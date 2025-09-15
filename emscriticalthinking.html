@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: Critical Thinking & Clinical Decision Making</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .module-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .module-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .module-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .module-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .objectives-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .objectives-list li {
+            background: #ecf0f1;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .module-progress {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            background: white;
+            border-left: 4px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .progress-item.completed {
+            border-left-color: #4caf50;
+            background: #f1f8e9;
+        }
+
+        .progress-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .progress-checkbox.checked {
+            background: #4caf50;
+            border-color: #4caf50;
+            color: white;
+        }
+
+        .progress-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: #ecf0f1;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .tab-button.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .tab-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .hour-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .hour-title {
+            font-size: 1.4rem;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .content-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-list li {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+        }
+
+        .case-study {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .case-study-title {
+            color: #856404;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .interactive-element {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.02);
+        }
+
+        .quiz-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 5px solid #007bff;
+        }
+
+        .quiz-options {
+            margin: 15px 0;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: #007bff;
+            background: #f0f8ff;
+        }
+
+        .quiz-option.selected {
+            border-color: #007bff;
+            background: #e3f2fd;
+        }
+
+        .quiz-option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .quiz-option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .quiz-explanation {
+            background: #fff3cd;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            display: none;
+        }
+
+        .quiz-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-button:hover {
+            background: #0056b3;
+        }
+
+        .quiz-results {
+            background: #d4edda;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #28a745;
+            text-align: center;
+        }
+
+        .quiz-score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #155724;
+            margin-bottom: 10px;
+        }
+
+        .name-entry {
+            background: #e3f2fd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #2196f3;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .module-title {
+                font-size: 2rem;
+            }
+            
+            .module-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Module Header -->
+        <div class="module-header">
+            <h1 class="module-title">Module 2: Critical Thinking & Clinical Decision Making</h1>
+            <p class="module-subtitle">Advanced EMS Training Based on Sanders' Paramedic Textbook</p>
+            <div class="module-info">
+                <div class="info-item">Duration: 8 Hours</div>
+                <div class="info-item">CAPCE Credits: 8 Hours</div>
+                <div class="info-item">Evidence-Based Learning</div>
+            </div>
+        </div>
+
+        <!-- Learning Objectives -->
+        <div class="section">
+            <h2 class="section-title">Learning Objectives</h2>
+            <ul class="objectives-list">
+                <li>🎯 Apply systematic clinical reasoning from dispatch to hospital transfer</li>
+                <li>📊 Demonstrate evidence-based decision-making processes</li>
+                <li>🧠 Utilize critical thinking skills for complex patient scenarios</li>
+                <li>⚖️ Integrate clinical guidelines with field realities</li>
+            </ul>
+        </div>
+
+        <!-- Module Progress Tracker -->
+        <div class="section">
+            <h2 class="section-title">📈 Module Progress</h2>
+            <div class="module-progress">
+                <p style="text-align: center; margin-bottom: 20px; font-weight: 600;">Complete all sections to unlock the final quiz</p>
+                <div class="progress-item" id="progress-hours1-2">
+                    <div class="progress-checkbox" id="check-hours1-2"></div>
+                    <div class="progress-text">Hours 1-2: Critical Thinking Foundations</div>
+                </div>
+                <div class="progress-item" id="progress-hours3-4">
+                    <div class="progress-checkbox" id="check-hours3-4"></div>
+                    <div class="progress-text">Hours 3-4: Evidence-Based Practice</div>
+                </div>
+                <div class="progress-item" id="progress-hours5-6">
+                    <div class="progress-checkbox" id="check-hours5-6"></div>
+                    <div class="progress-text">Hours 5-6: Clinical Decision Making Models</div>
+                </div>
+                <div class="progress-item" id="progress-hours7-8">
+                    <div class="progress-checkbox" id="check-hours7-8"></div>
+                    <div class="progress-text">Hours 7-8: Complex Scenario Management</div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <strong>Progress: <span id="progress-counter">0 of 4</span> sections completed</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Tabs -->
+        <div class="section">
+            <h2 class="section-title">Module Content</h2>
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="hours1-2">Hours 1-2: Foundations</button>
+                <button class="tab-button" data-tab="hours3-4">Hours 3-4: Evidence-Based Practice</button>
+                <button class="tab-button" data-tab="hours5-6">Hours 5-6: Decision Models</button>
+                <button class="tab-button" data-tab="hours7-8">Hours 7-8: Complex Scenarios</button>
+            </div>
+
+            <!-- Hours 1-2 Content -->
+            <div id="hours1-2" class="tab-content active">
+                <div class="hour-section">
+                    <h3 class="hour-title">Hour 1: Critical Thinking Foundations</h3>
+                    <ul class="content-list">
+                        <li><strong>Analysis:</strong> Breaking down complex patient presentations into component parts</li>
+                        <li><strong>Interpretation:</strong> Understanding the meaning of clinical findings within context</li>
+                        <li><strong>Inference:</strong> Drawing logical conclusions from available evidence</li>
+                        <li><strong>Evaluation:</strong> Assessing the credibility and relevance of information</li>
+                        <li><strong>Explanation:</strong> Articulating reasoning and decision-making processes</li>
+                        <li><strong>Self-regulation:</strong> Monitoring and correcting one's own thinking processes</li>
+                    </ul>
+                </div>
+
+                <div class="hour-section">
+                    <h3 class="hour-title">Hour 2: Cognitive Biases and Decision-Making Pitfalls</h3>
+                    <ul class="content-list">
+                        <li><strong>Anchoring Bias:</strong> Over-relying on first information encountered</li>
+                        <li><strong>Confirmation Bias:</strong> Seeking information that confirms initial impressions</li>
+                        <li><strong>Availability Bias:</strong> Overestimating likelihood based on memorable examples</li>
+                        <li><strong>Premature Closure:</strong> Accepting diagnosis before considering alternatives</li>
+                    </ul>
+                    
+                    <div class="case-study">
+                        <div class="case-study-title">Case Study: The Confirmation Bias Trap</div>
+                        <p><strong>Scenario:</strong> 65-year-old male with chest pain. Initial impression suggests MI, but critical thinking reveals importance of considering alternative diagnoses like aortic dissection, pneumothorax, or anxiety.</p>
+                    </div>
+                    
+                    <button class="interactive-element" data-section="hours1-2">
+                        🧩 Interactive: Identify Cognitive Biases
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hours 3-4 Content -->
+            <div id="hours3-4" class="tab-content">
+                <div class="hour-section">
+                    <h3 class="hour-title">Hour 3: Evidence-Based Practice Foundations</h3>
+                    <ul class="content-list">
+                        <li><strong>Level 1:</strong> Systematic Reviews/Meta-analyses - Highest quality evidence</li>
+                        <li><strong>Level 2:</strong> Randomized Controlled Trials - Experimental studies</li>
+                        <li><strong>Level 3:</strong> Cohort Studies - Observational studies over time</li>
+                        <li><strong>Level 4:</strong> Case-Control Studies - Retrospective comparisons</li>
+                        <li><strong>Level 5:</strong> Expert Opinion/Case Reports - Lowest level evidence</li>
+                    </ul>
+                </div>
+
+                <div class="hour-section">
+                    <h3 class="hour-title">Hour 4: Literature Evaluation and Clinical Application</h3>
+                    
+                    <div class="case-study">
+                        <div class="case-study-title">Evidence Review: Epinephrine in Cardiac Arrest</div>
+                        <p><strong>Traditional View:</strong> Epinephrine improves ROSC in cardiac arrest</p>
+                        <p><strong>Recent Evidence:</strong> PARAMEDIC2 trial (2018) showed epinephrine increased ROSC but worsened neurological outcomes</p>
+                    </div>
+                    
+                    <button class="interactive-element" data-section="hours3-4">
+                        📊 Interactive: Evaluate Research Evidence
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hours 5-6 Content -->
+            <div id="hours5-6" class="tab-content">
+                <div class="hour-section">
+                    <h3 class="hour-title">Hour 5: Systematic Patient Assessment</h3>
+                    <ul class="content-list">
+                        <li><strong>Scene Size-Up:</strong> Environmental hazards, mechanism, patient count</li>
+                        <li><strong>Primary Assessment (ABCDE):</strong> Airway, Breathing, Circulation, Disability, Exposure</li>
+                        <li><strong>History (OPQRST):</strong> Onset, Provocation, Quality, Region, Severity, Timing</li>
+                        <li><strong>Background (SAMPLE):</strong> Symptoms, Allergies, Medications, Past history, Last intake, Events</li>
+                    </ul>
+                </div>
+
+                <div class="hour-section">
+                    <h3 class="hour-title">Hour 6: Differential Diagnosis and Risk Stratification</h3>
+                    
+                    <div class="case-study">
+                        <div class="case-study-title">Decision Tree: Abdominal Pain Assessment</div>
+                        <p><strong>Patient:</strong> 45-year-old female with sudden severe abdominal pain</p>
+                        <p><strong>High Priority:</strong> AAA rupture, splenic rupture, perforated viscus</p>
+                        <p><strong>Moderate Priority:</strong> Kidney stone, ovarian torsion, pancreatitis</p>
+                    </div>
+                    
+                    <button class="interactive-element" data-section="hours5-6">
+                        🎯 Interactive: Decision-Making Framework
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hours 7-8 Content -->
+            <div id="hours7-8" class="tab-content">
+                <div class="hour-section">
+                    <h3 class="hour-title">Hour 7: Multi-Patient Incidents</h3>
+                    <ul class="content-list">
+                        <li><strong>Priority 1 (Red):</strong> Life-threatening injuries with good survival potential</li>
+                        <li><strong>Priority 2 (Yellow):</strong> Serious but stable injuries</li>
+                        <li><strong>Priority 3 (Green):</strong> Walking wounded, minor injuries</li>
+                        <li><strong>Priority 4 (Black):</strong> Injuries incompatible with life</li>
+                    </ul>
+                </div>
+
+                <div class="hour-section">
+                    <h3 class="hour-title">Hour 8: Communication and Documentation</h3>
+                    <ul class="content-list">
+                        <li><strong>SBAR Communication:</strong> Situation, Background, Assessment, Recommendation</li>
+                        <li><strong>Clinical Reasoning:</strong> Document thought process behind decisions</li>
+                        <li><strong>Quality Improvement:</strong> Use documentation for learning and improvement</li>
+                    </ul>
+                    
+                    <div class="case-study">
+                        <div class="case-study-title">MCI Scenario: School Bus Accident</div>
+                        <p><strong>Scenario:</strong> 28 pediatric patients with varying injuries</p>
+                        <p><strong>Triage Results:</strong> 4 Priority 1, 8 Priority 2, 15 Priority 3, 1 Priority 4</p>
+                    </div>
+                    
+                    <button class="interactive-element" data-section="hours7-8">
+                        🚨 Interactive: Multi-Patient Scenario
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section" id="quiz-section">
+            <h2 class="section-title">Knowledge Assessment Quiz</h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">Test your understanding with 20 comprehensive questions covering all module topics.</p>
+            
+            <div id="quiz-container">
+                <!-- Questions will be loaded here -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="quiz-button" id="startBtn">🎯 Start Final Assessment Quiz</button>
+                <button class="quiz-button" id="nextBtn" style="display: none;">Next Question</button>
+                <button class="quiz-button" id="resultsBtn" style="display: none;">Show Results</button>
+                <button class="quiz-button" id="resetBtn" style="display: none;">Retake Quiz</button>
+            </div>
+            
+            <div id="quiz-progress" style="text-align: center; margin-top: 20px; display: none;">
+                <div style="background: #e9ecef; height: 10px; border-radius: 5px; margin: 20px 0;">
+                    <div id="progress-bar" style="background: #007bff; height: 100%; border-radius: 5px; width: 0%; transition: width 0.3s ease;"></div>
+                </div>
+                <p id="progress-text">Question 1 of 20</p>
+            </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="section">
+            <h2 class="section-title">Required Resources</h2>
+            <div style="background: #2ecc71; color: white; padding: 15px; margin: 10px 0; border-radius: 10px; font-weight: 600;">📚 Sanders' Paramedic Textbook: Patient Assessment Chapters</div>
+            <div style="background: #2ecc71; color: white; padding: 15px; margin: 10px 0; border-radius: 10px; font-weight: 600;">📋 Prehospital Guidelines Consortium EBGs</div>
+            <div style="background: #2ecc71; color: white; padding: 15px; margin: 10px 0; border-radius: 10px; font-weight: 600;">📖 National EMS Education Standards 2021</div>
+            <div style="background: #2ecc71; color: white; padding: 15px; margin: 10px 0; border-radius: 10px; font-weight: 600;">🔬 Current EMS Research Database Access</div>
+            <div style="background: #2ecc71; color: white; padding: 15px; margin: 10px 0; border-radius: 10px; font-weight: 600;">💻 High-Fidelity Simulation Platform</div>
+        </div>
+    </div>
+
+    <script>
+        // Simple, robust quiz system with comprehensive error handling
+        
+        // Quiz data
+        const QUIZ_DATA = [
+            {
+                question: "Which of the following best defines critical thinking in EMS?",
+                options: [
+                    "Following protocols exactly as written without deviation",
+                    "Objective analysis and evaluation of information to form judgments and make decisions",
+                    "Making quick decisions based on first impressions",
+                    "Relying primarily on previous experience and intuition"
+                ],
+                correct: 1,
+                explanation: "Critical thinking involves objective analysis and evaluation of information to form sound clinical judgments, going beyond rote protocol following."
+            },
+            {
+                question: "Anchoring bias in EMS is best described as:",
+                options: [
+                    "Becoming too attached to a particular patient",
+                    "Over-relying on the first piece of information encountered",
+                    "Focusing only on the most recent training received",
+                    "Being influenced by the patient's social status"
+                ],
+                correct: 1,
+                explanation: "Anchoring bias occurs when we give disproportionate weight to the first information we receive, potentially leading to tunnel vision in diagnosis."
+            },
+            {
+                question: "According to the evidence hierarchy, which type of study provides the highest level of evidence?",
+                options: [
+                    "Case reports and expert opinion",
+                    "Randomized controlled trials",
+                    "Systematic reviews and meta-analyses",
+                    "Cohort studies"
+                ],
+                correct: 2,
+                explanation: "Systematic reviews and meta-analyses provide Level 1 evidence as they synthesize data from multiple high-quality studies."
+            },
+            {
+                question: "Which component is NOT part of the primary assessment (ABCDE approach)?",
+                options: [
+                    "Airway patency and protection",
+                    "Blood glucose measurement",
+                    "Circulation and pulse quality",
+                    "Disability and neurological status"
+                ],
+                correct: 1,
+                explanation: "Blood glucose is part of the secondary assessment. The primary assessment focuses on ABCDE: Airway, Breathing, Circulation, Disability, Exposure."
+            },
+            {
+                question: "Confirmation bias can be best mitigated by:",
+                options: [
+                    "Relying on dispatch information",
+                    "Using only the most obvious diagnosis",
+                    "Actively seeking disconfirming evidence",
+                    "Following the same assessment pattern for every patient"
+                ],
+                correct: 2,
+                explanation: "Actively seeking evidence that contradicts your initial impression helps prevent confirmation bias and leads to more accurate diagnoses."
+            },
+            {
+                question: "In evidence-based practice, what three components must be integrated?",
+                options: [
+                    "Protocols, medical control, and patient preference",
+                    "Best research evidence, clinical expertise, and patient values",
+                    "Dispatch information, scene assessment, and vital signs",
+                    "Primary assessment, secondary assessment, and ongoing assessment"
+                ],
+                correct: 1,
+                explanation: "Evidence-based practice integrates best research evidence, clinical expertise, and patient values to make optimal clinical decisions."
+            },
+            {
+                question: "In MCI triage, a patient with severe traumatic brain injury and signs of herniation would typically be classified as:",
+                options: [
+                    "Priority 1 (Red) - Immediate",
+                    "Priority 2 (Yellow) - Delayed",
+                    "Priority 3 (Green) - Minor",
+                    "Priority 4 (Black) - Expectant"
+                ],
+                correct: 3,
+                explanation: "Patients with injuries incompatible with life or extremely poor prognosis are classified as Priority 4 (Black) in MCI situations to focus resources on salvageable patients."
+            },
+            {
+                question: "The 'greatest good for greatest number' principle in MCI management is based on which ethical framework?",
+                options: [
+                    "Deontological ethics",
+                    "Virtue ethics",
+                    "Utilitarian ethics",
+                    "Care ethics"
+                ],
+                correct: 2,
+                explanation: "Utilitarian ethics focuses on maximizing overall positive outcomes, which underlies the 'greatest good for greatest number' principle in resource-limited situations."
+            },
+            {
+                question: "In the SBAR communication format, what does the 'A' represent?",
+                options: [
+                    "Action taken",
+                    "Assessment findings",
+                    "Arrival time",
+                    "Allergies"
+                ],
+                correct: 1,
+                explanation: "In SBAR, 'A' stands for Assessment, which includes clinical findings, working diagnosis, and interventions performed."
+            },
+            {
+                question: "Premature closure in clinical decision-making refers to:",
+                options: [
+                    "Ending patient care too quickly",
+                    "Accepting a diagnosis before fully considering alternatives",
+                    "Transporting patients without treatment",
+                    "Closing the ambulance doors prematurely"
+                ],
+                correct: 1,
+                explanation: "Premature closure occurs when we accept a diagnosis without fully exploring other possibilities, potentially missing important alternative diagnoses."
+            },
+            {
+                question: "In differential diagnosis development, which should be considered FIRST?",
+                options: [
+                    "Rare conditions that match symptoms",
+                    "Conditions requiring expensive treatments",
+                    "Common causes and life-threatening conditions",
+                    "Conditions the paramedic has seen recently"
+                ],
+                correct: 2,
+                explanation: "The differential should start with common causes (horses, not zebras) and life-threatening conditions that require immediate intervention."
+            },
+            {
+                question: "Which factor is LEAST important when making transport decisions?",
+                options: [
+                    "Patient's clinical stability",
+                    "Patient's insurance status",
+                    "Time sensitivity of condition",
+                    "Receiving facility capabilities"
+                ],
+                correct: 1,
+                explanation: "Insurance status should not influence emergency transport decisions. Clinical factors, time sensitivity, and appropriate level of care are the primary considerations."
+            },
+            {
+                question: "In pediatric MCI situations, what special consideration affects triage decisions?",
+                options: [
+                    "Children always receive lowest priority",
+                    "Children receive preferential triage when severity is equal",
+                    "Children are automatically Priority 1",
+                    "Children cannot be triaged using standard criteria"
+                ],
+                correct: 1,
+                explanation: "When injury severity is equal, children often receive preferential consideration due to their greater potential for recovery and years of life saved."
+            },
+            {
+                question: "Availability bias in EMS decision-making occurs when:",
+                options: [
+                    "Resources are limited at the scene",
+                    "Equipment is not immediately available",
+                    "Recent memorable cases influence current diagnosis",
+                    "The patient is not available for full assessment"
+                ],
+                correct: 2,
+                explanation: "Availability bias occurs when recent or memorable experiences disproportionately influence our assessment of probability in current situations."
+            },
+            {
+                question: "Quality documentation of clinical reasoning should include:",
+                options: [
+                    "Only the final diagnosis and treatment given",
+                    "Personal opinions about the patient's lifestyle",
+                    "The thought process behind clinical decisions",
+                    "Criticism of other healthcare providers"
+                ],
+                correct: 2,
+                explanation: "Good documentation includes the clinical reasoning process, differential considerations, and rationale for decisions to support continuity of care and quality improvement."
+            },
+            {
+                question: "When research findings conflict with established protocols, the BEST approach is to:",
+                options: [
+                    "Immediately change practice based on any new study",
+                    "Ignore research and continue current practice",
+                    "Evaluate study quality, applicability, and consult with medical direction",
+                    "Wait until protocols are officially changed before considering new evidence"
+                ],
+                correct: 2,
+                explanation: "New evidence should be critically evaluated for quality and applicability, with consultation with medical direction before making practice changes."
+            },
+            {
+                question: "Pattern recognition in expert paramedics is developed through:",
+                options: [
+                    "Memorizing textbook presentations only",
+                    "Experience with clusters of signs and symptoms",
+                    "Following algorithms without thinking",
+                    "Avoiding complex cases"
+                ],
+                correct: 1,
+                explanation: "Pattern recognition develops through experience recognizing clusters of signs and symptoms, allowing rapid assessment of similar presentations."
+            },
+            {
+                question: "The OPQRST mnemonic is used for:",
+                options: [
+                    "Vital sign assessment",
+                    "Symptom characterization",
+                    "Medication history",
+                    "Scene safety evaluation"
+                ],
+                correct: 1,
+                explanation: "OPQRST (Onset, Provocation, Quality, Region, Severity, Timing) is used to systematically characterize patient symptoms."
+            },
+            {
+                question: "In evidence-based medicine, Number Needed to Treat (NNT) represents:",
+                options: [
+                    "How many patients need the treatment to prevent one bad outcome",
+                    "The total number of patients in the study",
+                    "How many treatments each patient needs",
+                    "The number of healthcare providers needed"
+                ],
+                correct: 0,
+                explanation: "NNT indicates how many patients need to be treated to prevent one adverse outcome, helping assess treatment effectiveness."
+            },
+            {
+                question: "Critical thinking in EMS is most important because it:",
+                options: [
+                    "Helps paramedics work faster",
+                    "Reduces the need for medical control",
+                    "Improves patient outcomes through better decision-making",
+                    "Makes documentation easier"
+                ],
+                correct: 2,
+                explanation: "Critical thinking improves patient outcomes by enabling better clinical decision-making, more accurate diagnoses, and appropriate interventions."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let quizStarted = false;
+        let completedSections = new Set();
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('EMS Module initialized');
+            initializeTabs();
+            initializeInteractiveElements();
+            initializeQuiz();
+            updateProgressCounter();
+        });
+
+        // Tab navigation
+        function initializeTabs() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    showTab(targetTab);
+                });
+            });
+        }
+
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            const targetContent = document.getElementById(tabId);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+            
+            // Add active class to clicked button
+            const targetButton = document.querySelector(`[data-tab="${tabId}"]`);
+            if (targetButton) {
+                targetButton.classList.add('active');
+            }
+        }
+
+        // Interactive elements
+        function initializeInteractiveElements() {
+            const interactiveButtons = document.querySelectorAll('.interactive-element');
+            interactiveButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    markSectionComplete(sectionId);
+                    showInteractiveContent(sectionId);
+                });
+            });
+        }
+
+        function markSectionComplete(sectionId) {
+            completedSections.add(sectionId);
+            
+            // Update UI
+            const progressItem = document.getElementById(`progress-${sectionId}`);
+            const checkbox = document.getElementById(`check-${sectionId}`);
+            
+            if (progressItem) {
+                progressItem.classList.add('completed');
+            }
+            if (checkbox) {
+                checkbox.classList.add('checked');
+                checkbox.innerHTML = '✓';
+            }
+            
+            updateProgressCounter();
+            checkQuizUnlock();
+        }
+
+        function updateProgressCounter() {
+            const counter = document.getElementById('progress-counter');
+            if (counter) {
+                counter.textContent = `${completedSections.size} of 4`;
+            }
+        }
+
+        function checkQuizUnlock() {
+            if (completedSections.size >= 4) {
+                const quizSection = document.getElementById('quiz-section');
+                if (quizSection) {
+                    quizSection.style.display = 'block';
+                    setTimeout(() => {
+                        quizSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 500);
+                }
+            }
+        }
+
+        function showInteractiveContent(sectionId) {
+            const content = {
+                'hours1-2': '🧠 Critical Thinking Exercise:\n\nYou respond to a "chest pain" call. The patient is a 25-year-old athletic male who appears anxious. Your partner immediately begins preparing for an MI protocol.\n\nWhat cognitive biases might be at play?\n1. Age bias (too young for MI)\n2. Confirmation bias (fitting data to initial impression)\n3. Availability bias (recent MI calls)\n\nHow would you approach this systematically?\n\n✓ Complete primary assessment\n✓ Consider alternative diagnoses\n✓ Use objective assessment tools\n✓ Avoid premature closure',
+                
+                'hours3-4': '📊 Evidence-Based Practice Exercise:\n\nReview this scenario: Recent meta-analysis shows conflicting evidence for your current intubation protocol in cardiac arrest.\n\nSteps to evaluate:\n1. Assess study quality and methodology\n2. Consider population relevance\n3. Evaluate clinical significance vs. statistical significance\n4. Balance benefits vs. risks\n5. Consider local factors and resources\n6. Consult with medical direction\n\nPractice applying this framework to current protocols.',
+                
+                'hours5-6': '🎯 Decision-Making Framework:\n\nSystematic Approach:\n1. Scene Safety & Initial Impression\n2. Primary Assessment (ABCDE)\n3. Focused History (OPQRST/SAMPLE)\n4. Physical Examination\n5. Differential Diagnosis Development\n6. Risk Stratification\n7. Treatment Decision\n8. Transport Decision\n9. Ongoing Assessment\n\nPractice applying this to every patient encounter for consistent, thorough care.',
+                
+                'hours7-8': '🚨 Complex Scenario Exercise:\n\nBus accident with 28 pediatric patients:\n- 4 Priority 1 (critical)\n- 8 Priority 2 (urgent)\n- 15 Priority 3 (minor)\n- 1 Priority 4 (expectant)\n\nResources: 3 ambulances, 1 helicopter available.\n\nDecision points:\n1. Triage priorities and re-assessment\n2. Resource allocation and transport modes\n3. Pediatric facility selection\n4. Family reunification coordination\n5. Communication with multiple agencies\n\nHow do you balance individual needs with population outcomes?'
+            };
+            
+            alert(content[sectionId] || 'Interactive content for this section.');
+        }
+
+        // Quiz system
+        function initializeQuiz() {
+            const startButton = document.getElementById('startBtn');
+            const nextButton = document.getElementById('nextBtn');
+            const resultsButton = document.getElementById('resultsBtn');
+            const resetButton = document.getElementById('resetBtn');
+
+            if (startButton) {
+                startButton.addEventListener('click', startQuiz);
+            }
+            if (nextButton) {
+                nextButton.addEventListener('click', nextQuestion);
+            }
+            if (resultsButton) {
+                resultsButton.addEventListener('click', showResults);
+            }
+            if (resetButton) {
+                resetButton.addEventListener('click', resetQuiz);
+            }
+        }
+
+        function startQuiz() {
+            if (completedSections.size < 4) {
+                alert(`Please complete all module sections first. You have completed ${completedSections.size} of 4 sections.`);
+                return;
+            }
+
+            quizStarted = true;
+            currentQuestion = 0;
+            userAnswers = [];
+
+            // Update UI
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('quiz-progress').style.display = 'block';
+
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const container = document.getElementById('quiz-container');
+            const question = QUIZ_DATA[currentQuestion];
+
+            if (!container || !question) {
+                console.error('Quiz container or question not found');
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="quiz-question">
+                    <h4>Question ${currentQuestion + 1} of ${QUIZ_DATA.length}</h4>
+                    <p><strong>${question.question}</strong></p>
+                    <div class="quiz-options">
+                        ${question.options.map((option, index) => `
+                            <div class="quiz-option" data-index="${index}">
+                                ${String.fromCharCode(65 + index)}. ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="quiz-explanation" id="explanation-${currentQuestion}" style="display: none;">
+                        <strong>Explanation:</strong> ${question.explanation}
+                    </div>
+                </div>
+            `;
+
+            // Add click handlers to options
+            const options = container.querySelectorAll('.quiz-option');
+            options.forEach((option, index) => {
+                option.addEventListener('click', () => selectAnswer(index));
+            });
+
+            updateProgress();
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = QUIZ_DATA[currentQuestion];
+            const options = document.querySelectorAll('.quiz-option');
+
+            // Disable all options
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            // Mark selected option
+            options[selectedIndex].classList.add('selected');
+            userAnswers[currentQuestion] = selectedIndex;
+
+            // Show correct/incorrect after delay
+            setTimeout(() => {
+                options.forEach((option, index) => {
+                    if (index === question.correct) {
+                        option.classList.add('correct');
+                    } else if (index === selectedIndex && index !== question.correct) {
+                        option.classList.add('incorrect');
+                    }
+                });
+
+                // Show explanation
+                document.getElementById(`explanation-${currentQuestion}`).style.display = 'block';
+
+                // Show next button
+                if (currentQuestion < QUIZ_DATA.length - 1) {
+                    document.getElementById('nextBtn').style.display = 'inline-block';
+                } else {
+                    document.getElementById('resultsBtn').style.display = 'inline-block';
+                }
+            }, 500);
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            document.getElementById('nextBtn').style.display = 'none';
+            showQuestion();
+        }
+
+        function updateProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+
+            if (progressBar && progressText) {
+                const progress = ((currentQuestion + 1) / QUIZ_DATA.length) * 100;
+                progressBar.style.width = progress + '%';
+                progressText.textContent = `Question ${currentQuestion + 1} of ${QUIZ_DATA.length}`;
+            }
+        }
+
+        function showResults() {
+            const correctAnswers = userAnswers.filter((answer, index) => answer === QUIZ_DATA[index].correct).length;
+            const percentage = Math.round((correctAnswers / QUIZ_DATA.length) * 100);
+
+            let feedback = '';
+            let nameEntryHTML = '';
+
+            if (percentage >= 90) {
+                feedback = 'Excellent! You have a strong understanding of critical thinking and clinical decision-making principles.';
+                nameEntryHTML = generateNameEntry(percentage);
+            } else if (percentage >= 80) {
+                feedback = 'Good work! You demonstrate solid knowledge with room for some improvement.';
+                nameEntryHTML = generateNameEntry(percentage);
+            } else if (percentage >= 70) {
+                feedback = 'Fair performance. Consider reviewing the module content and retaking the quiz.';
+            } else {
+                feedback = 'Additional study is recommended. Please review the module materials thoroughly.';
+            }
+
+            document.getElementById('quiz-container').innerHTML = `
+                <div class="quiz-results">
+                    <div class="quiz-score">${correctAnswers}/${QUIZ_DATA.length} (${percentage}%)</div>
+                    <div style="font-size: 1.1rem; color: #155724; margin-bottom: 20px;">${feedback}</div>
+                    ${nameEntryHTML}
+                    <div style="text-align: center; margin-top: 30px; padding: 20px; background: #f0f8ff; border-radius: 10px; border: 2px dashed #007bff;">
+                        <h4 style="color: #007bff; margin-bottom: 15px;">📋 Study Materials</h4>
+                        <p style="margin-bottom: 15px;">Review your answers and explanations to reinforce learning.</p>
+                        <button class="quiz-button" onclick="showAnswerReview()" style="background: #17a2b8;">📖 Review Answers</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('resultsBtn').style.display = 'none';
+            document.getElementById('resetBtn').style.display = 'inline-block';
+        }
+
+        function generateNameEntry(percentage) {
+            return `
+                <div class="name-entry">
+                    <h4 style="color: #1976d2; margin-bottom: 15px;">🎉 Congratulations! You passed with ${percentage}%</h4>
+                    <p style="margin-bottom: 15px;"><strong>You are eligible for a completion certificate.</strong></p>
+                    <label for="studentName" style="display: block; margin-bottom: 10px; font-weight: 600;">Enter your full name for the certificate:</label>
+                    <input type="text" id="studentName" class="name-input" placeholder="Enter your full name (e.g., John Smith)" />
+                    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                        <button class="quiz-button" onclick="generateCertificate()" style="background: #4caf50;">📜 Generate Certificate</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showAnswerReview() {
+            let reviewHTML = '<h3 style="text-align: center; margin-bottom: 20px;">📋 Answer Review</h3>';
+            
+            QUIZ_DATA.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                const userLetter = userAnswer !== undefined ? String.fromCharCode(65 + userAnswer) : 'Not answered';
+                const correctLetter = String.fromCharCode(65 + question.correct);
+                
+                reviewHTML += `
+                    <div style="background: #f8f9fa; padding: 20px; margin: 15px 0; border-radius: 10px; border-left: 5px solid ${isCorrect ? '#28a745' : '#dc3545'};">
+                        <h4 style="color: #2c3e50;">Question ${index + 1}</h4>
+                        <p><strong>${question.question}</strong></p>
+                        <p style="margin: 10px 0;">
+                            <span style="color: ${isCorrect ? '#28a745' : '#dc3545'}; font-weight: bold;">
+                                Your Answer: ${userLetter}. ${userAnswer !== undefined ? question.options[userAnswer] : 'Not answered'}
+                                ${isCorrect ? '✓' : '✗'}
+                            </span>
+                        </p>
+                        ${!isCorrect ? `<p style="color: #28a745; font-weight: bold;">Correct Answer: ${correctLetter}. ${question.options[question.correct]} ✓</p>` : ''}
+                        <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                            <strong>Explanation:</strong> ${question.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('quiz-container').innerHTML = reviewHTML;
+        }
+
+        function generateCertificate() {
+            const studentName = document.getElementById('studentName');
+            if (!studentName || !studentName.value.trim()) {
+                alert('Please enter your full name to generate the certificate.');
+                return;
+            }
+
+            const correctAnswers = userAnswers.filter((answer, index) => answer === QUIZ_DATA[index].correct).length;
+            const percentage = Math.round((correctAnswers / QUIZ_DATA.length) * 100);
+            const currentDate = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            const certificateId = `CCC-EMS-${Date.now()}`;
+
+            const certificateHTML = `
+                <div style="border: 3px solid #2c3e50; border-radius: 15px; padding: 40px; margin: 20px 0; background: white; text-align: center; font-family: 'Times New Roman', serif;">
+                    <h1 style="color: #2c5aa0; font-size: 2.5rem; margin-bottom: 10px;">🎓 CAMP COMMUNITY COLLEGE</h1>
+                    <p style="font-size: 1.2rem; color: #666; margin-bottom: 30px;">Emergency Medical Services Training Program</p>
+                    
+                    <h2 style="font-size: 2rem; color: #2c5aa0; margin: 30px 0;">CERTIFICATE OF COMPLETION</h2>
+                    
+                    <p style="font-size: 1.3rem; margin: 20px 0;">This is to certify that</p>
+                    
+                    <h3 style="font-size: 2rem; color: #2c5aa0; margin: 20px 0; text-decoration: underline;">${studentName.value.toUpperCase()}</h3>
+                    
+                    <p style="font-size: 1.3rem; margin: 20px 0;">has successfully completed</p>
+                    
+                    <h4 style="font-size: 1.5rem; color: #2c5aa0; margin: 20px 0;">Module 2: Critical Thinking & Clinical Decision Making</h4>
+                    
+                    <p style="margin: 20px 0;">Advanced EMS Training Program<br>Based on Sanders' Paramedic Textbook Framework</p>
+                    
+                    <p style="font-size: 1.2rem; margin: 30px 0;">with a score of <strong>${percentage}%</strong><br>Meeting all requirements for <strong>8 CAPCE Credits</strong></p>
+                    
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px auto; max-width: 400px;">
+                        <strong>Certificate ID:</strong> ${certificateId}<br>
+                        <strong>Date of Completion:</strong> ${currentDate}<br>
+                        <strong>Module Duration:</strong> 8 Hours
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-top: 50px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        <div style="text-align: center;">
+                            <div style="border-bottom: 2px solid #333; width: 200px; margin-bottom: 10px; height: 30px;"></div>
+                            <strong>Program Director</strong><br>
+                            <small>EMS Education Department</small>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="border-bottom: 2px solid #333; width: 200px; margin-bottom: 10px; height: 30px;"></div>
+                            <strong>Medical Director</strong><br>
+                            <small>Camp Community College</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <button class="quiz-button" onclick="window.print()" style="background: #ff9800;">🖨️ Print Certificate</button>
+                </div>
+            `;
+
+            document.getElementById('quiz-container').innerHTML += certificateHTML;
+            
+            setTimeout(() => {
+                document.querySelector('#quiz-container > div:last-child').scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            quizStarted = false;
+
+            document.getElementById('quiz-container').innerHTML = '';
+            document.getElementById('quiz-progress').style.display = 'none';
+            document.getElementById('resetBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('resultsBtn').style.display = 'none';
+            document.getElementById('startBtn').style.display = 'inline-block';
+        }
+
+        // Global functions for inline handlers
+        window.showAnswerReview = showAnswerReview;
+        window.generateCertificate = generateCertificate;
+    </script>
+</body>
+</html>
