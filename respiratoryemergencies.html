@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respiratory Emergencies - Interactive Learning</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Lucide React icons as SVG components
+        const Lungs = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <path d="M9 12a3 3 0 1 1 6 0"/>
+                <path d="M12 3v6"/>
+                <path d="M12 15v6"/>
+                <path d="M5.5 9.5a5 5 0 0 1 0 7"/>
+                <path d="M18.5 9.5a5 5 0 0 0 0 7"/>
+            </svg>
+        );
+
+        const Heart = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            </svg>
+        );
+
+        const AlertCircle = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+        );
+
+        const Check = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <polyline points="20 6 9 17 4 12"/>
+            </svg>
+        );
+
+        const X = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        );
+
+        const Star = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+        );
+
+        const Trophy = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                <path d="M4 22h16"/>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+            </svg>
+        );
+
+        const Brain = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
+                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
+            </svg>
+        );
+
+        const Zap = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+        );
+
+        const BookOpen = ({ className, ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+        );
+
+        const RespiratoryEmergenciesLearning = () => {
+            const [currentModule, setCurrentModule] = useState('home');
+            const [score, setScore] = useState(0);
+            const [completedModules, setCompletedModules] = useState([]);
+            const [breathingPhase, setBreathingPhase] = useState('inspiration');
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    setBreathingPhase(prev => prev === 'inspiration' ? 'expiration' : 'inspiration');
+                }, 3000);
+                return () => clearInterval(interval);
+            }, []);
+
+            const modules = [
+                { id: 'presentation', name: 'Content Presentation', icon: BookOpen, color: 'bg-indigo-500' },
+                { id: 'anatomy', name: 'Anatomy & Physiology', icon: Lungs, color: 'bg-blue-500' },
+                { id: 'conditions', name: 'Respiratory Conditions', icon: AlertCircle, color: 'bg-red-500' },
+                { id: 'assessment', name: 'Patient Assessment', icon: Heart, color: 'bg-purple-500' },
+                { id: 'treatment', name: 'Emergency Care', icon: Zap, color: 'bg-green-500' },
+                { id: 'quiz', name: 'Final Quiz', icon: Brain, color: 'bg-yellow-500' }
+            ];
+
+            const quizQuestions = [
+                {
+                    question: "What is the primary stimulus to breathe in healthy individuals?",
+                    options: ["Low oxygen levels", "High carbon dioxide levels", "Low pH", "High oxygen levels"],
+                    correct: 1,
+                    explanation: "In healthy individuals, rising arterial carbon dioxide levels stimulate the respiratory center in the medulla to trigger breathing."
+                },
+                {
+                    question: "What is the I:E ratio (inspiratory to expiratory ratio)?",
+                    options: ["1:1", "2:1", "1:2", "3:1"],
+                    correct: 2,
+                    explanation: "Expiration lasts twice as long as inspiration, creating a 1:2 ratio."
+                },
+                {
+                    question: "Which condition is characterized by a 'barrel chest' appearance?",
+                    options: ["Asthma", "Pneumonia", "COPD", "Pulmonary embolism"],
+                    correct: 2,
+                    explanation: "Patients with chronic COPD often develop a barrel-like chest appearance due to chronic hyperinflation of the lungs."
+                },
+                {
+                    question: "What is the backup breathing control system in COPD patients?",
+                    options: ["Carbon dioxide drive", "Hypoxic drive", "pH regulation", "Temperature regulation"],
+                    correct: 1,
+                    explanation: "In COPD patients with chronic CO2 retention, the hypoxic drive becomes the backup system, controlling breathing based on low oxygen levels."
+                },
+                {
+                    question: "What is the ideal oxygen saturation target for most patients?",
+                    options: ["85-90%", "90-94%", "Above 94%", "100%"],
+                    correct: 2,
+                    explanation: "The goal is to keep oxygen saturation above 94%. An oxygen saturation of 100% should be avoided."
+                },
+                {
+                    question: "What do Type II alveolar cells produce?",
+                    options: ["Mucus", "Surfactant", "White blood cells", "Antibodies"],
+                    correct: 1,
+                    explanation: "Type II alveolar cells produce surfactant, which reduces surface tension and makes it easier for alveoli to expand."
+                },
+                {
+                    question: "What is cor pulmonale?",
+                    options: ["Left heart failure", "Right heart failure from lung disease", "Collapsed lung", "Fluid in lungs"],
+                    correct: 1,
+                    explanation: "Cor pulmonale is right-side heart failure caused by chronic lung disease."
+                },
+                {
+                    question: "Which breath sound indicates upper airway obstruction?",
+                    options: ["Wheezes", "Crackles", "Stridor", "Rhonchi"],
+                    correct: 2,
+                    explanation: "Stridor is a high-pitched sound that indicates upper airway obstruction."
+                },
+                {
+                    question: "What is the classic sign of tension pneumothorax (late finding)?",
+                    options: ["Wheezing", "Tracheal deviation", "Fever", "Cyanosis"],
+                    correct: 1,
+                    explanation: "Tracheal deviation is a late sign of tension pneumothorax where the trachea shifts away from the affected side."
+                },
+                {
+                    question: "What is orthopnea?",
+                    options: ["Difficulty breathing at night", "Difficulty breathing while lying down", "Rapid breathing", "Slow breathing"],
+                    correct: 1,
+                    explanation: "Orthopnea is difficulty breathing that occurs or worsens when lying down, commonly seen in pulmonary edema."
+                }
+            ];
+
+            const HomePage = () => (
+                <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-8">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="text-center mb-12">
+                            <div className="flex items-center justify-center mb-4">
+                                <Lungs className="w-20 h-20 text-blue-600 animate-pulse" />
+                            </div>
+                            <h1 className="text-5xl font-bold text-gray-800 mb-4">
+                                Respiratory Emergencies
+                            </h1>
+                            <p className="text-xl text-gray-600">Interactive Learning Experience</p>
+                            <div className="flex items-center justify-center gap-4 mt-6">
+                                <div className="bg-white rounded-lg p-4 shadow-md">
+                                    <Trophy className="w-8 h-8 text-yellow-500 mx-auto mb-2" />
+                                    <p className="text-sm text-gray-600">Score: {score}</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-4 shadow-md">
+                                    <Star className="w-8 h-8 text-purple-500 mx-auto mb-2" />
+                                    <p className="text-sm text-gray-600">Completed: {completedModules.length}/6</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+                            <h2 className="text-2xl font-bold text-center mb-6">Breathing Cycle Animation</h2>
+                            <div className="flex items-center justify-center">
+                                <div className="relative">
+                                    <div className={`w-64 h-64 rounded-full transition-all duration-[3000ms] ${
+                                        breathingPhase === 'inspiration' 
+                                            ? 'bg-blue-400 scale-110' 
+                                            : 'bg-blue-200 scale-90'
+                                    } flex items-center justify-center shadow-2xl`}>
+                                        <Lungs className={`transition-all duration-[3000ms] ${
+                                            breathingPhase === 'inspiration' 
+                                                ? 'w-32 h-32 text-white' 
+                                                : 'w-24 h-24 text-gray-600'
+                                        }`} />
+                                    </div>
+                                    <div className="text-center mt-4">
+                                        <p className="text-2xl font-bold capitalize text-gray-700">
+                                            {breathingPhase}
+                                        </p>
+                                        <p className="text-sm text-gray-500 mt-2">
+                                            {breathingPhase === 'inspiration' 
+                                                ? 'Diaphragm contracts • Thorax enlarges • Air flows in' 
+                                                : 'Diaphragm relaxes • Thorax decreases • Air flows out'}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {modules.map((module) => {
+                                const Icon = module.icon;
+                                const isCompleted = completedModules.includes(module.id);
+                                return (
+                                    <button
+                                        key={module.id}
+                                        onClick={() => setCurrentModule(module.id)}
+                                        className={`${module.color} text-white rounded-xl shadow-lg p-6 transform transition-all hover:scale-105 hover:shadow-2xl relative overflow-hidden`}
+                                    >
+                                        {isCompleted && (
+                                            <div className="absolute top-2 right-2">
+                                                <Check className="w-6 h-6 bg-white text-green-600 rounded-full p-1" />
+                                            </div>
+                                        )}
+                                        <Icon className="w-16 h-16 mx-auto mb-4" />
+                                        <h3 className="text-xl font-bold">{module.name}</h3>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const ContentPresentation = () => {
+                const [currentSlide, setCurrentSlide] = useState(0);
+
+                const slides = [
+                    {
+                        title: "Introduction to Respiratory Emergencies",
+                        content: [
+                            "Dyspnea (difficulty breathing) is a common complaint",
+                            "Can be a symptom of many different conditions",
+                            "Important to obtain thorough history and assessment",
+                            "Treatment focuses on symptoms, underlying problem, and anxiety"
+                        ],
+                        color: "bg-blue-500"
+                    },
+                    {
+                        title: "Anatomy Review: Upper Airway",
+                        content: [
+                            "Includes all structures above the vocal cords",
+                            "Nose, mouth, pharynx, larynx",
+                            "Primary function: Warm, filter, and humidify air",
+                            "Common site for obstructions"
+                        ],
+                        color: "bg-cyan-500"
+                    },
+                    {
+                        title: "Anatomy Review: Lower Airway",
+                        content: [
+                            "Structures below the vocal cords",
+                            "Trachea, bronchi, bronchioles, alveoli",
+                            "Site of gas exchange",
+                            "Contains an estimated 300 million alveoli"
+                        ],
+                        color: "bg-cyan-600"
+                    },
+                    {
+                        title: "The Process of Inspiration",
+                        content: [
+                            "Respiratory center in medulla triggers breathing",
+                            "Diaphragm and intercostal muscles contract",
+                            "Thoracic cavity enlarges",
+                            "Intrapulmonary pressure drops below atmospheric",
+                            "Air flows into lungs until pressures equalize"
+                        ],
+                        color: "bg-blue-600"
+                    },
+                    {
+                        title: "The Process of Expiration",
+                        content: [
+                            "Stretch receptors signal apneustic center",
+                            "Inspiratory center is inhibited",
+                            "Prevents overexpansion of lungs",
+                            "Expiration lasts twice as long as inspiration",
+                            "I:E ratio is normally 1:2"
+                        ],
+                        color: "bg-blue-700"
+                    },
+                    {
+                        title: "Gas Exchange at Alveoli",
+                        content: [
+                            "Type I cells: Thin walls for gas exchange",
+                            "Type II cells: Produce surfactant and new Type I cells",
+                            "Surfactant reduces surface tension",
+                            "Alveoli function best when partially inflated",
+                            "Oxygen and CO2 exchange occurs here"
+                        ],
+                        color: "bg-purple-500"
+                    },
+                    {
+                        title: "Hypoxic Drive",
+                        content: [
+                            "Normal drive: High CO2 levels trigger breathing",
+                            "In chronic COPD: CO2 receptors become less sensitive",
+                            "Backup system: Hypoxic drive",
+                            "Low oxygen levels become the stimulus to breathe",
+                            "Caution with high-flow oxygen in these patients"
+                        ],
+                        color: "bg-orange-500"
+                    },
+                    {
+                        title: "COPD (Chronic Obstructive Pulmonary Disease)",
+                        content: [
+                            "Progressive airway and alveolar damage",
+                            "Most common cause: Cigarette smoking",
+                            "Types: Chronic bronchitis and emphysema",
+                            "Signs: Barrel chest, pursed-lip breathing, dyspnea",
+                            "Treatment: Position of comfort, oxygen, bronchodilators"
+                        ],
+                        color: "bg-red-500"
+                    },
+                    {
+                        title: "Asthma",
+                        content: [
+                            "Acute bronchiole spasm with mucus production",
+                            "Triggers: Allergens, exercise, stress, infection",
+                            "Signs: Wheezing, dyspnea, chest tightness",
+                            "Can be life-threatening if severe",
+                            "Treatment: Oxygen, bronchodilators (albuterol)"
+                        ],
+                        color: "bg-red-600"
+                    },
+                    {
+                        title: "Acute Pulmonary Edema",
+                        content: [
+                            "Fluid accumulation in lungs",
+                            "Often cardiac-related but not always",
+                            "Signs: Severe dyspnea, orthopnea, crackles",
+                            "May have pink frothy sputum",
+                            "Treatment: Upright position, oxygen, CPAP, careful IV"
+                        ],
+                        color: "bg-pink-500"
+                    },
+                    {
+                        title: "Spontaneous Pneumothorax",
+                        content: [
+                            "Air accumulation in pleural space",
+                            "Lung collapses partially or completely",
+                            "Signs: Sudden dyspnea, pleuritic chest pain",
+                            "Decreased breath sounds on affected side",
+                            "Tracheal deviation is a LATE sign (tension pneumo)"
+                        ],
+                        color: "bg-yellow-600"
+                    },
+                    {
+                        title: "Pulmonary Embolism",
+                        content: [
+                            "Blood clot blocks pulmonary artery",
+                            "Often originates from leg DVT",
+                            "Risk factors: Immobility, surgery, pregnancy",
+                            "Signs: Sudden dyspnea, chest pain, tachycardia",
+                            "May have hemoptysis (coughing blood)",
+                            "High-flow oxygen and rapid transport"
+                        ],
+                        color: "bg-red-700"
+                    },
+                    {
+                        title: "Anaphylaxis",
+                        content: [
+                            "Severe allergic reaction with airway swelling",
+                            "Triggers: Foods, stings, medications, latex",
+                            "Can progress to coma and death",
+                            "Most reactions occur within 30 minutes",
+                            "Treatment: Epinephrine 0.3mg IM immediately!"
+                        ],
+                        color: "bg-orange-600"
+                    },
+                    {
+                        title: "Primary Survey: Airway & Breathing",
+                        content: [
+                            "Ensure scene safety first",
+                            "Assess airway patency",
+                            "Evaluate breathing rate, depth, and effort",
+                            "Look for use of accessory muscles",
+                            "Auscultate breath sounds bilaterally"
+                        ],
+                        color: "bg-purple-600"
+                    },
+                    {
+                        title: "Abnormal Breath Sounds",
+                        content: [
+                            "Wheezing: Narrowed lower airways (asthma, COPD)",
+                            "Crackles (Rales): Fluid in alveoli (pulmonary edema)",
+                            "Rhonchi: Mucus in airways",
+                            "Stridor: Upper airway obstruction (emergency!)",
+                            "Absent sounds: Pneumothorax or complete obstruction"
+                        ],
+                        color: "bg-purple-700"
+                    },
+                    {
+                        title: "SAMPLE History",
+                        content: [
+                            "S - Signs and Symptoms",
+                            "A - Allergies",
+                            "M - Medications (pay close attention!)",
+                            "P - Past medical history",
+                            "L - Last oral intake",
+                            "E - Events leading to current situation"
+                        ],
+                        color: "bg-green-600"
+                    },
+                    {
+                        title: "OPQRST Assessment",
+                        content: [
+                            "O - Onset (sudden or gradual?)",
+                            "P - Provocation/Palliation (what makes it better/worse?)",
+                            "Q - Quality (describe the feeling)",
+                            "R - Region/Radiation",
+                            "S - Severity (1-10 scale)",
+                            "T - Time/Duration (how long?)"
+                        ],
+                        color: "bg-green-700"
+                    },
+                    {
+                        title: "Oxygen Therapy",
+                        content: [
+                            "Goal: Keep SpO2 above 94%",
+                            "Use pulse oximetry to guide therapy",
+                            "Safe to give <50% to most patients",
+                            "Avoid 100% saturation",
+                            "Be cautious with hypoxic drive patients (COPD)"
+                        ],
+                        color: "bg-blue-500"
+                    },
+                    {
+                        title: "Bronchodilator Administration",
+                        content: [
+                            "Most common: Albuterol (beta-agonist)",
+                            "Delivered via nebulizer or MDI",
+                            "Nebulizer needs 6 L/min oxygen flow",
+                            "Side effects: Tachycardia, tremors, nervousness",
+                            "Multiple doses may be needed"
+                        ],
+                        color: "bg-green-500"
+                    },
+                    {
+                        title: "CPAP (Continuous Positive Airway Pressure)",
+                        content: [
+                            "Used for pulmonary edema and respiratory failure",
+                            "Increases intrathoracic pressure",
+                            "Improves oxygenation and reduces work of breathing",
+                            "Success inversely related to respiratory rate",
+                            "Contraindications: Pneumothorax, facial trauma"
+                        ],
+                        color: "bg-teal-500"
+                    },
+                    {
+                        title: "Assisted Ventilation",
+                        content: [
+                            "Indicated when patient is fatiguing",
+                            "Use bag-mask device if needed",
+                            "Support breathing, don't force it",
+                            "Watch for gastric distention",
+                            "Avoid hyperventilation (causes alkalosis)"
+                        ],
+                        color: "bg-teal-600"
+                    },
+                    {
+                        title: "Patient Positioning",
+                        content: [
+                            "ALWAYS allow position of comfort",
+                            "Most dyspneic patients prefer upright",
+                            "Tripod position for severe distress",
+                            "NEVER force patient to lie flat",
+                            "Orthopnea = worse when lying down"
+                        ],
+                        color: "bg-indigo-500"
+                    },
+                    {
+                        title: "Key Vital Signs to Monitor",
+                        content: [
+                            "Respiratory rate (normal adult: 12-20/min)",
+                            "Oxygen saturation (goal: >94%)",
+                            "Heart rate and blood pressure",
+                            "Mental status changes",
+                            "Reassess every 5 min (unstable) or 15 min (stable)"
+                        ],
+                        color: "bg-purple-500"
+                    },
+                    {
+                        title: "COVID-19 Considerations",
+                        content: [
+                            "Respiratory illness caused by SARS-CoV-2",
+                            "Spreads through respiratory droplets",
+                            "Symptoms: Fever, cough, dyspnea, fatigue",
+                            "Can progress to severe respiratory failure",
+                            "ALWAYS use appropriate PPE!"
+                        ],
+                        color: "bg-red-500"
+                    },
+                    {
+                        title: "Key Takeaways",
+                        content: [
+                            "Dyspnea is a symptom, not a diagnosis",
+                            "Support ABCs first, then investigate cause",
+                            "Position of comfort is crucial",
+                            "Oxygen therapy guided by SpO2",
+                            "Know your breath sounds",
+                            "SAMPLE and OPQRST are essential",
+                            "Reassess frequently!"
+                        ],
+                        color: "bg-gradient-to-r from-blue-500 to-purple-600"
+                    }
+                ];
+
+                return (
+                    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 p-8">
+                        <div className="max-w-5xl mx-auto">
+                            <button
+                                onClick={() => setCurrentModule('home')}
+                                className="mb-6 px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors"
+                            >
+                                ← Back to Home
+                            </button>
+
+                            <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+                                <div className={`${slides[currentSlide].color} text-white p-12 min-h-96 flex flex-col justify-center`}>
+                                    <div className="text-right text-sm opacity-75 mb-4">
+                                        Slide {currentSlide + 1} of {slides.length}
+                                    </div>
+                                    <h2 className="text-4xl font-bold mb-8">{slides[currentSlide].title}</h2>
+                                    <div className="space-y-4">
+                                        {slides[currentSlide].content.map((item, idx) => (
+                                            <div key={idx} className="flex items-start text-lg">
+                                                <div className="bg-white bg-opacity-30 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+                                                    {idx + 1}
+                                                </div>
+                                                <p className="leading-relaxed">{item}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="bg-gray-100 p-6">
+                                    <div className="flex items-center justify-between">
+                                        <button
+                                            onClick={() => setCurrentSlide(Math.max(0, currentSlide - 1))}
+                                            disabled={currentSlide === 0}
+                                            className={`px-6 py-3 rounded-lg font-bold transition-colors ${
+                                                currentSlide === 0
+                                                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                                    : 'bg-indigo-500 hover:bg-indigo-600 text-white'
+                                            }`}
+                                        >
+                                            ← Previous
+                                        </button>
+
+                                        <div className="text-center">
+                                            <div className="w-64 bg-gray-300 rounded-full h-2 mb-2">
+                                                <div 
+                                                    className="bg-indigo-500 h-2 rounded-full transition-all"
+                                                    style={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
+                                                />
+                                            </div>
+                                            <p className="text-sm text-gray-600">
+                                                {currentSlide + 1} / {slides.length}
+                                            </p>
+                                        </div>
+
+                                        <button
+                                            onClick={() => {
+                                                if (currentSlide < slides.length - 1) {
+                                                    setCurrentSlide(currentSlide + 1);
+                                                } else {
+                                                    if (!completedModules.includes('presentation')) {
+                                                        setCompletedModules([...completedModules, 'presentation']);
+                                                        setScore(score + 20);
+                                                    }
+                                                    setCurrentModule('home');
+                                                }
+                                            }}
+                                            className="px-6 py-3 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg font-bold transition-colors"
+                                        >
+                                            {currentSlide === slides.length - 1 ? 'Complete ✓' : 'Next →'}
+                                        </button>
+                                    </div>
+
+                                    <div className="flex justify-center gap-2 mt-4">
+                                        {slides.map((_, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => setCurrentSlide(idx)}
+                                                className={`w-2 h-2 rounded-full transition-all ${
+                                                    idx === currentSlide 
+                                                        ? 'bg-indigo-500 w-8' 
+                                                        : 'bg-gray-400 hover:bg-gray-500'
+                                                }`}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            const QuizModule = () => {
+                const [currentQuestion, setCurrentQuestion] = useState(0);
+                const [selectedAnswer, setSelectedAnswer] = useState(null);
+                const [showExplanation, setShowExplanation] = useState(false);
+                const [quizScore, setQuizScore] = useState(0);
+                const [quizComplete, setQuizComplete] = useState(false);
+
+                const handleAnswer = (index) => {
+                    setSelectedAnswer(index);
+                    setShowExplanation(true);
+                    if (index === quizQuestions[currentQuestion].correct) {
+                        setQuizScore(quizScore + 1);
+                    }
+                };
+
+                const nextQuestion = () => {
+                    if (currentQuestion < quizQuestions.length - 1) {
+                        setCurrentQuestion(currentQuestion + 1);
+                        setSelectedAnswer(null);
+                        setShowExplanation(false);
+                    } else {
+                        setQuizComplete(true);
+                        if (!completedModules.includes('quiz')) {
+                            setCompletedModules([...completedModules, 'quiz']);
+                            setScore(score + quizScore * 4);
+                        }
+                    }
+                };
+
+                if (quizComplete) {
+                    const percentage = (quizScore / quizQuestions.length) * 100;
+                    return (
+                        <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 p-8 flex items-center justify-center">
+                            <div className="max-w-2xl w-full bg-white rounded-xl shadow-2xl p-8">
+                                <div className="text-center">
+                                    <Trophy className={`w-24 h-24 mx-auto mb-4 ${
+                                        percentage >= 80 ? 'text-yellow-500' : 'text-gray-400'
+                                    }`} />
+                                    <h2 className="text-4xl font-bold mb-4">Quiz Complete!</h2>
+                                    <div className="text-6xl font-bold mb-4 text-blue-600">
+                                        {quizScore} / {quizQuestions.length}
+                                    </div>
+                                    <p className="text-2xl mb-2">{percentage.toFixed(0)}%</p>
+                                    <p className="text-xl mb-6">
+                                        {percentage >= 90 ? '🌟 Outstanding!' : 
+                                         percentage >= 80 ? '✨ Great job!' :
+                                         percentage >= 70 ? '👍 Good effort!' :
+                                         '📚 Keep studying!'}
+                                    </p>
+                                    <button
+                                        onClick={() => setCurrentModule('home')}
+                                        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+                                    >
+                                        Return Home
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                }
+
+                return (
+                    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 p-8">
+                        <div className="max-w-4xl mx-auto">
+                            <button
+                                onClick={() => setCurrentModule('home')}
+                                className="mb-6 px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors"
+                            >
+                                ← Back to Home
+                            </button>
+
+                            <div className="bg-white rounded-xl shadow-lg p-8">
+                                <div className="flex items-center justify-between mb-6">
+                                    <h2 className="text-3xl font-bold text-yellow-600 flex items-center">
+                                        <Brain className="w-10 h-10 mr-3" />
+                                        Final Quiz
+                                    </h2>
+                                    <div className="text-right">
+                                        <p className="text-sm text-gray-600">Question {currentQuestion + 1} of {quizQuestions.length}</p>
+                                        <p className="text-lg font-bold">Score: {quizScore}</p>
+                                    </div>
+                                </div>
+
+                                <div className="mb-6">
+                                    <div className="w-full bg-gray-200 rounded-full h-3">
+                                        <div 
+                                            className="bg-yellow-500 h-3 rounded-full transition-all"
+                                            style={{ width: `${((currentQuestion + 1) / quizQuestions.length) * 100}%` }}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="bg-yellow-50 rounded-lg p-6 mb-6">
+                                    <h3 className="text-xl font-bold mb-6">{quizQuestions[currentQuestion].question}</h3>
+                                    
+                                    <div className="space-y-3">
+                                        {quizQuestions[currentQuestion].options.map((option, index) => {
+                                            const isCorrect = index === quizQuestions[currentQuestion].correct;
+                                            const isSelected = index === selectedAnswer;
+                                            
+                                            return (
+                                                <button
+                                                    key={index}
+                                                    onClick={() => !showExplanation && handleAnswer(index)}
+                                                    disabled={showExplanation}
+                                                    className={`w-full p-4 rounded-lg text-left transition-all ${
+                                                        !showExplanation
+                                                            ? 'bg-white hover:bg-gray-100 border-2 border-gray-300'
+                                                            : isCorrect
+                                                            ? 'bg-green-100 border-2 border-green-500'
+                                                            : isSelected
+                                                            ? 'bg-red-100 border-2 border-red-500'
+                                                            : 'bg-gray-100 border-2 border-gray-300'
+                                                    }`}
+                                                >
+                                                    <div className="flex items-center justify-between">
+                                                        <span>{option}</span>
+                                                        {showExplanation && isCorrect && <Check className="w-6 h-6 text-green-600" />}
+                                                        {showExplanation && isSelected && !isCorrect && <X className="w-6 h-6 text-red-600" />}
+                                                    </div>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+
+                                    {showExplanation && (
+                                        <div className="mt-6 p-4 bg-blue-100 rounded-lg border-2 border-blue-400">
+                                            <h4 className="font-bold mb-2">Explanation:</h4>
+                                            <p>{quizQuestions[currentQuestion].explanation}</p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {showExplanation && (
+                                    <button
+                                        onClick={nextQuestion}
+                                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition-colors"
+                                    >
+                                        {currentQuestion < quizQuestions.length - 1 ? 'Next Question' : 'Finish Quiz'}
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            return (
+                <div className="font-sans">
+                    {currentModule === 'home' && <HomePage />}
+                    {currentModule === 'presentation' && <ContentPresentation />}
+                    {currentModule === 'quiz' && <QuizModule />}
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<RespiratoryEmergenciesLearning />);
+    </script>
+</body>
+</html>
