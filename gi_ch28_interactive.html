@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 28 — Abdominal & GI Disorders | CAMP EMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════
+   DESIGN TOKENS — DARK MODE
+═══════════════════════════════ */
+:root {
+  --bg:       #081410;
+  --bg-mid:   #0d1f19;
+  --bg-card:  #112118;
+  --bg-raise: #163020;
+  --border:   #1e4030;
+  --teal:     #00c896;
+  --teal-dim: #00c89614;
+  --teal-dk:  #009970;
+  --amber:    #f5a623;
+  --amber-dim:#f5a62314;
+  --coral:    #f25c4a;
+  --coral-dim:#f25c4a14;
+  --sky:      #38bdf8;
+  --sky-dim:  #38bdf814;
+  --violet:   #a78bfa;
+  --violet-dim:#a78bfa14;
+  --lime:     #84cc16;
+  --lime-dim: #84cc1614;
+  --text:     #e2ede8;
+  --muted:    #6b9e88;
+  --dim:      #3a5e4a;
+  --r:        12px;
+  --r-sm:     8px;
+  color-scheme: dark;
+}
+
+/* LIGHT MODE */
+html.light {
+  --bg:       #f0faf5;
+  --bg-mid:   #e4f4ec;
+  --bg-card:  #ffffff;
+  --bg-raise: #d6ede0;
+  --border:   #b8deca;
+  --teal:     #007a5a;
+  --teal-dim: #007a5a14;
+  --teal-dk:  #005a40;
+  --amber:    #c07800;
+  --amber-dim:#c0780014;
+  --coral:    #c93020;
+  --coral-dim:#c9302014;
+  --sky:      #0077aa;
+  --sky-dim:  #0077aa14;
+  --violet:   #6d3db8;
+  --violet-dim:#6d3db814;
+  --lime:     #4d7c0f;
+  --lime-dim: #4d7c0f14;
+  --text:     #0a2018;
+  --muted:    #2a5c3a;
+  --dim:      #6a9e80;
+  color-scheme: light;
+}
+
+/* smooth transitions */
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; transition: background-color .2s, border-color .2s, color .15s; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ═══ HEADER ═══ */
+.site-hdr {
+  background: linear-gradient(135deg, #040e0a 0%, #0b1c14 60%, #071210 100%);
+  border-bottom: 2px solid var(--teal);
+  position: sticky; top:0; z-index:200;
+  box-shadow: 0 4px 32px #00000080;
+}
+html.light .site-hdr { background: linear-gradient(135deg,#d8f0e4,#cceada,#d4edd8) !important; }
+.hdr-inner {
+  max-width: 1400px; margin:0 auto;
+  padding: 13px 24px;
+  display: flex; align-items: center; gap:18px;
+}
+.hdr-chip {
+  background: var(--teal); color: var(--bg);
+  font-weight:800; font-size:10px; letter-spacing:1.5px;
+  text-transform:uppercase; padding:5px 12px; border-radius:4px;
+  white-space:nowrap;
+}
+.hdr-title {
+  font-family:'Source Serif 4',serif;
+  font-size:21px; color:#fff; flex:1;
+}
+html.light .hdr-title { color:#0a2018 !important; }
+.hdr-title em { font-style:italic; color:var(--teal); }
+.hdr-sub { font-size:11px; color:var(--muted); text-align:right; line-height:1.55; }
+
+/* Theme toggle */
+.theme-tog {
+  background:transparent;
+  border:1.5px solid rgba(255,255,255,.22);
+  border-radius:20px; padding:5px 12px 5px 8px;
+  cursor:pointer; display:flex; align-items:center; gap:7px;
+  color:rgba(255,255,255,.7); font-family:'Outfit',sans-serif;
+  font-size:12px; font-weight:600; white-space:nowrap; flex-shrink:0;
+  transition: all .2s;
+}
+.theme-tog:hover { background:rgba(255,255,255,.1); color:#fff; }
+html.light .theme-tog { border-color:rgba(0,50,30,.25); color:rgba(0,50,30,.7); }
+html.light .theme-tog:hover { background:rgba(0,50,30,.08); color:#0a2018; }
+.tog-track { width:32px; height:18px; border-radius:9px; background:rgba(255,255,255,.18); position:relative; flex-shrink:0; }
+html.light .tog-track { background:#b8deca; }
+.tog-thumb { width:14px; height:14px; border-radius:50%; background:rgba(255,255,255,.7); position:absolute; top:2px; left:2px; transition: transform .25s, background .25s; }
+html.light .tog-thumb { transform:translateX(14px); background:var(--teal); }
+
+/* ═══ LAYOUT ═══ */
+.app { max-width:1400px; margin:0 auto; display:grid; grid-template-columns:270px 1fr; min-height:calc(100vh - 66px); }
+
+/* ═══ SIDEBAR ═══ */
+.sidebar {
+  background:#060f0b; border-right:1px solid var(--border);
+  padding:20px 0; position:sticky; top:66px;
+  height:calc(100vh - 66px); overflow-y:auto;
+}
+html.light .sidebar { background:#e4f4ec !important; }
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:var(--border); }
+.sec-lbl {
+  font-size:9px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--dim);
+  padding:14px 18px 5px;
+}
+.nav-item {
+  display:flex; align-items:center; gap:11px;
+  padding:9px 18px; cursor:pointer;
+  border-left:3px solid transparent;
+  color:var(--muted); font-size:13px; font-weight:400;
+  transition:all .18s; text-decoration:none;
+}
+.nav-item:hover { background:var(--bg-mid); color:var(--text); }
+.nav-item.active { background:var(--bg-mid); color:var(--teal); border-left-color:var(--teal); font-weight:600; }
+.nav-icon { width:26px; height:26px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+
+/* ═══ CONTENT ═══ */
+.content { padding:32px; overflow-y:auto; }
+.page { display:none; }
+.page.active { display:block; animation:pgIn .3s ease; }
+@keyframes pgIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+
+/* ═══ PAGE HERO ═══ */
+.hero {
+  background: linear-gradient(135deg, var(--bg-mid) 0%, var(--bg-raise) 100%);
+  border:1px solid var(--border); border-radius:var(--r);
+  padding:32px; margin-bottom:26px; position:relative; overflow:hidden;
+}
+.hero::before { content:''; position:absolute; top:-60px;right:-60px; width:220px;height:220px; border-radius:50%; background:radial-gradient(circle,var(--teal-dim) 0%,transparent 70%); pointer-events:none; }
+.hero-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:8px; }
+.hero h1 { font-family:'Source Serif 4',serif; font-size:30px; color:#fff; margin-bottom:10px; line-height:1.2; }
+html.light .hero h1 { color:#0a2018 !important; }
+.hero p { color:var(--muted); font-size:14px; line-height:1.75; max-width:680px; }
+.hero-tags { display:flex; gap:7px; flex-wrap:wrap; margin-top:14px; }
+.hero-tag { background:var(--teal-dim); border:1px solid var(--teal); color:var(--teal); font-size:10px; font-weight:700; padding:3px 10px; border-radius:20px; }
+
+/* ═══ SECTION HEADER ═══ */
+.sec-hdr { display:flex; align-items:center; gap:12px; margin:28px 0 16px; }
+.sec-hdr:first-of-type { margin-top:0; }
+.sec-hdr h2 { font-family:'Source Serif 4',serif; font-size:18px; color:var(--text); }
+.sec-line { flex:1; height:1px; background:var(--border); }
+
+/* ═══ CARDS ═══ */
+.card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r); padding:20px; margin-bottom:14px; }
+.card h3 { font-size:14px; font-weight:700; color:var(--text); margin-bottom:9px; display:flex; align-items:center; gap:8px; }
+.card p, .card li { font-size:13.5px; line-height:1.75; color:var(--muted); }
+.card ul { padding-left:18px; }
+.card li { margin-bottom:3px; }
+.card2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+.card3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:14px; }
+
+.ca-teal  { border-left:4px solid var(--teal); }
+.ca-amber { border-left:4px solid var(--amber); }
+.ca-coral { border-left:4px solid var(--coral); }
+.ca-sky   { border-left:4px solid var(--sky); }
+.ca-violet{ border-left:4px solid var(--violet); }
+.ca-lime  { border-left:4px solid var(--lime); }
+
+/* ═══ ANALOGY BOX ═══ */
+.analogy {
+  background: linear-gradient(135deg,#0a1f14,#0d1f19);
+  border:1px solid var(--teal-dim); border-left:4px solid var(--teal);
+  border-radius:var(--r); padding:18px; margin-bottom:14px;
+}
+html.light .analogy { background:linear-gradient(135deg,#d8f5e8,#e4f4ec) !important; }
+.analogy-lbl { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:7px; display:flex; align-items:center; gap:6px; }
+.analogy p { font-size:13.5px; line-height:1.75; color:var(--text); font-style:italic; }
+
+/* ═══ ALERT BOXES ═══ */
+.alert { border-radius:var(--r-sm); padding:13px 16px; margin-bottom:12px; display:flex; gap:11px; font-size:13px; line-height:1.65; align-items:flex-start; }
+.alert-icon { font-size:17px; flex-shrink:0; margin-top:1px; }
+.al-red    { background:var(--coral-dim); border:1px solid #f25c4a40; color:#f09080; }
+.al-amber  { background:var(--amber-dim); border:1px solid #f5a62340; color:#e0c070; }
+.al-teal   { background:var(--teal-dim);  border:1px solid #00c89640; color:#70d8b8; }
+.al-sky    { background:var(--sky-dim);   border:1px solid #38bdf840; color:#80d0f0; }
+
+/* ═══ COMPARE TABLE ═══ */
+.cmp-table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:14px; }
+.cmp-table th { background:var(--bg-raise); color:var(--teal); font-weight:700; padding:11px 14px; text-align:left; font-size:11px; letter-spacing:.5px; border-bottom:2px solid var(--teal); }
+.cmp-table td { padding:9px 14px; border-bottom:1px solid var(--border); color:var(--muted); vertical-align:top; }
+.cmp-table tr:hover td { background:var(--bg-mid); color:var(--text); }
+.cmp-table tr:last-child td { border-bottom:none; }
+td.hl-teal  { color:var(--teal);  font-weight:700; }
+td.hl-coral { color:var(--coral); font-weight:700; }
+td.hl-amber { color:var(--amber); font-weight:700; }
+td.hl-sky   { color:var(--sky);   font-weight:700; }
+
+/* ═══ PATHOPHYSIOLOGY FLOW ═══ */
+.flow { display:flex; flex-direction:column; gap:0; margin-bottom:14px; }
+.flow-step { display:flex; gap:14px; align-items:flex-start; }
+.flow-con { display:flex; flex-direction:column; align-items:center; width:34px; flex-shrink:0; }
+.flow-dot { width:34px;height:34px;border-radius:50%; display:flex;align-items:center;justify-content:center; font-size:12px;font-weight:700;flex-shrink:0;border:2px solid; }
+.flow-line { width:2px;flex:1;min-height:18px;background:var(--border);margin:3px 0; }
+.flow-body { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 14px;flex:1;margin-bottom:7px; }
+.flow-body h4 { font-size:13px;font-weight:700;margin-bottom:3px; }
+.flow-body p { font-size:12.5px;color:var(--muted);line-height:1.6; }
+
+/* ═══ TABS ═══ */
+.tabs { display:flex;gap:4px;background:var(--bg-mid);border:1px solid var(--border);border-radius:var(--r);padding:5px;margin-bottom:18px;flex-wrap:wrap; }
+.tab { flex:1;min-width:90px;padding:8px 12px;background:transparent;border:none;border-radius:var(--r-sm);color:var(--muted);font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .18s;white-space:nowrap; }
+.tab:hover { background:var(--bg-raise);color:var(--text); }
+.tab.active { background:var(--bg-raise);color:var(--teal);font-weight:700; }
+.tc { display:none; }
+.tc.active { display:block; }
+
+/* ═══ MED CARDS ═══ */
+.med-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:11px;margin-bottom:14px; }
+.med-card { background:#060f0b;border:1px solid var(--border);border-radius:var(--r-sm);padding:13px; }
+html.light .med-card { background:#e4f4ec !important; }
+.med-cls { display:inline-block;font-size:9px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:10px;margin-bottom:7px; }
+.mc-teal  { background:var(--teal-dim);  color:var(--teal);  border:1px solid var(--teal); }
+.mc-amber { background:var(--amber-dim); color:var(--amber); border:1px solid var(--amber); }
+.mc-coral { background:var(--coral-dim); color:var(--coral); border:1px solid var(--coral); }
+.mc-sky   { background:var(--sky-dim);   color:var(--sky);   border:1px solid var(--sky); }
+.mc-violet{ background:var(--violet-dim);color:var(--violet);border:1px solid var(--violet); }
+.med-name { font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--teal);margin-bottom:3px; }
+.med-gen  { font-size:11px;color:var(--dim);margin-bottom:7px;font-style:italic; }
+.med-note { font-size:12px;color:var(--muted);line-height:1.5; }
+
+/* ═══ OVERVIEW CARDS ═══ */
+.ov-grid { display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px; }
+.ov-card { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .22s;border-top:3px solid; }
+.ov-card:hover { transform:translateY(-3px);box-shadow:0 8px 24px #00000050; }
+.ov-icon { font-size:26px;margin-bottom:10px; }
+.ov-card h3 { font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px; }
+.ov-card p { font-size:12px;color:var(--muted);line-height:1.55; }
+.ov-tag { font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:9px; }
+
+/* ═══ QUADRANT WIDGET ═══ */
+.quad-grid { display:grid;grid-template-columns:1fr 1fr;gap:3px;max-width:340px;margin:0 auto 16px; }
+.quad-cell { background:var(--bg-raise);border:1px solid var(--border);border-radius:6px;padding:14px;cursor:pointer;transition:all .2s;text-align:center;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px; }
+.quad-cell:hover { background:var(--teal-dim);border-color:var(--teal); }
+.quad-cell.active { background:var(--teal-dim);border-color:var(--teal); }
+.quad-label { font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal); }
+.quad-organs { font-size:12px;color:var(--muted);line-height:1.5; }
+.quad-center { position:relative;margin:0 auto 16px;max-width:340px; }
+.quad-navel { position:absolute;top:50%;left:50%;transform:translate(-50%,-50%); background:var(--bg-mid);border:2px solid var(--border);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);z-index:2; }
+.quad-detail { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px;margin-bottom:14px;display:none; }
+.quad-detail.show { display:block; }
+
+/* ═══ ASSESSMENT — all scoped to #gi-assess ═══ */
+#gi-assess { }
+.as-screen { display:none; }
+.as-screen.on { display:block; animation:pgIn .35s ease; }
+.as-hero { background:linear-gradient(135deg,var(--bg-mid),var(--bg-raise));border:1px solid var(--border);border-top:3px solid var(--teal);border-radius:var(--r);padding:38px 34px;text-align:center;position:relative;overflow:hidden;margin-bottom:22px; }
+.as-hero::before { content:'';position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,var(--teal-dim) 0%,transparent 70%);pointer-events:none; }
+.as-hero-lbl { font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px; }
+.as-hero-lbl::before,.as-hero-lbl::after { content:'';width:34px;height:1px;background:var(--teal);opacity:.4; }
+.as-hero h2 { font-family:'Source Serif 4',serif;font-size:32px;color:var(--text);line-height:1.15;margin-bottom:10px; }
+.as-hero h2 em { font-style:italic;color:var(--teal); }
+.as-hero p { color:var(--muted);font-size:14px;line-height:1.75;max-width:520px;margin:0 auto 22px; }
+.as-stats { display:flex;justify-content:center;gap:28px;flex-wrap:wrap; }
+.as-stat-n { font-family:'Source Serif 4',serif;font-size:26px;color:var(--teal);line-height:1; }
+.as-stat-l { font-size:11px;color:var(--muted);margin-top:3px; }
+.as-tiles { display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:22px; }
+.as-tile { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px; }
+.as-tile .t-ic { font-size:19px;margin-bottom:6px; }
+.as-tile .t-t { font-weight:700;color:var(--text);font-size:13px;margin-bottom:3px; }
+.as-tile .t-d { color:var(--muted);font-size:12px;line-height:1.5; }
+/* Student form */
+.as-form { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:26px;margin-bottom:20px; }
+.as-form h3 { font-family:'Source Serif 4',serif;font-size:19px;color:var(--text);margin-bottom:4px; }
+.as-form-sub { font-size:13px;color:var(--muted);margin-bottom:20px; }
+.as-row { display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:15px; }
+.as-grp { display:flex;flex-direction:column;gap:7px; }
+.as-grp label { font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted); }
+.as-grp input,.as-grp select { background:var(--bg-mid);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:11px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color .2s; }
+.as-grp input:focus,.as-grp select:focus { border-color:var(--teal); }
+.as-grp input::placeholder { color:var(--dim); }
+.as-grp select option { background:var(--bg-mid); }
+.as-err { color:var(--coral);font-size:12px;font-weight:600;display:none;margin-top:8px; }
+.as-err.on { display:block; }
+/* Buttons */
+.btn-go { background:var(--teal);color:var(--bg);border:none;padding:13px 30px;border-radius:var(--r-sm);font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s; }
+.btn-go:hover { background:var(--teal-dk);transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,200,150,.25); }
+.btn-rpt { background:linear-gradient(135deg,#8b0020,var(--coral));color:#fff;border:none;padding:13px 26px;border-radius:var(--r-sm);font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:all .2s;box-shadow:0 4px 16px rgba(242,92,74,.3); }
+.btn-rpt:hover { transform:translateY(-2px);box-shadow:0 8px 24px rgba(242,92,74,.4); }
+.btn-rt { background:transparent;color:var(--muted);border:1.5px solid var(--border);padding:13px 22px;border-radius:var(--r-sm);font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s; }
+.btn-rt:hover { border-color:var(--teal);color:var(--teal); }
+/* Quiz UI */
+.q-hdr { display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px; }
+.q-hdr-l { display:flex;flex-direction:column;gap:3px; }
+.q-name { font-family:'Source Serif 4',serif;font-size:16px;color:var(--text); }
+.q-id { font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace; }
+.q-counter { font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-align:right; }
+.q-counter strong { color:var(--teal);font-size:16px; }
+.q-prog-wrap { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:11px 16px;display:flex;align-items:center;gap:14px;margin-bottom:16px; }
+.q-bar { flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden; }
+.q-bar-fill { height:100%;background:linear-gradient(90deg,var(--teal),var(--sky));border-radius:3px;transition:width .4s ease; }
+.q-pct { font-size:11px;color:var(--muted);white-space:nowrap;font-family:'JetBrains Mono',monospace; }
+.q-cat { display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:12px; }
+.q-card { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:26px;margin-bottom:13px; }
+.q-num { font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:11px; }
+.q-text { font-size:15px;font-weight:500;color:var(--text);line-height:1.65;margin-bottom:22px; }
+.q-opts { display:flex;flex-direction:column;gap:9px; }
+.q-opt { display:flex;align-items:flex-start;gap:12px;padding:12px 15px;background:var(--bg-mid);border:1.5px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:all .18s;text-align:left;width:100%;font-family:'Outfit',sans-serif; }
+.q-opt:hover:not(.qdis) { border-color:rgba(0,200,150,.5);background:rgba(0,200,150,.05); }
+.q-let { width:25px;height:25px;border-radius:5px;background:var(--border);color:var(--muted);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .18s; }
+.q-ot  { font-size:13.5px;color:var(--muted);line-height:1.5;padding-top:2px; }
+.q-opt:hover:not(.qdis) .q-let { background:rgba(0,200,150,.2);color:var(--teal); }
+.q-opt:hover:not(.qdis) .q-ot  { color:var(--text); }
+.q-opt.qok  { border-color:var(--teal); background:rgba(0,200,150,.08); }
+.q-opt.qok  .q-let { background:var(--teal);color:var(--bg); }
+.q-opt.qok  .q-ot  { color:var(--teal); }
+.q-opt.qbad { border-color:var(--coral);background:rgba(242,92,74,.08); }
+.q-opt.qbad .q-let { background:var(--coral);color:#fff; }
+.q-opt.qbad .q-ot  { color:var(--coral); }
+.q-opt.qdis { cursor:not-allowed;pointer-events:none; }
+.q-fb { border-radius:var(--r-sm);padding:13px 16px;margin-top:16px;display:none; }
+.q-fb.on { display:block;animation:pgIn .3s ease; }
+.q-fb-h { font-size:13px;font-weight:700;margin-bottom:7px; }
+.q-fb-t { font-size:13px;line-height:1.7; }
+.q-fb.fbOk  { background:rgba(0,200,150,.1); border:1px solid rgba(0,200,150,.3); }
+.q-fb.fbOk  .q-fb-h { color:var(--teal); }
+.q-fb.fbOk  .q-fb-t { color:#80dfc0; }
+.q-fb.fbBad { background:rgba(242,92,74,.1); border:1px solid rgba(242,92,74,.3); }
+.q-fb.fbBad .q-fb-h { color:var(--coral); }
+.q-fb.fbBad .q-fb-t { color:#f0a090; }
+.q-actions { display:flex;justify-content:space-between;align-items:center;margin-top:13px; }
+.q-live { font-size:13px;color:var(--muted); }
+.q-live strong { color:var(--teal);font-size:15px; }
+.btn-nxt { background:var(--teal);color:var(--bg);border:none;padding:11px 24px;border-radius:var(--r-sm);font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;cursor:pointer;display:none;align-items:center;gap:7px;transition:all .2s; }
+.btn-nxt:hover { background:var(--teal-dk); }
+/* Results */
+.res-hero { background:linear-gradient(135deg,var(--bg-mid),var(--bg-raise));border:1px solid var(--border);border-radius:var(--r);padding:38px 34px;text-align:center;margin-bottom:22px;position:relative;overflow:hidden; }
+.res-hero::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,200,150,.1) 0%,transparent 60%);pointer-events:none; }
+.res-circle { width:128px;height:128px;border-radius:50%;margin:0 auto 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid; }
+.res-pct { font-family:'Source Serif 4',serif;font-size:34px;line-height:1; }
+.res-grd { font-size:11px;font-weight:700;letter-spacing:1px;margin-top:2px; }
+.res-hero h3 { font-family:'Source Serif 4',serif;font-size:24px;color:var(--text);margin-bottom:7px; }
+.res-hero p { color:var(--muted);font-size:13.5px;line-height:1.7;max-width:480px;margin:0 auto; }
+.res-meta { display:flex;justify-content:center;gap:34px;margin-top:20px;flex-wrap:wrap; }
+.res-mv { font-size:19px;font-weight:700;font-family:'Source Serif 4',serif; }
+.res-ml { font-size:11px;color:var(--muted);margin-top:2px;letter-spacing:.5px; }
+.res-card { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:14px; }
+.res-card-t { font-family:'Source Serif 4',serif;font-size:16px;color:var(--text);margin-bottom:14px; }
+.cat-row { display:grid;grid-template-columns:200px 1fr 65px;gap:12px;align-items:center;margin-bottom:9px; }
+.cat-n { font-size:12.5px;color:var(--muted); }
+.cat-bw { height:6px;background:var(--border);border-radius:3px;overflow:hidden; }
+.cat-bf { height:100%;border-radius:3px;transition:width .6s ease; }
+.cat-pv { font-size:12px;font-weight:700;text-align:right;font-family:'JetBrains Mono',monospace; }
+.wrng-item { border:1px solid rgba(242,92,74,.2);border-left:4px solid var(--coral);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:13px;margin-bottom:10px;background:rgba(242,92,74,.03); }
+.wi-q { font-size:13px;font-weight:600;color:var(--text);margin-bottom:7px;line-height:1.5; }
+.wi-y { font-size:12px;color:var(--coral);margin-bottom:3px; }
+.wi-c { font-size:12px;color:var(--teal);margin-bottom:7px; }
+.wi-r { border-top:1px solid var(--border);padding-top:7px;font-size:12px;color:var(--muted);line-height:1.65; }
+.res-actions { display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:26px; }
+/* Report modal */
+#gi-modal { display:none;position:fixed;inset:0;z-index:10000;background:rgba(4,10,8,.97);overflow-y:auto; }
+#gi-modal.on { display:block; }
+.modal-bar { position:sticky;top:0;z-index:10001;background:#030a06;border-bottom:2px solid var(--teal);padding:11px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap; }
+.modal-info { font-size:13px;color:var(--muted); }
+.modal-info strong { color:var(--text); }
+.modal-btns { display:flex;gap:9px; }
+.modal-print { background:var(--teal);color:var(--bg);border:none;padding:9px 22px;border-radius:var(--r-sm);font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s; }
+.modal-print:hover { background:var(--teal-dk); }
+.modal-close { background:transparent;color:var(--muted);border:1.5px solid var(--border);padding:8px 16px;border-radius:var(--r-sm);font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;transition:all .2s; }
+.modal-close:hover { border-color:var(--coral);color:var(--coral); }
+.modal-body { max-width:820px;margin:0 auto;padding:28px 20px 60px; }
+/* Report card */
+.rpt { background:#fff;border-radius:10px;overflow:hidden;color:#111;font-family:Arial,sans-serif; }
+.rpt-hdr { background:#081410;padding:22px 26px 18px; }
+.rpt-hr { display:flex;justify-content:space-between;align-items:flex-start;gap:14px; }
+.rpt-ch { background:#00c896;color:#081410;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:4px;display:inline-block;margin-bottom:7px; }
+.rpt-ht { font-size:19px;font-weight:700;color:#fff;margin-bottom:3px; }
+.rpt-hs { font-size:11px;color:#6b9e88;line-height:1.6; }
+.rpt-sp { border-radius:8px;padding:12px 18px;text-align:center;min-width:80px;flex-shrink:0; }
+.rpt-sn { font-size:26px;font-weight:700;color:#081410;line-height:1; }
+.rpt-sg { font-size:11px;font-weight:700;color:#081410;margin-top:3px; }
+.rpt-in { padding:20px 26px; }
+.rpt-stu { display:flex;justify-content:space-between;align-items:center;background:#f5f9f7;border:1px solid #c8e0d4;border-radius:8px;padding:13px 16px;margin-bottom:13px;gap:14px;flex-wrap:wrap; }
+.rpt-sn2 { font-size:16px;font-weight:700;color:#111;margin-bottom:3px; }
+.rpt-sm { font-size:12px;color:#556; }
+.rpt-stats { display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:13px; }
+.rpt-st { background:#f5f9f7;border:1px solid #c8e0d4;border-radius:8px;padding:10px;text-align:center; }
+.rpt-sv { font-size:20px;font-weight:700; }
+.rpt-sl { font-size:10px;color:#778;letter-spacing:.5px;text-transform:uppercase;margin-top:2px; }
+.rpt-pass { border-radius:6px;padding:9px 14px;margin-bottom:16px;font-weight:700;font-size:13px;text-align:center; }
+.rpt-py { background:#e8faf3;border:1.5px solid #00c896;color:#006040; }
+.rpt-pn { background:#fce8e6;border:1.5px solid #f25c4a;color:#7a1510; }
+.rpt-sec { font-size:14px;font-weight:700;color:#081410;border-bottom:2px solid #00c896;padding-bottom:5px;margin:18px 0 11px; }
+.rpt-ct { width:100%;border-collapse:collapse;margin-bottom:16px; }
+.rpt-ct th { background:#081410;color:#00c896;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:8px 10px;text-align:left; }
+.rpt-ct td { padding:7px 10px;border-bottom:1px solid #eef0f3;font-size:12px;color:#334;vertical-align:middle; }
+.rpt-ct tr:last-child td { border-bottom:none; }
+.rpt-bw { background:#dce8e2;border-radius:4px;height:8px;overflow:hidden; }
+.rpt-bf { height:100%;border-radius:4px; }
+.rpt-ag { display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:10px; }
+.rpt-ac { border-radius:5px;padding:5px 3px;text-align:center; }
+.rpt-aq { font-size:9px;color:#888;margin-bottom:1px; }
+.rpt-av { font-size:11px;font-weight:700; }
+.rpt-wi { border-left:4px solid #f25c4a;padding:12px 14px;margin-bottom:10px;background:#fff8f7;border-radius:0 6px 6px 0;border-top:1px solid #f0c8c4;border-right:1px solid #f0c8c4;border-bottom:1px solid #f0c8c4; }
+.rpt-wc { font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#b03050;margin-bottom:4px; }
+.rpt-wq { font-size:13px;font-weight:600;color:#111;margin-bottom:7px;line-height:1.5; }
+.rpt-wy { font-size:12px;color:#c0202a;margin-bottom:3px; }
+.rpt-wok { font-size:12px;color:#006040;margin-bottom:7px; }
+.rpt-wr { border-top:1px solid #e0d0d0;padding-top:7px;font-size:12px;color:#556;line-height:1.65; }
+@media print {
+  body > *:not(#gi-modal) { display:none !important; }
+  #gi-modal { display:block !important;position:static !important;background:#fff !important;overflow:visible !important; }
+  .modal-bar { display:none !important; }
+  .modal-body { padding:0 !important;max-width:100% !important; }
+  .rpt-wi { page-break-inside:avoid; }
+}
+/* Loading */
+#gi-loading { position:fixed;inset:0;background:rgba(4,10,8,.93);z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px; }
+#gi-loading.on { display:flex; }
+.spin { width:42px;height:42px;border:3px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.spin-lbl { font-size:13px;color:var(--muted); }
+#gi-toast { position:fixed;bottom:22px;right:22px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 18px;font-size:13px;color:var(--text);box-shadow:0 8px 32px #00000060;z-index:300;transform:translateY(60px);opacity:0;transition:all .3s ease; }
+#gi-toast.on { transform:translateY(0);opacity:1; }
+/* Pills */
+.pill { display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.5px;vertical-align:middle; }
+.pill-t { background:var(--teal-dim); color:var(--teal); border:1px solid var(--teal); }
+.pill-r { background:var(--coral-dim);color:var(--coral);border:1px solid var(--coral); }
+.pill-a { background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber); }
+
+/* Responsive */
+@media(max-width:900px) {
+  .app { grid-template-columns:1fr; }
+  .sidebar { position:static;height:auto;border-right:none;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;padding:10px;gap:3px; }
+  .sec-lbl { display:none; }
+  .nav-item { padding:7px 11px;border-left:none;border-radius:var(--r-sm);font-size:12px;flex:1;min-width:100px;justify-content:center; }
+  .nav-item.active { border-left:none;background:var(--teal-dim); }
+  .card2,.card3,.ov-grid,.as-tiles { grid-template-columns:1fr; }
+  .content { padding:16px; }
+  .cat-row { grid-template-columns:1fr 1fr; }
+  .cat-bw { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="gi-loading"><div class="spin"></div><div class="spin-lbl">Building report...</div></div>
+<div id="gi-toast"></div>
+<div id="gi-modal">
+  <div class="modal-bar">
+    <div class="modal-info"><strong>GI Score Report</strong> — Use browser Print to save as PDF</div>
+    <div class="modal-btns">
+      <button class="modal-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+      <button class="modal-close" onclick="document.getElementById('gi-modal').classList.remove('on')">✕ Close</button>
+    </div>
+  </div>
+  <div class="modal-body"><div id="gi-rpt-content"></div></div>
+</div>
+
+<!-- HEADER -->
+<header class="site-hdr">
+  <div class="hdr-inner">
+    <div class="hdr-chip">CH. 28</div>
+    <div class="hdr-title"><em>Abdominal &amp; GI Disorders</em> — Paramedic Program</div>
+    <div class="hdr-sub">Sanders' Paramedic Textbook, 6th Ed.<br>CAMP Community College EMS</div>
+    <button class="theme-tog" onclick="toggleTheme()" id="tog-btn">
+      <div class="tog-track"><div class="tog-thumb"></div></div>
+      <span id="tog-lbl">Light</span>
+    </button>
+  </div>
+</header>
+
+<div class="app">
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sec-lbl">Overview</div>
+  <div class="nav-item active" onclick="nav('overview')" data-p="overview"><div class="nav-icon" style="background:var(--teal-dim)">🗂️</div><span>Chapter Overview</span></div>
+  <div class="sec-lbl">Anatomy & Assessment</div>
+  <div class="nav-item" onclick="nav('anatomy')" data-p="anatomy"><div class="nav-icon" style="background:var(--sky-dim)">🫀</div><span>GI Anatomy</span></div>
+  <div class="nav-item" onclick="nav('assess')" data-p="assess"><div class="nav-icon" style="background:var(--amber-dim)">🩺</div><span>Assessment</span></div>
+  <div class="sec-lbl">Upper GI</div>
+  <div class="nav-item" onclick="nav('pud')" data-p="pud"><div class="nav-icon" style="background:var(--coral-dim)">🔥</div><span>Peptic Ulcer Disease</span></div>
+  <div class="nav-item" onclick="nav('varices')" data-p="varices"><div class="nav-icon" style="background:var(--coral-dim)">🩸</div><span>Esophageal Varices</span></div>
+  <div class="nav-item" onclick="nav('gibleed')" data-p="gibleed"><div class="nav-icon" style="background:var(--coral-dim)">💉</div><span>GI Bleeding</span></div>
+  <div class="sec-lbl">Intestinal</div>
+  <div class="nav-item" onclick="nav('gastro')" data-p="gastro"><div class="nav-icon" style="background:var(--amber-dim)">🦠</div><span>Gastroenteritis</span></div>
+  <div class="nav-item" onclick="nav('ibd')" data-p="ibd"><div class="nav-icon" style="background:var(--amber-dim)">🧬</div><span>IBD / Crohn's / UC</span></div>
+  <div class="nav-item" onclick="nav('appendix')" data-p="appendix"><div class="nav-icon" style="background:var(--coral-dim)">⚡</div><span>Appendicitis</span></div>
+  <div class="nav-item" onclick="nav('bowel')" data-p="bowel"><div class="nav-icon" style="background:var(--amber-dim)">🚧</div><span>Bowel Obstruction</span></div>
+  <div class="nav-item" onclick="nav('divert')" data-p="divert"><div class="nav-icon" style="background:var(--sky-dim)">🕳️</div><span>Diverticulosis</span></div>
+  <div class="sec-lbl">Organs</div>
+  <div class="nav-item" onclick="nav('pancreas')" data-p="pancreas"><div class="nav-icon" style="background:var(--violet-dim)">🔴</div><span>Pancreatitis</span></div>
+  <div class="nav-item" onclick="nav('gallbladder')" data-p="gallbladder"><div class="nav-icon" style="background:var(--lime-dim)">💛</div><span>Cholecystitis</span></div>
+  <div class="nav-item" onclick="nav('hepatitis')" data-p="hepatitis"><div class="nav-icon" style="background:var(--amber-dim)">🫀</div><span>Acute Hepatitis</span></div>
+  <div class="sec-lbl">Examination</div>
+  <div class="nav-item" onclick="nav('exam')" data-p="exam"><div class="nav-icon" style="background:var(--teal-dim)">📝</div><span>100-Question Exam</span></div>
+</nav>
+
+<!-- CONTENT -->
+<main class="content">
+
+<!-- ══ OVERVIEW ══ -->
+<div id="page-overview" class="page active">
+  <div class="hero">
+    <div class="hero-label">Chapter 28 — Sanders' Paramedic Textbook</div>
+    <h1>Abdominal &amp; Gastrointestinal Disorders</h1>
+    <p>The abdomen is the most diagnostically challenging region in emergency medicine. Dozens of organ systems share the same real estate — and their distress signals overlap, radiate, and mimic each other. A systematic approach to assessment, combined with deep pathophysiology knowledge, is the paramedic's most powerful tool.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">GI Bleeding</span><span class="hero-tag">Appendicitis</span>
+      <span class="hero-tag">Pancreatitis</span><span class="hero-tag">Cholecystitis</span>
+      <span class="hero-tag">Peptic Ulcer</span><span class="hero-tag">Esophageal Varices</span>
+      <span class="hero-tag">IBD / Crohn's</span><span class="hero-tag">Bowel Obstruction</span>
+    </div>
+  </div>
+
+  <div class="sec-hdr"><h2>Learning Objectives</h2><div class="sec-line"></div></div>
+  <div class="card ca-teal">
+    <p>After completing this chapter, you will be able to:</p>
+    <ul style="margin-top:9px">
+      <li>Identify abdominal organs and describe their functions</li>
+      <li>Distinguish visceral, somatic, and referred abdominal pain</li>
+      <li>Perform a systematic prehospital abdominal assessment using OPQRST</li>
+      <li>Recognize and manage GI bleeding, appendicitis, pancreatitis, cholecystitis, esophageal varices, IBD, and bowel obstruction</li>
+      <li>Identify high-risk patient populations for abdominal emergencies</li>
+    </ul>
+  </div>
+
+  <div class="sec-hdr"><h2>Disease Quick Reference — Click to Navigate</h2><div class="sec-line"></div></div>
+  <div class="ov-grid">
+    <div class="ov-card" style="border-top-color:var(--coral)" onclick="nav('gibleed')">
+      <div class="ov-icon">🩸</div><h3>GI Bleeding</h3>
+      <p>Upper (ulcer, varices) and lower (diverticular) hemorrhage. Hematemesis = upper. Melena = upper/proximal lower. Hematochezia = lower.</p>
+      <div class="ov-tag" style="color:var(--coral)">HEMODYNAMIC EMERGENCY</div>
+    </div>
+    <div class="ov-card" style="border-top-color:var(--coral)" onclick="nav('appendix')">
+      <div class="ov-icon">⚡</div><h3>Appendicitis</h3>
+      <p>Periumbilical pain migrating to RLQ McBurney's point. Fever, N/V, rebound tenderness. Most common in ages 10–19.</p>
+      <div class="ov-tag" style="color:var(--coral)">SURGICAL EMERGENCY</div>
+    </div>
+    <div class="ov-card" style="border-top-color:var(--violet)" onclick="nav('pancreas')">
+      <div class="ov-icon">🔴</div><h3>Pancreatitis</h3>
+      <p>Severe epigastric pain radiating to the back. Caused by gallstones or alcohol. Enzymes digesting the pancreas itself.</p>
+      <div class="ov-tag" style="color:var(--violet)">ENZYMES GONE ROGUE</div>
+    </div>
+    <div class="ov-card" style="border-top-color:var(--lime)" onclick="nav('gallbladder')">
+      <div class="ov-icon">💛</div><h3>Cholecystitis</h3>
+      <p>RUQ pain after fatty meals. Murphy's sign positive. Fat, female, forty, fertile — the 4 Fs.</p>
+      <div class="ov-tag" style="color:var(--lime)">GALLSTONE OBSTRUCTION</div>
+    </div>
+    <div class="ov-card" style="border-top-color:var(--coral)" onclick="nav('varices')">
+      <div class="ov-icon">🫀</div><h3>Esophageal Varices</h3>
+      <p>Massive hematemesis in cirrhotic patients. Portal hypertension → engorged veins → catastrophic rupture. 20–30% mortality.</p>
+      <div class="ov-tag" style="color:var(--coral)">LIFE-THREATENING BLEED</div>
+    </div>
+    <div class="ov-card" style="border-top-color:var(--amber)" onclick="nav('ibd')">
+      <div class="ov-icon">🧬</div><h3>IBD (UC &amp; Crohn's)</h3>
+      <p>Chronic autoimmune inflammation. UC = colon only. Crohn's = anywhere mouth to anus. Both cause bloody diarrhea, pain, weight loss.</p>
+      <div class="ov-tag" style="color:var(--amber)">CHRONIC / RELAPSING</div>
+    </div>
+  </div>
+
+  <div class="sec-hdr"><h2>The Abdomen at a Glance — Types of Pain</h2><div class="sec-line"></div></div>
+  <div class="card2">
+    <div class="card ca-sky">
+      <h3>🔵 Visceral Pain</h3>
+      <p>Poorly localized, cramping or colicky. Comes from autonomic nerve fibers around hollow organs. Often near the umbilicus. Associated with nausea, diaphoresis, tachycardia. <strong>Examples:</strong> early appendicitis, intestinal obstruction, pancreatitis.</p>
+    </div>
+    <div class="card ca-coral">
+      <h3>🔴 Somatic Pain</h3>
+      <p>Sharp, localized, constant. From peritoneal irritation — bacterial or chemical. Worsens with movement. Involuntary guarding, rebound tenderness. <strong>Examples:</strong> perforated ulcer, ruptured appendix, peritonitis.</p>
+    </div>
+  </div>
+  <div class="analogy">
+    <div class="analogy-lbl">🗺️ Analogy — Referred Pain</div>
+    <p>Referred pain is like a faulty GPS signal — the pain message from a visceral organ travels up the spinal cord and <strong>merges onto the same highway</strong> as skin sensation signals. The brain can't tell which exit the pain came from, so it pins it on a body surface location far from the actual source. Classic example: gallbladder pain felt at the right shoulder tip; cardiac pain felt in the left arm; kidney stones felt in the groin.</p>
+  </div>
+</div>
+
+<!-- ══ ANATOMY ══ -->
+<div id="page-anatomy" class="page">
+  <div class="hero">
+    <div class="hero-label">GI Anatomy & Physiology</div>
+    <h1>The GI Tract — Structure &amp; Function</h1>
+    <p>The gastrointestinal tract is a 25-foot continuous tube from mouth to anus, supported by accessory organs. Each segment has a specialized role, and understanding their locations predicts where pain will appear when they fail.</p>
+  </div>
+
+  <div class="sec-hdr"><h2>Abdominal Quadrants — Click a Quadrant</h2><div class="sec-line"></div></div>
+  <div class="quad-center">
+    <div class="quad-grid">
+      <div class="quad-cell" onclick="showQuad('ruq')" id="quad-ruq">
+        <div class="quad-label">RUQ</div>
+        <div class="quad-organs">Liver, Gallbladder<br>Right kidney, Duodenum</div>
+      </div>
+      <div class="quad-cell" onclick="showQuad('luq')" id="quad-luq">
+        <div class="quad-label">LUQ</div>
+        <div class="quad-organs">Stomach, Spleen<br>Left kidney, Pancreas (tail)</div>
+      </div>
+      <div class="quad-cell" onclick="showQuad('rlq')" id="quad-rlq">
+        <div class="quad-label">RLQ</div>
+        <div class="quad-organs">Appendix, Cecum<br>Right ovary/fallopian tube</div>
+      </div>
+      <div class="quad-cell" onclick="showQuad('llq')" id="quad-llq">
+        <div class="quad-label">LLQ</div>
+        <div class="quad-organs">Sigmoid colon<br>Left ovary/fallopian tube</div>
+      </div>
+    </div>
+  </div>
+  <div id="quad-detail" class="quad-detail">
+    <h3 id="quad-title" style="font-size:14px;font-weight:700;color:var(--teal);margin-bottom:8px"></h3>
+    <p id="quad-text" style="font-size:13px;color:var(--muted);line-height:1.7"></p>
+  </div>
+
+  <div class="sec-hdr"><h2>Major GI Organs</h2><div class="sec-line"></div></div>
+  <div class="card3">
+    <div class="card ca-teal"><h3>🔵 Esophagus</h3><p>Muscular tube carrying food from pharynx to stomach. Lower esophageal sphincter (LES) prevents acid reflux. Portal hypertension can cause variceal enlargement of its veins.</p></div>
+    <div class="card ca-teal"><h3>🔵 Stomach</h3><p>Stores and mixes food with HCl and pepsin. The gastric mucosa is protected by a mucus layer — NSAID/H. pylori damage breaks this barrier, causing ulcers.</p></div>
+    <div class="card ca-teal"><h3>🔵 Small Intestine</h3><p>Duodenum (ulcers here), jejunum, ileum. Site of most nutrient absorption. Crohn's disease commonly affects the terminal ileum. 20 feet long.</p></div>
+    <div class="card ca-amber"><h3>🟠 Large Intestine</h3><p>Cecum, ascending, transverse, descending, sigmoid colon, rectum. Absorbs water and electrolytes. Diverticulosis forms here. UC inflames the mucosal lining.</p></div>
+    <div class="card ca-amber"><h3>🟠 Liver</h3><p>Largest abdominal organ — metabolism, detox, clotting factors, bile production. Cirrhosis from chronic hepatitis or alcohol → portal hypertension → varices.</p></div>
+    <div class="card ca-amber"><h3>🟠 Pancreas</h3><p>Dual function: exocrine (digestive enzymes) and endocrine (insulin, glucagon). Pancreatitis = enzymes escaping and digesting the gland and surrounding tissue.</p></div>
+  </div>
+  <div class="card ca-lime" style="margin-top:0">
+    <h3>🟢 Gallbladder &amp; Biliary Tree</h3>
+    <p>The gallbladder stores bile produced by the liver. Bile is released into the duodenum via the common bile duct to aid fat digestion. Gallstones (cholelithiasis) can obstruct the cystic duct → cholecystitis, or the common bile duct → cholangitis/pancreatitis. Clay-colored stools indicate biliary obstruction preventing bile from reaching the intestine.</p>
+  </div>
+</div>
+
+<!-- ══ ASSESSMENT ══ -->
+<div id="page-assess" class="page">
+  <div class="hero">
+    <div class="hero-label">Prehospital Assessment</div>
+    <h1>Assessing the Acute Abdomen</h1>
+    <p>Abdominal pain is one of the most diagnostically challenging presentations in EMS. The paramedic's systematic approach — OPQRST, physical exam sequence, and recognition of peritoneal signs — forms the foundation for all GI emergencies.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('assess','opqrst')">OPQRST</button>
+    <button class="tab" onclick="switchTab('assess','exam')">Physical Exam</button>
+    <button class="tab" onclick="switchTab('assess','signs')">Peritoneal Signs</button>
+    <button class="tab" onclick="switchTab('assess','mgmt')">Prehospital Mgmt</button>
+    <button class="tab" onclick="switchTab('assess','highrisk')">High-Risk Patients</button>
+  </div>
+
+  <div id="assess-opqrst" class="tc active">
+    <div class="analogy">
+      <div class="analogy-lbl">📋 OPQRST — Your GI Detective Framework</div>
+      <p>Think of OPQRST as a six-question diagnostic interview. Each letter unlocks a different dimension of the pain story. A sharp, sudden-onset epigastric pain that worsened after eating fatty food tells a very different story than a gradual, crampy, periumbilical pain that migrated to the RLQ over 12 hours. The history IS the diagnosis in GI emergencies.</p>
+    </div>
+    <div class="card3">
+      <div class="card ca-teal"><h3>O — Onset</h3><p><strong>Sudden</strong> = vascular (AAA rupture, mesenteric ischemia) or perforation. <strong>Gradual</strong> = inflammation (appendicitis, cholecystitis). <strong>With meals</strong> = gallbladder, PUD.</p></div>
+      <div class="card ca-teal"><h3>P — Provocation</h3><p><strong>Worse with movement</strong> = peritonitis (somatic pain). <strong>Better with position</strong> = pancreatitis (leaning forward). <strong>After fatty meals</strong> = cholecystitis.</p></div>
+      <div class="card ca-teal"><h3>Q — Quality</h3><p><strong>Burning</strong> = PUD/GERD. <strong>Cramping/colicky</strong> = obstruction, renal colic. <strong>Tearing</strong> = AAA, aortic dissection. <strong>Constant/severe</strong> = peritonitis.</p></div>
+      <div class="card ca-sky"><h3>R — Region/Radiation</h3><p><strong>RUQ → right shoulder</strong> = gallbladder. <strong>Epigastric → back</strong> = pancreatitis. <strong>Periumbilical → RLQ</strong> = appendicitis. <strong>Flank → groin</strong> = kidney stone.</p></div>
+      <div class="card ca-sky"><h3>S — Severity</h3><p>Rate 0–10. Pain out of proportion to exam findings suggests <strong>mesenteric ischemia</strong>. "Worst pain of my life" + tearing = AAA until proven otherwise. Track changes over time.</p></div>
+      <div class="card ca-sky"><h3>T — Time</h3><p><strong>Constant</strong> = inflammation or obstruction. <strong>Colicky (comes and goes)</strong> = hollow organ spasm (bowel obstruction, kidney stone, biliary colic). Duration guides urgency.</p></div>
+    </div>
+  </div>
+
+  <div id="assess-exam" class="tc">
+    <div class="alert al-amber"><span class="alert-icon">⚠️</span><div><strong>Sequence Matters:</strong> Always use <strong>Inspection → Auscultation → Percussion → Palpation</strong> (IAPP). Palpation last because it can alter bowel sounds and cause guarding that makes subsequent steps unreliable.</div></div>
+    <div class="card2">
+      <div class="card ca-teal">
+        <h3>👁️ Inspection</h3>
+        <ul>
+          <li>Patient position (fetal = peritonitis)</li>
+          <li>Abdominal distention (obstruction, ascites)</li>
+          <li>Scars (previous surgeries — adhesions risk)</li>
+          <li>Bruising: Cullen's sign (periumbilical ecchymosis) = retroperitoneal hemorrhage; Grey Turner's sign (flank ecchymosis) = pancreatitis/AAA</li>
+          <li>Skin color, facial expression</li>
+        </ul>
+      </div>
+      <div class="card ca-amber">
+        <h3>🔊 Auscultation</h3>
+        <ul>
+          <li>Must come BEFORE palpation</li>
+          <li><strong>Hyperactive bowel sounds</strong> = gastroenteritis, early obstruction</li>
+          <li><strong>Hypoactive/absent</strong> = peritonitis, paralytic ileus</li>
+          <li><strong>High-pitched, tinkling</strong> = mechanical obstruction</li>
+          <li>Bruit over aorta = AAA</li>
+        </ul>
+      </div>
+      <div class="card ca-coral">
+        <h3>👋 Palpation (Last)</h3>
+        <ul>
+          <li>Start AWAY from area of pain</li>
+          <li>Note: voluntary vs. involuntary guarding</li>
+          <li><strong>Involuntary guarding</strong> (board-like rigidity) = peritonitis</li>
+          <li><strong>Rebound tenderness</strong> = peritoneal irritation</li>
+          <li>Murphy's sign = RUQ inspiration pain = cholecystitis</li>
+          <li>McBurney's point tenderness = appendicitis</li>
+        </ul>
+      </div>
+      <div class="card ca-sky">
+        <h3>💊 Diagnostics (Field)</h3>
+        <ul>
+          <li>12-lead ECG (rule out inferior MI mimicking GI pain)</li>
+          <li>Blood glucose (Addison crisis, DKA can mimic acute abdomen)</li>
+          <li>Serum lactate (shock, mesenteric ischemia)</li>
+          <li>FAST ultrasound (free fluid, AAA) where available</li>
+          <li>EtCO₂ monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="assess-signs" class="tc">
+    <div class="card">
+      <table class="cmp-table">
+        <thead><tr><th>Sign</th><th>How to Elicit</th><th>Positive Finding</th><th>Suggests</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Murphy's Sign</strong></td><td>Hook fingers under right costal margin, ask patient to inhale</td><td>Patient stops breathing in due to pain</td><td class="hl-teal">Cholecystitis</td></tr>
+          <tr><td><strong>McBurney's Point</strong></td><td>Palpate 1/3 from ASIS to umbilicus (RLQ)</td><td>Maximal tenderness at this point</td><td class="hl-coral">Appendicitis</td></tr>
+          <tr><td><strong>Rebound Tenderness</strong></td><td>Slowly press then rapidly release</td><td>Pain worse on release than on pressure</td><td class="hl-amber">Peritoneal irritation</td></tr>
+          <tr><td><strong>Rovsing's Sign</strong></td><td>Palpate LLQ</td><td>Pain referred to RLQ</td><td class="hl-coral">Appendicitis</td></tr>
+          <tr><td><strong>Cullen's Sign</strong></td><td>Inspect periumbilical area</td><td>Ecchymosis around umbilicus</td><td class="hl-amber">Retroperitoneal hemorrhage, severe pancreatitis</td></tr>
+          <tr><td><strong>Grey Turner's Sign</strong></td><td>Inspect flanks</td><td>Flank ecchymosis</td><td class="hl-amber">Pancreatitis, AAA</td></tr>
+          <tr><td><strong>Psoas Sign</strong></td><td>Extend right hip against resistance (supine)</td><td>Pain in RLQ</td><td class="hl-coral">Retrocecal appendicitis</td></tr>
+          <tr><td><strong>Obturator Sign</strong></td><td>Flex right knee, internally rotate hip</td><td>Pain in RLQ/hypogastrium</td><td class="hl-coral">Pelvic appendicitis, pelvic abscess</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="assess-mgmt" class="tc">
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-con"><div class="flow-dot" style="color:var(--teal);border-color:var(--teal);background:var(--teal-dim)">1</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4 style="color:var(--teal)">Airway & Ventilation</h4><p>Protect airway in vomiting or obtunded patients. High-flow O₂. Have suction ready — GI bleeds and vomiting are aspiration risks.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-con"><div class="flow-dot" style="color:var(--amber);border-color:var(--amber);background:var(--amber-dim)">2</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4 style="color:var(--amber)">IV Access & Fluid Resuscitation</h4><p>Large-bore IV ×2 for suspected GI bleeds. Initiate normal saline or LR for hypovolemia. Target MAP ≥65 mmHg. Avoid over-resuscitation in suspected varices (can worsen bleeding).</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-con"><div class="flow-dot" style="color:var(--sky);border-color:var(--sky);background:var(--sky-dim)">3</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4 style="color:var(--sky)">Monitor</h4><p>12-lead ECG (rule out cardiac cause). Continuous SpO₂, EtCO₂. Serial vital signs — orthostatic changes indicate significant blood loss. Document BGL and lactate per protocol.</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-con"><div class="flow-dot" style="color:var(--violet);border-color:var(--violet);background:var(--violet-dim)">4</div><div class="flow-line"></div></div>
+        <div class="flow-body"><h4 style="color:var(--violet)">Analgesia & Antiemetics</h4><p>Morphine or fentanyl per protocol. <em>Modern evidence shows analgesics do NOT mask important exam findings.</em> Ondansetron (Zofran) or promethazine for nausea/vomiting. Position of comfort (often fetal/lateral).</p></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-con"><div class="flow-dot" style="color:var(--coral);border-color:var(--coral);background:var(--coral-dim)">5</div></div>
+        <div class="flow-body"><h4 style="color:var(--coral)">Rapid Transport</h4><p>Most abdominal emergencies require definitive surgical or endoscopic care. Document findings thoroughly, provide warm handoff with pertinent positives and negatives.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="assess-highrisk" class="tc">
+    <div class="alert al-red"><span class="alert-icon">🚨</span><div><strong>High-risk groups present atypically and decompensate rapidly.</strong> Maintain a low threshold for aggressive intervention in any of the following populations.</div></div>
+    <div class="card2">
+      <div class="card ca-coral"><h3>👶 Women of Childbearing Age</h3><p>Any abdominal pain requires consideration of <strong>ectopic pregnancy</strong> (life-threatening). Rule in/out pregnancy first. Ovarian torsion, PID, and ruptured ovarian cysts also cause acute abdomen.</p></div>
+      <div class="card ca-amber"><h3>🧓 Older Adults</h3><p>Pain may be <strong>minimal or absent</strong> despite serious pathology (perforated viscus with minimal guarding). Appendicitis presents atypically. Higher risk for mesenteric ischemia, AAA, MI presenting as abdominal pain.</p></div>
+      <div class="card ca-sky"><h3>🏥 Post-Surgical Patients</h3><p>Adhesions from prior surgery cause bowel obstruction. Recent bariatric surgery patients have unique anatomy and complication profiles (leaks, volvulus). Infection, hemorrhage always possible.</p></div>
+      <div class="card ca-violet"><h3>🛡️ Immunocompromised</h3><p>HIV, chemotherapy, transplant immunosuppression, long-term steroids. Normal inflammatory signs may be blunted or absent. Opportunistic infections (CMV colitis, Candida esophagitis) present atypically. Always suspect the worst.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PEPTIC ULCER DISEASE ══ -->
+<div id="page-pud" class="page">
+  <div class="hero">
+    <div class="hero-label">Upper GI</div>
+    <h1>Peptic Ulcer Disease (PUD)</h1>
+    <p>A breakdown of the gastric mucosal barrier allowing acid and digestive enzymes to erode the lining of the stomach or duodenum. The two main culprits: H. pylori infection and NSAID use. Perforation or hemorrhage can transform a chronic nuisance into a surgical emergency.</p>
+    <div class="hero-tags"><span class="hero-tag">H. pylori</span><span class="hero-tag">NSAIDs</span><span class="hero-tag">Perforation Risk</span><span class="hero-tag">Epigastric Pain</span></div>
+  </div>
+
+  <div class="sec-hdr"><h2>Pathophysiology</h2><div class="sec-line"></div></div>
+  <div class="analogy">
+    <div class="analogy-lbl">🏰 Analogy — The Castle Wall</div>
+    <p>The stomach lining is a castle wall protecting against an acid moat. The mucus layer is the wall's mortar — constantly repaired by prostaglandins. <strong>H. pylori</strong> is a tiny saboteur that drills through the mortar and weakens the wall from within. <strong>NSAIDs</strong> block prostaglandin synthesis — like stopping all the repair crews. Without mortar production or repair crews, the acid eventually eats through the wall itself, causing an ulcer. A <strong>perforated ulcer</strong> is when the wall completely breaches — gastric acid spills into the peritoneal cavity, causing immediate, severe somatic pain.</p>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--coral);border-color:var(--coral);background:var(--coral-dim)">1</div><div class="flow-line"></div></div><div class="flow-body"><h4 style="color:var(--coral)">Mucosal Barrier Disruption</h4><p>H. pylori secretes urease → creates ammonia → neutralizes acid around bacteria → damages mucus layer. NSAIDs block COX-1 → suppress prostaglandins → ↓ mucus and bicarbonate secretion.</p></div></div>
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--amber);border-color:var(--amber);background:var(--amber-dim)">2</div><div class="flow-line"></div></div><div class="flow-body"><h4 style="color:var(--amber)">Acid Erosion</h4><p>Unprotected epithelium exposed to HCl and pepsin → superficial erosion → deepens through mucosa → submucosa → muscularis = full ulcer. Duodenal ulcers (most common) typically occur in the first portion of the duodenum.</p></div></div>
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--coral);border-color:var(--coral);background:var(--coral-dim)">3</div></div><div class="flow-body"><h4 style="color:var(--coral)">Complications: Bleed or Perforate</h4><p>Erosion into a blood vessel → GI hemorrhage (hematemesis, melena). Erosion through all layers → perforation → gastric contents spill into peritoneum → immediate severe somatic pain → peritonitis → sepsis.</p></div></div>
+  </div>
+
+  <div class="sec-hdr"><h2>Signs, Symptoms &amp; Management</h2><div class="sec-line"></div></div>
+  <div class="card2">
+    <div class="card ca-amber">
+      <h3>🩺 Classic Presentation</h3>
+      <ul>
+        <li><strong>Burning/gnawing epigastric pain</strong> — typically 1–3 hours after meals (gastric) or when empty (duodenal)</li>
+        <li>Pain relieved by food, antacids, or vomiting</li>
+        <li>Nocturnal pain (wakes patient at 2–3 AM)</li>
+        <li>Nausea, belching, bloating</li>
+        <li>Hematemesis or melena if bleeding</li>
+        <li><strong>Board-like rigidity</strong> if perforated</li>
+      </ul>
+    </div>
+    <div class="card ca-teal">
+      <h3>🚑 Prehospital Management</h3>
+      <ul>
+        <li>Obtain pertinent history (NSAID/alcohol use, prior PUD, H. pylori tx)</li>
+        <li>Assess for hemodynamic instability (BP, HR, orthostatics)</li>
+        <li>Large-bore IV ×2 if bleeding suspected</li>
+        <li>Fluid resuscitation for shock</li>
+        <li>Position of comfort; NPO</li>
+        <li>Transport — endoscopy or surgical repair in hospital</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-hdr"><h2>Medications</h2><div class="sec-line"></div></div>
+  <div class="med-grid">
+    <div class="med-card"><div class="med-cls mc-teal">ANTIBIOTIC (H. pylori)</div><div class="med-name">Clarithromycin</div><div class="med-gen">Biaxin</div><div class="med-note">Part of triple therapy for H. pylori eradication. Combined with amoxicillin + PPI.</div></div>
+    <div class="med-card"><div class="med-cls mc-teal">PPI</div><div class="med-name">Omeprazole</div><div class="med-gen">Prilosec</div><div class="med-note">Proton pump inhibitor — blocks H⁺/K⁺-ATPase, suppressing acid production. First-line for PUD healing.</div></div>
+    <div class="med-card"><div class="med-cls mc-teal">PPI</div><div class="med-name">Pantoprazole</div><div class="med-gen">Protonix</div><div class="med-note">IV PPI used in hospital for acute upper GI bleeding. Reduces re-bleeding risk post-endoscopy.</div></div>
+    <div class="med-card"><div class="med-cls mc-amber">H2 BLOCKER</div><div class="med-name">Famotidine</div><div class="med-gen">Pepcid</div><div class="med-note">H2-receptor antagonist — reduces histamine-stimulated acid. Less potent than PPIs but OTC available.</div></div>
+    <div class="med-card"><div class="med-cls mc-coral">ANTACID</div><div class="med-name">Calcium Carbonate</div><div class="med-gen">Tums</div><div class="med-note">Neutralizes existing acid. Provides symptomatic relief; does not heal ulcers or treat H. pylori.</div></div>
+    <div class="med-card"><div class="med-cls mc-sky">EMS ANALGESIC</div><div class="med-name">Fentanyl / Morphine</div><div class="med-gen">Pain management</div><div class="med-note">For severe abdominal pain per protocol. Modern evidence: analgesics do NOT worsen diagnostic accuracy.</div></div>
+  </div>
+</div>
+
+<!-- ══ ESOPHAGEAL VARICES ══ -->
+<div id="page-varices" class="page">
+  <div class="hero">
+    <div class="hero-label">Upper GI — Vascular Emergency</div>
+    <h1>Esophageal Varices</h1>
+    <p>Dilated, tortuous veins at the lower esophagus, caused by portal hypertension from liver disease. When they rupture, the result is massive, life-threatening hematemesis with mortality of 20–30% per episode.</p>
+    <div class="hero-tags"><span class="hero-tag">Portal Hypertension</span><span class="hero-tag">Cirrhosis</span><span class="hero-tag">20–30% Mortality</span><span class="hero-tag">Bright Red Hematemesis</span></div>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-lbl">🚰 Analogy — The Overpressured Plumbing</div>
+    <p>Imagine the portal vein system as the city's main water main. Cirrhosis scars the liver, creating a dam in the main line — pressure backs up throughout the system (portal hypertension). Blood needs an escape route, so it reroutes through tiny collateral veins in the esophagus that were never designed for high-pressure flow. These veins balloon out like garden hoses crimped with extreme pressure. One day a <strong>violent retch or an increase in pressure snaps one of these engorged hoses</strong> — the patient is suddenly vomiting bright red blood by the cupful. No warning, nothing to clamp externally, and the airway is immediately at risk.</p>
+  </div>
+
+  <div class="sec-hdr"><h2>Pathophysiology Flow</h2><div class="sec-line"></div></div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--amber);border-color:var(--amber);background:var(--amber-dim)">1</div><div class="flow-line"></div></div><div class="flow-body"><h4 style="color:var(--amber)">Chronic Liver Disease → Fibrosis</h4><p>Alcohol, viral hepatitis B/C, fatty liver disease → hepatocyte death → fibrosis and cirrhosis → liver architecture distorted → resistance to portal blood flow.</p></div></div>
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--amber);border-color:var(--amber);background:var(--amber-dim)">2</div><div class="flow-line"></div></div><div class="flow-body"><h4 style="color:var(--amber)">Portal Hypertension Develops</h4><p>Normal portal pressure: 5–10 mmHg. Cirrhosis → portal pressure >12 mmHg → blood backs up → collateral circulation develops in esophagus, stomach (fundal varices), umbilicus (caput medusae), rectum (hemorrhoids).</p></div></div>
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--coral);border-color:var(--coral);background:var(--coral-dim)">3</div><div class="flow-line"></div></div><div class="flow-body"><h4 style="color:var(--coral)">Variceal Rupture</h4><p>Triggered by increased intra-abdominal pressure (vomiting, straining), increased portal pressure (alcohol binge), or erosion. Bleeding is typically profuse — 50% of patients with cirrhosis who develop varices will bleed.</p></div></div>
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--coral);border-color:var(--coral);background:var(--coral-dim)">4</div></div><div class="flow-body"><h4 style="color:var(--coral)">Hemorrhagic Shock + Airway Compromise</h4><p>Massive blood loss → hemorrhagic shock. Vomiting blood → aspiration risk → respiratory failure. Hepatic encephalopathy from blood in GI tract → altered mental status worsens airway protection.</p></div></div>
+  </div>
+
+  <div class="sec-hdr"><h2>EMS Management</h2><div class="sec-line"></div></div>
+  <div class="card2">
+    <div class="card ca-coral">
+      <h3>🚨 Immediate Priorities</h3>
+      <ul>
+        <li><strong>Airway is #1</strong> — patient vomiting large volumes of blood</li>
+        <li>Hard-tip (Yankauer) suction IMMEDIATELY</li>
+        <li>Position: left lateral, head of bed elevated (Fowler)</li>
+        <li>Intubation for uncontrolled airway or loss of consciousness</li>
+        <li>Large-bore IV ×2 — fluid resuscitation (avoid over-resuscitation)</li>
+        <li>Rapid transport — endoscopic banding is definitive treatment</li>
+      </ul>
+    </div>
+    <div class="card ca-amber">
+      <h3>💊 Hospital Pharmacology</h3>
+      <ul>
+        <li><strong>Octreotide</strong> — reduces portal venous pressure (vasoconstriction of splanchnic vessels). Drug of choice for acute variceal bleed</li>
+        <li><strong>Vasopressin / Terlipressin</strong> — vasopressin analogue, reduces portal pressure</li>
+        <li><strong>Propranolol</strong> — for prophylaxis of first bleed/rebleed (lowers portal pressure)</li>
+        <li><strong>Ceftriaxone</strong> — prophylactic antibiotics in all variceal bleeds (prevents SBP)</li>
+        <li>Endoscopic band ligation (EVL) — definitive acute treatment</li>
+        <li>TIPS procedure — transjugular intrahepatic portosystemic shunt</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert al-red"><span class="alert-icon">🚨</span><div><strong>Mallory-Weiss Syndrome:</strong> Another cause of hematemesis — longitudinal mucosal tear at the gastroesophageal junction from violent, repeated vomiting. Classic history: prolonged vomiting (alcohol binge) → sudden bright red blood in vomitus. Usually self-limited but can be massive.</div></div>
+</div>
+
+<!-- ══ GI BLEEDING ══ -->
+<div id="page-gibleed" class="page">
+  <div class="hero">
+    <div class="hero-label">GI Emergency</div>
+    <h1>Gastrointestinal Bleeding</h1>
+    <p>GI bleeding ranges from a slow, chronic ooze causing iron-deficiency anemia to a massive, immediately life-threatening hemorrhage. The location determines the presentation — upper vs. lower — and guides resuscitation priorities.</p>
+    <div class="hero-tags"><span class="hero-tag">Hematemesis</span><span class="hero-tag">Melena</span><span class="hero-tag">Hematochezia</span><span class="hero-tag">Hemorrhagic Shock</span></div>
+  </div>
+
+  <div class="sec-hdr"><h2>Upper vs Lower GI Bleeding</h2><div class="sec-line"></div></div>
+  <div class="card">
+    <table class="cmp-table">
+      <thead><tr><th>Feature</th><th>Upper GI Bleeding (Above ligament of Treitz)</th><th>Lower GI Bleeding (Below ligament of Treitz)</th></tr></thead>
+      <tbody>
+        <tr><td>Most Common Causes</td><td class="hl-coral">Peptic ulcers (most common), esophageal varices, Mallory-Weiss tears, gastritis, esophagitis</td><td class="hl-amber">Diverticulosis (most common), colon cancer, polyps, IBD, hemorrhoids, angiodysplasia</td></tr>
+        <tr><td>Presentation</td><td class="hl-coral">Hematemesis (bright red or "coffee grounds"), melena (black, tarry, foul-smelling stool)</td><td class="hl-amber">Hematochezia (bright red blood per rectum), or melena if from proximal colon</td></tr>
+        <tr><td>"Coffee Ground" Emesis</td><td>Yes — old blood oxidized by gastric acid</td><td>No</td></tr>
+        <tr><td>BUN/Creatinine Ratio</td><td>>20 (blood digested = protein absorbed = elevated BUN)</td><td>Normal</td></tr>
+        <tr><td>Severity</td><td>Often more severe; rapid hemorrhage possible</td><td>Typically less severe; often self-limited</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-hdr"><h2>Assessing Severity</h2><div class="sec-line"></div></div>
+  <div class="card2">
+    <div class="card ca-teal">
+      <h3>📊 Signs of Significant Blood Loss</h3>
+      <ul>
+        <li>Tachycardia (earliest sign — HR >100)</li>
+        <li>Orthostatic hypotension (>20 mmHg drop on standing)</li>
+        <li>Cool, clammy, pale skin</li>
+        <li>Altered mental status</li>
+        <li>Hypotension (late sign — >30% blood volume lost)</li>
+        <li>Pallor, weakness, dyspnea on exertion (chronic bleeding)</li>
+      </ul>
+    </div>
+    <div class="card ca-coral">
+      <h3>🚑 Prehospital Priorities</h3>
+      <ul>
+        <li>Airway management (vomiting blood = aspiration risk)</li>
+        <li>High-flow O₂</li>
+        <li>Large-bore IV ×2 — begin fluid resuscitation</li>
+        <li>Measure serum lactate if available</li>
+        <li>Measure BGL (hepatic dysfunction → hypoglycemia)</li>
+        <li>Cardiac monitor — dysrhythmias from acute anemia/shock</li>
+        <li><strong>Rapid transport</strong> — endoscopy/surgery required</li>
+      </ul>
+    </div>
+  </div>
+  <div class="analogy">
+    <div class="analogy-lbl">☕ Clinical Pearl — Coffee Ground Emesis</div>
+    <p>When blood sits in the stomach and contacts hydrochloric acid, hemoglobin is oxidized to methemoglobin and other compounds — producing the characteristic dark brown, grainy appearance of "coffee grounds." This tells you the bleeding is <strong>upper GI and relatively slow</strong> — blood had time to be digested before being vomited. Bright red hematemesis = brisk, active upper GI bleed — the blood is arriving too fast to be digested. Melena (tarry, black, foul stools) = 200+ mL of blood digested as it transited the GI tract.</p>
+  </div>
+</div>
+
+<!-- ══ GASTROENTERITIS ══ -->
+<div id="page-gastro" class="page">
+  <div class="hero">
+    <div class="hero-label">Infectious/Inflammatory</div>
+    <h1>Gastroenteritis — Acute &amp; Chronic</h1>
+    <p>Inflammation of the stomach and intestines causing rapid onset of vomiting and diarrhea. Up to 179 million episodes occur yearly in the US. Most are self-limited, but severe cases cause life-threatening dehydration and electrolyte imbalances.</p>
+    <div class="hero-tags"><span class="hero-tag">Norovirus</span><span class="hero-tag">Salmonella</span><span class="hero-tag">Dehydration</span><span class="hero-tag">Fecal-Oral Route</span></div>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-lbl">🏭 Analogy — The Factory Shutdown</div>
+    <p>The GI tract is a sophisticated processing factory. When a pathogen invades (bacterial toxin, viral infection), the body's defense system triggers an emergency shutdown: <strong>the factory expels everything as fast as possible</strong> — vomiting clears the stomach, diarrhea clears the intestines. This is actually protective, but the cost is enormous fluid and electrolyte loss. In healthy adults, the body can compensate. In the elderly, infants, or immunocompromised, the fluid losses become life-threatening within hours. Norovirus is so efficient it can shut down an entire cruise ship's "factory" simultaneously — just 18 viral particles are enough to cause infection.</p>
+  </div>
+
+  <div class="card2">
+    <div class="card ca-amber">
+      <h3>🦠 Acute Gastroenteritis — Key Facts</h3>
+      <ul>
+        <li>Top US pathogens: <strong>Norovirus</strong> (>50%), Shigella, Salmonella</li>
+        <li>Transmission: fecal-oral, contaminated food/water, person-to-person</li>
+        <li>Settings: long-term care, schools, cruise ships, disaster areas</li>
+        <li>Symptoms: sudden N/V/D, cramping, low-grade fever</li>
+        <li>Treatment: supportive — IV fluids, antiemetics, rest</li>
+        <li>Bacterial causes may need antibiotics</li>
+      </ul>
+    </div>
+    <div class="card ca-coral">
+      <h3>🔄 Chronic Gastroenteritis</h3>
+      <ul>
+        <li>Prolonged inflammation → long-term mucosal damage</li>
+        <li>Causes: H. pylori, chronic NSAID/alcohol use, hyperacidity</li>
+        <li>Signs: epigastric pain, N/V, fever, anorexia, mucosal bleeding</li>
+        <li>Severe cases → hypovolemia and shock</li>
+        <li>Treatment: dietary regulation, medications, IV fluids</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-hdr"><h2>Medications</h2><div class="sec-line"></div></div>
+  <div class="med-grid">
+    <div class="med-card"><div class="med-cls mc-teal">ANTIEMETIC</div><div class="med-name">Ondansetron</div><div class="med-gen">Zofran</div><div class="med-note">5-HT3 receptor antagonist. First-line antiemetic in EMS. Safe in most patients including pregnant women (after 1st trimester).</div></div>
+    <div class="med-card"><div class="med-cls mc-teal">ANTIEMETIC</div><div class="med-name">Promethazine</div><div class="med-gen">Phenergan</div><div class="med-note">Antihistamine antiemetic. Causes sedation. Risk of tissue necrosis with IV (use deep IM or dilute IV push slowly).</div></div>
+    <div class="med-card"><div class="med-cls mc-amber">ANTIDIARRHEAL</div><div class="med-name">Loperamide</div><div class="med-gen">Imodium</div><div class="med-note">Reduces GI motility. NOT for infectious diarrhea (especially C. diff or bloody diarrhea) — can worsen toxin retention.</div></div>
+    <div class="med-card"><div class="med-cls mc-coral">ANTIBIOTIC</div><div class="med-name">Azithromycin</div><div class="med-gen">Zithromax</div><div class="med-note">For bacterial gastroenteritis (Campylobacter, Shigella, traveler's diarrhea). Not needed for viral gastroenteritis.</div></div>
+    <div class="med-card"><div class="med-cls mc-sky">FLUID THERAPY</div><div class="med-name">Normal Saline / LR</div><div class="med-gen">IV Fluid</div><div class="med-note">Primary EMS treatment. Correct dehydration and electrolyte losses from vomiting/diarrhea. Use warm fluid to prevent hypothermia.</div></div>
+  </div>
+
+  <div class="alert al-teal"><span class="alert-icon">🧤</span><div><strong>EMS Infection Control:</strong> Norovirus is highly resistant — regular alcohol sanitizer alone is insufficient. Use chlorine-based disinfectants on surfaces. Remove gloves carefully, wash hands with soap and water. Norovirus survives on surfaces for days to weeks.</div></div>
+</div>
+
+<!-- ══ IBD ══ -->
+<div id="page-ibd" class="page">
+  <div class="hero">
+    <div class="hero-label">Inflammatory Bowel Disease</div>
+    <h1>Ulcerative Colitis &amp; Crohn Disease</h1>
+    <p>Two distinct but related autoimmune inflammatory conditions causing chronic GI tract destruction. Both produce debilitating symptoms, require lifelong management, and can cause acute exacerbations requiring emergency intervention.</p>
+    <div class="hero-tags"><span class="hero-tag">Autoimmune</span><span class="hero-tag">Relapsing-Remitting</span><span class="hero-tag">Bloody Diarrhea</span><span class="hero-tag">Young Adults</span></div>
+  </div>
+
+  <div class="sec-hdr"><h2>UC vs Crohn — The Critical Comparison</h2><div class="sec-line"></div></div>
+  <div class="analogy">
+    <div class="analogy-lbl">🔥 Analogy — Two Types of Fire</div>
+    <p><strong>Ulcerative Colitis</strong> is like a brush fire that burns only the surface layer — it affects only the mucosal lining of the colon, spreading continuously from the rectum upward. <strong>Crohn's disease</strong> is like a deep underground fire — it burns through ALL layers of the bowel wall (transmural) and can appear <em>anywhere</em> in the GI tract from mouth to anus, often with skipped "normal" segments between diseased areas. Crohn's deep burns create tunnels (fistulas) and scarring (strictures) that UC surface fires cannot.</p>
+  </div>
+
+  <div class="card">
+    <table class="cmp-table">
+      <thead><tr><th>Feature</th><th>Ulcerative Colitis</th><th>Crohn Disease</th></tr></thead>
+      <tbody>
+        <tr><td>Location</td><td class="hl-teal">Colon ONLY (rectum → upward)</td><td class="hl-amber">Anywhere — mouth to anus; terminal ileum most common</td></tr>
+        <tr><td>Depth of Involvement</td><td class="hl-teal">Mucosal only (superficial)</td><td class="hl-amber">Transmural (all layers) — fistulas, strictures</td></tr>
+        <tr><td>Distribution</td><td class="hl-teal">Continuous</td><td class="hl-amber">Skip lesions (patchy)</td></tr>
+        <tr><td>Rectal Involvement</td><td class="hl-coral">Always (starts here)</td><td>Rare (&lt;50%)</td></tr>
+        <tr><td>Bloody Diarrhea</td><td class="hl-coral">Classic, prominent</td><td>Less common</td></tr>
+        <tr><td>Abdominal Pain</td><td>LLQ cramping</td><td class="hl-amber">RLQ (terminal ileum) — can mimic appendicitis</td></tr>
+        <tr><td>Fistulas</td><td>Uncommon</td><td class="hl-amber">Common (perianal fistulas, enteroenteric, enterovesicular)</td></tr>
+        <tr><td>Cancer Risk</td><td class="hl-coral">High (increases with extent and duration)</td><td>Slightly elevated</td></tr>
+        <tr><td>Definitive Cure</td><td class="hl-teal">Colectomy cures UC</td><td class="hl-amber">No surgical cure — disease can recur anywhere</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-hdr"><h2>EMS Management &amp; Medications</h2><div class="sec-line"></div></div>
+  <div class="card2">
+    <div class="card ca-teal">
+      <h3>🚑 Prehospital Care</h3>
+      <ul>
+        <li>Mild flare: supportive care, transport for evaluation</li>
+        <li>Severe flare: airway, IV access, fluid resuscitation for hypovolemia</li>
+        <li>Assess for toxic megacolon (massively dilated colon — surgical emergency)</li>
+        <li>Bowel sounds may be hyperactive or absent</li>
+        <li>Check vitals for dehydration/sepsis signs</li>
+        <li>Emotional support — depression is common in IBD patients</li>
+      </ul>
+    </div>
+    <div class="card ca-amber">
+      <h3>💊 IBD Medications to Know</h3>
+      <ul>
+        <li><strong>Mesalamine (5-ASA)</strong> — first-line for UC; anti-inflammatory in colon</li>
+        <li><strong>Prednisone</strong> — corticosteroid for acute flares; significant side effects with long-term use</li>
+        <li><strong>Azathioprine / 6-MP</strong> — immunomodulators for maintenance</li>
+        <li><strong>Infliximab (Remicade)</strong> — TNF-α blocker; biologic for moderate-severe disease</li>
+        <li><strong>Metronidazole</strong> — for perianal Crohn's disease</li>
+        <li><strong>Loperamide</strong> — antidiarrheal (use cautiously; avoid in toxic megacolon)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert al-red"><span class="alert-icon">🚨</span><div><strong>Toxic Megacolon:</strong> Life-threatening complication of UC (less common in Crohn's). The colon dilates massively (>6 cm), loses motility, and risks perforation and sepsis. Presentation: severely ill patient, distended abdomen, absent bowel sounds, fever, tachycardia. Do NOT give anticholinergics, opioids, or antidiarrheal agents — surgical emergency.</div></div>
+</div>
+
+<!-- ══ APPENDICITIS ══ -->
+<div id="page-appendix" class="page">
+  <div class="hero">
+    <div class="hero-label">Surgical Emergency</div>
+    <h1>Appendicitis</h1>
+    <p>The most common abdominal surgical emergency — affecting 7% of the US population. The natural history is predictable: obstruction → distention → infection → gangrene → perforation → peritonitis. Early recognition prevents rupture.</p>
+    <div class="hero-tags"><span class="hero-tag">Ages 10–19</span><span class="hero-tag">McBurney's Point</span><span class="hero-tag">Rebound Tenderness</span><span class="hero-tag">Rupture = Peritonitis</span></div>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-lbl">🚰 Analogy — The Clogged Dead-End Pipe</div>
+    <p>The appendix is a dead-end pipe branching off the cecum. When its opening gets blocked — by a fecalith (hardened stool), lymph node swelling (from viral infection), or foreign body — the appendix continues secreting mucus with nowhere to go. <strong>Pressure builds like a water balloon filling past capacity.</strong> Bacteria multiply in the stagnant environment, inflammation spreads to the wall, blood supply is cut off (ischemia), the wall dies (gangrene), and finally <strong>the balloon pops</strong> — spilling infected contents into the peritoneal cavity. That's when diffuse peritonitis and sepsis develop.</p>
+  </div>
+
+  <div class="sec-hdr"><h2>Classic Pain Migration Pattern</h2><div class="sec-line"></div></div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--sky);border-color:var(--sky);background:var(--sky-dim)">1</div><div class="flow-line"></div></div><div class="flow-body"><h4 style="color:var(--sky)">Early: Periumbilical / Diffuse Pain (Visceral)</h4><p>Obstruction → distension → visceral nerve stimulation → poorly localized, crampy, periumbilical pain. Patient cannot point to one spot. N/V, anorexia, low-grade fever. Pain intensity: mild-moderate.</p></div></div>
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--amber);border-color:var(--amber);background:var(--amber-dim)">2</div><div class="flow-line"></div></div><div class="flow-body"><h4 style="color:var(--amber)">6–12 Hours: RLQ Migration (McBurney's Point)</h4><p>Inflammation extends to peritoneum → somatic nerve activation → pain localizes to RLQ at McBurney's point (1/3 distance from ASIS to umbilicus). Now sharp, constant, worsened by movement. Rebound tenderness, guarding.</p></div></div>
+    <div class="flow-step"><div class="flow-con"><div class="flow-dot" style="color:var(--coral);border-color:var(--coral);background:var(--coral-dim)">3</div></div><div class="flow-body"><h4 style="color:var(--coral)">Perforation: Temporary Relief → Diffuse Peritonitis</h4><p>Rupture → brief pain relief as pressure releases → then diffuse pain throughout abdomen as contents spread → board-like rigidity, absent bowel sounds, sepsis. Temperature >38.5°C, leukocytosis. Septic shock can follow.</p></div></div>
+  </div>
+
+  <div class="sec-hdr"><h2>Special Presentations &amp; Management</h2><div class="sec-line"></div></div>
+  <div class="card2">
+    <div class="card ca-sky">
+      <h3>⚠️ Atypical Presentations</h3>
+      <ul>
+        <li><strong>Elderly</strong>: minimal pain, fever absent, perforation rate higher — diagnose late</li>
+        <li><strong>Pregnant</strong>: appendix displaced upward by uterus → RUQ or flank pain</li>
+        <li><strong>Children under 5</strong>: rapid perforation; often misdiagnosed as gastroenteritis</li>
+        <li><strong>Retrocecal appendix</strong>: pain more in flank; psoas sign positive</li>
+        <li><strong>Rovsing's sign</strong>: LLQ palpation → RLQ pain = appendicitis</li>
+      </ul>
+    </div>
+    <div class="card ca-teal">
+      <h3>🚑 Prehospital Management</h3>
+      <ul>
+        <li>Position of comfort (often right side, knees flexed)</li>
+        <li>IV access; NPO</li>
+        <li>Analgesia per protocol (does NOT mask findings in modern care)</li>
+        <li>Antiemetics</li>
+        <li><strong>No heat packs</strong> to abdomen — may increase perforation risk</li>
+        <li>Rapid transport — appendectomy is curative; delay = perforation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BOWEL OBSTRUCTION ══ -->
+<div id="page-bowel" class="page">
+  <div class="hero">
+    <div class="hero-label">Mechanical Emergency</div>
+    <h1>Bowel Obstruction</h1>
+    <p>Occlusion of the intestinal lumen blocking normal flow of intestinal contents. Small bowel obstruction is most common. The most feared complication is perforation leading to fecal peritonitis and septic shock.</p>
+    <div class="hero-tags"><span class="hero-tag">Adhesions #1 Cause</span><span class="hero-tag">Colicky Pain</span><span class="hero-tag">High-Pitched Bowel Sounds</span><span class="hero-tag">Distention</span></div>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-lbl">🚧 Analogy — The Highway Gridlock</div>
+    <p>The intestine is a high-traffic highway for digestive contents. An obstruction is a multi-car pileup that blocks all lanes. Traffic (intestinal contents, gas, fluid) backs up in every direction. The backup creates pressure and distention, which triggers <strong>increasingly desperate, powerful muscle contractions (colic)</strong> as the bowel tries to force the blockage open. Bowel sounds become high-pitched and hyperactive early (the bowel "screaming"), then go quiet late as the muscle exhausts itself or the bowel perforates — like a highway that eventually goes ghost-town silent because everyone turned around. A perforated bowel is the highway barrier finally crashing down — catastrophic spillage into the surrounding area.</p>
+  </div>
+
+  <div class="card2">
+    <div class="card ca-amber">
+      <h3>🔍 Causes</h3>
+      <ul>
+        <li><strong>Adhesions</strong> — #1 cause of small bowel obstruction (prior surgery)</li>
+        <li><strong>Hernias</strong> — incarcerated or strangulated hernia</li>
+        <li><strong>Volvulus</strong> — bowel twisting on its mesentery</li>
+        <li><strong>Intussusception</strong> — bowel telescoping into itself (pediatric)</li>
+        <li><strong>Tumor</strong> — #1 cause of large bowel obstruction</li>
+        <li><strong>Fecal impaction</strong> — elderly, constipated patients</li>
+        <li><strong>Paralytic ileus</strong> — functional (post-op, electrolyte disturbance)</li>
+      </ul>
+    </div>
+    <div class="card ca-coral">
+      <h3>🩺 Presentation</h3>
+      <ul>
+        <li>Crampy, colicky abdominal pain (intermittent waves)</li>
+        <li>Abdominal distention</li>
+        <li>Nausea and vomiting (bilious early; feculent late = distal obstruction)</li>
+        <li>Obstipation (absence of flatus and stool)</li>
+        <li><strong>High-pitched, tinkling bowel sounds</strong> = early mechanical obstruction</li>
+        <li><strong>Absent bowel sounds</strong> = late (ileus, ischemia, perforation)</li>
+        <li>Fever, leukocytosis, peritoneal signs = strangulation/perforation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card ca-teal">
+    <h3>🚑 Prehospital Management</h3>
+    <ul>
+      <li>IV access; fluid resuscitation for dehydration</li>
+      <li>Analgesia and antiemetics per protocol</li>
+      <li>NG tube for vomiting/decompression if available and indicated</li>
+      <li>Cardiac monitoring — electrolyte abnormalities from repeated vomiting can cause dysrhythmias</li>
+      <li>NPO — surgery is likely</li>
+      <li>Rapid transport — strangulated bowel → ischemia → infarction within hours</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══ DIVERTICULOSIS ══ -->
+<div id="page-divert" class="page">
+  <div class="hero">
+    <div class="hero-label">Colonic Disorder</div>
+    <h1>Diverticulosis &amp; Diverticulitis</h1>
+    <p>Diverticulosis (pouches in the colon wall) is extremely common in Western populations — present in over 50% of Americans by age 60. Most are asymptomatic, but complications — diverticulitis (inflammation) and hemorrhage — can be serious.</p>
+    <div class="hero-tags"><span class="hero-tag">Low-Fiber Diet</span><span class="hero-tag">LLQ Pain</span><span class="hero-tag">#1 Lower GI Bleed Cause</span><span class="hero-tag">Ages 40+</span></div>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-lbl">🎈 Analogy — Inner Tube Herniation</div>
+    <p>The colon wall has inner (mucosal) and outer (muscular) layers. A low-fiber diet means the colon has to work harder to move dry, hard stool — generating high pressure with every contraction. Over years, this <strong>high pressure blows small bubbles</strong> (diverticula) through weak points in the muscular layer, like patches on an inner tube bulging through a worn tire wall. Each diverticulum is a potential trap — stool can get caught in it, causing inflammation (diverticulitis), or a blood vessel running along the base can erode and rupture (diverticular hemorrhage — the #1 cause of lower GI bleeding).</p>
+  </div>
+
+  <div class="card2">
+    <div class="card ca-teal">
+      <h3>📋 Diverticulosis (No Inflammation)</h3>
+      <ul>
+        <li>Usually asymptomatic — discovered incidentally on colonoscopy</li>
+        <li>Mild symptoms: irregular bowel habits, bloating, cramping</li>
+        <li>Significant lower GI bleeding — bright red rectal bleeding, often painless</li>
+        <li>Treatment: high-fiber diet, stay hydrated</li>
+      </ul>
+    </div>
+    <div class="card ca-coral">
+      <h3>🔥 Diverticulitis (Inflammation)</h3>
+      <ul>
+        <li>Fecal material trapped in diverticulum → bacterial overgrowth → inflammation</li>
+        <li><strong>LLQ pain</strong> (sigmoid colon most affected) — "left-sided appendicitis"</li>
+        <li>Fever, chills, leukocytosis, nausea, vomiting</li>
+        <li>Complications: abscess, fistula, stricture, perforation, peritonitis</li>
+        <li>Treatment: antibiotics, IV fluids, bowel rest; surgery for complications</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PANCREATITIS ══ -->
+<div id="page-pancreas" class="page">
+  <div class="hero">
+    <div class="hero-label">Organ Emergency</div>
+    <h1>Pancreatitis</h1>
+    <p>Inflammation of the pancreas triggered by premature activation of digestive enzymes. The pancreas literally begins digesting itself and surrounding tissues. Can range from mild and self-limited to severe, multi-organ failure with 20–30% mortality.</p>
+    <div class="hero-tags"><span class="hero-tag">Gallstones #1 Cause</span><span class="hero-tag">Alcohol #2</span><span class="hero-tag">Epigastric Pain → Back</span><span class="hero-tag">Grey Turner / Cullen Signs</span></div>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-lbl">💣 Analogy — Explosives Factory on Fire</div>
+    <p>The pancreas is an explosives factory that manufactures digestive enzymes (protease, lipase, amylase) — all kept safely inactivated until they reach the small intestine. In pancreatitis, <strong>a spark ignites the factory from within</strong> — enzymes activate prematurely inside the gland. Trypsin triggers a cascade, activating other enzymes that begin destroying the gland's own tissue (autodigestion), blood vessels (hemorrhage), and fat cells in surrounding tissue (fat necrosis). The fire can spread: systemic inflammatory response syndrome (SIRS), ARDS, acute kidney injury, and septic shock can all result from enzymes and inflammatory mediators released into the bloodstream.</p>
+  </div>
+
+  <div class="sec-hdr"><h2>Causes &amp; Pathophysiology</h2><div class="sec-line"></div></div>
+  <div class="card3">
+    <div class="card ca-amber">
+      <h3>🪨 Gallstones (40–70%)</h3>
+      <p>Common bile duct obstruction → bile backs up into pancreatic duct → activates pancreatic enzymes prematurely. Classic: acute onset after fatty meal in overweight female.</p>
+    </div>
+    <div class="card ca-amber">
+      <h3>🍺 Alcohol (30%)</h3>
+      <p>Direct toxic effect on acinar cells + spasm of sphincter of Oddi → enzyme stasis. Usually requires years of heavy use. Chronic pancreatitis = recurrent acute episodes → scarring → exocrine/endocrine failure.</p>
+    </div>
+    <div class="card ca-sky">
+      <h3>⚡ Other Causes</h3>
+      <p>Hypertriglyceridemia (TG >1000 mg/dL), hypercalcemia, trauma, ERCP procedure, medications (thiazides, steroids, azathioprine), scorpion venom, idiopathic (10%).</p>
+    </div>
+  </div>
+
+  <div class="sec-hdr"><h2>Signs, Symptoms &amp; Management</h2><div class="sec-line"></div></div>
+  <div class="card2">
+    <div class="card ca-coral">
+      <h3>🩺 Clinical Presentation</h3>
+      <ul>
+        <li><strong>Severe epigastric pain</strong> radiating to the back — hallmark</li>
+        <li>Pain relieved slightly by leaning forward (reduces pressure on celiac plexus)</li>
+        <li>Nausea and vomiting (often not relieved by vomiting)</li>
+        <li>Fever, tachycardia in moderate-severe disease</li>
+        <li><strong>Cullen's sign</strong> (periumbilical ecchymosis) — hemorrhagic pancreatitis</li>
+        <li><strong>Grey Turner's sign</strong> (flank ecchymosis) — hemorrhagic pancreatitis</li>
+        <li>Abdominal guarding, distention</li>
+        <li>Hypotension/shock in severe cases</li>
+      </ul>
+    </div>
+    <div class="card ca-teal">
+      <h3>🚑 Prehospital &amp; Hospital Management</h3>
+      <ul>
+        <li>Large-bore IV ×2; aggressive fluid resuscitation (LR preferred)</li>
+        <li>Analgesia (fentanyl IV per protocol)</li>
+        <li>Antiemetics</li>
+        <li>NPO — bowel rest</li>
+        <li>NG tube if vomiting is uncontrolled</li>
+        <li>Cardiac monitoring — electrolyte abnormalities common</li>
+        <li>Watch for ARDS, AKI, DIC in severe disease</li>
+        <li>Hospital: IV fluids, pain control, treat underlying cause (ERCP for stones)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="med-grid">
+    <div class="med-card"><div class="med-cls mc-teal">ANALGESIC</div><div class="med-name">Fentanyl</div><div class="med-gen">Sublimaze</div><div class="med-note">Preferred opioid for pancreatitis. Does NOT significantly cause sphincter of Oddi spasm unlike morphine. Titrate IV carefully.</div></div>
+    <div class="med-card"><div class="med-cls mc-teal">ANTIEMETIC</div><div class="med-name">Ondansetron</div><div class="med-gen">Zofran</div><div class="med-note">Controls vomiting. IV/IM/ODT routes. Safe in most patients including elderly.</div></div>
+    <div class="med-card"><div class="med-cls mc-sky">IV FLUID</div><div class="med-name">Lactated Ringer's</div><div class="med-gen">LR</div><div class="med-note">Preferred crystalloid for acute pancreatitis. Studies show LR reduces systemic inflammation vs. normal saline.</div></div>
+    <div class="med-card"><div class="med-cls mc-coral">ANTIBIOTIC</div><div class="med-name">Imipenem / Meropenem</div><div class="med-gen">Carbapenem</div><div class="med-note">For infected pancreatic necrosis — not routine pancreatitis. Used in severe cases with confirmed infection.</div></div>
+  </div>
+</div>
+
+<!-- ══ CHOLECYSTITIS ══ -->
+<div id="page-gallbladder" class="page">
+  <div class="hero">
+    <div class="hero-label">Biliary Emergency</div>
+    <h1>Cholecystitis &amp; Biliary Disease</h1>
+    <p>Inflammation of the gallbladder, almost always from gallstone obstruction. One of the most common GI emergencies — more than 750,000 cholecystectomies are performed in the US annually. The classic "4 Fs" patient: Fat, Female, Forty, Fertile.</p>
+    <div class="hero-tags"><span class="hero-tag">4 Fs</span><span class="hero-tag">RUQ Pain</span><span class="hero-tag">Murphy's Sign</span><span class="hero-tag">Post-Fatty Meal</span></div>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-lbl">🪨 Analogy — The Rock in the Drain</div>
+    <p>The gallbladder is a small reservoir that stores bile, releasing it through the cystic duct when a fatty meal arrives. Gallstones form when bile becomes supersaturated with cholesterol — like mineral deposits forming in a hard-water pipe. When a stone rolls into the cystic duct <strong>it's like a rock blocking the drain</strong>. The gallbladder contracts against the obstruction, causing intense biliary colic (episodic cramping RUQ pain). If the stone stays lodged, bile backs up, bacteria colonize the stagnant bile, and the gallbladder wall becomes inflamed (cholecystitis). The gallbladder swells, and the surrounding peritoneum becomes irritated — triggering Murphy's sign.</p>
+  </div>
+
+  <div class="card2">
+    <div class="card ca-lime">
+      <h3>🩺 Presentation</h3>
+      <ul>
+        <li><strong>RUQ pain</strong> — onset typically 30–60 minutes after fatty meal</li>
+        <li>Pain radiates to <strong>right shoulder or subscapular</strong> area</li>
+        <li>Fever, chills, leukocytosis</li>
+        <li><strong>Murphy's sign</strong> — inability to inspire during RUQ palpation</li>
+        <li>Nausea, vomiting (often bile-stained)</li>
+        <li>Jaundice if CBD obstruction (Charcot's triad: fever + jaundice + RUQ pain = cholangitis)</li>
+      </ul>
+    </div>
+    <div class="card ca-teal">
+      <h3>🚑 Prehospital Management</h3>
+      <ul>
+        <li>IV access — fluids for dehydration</li>
+        <li>Analgesia per protocol (ketorolac works well — anti-inflammatory + analgesic)</li>
+        <li>Antiemetics for nausea</li>
+        <li>NPO — surgery likely</li>
+        <li>Transport for imaging (ultrasound is gold standard for gallstones)</li>
+        <li>Rule out: MI (inferior wall), PUD, pancreatitis, right-sided pneumonia</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert al-amber"><span class="alert-icon">⚠️</span><div><strong>Charcot's Triad vs Reynolds' Pentad:</strong> Charcot's Triad (fever + jaundice + RUQ pain) = cholangitis (bile duct infection). Reynolds' Pentad adds altered mental status + septic shock = ascending cholangitis — a life-threatening emergency requiring urgent biliary decompression.</div></div>
+
+  <div class="sec-hdr"><h2>Medications</h2><div class="sec-line"></div></div>
+  <div class="med-grid">
+    <div class="med-card"><div class="med-cls mc-teal">NSAID / ANALGESIC</div><div class="med-name">Ketorolac</div><div class="med-gen">Toradol</div><div class="med-note">NSAID with strong anti-inflammatory properties. Particularly effective for biliary/renal colic. IV/IM.</div></div>
+    <div class="med-card"><div class="med-cls mc-teal">ANALGESIC</div><div class="med-name">Morphine / Fentanyl</div><div class="med-gen">Opioids</div><div class="med-note">For severe biliary colic. Morphine historically avoided (sphincter of Oddi spasm concern) but clinical significance is debated. Fentanyl is preferred.</div></div>
+    <div class="med-card"><div class="med-cls mc-amber">ANTIBIOTIC</div><div class="med-name">Piperacillin-Tazobactam</div><div class="med-gen">Zosyn</div><div class="med-note">Broad-spectrum IV antibiotic for acute cholecystitis / cholangitis in hospital. Covers gram-negative GI organisms.</div></div>
+    <div class="med-card"><div class="med-cls mc-sky">ANTISPASMODIC</div><div class="med-name">Hyoscine / Dicyclomine</div><div class="med-gen">Buscopan</div><div class="med-note">Anticholinergic — reduces smooth muscle spasm in biliary colic. Limited evidence but used in some EMS systems.</div></div>
+  </div>
+</div>
+
+<!-- ══ HEPATITIS ══ -->
+<div id="page-hepatitis" class="page">
+  <div class="hero">
+    <div class="hero-label">Liver Disease</div>
+    <h1>Acute Hepatitis &amp; Liver Emergencies</h1>
+    <p>Hepatitis — inflammation of the liver — is the leading cause of liver disease worldwide. The spectrum ranges from mild, self-limited illness to fulminant hepatic failure. The liver's central role in metabolism, coagulation, and detoxification means liver disease produces systemic consequences far beyond the RUQ.</p>
+    <div class="hero-tags"><span class="hero-tag">Viral Hepatitis A/B/C</span><span class="hero-tag">Jaundice</span><span class="hero-tag">Cirrhosis Risk</span><span class="hero-tag">BSI Precautions</span></div>
+  </div>
+
+  <div class="card">
+    <table class="cmp-table">
+      <thead><tr><th>Type</th><th>Transmission</th><th>Acute/Chronic</th><th>Vaccine?</th><th>Key Fact</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hep A (HAV)</strong></td><td class="hl-amber">Fecal-oral (contaminated food/water)</td><td>Acute only (no chronic)</td><td class="hl-teal">Yes</td><td>Most common food-borne hepatitis; self-limited; shellfish source</td></tr>
+        <tr><td><strong>Hep B (HBV)</strong></td><td class="hl-coral">Blood, sexual contact, vertical</td><td>Acute AND chronic</td><td class="hl-teal">Yes</td><td>Can cause cirrhosis, HCC; EMS workers must be vaccinated</td></tr>
+        <tr><td><strong>Hep C (HCV)</strong></td><td class="hl-coral">Blood (IV drug use, transfusion)</td><td>Mostly chronic (&gt;70%)</td><td class="hl-amber">No</td><td>Leading cause of liver transplant in US; highly curable now with DAAs</td></tr>
+        <tr><td><strong>Hep D (HDV)</strong></td><td>Blood — only with HBV co-infection</td><td>Chronic</td><td>Hep B vaccine protects</td><td>Requires HBV to replicate — only in HBV-positive patients</td></tr>
+        <tr><td><strong>Hep E (HEV)</strong></td><td class="hl-amber">Fecal-oral (endemic areas, pork)</td><td>Acute only</td><td>Limited availability</td><td>High mortality in pregnant women (up to 20%)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-hdr"><h2>Clinical Features &amp; EMS Approach</h2><div class="sec-line"></div></div>
+  <div class="card2">
+    <div class="card ca-amber">
+      <h3>🩺 Signs & Symptoms</h3>
+      <ul>
+        <li>Prodrome: malaise, fatigue, anorexia, nausea, fever</li>
+        <li>RUQ pain / hepatomegaly</li>
+        <li><strong>Jaundice</strong> (yellowing of skin/sclera) — bilirubin >2.5 mg/dL</li>
+        <li><strong>Dark urine</strong> (bilirubin) + pale/clay-colored stools (absent bile)</li>
+        <li>Pruritus (from bile salts in skin)</li>
+        <li>Signs of chronic liver disease: spider angiomas, palmar erythema, asterixis, caput medusae</li>
+      </ul>
+    </div>
+    <div class="card ca-teal">
+      <h3>🚑 EMS Management</h3>
+      <ul>
+        <li><strong>Strict BSI</strong> — Hep B/C transmitted by blood contact; ensure gloves/eye protection</li>
+        <li>Support ABCs; assess mental status (hepatic encephalopathy)</li>
+        <li>IV access; fluid support</li>
+        <li>Glucose check (impaired gluconeogenesis → hypoglycemia)</li>
+        <li>Watch for coagulopathy signs (liver makes clotting factors)</li>
+        <li>All EMS personnel must be vaccinated against Hep B</li>
+        <li>Document exposure if needlestick — post-exposure prophylaxis (PEP) available for HBV/HIV</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert al-sky"><span class="alert-icon">💉</span><div><strong>Hepatic Encephalopathy:</strong> Liver failure → ammonia not cleared → central nervous system toxicity → confusion, asterixis (flapping tremor), slurred speech, and ultimately coma. Common precipitants: GI bleeding (blood = protein = ammonia), infection, constipation, sedatives. Treat with lactulose (traps ammonia in gut) and rifaximin (reduces ammonia-producing gut bacteria).</div></div>
+</div>
+
+<!-- ══ EXAM ══ -->
+<div id="page-exam" class="page">
+<div id="gi-assess">
+
+  <!-- WELCOME -->
+  <div class="as-screen on" id="gis-welcome">
+    <div class="as-hero">
+      <div class="as-hero-lbl">Chapter 28 Comprehensive Examination</div>
+      <h2>Abdominal &amp; GI<br><em>100-Question Assessment</em></h2>
+      <p>A comprehensive 100-question exam covering GI anatomy, assessment, pathophysiology, and prehospital management from Sanders' Paramedic Textbook, Chapter 28.</p>
+      <div class="as-stats">
+        <div><div class="as-stat-n">100</div><div class="as-stat-l">Questions</div></div>
+        <div><div class="as-stat-n">10</div><div class="as-stat-l">Topic Areas</div></div>
+        <div><div class="as-stat-n">70%</div><div class="as-stat-l">Passing Score</div></div>
+        <div><div class="as-stat-n">PDF</div><div class="as-stat-l">Score Report</div></div>
+      </div>
+    </div>
+    <div class="as-tiles">
+      <div class="as-tile"><div class="t-ic">📋</div><div class="t-t">Multiple Choice</div><div class="t-d">4 options per question with immediate feedback and clinical rationale.</div></div>
+      <div class="as-tile"><div class="t-ic">🏥</div><div class="t-t">Topics Covered</div><div class="t-d">Anatomy, Assessment, GI Bleeds, IBD, Appendicitis, PUD, Pancreatitis, Cholecystitis, Hepatitis.</div></div>
+      <div class="as-tile"><div class="t-ic">📄</div><div class="t-t">Score Report</div><div class="t-d">Full PDF with name, ID, score, category breakdown, and missed question review.</div></div>
+    </div>
+    <div class="as-form">
+      <h3>Student Information</h3>
+      <div class="as-form-sub">Enter your information below — it will appear on your official score report.</div>
+      <div class="as-row">
+        <div class="as-grp"><label>First Name</label><input type="text" id="gi-first" placeholder="First name" autocomplete="given-name"></div>
+        <div class="as-grp"><label>Last Name</label><input type="text" id="gi-last" placeholder="Last name" autocomplete="family-name"></div>
+      </div>
+      <div class="as-row">
+        <div class="as-grp"><label>Student ID</label><input type="text" id="gi-sid" placeholder="e.g. 2024-EMS-0042" autocomplete="off"></div>
+        <div class="as-grp"><label>Program</label>
+          <select id="gi-prog">
+            <option value="Paramedic">Paramedic Program</option>
+            <option value="AEMT">AEMT Program</option>
+            <option value="EMT">EMT Program</option>
+            <option value="Norfolk Fire-Rescue Cohort">Norfolk Fire-Rescue Cohort</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div id="gi-err" class="as-err">&#9888; Please enter your first name, last name, and student ID.</div>
+      <button class="btn-go" onclick="giStart()">Begin Assessment &#8594;</button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="as-screen" id="gis-quiz">
+    <div class="q-hdr">
+      <div class="q-hdr-l">
+        <div class="q-name" id="gi-disp-name">Student</div>
+        <div class="q-id" id="gi-disp-id">ID: —</div>
+      </div>
+      <div class="q-counter">Question <strong id="gi-qnum">1</strong> of 100</div>
+    </div>
+    <div class="q-prog-wrap">
+      <div class="q-bar"><div class="q-bar-fill" id="gi-bar"></div></div>
+      <div class="q-pct" id="gi-pct">0 / 100</div>
+    </div>
+    <div id="gi-cat-badge"></div>
+    <div class="q-card" id="gi-qcard">
+      <div class="q-num" id="gi-qlbl">QUESTION 1 OF 100</div>
+      <div class="q-text" id="gi-qtext"></div>
+      <div class="q-opts" id="gi-qopts"></div>
+      <div class="q-fb" id="gi-fb">
+        <div class="q-fb-h" id="gi-fb-h"></div>
+        <div class="q-fb-t" id="gi-fb-t"></div>
+      </div>
+    </div>
+    <div class="q-actions">
+      <div class="q-live">Score: <strong id="gi-ls">0</strong> / <span id="gi-lt">0</span></div>
+      <button class="btn-nxt" id="gi-nxt" onclick="giNext()"><span id="gi-nxt-l">Next Question</span> &#8594;</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="as-screen" id="gis-results">
+    <div class="res-hero">
+      <div class="res-circle" id="gi-rcircle">
+        <div class="res-pct" id="gi-rpct">—</div>
+        <div class="res-grd" id="gi-rgrd">—</div>
+      </div>
+      <h3 id="gi-rname">Assessment Complete</h3>
+      <p id="gi-rmsg"></p>
+      <div class="res-meta">
+        <div><div class="res-mv" id="gi-rco" style="color:var(--teal)">—</div><div class="res-ml">Correct</div></div>
+        <div><div class="res-mv" id="gi-rwr" style="color:var(--coral)">—</div><div class="res-ml">Incorrect</div></div>
+        <div><div class="res-mv" id="gi-rpc" style="color:var(--amber)">—</div><div class="res-ml">Score</div></div>
+        <div><div class="res-mv" id="gi-rtm" style="color:var(--sky)">—</div><div class="res-ml">Time</div></div>
+      </div>
+    </div>
+    <div class="res-actions">
+      <button class="btn-rpt" onclick="giReport()">&#128196; View Score Report &amp; Print PDF</button>
+      <button class="btn-rt" onclick="giRetake()">&#8634; Retake Assessment</button>
+    </div>
+    <div class="res-card">
+      <div class="res-card-t">&#128202; Performance by Category</div>
+      <div id="gi-catbd"></div>
+    </div>
+    <div class="res-card">
+      <div class="res-card-t">&#10060; Missed Questions — Study Review</div>
+      <div id="gi-wrev"></div>
+    </div>
+  </div>
+
+</div><!-- /gi-assess -->
+</div><!-- /page-exam -->
+
+</main>
+</div><!-- /app -->
+
+<script>
+// ── NAVIGATION ──
+function nav(id) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelector('[data-p="'+id+'"]').classList.add('active');
+}
+
+// ── TABS ──
+function switchTab(group, tab) {
+  document.querySelectorAll('[id^="'+group+'-"]').forEach(t=>t.classList.remove('active'));
+  document.getElementById(group+'-'+tab).classList.add('active');
+  document.querySelectorAll('.tab').forEach(b=>{
+    if(b.getAttribute('onclick')==="switchTab('"+group+"','"+tab+"')") {
+      b.parentElement.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+    }
+  });
+}
+
+// ── QUADRANT WIDGET ──
+const quadData = {
+  ruq: { title:'Right Upper Quadrant (RUQ)', text:'Contains: Liver (right lobe), gallbladder, right kidney, hepatic flexure of colon, first portion of duodenum. Common pathology: cholecystitis (RUQ pain → right shoulder), hepatitis (enlarged tender liver), PUD (duodenum). Referred pain from gallbladder classically radiates to right shoulder and scapula.' },
+  luq: { title:'Left Upper Quadrant (LUQ)', text:'Contains: Stomach, spleen, left kidney, body/tail of pancreas, splenic flexure of colon. Common pathology: pancreatitis (epigastric/LUQ → back), splenic rupture (Kehr sign = left shoulder pain), gastric ulcer, splenic pathology.' },
+  rlq: { title:'Right Lower Quadrant (RLQ)', text:'Contains: Appendix, cecum, terminal ileum, right ovary/fallopian tube, right ureter. Classic pathology: appendicitis (McBurney point, 1/3 from ASIS to umbilicus), ectopic pregnancy, ovarian cyst, ovarian torsion, Crohn disease (terminal ileitis mimics appendicitis).' },
+  llq: { title:'Left Lower Quadrant (LLQ)', text:'Contains: Sigmoid colon, descending colon, left ovary/fallopian tube, left ureter. Classic pathology: diverticulitis ("left-sided appendicitis"), IBD/UC flares (sigmoid involvement), sigmoid volvulus, ovarian pathology, ectopic pregnancy.' }
+};
+function showQuad(q) {
+  document.querySelectorAll('.quad-cell').forEach(c=>c.classList.remove('active'));
+  document.getElementById('quad-'+q).classList.add('active');
+  document.getElementById('quad-title').textContent = quadData[q].title;
+  document.getElementById('quad-text').textContent = quadData[q].text;
+  const d = document.getElementById('quad-detail');
+  d.classList.add('show');
+}
+
+// ── THEME ──
+function toggleTheme() {
+  const h = document.documentElement;
+  const isLight = h.classList.toggle('light');
+  document.getElementById('tog-lbl').textContent = isLight ? 'Dark' : 'Light';
+  try { localStorage.setItem('gi-theme', isLight?'light':'dark'); } catch(e){}
+}
+(function(){
+  try { if(localStorage.getItem('gi-theme')==='light') { document.documentElement.classList.add('light'); const l=document.getElementById('tog-lbl'); if(l) l.textContent='Dark'; } } catch(e){}
+})();
+
+// ══════════════════════════════════════════
+//  100-QUESTION BANK
+// ══════════════════════════════════════════
+const GI_Q = [
+// ── ANATOMY & PHYSIOLOGY (1–10) ──
+{cat:"GI Anatomy",color:"#38bdf8",q:"Which organ is the primary regulator of glucose metabolism AND produces digestive enzymes?",opts:["Liver","Gallbladder","Pancreas","Small intestine"],ans:2,rat:"The pancreas has dual function: endocrine (insulin/glucagon from islets of Langerhans) and exocrine (digestive enzymes — amylase, lipase, protease — secreted into the duodenum). Pancreatitis occurs when these digestive enzymes activate prematurely within the gland itself."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"The appendix is located at the junction of which two intestinal structures?",opts:["Jejunum and ileum","Ileum and cecum","Cecum and ascending colon","Sigmoid colon and rectum"],ans:1,rat:"The appendix arises from the cecum, just below the ileocecal valve where the ileum meets the large intestine. McBurney's point — 1/3 the distance from the anterior superior iliac spine (ASIS) to the umbilicus — marks its approximate surface location."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"Clay-colored (acholic) stools indicate obstruction of which structure?",opts:["Common bile duct","Pancreatic duct","Esophagus","Sigmoid colon"],ans:0,rat:"Bile, produced by the liver and stored in the gallbladder, travels through the common bile duct into the duodenum. Bile gives stool its normal brown color. Obstruction of the CBD (by gallstone, tumor, or inflammation) prevents bile from reaching the intestine — resulting in pale, clay-colored stools and jaundice."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"Which structure prevents bile and gastric acid from refluxing into the esophagus?",opts:["Pyloric sphincter","Lower esophageal sphincter (LES)","Ileocecal valve","Sphincter of Oddi"],ans:1,rat:"The lower esophageal sphincter (LES) is a muscular ring at the gastroesophageal junction. LES dysfunction → GERD (gastroesophageal reflux disease). The pyloric sphincter controls gastric emptying into the duodenum. The sphincter of Oddi controls bile/pancreatic enzyme release into the duodenum."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"Portal hypertension causes esophageal varices because blood is rerouted through which alternative pathway?",opts:["Inferior vena cava","Pulmonary veins","Collateral esophageal submucosal veins","Hepatic artery"],ans:2,rat:"When portal pressure exceeds ~12 mmHg (normal 5–10 mmHg), blood seeks low-resistance alternative routes. Submucosal veins of the lower esophagus form collaterals, becoming engorged (varices). Other collaterals appear at the umbilicus (caput medusae) and rectum (hemorrhoids)."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"Which quadrant contains the appendix, cecum, and right ovary?",opts:["RUQ","LUQ","RLQ","LLQ"],ans:2,rat:"The right lower quadrant (RLQ) contains the appendix, cecum, terminal ileum, right ureter, and right ovary/fallopian tube. This is why appendicitis presents with RLQ pain (McBurney's point) and must be distinguished from ectopic pregnancy in women of childbearing age."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"The ligament of Treitz divides upper and lower GI bleeds. Where is it located?",opts:["Junction of esophagus and stomach","Junction of duodenum and jejunum","Junction of jejunum and ileum","Ileocecal valve"],ans:1,rat:"The ligament of Treitz (suspensory ligament of the duodenum) is at the duodenojejunal junction. Bleeding above this landmark = upper GI bleeding (esophagus, stomach, duodenum) — presents as hematemesis or melena. Bleeding below = lower GI bleeding — presents as hematochezia."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"Which organ produces clotting factors, metabolizes medications, and produces albumin?",opts:["Kidneys","Pancreas","Spleen","Liver"],ans:3,rat:"The liver is the metabolic workhorse. It produces most clotting factors (I, II, V, VII, VIII, IX, X, XI), albumin (maintains oncotic pressure), and processes medications through the cytochrome P450 system. Liver failure → coagulopathy, hypoalbuminemia, and drug accumulation."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"Which segment of the small intestine is most commonly affected by Crohn disease?",opts:["Duodenum","Jejunum","Terminal ileum","Cecum"],ans:2,rat:"The terminal ileum (the last segment of the small intestine before joining the cecum) is the most common site of Crohn disease involvement. This explains why Crohn's often causes RLQ pain and can mimic appendicitis. The terminal ileum absorbs vitamin B12 and bile salts — Crohn's disease there can cause B12 deficiency and bile salt malabsorption."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"The 'four Fs' are classic risk factors for which GI condition?",opts:["Peptic ulcer disease","Cholecystitis/gallstones","Pancreatitis","Esophageal varices"],ans:1,rat:"Fat, Female, Forty, Fertile — the classic gallstone risk mnemonic. Estrogen increases cholesterol saturation of bile and reduces gallbladder motility. Obesity increases cholesterol production. Age increases gallstone prevalence. The 5th F is often added: 'Family history.'"},
+// ── ABDOMINAL ASSESSMENT (11–22) ──
+{cat:"Assessment",color:"#f5a623",q:"What is the correct sequence for abdominal physical examination?",opts:["Palpation → Auscultation → Inspection → Percussion","Inspection → Auscultation → Percussion → Palpation","Auscultation → Inspection → Palpation → Percussion","Percussion → Palpation → Auscultation → Inspection"],ans:1,rat:"IAPP: Inspection → Auscultation → Percussion → Palpation. Auscultation must come BEFORE palpation and percussion because palpation stimulates bowel and alters bowel sounds. This is the reverse of most other physical exam regions."},
+{cat:"Assessment",color:"#f5a623",q:"Murphy's sign — the patient stops inhaling when the RUQ is palpated — is pathognomonic for:",opts:["Pancreatitis","Appendicitis","Cholecystitis","Liver abscess"],ans:2,rat:"Murphy's sign is elicited by hooking the fingers under the right costal margin and asking the patient to inhale deeply. The inflamed gallbladder descends on inspiration and contacts the examiner's fingers — causing sharp pain and inspiratory arrest (the patient 'catches' their breath). It has ~97% specificity for acute cholecystitis."},
+{cat:"Assessment",color:"#f5a623",q:"Visceral abdominal pain is BEST described as:",opts:["Sharp, localized, worsened by movement","Crampy, diffuse, poorly localized, often periumbilical","Constant, board-like, with guarding","Burning, epigastric, relieved by food"],ans:1,rat:"Visceral pain originates from autonomic nerve fibers surrounding hollow organs. It is characteristically poorly localized, crampy or colicky, diffuse, often periumbilical or midline. It is associated with nausea, diaphoresis, and tachycardia. Early appendicitis, pancreatitis, and intestinal obstruction cause visceral pain."},
+{cat:"Assessment",color:"#f5a623",q:"Somatic (parietal) pain is caused by:",opts:["Distension of hollow organs","Compression of solid organs","Bacterial or chemical irritation of the peritoneum","Autonomic nerve stimulation"],ans:2,rat:"Somatic pain originates from somatic nerve fibers innervating the peritoneum. It is sharp, well-localized, constant, and worsens with movement (patients lie still). Peritonitis, perforated viscus, and ruptured appendix cause somatic pain. Involuntary guarding and rebound tenderness are hallmarks."},
+{cat:"Assessment",color:"#f5a623",q:"Referred pain from the gallbladder is classically felt in the:",opts:["Left shoulder","Periumbilical area","Right shoulder or right subscapular area","Lower back"],ans:2,rat:"Gallbladder pain is referred to the right shoulder or right subscapular region because the phrenic nerve (C3-5) shares dermatome-level spinal cord connections with sensory fibers from the right hemidiaphragm, which lies adjacent to the inflamed gallbladder. Similarly, diaphragmatic irritation (from subphrenic blood) causes shoulder pain."},
+{cat:"Assessment",color:"#f5a623",q:"Rovsing's sign — LLQ palpation causing RLQ pain — suggests:",opts:["Diverticulitis","Appendicitis","Cholecystitis","Bowel obstruction"],ans:1,rat:"Rovsing's sign: pressing the LLQ compresses the gas column in the colon, increasing pressure in the cecal region and stimulating the inflamed appendix — producing pain at McBurney's point in the RLQ. It supports appendicitis but is not as sensitive as direct RLQ tenderness."},
+{cat:"Assessment",color:"#f5a623",q:"Which finding on auscultation suggests early mechanical bowel obstruction?",opts:["Absent bowel sounds","Low-pitched rumbling sounds","High-pitched, tinkling bowel sounds","Bruit over the epigastrium"],ans:2,rat:"Early mechanical bowel obstruction produces high-pitched, tinkling, or rushing bowel sounds as the bowel tries to force contents past the obstruction. As obstruction progresses and the bowel fatigues (or perforates), bowel sounds become absent. Absent bowel sounds = paralytic ileus, peritonitis, or late obstruction."},
+{cat:"Assessment",color:"#f5a623",q:"The 'P' in OPQRST for a patient who states 'the pain is worse when I move and better when I stay still' MOST suggests:",opts:["Visceral pain from intestinal cramping","Somatic pain from peritoneal irritation","Referred pain from the diaphragm","Colicky pain from ureterolithiasis"],ans:1,rat:"Somatic (parietal) pain is worsened by movement because the inflamed parietal peritoneum is jostled by movement. Classic example: the patient with appendicitis who lies perfectly still, avoids bumps in the ambulance, and winces when the gurney is moved. This distinguishes peritonitis from colicky or visceral pain."},
+{cat:"Assessment",color:"#f5a623",q:"In a patient with acute abdominal pain, the FIRST diagnostic test the paramedic should obtain is:",opts:["Abdominal ultrasound","12-lead ECG","Blood glucose level","Serum lactate"],ans:1,rat:"The 12-lead ECG is critically important because inferior wall MI can present as epigastric pain, nausea, and vomiting — mimicking a GI emergency. Missing a STEMI because it's assumed to be 'just stomach pain' is a major error. Get an ECG on any patient with risk factors for cardiovascular disease presenting with abdominal symptoms."},
+{cat:"Assessment",color:"#f5a623",q:"Pain out of proportion to physical examination findings is the classic presentation of:",opts:["Diverticulitis","Peptic ulcer perforation","Mesenteric ischemia","Pancreatitis"],ans:2,rat:"Mesenteric ischemia (bowel infarction from occlusion of mesenteric arteries) classically presents with severe, colicky pain that is VASTLY disproportionate to the physical exam — the abdomen may be soft with minimal tenderness early despite ischemic bowel. This is the clinical pearl: 'pain out of proportion' = mesenteric ischemia until proven otherwise."},
+{cat:"Assessment",color:"#f5a623",q:"Cullen's sign (periumbilical ecchymosis) indicates:",opts:["Portal hypertension","Retroperitoneal hemorrhage (e.g., severe pancreatitis, AAA rupture)","Bowel ischemia","Acute appendicitis"],ans:1,rat:"Cullen's sign is periumbilical bruising from retroperitoneal or intraperitoneal hemorrhage — blood tracking along fascial planes to the umbilicus. Most commonly associated with hemorrhagic pancreatitis and ruptured AAA. Grey Turner's sign (flank ecchymosis) has the same mechanism."},
+{cat:"Assessment",color:"#f5a623",q:"What position do patients with peritonitis typically adopt?",opts:["Supine, flat, arms at sides","Fetal position (lateral recumbent with knees flexed)","Tripod position (leaning forward)","Standing","Fowler's position"],ans:1,rat:"Peritonitis patients characteristically lie perfectly still — any movement worsens somatic pain. They typically adopt the fetal position (knees drawn up, lateral decubitus) which reduces tension on the parietal peritoneum. Voluntary immobility is itself a diagnostic sign of peritoneal irritation. Contrast with the 'writhing' patient of renal colic."},
+// ── GI BLEEDING (23–33) ──
+{cat:"GI Bleeding",color:"#f25c4a",q:"'Coffee ground' emesis indicates:",opts:["Fresh, active upper GI bleeding","Slow upper GI bleeding with blood oxidized by gastric acid","Lower GI bleeding","Esophageal laceration from vomiting"],ans:1,rat:"Coffee ground emesis occurs when blood pools in the stomach and is exposed to hydrochloric acid, which oxidizes hemoglobin to methemoglobin — giving the characteristic dark, grainy appearance. It indicates UPPER GI bleeding that is relatively slow (blood had time to be digested). Bright red hematemesis = brisk, massive upper GI bleed."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"Melena is defined as:",opts:["Bright red blood per rectum","Black, tarry, foul-smelling stools from digested blood","Clay-colored stools from bile duct obstruction","Mucus-containing loose stools"],ans:1,rat:"Melena is black, tarry, foul-smelling stool resulting from at least 200 mL of blood that has been digested as it transited the upper/proximal GI tract. The black color comes from hematin (oxidized hemoglobin). Melena indicates UPPER GI bleeding (or proximal lower GI). Hematochezia (bright red blood per rectum) indicates lower GI or brisk upper GI bleeding."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"The MOST common cause of upper GI bleeding is:",opts:["Esophageal varices","Peptic ulcer disease (gastric and duodenal ulcers)","Mallory-Weiss tear","Esophagitis"],ans:1,rat:"Peptic ulcer disease (PUD) is responsible for approximately 35–50% of all upper GI bleeds. Erosion into a submucosal blood vessel causes hemorrhage. Other major causes: varices (in cirrhotics), Mallory-Weiss tears (from violent vomiting), and gastritis. H. pylori infection and NSAID use are the top ulcer-causing factors."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"The MOST common cause of LOWER GI bleeding in adults is:",opts:["Colon cancer","Inflammatory bowel disease","Diverticulosis","Hemorrhoids"],ans:2,rat:"Diverticulosis accounts for approximately 30–40% of lower GI bleeds. Blood vessels (vasa recta) run along the dome of each diverticulum — erosion causes sudden, painless, bright red rectal bleeding, often massive. Importantly, diverticular bleeding is usually painless — distinguishing it from diverticulitis (which has pain/fever)."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"Esophageal varices carry an acute bleed mortality of approximately:",opts:["2–5%","8–12%","20–30%","Greater than 50%"],ans:2,rat:"Each episode of variceal bleeding carries approximately 20–30% mortality. Survivors have a 70% re-bleeding rate within 1 year without treatment. Variceal bleeding is the most feared complication of portal hypertension — it requires immediate airway management, fluid resuscitation, and endoscopic intervention (banding)."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"In a patient with suspected upper GI bleeding and hemodynamic instability, the FIRST priority after airway management is:",opts:["Administering an antiemetic","Establishing large-bore IV access × 2 and initiating fluid resuscitation","Placing a nasogastric tube","Administering an opioid analgesic"],ans:1,rat:"After securing the airway (suction, position, intubate if needed), the immediate priority is IV access (large-bore × 2) for aggressive volume resuscitation. GI hemorrhage can be life-threatening within minutes. Two large-bore IVs allow rapid fluid and blood product administration. Transport should not be delayed for procedures that can be done en route."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"Which finding suggests the patient with GI bleeding has lost more than 30% of blood volume?",opts:["Heart rate 105 bpm with normal blood pressure","Heart rate 120 bpm with orthostatic hypotension","Hypotension and altered mental status","Mild pallor and fatigue on exertion"],ans:2,rat:"Hypotension and altered mental status indicate >30% blood volume loss (Class III–IV hemorrhagic shock). At this point compensatory mechanisms (tachycardia, vasoconstriction) are overwhelmed. Tachycardia alone = ~15–30% volume loss. Orthostatic changes = significant but not yet severe. Hypotension in GI bleeding = resuscitate aggressively."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"Mallory-Weiss syndrome involves which structure?",opts:["A tear at the lower esophageal sphincter caused by violent vomiting","Variceal rupture in the esophagus","Duodenal perforation from peptic ulcer disease","Sigmoid colon tear from diverticular disease"],ans:0,rat:"Mallory-Weiss syndrome is a mucosal tear at the gastroesophageal junction (lower esophagus/proximal stomach) caused by sudden increases in intra-abdominal pressure — most commonly from violent, repetitive vomiting, retching, or coughing. Classic history: heavy alcohol consumption followed by prolonged vomiting, then bright red hematemesis."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"For acute variceal hemorrhage in the hospital, which drug specifically reduces portal venous pressure?",opts:["Pantoprazole (Protonix)","Octreotide (Sandostatin)","Metoclopramide (Reglan)","Propofol (Diprivan)"],ans:1,rat:"Octreotide is a synthetic somatostatin analogue that causes splanchnic vasoconstriction, reducing portal venous blood flow and portal pressure. It is considered first-line pharmacological therapy for acute variceal bleeding, given as IV infusion. It buys time before definitive endoscopic treatment (band ligation)."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"Serum lactate measurement in a GI bleeding patient is useful because:",opts:["It quantifies the exact volume of blood lost","It detects end-organ hypoperfusion and tissue ischemia (shock)","It identifies the source of bleeding (upper vs lower)","It predicts response to fluid resuscitation"],ans:1,rat:"Elevated serum lactate (>2 mmol/L) indicates anaerobic metabolism from tissue hypoperfusion — a marker of shock even before blood pressure falls. In GI bleeding, lactate helps detect occult shock when vital signs appear stable (compensated shock). Serial lactate levels also track response to resuscitation."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"In a patient with esophageal varices bleeding, why should fluid resuscitation be CONSERVATIVE (avoid over-resuscitation)?",opts:["IV fluids worsen portal hypertension and increase variceal pressure, worsening bleeding","IV fluids dilute platelets excessively","IV fluids cause esophageal edema","There is no contraindication to aggressive resuscitation"],ans:0,rat:"Aggressive over-resuscitation in variceal bleeding increases portal venous pressure, potentially worsening variceal bleeding. Current evidence supports a 'restrictive' resuscitation strategy targeting MAP ~65 mmHg and Hgb ~7–8 g/dL (rather than normal levels). This is sometimes called 'permissive hypotension' in the context of uncontrolled hemorrhage."},
+// ── GASTROENTERITIS & IBD (34–47) ──
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"The top pathogen responsible for GI illness outbreaks in the United States is:",opts:["Salmonella","E. coli O157:H7","Norovirus","Campylobacter"],ans:2,rat:"Norovirus causes more than 50% of all gastroenteritis outbreaks in the US. It is highly contagious (infectious dose ~18 particles), resistant to hand sanitizers (requires soap and water + bleach-based disinfectants on surfaces), and spreads primarily via fecal-oral route and contaminated surfaces. Classic settings: cruise ships, nursing homes, schools, restaurants."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"Why is loperamide (Imodium) CONTRAINDICATED in bloody diarrhea or suspected C. difficile infection?",opts:["It causes severe allergic reactions","It reduces GI motility, trapping toxins in the colon and worsening disease/toxic megacolon","It directly damages the intestinal mucosa","It has no contraindications for any type of diarrhea"],ans:1,rat:"Loperamide reduces peristalsis. In infectious/inflammatory diarrhea (especially C. diff, EHEC, Shigella), slowing GI motility traps the toxin or pathogen in the colon — increasing systemic toxin absorption and risk of toxic megacolon. Use loperamide ONLY for non-infectious, non-inflammatory diarrhea (traveler's diarrhea after infectious cause excluded)."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"Ulcerative colitis (UC) affects which part of the GI tract?",opts:["The entire GI tract from mouth to anus","The small intestine only (jejunum and ileum)","The large intestine (colon), always starting at the rectum","The stomach and duodenum"],ans:2,rat:"UC is confined to the large intestine (colon) and always starts in the rectum, spreading proximally in a continuous fashion. It never involves the small intestine or other GI segments (unlike Crohn's). This continuous rectal involvement means sigmoidoscopy/colonoscopy can always diagnose UC from below."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"Crohn disease differs from ulcerative colitis in that it:",opts:["Only affects the colon","Is always limited to the mucosal layer","Can occur anywhere in the GI tract from mouth to anus with skip lesions and transmural involvement","Has a higher cure rate with surgery"],ans:2,rat:"Crohn's disease is transmural (affects all layers of the bowel wall) and can affect any GI segment — often in skip lesions (normal bowel between diseased segments). This transmural involvement leads to unique complications: fistulas (tunneling through bowel wall), strictures, and abscesses — complications that are rare in UC's mucosal disease."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"Toxic megacolon is a life-threatening complication MOST commonly associated with:",opts:["Crohn disease","Ulcerative colitis","Diverticulitis","Ischemic colitis"],ans:1,rat:"Toxic megacolon occurs when severe transmural colonic inflammation causes colonic dilation (>6 cm), loss of haustral markings, and motility failure. It is most commonly associated with UC, though it can occur in Crohn's. The massively dilated, paralyzed colon risks perforation and sepsis. Anticholinergics, opioids, and antidiarreals worsen it."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"A 25-year-old male presents with RLQ pain, weight loss, and diarrhea for 6 months, with no blood in the stool. CT shows terminal ileum thickening with fat stranding. The MOST likely diagnosis is:",opts:["Acute appendicitis","Ulcerative colitis","Crohn disease","Mesenteric ischemia"],ans:2,rat:"This is a classic Crohn's disease presentation: young adult, RLQ pain (terminal ileum involvement), chronic course with weight loss, diarrhea (often without blood since terminal ileum is above rectum), and CT findings of terminal ileal thickening. Appendicitis would be acute, not 6 months. UC affects the colon and causes bloody diarrhea."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"A patient on infliximab (Remicade) for Crohn disease presents with fever and RLQ pain. What is the primary concern?",opts:["Infliximab toxicity causing hepatitis","Infectious complication — TNF blockers severely impair immune response (risk of TB reactivation, sepsis)","Worsening Crohn flare requiring increased dose","Appendicitis — infliximab does not increase infection risk"],ans:1,rat:"Infliximab and other TNF-alpha blockers severely immunosuppress patients. They dramatically increase risk of serious infections — including TB reactivation (all patients must be screened for latent TB before starting), bacterial sepsis, fungal infections, and opportunistic infections. A febrile immunosuppressed patient is a potentially critically ill patient."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"Which oral medication is first-line maintenance therapy for mild to moderate ulcerative colitis?",opts:["Prednisone","Azathioprine (Imuran)","Mesalamine (5-ASA)","Infliximab (Remicade)"],ans:2,rat:"Mesalamine (5-aminosalicylic acid, 5-ASA) is the first-line therapy for mild-moderate UC. It works locally in the colonic mucosa as an anti-inflammatory agent. It is available in oral and rectal formulations. Prednisone is used for acute flares (not maintenance — too many long-term side effects). Biologics like infliximab are reserved for refractory disease."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"Diverticulitis ('left-sided appendicitis') characteristically causes pain in which quadrant?",opts:["RUQ","RLQ","LLQ","Epigastric"],ans:2,rat:"Diverticulitis most commonly affects the sigmoid colon (LLQ), causing left lower quadrant pain, fever, leukocytosis, and nausea — hence the 'left-sided appendicitis' nickname. It is the most common complication of diverticulosis. Treatment: antibiotics, bowel rest, and IV fluids; surgery for perforation, abscess, or fistula formation."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"Most diverticula are located in the sigmoid colon because:",opts:["The sigmoid colon has the thinnest wall","The sigmoid colon generates the highest intraluminal pressure due to its narrow lumen","The sigmoid colon has the least blood supply","The sigmoid colon has no muscular layers to resist herniation"],ans:1,rat:"The sigmoid colon has the narrowest lumen in the large intestine. By Laplace's Law (pressure = tension/radius), narrower lumens require more muscular tension to propel stool — generating very high intraluminal pressures. This high pressure forces mucosa through weak points (where blood vessels penetrate the muscular wall) → diverticula formation. Low-fiber diets create hard, dry stools that require even more pressure."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"Ondansetron (Zofran) works as an antiemetic through which mechanism?",opts:["Blocking dopamine receptors in the chemoreceptor trigger zone","Blocking 5-HT3 (serotonin) receptors in the GI tract and vomiting center","Blocking histamine H1 receptors centrally","Blocking acetylcholine receptors in the gut"],ans:1,rat:"Ondansetron is a 5-HT3 (serotonin type 3) receptor antagonist. It blocks serotonin receptors in the vagal afferents of the GI tract AND in the chemoreceptor trigger zone (CTZ) of the brainstem. It does NOT cause extrapyramidal side effects (unlike metoclopramide or prochlorperazine), making it the preferred antiemetic in EMS."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"EMS personnel treating a gastroenteritis patient should use which disinfectant specifically for norovirus decontamination?",opts:["Alcohol-based hand sanitizer (62% ethanol)","Quaternary ammonium compound","Chlorine/bleach-based disinfectant","Povidone-iodine scrub"],ans:2,rat:"Norovirus is exceptionally resistant to alcohol-based sanitizers. The CDC recommends chlorine-based disinfectants (1000–5000 ppm bleach solution) for environmental decontamination of surfaces exposed to norovirus. Handwashing with soap and water is more effective than alcohol sanitizer for hand decontamination after norovirus exposure."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"An 18-year-old presents with 3 days of bloody diarrhea, severe abdominal pain, fever, and weight loss. Murphy's sign is negative. MOST likely diagnosis?",opts:["Acute cholecystitis","Inflammatory bowel disease (UC or Crohn's) flare","Diverticulitis","Peptic ulcer disease"],ans:1,rat:"Bloody diarrhea + abdominal pain + fever in a young adult = IBD flare until proven otherwise. UC almost always causes bloody diarrhea (inflamed rectum bleeds). Crohn's can cause bloody diarrhea if colonic involvement. This age group is prime IBD presentation age (15–35 years for Crohn's; UC can present at any age). Cholecystitis is RUQ focused with Murphy's sign."},
+{cat:"Gastroenteritis & IBD",color:"#84cc16",q:"IBD patients frequently develop depression. The EMS role in this context is:",opts:["Advise patients to 'push through' their symptoms","Recognize psychological distress as a common comorbidity, provide empathetic support, and facilitate appropriate mental health follow-up","Avoid discussing psychological symptoms as they are not an EMS concern","Administer sedatives for agitation related to pain"],ans:1,rat:"IBD causes relentless, painful, socially embarrassing symptoms — chronic pain, bloody diarrhea, urgency, and dietary restrictions. Depression affects 20–30% of IBD patients, anxiety up to 35%. EMS providers should recognize this, acknowledge the patient's suffering compassionately, avoid minimizing symptoms, and ensure mental health resources are included in the disposition plan."},
+// ── APPENDICITIS (48–57) ──
+{cat:"Appendicitis",color:"#a78bfa",q:"The classic SEQUENCE of symptoms in appendicitis is:",opts:["Fever → Vomiting → RLQ pain","Diffuse abdominal pain → Nausea/anorexia → RLQ pain localization → Fever","RLQ pain → Fever → Diffuse abdominal pain","Vomiting → Periumbilical pain → Fever only"],ans:1,rat:"Classic appendicitis follows a predictable sequence: (1) Vague periumbilical/diffuse visceral pain (obstruction phase); (2) Nausea, anorexia, low-grade fever; (3) Pain localizes to RLQ at McBurney's point (peritoneal inflammation); (4) Fever increases if perforation occurs. This progression over 12–24 hours helps distinguish appendicitis from other causes of acute abdomen."},
+{cat:"Appendicitis",color:"#a78bfa",q:"McBurney's point is located:",opts:["At the umbilicus","At 1/3 the distance from the right ASIS to the umbilicus","At 1/2 the distance between the ASIS and umbilicus","At the right costal margin"],ans:1,rat:"McBurney's point is at one-third the distance from the right anterior superior iliac spine (ASIS) to the umbilicus. It marks the approximate surface projection of the appendiceal tip. Maximal tenderness here is the most sensitive physical sign of appendicitis. Described by Charles McBurney in 1889."},
+{cat:"Appendicitis",color:"#a78bfa",q:"In which patient population is appendicitis MOST frequently misdiagnosed and MOST likely to result in perforation?",opts:["Adolescents (10–19 years)","Pregnant women","Young adult males","Children under 5 years and elderly patients"],ans:3,rat:"Very young children (<5 years) and elderly patients have the highest perforation rates (>50%). Young children cannot communicate their pain clearly, and symptoms are atypical. Elderly patients have blunted inflammatory responses, reduced pain perception (neuropathy), and fewer classic signs — leading to delayed diagnosis and higher rates of perforation and complications."},
+{cat:"Appendicitis",color:"#a78bfa",q:"A patient with appendicitis suddenly reports that their pain has significantly IMPROVED. This should be interpreted as:",opts:["The appendicitis is resolving with conservative management","A concerning sign — the appendix has likely perforated, relieving pressure temporarily","The patient's pain tolerance has increased","Analgesia is working appropriately"],ans:1,rat:"Sudden pain improvement in appendicitis is a RED FLAG — it typically signals perforation. Rupture releases the pressure within the distended appendix → temporary pain relief. However, infected contents now contaminate the peritoneal cavity. Within hours, pain returns but now becomes diffuse, severe somatic pain from generalized peritonitis. 'Getting better' in appendicitis is actually getting worse."},
+{cat:"Appendicitis",color:"#a78bfa",q:"A pregnant patient at 28 weeks presents with right-sided abdominal pain. Where would you expect tenderness if she has appendicitis?",opts:["McBurney's point in the RLQ (same as non-pregnant)","Right upper quadrant or right flank (appendix displaced upward by gravid uterus)","Left lower quadrant (uterus displaces appendix left)","Epigastric region"],ans:1,rat:"In pregnancy, the enlarging uterus progressively displaces the appendix superiorly and laterally. By the 3rd trimester, the appendix may be near the right upper quadrant or right flank. This is why appendicitis in pregnancy is commonly misdiagnosed — the pain is in an unexpected location, and peritoneal signs are muted by the abdominal wall laxity. The prehospital provider must maintain a high index of suspicion."},
+{cat:"Appendicitis",color:"#a78bfa",q:"Administering analgesics to a patient with suspected appendicitis in the prehospital setting:",opts:["Should be avoided — it will mask exam findings and delay surgical diagnosis","Is appropriate — modern evidence shows analgesics do NOT significantly impair diagnostic accuracy","Should only be given after surgical consultation","Is contraindicated in patients under 18"],ans:1,rat:"Multiple randomized controlled trials have definitively shown that adequate analgesia in acute abdominal pain does NOT impair surgical diagnostic accuracy. In fact, pain relief allows patients to better cooperate with examination. Withholding analgesia from a patient in severe pain is unethical and not evidence-based. Administer analgesics per protocol."},
+{cat:"Appendicitis",color:"#a78bfa",q:"Which sign — deep palpation of the LLQ causing pain in the RLQ — suggests appendicitis?",opts:["Murphy's sign","Cullen's sign","Rovsing's sign","Psoas sign"],ans:2,rat:"Rovsing's sign: pressure applied to the LLQ compresses the gas column in the sigmoid/descending colon, transmitting pressure retrograde to the cecal region — stimulating the inflamed appendix and reproducing RLQ pain. It indicates peritoneal irritation in the RLQ and supports appendicitis."},
+{cat:"Appendicitis",color:"#a78bfa",q:"Which action should be AVOIDED in prehospital management of suspected appendicitis?",opts:["Administering IV analgesia","Positioning patient for comfort","Applying heat packs to the abdomen","Establishing IV access"],ans:2,rat:"Heat packs to the abdomen in suspected appendicitis increase blood flow to the area, which may increase inflammation and theoretically accelerate perforation. More importantly, heat masks the worsening of peritoneal signs. Cold packs are equally contraindicated (vasoconstriction). Leave the abdomen uncovered and assess frequently."},
+{cat:"Appendicitis",color:"#a78bfa",q:"Appendicitis affects approximately what percentage of the US population over a lifetime?",opts:["1%","7%","20%","35%"],ans:1,rat:"Appendicitis has a lifetime incidence of approximately 7% of the US population — making it the most common abdominal surgical emergency in the world. It is most prevalent in ages 10–19 years. Despite its prevalence, it remains a diagnosis that is missed in 20–30% of cases, particularly in women (confused with gynecological pathology) and at extremes of age."},
+{cat:"Appendicitis",color:"#a78bfa",q:"The goal of prehospital and early hospital management of appendicitis is primarily to:",opts:["Achieve pain control and discharge home","Prevent perforation through early identification and rapid transport for surgical appendectomy","Treat with IV antibiotics to avoid surgery","Monitor for 48 hours before deciding on surgical intervention"],ans:1,rat:"The definitive treatment for appendicitis is surgical removal (appendectomy) — either open or laparoscopic. Every hour of delay increases perforation risk by approximately 5%. Once perforated, morbidity dramatically increases: prolonged hospital stay, IV antibiotics, higher complication rates. EMS goal: identify early, manage symptoms, transport without delay."},
+// ── PUD & BOWEL OBSTRUCTION (58–70) ──
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"The TWO main causes of peptic ulcer disease are:",opts:["NSAIDs and alcohol","H. pylori infection and NSAID use","H. pylori infection and stress","Caffeine and spicy food"],ans:1,rat:"H. pylori (Helicobacter pylori) infection and NSAID use together account for >95% of all peptic ulcers. H. pylori damages the mucus protective layer; NSAIDs inhibit COX-1 prostaglandin synthesis, reducing mucus and bicarbonate secretion. Stress ulcers (Curling's — burns; Cushing's — CNS injury) are a separate etiology in critically ill patients."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"Duodenal ulcer pain is characteristically:",opts:["Constant, unrelated to food intake","Immediately worse after eating","Relieved by food, awakens patient at night (2–3 AM), improved by antacids","Always associated with hematemesis"],ans:2,rat:"Duodenal ulcer pain follows the acid cycle: when the stomach empties (2–3 AM, before meals), acid secretion peaks and the unprotected duodenal mucosa is most irritated. Food buffers acid → temporary pain relief. The classic history: epigastric pain at night that wakes the patient, relieved by eating or taking milk/antacids. Gastric ulcer pain is typically worse 15–30 minutes after eating."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"A perforated peptic ulcer classically presents with:",opts:["Gradual onset epigastric pain over several days","Sudden, severe, 'board-like' epigastric rigidity — the patient lies still and avoids movement","Colicky abdominal pain that comes and goes","Painless rectal bleeding"],ans:1,rat:"Perforation releases gastric acid and pepsin into the peritoneal cavity — chemical peritonitis develops within seconds. The patient experiences sudden, catastrophic epigastric pain that rapidly spreads to the entire abdomen. The abdomen becomes 'board-like' from involuntary guarding. The patient lies perfectly still (movement worsens somatic pain). Air under the diaphragm on X-ray (free air) confirms perforation."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"Proton pump inhibitors (PPIs) like omeprazole work by:",opts:["Neutralizing existing acid in the stomach","Blocking H2 receptors on parietal cells","Irreversibly inhibiting H⁺/K⁺-ATPase (the proton pump) on gastric parietal cells","Coating the gastric mucosa"],ans:2,rat:"PPIs irreversibly bind and inhibit the H⁺/K⁺-ATPase enzyme (proton pump) on gastric parietal cells — the final common pathway for acid secretion regardless of the stimulus (histamine, acetylcholine, or gastrin). This makes PPIs more effective than H2 blockers (which only block histamine-stimulated acid). Examples: omeprazole, pantoprazole, lansoprazole, esomeprazole (suffix: '-prazole')."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"The MOST COMMON cause of small bowel obstruction (SBO) is:",opts:["Hernia","Tumor","Adhesions from prior abdominal surgery","Crohn disease"],ans:2,rat:"Post-surgical adhesions (fibrous bands of scar tissue) account for 60–70% of all small bowel obstructions. The risk increases with each subsequent abdominal surgery. When bowel loops adhere to adhesion bands, they can kink, twist, or become trapped — causing mechanical obstruction. This is why a history of prior abdominal surgery is a critical piece of information in any patient with obstruction symptoms."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"The MOST COMMON cause of large bowel obstruction (LBO) is:",opts:["Volvulus","Diverticulitis","Colorectal cancer","Fecal impaction"],ans:2,rat:"Colorectal cancer is responsible for approximately 60% of all large bowel obstructions. Tumors typically produce gradual, progressive obstruction (weeks to months) as the lumen narrows. This contrasts with SBO (where adhesions from surgery are #1). Volvulus is the #2 cause of LBO and can cause rapid, complete obstruction."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"Feculent (feces-smelling) vomiting indicates:",opts:["Early small bowel obstruction","Gastroenteritis with bacterial overgrowth","Distal obstruction with bacterial overgrowth producing fecal-smelling intestinal contents","Mallory-Weiss syndrome"],ans:2,rat:"Feculent vomiting indicates a distal small bowel or colonic obstruction — the contents of the distal GI tract have been regurgitated all the way to the stomach. Bacterial overgrowth in stagnant intestinal contents produces the characteristic fecal odor. This is a late and serious sign indicating the obstruction is distal and significant fermentation has occurred."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"Intussusception — a bowel segment telescoping into an adjacent segment — is MOST common in:",opts:["Adults over 60","Adolescents 15–25 years","Infants and children 3 months to 5 years","Pregnant women"],ans:2,rat:"Intussusception is the most common cause of intestinal obstruction in children 3 months to 5 years old. A viral illness causes lymphoid tissue (Peyer's patches) to enlarge and act as a 'lead point,' pulling bowel into itself. Classic presentation: episodic, severe, colicky abdominal pain with 'currant jelly' stools (blood and mucus mixed). In adults, intussusception usually has an identifiable lead point (tumor)."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"A patient with bowel obstruction develops fever, rebound tenderness, and absent bowel sounds. This most likely indicates:",opts:["The obstruction has resolved spontaneously","Strangulation with bowel ischemia and imminent perforation","A simple partial obstruction requiring observation","Improved bowel function after NG decompression"],ans:1,rat:"Fever + peritoneal signs (rebound tenderness, guarding) + absent bowel sounds in a patient with obstruction = strangulation (compromised blood supply) with bowel ischemia or perforation. Strangulated obstruction is a surgical emergency — bowel infarction can occur within hours. Absent bowel sounds signal that the bowel has stopped functioning (late obstruction, ileus, or perforation)."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"In prehospital management of bowel obstruction, which statement is CORRECT?",opts:["Administer laxatives to help relieve the obstruction","IV fluids, analgesia, antiemetics, and rapid transport — avoid anything by mouth (NPO)","Encourage the patient to eat a light meal to stimulate peristalsis","Administer an enema if the patient has not had a bowel movement for 3 days"],ans:1,rat:"Bowel obstruction management is NPO (nothing by mouth) — any oral intake worsens the obstruction and increases aspiration risk. IV access and fluid resuscitation correct electrolyte abnormalities from vomiting. Analgesia and antiemetics per protocol. Rapid transport — surgical evaluation is required. Never administer laxatives or enemas in suspected complete obstruction."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"Volvulus — twisting of the bowel on its mesentery — most commonly affects which bowel segment in adults?",opts:["Terminal ileum","Cecum","Sigmoid colon","Ascending colon"],ans:2,rat:"Sigmoid volvulus accounts for approximately 65–75% of all colonic volvulus in adults (cecal volvulus is #2). The sigmoid colon has a long, redundant loop with a narrow mesenteric attachment — predisposed to twisting. It is more common in elderly, institutionalized, or constipated patients. Classic X-ray finding: 'coffee bean sign' — the dilated sigmoid loop appearing like a coffee bean on abdominal film."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"Which hernia type CANNOT be manually reduced and has compromised blood supply to the trapped bowel?",opts:["Reducible hernia","Incarcerated hernia","Strangulated hernia","Sliding hernia"],ans:2,rat:"Hernia classification: Reducible = contents can be pushed back manually. Incarcerated = contents trapped, cannot be reduced, but blood supply intact. Strangulated = blood supply to trapped bowel is cut off → bowel ischemia → infarction within hours. Strangulated hernia is a surgical emergency requiring urgent OR. Clinical signs: constant (not colicky) pain, fever, signs of sepsis, non-reducible bulge."},
+// ── PANCREATITIS & BILIARY (71–84) ──
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"The TWO most common causes of acute pancreatitis account for approximately 80% of cases. They are:",opts:["H. pylori infection and NSAIDs","Gallstones and alcohol","High-fat diet and obesity","Viral infection and trauma"],ans:1,rat:"Gallstones (40–70%) and alcohol (30%) together cause approximately 80% of all acute pancreatitis. Gallstones obstruct the common bile duct or ampulla of Vater → bile reflux into pancreatic duct → enzyme activation. Alcohol directly damages acinar cells and causes sphincter of Oddi spasm. The remaining 20% includes hypertriglyceridemia, hypercalcemia, medications, ERCP-induced, and idiopathic causes."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"The HALLMARK symptom of acute pancreatitis is:",opts:["RUQ pain worsening after fatty meals","Severe epigastric pain radiating to the back, relieved by leaning forward","Sudden, diffuse 'board-like' abdominal rigidity","Intermittent crampy LLQ pain with fever"],ans:1,rat:"The cardinal feature of pancreatitis is severe, constant epigastric pain radiating to the back (from retroperitoneal location of the pancreas). The 'leaning forward' position reduces pressure on the celiac plexus and provides slight relief — pathognomonic for pancreatic pain. Nausea and vomiting are universal but do NOT relieve the pain (differentiating it from PUD)."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Grey Turner's sign (flank ecchymosis) and Cullen's sign (periumbilical ecchymosis) seen in pancreatitis indicate:",opts:["Mild pancreatitis with good prognosis","Hemorrhagic pancreatitis — blood tracking along fascial planes from retroperitoneal hemorrhage","Portal hypertension","Normal variants in obese patients"],ans:1,rat:"These ecchymosis signs indicate hemorrhagic pancreatitis — the most severe form, where pancreatic enzymes erode blood vessels, causing retroperitoneal hemorrhage. Blood tracks along fascial planes: Cullen's sign = periumbilical; Grey Turner's = flank. Both are late signs (appear days after onset) and indicate severe disease with high mortality. They should immediately prompt aggressive resuscitation."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Why is fentanyl preferred over morphine for analgesia in pancreatitis?",opts:["Fentanyl is more potent and longer-acting","Fentanyl does not cause sphincter of Oddi spasm (unlike morphine), avoiding potential worsening of biliary obstruction","Fentanyl has fewer GI side effects in general","There is no difference — both are equally appropriate"],ans:1,rat:"Morphine historically was considered to cause sphincter of Oddi spasm, potentially worsening biliary obstruction. While the clinical significance is debated (modern evidence suggests minimal impact), fentanyl is preferred in pancreatitis and biliary colic because it has minimal to no effect on sphincter of Oddi tone. This is a clinically tested principle taught in EMS pharmacology."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Which IV fluid is preferred for resuscitation in acute pancreatitis?",opts:["D5W (5% dextrose)","Normal saline (0.9% NaCl)","Lactated Ringer's (LR)","Albumin (5%)"],ans:2,rat:"Lactated Ringer's is the preferred crystalloid for acute pancreatitis resuscitation. Studies show LR reduces systemic inflammation compared to normal saline — possibly because LR's lower chloride content reduces acidosis and the lactate is metabolized to bicarbonate. Large-volume resuscitation (250–500 mL/hr) in the first 24–48 hours improves outcomes and reduces pancreatic necrosis."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Murphy's sign is BEST used to distinguish which condition from other causes of upper abdominal pain?",opts:["Peptic ulcer disease","Pancreatitis","Acute cholecystitis","Hepatitis"],ans:2,rat:"Murphy's sign (inspiratory arrest during RUQ palpation from gallbladder contact with examiner's fingers) is highly specific (~97%) for acute cholecystitis. It helps distinguish cholecystitis from pancreatitis (midline epigastric pain), hepatitis (RUQ tenderness without inspiratory arrest), and PUD (epigastric burning). A positive Murphy's sign is one of the most useful physical exam findings in acute abdominal assessment."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Charcot's Triad (fever + RUQ pain + jaundice) is the classic presentation of:",opts:["Acute cholecystitis","Cholangitis (bile duct infection)","Pancreatitis","Hepatitis B"],ans:1,rat:"Charcot's Triad = fever + RUQ pain + jaundice = cholangitis (bacterial infection of the common bile duct, usually from an obstructing gallstone). This is a biliary emergency. Reynolds' Pentad adds altered mental status + hypotension (septic shock) = ascending cholangitis — a life-threatening emergency requiring urgent biliary decompression in the hospital."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Ketorolac (Toradol) is particularly effective for biliary and renal colic because:",opts:["It sedates the patient, reducing pain perception","As an NSAID, it reduces prostaglandin-mediated smooth muscle spasm in the biliary and urinary tracts","It directly relaxes sphincter of Oddi","It works faster than opioids in biliary colic"],ans:1,rat:"NSAIDs (ketorolac, diclofenac) are highly effective for colicky pain because prostaglandins play a major role in smooth muscle spasm and sensitization of pain receptors in the biliary and ureteral walls. By blocking prostaglandin synthesis, NSAIDs reduce both the spasm and the pain sensitization. Studies show NSAIDs equal or superior to opioids for biliary/renal colic with fewer side effects."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Which group of patients has the HIGHEST incidence of gallstone disease?",opts:["Young black males","Elderly Asian men","Female American Indians (Native Americans)","Middle-aged white males"],ans:2,rat:"Native American women (particularly Pima Indians) have the highest prevalence of gallstones in the world — up to 70–75% by age 60. The female Hispanic population has the next highest rates. Genetic factors affecting cholesterol metabolism in bile, combined with obesity and estrogen effects, drive this disparity. This is a direct reflection of the 'ethnicity' component of gallstone risk factors taught in the textbook."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"In chronic pancreatitis, scarring of the pancreas leads to what long-term complications?",opts:["Increased insulin production and hypoglycemia","Exocrine failure (malabsorption) and endocrine failure (diabetes mellitus)","Immune system activation and autoimmune hepatitis","Decreased risk of pancreatic cancer"],ans:1,rat:"Chronic pancreatitis progressively destroys both pancreatic functions: exocrine failure (↓ lipase/amylase/protease) → malabsorption, steatorrhea (fatty stools), weight loss; endocrine failure (↓ insulin from damaged islets) → diabetes mellitus type 3c. Chronic pancreatitis also increases pancreatic cancer risk 13-fold. Each acute episode accelerates the scarring process."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Which patient is MOST at risk for acute cholecystitis?",opts:["25-year-old male marathon runner","45-year-old obese female with diabetes taking oral contraceptives","30-year-old lean Asian male","55-year-old male with history of peptic ulcer disease"],ans:1,rat:"This patient hits all the classic risk factors: Female, Forty-ish, Fat (obese), Fertile (OCP use provides estrogen exposure), and Diabetic. Oral contraceptives increase cholesterol saturation of bile. Obesity increases cholesterol production. Diabetes slows gallbladder motility. This is the prototypical cholecystitis patient."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"The DEFINITIVE treatment for acute cholecystitis is:",opts:["IV antibiotics for 2 weeks","Low-fat diet and bile acid dissolution therapy","Laparoscopic cholecystectomy (surgical gallbladder removal)","ERCP to remove the gallstone"],ans:2,rat:"Laparoscopic cholecystectomy (lapcholy) is the definitive treatment. Antibiotics treat secondary bacterial infection but do not address the underlying gallstone obstruction. Bile acid therapy (ursodeoxycholic acid) can slowly dissolve some cholesterol stones but requires months and has high recurrence rates. ERCP is for common bile duct stones, not the gallbladder itself."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Hereditary hemochromatosis causes iron overload that primarily damages which organs?",opts:["Kidneys and adrenal glands","Liver, heart, and pancreas","Lungs and spleen","Thyroid and pituitary gland"],ans:1,rat:"Hereditary hemochromatosis (the most common genetic disorder in the US — 1 in 300 people of Northern European descent) causes progressive iron accumulation in organs. Primary targets: liver (cirrhosis, hepatocellular carcinoma), heart (cardiomyopathy, dysrhythmias), and pancreas (diabetes mellitus type 3c from islet cell destruction). Also damages pituitary, adrenal gland, and joints. Treatment: regular phlebotomy."},
+// ── HEPATITIS & HIGH-RISK (85–100) ──
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"Which type of hepatitis is transmitted via the fecal-oral route and DOES NOT cause chronic liver disease?",opts:["Hepatitis B","Hepatitis C","Hepatitis A","Hepatitis D"],ans:2,rat:"Hepatitis A (HAV) is transmitted fecal-orally (contaminated food/water/shellfish) and causes only ACUTE hepatitis — it does not cause chronic liver disease. HAV infection is self-limited and provides lifelong immunity. A vaccine exists. It is the most common cause of food-borne hepatitis in the US. Hep B and C can cause chronic hepatitis, cirrhosis, and hepatocellular carcinoma."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"EMS personnel are at occupational risk for which hepatitis type, making vaccination mandatory?",opts:["Hepatitis A","Hepatitis B","Hepatitis C","Hepatitis E"],ans:1,rat:"Hepatitis B (HBV) is transmitted through blood and body fluid contact — the primary occupational risk for EMS. OSHA mandates Hep B vaccination for all EMS providers. HBV is far more infectious per needle stick than HIV (HBV: 6–30% transmission risk; HCV: 1.8%; HIV: 0.3%). The vaccine is safe, effective, and provides durable immunity. Post-exposure prophylaxis (HBIG + vaccine) is available if exposed."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"Hepatic encephalopathy (altered mental status from liver failure) is precipitated by ALL of the following EXCEPT:",opts:["GI bleeding (blood = protein = ammonia substrate)","High-fiber diet and regular bowel movements","Constipation (prolonged ammonia absorption)","Sedative medications (slowed metabolism)"],ans:1,rat:"High-fiber diet and regular bowel movements are PROTECTIVE against hepatic encephalopathy — they reduce transit time, limiting ammonia absorption and decreasing gut bacterial flora (ammonia producers). GI bleeding, constipation, sedatives, infection, dehydration, and metabolic disturbances all precipitate encephalopathy by increasing ammonia production or impairing its clearance."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"Jaundice (icterus) becomes clinically visible when serum bilirubin exceeds approximately:",opts:["0.5 mg/dL","1.0 mg/dL","2.5 mg/dL","5.0 mg/dL"],ans:2,rat:"Jaundice becomes clinically detectable (first in the sclera — 'scleral icterus') when serum bilirubin exceeds approximately 2.5 mg/dL (normal: <1.0 mg/dL). The sclera is a sensitive early detector because bilirubin binds preferentially to elastic tissue. Skin yellowing requires higher levels. In dark-skinned patients, scleral examination is particularly important."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"Lactulose is used in hepatic encephalopathy because:",opts:["It provides calories for the failing liver","It acidifies the colon, trapping ammonia as ammonium (NH₄⁺), and acts as an osmotic laxative to eliminate it","It directly detoxifies ammonia in the bloodstream","It improves liver perfusion by reducing ascites"],ans:1,rat:"Lactulose is a non-absorbable synthetic disaccharide. In the colon: (1) Bacteria ferment lactulose → lactic acid → acidification → NH₃ converts to NH₄⁺ (ionized, non-absorbable, trapped); (2) Osmotic cathartic effect → increased stool frequency → rapid ammonia elimination. The combination of trapping and excreting ammonia reduces serum ammonia levels and improves encephalopathy."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"Which sign of chronic liver disease is caused by spider angiomas, palmar erythema, and gynecomastia?",opts:["Increased cortisol production","Elevated estrogen levels from impaired hepatic estrogen metabolism","Increased aldosterone from secondary hyperaldosteronism","Decreased clotting factors"],ans:1,rat:"The normal liver metabolizes estrogen. In cirrhosis, impaired estrogen metabolism → elevated circulating estrogen → estrogen-sensitive changes: spider angiomas (arterial dilations), palmar erythema (peripheral vasodilation), gynecomastia (breast tissue development in males), and testicular atrophy. These stigmata of chronic liver disease are collectively caused by hyperestrogenemia."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"An older adult patient with acute abdominal pain has a blood pressure of 80/50 and a pulsatile abdominal mass. The MOST likely diagnosis is:",opts:["Severe pancreatitis","Ruptured abdominal aortic aneurysm (AAA)","Fecal impaction","Diverticulitis with perforation"],ans:1,rat:"The classic triad of ruptured AAA: severe abdominal/back pain + hypotension + pulsatile abdominal mass. This is immediately life-threatening — the most dangerous abdominal emergency. It mimics many GI conditions. Any older male (>60) with back/abdominal pain and hemodynamic instability = ruptured AAA until proven otherwise. Time to OR is the only treatment."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"In an immunocompromised patient with abdominal pain, you should expect:",opts:["More dramatic presentation than an immunocompetent patient","Normal inflammatory response and reliable physical exam signs","Signs and symptoms may be minimal or absent despite serious pathology","Always high fever as the immune system compensates"],ans:2,rat:"Immunocompromised patients (HIV, chemotherapy, organ transplant, long-term steroids) may have blunted or absent inflammatory responses. Classic signs of infection — fever, leukocytosis, peritoneal signs — may be minimal even in the setting of serious pathology (perforation, abscess, sepsis). Maintain a high index of suspicion: the absence of 'expected' findings does not exclude serious disease."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"In any woman of childbearing age with acute abdominal pain, which diagnosis MUST always be considered first?",opts:["Appendicitis","Diverticulitis","Ectopic pregnancy","Ovarian cyst"],ans:2,rat:"Ectopic pregnancy (fertilized egg implanted outside the uterus — usually fallopian tube) is an immediately life-threatening emergency that must be ruled out first in any woman of childbearing age with abdominal pain. Rupture → massive hemorrhage → death within minutes. A negative pregnancy test is reassuring but not 100% reliable in very early pregnancy. Maintain suspicion."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"Which statement about the prehospital approach to ALL GI emergencies is MOST accurate?",opts:["Always determine the exact diagnosis before beginning treatment","GI emergencies rarely cause hemodynamic compromise and can be treated conservatively in the field","Systematic assessment, hemodynamic support, analgesia, and rapid transport are the universal priorities regardless of specific GI diagnosis","Always avoid IV fluids in GI emergencies due to risk of worsening the condition"],ans:2,rat:"The prehospital approach to GI emergencies follows universal principles: (1) Protect the airway (vomiting, bleeding); (2) Establish IV access and resuscitate hemodynamic compromise; (3) Provide analgesia and antiemetics per protocol; (4) Monitor cardiac rhythm; (5) Document thoroughly; (6) Transport rapidly. Definitive diagnosis is a hospital function — do not delay transport trying to determine exact etiology."}
+];
+
+// ── 8 ADDITIONAL QUESTIONS (93–100) ──
+const GI_Q_EXTRA = [
+{cat:"Assessment",color:"#f5a623",q:"A patient with acute abdominal pain is described as 'writhing and unable to find a comfortable position.' This presentation is MOST consistent with:",opts:["Somatic peritoneal pain","Colicky pain from a hollow organ obstruction","Referred pain from diaphragmatic irritation","Hepatic capsule distension"],ans:1,rat:"Colicky pain from hollow organ distension (renal colic, biliary colic, bowel obstruction) causes patients to writhe, rock, or change positions constantly — they cannot stay still. This contrasts sharply with somatic/peritoneal pain, where any movement worsens pain and patients lie perfectly still. The 'writhing vs. still' distinction is a powerful diagnostic clue."},
+{cat:"Assessment",color:"#f5a623",q:"Which vital sign change is the EARLIEST indicator of significant GI hemorrhage?",opts:["Hypotension (SBP <90 mmHg)","Tachycardia (HR >100 bpm)","Respiratory rate >20/min","Temperature >38°C"],ans:1,rat:"Tachycardia is the earliest and most sensitive vital sign change in hemorrhagic shock. The body compensates for volume loss by increasing heart rate (sympathetic activation) BEFORE blood pressure falls. Blood pressure remains within normal range until approximately 30% of blood volume is lost (Class III shock). A rising heart rate in a GI bleed patient should trigger aggressive intervention even before hypotension develops."},
+{cat:"Pancreatitis & Biliary",color:"#a78bfa",q:"Which lab finding is the PRIMARY biochemical marker for acute pancreatitis?",opts:["Elevated ALT and AST","Elevated serum amylase and lipase (3× upper limit of normal)","Elevated direct bilirubin","Elevated creatinine"],ans:1,rat:"Serum lipase and amylase are the diagnostic biochemical markers for pancreatitis. Lipase is more sensitive and specific than amylase (lipase remains elevated longer, while amylase normalizes within 48–72 hours). A level 3× the upper limit of normal is diagnostic. However, in EMS, labs are not available — the clinical diagnosis is based on the classic pain pattern, nausea/vomiting, and history of gallstones or alcohol use."},
+{cat:"GI Bleeding",color:"#f25c4a",q:"A 60-year-old male on warfarin presents with maroon-colored stools and HR 110, BP 96/62. Your FIRST action after ensuring airway patency is:",opts:["Obtain 12-lead ECG only","Establish large-bore IV access × 2 and initiate fluid resuscitation while contacting medical control","Administer vitamin K IM","Administer fresh frozen plasma in the field"],ans:1,rat:"This patient is in hemorrhagic shock (tachycardia, hypotension) from GI bleeding, compounded by anticoagulation. After airway, immediately establish large-bore IV × 2 for volume resuscitation and contact medical control regarding hospital notification for likely blood product therapy. Field administration of vitamin K (slow onset) or FFP (requires blood type matching) is not practical in the prehospital setting."},
+{cat:"Hepatitis & Special Populations",color:"#f5a623",q:"A patient with known cirrhosis is found confused, with asterixis (flapping tremor when wrists are extended). He was found to have a GI bleed 2 days ago. The MOST LIKELY cause of his confusion is:",opts:["Hypoglycemia only","Acute alcohol intoxication","Hepatic encephalopathy precipitated by GI bleeding (blood = protein = ammonia)","Subdural hematoma from fall"],ans:2,rat:"GI bleeding is a classic precipitant of hepatic encephalopathy in cirrhotic patients. Blood in the GI tract is a protein load — bacteria in the colon metabolize blood proteins into ammonia. The failing liver cannot clear ammonia → systemic ammonia → CNS toxicity → encephalopathy. Other precipitants: infection, constipation, sedatives, electrolyte abnormalities. Check glucose (cirrhosis → hypoglycemia), but the clinical picture points to encephalopathy."},
+{cat:"GI Anatomy",color:"#38bdf8",q:"The sphincter of Oddi controls the release of bile and pancreatic enzymes into which structure?",opts:["The stomach","The duodenum at the ampulla of Vater","The jejunum","The common hepatic duct"],ans:1,rat:"The sphincter of Oddi is a muscular valve at the ampulla of Vater (where the common bile duct and main pancreatic duct merge) that opens into the second portion of the duodenum. This is a critical anatomical junction — gallstones lodged here cause both biliary obstruction and pancreatitis simultaneously by blocking both bile and pancreatic enzyme drainage. Morphine causes sphincter of Oddi spasm, which is why fentanyl is preferred for biliary pain."},
+{cat:"Appendicitis",color:"#a78bfa",q:"A patient with acute appendicitis who refuses transport states 'I feel much better now.' What is the MOST appropriate EMS response?",opts:["Allow refusal — the patient appears improved","Document the refusal and advise the patient to call again if pain returns","Explain that sudden improvement in appendicitis often indicates perforation, which is a life-threatening emergency, and strongly encourage transport with a thorough refusal documentation if still refused","Accept the patient's refusal since they are alert and oriented"],ans:2,rat:"Sudden pain improvement in appendicitis is a red flag for perforation, not resolution. The patient and family must understand this clearly: ruptured appendicitis can lead to peritonitis and septic death within hours. Use shared decision-making — explain the risk thoroughly, document meticulously (including the specific warning given), and strongly advocate for transport. If the patient ultimately refuses, ensure follow-up instructions and emergency return precautions are documented."},
+{cat:"PUD & Bowel Obstruction",color:"#f25c4a",q:"H. pylori eradication therapy (triple therapy) consists of which combination?",opts:["Omeprazole + metronidazole + loperamide","Clarithromycin + amoxicillin + a PPI (e.g., omeprazole)","Ciprofloxacin + metronidazole + ranitidine","Azithromycin + doxycycline + famotidine"],ans:1,rat:"Standard H. pylori triple therapy: clarithromycin (macrolide antibiotic) + amoxicillin (beta-lactam antibiotic) + a proton pump inhibitor (omeprazole, pantoprazole, etc.) for 10–14 days. The PPI reduces acid to allow antibiotics to be more effective in the acidic gastric environment. Eradication rates: ~85%. Metronidazole can substitute for amoxicillin in penicillin-allergic patients."}
+];
+// Merge additional questions
+GI_Q.push(...GI_Q_EXTRA);
+
+// ── ASSESSMENT STATE ──
+let gStu={}, gCQ=0, gSc=0, gAns=[], gStart=null;
+
+function giShowScreen(id) {
+  document.querySelectorAll('.as-screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById('gis-'+id).classList.add('on');
+}
+
+function giStart() {
+  const f=document.getElementById('gi-first').value.trim();
+  const l=document.getElementById('gi-last').value.trim();
+  const s=document.getElementById('gi-sid').value.trim();
+  const p=document.getElementById('gi-prog').value;
+  const e=document.getElementById('gi-err');
+  if(!f||!l||!s){e.classList.add('on');return;}
+  e.classList.remove('on');
+  gStu={first:f,last:l,sid:s,program:p,fullName:f+' '+l,
+    date:new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}),
+    time:new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})};
+  gCQ=0; gSc=0; gAns=[];
+  gStart=Date.now();
+  document.getElementById('gi-disp-name').textContent=gStu.fullName;
+  document.getElementById('gi-disp-id').textContent='ID: '+gStu.sid;
+  giShowScreen('quiz');
+  giRender();
+}
+
+function giRender() {
+  const q=GI_Q[gCQ];
+  const pct=Math.round((gCQ/GI_Q.length)*100);
+  document.getElementById('gi-qnum').textContent=gCQ+1;
+  document.getElementById('gi-qlbl').textContent='QUESTION '+(gCQ+1)+' OF '+GI_Q.length;
+  document.getElementById('gi-qtext').textContent=q.q;
+  document.getElementById('gi-bar').style.width=pct+'%';
+  document.getElementById('gi-pct').textContent=gCQ+' / '+GI_Q.length;
+  document.getElementById('gi-ls').textContent=gSc;
+  document.getElementById('gi-lt').textContent=gCQ;
+  document.getElementById('gi-cat-badge').innerHTML=
+    `<span class="q-cat" style="background:${q.color}20;border:1px solid ${q.color}60;color:${q.color}">${q.cat}</span>`;
+  const od=document.getElementById('gi-qopts');
+  od.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='q-opt';
+    b.innerHTML=`<span class="q-let">${String.fromCharCode(65+i)}</span><span class="q-ot">${o}</span>`;
+    b.onclick=()=>giSelect(i);
+    od.appendChild(b);
+  });
+  const fb=document.getElementById('gi-fb');
+  fb.className='q-fb';
+  document.getElementById('gi-nxt').style.display='none';
+  document.getElementById('gi-qcard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function giSelect(sel) {
+  const q=GI_Q[gCQ];
+  const ok=sel===q.ans;
+  if(ok) gSc++;
+  gAns.push({qIndex:gCQ,selected:sel,isCorrect:ok,q:q.q,opts:q.opts,correct:q.ans,rat:q.rat,cat:q.cat,color:q.color});
+  document.querySelectorAll('.q-opt').forEach((b,i)=>{
+    b.classList.add('qdis');
+    if(i===q.ans) b.classList.add('qok');
+    else if(i===sel&&!ok) b.classList.add('qbad');
+  });
+  const fb=document.getElementById('gi-fb');
+  fb.className='q-fb on '+(ok?'fbOk':'fbBad');
+  document.getElementById('gi-fb-h').innerHTML=ok?'&#10003; Correct!':`&#10007; Incorrect — Correct: ${String.fromCharCode(65+q.ans)}. ${q.opts[q.ans]}`;
+  document.getElementById('gi-fb-t').textContent=q.rat;
+  const nb=document.getElementById('gi-nxt');
+  nb.style.display='inline-flex';
+  document.getElementById('gi-nxt-l').textContent=gCQ<GI_Q.length-1?'Next Question':'View Results';
+  document.getElementById('gi-ls').textContent=gSc;
+  document.getElementById('gi-lt').textContent=gCQ+1;
+}
+
+function giNext() {
+  gCQ++;
+  if(gCQ>=GI_Q.length) giResults();
+  else giRender();
+}
+
+function giCatStats() {
+  const cats={};
+  GI_Q.forEach((q,i)=>{
+    if(!cats[q.cat]) cats[q.cat]={correct:0,total:0,color:q.color};
+    cats[q.cat].total++;
+    const a=gAns.find(x=>x.qIndex===i);
+    if(a&&a.isCorrect) cats[q.cat].correct++;
+  });
+  return cats;
+}
+
+function giResults() {
+  const pct=Math.round((gSc/GI_Q.length)*100);
+  const el=Math.round((Date.now()-gStart)/1000);
+  const m=Math.floor(el/60),s=el%60;
+  let gr,gc,msg;
+  if(pct>=90){gr='A';gc='#00c896';msg='Outstanding! You have demonstrated mastery of GI emergencies.';}
+  else if(pct>=80){gr='B';gc='#f5a623';msg='Strong performance. Review missed categories to achieve mastery.';}
+  else if(pct>=70){gr='C';gc='#f77f00';msg='Passing score achieved. Focus review on missed topics.';}
+  else{gr='F';gc='#f25c4a';msg='Below passing threshold (70%). Additional study required. Retake recommended.';}
+  const circ=document.getElementById('gi-rcircle');
+  circ.style.borderColor=gc; circ.style.background=gc+'15';
+  document.getElementById('gi-rpct').textContent=pct+'%';
+  document.getElementById('gi-rpct').style.color=gc;
+  document.getElementById('gi-rgrd').textContent='Grade: '+gr;
+  document.getElementById('gi-rgrd').style.color=gc;
+  document.getElementById('gi-rname').textContent=gStu.fullName+' — Assessment Complete';
+  document.getElementById('gi-rmsg').textContent=msg;
+  document.getElementById('gi-rco').textContent=gSc;
+  document.getElementById('gi-rwr').textContent=GI_Q.length-gSc;
+  document.getElementById('gi-rpc').textContent=pct+'%';
+  document.getElementById('gi-rtm').textContent=m+'m '+s+'s';
+  const cats=giCatStats();
+  const catDiv=document.getElementById('gi-catbd');
+  catDiv.innerHTML='';
+  Object.entries(cats).forEach(([name,d])=>{
+    const p=Math.round((d.correct/d.total)*100);
+    catDiv.innerHTML+=`<div class="cat-row"><div class="cat-n">${name}</div><div class="cat-bw"><div class="cat-bf" style="width:${p}%;background:${d.color}"></div></div><div class="cat-pv" style="color:${d.color}">${d.correct}/${d.total}</div></div>`;
+  });
+  const wrong=gAns.filter(a=>!a.isCorrect);
+  const wDiv=document.getElementById('gi-wrev');
+  if(wrong.length===0){wDiv.innerHTML='<div style="text-align:center;padding:20px;color:var(--teal);font-weight:700">&#127942; Perfect Score — No Missed Questions!</div>';}
+  else{wDiv.innerHTML='';wrong.forEach(a=>{wDiv.innerHTML+=`<div class="wrng-item"><div class="wi-q">Q${a.qIndex+1}. ${a.q}</div><div class="wi-y">&#10007; ${String.fromCharCode(65+a.selected)}. ${a.opts[a.selected]}</div><div class="wi-c">&#10003; ${String.fromCharCode(65+a.correct)}. ${a.opts[a.correct]}</div><div class="wi-r">${a.rat}</div></div>`;});}
+  giShowScreen('results');
+}
+
+function giRetake() {
+  gCQ=0; gSc=0; gAns=[]; gStart=Date.now();
+  giShowScreen('quiz'); giRender();
+}
+
+// ── REPORT GENERATION ──
+function giReport() {
+  try {
+    const pct=Math.round((gSc/GI_Q.length)*100);
+    const el=Math.round((Date.now()-gStart)/1000);
+    const m=Math.floor(el/60),s=el%60;
+    const gr=pct>=90?'A':pct>=80?'B':pct>=70?'C':'F';
+    const passed=pct>=70;
+    const gc=pct>=90?'#00c896':pct>=80?'#f5a623':pct>=70?'#f77f00':'#f25c4a';
+    const cats=giCatStats();
+    const wrong=gAns.filter(a=>!a.isCorrect);
+    const catRows=Object.entries(cats).map(([name,d])=>{
+      const p=Math.round((d.correct/d.total)*100);
+      return `<tr><td>${name}</td><td><div class="rpt-bw"><div class="rpt-bf" style="width:${p}%;background:${d.color}"></div></div></td><td style="font-weight:700;color:${d.color};text-align:right;white-space:nowrap">${d.correct}/${d.total} (${p}%)</td></tr>`;
+    }).join('');
+    const grid=gAns.map((a,i)=>`<div class="rpt-ac" style="background:${a.isCorrect?'#e8faf3':'#fce8e6'}"><div class="rpt-aq">Q${i+1}</div><div class="rpt-av" style="color:${a.isCorrect?'#006040':'#c0202a'}">${String.fromCharCode(65+a.selected)} ${a.isCorrect?'&#10003;':'&#10007;'}</div></div>`).join('');
+    const wrongHTML=wrong.length===0
+      ?`<div style="text-align:center;padding:24px;color:#006040;font-size:15px;font-weight:700;background:#e8faf3;border-radius:8px">&#10003; Perfect Score!</div>`
+      :wrong.map(a=>`<div class="rpt-wi"><div class="rpt-wc">${a.cat}</div><div class="rpt-wq">Q${a.qIndex+1}. ${a.q}</div><div class="rpt-wy">&#10007; ${String.fromCharCode(65+a.selected)}. ${a.opts[a.selected]}</div><div class="rpt-wok">&#10003; ${String.fromCharCode(65+a.correct)}. ${a.opts[a.correct]}</div><div class="rpt-wr">${a.rat}</div></div>`).join('');
+    document.getElementById('gi-rpt-content').innerHTML=`
+      <div class="rpt">
+        <div class="rpt-hdr">
+          <div class="rpt-hr">
+            <div>
+              <div class="rpt-ch">CAMP EMS &bull; Chapter 28</div>
+              <div class="rpt-ht">Abdominal &amp; GI Disorders Assessment</div>
+              <div class="rpt-hs">Sanders' Paramedic Textbook, 6th Ed. &bull; CAMP Community College EMS Program</div>
+              <div class="rpt-hs">Date: ${gStu.date} &bull; Time: ${gStu.time}</div>
+            </div>
+            <div class="rpt-sp" style="background:${gc}">
+              <div class="rpt-sn">${pct}%</div>
+              <div class="rpt-sg">Grade: ${gr}</div>
+            </div>
+          </div>
+        </div>
+        <div class="rpt-in">
+          <div class="rpt-stu">
+            <div>
+              <div class="rpt-sn2">${gStu.fullName}</div>
+              <div class="rpt-sm">Student ID: ${gStu.sid} &bull; Program: ${gStu.program}</div>
+            </div>
+            <div style="text-align:right"><div style="font-size:11px;color:#778">Time Taken</div><div style="font-size:16px;font-weight:700;color:#111">${m}m ${s}s</div></div>
+          </div>
+          <div class="rpt-stats">
+            <div class="rpt-st"><div class="rpt-sv" style="color:#006040">${gSc}</div><div class="rpt-sl">Correct</div></div>
+            <div class="rpt-st"><div class="rpt-sv" style="color:#c0202a">${GI_Q.length-gSc}</div><div class="rpt-sl">Incorrect</div></div>
+            <div class="rpt-st"><div class="rpt-sv" style="color:${gc}">${pct}%</div><div class="rpt-sl">Score</div></div>
+            <div class="rpt-st"><div class="rpt-sv" style="color:#081410">${GI_Q.length}</div><div class="rpt-sl">Total Qs</div></div>
+          </div>
+          <div class="rpt-pass ${passed?'rpt-py':'rpt-pn'}">${passed?'&#10003; PASS &mdash; Minimum passing score of 70% achieved':'&#10007; NOT PASSING &mdash; Score below 70%. Additional study recommended.'}</div>
+          <div class="rpt-sec">Performance by Category</div>
+          <table class="rpt-ct"><thead><tr><th>Category</th><th style="width:40%">Progress</th><th style="text-align:right">Score</th></tr></thead><tbody>${catRows}</tbody></table>
+          <div class="rpt-sec">Complete Answer Record</div>
+          <div class="rpt-ag">${grid}</div>
+          <div style="font-size:11px;color:#778;margin-bottom:16px"><span style="color:#006040;font-weight:700">&#10003; = Correct</span> &nbsp; <span style="color:#c0202a;font-weight:700">&#10007; = Incorrect</span> &nbsp; Letter = your selected answer.</div>
+          <div class="rpt-sec">Missed Questions &mdash; Study Review (${wrong.length} missed)</div>
+          ${wrongHTML}
+        </div>
+      </div>`;
+    document.getElementById('gi-modal').classList.add('on');
+    document.getElementById('gi-modal').scrollTop=0;
+  } catch(err) {
+    console.error(err);
+    const t=document.getElementById('gi-toast');
+    t.textContent='Error building report: '+err.message;
+    t.classList.add('on');
+    setTimeout(()=>t.classList.remove('on'),4000);
+  }
+}
+</script>
+</body>
+</html>
