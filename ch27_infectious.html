@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 27: Infectious & Communicable Diseases | CAMP EMS</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root {
+  --bg: #080e1c;
+  --bg2: #0d1526;
+  --bg3: #111e35;
+  --bg4: #162440;
+  --teal: #00d4aa;
+  --teal2: #00b896;
+  --teal3: rgba(0,212,170,0.12);
+  --teal4: rgba(0,212,170,0.06);
+  --blue: #3b82f6;
+  --blue2: rgba(59,130,246,0.15);
+  --red: #f87171;
+  --red2: rgba(248,113,113,0.15);
+  --amber: #fbbf24;
+  --amber2: rgba(251,191,36,0.15);
+  --green: #4ade80;
+  --green2: rgba(74,222,128,0.12);
+  --purple: #a78bfa;
+  --purple2: rgba(167,139,250,0.15);
+  --text: #e8edf5;
+  --text2: #9fb3cc;
+  --text3: #6b8099;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(0,212,170,0.25);
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --serif: 'IBM Plex Serif', serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:
+  radial-gradient(ellipse 800px 600px at 20% -10%, rgba(0,212,170,0.04) 0%, transparent 60%),
+  radial-gradient(ellipse 600px 400px at 80% 110%, rgba(59,130,246,0.04) 0%, transparent 60%);
+  pointer-events:none;z-index:0}
+
+/* SCREENS */
+.screen{display:none;min-height:100vh;position:relative;z-index:1}
+.screen.active{display:flex;flex-direction:column}
+
+/* LANDING */
+#landing{align-items:center;justify-content:center;padding:40px 20px}
+.landing-inner{max-width:480px;width:100%;text-align:center}
+.logo-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal3);border:1px solid var(--border2);border-radius:20px;padding:6px 16px;margin-bottom:32px;font-size:12px;font-family:var(--mono);color:var(--teal);letter-spacing:.08em}
+.logo-badge svg{width:14px;height:14px}
+.landing-title{font-size:clamp(26px,5vw,38px);font-weight:700;line-height:1.15;margin-bottom:8px;letter-spacing:-.02em}
+.landing-title span{color:var(--teal)}
+.landing-sub{font-size:14px;color:var(--text2);margin-bottom:40px;line-height:1.6}
+.form-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:left}
+.form-label{display:block;font-size:11px;font-family:var(--mono);color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.form-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:15px;font-family:var(--sans);color:var(--text);outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--teal)}
+.form-group{margin-bottom:20px}
+.btn-start{width:100%;background:var(--teal);color:#000;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:all .2s;margin-top:8px;letter-spacing:.02em}
+.btn-start:hover{background:var(--teal2);transform:translateY(-1px)}
+.landing-meta{margin-top:24px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.meta-pill{font-size:12px;color:var(--text3);font-family:var(--mono)}
+.meta-pill span{color:var(--teal)}
+
+/* HEADER */
+.app-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-shrink:0}
+.header-left{display:flex;align-items:center;gap:12px}
+.header-logo{font-family:var(--mono);font-size:13px;color:var(--teal);font-weight:500}
+.header-chapter{font-size:13px;color:var(--text3)}
+.header-student{font-size:12px;color:var(--text2);font-family:var(--mono)}
+.header-btn{background:var(--teal);color:#000;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--sans)}
+.header-btn:hover{background:var(--teal2)}
+
+/* TABS */
+.tab-bar{display:flex;gap:4px;padding:16px 24px 0;border-bottom:1px solid var(--border);background:var(--bg2);flex-shrink:0}
+.tab-btn{background:none;border:none;border-bottom:2px solid transparent;padding:10px 18px 12px;font-size:13px;font-weight:500;color:var(--text3);cursor:pointer;font-family:var(--sans);transition:all .2s;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* CONTENT AREA */
+.content-area{flex:1;overflow-y:auto;padding:28px 24px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* SECTION TITLES */
+.section-title{font-size:11px;font-family:var(--mono);color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.section-heading{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.section-desc{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:28px}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:16px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:24px}
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px}
+.info-card-icon{font-size:24px;margin-bottom:10px}
+.info-card-title{font-size:13px;font-weight:600;color:var(--teal);margin-bottom:6px;font-family:var(--mono)}
+.info-card-body{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* CHAIN OF INFECTION */
+.chain-diagram{display:flex;align-items:center;gap:0;margin:20px 0 28px;overflow-x:auto;padding-bottom:8px}
+.chain-node{flex-shrink:0;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px 12px;text-align:center;min-width:110px;position:relative}
+.chain-node-num{font-size:10px;font-family:var(--mono);color:var(--teal);margin-bottom:4px}
+.chain-node-label{font-size:13px;font-weight:600;margin-bottom:4px}
+.chain-node-sub{font-size:11px;color:var(--text3);line-height:1.4}
+.chain-arrow{flex-shrink:0;color:var(--teal);font-size:20px;padding:0 8px}
+
+/* STAGES */
+.stages-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:28px}
+.stage-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;border-left:3px solid var(--teal)}
+.stage-num{font-size:10px;font-family:var(--mono);color:var(--teal);margin-bottom:4px}
+.stage-name{font-size:14px;font-weight:600;margin-bottom:6px}
+.stage-desc{font-size:12px;color:var(--text2);line-height:1.5}
+
+/* DISEASE LIBRARY */
+.disease-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.disease-header{padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:background .15s}
+.disease-header:hover{background:var(--bg3)}
+.disease-header-left{display:flex;align-items:center;gap:12px}
+.disease-icon{font-size:22px;flex-shrink:0}
+.disease-title{font-size:15px;font-weight:600}
+.disease-subtitle{font-size:12px;color:var(--text3)}
+.disease-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.badge{font-size:10px;font-family:var(--mono);padding:2px 8px;border-radius:4px;font-weight:500;white-space:nowrap}
+.badge-red{background:var(--red2);color:var(--red)}
+.badge-teal{background:var(--teal3);color:var(--teal)}
+.badge-amber{background:var(--amber2);color:var(--amber)}
+.badge-blue{background:var(--blue2);color:var(--blue)}
+.badge-purple{background:var(--purple2);color:var(--purple)}
+.disease-chevron{color:var(--text3);font-size:18px;transition:transform .2s;flex-shrink:0}
+.disease-card.open .disease-chevron{transform:rotate(180deg)}
+.disease-body{display:none;padding:0 20px 20px;border-top:1px solid var(--border)}
+.disease-card.open .disease-body{display:block}
+.disease-tabs{display:flex;gap:4px;padding:12px 0 0;margin-bottom:16px;border-bottom:1px solid var(--border)}
+.d-tab{background:none;border:none;border-bottom:2px solid transparent;padding:6px 14px 10px;font-size:12px;font-weight:500;color:var(--text3);cursor:pointer;font-family:var(--sans);transition:all .2s;margin-bottom:-1px}
+.d-tab:hover{color:var(--text)}
+.d-tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+.d-panel{display:none}
+.d-panel.active{display:block}
+.d-section{margin-bottom:14px}
+.d-section-title{font-size:11px;font-family:var(--mono);color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.d-text{font-size:13px;color:var(--text2);line-height:1.65}
+.analogy-box{background:linear-gradient(135deg,var(--teal3),var(--bg3));border:1px solid var(--border2);border-radius:8px;padding:14px 16px;margin-top:10px}
+.analogy-label{font-size:10px;font-family:var(--mono);color:var(--teal);letter-spacing:.1em;margin-bottom:4px}
+.analogy-text{font-size:13px;color:var(--text);line-height:1.6;font-style:italic}
+.med-row{display:flex;gap:8px;margin-bottom:8px;padding:10px 12px;background:var(--bg3);border-radius:8px;flex-wrap:wrap}
+.med-name{font-family:var(--mono);font-size:12px;color:var(--teal);font-weight:500;min-width:120px}
+.med-info{font-size:12px;color:var(--text2);line-height:1.5}
+.ems-step{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start}
+.ems-num{background:var(--teal);color:#000;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.ems-text{font-size:13px;color:var(--text2);line-height:1.5}
+
+/* SEPSIS */
+.qsofa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.qsofa-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.qsofa-val{font-size:22px;font-weight:700;font-family:var(--mono);color:var(--amber);margin-bottom:6px}
+.qsofa-label{font-size:12px;color:var(--text2)}
+.progression-row{display:flex;align-items:center;gap:0;margin:20px 0;overflow-x:auto;padding-bottom:8px}
+.prog-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px;min-width:120px;flex-shrink:0;text-align:center}
+.prog-box-label{font-size:11px;font-weight:600;margin-bottom:4px}
+.prog-box-desc{font-size:10px;color:var(--text3);line-height:1.4}
+.prog-box.sirs{border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.06)}
+.prog-box.sepsis{border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.06)}
+.prog-box.severe{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.1)}
+.prog-box.shock{border-color:rgba(185,28,28,.5);background:rgba(185,28,28,.15)}
+.prog-arrow{color:var(--red);padding:0 8px;font-size:18px;flex-shrink:0}
+
+/* MEDICATIONS */
+.med-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px}
+.med-card-name{font-size:16px;font-weight:700;font-family:var(--mono);color:var(--teal);margin-bottom:4px}
+.med-card-class{font-size:12px;color:var(--text3);margin-bottom:14px}
+.med-detail-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.med-detail{background:var(--bg3);border-radius:8px;padding:10px 12px}
+.med-detail-label{font-size:10px;font-family:var(--mono);color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.med-detail-val{font-size:13px;color:var(--text);line-height:1.5}
+
+/* ASSESSMENT */
+#assessment{flex-direction:column}
+.assess-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 24px;flex-shrink:0}
+.progress-bar-wrap{background:var(--bg3);border-radius:4px;height:6px;margin-top:10px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--blue));border-radius:4px;transition:width .3s}
+.progress-info{display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-top:6px;font-family:var(--mono)}
+.question-area{flex:1;overflow-y:auto;padding:28px 24px;max-width:760px;margin:0 auto;width:100%}
+.q-number{font-size:11px;font-family:var(--mono);color:var(--teal);letter-spacing:.1em;margin-bottom:10px}
+.q-text{font-size:17px;font-weight:500;line-height:1.55;margin-bottom:24px}
+.options-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.option-btn{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;text-align:left;font-size:14px;color:var(--text);cursor:pointer;font-family:var(--sans);transition:all .2s;display:flex;align-items:center;gap:12px}
+.option-btn:hover:not(:disabled){background:var(--bg3);border-color:var(--teal)}
+.option-letter{font-family:var(--mono);font-size:12px;color:var(--text3);width:20px;flex-shrink:0}
+.option-btn.correct{background:var(--green2);border-color:var(--green);color:var(--green)}
+.option-btn.incorrect{background:var(--red2);border-color:var(--red);color:var(--red)}
+.option-btn.selected-wrong{background:var(--red2);border-color:var(--red)}
+.feedback-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:20px;font-size:14px;color:var(--text2);line-height:1.6;display:none}
+.feedback-box.show{display:block}
+.feedback-box.fb-correct{border-color:var(--green);background:var(--green2)}
+.feedback-box.fb-incorrect{border-color:var(--amber);background:var(--amber2)}
+.q-nav{display:flex;gap:10px;justify-content:space-between}
+.q-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;font-family:var(--sans);transition:all .2s}
+.q-btn:hover{background:var(--bg4)}
+.q-btn.primary{background:var(--teal);color:#000;border-color:var(--teal);font-weight:700}
+.q-btn.primary:hover{background:var(--teal2)}
+.q-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* RESULTS */
+#results{flex-direction:column}
+.results-content{flex:1;overflow-y:auto;padding:28px 24px;max-width:800px;margin:0 auto;width:100%}
+.score-ring-wrap{text-align:center;margin-bottom:32px}
+.score-ring-svg{width:180px;height:180px}
+.score-ring-text{font-size:38px;font-weight:700;font-family:var(--mono)}
+.score-ring-label{font-size:13px;color:var(--text2)}
+.score-meta{display:flex;justify-content:center;gap:24px;margin-top:16px;flex-wrap:wrap}
+.score-meta-item{text-align:center}
+.score-meta-val{font-size:22px;font-weight:700;font-family:var(--mono);display:block}
+.score-meta-label{font-size:12px;color:var(--text3)}
+.pass-banner{border-radius:10px;padding:14px 20px;margin-bottom:28px;text-align:center;font-size:15px;font-weight:600}
+.pass-banner.pass{background:var(--green2);border:1px solid var(--green);color:var(--green)}
+.pass-banner.fail{background:var(--amber2);border:1px solid var(--amber);color:var(--amber)}
+.review-filter{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.filter-btn{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 14px;font-size:12px;font-family:var(--mono);color:var(--text3);cursor:pointer;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{background:var(--teal3);border-color:var(--border2);color:var(--teal)}
+.review-item{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:10px}
+.review-item.r-correct{border-left:3px solid var(--green)}
+.review-item.r-incorrect{border-left:3px solid var(--red)}
+.review-item.r-skipped{border-left:3px solid var(--text3)}
+.review-q{font-size:14px;font-weight:500;margin-bottom:8px;line-height:1.5}
+.review-answer{font-size:13px;margin-bottom:4px}
+.review-expl{font-size:12px;color:var(--text2);line-height:1.6;margin-top:8px;background:var(--bg3);border-radius:6px;padding:10px 12px}
+.pdf-btn{width:100%;background:linear-gradient(135deg,var(--teal),#00b896);color:#000;border:none;border-radius:12px;padding:16px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--sans);display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;transition:all .2s}
+.pdf-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,170,.3)}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .tab-bar{overflow-x:auto}
+  .qsofa-grid{grid-template-columns:1fr}
+  .chain-diagram{flex-direction:column;align-items:stretch}
+  .chain-arrow{transform:rotate(90deg);text-align:center}
+  .progression-row{flex-direction:column;align-items:stretch}
+  .prog-arrow{transform:rotate(90deg);text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="landing" class="screen active">
+  <div class="landing-inner">
+    <div class="logo-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      CAMP EMS Program
+    </div>
+    <h1 class="landing-title">Chapter 27<br><span>Infectious & Communicable</span><br>Diseases</h1>
+    <p class="landing-sub">Sanders' Paramedic Textbook · 6th Edition<br>Comprehensive study module with 100-question assessment</p>
+    <div class="form-card">
+      <div class="form-group">
+        <label class="form-label" for="s-name">Student Full Name</label>
+        <input id="s-name" class="form-input" type="text" placeholder="First Last" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="s-id">Student ID</label>
+        <input id="s-id" class="form-input" type="text" placeholder="e.g. 123456" autocomplete="off">
+      </div>
+      <button class="btn-start" onclick="startModule()">Begin Learning Module →</button>
+    </div>
+    <div class="landing-meta">
+      <span class="meta-pill"><span>4</span> Learning Tabs</span>
+      <span class="meta-pill"><span>14</span> Disease Cards</span>
+      <span class="meta-pill"><span>100</span> Questions</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT SCREEN -->
+<div id="content" class="screen">
+  <div class="app-header">
+    <div class="header-left">
+      <div class="header-logo">CAMP EMS</div>
+      <div class="header-chapter">Ch. 27 — Infectious Diseases</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span class="header-student" id="header-name"></span>
+      <button class="header-btn" onclick="gotoAssessment()">Take Assessment →</button>
+    </div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="showTab('diseases')">Disease Library</button>
+    <button class="tab-btn" onclick="showTab('sepsis')">Sepsis & SIRS</button>
+    <button class="tab-btn" onclick="showTab('meds')">Medications</button>
+  </div>
+  <div class="content-area">
+
+    <!-- OVERVIEW TAB -->
+    <div id="tab-overview" class="tab-panel active">
+      <div class="section-title">public health foundations</div>
+      <h2 class="section-heading">Chain of Infection</h2>
+      <p class="section-desc">Infectious disease transmission requires six sequential links. Breaking any link interrupts transmission and prevents disease spread.</p>
+      <div class="chain-diagram">
+        <div class="chain-node"><div class="chain-node-num">01</div><div class="chain-node-label">Infectious Agent</div><div class="chain-node-sub">Bacteria, virus, fungus, parasite</div></div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node"><div class="chain-node-num">02</div><div class="chain-node-label">Reservoir</div><div class="chain-node-sub">Human, animal, environment, soil</div></div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node"><div class="chain-node-num">03</div><div class="chain-node-label">Portal of Exit</div><div class="chain-node-sub">Respiratory, blood, feces, skin</div></div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node"><div class="chain-node-num">04</div><div class="chain-node-label">Transmission</div><div class="chain-node-sub">Droplet, airborne, contact, vector</div></div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node"><div class="chain-node-num">05</div><div class="chain-node-label">Portal of Entry</div><div class="chain-node-sub">Mucous membrane, skin breaks, inhalation</div></div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node"><div class="chain-node-num">06</div><div class="chain-node-label">Susceptible Host</div><div class="chain-node-sub">Immunocompromised, unvaccinated, elderly</div></div>
+      </div>
+
+      <div class="section-title">disease progression</div>
+      <h2 class="section-heading">Stages of Infectious Disease</h2>
+      <div class="stages-grid">
+        <div class="stage-card"><div class="stage-num">Stage 1</div><div class="stage-name">Incubation</div><div class="stage-desc">Pathogen invades; no symptoms yet. Ranges from hours (influenza) to years (HIV). Patient is contagious but unaware.</div></div>
+        <div class="stage-card"><div class="stage-num">Stage 2</div><div class="stage-name">Prodromal</div><div class="stage-desc">Nonspecific early symptoms: fatigue, low fever, malaise. Highly contagious stage. Patient often still ambulatory.</div></div>
+        <div class="stage-card"><div class="stage-num">Stage 3</div><div class="stage-name">Illness</div><div class="stage-desc">Peak symptoms specific to the disease. Highest immune response. Body attempting to eliminate pathogen.</div></div>
+        <div class="stage-card"><div class="stage-num">Stage 4</div><div class="stage-name">Convalescence</div><div class="stage-desc">Recovery phase. Symptoms subside; energy gradually returns. Some diseases remain contagious.</div></div>
+      </div>
+
+      <div class="section-title">EMS operational knowledge</div>
+      <h2 class="section-heading">Key Concepts</h2>
+      <div class="card-grid">
+        <div class="info-card"><div class="info-card-icon">🛡️</div><div class="info-card-title">PPE Hierarchy</div><div class="info-card-body"><strong>Standard:</strong> Gloves, gown<br><strong>Droplet:</strong> + Surgical mask, eye protection<br><strong>Airborne:</strong> + N95/PAPR, negative pressure room<br><strong>Contact:</strong> + Dedicated equipment</div></div>
+        <div class="info-card"><div class="info-card-icon">🔬</div><div class="info-card-title">Decontamination Levels</div><div class="info-card-body"><strong>Cleaning:</strong> Remove gross contamination<br><strong>Disinfection:</strong> Kill most microorganisms<br><strong>Sterilization:</strong> Destroy ALL organisms including spores<br>Spaulding Classification guides level needed.</div></div>
+        <div class="info-card"><div class="info-card-icon">📋</div><div class="info-card-title">DICO System</div><div class="info-card-body">Designated Infection Control Officer manages agency exposure protocols, post-exposure prophylaxis coordination, medical evaluation referrals, and OSHA bloodborne pathogen compliance.</div></div>
+        <div class="info-card"><div class="info-card-icon">📢</div><div class="info-card-title">Exposure Reporting</div><div class="info-card-body">Report immediately after any significant exposure to blood/body fluids. Document source patient information. Initiate PEP within <strong>2 hours</strong> for HIV exposure for best efficacy. Ryan White Act protections apply.</div></div>
+        <div class="info-card"><div class="info-card-icon">💉</div><div class="info-card-title">Host Defenses</div><div class="info-card-body"><strong>Non-specific:</strong> Skin, mucous membranes, fever, phagocytes<br><strong>Specific (adaptive):</strong> B-cells (antibodies), T-cells (cell-mediated). Compromised by immunosuppression, malnutrition, extremes of age.</div></div>
+        <div class="info-card"><div class="info-card-icon">⚠️</div><div class="info-card-title">Antibiotic Resistance</div><div class="info-card-body">MRSA, C. diff, CRE, and drug-resistant gonorrhea represent major threats. Contact precautions for MRSA/C. diff. Overuse and incomplete antibiotic courses drive resistance evolution.</div></div>
+      </div>
+    </div>
+
+    <!-- DISEASE LIBRARY TAB -->
+    <div id="tab-diseases" class="tab-panel">
+      <div class="section-title">pathogen reference</div>
+      <h2 class="section-heading">Disease Library</h2>
+      <p class="section-desc">Select any disease for detailed pathophysiology, clinical analogies, medications, and EMS management considerations.</p>
+      <div id="disease-list"></div>
+    </div>
+
+    <!-- SEPSIS TAB -->
+    <div id="tab-sepsis" class="tab-panel">
+      <div class="section-title">critical syndrome</div>
+      <h2 class="section-heading">SIRS, Sepsis & Septic Shock</h2>
+      <p class="section-desc">Sepsis is life-threatening organ dysfunction caused by a dysregulated host response to infection. Rapid recognition and intervention are critical.</p>
+
+      <div class="section-title">screening tool</div>
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:12px;color:var(--amber)">qSOFA Score (≥2 = High Suspicion for Sepsis)</h3>
+      <div class="qsofa-grid">
+        <div class="qsofa-card"><div class="qsofa-val">GCS ≤13</div><div class="qsofa-label">Altered mental status</div></div>
+        <div class="qsofa-card"><div class="qsofa-val">SBP ≤100</div><div class="qsofa-label">Hypotension (mmHg)</div></div>
+        <div class="qsofa-card"><div class="qsofa-val">RR ≥22</div><div class="qsofa-label">Tachypnea (breaths/min)</div></div>
+      </div>
+
+      <div class="section-title">diagnostic criteria</div>
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">SIRS Criteria (2 of 4 required)</h3>
+      <div class="card" style="margin-bottom:24px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
+          <div><div class="d-section-title">Temperature</div><div class="d-text">&gt;38.3°C (100.9°F) or &lt;36°C (96.8°F)</div></div>
+          <div><div class="d-section-title">Heart Rate</div><div class="d-text">&gt;90 bpm</div></div>
+          <div><div class="d-section-title">Respiratory Rate</div><div class="d-text">&gt;20 breaths/min or PaCO₂ &lt;32 mmHg</div></div>
+          <div><div class="d-section-title">WBC</div><div class="d-text">&gt;12,000/mm³ or &lt;4,000/mm³ or &gt;10% bands</div></div>
+        </div>
+      </div>
+
+      <div class="section-title">disease progression</div>
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">Sepsis Continuum</h3>
+      <div class="progression-row">
+        <div class="prog-box sirs"><div class="prog-box-label" style="color:var(--amber)">SIRS</div><div class="prog-box-desc">Systemic inflammatory response. May be non-infectious.</div></div>
+        <div class="prog-arrow">→</div>
+        <div class="prog-box sepsis"><div class="prog-box-label" style="color:var(--red)">Sepsis</div><div class="prog-box-desc">SIRS + confirmed/suspected infection + organ dysfunction.</div></div>
+        <div class="prog-arrow">→</div>
+        <div class="prog-box severe"><div class="prog-box-label" style="color:#ef4444">Severe Sepsis</div><div class="prog-box-desc">+ Hypoperfusion, lactate &gt;2 mmol/L, or organ failure.</div></div>
+        <div class="prog-arrow">→</div>
+        <div class="prog-box shock"><div class="prog-box-label" style="color:#dc2626">Septic Shock</div><div class="prog-box-desc">Refractory hypotension despite 30 mL/kg IVF. High mortality.</div></div>
+      </div>
+
+      <div class="analogy-box" style="margin:20px 0 24px">
+        <div class="analogy-label">🔥 Clinical Analogy</div>
+        <div class="analogy-text">Sepsis is like a wildfire response gone catastrophically wrong. The fire (infection) triggers emergency services (immune system), but instead of containing only the fire, the response starts burning down the surrounding city — blood vessels dilate uncontrollably, clotting systems activate everywhere, and organs shut down from the collateral damage.</div>
+      </div>
+
+      <div class="section-title">prehospital management</div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <div class="d-section-title">Immediate Actions</div>
+            <div class="ems-step"><div class="ems-num">1</div><div class="ems-text">High-flow O₂; airway management as needed</div></div>
+            <div class="ems-step"><div class="ems-num">2</div><div class="ems-text">IV/IO access × 2; obtain blood cultures if possible</div></div>
+            <div class="ems-step"><div class="ems-num">3</div><div class="ems-text">Fluid resuscitation: 30 mL/kg crystalloid (LR/NS) bolus</div></div>
+            <div class="ems-step"><div class="ems-num">4</div><div class="ems-text">Monitor lactate trend if available</div></div>
+            <div class="ems-step"><div class="ems-num">5</div><div class="ems-text">Vasopressors per protocol if hypotension persists</div></div>
+          </div>
+          <div>
+            <div class="d-section-title">Sepsis Bundle (Hour-1)</div>
+            <div class="d-text" style="margin-bottom:8px">Hospital targets within 1 hour:</div>
+            <ul style="font-size:13px;color:var(--text2);line-height:1.8;padding-left:18px">
+              <li>Measure lactate level</li>
+              <li>Blood cultures before antibiotics</li>
+              <li>Broad-spectrum antibiotics</li>
+              <li>30 mL/kg crystalloid if hypotensive or lactate ≥4</li>
+              <li>Norepinephrine if MAP &lt;65 after fluids</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDICATIONS TAB -->
+    <div id="tab-meds" class="tab-panel">
+      <div class="section-title">pharmacology reference</div>
+      <h2 class="section-heading">Infectious Disease Medications</h2>
+      <p class="section-desc">Key antimicrobials, antivirals, and immune agents used in the treatment of communicable diseases. EMS providers should understand mechanisms and indications for patient care discussions.</p>
+      <div id="med-list"></div>
+    </div>
+
+  </div><!-- end content-area -->
+</div><!-- end content screen -->
+
+<!-- ASSESSMENT SCREEN -->
+<div id="assessment" class="screen">
+  <div class="app-header">
+    <div class="header-left">
+      <div class="header-logo">CAMP EMS</div>
+      <div class="header-chapter">Ch. 27 Assessment</div>
+    </div>
+    <span class="header-student" id="assess-name"></span>
+  </div>
+  <div class="assess-header">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <span style="font-size:13px;color:var(--text2)">Question <span id="q-current">1</span> of 100</span>
+      <span style="font-size:13px;color:var(--text3);font-family:var(--mono)">Answered: <span id="q-answered">0</span>/100</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:1%"></div></div>
+    <div class="progress-info"><span id="progress-pct">1%</span><span id="q-score-live">Score: --</span></div>
+  </div>
+  <div class="question-area">
+    <div class="q-number" id="q-num-label"></div>
+    <div class="q-text" id="q-text"></div>
+    <ul class="options-list" id="q-options"></ul>
+    <div class="feedback-box" id="q-feedback"></div>
+    <div class="q-nav">
+      <button class="q-btn" id="btn-prev" onclick="navQ(-1)">← Previous</button>
+      <button class="q-btn primary" id="btn-next" onclick="navQ(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div id="results" class="screen">
+  <div class="app-header">
+    <div class="header-left"><div class="header-logo">CAMP EMS</div><div class="header-chapter">Assessment Results</div></div>
+    <button class="header-btn" onclick="showScreen('content')">← Return to Content</button>
+  </div>
+  <div class="results-content">
+    <div class="score-ring-wrap">
+      <svg class="score-ring-svg" viewBox="0 0 180 180">
+        <circle cx="90" cy="90" r="76" fill="none" stroke="var(--bg3)" stroke-width="12"/>
+        <circle id="score-ring" cx="90" cy="90" r="76" fill="none" stroke="var(--teal)" stroke-width="12" stroke-linecap="round" stroke-dasharray="477.5" stroke-dashoffset="477.5" transform="rotate(-90 90 90)" style="transition:stroke-dashoffset 1.2s ease"/>
+        <text x="90" y="85" text-anchor="middle" class="score-ring-text" fill="var(--text)" font-size="36" font-weight="700" font-family="IBM Plex Mono"></text>
+        <text x="90" y="108" text-anchor="middle" fill="var(--text3)" font-size="13" font-family="IBM Plex Sans">out of 100</text>
+      </svg>
+      <div class="score-meta">
+        <div class="score-meta-item"><span class="score-meta-val" style="color:var(--green)" id="r-correct">--</span><span class="score-meta-label">Correct</span></div>
+        <div class="score-meta-item"><span class="score-meta-val" style="color:var(--red)" id="r-incorrect">--</span><span class="score-meta-label">Incorrect</span></div>
+        <div class="score-meta-item"><span class="score-meta-val" style="color:var(--text3)" id="r-skipped">--</span><span class="score-meta-label">Skipped</span></div>
+        <div class="score-meta-item"><span class="score-meta-val" style="color:var(--blue)" id="r-pct">--%</span><span class="score-meta-label">Percentage</span></div>
+      </div>
+    </div>
+    <div class="pass-banner" id="pass-banner"></div>
+    <button class="pdf-btn" onclick="generatePDF()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+      Download PDF Report
+    </button>
+    <div class="review-filter">
+      <button class="filter-btn active" onclick="filterReview('all',this)">All (100)</button>
+      <button class="filter-btn" onclick="filterReview('correct',this)">✅ Correct</button>
+      <button class="filter-btn" onclick="filterReview('incorrect',this)">❌ Incorrect</button>
+      <button class="filter-btn" onclick="filterReview('skipped',this)">⬜ Skipped</button>
+    </div>
+    <div id="review-list"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const DISEASES = [
+  {
+    icon:'🦠', title:'HIV / AIDS', subtitle:'Human Immunodeficiency Virus',
+    badges:[{t:'Bloodborne',c:'red'},{t:'Sexual',c:'red'},{t:'N95+Gloves',c:'teal'},{t:'Reportable',c:'amber'}],
+    path:`HIV is a retrovirus that specifically targets <strong>CD4+ T-helper lymphocytes</strong> — the "generals" of the immune system. Using reverse transcriptase, it converts its RNA genome into DNA and integrates into the host cell's nucleus. Over years, CD4+ counts fall from normal (~1,000/mm³) toward &lt;200/mm³, the threshold for <strong>AIDS</strong>. At that point, opportunistic infections (PCP pneumonia, toxoplasmosis, CMV) overwhelm the disabled immune system.<br><br>HIV has a <strong>window period</strong> of 3–12 weeks where the patient is infectious but antibody tests may be negative. <strong>Acute retroviral syndrome</strong> (mononucleosis-like illness) occurs 2–4 weeks after infection in many patients.`,
+    analogy:'Think of HIV as a <strong>Trojan Horse targeting the generals</strong>. The immune army (CD4+ T cells) takes in the disguised virus, which then hijacks command-and-control. As the generals are eliminated, the army falls into chaos and cannot defend against even minor invaders.',
+    meds:[
+      {name:'Tenofovir/Emtricitabine',info:'NRTI backbone of most ART regimens. Also used for PrEP. Mechanism: terminates viral DNA chain synthesis.'},
+      {name:'Dolutegravir',info:'Integrase inhibitor — blocks HIV DNA from inserting into host chromosome. High barrier to resistance.'},
+      {name:'Post-Exposure Prophylaxis',info:'3-drug ART regimen started within 2 hours (max 72 hrs) after significant exposure. Duration: 28 days. EMS providers are eligible after needle-sticks or mucous membrane exposure.'}
+    ],
+    ems:[
+      'Universal Precautions: gloves for ALL patient contacts — HIV most often undiagnosed',
+      'HIV+ patients on ART are often "undetectable = untransmittable" (U=U)',
+      'If needlestick/exposure: report immediately, initiate PEP within 2 hours via DICO',
+      'Watch for signs of AIDS-defining illnesses: PCP (severe dyspnea), neurological changes, unusual infections'
+    ]
+  },
+  {
+    icon:'🫁', title:'Hepatitis A, B & C', subtitle:'Viral Hepatic Infections',
+    badges:[{t:'Hep A: Fecal-Oral',c:'amber'},{t:'Hep B/C: Bloodborne',c:'red'},{t:'PPE: Gloves/Mask',c:'teal'}],
+    path:`<strong>Hepatitis A (HAV):</strong> RNA virus transmitted via fecal-oral route (contaminated food/water). Causes acute self-limiting illness; does NOT become chronic. Vaccine-preventable.<br><br><strong>Hepatitis B (HBV):</strong> DNA virus; bloodborne, sexual, perinatal. Most adults clear it, but 5–10% develop chronic hepatitis → cirrhosis → hepatocellular carcinoma. Vaccine available; EMS providers must be vaccinated (OSHA).<br><br><strong>Hepatitis C (HCV):</strong> RNA virus; primarily bloodborne. No vaccine. 75–85% of infections become chronic. Major cause of liver transplantation. Now curable with direct-acting antivirals.`,
+    analogy:'Think of the liver as a water filtration plant. Hepatitis viruses infect the plant workers (hepatocytes). HAV causes a <strong>brief worker strike</strong>; everyone recovers. HBV/HCV cause a <strong>smoldering labor dispute</strong> that, if unresolved, eventually burns the plant down (cirrhosis).',
+    meds:[
+      {name:'HBIG (Hepatitis B Immune Globulin)',info:'Passive immunity. Given within 24 hrs of HBV exposure to unvaccinated individuals. Buys time for active vaccination.'},
+      {name:'Sofosbuvir/Ledipasvir',info:'Direct-acting antiviral for HCV. &gt;95% cure rate in 8–12 weeks. Targets NS5B polymerase.'},
+      {name:'Tenofovir (Viread)',info:'Also used for chronic HBV — suppresses viral replication. Requires long-term therapy.'}
+    ],
+    ems:[
+      'HBV is highly durable — survives on surfaces up to 7 days. Meticulous equipment decontamination required',
+      'Verify HBV vaccination status; titer check annually recommended for EMS',
+      'HCV exposure: no PEP available; baseline testing, follow-up at 6 weeks, 3 months, 6 months',
+      'Signs of acute hepatitis: jaundice, dark urine ("cola urine"), RUQ pain, fatigue, nausea'
+    ]
+  },
+  {
+    icon:'🦠', title:'COVID-19 / SARS-CoV-2', subtitle:'Coronavirus Disease 2019',
+    badges:[{t:'Droplet',c:'amber'},{t:'Airborne (AGP)',c:'red'},{t:'N95+Face Shield',c:'teal'},{t:'Reportable',c:'amber'}],
+    path:`SARS-CoV-2 is a <strong>betacoronavirus</strong> with a spike protein that binds ACE2 receptors — densely expressed in lungs, heart, kidneys, and GI tract. The virus causes a spectrum from asymptomatic infection to fatal ARDS.<br><br><strong>Cytokine storm</strong> — an uncontrolled inflammatory cascade — drives severe disease rather than direct viral damage alone. This explains why anti-inflammatory agents (dexamethasone) reduce mortality. Common presentations: fever, cough, dyspnea, anosmia/ageusia. <strong>Long COVID</strong> affects 10–30% with persistent fatigue, brain fog, and dyspnea months after infection.`,
+    analogy:'COVID-19 pathology is less like an enemy invasion and more like a <strong>false alarm triggering a nuclear response</strong>. The initial infection is manageable, but in some hosts, the immune system overreacts — flooding the lungs and organs with inflammatory signals that cause more damage than the virus itself.',
+    meds:[
+      {name:'Dexamethasone',info:'6 mg daily × 10 days for patients on supplemental O₂. Reduces cytokine storm-mediated lung injury. Landmark RECOVERY trial showed 35% mortality reduction in ventilated patients.'},
+      {name:'Nirmatrelvir/Ritonavir (Paxlovid)',info:'Oral antiviral for high-risk patients within 5 days of symptom onset. Protease inhibitor. Significant drug interactions (ritonavir).'},
+      {name:'Remdesivir',info:'IV nucleotide analog — terminates viral RNA replication. For hospitalized patients requiring O₂.'}
+    ],
+    ems:[
+      'Droplet + contact precautions minimum; N95 + face shield for AGPs (intubation, suctioning, BVM)',
+      'Pre-notify receiving facility of suspected COVID cases',
+      'Airborne precautions for aerosol-generating procedures — only perform if absolutely necessary',
+      'Post-transport decontamination: EPA-approved disinfectant, all surfaces contacted by patient',
+      'High-flow nasal cannula can generate aerosols — treat as AGP'
+    ]
+  },
+  {
+    icon:'🫁', title:'Tuberculosis', subtitle:'Mycobacterium tuberculosis',
+    badges:[{t:'Airborne',c:'red'},{t:'N95 Required',c:'teal'},{t:'Negative Pressure',c:'amber'},{t:'Reportable',c:'amber'}],
+    path:`M. tuberculosis is an acid-fast bacillus (AFB) transmitted by <strong>airborne nuclei</strong> (&lt;5μm). Only ~10% of those infected develop active disease; the rest develop <strong>latent TB infection (LTBI)</strong> where the bacilli are walled off in granulomas (Ghon complex) — the immune system's containment cells.<br><br><strong>Reactivation TB</strong> occurs when immunity is compromised (HIV, immunosuppressants, malnutrition, aging). Active TB presents with chronic productive cough, hemoptysis, night sweats, and weight loss. <strong>Cavitary lesions</strong> on CXR are classic. Drug resistance (MDR-TB, XDR-TB) is a growing global emergency.`,
+    analogy:'TB is like a <strong>prisoner in solitary confinement</strong> (the granuloma). The immune system builds the cell and locks the bacteria inside. Years later, if the prison warden (T-cell immunity) is removed — through HIV, steroids, or aging — the prisoner escapes and starts a riot throughout the lungs.',
+    meds:[
+      {name:'Isoniazid (INH)',info:'Bactericidal first-line drug. Inhibits mycolic acid synthesis. Given with pyridoxine (B6) to prevent peripheral neuropathy. Used 6–9 months for LTBI prophylaxis.'},
+      {name:'RIPE Therapy',info:'Standard 6-month active TB regimen: Rifampin + Isoniazid + Pyrazinamide + Ethambutol × 2 months, then RH × 4 months. DOT (directly observed therapy) required.'},
+      {name:'Bedaquiline',info:'Novel diarylquinoline for MDR-TB. Inhibits ATP synthase. Reserved for resistant strains.'}
+    ],
+    ems:[
+      'N95 respirator (or higher) MANDATORY for suspected active TB — NOT a surgical mask',
+      'Transport in negative pressure vehicle if available; open windows if not',
+      'Patient should wear surgical mask to reduce droplet nuclei in cabin',
+      'Notify receiving hospital before arrival — respiratory isolation required',
+      'Post-exposure: TST/IGRA testing at baseline, 8–10 weeks; report to DICO'
+    ]
+  },
+  {
+    icon:'🧠', title:'Bacterial Meningitis', subtitle:'N. meningitidis, S. pneumoniae, L. monocytogenes',
+    badges:[{t:'Droplet',c:'amber'},{t:'Contact',c:'amber'},{t:'Life-Threatening',c:'red'},{t:'Reportable',c:'amber'}],
+    path:`Bacterial meningitis is <strong>inflammation of the meninges</strong> (pia, arachnoid, dura) caused by bacterial invasion via hematogenous spread or direct extension. Pathogens breach the blood-brain barrier, triggering a catastrophic inflammatory response in the subarachnoid space.<br><br>Classic triad: <strong>fever, neck stiffness (nuchal rigidity), altered mental status</strong>. Also: severe headache ("worst of my life"), photophobia, phonophobia. <strong>Meningococcemia</strong> causes petechial/purpuric rash — a medical emergency with mortality up to 25% without treatment. <strong>Kernig's sign</strong> (resistance to knee extension) and <strong>Brudzinski's sign</strong> (involuntary hip flexion with neck flexion) indicate meningeal irritation.`,
+    analogy:'Imagine a <strong>riot breaking out inside the brain\'s gated community</strong> (subarachnoid space). The meninges are the walls; bacteria force their way in and trigger massive inflammatory chaos. Pressure builds, blood flow is compromised, and the brain itself is at risk of herniation from the swelling.',
+    meds:[
+      {name:'Ceftriaxone',info:'First-line empiric therapy (2g IV q12h for adults). Third-generation cephalosporin with excellent CNS penetration. Covers N. meningitidis and S. pneumoniae.'},
+      {name:'Dexamethasone',info:'0.15 mg/kg q6h × 2–4 days. Given BEFORE or WITH first antibiotic dose. Reduces cytokine-driven neurological sequelae, especially hearing loss.'},
+      {name:'Vancomycin',info:'Added empirically for PCN-resistant S. pneumoniae coverage until sensitivities known. Poor CSF penetration — relies on inflamed BBB.'}
+    ],
+    ems:[
+      'Droplet precautions + surgical mask until meningococcemia is ruled out',
+      'Time-critical: every hour of delay in antibiotics increases mortality — pre-notify hospital',
+      'Establish IV access en route; be prepared for seizure management (benzodiazepines)',
+      'Dim the patient compartment — severe photophobia is present',
+      'High suspicion if: young adult + fever + "worst headache ever" + neck stiffness + rash'
+    ]
+  },
+  {
+    icon:'❤️', title:'Bacterial Endocarditis', subtitle:'Infective Endocarditis (IE)',
+    badges:[{t:'Not Directly Transmissible',c:'blue'},{t:'Standard Precautions',c:'teal'},{t:'High Mortality',c:'red'}],
+    path:`IE is infection of the endocardium — typically the cardiac valves. Bacteria (most commonly <strong>Staphylococcus aureus, Streptococcus viridans, Enterococcus</strong>) adhere to damaged or abnormal valve tissue and form <strong>vegetations</strong> — clumps of bacteria, fibrin, and platelets.<br><br>Risk factors: IV drug use (IVDU), prosthetic valves, prior rheumatic fever, poor dentition. IVDU-associated IE typically affects the <strong>tricuspid valve</strong> (right-sided). Classic presentation: prolonged fever, new heart murmur, embolic phenomena (stroke, splenic infarct). <strong>Janeway lesions</strong>, <strong>Osler nodes</strong>, <strong>Roth spots</strong>, <strong>splinter hemorrhages</strong> are classic physical findings.`,
+    analogy:'Bacterial endocarditis is like <strong>barnacles growing on a ship\'s rudder</strong>. The bacteria (barnacles) colonize damaged valve tissue (a worn rudder), form vegetations, and pieces break off — shooting bacterial emboli to the brain, kidneys, and lungs like jagged debris downstream.',
+    meds:[
+      {name:'Nafcillin/Oxacillin',info:'Anti-staphylococcal penicillins — preferred for MSSA endocarditis. Bactericidal.'},
+      {name:'Vancomycin',info:'Used for MRSA or penicillin-allergic patients. Long-duration therapy (4–6 weeks).'},
+      {name:'Gentamicin',info:'Aminoglycoside; synergistic bactericidal effect in certain IE protocols (enterococcal IE). Monitor renal function.'}
+    ],
+    ems:[
+      'Consider IE in IVDU patients with fever, dyspnea, or altered mental status',
+      'New murmur in a febrile patient is highly suspicious — report to receiving',
+      'Right-sided IE may present as recurrent pulmonary emboli (dyspnea, pleuritic chest pain)',
+      'Blood cultures are critical — do not delay transport for multiple sticks',
+      'Embolic stroke may be the presenting complaint — look for concurrent fever'
+    ]
+  },
+  {
+    icon:'😤', title:'Pneumonia', subtitle:'Community-Acquired & Hospital-Acquired',
+    badges:[{t:'Droplet/Contact',c:'amber'},{t:'Airborne (Atypical)',c:'red'},{t:'Gloves+Mask',c:'teal'}],
+    path:`Pneumonia is <strong>infection and inflammation of lung parenchyma</strong>, most commonly caused by <em>Streptococcus pneumoniae</em> (CAP), <em>Haemophilus influenzae</em>, atypical organisms (<em>Mycoplasma, Legionella, Chlamydia</em>), and respiratory viruses.<br><br>Bacteria overwhelm local defenses, triggering an inflammatory cascade that floods alveoli with exudate. This creates a <strong>consolidation</strong> (solid-appearing lobe on CXR) that impairs gas exchange — causing hypoxia. <strong>Lobar vs. bronchopneumonia vs. interstitial</strong> patterns reflect extent and organism. <strong>PORT/PSI score</strong> guides admission decision. Classic presentation: fever, productive cough, pleuritic chest pain, crackles on auscultation.`,
+    analogy:'Pneumonia is like a <strong>flood inside a building\'s ventilation ducts</strong>. The alveoli (tiny air sacs) fill with fluid and pus — air can no longer pass through. The lungs try to compensate by increasing respiratory rate, but gas exchange deteriorates until the fluid is cleared by immune response or antibiotics.',
+    meds:[
+      {name:'Azithromycin',info:'First-line for outpatient CAP. Covers atypicals. Macrolide mechanism: inhibits bacterial protein synthesis (50S ribosome).'},
+      {name:'Amoxicillin-Clavulanate',info:'Covers beta-lactamase producing organisms. Used for outpatient CAP with comorbidities.'},
+      {name:'Ceftriaxone + Azithromycin',info:'Inpatient CAP regimen. Combination covers typical and atypical organisms.'}
+    ],
+    ems:[
+      'Hypoxia is the primary life threat — aggressive O₂ therapy, position of comfort (sitting up)',
+      'Pulse oximetry may be falsely reassuring in early pneumonia — watch work of breathing',
+      'Atypical pneumonia (Legionella): associated with contaminated water sources, AC systems',
+      'Aspiration pneumonia: consider in altered mental status patients, alcoholics, seizure patients',
+      'CPAP may be indicated for severe hypoxia if patient is cooperative'
+    ]
+  },
+  {
+    icon:'⚡', title:'Tetanus', subtitle:'Clostridium tetani',
+    badges:[{t:'Not Contagious',c:'blue'},{t:'Wound Entry',c:'amber'},{t:'Standard Precautions',c:'teal'}],
+    path:`<em>Clostridium tetani</em> is an anaerobic spore-forming bacterium that produces <strong>tetanospasmin</strong> — one of the most potent toxins known. The toxin travels retrograde along motor neurons to the spinal cord where it cleaves <strong>SNARE proteins</strong> in inhibitory interneurons, blocking the release of <strong>GABA and glycine</strong> — the "brakes" of the motor system.<br><br>Without inhibitory neurotransmission, motor neurons fire continuously — causing <strong>trismus</strong> ("lockjaw"), <strong>risus sardonicus</strong> (sardonic grin), <strong>opisthotonus</strong> (arched back), and painful generalized spasms triggered by minor stimuli. <strong>Respiratory muscle spasm</strong> leads to asphyxiation if untreated.`,
+    analogy:'Tetanus is like a <strong>car with the gas pedal jammed to the floor and the brakes cut</strong>. GABA and glycine are the brakes of the nervous system. Once tetanospasmin destroys the brake system (inhibitory neurons), every muscle fires continuously with no "off" switch. The engine (motor neurons) revs to destruction.',
+    meds:[
+      {name:'Tetanus Immune Globulin (TIG)',info:'500 U IM — neutralizes unbound toxin. Given with wound debridement. TIG cannot reverse toxin already bound to neurons.'},
+      {name:'Metronidazole (Flagyl)',info:'Antibiotic of choice to eliminate C. tetani from wound. 500 mg IV q6h × 7–10 days.'},
+      {name:'Diazepam/Midazolam',info:'Benzodiazepines to control muscle spasms — potentiate GABA receptors. Severe cases may require neuromuscular blockade + mechanical ventilation.'}
+    ],
+    ems:[
+      'Prevention: Td booster every 10 years; TdaP once for pertussis coverage',
+      'Minimize environmental stimuli — noise and light trigger violent spasms',
+      'Prepare for airway emergency: laryngospasm can cause sudden respiratory arrest',
+      'IV benzodiazepines for active spasms — diazepam 5–10 mg IV',
+      'Wound type matters: deep punctures, soil contamination, crush injuries are highest risk'
+    ]
+  },
+  {
+    icon:'🐺', title:'Rabies', subtitle:'Lyssavirus (Rhabdovirus)',
+    badges:[{t:'Animal Bite/Scratch',c:'red'},{t:'Saliva Exposure',c:'amber'},{t:'Fatal If Untreated',c:'red'}],
+    path:`Rabies virus enters via <strong>animal saliva</strong> through a bite or mucous membrane exposure. It binds to nicotinic acetylcholine receptors at the neuromuscular junction and travels <strong>retrograde along peripheral axons</strong> at 12–24 mm/day toward the spinal cord and brain.<br><br>Incubation: 1–3 months (range: days to years). Once virus reaches the brain, encephalitis ensues — and the disease is nearly 100% fatal. Classic signs: <strong>hydrophobia</strong> (painful pharyngeal spasm triggered by water), <strong>aerophobia</strong>, agitation, excessive salivation. Only 14 documented survivors have existed. Death from respiratory failure or cardiac arrhythmia.`,
+    analogy:'Rabies is an <strong>express train to the brain</strong>. The moment the train (virus) enters the station (wound), it travels along dedicated tracks (peripheral nerves) directly to the destination (brainstem). PEP is the only way to derail the train before it arrives — once it reaches the brain, nothing can stop it.',
+    meds:[
+      {name:'Rabies Immune Globulin (RIG)',info:'20 IU/kg — half infiltrated into wound site, half IM. Provides immediate passive protection. Given on Day 0 with first vaccine.'},
+      {name:'Rabies Vaccine (HDCV or PCECV)',info:'4-dose series: Day 0, 3, 7, 14. Stimulates active immunity. Pre-exposure prophylaxis available for high-risk occupations.'}
+    ],
+    ems:[
+      'Wash all bite wounds immediately and thoroughly with soap and water × 15 minutes — reduces viral load',
+      'Suspect rabies in: unprovoked animal attack, bat exposure, wild animal acting abnormally',
+      'Post-exposure PEP must begin immediately — do NOT wait for lab confirmation',
+      'Bats are #1 source of US rabies deaths — any bat exposure (even during sleep) warrants PEP evaluation',
+      'Euthanize/capture animal if safe — 10-day observation (dogs/cats) or direct FA testing'
+    ]
+  },
+  {
+    icon:'🐭', title:'Hantavirus & Mosquito-Borne Illness', subtitle:'HPS, West Nile, Dengue, Malaria, Zika',
+    badges:[{t:'Rodent Excreta',c:'amber'},{t:'Vector-Borne',c:'blue'},{t:'Standard Precautions',c:'teal'},{t:'Reportable',c:'amber'}],
+    path:`<strong>Hantavirus Pulmonary Syndrome (HPS):</strong> Caused by Sin Nombre virus carried by deer mice. Transmitted by inhalation of aerosolized rodent urine/feces/saliva. Prodrome resembles flu, then rapid progression to noncardiogenic pulmonary edema (ARDS). Mortality ~38%.<br><br><strong>Dengue:</strong> Flavivirus transmitted by <em>Aedes aegypti</em> mosquito. First infection causes classic dengue fever. <strong>Second infection with different serotype</strong> triggers antibody-dependent enhancement (ADE) — prior antibodies help the virus enter more cells (key that fits the wrong door). Can cause <strong>dengue hemorrhagic fever</strong>.<br><br><strong>West Nile Virus:</strong> Most infected are asymptomatic; &lt;1% develop neuroinvasive disease (encephalitis, meningitis, flaccid paralysis).`,
+    analogy:'Dengue\'s secondary infection phenomenon: imagine having a key (antibodies) that was <strong>cut for one lock (serotype 1)</strong>. When you encounter a slightly different lock (serotype 2), the key almost fits — it opens the door just enough for the virus to sneak inside MORE cells, causing far worse disease.',
+    meds:[
+      {name:'Supportive Care (HPS)',info:'No specific antiviral. IV fluids cautiously — risk of worsening pulmonary edema. Early ECMO may be life-saving.'},
+      {name:'Antimalarials (Chloroquine/Artemisinin)',info:'Chloroquine for sensitive P. vivax/P. malariae; artemisinin-based combination therapy (ACT) for P. falciparum. Resistance patterns vary by region.'}
+    ],
+    ems:[
+      'HPS: avoid rodent-infested structures; if entry required, wear N95 + gloves',
+      'Dengue: no person-to-person transmission; treat shock aggressively — dengue shock syndrome',
+      'Malaria consideration in febrile patients returning from endemic regions (Africa, SE Asia)',
+      'West Nile: elderly patients at highest risk for neuroinvasive disease',
+      'All vector-borne diseases: symptomatic/supportive; immediate transport for hemodynamic instability'
+    ]
+  },
+  {
+    icon:'🧫', title:'Antibiotic-Resistant Infections', subtitle:'MRSA, C. diff, CRE, Drug-Resistant Gonorrhea',
+    badges:[{t:'Contact Precautions',c:'red'},{t:'Gown+Gloves',c:'teal'},{t:'Environmental Persistence',c:'amber'}],
+    path:`<strong>MRSA</strong> (Methicillin-Resistant S. aureus): Resistance via <em>mecA</em> gene encoding altered penicillin-binding protein (PBP2a). Community-MRSA (skin/soft tissue abscesses) vs. Hospital-MRSA (bloodstream, pneumonia, septic arthritis).<br><br><strong>C. difficile:</strong> Produces toxins A and B that destroy colonocytes. Risk factors: prior antibiotics (disrupt normal flora), proton pump inhibitors, hospitalization, age &gt;65. Causes pseudomembranous colitis. <strong>Spores survive standard alcohol-based sanitizers</strong> — must use soap and water.<br><br><strong>CRE</strong> (Carbapenem-Resistant Enterobacteriaceae): Nearly pan-resistant. Mortality in bacteremia 40–50%. Last-resort agents include colistin, ceftazidime-avibactam.`,
+    analogy:'Antibiotic resistance is <strong>Darwinian evolution in fast-forward</strong>. Every course of antibiotics is a selection event — bacteria with mutations that confer resistance survive and reproduce. Incomplete courses of antibiotics are the worst: they kill off the susceptible bacteria but allow the partially resistant ones to thrive and multiply.',
+    meds:[
+      {name:'Vancomycin',info:'IV: primary therapy for serious MRSA infections. Oral: not absorbed — used specifically for C. diff (stays in GI tract).'},
+      {name:'Fidaxomicin (Dificid)',info:'First-line for C. diff (superior to oral vancomycin for recurrence prevention). Narrow spectrum — preserves microbiome.'},
+      {name:'TMP-SMX (Bactrim)',info:'Oral option for community-MRSA skin infections. Check local resistance patterns — varies regionally.'}
+    ],
+    ems:[
+      'MRSA: gown + gloves; dedicated equipment; decontaminate stretcher after transport',
+      'C. diff: alcohol hand sanitizer DOES NOT KILL spores — use soap and water hand washing',
+      'Do not administer antibiotics for viral URI — patient education is antibiotic stewardship',
+      'MRSA wound care: do not manipulate furuncles/abscesses — risk of bacteremia',
+      'Notify receiving facility of known MRSA/C. diff patients for isolation preparation'
+    ]
+  },
+  {
+    icon:'👶', title:'Childhood Viral Diseases', subtitle:'Rubella, Rubeola, Mumps, Chickenpox, Pertussis',
+    badges:[{t:'Airborne',c:'red'},{t:'Droplet',c:'amber'},{t:'N95+Mask',c:'teal'},{t:'Vaccine-Preventable',c:'blue'}],
+    path:`<strong>Rubella (German Measles):</strong> Mild in children; <strong>devastating in pregnancy</strong> (congenital rubella syndrome: cataracts, deafness, heart defects). MMR vaccine essential.<br><br><strong>Rubeola (Measles):</strong> Highly contagious RNA paramyxovirus. Koplik spots (white spots on buccal mucosa) pathognomonic prodrome. Complications: pneumonia, encephalitis, SSPE (delayed fatal brain disease).<br><br><strong>Pertussis ("Whooping Cough"):</strong> <em>Bordetella pertussis</em>. Phases: catarrhal (most contagious, URI-like) → paroxysmal (severe coughing spells + inspiratory whoop) → convalescent. Most dangerous in infants (&lt;6 months) — can cause apnea and death.<br><br><strong>Varicella (Chickenpox):</strong> Extremely contagious; airborne + direct contact. VZV establishes latency in dorsal root ganglia → reactivates as <strong>shingles (herpes zoster)</strong> in adults.`,
+    analogy:'Pertussis in infants is particularly dangerous because the inspiratory whoop (from the forced inhalation after the violent cough) may be absent — the infant simply <strong>stops breathing instead</strong>. The cough toxin paralyzes cilia and paralyzes the normal airway clearing mechanism.',
+    meds:[
+      {name:'Azithromycin',info:'First-line for pertussis (all ages including infants). Reduces contagiousness even if symptoms persist. Post-exposure prophylaxis for household contacts.'},
+      {name:'Acyclovir',info:'For severe/complicated varicella — immunocompromised patients, adults, pneumonia cases. Inhibits viral DNA polymerase.'},
+      {name:'MMR Vaccine',info:'Measles-Mumps-Rubella live attenuated vaccine. Two doses in childhood. Healthcare workers require documented immunity.'}
+    ],
+    ems:[
+      'Measles: 10× more contagious than COVID — N95 required; patient isolated from waiting room',
+      'Chickenpox: airborne precautions; non-immune pregnant EMS providers should NOT respond',
+      'Pertussis: early (catarrhal) phase — looks like common cold but EXTREMELY contagious',
+      'Infant pertussis: watch for apnea, cyanosis — may present as apparent life-threatening event',
+      'EMS providers must maintain MMR/Varicella immunity — OSHA requirement'
+    ]
+  },
+  {
+    icon:'🔬', title:'Sexually Transmitted Infections', subtitle:'Syphilis, Gonorrhea, Chlamydia, Herpes',
+    badges:[{t:'Sexual Transmission',c:'red'},{t:'Standard Precautions',c:'teal'},{t:'Reportable',c:'amber'}],
+    path:`<strong>Syphilis (<em>Treponema pallidum</em>):</strong> Four stages: Primary (painless chancre), Secondary (disseminated rash on palms/soles, condylomata lata), Latent (asymptomatic), Tertiary (gummas, cardiovascular syphilis, neurosyphilis). <strong>Congenital syphilis</strong> resurgent nationally.<br><br><strong>Gonorrhea (<em>N. gonorrhoeae</em>):</strong> Increasingly drug-resistant. Urethral/cervical discharge. Can cause PID, ectopic pregnancy. Dual therapy required due to resistance.<br><br><strong>Herpes Simplex (HSV-1/HSV-2):</strong> Establishes lifelong latency in sensory ganglia. Reactivates with stress, illness, immunosuppression. Neonatal herpes from birth canal exposure is life-threatening.`,
+    analogy:'Syphilis is called "the great imitator" because its secondary stage mimics nearly every rash and disease known. Think of it as a <strong>master of disguise</strong> — it can look like any condition, fooling both patients and providers into missing the diagnosis until tertiary complications appear.',
+    meds:[
+      {name:'Benzathine Penicillin G',info:'2.4 million units IM — definitive treatment for primary, secondary, and early latent syphilis. Injectable form ensures compliance.'},
+      {name:'Ceftriaxone + Azithromycin',info:'Dual therapy for gonorrhea (resistance to azithromycin increasing — culture/sensitivity needed). Oral cefixime less preferred.'},
+      {name:'Acyclovir/Valacyclovir',info:'Suppressive therapy for HSV — reduces frequency of outbreaks and viral shedding. Does not cure latency.'}
+    ],
+    ems:[
+      'STI patients may present with PID (lower abdominal pain, fever), epididymitis, or sepsis from gonococcal bacteremia',
+      'Neonatal conjunctivitis within 2–5 days of birth: suspect gonococcal — urgent ophthalmology',
+      'Syphilis rash on palms/soles: classic finding — wear gloves during any skin contact',
+      'Ectopic pregnancy rupture: consider in women of childbearing age with pelvic pain + history of STIs',
+      'Non-judgmental patient communication — stigma reduces disclosure'
+    ]
+  },
+  {
+    icon:'🌍', title:'Mpox & Emerging Diseases', subtitle:'Mpox (Monkeypox), Polio, Emerging Pathogens',
+    badges:[{t:'Direct Contact',c:'amber'},{t:'Droplet (Mpox)',c:'amber'},{t:'Contact Precautions',c:'teal'},{t:'Reportable',c:'amber'}],
+    path:`<strong>Mpox (formerly Monkeypox):</strong> Orthopoxvirus. Transmitted via close skin-to-skin contact with lesions, respiratory droplets, or contaminated surfaces. Presents with fever, lymphadenopathy, and a characteristic <strong>deep-seated, well-circumscribed rash</strong> progressing from macules → papules → vesicles → pustules → crusts (all stages present simultaneously). Less severe than smallpox; most cases self-limiting.<br><br><strong>Emerging Disease Principles:</strong> Novel pathogens exploit globalization, deforestation, and climate change. EMS is often on the "front lines" — the first to recognize unusual disease clusters. The OPIM (Other Potentially Infectious Material) category in OSHA covers virtually all body fluids.`,
+    analogy:'Emerging diseases are nature\'s version of a <strong>cyberattack on a system with no existing patches</strong>. A novel pathogen enters a population with zero pre-existing immunity — no herd protection, no established treatment, no diagnostic tests. The healthcare system must build defenses in real time.',
+    meds:[
+      {name:'Tecovirimat (TPOXX)',info:'Antiviral for orthopoxviruses (smallpox, mpox). Inhibits VP37 (viral envelope protein). CDC Strategic National Stockpile. Oral or IV.'},
+      {name:'JYNNEOS Vaccine',info:'Live non-replicating Modified Vaccinia Ankara (MVA) vaccine. Two doses for pre-exposure or post-exposure (within 4 days). FDA-approved for mpox/smallpox.'}
+    ],
+    ems:[
+      'Contact precautions + gown + gloves + surgical mask for mpox — N95 for prolonged respiratory exposure',
+      'Do NOT touch lesions — primary transmission route for mpox',
+      'Unusual disease presentation clusters: report to public health/medical director immediately',
+      'Suspicious rash with fever + lymphadenopathy: consider mpox, especially in high-risk populations',
+      'Bioterrorism awareness: smallpox (eradicated) → vesicular rash with lesions in all same stage'
+    ]
+  }
+];
+
+const MEDICATIONS = [
+  {name:'Ceftriaxone',cls:'Third-Generation Cephalosporin',mechanism:'Inhibits cell wall synthesis by binding penicillin-binding proteins (PBPs). Bactericidal.',use:'Meningitis (2g IV q12h), gonorrhea, CAP, sepsis, Lyme disease.',dose:'Meningitis: 2g IV q12h. Sepsis: 1–2g IV q24h. Gonorrhea: 500mg IM single dose.',notes:'Excellent CNS penetration. May cause biliary sludging. Avoid in neonates with hyperbilirubinemia.'},
+  {name:'Vancomycin',cls:'Glycopeptide Antibiotic',mechanism:'Inhibits bacterial cell wall synthesis by binding D-Ala-D-Ala terminus of peptidoglycan precursors. Different mechanism from beta-lactams — active against MRSA.',use:'MRSA infections, endocarditis, meningitis (with ceftriaxone), C. diff (oral form).',dose:'15–20 mg/kg IV q8–12h (target trough/AUC monitoring). Oral for C. diff: 125mg q6h × 10d.',notes:'"Red man syndrome" with rapid infusion (not allergy). Nephrotoxic — monitor renal function. Oral form NOT absorbed systemically.'},
+  {name:'Isoniazid (INH)',cls:'Antitubercular / First-Line',mechanism:'Inhibits mycolic acid synthesis (KatG pro-drug activation). Bactericidal against actively replicating M. tuberculosis.',use:'Active TB (part of RIPE), LTBI prophylaxis (6–9 month course).',dose:'Active TB: 5 mg/kg/day PO (max 300mg). LTBI: 300mg PO daily × 9 months.',notes:'Always give with Pyridoxine (B6) 25–50mg/day to prevent peripheral neuropathy. Hepatotoxicity risk — monitor LFTs.'},
+  {name:'Tenofovir/Emtricitabine',cls:'NRTI Combination (Truvada/Descovy)',mechanism:'Nucleoside/nucleotide reverse transcriptase inhibitors — terminate HIV DNA chain synthesis after incorporation.',use:'ART backbone for HIV treatment. Pre-Exposure Prophylaxis (PrEP). Component of PEP regimens.',dose:'PrEP: 1 tablet PO daily. PEP: combined with dolutegravir — start within 72 hrs, continue 28 days.',notes:'Excellent tolerability. Tenofovir alafenamide (TAF) has less renal/bone toxicity than TDF. Check renal function at baseline.'},
+  {name:'Ribavirin',cls:'Nucleoside Analog Antiviral',mechanism:'Inhibits viral RNA-dependent RNA polymerase. Immunomodulatory effects. Broad-spectrum antiviral activity.',use:'Chronic HCV (older regimens), hemorrhagic fever viruses (Lassa, some cases of Hantavirus in early phase).',dose:'Weight-based oral dosing for HCV. Inhaled (Synagis/RSV in infants — controversial).',notes:'Teratogenic — absolutely contraindicated in pregnancy. Causes hemolytic anemia. Now largely replaced by DAAs for HCV.'},
+  {name:'HBIG (Hepatitis B Immune Globulin)',cls:'Passive Immunity Agent',mechanism:'Concentrated anti-HBs antibodies provide immediate passive protection against HBV infection.',use:'Post-exposure prophylaxis for unvaccinated individuals. Newborns of HBsAg-positive mothers. Liver transplant recipients.',dose:'0.06 mL/kg IM within 24 hours of exposure (ideally within 12 hours). Give simultaneously with first HBV vaccine dose (different site).',notes:'Provides temporary protection for 3–6 months. Must be followed by active HBV vaccination series for long-term immunity.'},
+  {name:'Benzathine Penicillin G',cls:'Long-Acting Penicillin',mechanism:'Inhibits bacterial cell wall synthesis. Bactericidal for T. pallidum — no documented penicillin resistance in 70+ years.',use:'Syphilis (all stages). Streptococcal pharyngitis prophylaxis (rheumatic fever prevention).',dose:'Primary/Secondary syphilis: 2.4 million units IM single dose. Latent/tertiary: 3 weekly doses.',notes:'Depot injection — slowly absorbed from IM site, maintaining bactericidal levels for 2–4 weeks. Painful injection — Z-track technique.'},
+  {name:'Acyclovir',cls:'Nucleoside Analog Antiviral',mechanism:'Selectively phosphorylated by viral thymidine kinase → inhibits viral DNA polymerase. Selective toxicity to infected cells.',use:'HSV-1/HSV-2 (genital herpes, encephalitis, neonatal). Varicella-zoster (chickenpox, shingles). EBV in severe cases.',dose:'HSV encephalitis: 10 mg/kg IV q8h × 14–21d. Genital herpes: 400mg PO TID × 7–10d. Zoster: 800mg PO 5×/day × 7–10d.',notes:'Valacyclovir is oral prodrug with better bioavailability. Resistance emerging in immunocompromised. Adequate hydration prevents renal crystallization.'},
+  {name:'Azithromycin',cls:'Macrolide Antibiotic',mechanism:'Binds 50S ribosomal subunit → inhibits protein synthesis. Bacteriostatic. Concentrates intracellularly — excellent tissue penetration.',use:'Atypical pneumonia, pertussis, STIs (chlamydia, gonorrhea as dual therapy), MAC prophylaxis in HIV.',dose:'CAP: 500mg day 1, 250mg days 2–5. Pertussis: 500mg day 1, 250mg days 2–5. Chlamydia: 1g single dose.',notes:'"Z-pack" — widespread use has driven macrolide resistance. QT prolongation risk — caution with other QT-prolonging drugs. Cardiac risk in high-risk patients.'},
+  {name:'Tecovirimat (TPOXX)',cls:'Antiviral — Orthopoxvirus',mechanism:'Inhibits VP37 protein required for enveloped virion formation → prevents viral egress and spread.',use:'Smallpox (biodefense), Mpox (monkeypox). CDC Strategic National Stockpile.',dose:'Oral (preferred): weight-based — ~600mg BID × 14d (adults 40–120kg). IV form for severe cases.',notes:'FDA-approved 2018. Expanded access protocol for mpox. Generally well-tolerated. Stockpiled by federal government. Requires expanded access/CDC consultation.'},
+  {name:'Rabies Immune Globulin (RIG)',cls:'Passive Immune Agent',mechanism:'Concentrated human anti-rabies antibodies provide immediate passive protection while active vaccine-induced immunity develops over 7–10 days.',use:'Post-exposure prophylaxis for previously unvaccinated individuals bitten/exposed to potentially rabid animal.',dose:'20 IU/kg total dose. Infiltrate as much as possible around wound; remainder given IM distant from vaccine site. Day 0 only.',notes:'NEVER repeat after first dose — can blunt active vaccine response. Given simultaneously with Day 0 vaccine (different site). Do not administer if fully vaccinated.'},
+  {name:'Dexamethasone',cls:'Corticosteroid / Anti-inflammatory',mechanism:'Inhibits phospholipase A2 → blocks arachidonic acid cascade → reduces prostaglandins, leukotrienes, cytokines. Reduces vascular permeability and edema.',use:'Bacterial meningitis (reduce inflammatory sequelae), COVID-19 on O₂ (reduce cytokine storm), cerebral edema, croup, severe sepsis adjunct.',dose:'Meningitis: 0.15 mg/kg IV q6h × 2–4 days. COVID: 6 mg PO/IV daily × 10 days. Cerebral edema: 10mg IV bolus then 4mg q6h.',notes:'Give BEFORE or WITH first antibiotic dose for meningitis to maximize benefit. Immunosuppressive — do not use in herpes encephalitis without antiviral cover.'}
+];
+
+// ============================================================
+// 100 QUESTIONS
+// ============================================================
+const QUESTIONS = [
+  // PUBLIC HEALTH & CHAIN OF INFECTION (Q1-10)
+  {q:"Which link in the chain of infection represents the organism that causes disease?",o:["Reservoir","Susceptible host","Infectious agent","Portal of entry"],a:2,e:"The infectious agent is the pathogen itself — bacteria, virus, fungus, or parasite — that initiates the chain of infection. Breaking any link, including eliminating or reducing the pathogen, interrupts transmission."},
+  {q:"A patient lives in a rural area and has been exposed to contaminated well water containing bacterial pathogens. The well water represents which link in the chain of infection?",o:["Portal of exit","Reservoir","Mode of transmission","Infectious agent"],a:1,e:"A reservoir is any animate or inanimate source where a pathogen lives and multiplies. Contaminated well water is an environmental (inanimate) reservoir."},
+  {q:"An EMS provider coughs without covering their mouth while caring for a patient. This represents a failure of which chain-of-infection link?",o:["Reservoir control","Portal of exit control","Mode of transmission control","Susceptible host protection"],a:1,e:"The respiratory tract is a portal of exit. Covering coughs and using source control (masks) helps seal this exit point and prevent transmission."},
+  {q:"N95 respirators primarily interrupt which link in the chain of infection?",o:["Infectious agent","Reservoir","Mode of transmission","Portal of entry"],a:2,e:"N95 respirators filter airborne particles, interrupting the airborne mode of transmission before pathogens reach a susceptible host."},
+  {q:"Which transmission route requires the largest particle size (>5 micrometers)?",o:["Airborne","Droplet","Vector-borne","Indirect contact"],a:1,e:"Droplet transmission involves large respiratory droplets (>5 μm) that travel short distances (<6 feet) and fall quickly due to gravity. Airborne transmission involves smaller particles (<5 μm) that remain suspended."},
+  {q:"A patient was infected with tuberculosis from a coworker who sat in the same room. This most likely represents which transmission route?",o:["Droplet","Direct contact","Airborne","Vector-borne"],a:2,e:"TB is transmitted by airborne nuclei (droplet nuclei <5 μm) that remain suspended in air for prolonged periods. Casual room-sharing is sufficient for transmission — highlighting why N95 respirators are required."},
+  {q:"Which of the following individuals is MOST at risk of being a susceptible host?",o:["A 25-year-old who recently received all immunizations","A patient receiving systemic corticosteroids for lupus","A firefighter who exercises daily","A nurse who has recovered from seasonal influenza"],a:1,e:"Corticosteroids suppress cell-mediated and humoral immunity, significantly increasing susceptibility to infection. Immunocompromised individuals are the most susceptible hosts."},
+  {q:"Standard precautions are designed to reduce transmission from:",o:["Known infected patients only","All patients regardless of diagnosis","Patients flagged in their chart","Patients with positive cultures"],a:1,e:"Standard precautions assume ALL blood, body fluids, secretions, excretions, non-intact skin, and mucous membranes may be infectious — regardless of known diagnosis. This protects against undiagnosed infections."},
+  {q:"Which decontamination level destroys ALL microorganisms including bacterial spores?",o:["Cleaning","Low-level disinfection","High-level disinfection","Sterilization"],a:3,e:"Sterilization destroys all microbial life including spores. High-level disinfection kills most organisms except high numbers of spores. This distinction follows the Spaulding Classification."},
+  {q:"Under the Ryan White Act, what can an EMS provider request after a significant exposure?",o:["Mandatory vaccination of the source patient","Notification of the source patient's infectious disease status","Immediate isolation of the source patient","Transfer of the patient to an infectious disease unit"],a:1,e:"The Ryan White Act entitles exposed EMS providers to know the infectious disease status (HIV, hepatitis, TB) of source patients, enabling appropriate post-exposure medical care decisions."},
+  // HOST DEFENSES (Q11-14)
+  {q:"Which type of immunity is provided by NK cells, phagocytes, and physical barriers like skin?",o:["Specific (adaptive) immunity","Passive immunity","Non-specific (innate) immunity","Humoral immunity"],a:2,e:"Non-specific (innate) immunity includes physical barriers (skin, mucous membranes), chemical barriers (lysozyme, stomach acid), and cellular components (neutrophils, NK cells, macrophages) that respond immediately to any pathogen."},
+  {q:"B lymphocytes are primarily responsible for which immune function?",o:["Cell-mediated immunity against intracellular pathogens","Production of antibodies (humoral immunity)","Direct destruction of infected cells","Production of cytokines for inflammation"],a:1,e:"B lymphocytes differentiate into plasma cells that produce antigen-specific antibodies. This humoral immunity is most effective against extracellular pathogens and provides the basis for vaccination."},
+  {q:"A patient taking prednisone 60mg daily for rheumatoid arthritis develops an unusual fungal pneumonia. This illustrates:",o:["Primary immunodeficiency","Normal immune function","Acquired immunosuppression increasing susceptibility","Overactive non-specific immunity"],a:2,e:"Corticosteroids suppress cell-mediated immunity (T-cell function), allowing opportunistic organisms that normally don't cause disease in immunocompetent individuals to cause severe infections."},
+  {q:"Fever benefits the host during infection by:",o:["Directly killing all pathogens","Slowing enzymatic activity of many pathogens and enhancing immune function","Eliminating portals of entry","Reducing the infectious agent load by desiccation"],a:1,e:"Elevated body temperature impairs replication of many pathogens (optimal for most bacteria is 37°C) and enhances neutrophil and macrophage function. However, extreme fever can be harmful to the host."},
+  // STAGES OF DISEASE (Q15-17)
+  {q:"A patient was exposed to influenza 2 days ago and has no symptoms yet. Which disease stage is this patient in?",o:["Prodromal","Illness","Convalescence","Incubation"],a:3,e:"The incubation period begins when the pathogen enters the body and ends when symptoms first appear. The patient is harboring and replicating the virus but has not yet manifested symptoms. Influenza incubation is 1–4 days."},
+  {q:"During which stage of infectious disease is the patient typically MOST contagious for most respiratory illnesses?",o:["Incubation","Prodromal","Illness","Convalescence"],a:1,e:"The prodromal stage (early nonspecific symptoms) is often the period of highest contagiousness for respiratory illnesses. Patients feel only mildly unwell and continue normal activities while actively shedding pathogens."},
+  {q:"A patient recovering from mononucleosis reports still feeling fatigued 3 weeks after fever resolved. This represents:",o:["Incubation stage","Second illness episode","Convalescence stage","Prodromal stage"],a:2,e:"Convalescence is the recovery phase where symptoms gradually resolve and energy returns. Mononucleosis is notable for a prolonged convalescence that can last weeks to months."},
+  // SIRS/SEPSIS (Q18-24)
+  {q:"Which of the following combinations meets the criteria for SIRS?",o:["Temp 37.5°C, HR 78, RR 16","Temp 39.2°C, HR 102, RR 14","Temp 38.5°C, HR 94, RR 22","Temp 37°C, HR 88, RR 19"],a:2,e:"SIRS requires 2 of 4: temp >38.3°C or <36°C, HR >90, RR >20, or WBC abnormality. Temp 38.5°C (>38.3) + RR 22 (>20) = 2 criteria met. SIRS can be from any cause, not just infection."},
+  {q:"A patient with suspected urinary tract infection has a BP of 88/54, RR of 26, and GCS of 12. The qSOFA score is:",o:["1","2","3","0"],a:2,e:"qSOFA scores 1 point each for: SBP ≤100 (88 — YES), RR ≥22 (26 — YES), GCS ≤13 (12 — YES). Score = 3. A score ≥2 indicates high suspicion for sepsis and risk of poor outcome."},
+  {q:"In sepsis, organ dysfunction results primarily from:",o:["Direct bacterial invasion of all organs","Antibiotic toxicity","Dysregulated host inflammatory response causing hypoperfusion","Viral co-infection"],a:2,e:"Sepsis-3 definition: life-threatening organ dysfunction caused by a DYSREGULATED host response to infection. The inflammatory cascade (not just bacteria) drives coagulopathy, vasodilation, capillary leak, and end-organ ischemia."},
+  {q:"What distinguishes septic shock from severe sepsis?",o:["Presence of fever","Positive blood cultures","Refractory hypotension despite adequate fluid resuscitation","WBC >15,000"],a:2,e:"Septic shock = sepsis + persistent hypotension (MAP <65) despite 30 mL/kg crystalloid resuscitation, requiring vasopressors. This reflects cardiovascular failure from the inflammatory response."},
+  {q:"Initial fluid resuscitation for a 70 kg septic shock patient should include:",o:["500 mL bolus, then reassess","1 liter of 5% dextrose","2,100 mL of crystalloid (30 mL/kg)","4 units of packed red blood cells"],a:2,e:"Surviving Sepsis Campaign: 30 mL/kg IV crystalloid (LR preferred) for sepsis-induced hypoperfusion within 3 hours. For 70 kg: 70 × 30 = 2,100 mL. Reassess after each bolus using dynamic perfusion parameters."},
+  {q:"Which vasopressor is the FIRST-LINE agent for septic shock when fluids are insufficient?",o:["Epinephrine","Dopamine","Norepinephrine (levophed)","Vasopressin"],a:2,e:"Norepinephrine (norepinephrine) is the first-line vasopressor for septic shock — it increases SVR through alpha-1 adrenergic agonism with some inotropy (beta-1). Dopamine is second-line due to increased arrhythmia risk."},
+  {q:"A patient with sepsis has a lactate level of 5.2 mmol/L. This indicates:",o:["Normal cellular metabolism","Mild dehydration","Tissue hypoperfusion and anaerobic metabolism","Diabetic ketoacidosis"],a:2,e:"Lactate >2 mmol/L suggests inadequate tissue perfusion. When oxygen delivery fails, cells switch to anaerobic glycolysis, producing lactic acid. Lactate ≥4 mmol/L indicates severe hypoperfusion regardless of blood pressure."},
+  // HIV (Q25-33)
+  {q:"HIV specifically targets which immune cell?",o:["B lymphocytes","Neutrophils","CD4+ T-helper lymphocytes","Natural killer cells"],a:2,e:"HIV uses its gp120 glycoprotein to bind CD4 receptors (plus CCR5 or CXCR4 co-receptors) on T-helper lymphocytes. This selective destruction of CD4+ cells progressively devastates immune coordination."},
+  {q:"AIDS is defined by a CD4+ T-cell count below:",o:["500/mm³","350/mm³","200/mm³","100/mm³"],a:2,e:"AIDS is diagnosed when CD4+ count falls below 200/mm³ OR when an AIDS-defining illness occurs (PCP pneumonia, toxoplasmosis, CMV retinitis, etc.) regardless of CD4 count."},
+  {q:"What is the primary mechanism by which HIV replicates inside host cells?",o:["Binary fission","Uses integrase to insert DNA into host nucleus; reverse transcriptase converts RNA to DNA","Budding without cell entry","Plasmid transfer"],a:1,e:"HIV uses reverse transcriptase to convert its RNA genome to DNA (retroviruses work 'backwards'). Integrase then inserts the viral DNA into the host chromosome. The cell subsequently produces new viral particles."},
+  {q:"The 'window period' in HIV infection refers to:",o:["The time between transmission and first CD4 drop","The period where antibody tests may be negative despite active infection","The time required for AIDS to develop","The effectiveness window for antiretroviral therapy"],a:1,e:"The window period (3–12 weeks) is when HIV is present and transmissible but antibody tests return negative (immune system hasn't mounted a detectable antibody response yet). 4th-generation tests detect p24 antigen and reduce this window."},
+  {q:"An EMS provider sustains a needlestick from an HIV-positive patient. Post-exposure prophylaxis should be initiated within:",o:["8 hours","24 hours","2 hours (ideally)","72 hours is acceptable"],a:2,e:"PEP should be initiated as soon as possible — ideally within 2 hours for maximum efficacy. The 72-hour window is the absolute maximum; efficacy decreases with delay. PEP continues for 28 days."},
+  {q:"Which opportunistic infection is MOST associated with AIDS when CD4 <200/mm³?",o:["Community-acquired pneumonia","Pneumocystis jirovecii pneumonia (PCP)","Influenza A","MRSA bacteremia"],a:1,e:"PCP (Pneumocystis jirovecii pneumonia) is the most common AIDS-defining illness in the US. It occurs when CD4 falls <200/mm³. Classic presentation: progressive dyspnea on exertion, dry cough, fever, hypoxia worse than auscultation suggests."},
+  {q:"'Undetectable = Untransmittable' (U=U) means:",o:["HIV patients cannot transmit if they practice safe sex","HIV patients on effective ART with undetectable viral load cannot sexually transmit HIV","All HIV patients are immune from re-infection","HIV is eliminated from the body with treatment"],a:1,e:"Scientific consensus: people with HIV on effective ART who maintain an undetectable viral load (<200 copies/mL) cannot sexually transmit HIV to partners. ART does not cure HIV but suppresses it to non-transmissible levels."},
+  {q:"Acute retroviral syndrome (primary HIV infection) typically presents as:",o:["Severe sepsis requiring hospitalization","Mononucleosis-like illness 2–4 weeks after infection","Jaundice and hepatomegaly","Pulmonary infiltrates on chest X-ray"],a:1,e:"Acute HIV infection (2–4 weeks post-exposure) produces a mononucleosis-like syndrome: fever, lymphadenopathy, pharyngitis, rash, myalgia. Most patients seek care for 'flu-like illness.' Often undiagnosed because providers don't consider HIV."},
+  {q:"Which antiretroviral class prevents HIV DNA from integrating into the host chromosome?",o:["NRTI — Nucleoside Reverse Transcriptase Inhibitors","PI — Protease Inhibitors","Integrase Inhibitors (INSTIs)","Entry Inhibitors"],a:2,e:"Integrase strand transfer inhibitors (INSTIs) like dolutegravir, raltegravir, and bictegravir block the viral integrase enzyme, preventing insertion of HIV DNA into the host cell's genome — a critical step in viral replication."},
+  // HEPATITIS (Q34-40)
+  {q:"Which hepatitis virus is primarily transmitted by the fecal-oral route?",o:["Hepatitis B","Hepatitis C","Hepatitis A","Hepatitis D"],a:2,e:"Hepatitis A (HAV) is transmitted via contaminated food and water (fecal-oral route). It causes acute self-limiting hepatitis and does not cause chronic infection. Vaccine-preventable."},
+  {q:"Which type of hepatitis has NO available vaccine?",o:["Hepatitis A","Hepatitis B","Hepatitis C","Both A and C"],a:2,e:"There is no vaccine for Hepatitis C (HCV). However, HCV is now curable with direct-acting antivirals (>95% cure rate). The lack of vaccine makes primary prevention (avoiding bloodborne exposure) critical."},
+  {q:"Hepatitis B virus can survive on surfaces at room temperature for up to:",o:["30 minutes","2 hours","24 hours","7 days"],a:3,e:"HBV is highly durable — it can survive on environmental surfaces for up to 7 days at room temperature. This makes thorough equipment decontamination critical after transporting HBV-positive patients."},
+  {q:"A healthcare worker unvaccinated for Hepatitis B sustains a needlestick from an HBsAg-positive patient. The FIRST intervention should be:",o:["Administer ribavirin immediately","Begin HBV vaccine series only","Administer HBIG within 24 hours AND begin vaccine series","Wait for HBsAg test results before acting"],a:2,e:"For unvaccinated HCW exposed to HBV: HBIG (Hepatitis B Immune Globulin) provides immediate passive immunity AND the vaccine series is initiated simultaneously (different injection sites). HBIG should ideally be given within 12 hours, maximum 24 hours."},
+  {q:"Chronic hepatitis C infection most commonly leads to:",o:["Acute liver failure within one year","Kidney failure","Cirrhosis and hepatocellular carcinoma over decades","Complete recovery in 80% of cases"],a:2,e:"75–85% of HCV infections become chronic. Over 20–30 years, chronic HCV causes progressive liver fibrosis → cirrhosis → hepatocellular carcinoma. HCV is the leading indication for liver transplantation in the US."},
+  {q:"OSHA requires EMS providers to be vaccinated against which hepatitis virus?",o:["Hepatitis A","Hepatitis C","Hepatitis B","Both A and B"],a:2,e:"OSHA's Bloodborne Pathogens Standard (29 CFR 1910.1030) requires employers to offer Hepatitis B vaccination to all employees with occupational exposure risk at no cost to the employee."},
+  {q:"Which finding is most specific for acute hepatitis infection?",o:["Abdominal pain in the right lower quadrant","Jaundice with dark (cola-colored) urine and pale stools","Fever alone","Elevated white blood cell count"],a:1,e:"Jaundice (hyperbilirubinemia) with dark urine (urobilinogen/bilirubin) and acholic (pale/clay-colored) stools occurs when hepatocyte dysfunction causes bile flow obstruction — classic for hepatitis. RUQ pain (not RLQ) is typical."},
+  // COVID-19 (Q41-45)
+  {q:"SARS-CoV-2 infects cells primarily by binding to:",o:["CD4 receptors","ACE2 receptors","TLR-4 receptors","EGFR receptors"],a:1,e:"SARS-CoV-2 spike protein binds ACE2 (angiotensin-converting enzyme 2) receptors, which are highly expressed in the lungs (type II pneumocytes), heart, kidneys, and GI tract — explaining the multi-organ involvement of severe COVID-19."},
+  {q:"Severe COVID-19 lung injury is primarily driven by:",o:["Direct viral destruction of all lung tissue","Cytokine storm — uncontrolled systemic inflammatory response","Bacterial superinfection in all cases","Hemorrhage from coagulopathy"],a:1,e:"Cytokine storm (hypercytokinemia) — an excessive, dysregulated immune response — is the primary driver of ARDS in severe COVID. This is why dexamethasone (anti-inflammatory) reduces mortality. The virus 'sets off' the immune system, which then damages the lungs."},
+  {q:"Which intervention has demonstrated reduced mortality in COVID-19 patients on supplemental oxygen?",o:["Hydroxychloroquine","Ivermectin","Dexamethasone 6mg daily × 10 days","High-dose vitamin D"],a:2,e:"The RECOVERY trial (Oxford, 2020) demonstrated that dexamethasone 6mg daily for 10 days reduced 28-day mortality by 35% in mechanically ventilated COVID patients and 20% in those requiring supplemental O₂. No benefit was seen in those not requiring O₂."},
+  {q:"During intubation of a suspected COVID patient, EMS should use at minimum:",o:["Surgical mask and gloves","N95 respirator, gown, face shield, gloves","Surgical mask, face shield, gloves","Powered air-purifying respirator (PAPR) only"],a:1,e:"Intubation is an aerosol-generating procedure (AGP). AGPs require enhanced PPE: N95 respirator (or PAPR), gown, face shield (eye protection), and gloves. Surgical masks are insufficient for AGPs."},
+  {q:"'Long COVID' refers to:",o:["COVID-19 lasting more than 10 days","Reinfection occurring more than once","Persistent symptoms (fatigue, brain fog, dyspnea) beyond 4 weeks after acute infection","COVID-19 in patients over age 65"],a:2,e:"Long COVID (post-acute sequelae of SARS-CoV-2 infection/PASC) involves persistent symptoms beyond 4 weeks — most commonly fatigue, cognitive impairment ('brain fog'), dyspnea, and post-exertional malaise. Affects an estimated 10–30% of those infected."},
+  // TUBERCULOSIS (Q46-51)
+  {q:"Tuberculosis is transmitted by:",o:["Contact with open sores","Droplet nuclei ≤5 micrometers that remain suspended in air","Fecal-oral contamination","Vector (mosquito bite)"],a:1,e:"M. tuberculosis spreads via airborne droplet nuclei (<5 μm) — tiny particles that remain suspended in air for hours. This requires airborne precautions (N95), not just droplet (surgical mask) precautions."},
+  {q:"Latent TB infection (LTBI) is characterized by:",o:["Active multiplication of M. tuberculosis in the lungs","Positive TST/IGRA with no symptoms and no active disease","Positive sputum culture for AFB","Cavitary lesions on chest X-ray"],a:1,e:"LTBI: immune system has contained M. tuberculosis in granulomas (Ghon complexes). Patient has positive immune test (TST or IGRA), normal CXR, no symptoms, non-infectious. 90% never develop active disease."},
+  {q:"Which patient with LTBI is at HIGHEST risk for reactivation to active TB?",o:["A 30-year-old marathon runner with a positive TST","A patient with HIV and CD4 count 85/mm³","A patient who completed INH prophylaxis 2 years ago","A non-smoker with well-controlled diabetes"],a:1,e:"HIV co-infection with low CD4+ count dramatically increases reactivation risk — up to 10% per year vs. 10% lifetime risk in immunocompetent individuals. LTBI treatment with INH is strongly recommended in all HIV+ patients."},
+  {q:"The Mantoux tuberculin skin test (TST) is considered POSITIVE at ≥5mm induration in:",o:["All patients","Only patients with active TB","Immunocompromised patients, recent TB contacts, and those with fibrotic chest X-ray changes","Patients over 65 with no risk factors"],a:2,e:"TST interpretation varies by risk. ≥5mm is positive in: HIV+, immunosuppressed, close contacts of active TB, CXR fibrotic changes. ≥10mm for high-risk occupations/countries. ≥15mm for low-risk individuals. Lower thresholds reflect higher pre-test probability."},
+  {q:"The standard first-line drug regimen for active TB is known as:",o:["AMPS (Ampicillin, Metronidazole, Penicillin, Streptomycin)","RIPE (Rifampin, Isoniazid, Pyrazinamide, Ethambutol)","CAVE (Clarithromycin, Amoxicillin, Vancomycin, Ethambutol)","INH monotherapy for 9 months"],a:1,e:"RIPE therapy: Rifampin + Isoniazid + Pyrazinamide + Ethambutol × 2 months (intensive phase), then Rifampin + Isoniazid × 4 months (continuation phase). Total 6 months. Directly Observed Therapy (DOT) required to prevent resistance."},
+  {q:"Why must EMS providers wear an N95 (not a surgical mask) for suspected active TB?",o:["N95 is more comfortable in enclosed spaces","Surgical masks do not filter droplet nuclei ≤5 μm effectively","N95 prevents all transmission routes","Surgical masks are only for COVID-19"],a:1,e:"Surgical masks filter large droplets (>5 μm) but do NOT adequately filter airborne droplet nuclei (≤5 μm) that carry M. tuberculosis. N95 respirators are NIOSH-approved to filter ≥95% of airborne particles ≥0.3 μm."},
+  // MENINGITIS (Q52-56)
+  {q:"The classic triad of bacterial meningitis is:",o:["Fever, cough, chest pain","Fever, nuchal rigidity, altered mental status","Headache, vomiting, photophobia","Rash, fever, lymphadenopathy"],a:1,e:"Classic triad: fever + nuchal rigidity (neck stiffness from meningeal irritation) + altered mental status. Only 44% of patients have all three, but presence of any two warrants urgent evaluation. Add severe headache for a 'tetrad.'"},
+  {q:"A patient presents with fever, severe headache, neck stiffness, and petechial/purpuric rash. This presentation is MOST concerning for:",o:["Rocky Mountain Spotted Fever","Viral meningitis","Meningococcal meningitis (N. meningitidis)","Subarachnoid hemorrhage"],a:2,e:"Petechial/purpuric rash + meningitis = meningococcemia until proven otherwise. Non-blanching purpura indicates bacterial invasion of blood vessels with hemorrhage — a medical emergency with 15–25% mortality. Treat immediately."},
+  {q:"Kernig's sign, a clinical indicator of meningeal irritation, is assessed by:",o:["Flexing the neck and noting involuntary hip flexion","Extending the knee in a supine patient with the hip flexed to 90°","Pressing the mastoid for tenderness","Eliciting the gag reflex"],a:1,e:"Kernig's sign: with patient supine and hip flexed 90°, extension of the knee causes pain/resistance — indicating meningeal irritation. Brudzinski's sign: passive neck flexion causes involuntary hip/knee flexion."},
+  {q:"Dexamethasone is administered in bacterial meningitis primarily to:",o:["Prevent hydrocephalus","Reduce fever","Decrease neurological complications including hearing loss","Enhance antibiotic penetration of the CSF"],a:2,e:"Dexamethasone given BEFORE or WITH the first antibiotic dose reduces cytokine-mediated inflammatory sequelae — particularly hearing loss from pneumococcal meningitis. It must be given before antibiotics to suppress the inflammatory burst from bacterial lysis."},
+  {q:"An EMS provider caring for a patient with confirmed meningococcal meningitis should:",o:["No additional precautions beyond standard","Droplet precautions for 24 hours after antibiotic initiation","Airborne precautions indefinitely","Contact precautions only"],a:1,e:"Droplet precautions are required for N. meningitidis until 24 hours after initiation of effective antibiotic therapy. The provider may also need antibiotic prophylaxis (rifampin or ciprofloxacin) if there was close respiratory exposure."},
+  // ENDOCARDITIS & PNEUMONIA (Q57-61)
+  {q:"Which organism is the MOST COMMON cause of infective endocarditis in IV drug users?",o:["Streptococcus viridans","Enterococcus faecalis","Staphylococcus aureus","Pseudomonas aeruginosa"],a:2,e:"S. aureus (including MRSA) is the most common causative organism in IVDU-associated endocarditis. IVDU introduces skin flora directly into the bloodstream. The tricuspid valve (right-sided) is most commonly affected in IVDU."},
+  {q:"A patient with IVDU presents with fever, new murmur, and small red lesions on fingertips that are tender when pressed. These findings are called:",o:["Petechiae","Janeway lesions","Osler nodes","Koplik spots"],a:2,e:"Osler nodes: tender nodules on finger/toe pads — immune complex deposits from bacteremia. Janeway lesions are non-tender hemorrhagic macules on palms/soles. Both are peripheral manifestations of endocarditis. Koplik spots are for measles."},
+  {q:"Which organism is the most common cause of community-acquired pneumonia (CAP)?",o:["Staphylococcus aureus","Klebsiella pneumoniae","Streptococcus pneumoniae","Haemophilus influenzae"],a:2,e:"S. pneumoniae (pneumococcus) causes 30–35% of CAP requiring hospitalization. Classic presentation: sudden fever, productive cough with 'rusty' sputum, pleuritic chest pain, lobar consolidation on CXR. Vaccine-preventable."},
+  {q:"Which type of pneumonia is associated with contaminated water cooling towers and air conditioning systems?",o:["Klebsiella pneumonia","Pneumocystis pneumonia (PCP)","Legionella pneumophila (Legionnaires' disease)","Staphylococcal pneumonia"],a:2,e:"Legionella pneumophila thrives in warm water (8–45°C) and aerosolizes from cooling towers, decorative fountains, and AC systems. It is NOT person-to-person transmissible. Risk factors: age >50, smoking, immunosuppression."},
+  {q:"CPAP is most appropriately indicated in pneumonia patients who have:",o:["Mild dyspnea with SpO₂ 96%","Altered mental status and inability to protect airway","Hypoxia with adequate respiratory effort and intact airway reflexes","Productive cough without dyspnea"],a:2,e:"CPAP improves oxygenation through PEEP-mediated alveolar recruitment. It requires patient cooperation and intact airway reflexes (cannot use in obtunded/unconscious patients). SpO₂ <92–94% despite high-flow O₂ with appropriate effort is a good indication."},
+  // TETANUS & RABIES (Q62-67)
+  {q:"Tetanospasmin causes the characteristic spasms of tetanus by:",o:["Directly stimulating acetylcholine release","Blocking inhibitory neurotransmitters (GABA and glycine) in the spinal cord","Causing widespread myelin destruction","Stimulating alpha-motor neurons peripherally"],a:1,e:"Tetanospasmin cleaves SNARE proteins in inhibitory interneurons, blocking release of GABA and glycine — the 'brake' neurotransmitters. Without inhibition, motor neurons fire continuously → tonic/clonic muscle spasms."},
+  {q:"Which wound type carries the HIGHEST risk for tetanus infection?",o:["Clean surgical incision","Superficial abrasion","Deep puncture with soil contamination","Partial thickness burn"],a:2,e:"C. tetani is an anaerobic organism — it thrives in deep, oxygen-poor wounds. Deep punctures with soil contamination (spores are soil-borne), crush injuries, and infected wounds carry the highest tetanus risk."},
+  {q:"Trismus is the term for which tetanus manifestation?",o:["Arched back spasm (opisthotonus)","Lockjaw — masseter/jaw muscle spasm causing inability to open mouth","Spasm of facial muscles producing sardonic grin","Laryngospasm causing respiratory arrest"],a:1,e:"Trismus (lockjaw) is the hallmark early sign of tetanus — spasm of the masseter muscles prevents mouth opening. Risus sardonicus is the sardonic facial grin (facial muscle spasm). Opisthotonus is the arched-back posture."},
+  {q:"Rabies virus travels from the bite wound to the brain via:",o:["Hematogenous spread (through the bloodstream)","Lymphatic channels","Retrograde transport along peripheral nerves","Direct CSF spread"],a:2,e:"Rabies exhibits retrograde axonal transport — the virus travels backward along peripheral motor and sensory nerves at 12–24 mm/day toward the spinal cord and brain. This explains why distal extremity bites have a longer incubation period."},
+  {q:"Which animal exposure in the United States carries the HIGHEST risk of rabies transmission?",o:["Domestic dog","Squirrel","Bat","Raccoon"],a:2,e:"Bats account for the majority of human rabies deaths in the United States. Bat bites are often painless or unnoticed (especially during sleep). Any bat exposure — even if a bite was not felt — warrants PEP evaluation."},
+  {q:"If a known HIV-positive patient is bitten by a potentially rabid dog, rabies PEP should be:",o:["Withheld due to immunosuppression making the vaccine ineffective","Given with higher doses due to immunosuppression","Given according to standard protocol; no modification needed","Given with 6 vaccine doses instead of 4"],a:2,e:"Rabies PEP (RIG + 4-dose vaccine series) should be administered to ALL exposed individuals regardless of immune status. Immunocompromised patients may need rabies antibody titer testing to confirm response, but the protocol is not changed."},
+  // HANTAVIRUS & MOSQUITO-BORNE (Q68-72)
+  {q:"Hantavirus Pulmonary Syndrome (HPS) is primarily transmitted by:",o:["Mosquito bite","Hantavirus-infected rodent bites","Inhalation of aerosolized rodent excreta (urine, feces, saliva)","Direct contact with infected deer mice"],a:2,e:"HPS (caused by Sin Nombre virus) is transmitted by inhaling aerosolized rodent excreta — particularly from deer mice. Sweeping/vacuuming rodent droppings creates infectious aerosols. Wet mopping or disinfectant spray first is required."},
+  {q:"Dengue hemorrhagic fever is MOST LIKELY in patients experiencing their:",o:["First dengue infection","Second dengue infection with a different serotype","Third dengue infection","Any dengue infection in elderly patients"],a:1,e:"Antibody-dependent enhancement (ADE): antibodies from a prior dengue infection (different serotype) bind the new serotype virus but don't neutralize it — instead, they facilitate entry into more monocytes/macrophages, causing more severe disease including hemorrhagic fever and shock."},
+  {q:"Which mosquito species primarily transmits dengue, Zika, and chikungunya viruses?",o:["Anopheles gambiae","Culex pipiens","Aedes aegypti","Anopheles stephensi"],a:2,e:"Aedes aegypti mosquito is the primary vector for dengue, Zika, chikungunya, and yellow fever. It is a daytime biter that breeds in small containers of standing water. Anopheles transmits malaria; Culex transmits West Nile Virus."},
+  {q:"A returning traveler from sub-Saharan Africa presents with fever, chills, and rigors recurring every 48-72 hours. The most likely diagnosis is:",o:["Dengue fever","West Nile virus","Malaria","Hantavirus"],a:2,e:"Classic malaria presentation: periodic fever, chills, rigors (shaking chills), headache, and myalgia — caused by synchronous rupture of infected RBCs releasing merozoites. P. vivax/ovale: 48-hr cycles (tertian); P. malariae: 72-hr (quartan)."},
+  {q:"West Nile Virus is primarily transmitted to humans by:",o:["Direct bird-to-human contact","Culex mosquito bites","Contact with infected horses","Aedes mosquito bites"],a:1,e:"West Nile Virus (WNV) is a Flavivirus maintained in a bird-mosquito-bird cycle. Culex mosquitoes become infected feeding on birds and transmit to humans and horses (dead-end hosts). Most human infections are asymptomatic; <1% develop neuroinvasive disease."},
+  // ANTIBIOTIC RESISTANCE (Q73-77)
+  {q:"MRSA (Methicillin-Resistant Staphylococcus aureus) is resistant to most penicillins and cephalosporins because:",o:["It produces penicillinase that breaks down beta-lactam rings","It has an altered penicillin-binding protein (PBP2a) encoded by the mecA gene","It is able to efflux beta-lactam antibiotics","It lacks a cell wall"],a:1,e:"The mecA gene encodes PBP2a — a modified penicillin-binding protein with very low affinity for beta-lactam antibiotics. Beta-lactams cannot bind PBP2a, so cell wall synthesis continues normally. This confers resistance to nearly all beta-lactams."},
+  {q:"Clostridium difficile (C. diff) colitis most commonly follows:",o:["A viral respiratory infection","Prolonged steroid use","Recent antibiotic therapy that disrupts normal gut flora","Foodborne contamination"],a:2,e:"Antibiotics disrupt the normal gut microbiome (especially anti-anaerobes), allowing C. diff spores (present in the environment) to germinate and overgrow. C. diff produces toxins A and B that destroy colonocytes → pseudomembranous colitis."},
+  {q:"Why does alcohol-based hand sanitizer FAIL to prevent C. diff transmission?",o:["C. diff is a virus, not a bacterium","C. diff forms spores that are resistant to alcohol","Alcohol is not approved for healthcare use","C. diff is only transmitted by direct contact with blood"],a:1,e:"C. difficile forms highly resistant spores that are NOT killed by alcohol. Soap and water physically removes spores from hands. Healthcare facilities with C. diff outbreaks must mandate soap-and-water handwashing, not just hand sanitizer."},
+  {q:"CRE (Carbapenem-Resistant Enterobacteriaceae) are considered particularly dangerous because:",o:["They cause a specific hemorrhagic fever","Carbapenems are last-resort antibiotics; CRE often leave few treatment options","They are transmitted by airborne route","They primarily affect immunocompetent patients"],a:1,e:"Carbapenems (imipenem, meropenem) are broad-spectrum 'last resort' antibiotics used when other drugs fail. CRE produce carbapenemases (enzymes) that inactivate carbapenems, leaving only toxic or minimally effective alternatives (colistin, ceftazidime-avibactam)."},
+  {q:"Which practice most contributes to the development of antibiotic resistance?",o:["Using antibiotics for appropriate bacterial infections","Completing a full course of prescribed antibiotics","Prescribing antibiotics for viral infections (URI, flu)","Using narrow-spectrum antibiotics when possible"],a:2,e:"Antibiotic misuse for viral infections (which are unaffected by antibiotics) provides selection pressure for resistant organisms while killing susceptible colonizing bacteria. This is the leading driver of antimicrobial resistance globally."},
+  // CHILDHOOD DISEASES (Q78-84)
+  {q:"Koplik spots are pathognomonic for which disease?",o:["Rubella","Rubeola (measles)","Roseola","Scarlet fever"],a:1,e:"Koplik spots — small white lesions on a bright red base appearing on the buccal mucosa (opposite molars) — are pathognomonic for measles. They appear 1–2 days BEFORE the characteristic maculopapular rash and are diagnostic."},
+  {q:"Which childhood disease is MOST concerning if contracted by a pregnant woman in the first trimester?",o:["Rubeola (measles)","Mumps","Rubella","Varicella (chickenpox)"],a:2,e:"Congenital Rubella Syndrome (CRS) is devastating: rubella in the first trimester causes cataracts, congenital heart defects, sensorineural deafness, microcephaly, and intellectual disability. The MMR vaccine prevents rubella and has virtually eliminated CRS in vaccinated populations."},
+  {q:"An infant presents with paroxysmal cough spells followed by a 'whoop' and post-tussive vomiting. The most likely diagnosis is:",o:["Croup","Bronchiolitis (RSV)","Pertussis (whooping cough)","Epiglottitis"],a:2,e:"Classic pertussis: paroxysmal stage with repetitive violent coughing ending in an inspiratory whoop (from forced air through narrowed airway), often followed by vomiting. Infants may have apnea instead of the whoop."},
+  {q:"Pertussis is MOST dangerous in which age group?",o:["Adolescents","Adults >65","Infants under 6 months","School-age children"],a:2,e:"Infants <6 months have incomplete vaccination series and immature airways. They may not produce the classic whoop — instead having apnea, cyanosis, and respiratory failure. Pertussis is a leading cause of infant mortality from vaccine-preventable disease."},
+  {q:"Varicella (chickenpox) can reactivate decades later as:",o:["Rubeola","Shingles (herpes zoster)","Impetigo","Fifth disease"],a:1,e:"VZV establishes lifelong latency in dorsal root ganglia after primary chickenpox infection. Reactivation — triggered by immune senescence, immunosuppression, or stress — causes herpes zoster (shingles): dermatomal vesicular rash with severe neuropathic pain."},
+  {q:"Which precaution level is required for a patient with suspected measles (rubeola)?",o:["Standard precautions only","Contact precautions","Droplet precautions","Airborne precautions"],a:3,e:"Measles requires airborne precautions — N95 respirator, negative-pressure room when possible. Measles is transmitted by airborne droplet nuclei that can remain infectious in air for up to 2 hours after the infectious person has left the room."},
+  {q:"A school-age child presents with low-grade fever and bilateral parotid gland swelling 3 days after onset. This is most consistent with:",o:["Ludwig's angina","Mumps","Dental abscess","Lymphoma"],a:1,e:"Mumps (Paramyxovirus) classically causes bilateral (or unilateral) parotid gland swelling (parotitis), fever, and malaise. Complications include orchitis (15–30% of post-pubertal males), aseptic meningitis, and encephalitis."},
+  // INFLUENZA/MONO (Q85-87)
+  {q:"The influenza virus requires annual vaccination because:",o:["Immunity wanes within weeks","The virus undergoes antigenic drift — gradual mutations in surface proteins","Influenza vaccines are weakened each year","The virus develops antibiotic resistance"],a:1,e:"Antigenic drift: gradual accumulation of point mutations in hemagglutinin (H) and neuraminidase (N) surface proteins causes existing antibodies to lose effectiveness. Annual reformulation of the vaccine is required to match circulating strains."},
+  {q:"Infectious mononucleosis ('mono') is caused by:",o:["Cytomegalovirus","Epstein-Barr Virus (EBV)","Human Herpesvirus 6 (HHV-6)","Adenovirus"],a:1,e:"EBV (Human Herpesvirus 4) infects B lymphocytes via CD21 receptors. The classic triad: fever + pharyngitis (exudative) + lymphadenopathy. Atypical lymphocytes (reactive T cells) on peripheral smear. Monospot test (heterophile antibodies) is confirmatory."},
+  {q:"Why should patients with infectious mononucleosis avoid contact sports for 3–4 weeks?",o:["High risk of bacterial superinfection","Risk of splenic rupture (splenomegaly)","Airborne transmission risk in crowds","Myocarditis risk from exertion"],a:1,e:"EBV causes splenomegaly in ~50% of mono patients. The enlarged, friable spleen is at risk of traumatic rupture — a life-threatening emergency. Contact sports are contraindicated until splenomegaly resolves (confirmed clinically or by ultrasound)."},
+  // STIs (Q88-93)
+  {q:"The primary (chancre) stage of syphilis is characterized by:",o:["Disseminated rash on palms and soles","Painless ulcer (chancre) at the infection site","Gummatous lesions of bone and skin","Cardiovascular and neurological complications"],a:1,e:"Primary syphilis: painless, indurated ulcer (chancre) at the entry site (penis, vagina, cervix, rectum, lips) with regional lymphadenopathy. Heals spontaneously in 3–6 weeks, giving a false sense of recovery before secondary stage."},
+  {q:"A rash involving the PALMS AND SOLES is most classically associated with:",o:["Varicella (chickenpox)","Rocky Mountain Spotted Fever and secondary syphilis","Rubeola (measles)","Shingles"],a:1,e:"The classic differentials for palms-and-soles rash: Rocky Mountain Spotted Fever (petechial/purpuric) and Secondary Syphilis (macular/maculopapular, copper-colored, non-pruritic). This distribution is unusual and should always prompt serologic testing."},
+  {q:"Gonorrhea requires dual antibiotic therapy because:",o:["Gonorrhea is always co-infected with chlamydia","Single-drug therapy is too toxic","Increasing resistance to azithromycin makes dual coverage necessary","CDC requires culture before treatment"],a:2,e:"N. gonorrhoeae has developed resistance to fluoroquinolones, older cephalosporins, and now azithromycin. Dual therapy (ceftriaxone + azithromycin, or now ceftriaxone alone in some guidelines) compensates for resistance patterns and co-treats frequent chlamydia co-infection."},
+  {q:"Neonatal herpes simplex infection is most commonly acquired:",o:["During the third trimester via placental crossing","During delivery through an infected birth canal","From breast milk after birth","From infected household members postpartum"],a:1,e:"~85% of neonatal HSV is acquired during birth (intrapartum) via direct contact with infectious HSV lesions in the birth canal. Primary maternal infection near delivery carries the highest risk (30–50%) because antibodies haven't been transferred to the neonate."},
+  {q:"Which STI has demonstrated NO penicillin resistance in over 70 years?",o:["Neisseria gonorrhoeae","Treponema pallidum (syphilis)","Chlamydia trachomatis","Herpes simplex virus"],a:1,e:"T. pallidum has never developed resistance to penicillin — benzathine penicillin G remains the definitive treatment for all stages of syphilis. This is remarkable given widespread resistance development in other organisms."},
+  {q:"Congenital syphilis is BEST prevented by:",o:["Partner notification","Neonatal treatment at birth","Routine prenatal syphilis screening and treatment","Maternal vaccination"],a:2,e:"Universal prenatal syphilis screening (first prenatal visit + third trimester + delivery in high-prevalence areas) with immediate treatment of positive mothers is the most effective prevention strategy. There is no syphilis vaccine."},
+  // LICE/SCABIES & EMERGING (Q94-100)
+  {q:"Pediculosis capitis (head lice) is most effectively treated with:",o:["Oral antibiotics","Topical permethrin or malathion; remove nits manually","Antifungal shampoo","Oral ivermectin only"],a:1,e:"First-line: topical permethrin 1% (OTC) or malathion 0.5% (prescription) with nit removal using a fine-tooth comb. Retreat in 7–10 days. Oral ivermectin reserved for resistant cases. No antibiotics indicated — lice are arthropods, not bacteria."},
+  {q:"Scabies is caused by:",o:["Sarcoptes scabiei mite burrowing into the epidermis","A viral skin infection","A fungal dermatophyte","A bacterial skin infection from Strep"],a:0,e:"Sarcoptes scabiei is a microscopic mite that burrows into the stratum corneum, laying eggs. The host's hypersensitivity reaction (not the mite itself) causes the intense pruritus — especially at night. Classic locations: finger webs, wrists, genitalia, axillae."},
+  {q:"The characteristic rash of mpox (monkeypox) differs from chickenpox in that mpox lesions:",o:["Never appear on the face","Are smaller and lighter colored","Are all in the same stage of development simultaneously and are deeper/umbilicated","Appear only on the trunk"],a:2,e:"Mpox lesions are characteristically deep-seated, well-circumscribed, and umbilicated. Critically, ALL lesions progress together through the same stage simultaneously — unlike varicella where lesions appear in 'crops' at different stages. Mpox also has prominent lymphadenopathy."},
+  {q:"Tecovirimat (TPOXX) is used for treatment of:",o:["HIV infection","Hepatitis B","Mpox and other orthopoxvirus infections","Severe influenza"],a:2,e:"Tecovirimat is an antiviral specifically active against orthopoxviruses. It inhibits VP37, a protein required for enveloped virion formation. Stockpiled by the US government for smallpox bioterrorism response; expanded access used for mpox treatment."},
+  {q:"Which of the following diseases was declared eradicated globally by the WHO in 1980?",o:["Polio","Smallpox","Measles","Typhoid fever"],a:1,e:"Smallpox (variola virus) was declared globally eradicated by the WHO in 1980 — the only human disease ever eradicated. This was achieved through global vaccination campaigns. Remaining live virus stocks exist only at CDC (Atlanta) and VECTOR (Russia)."},
+  {q:"When an EMS provider notices an unusual cluster of patients with similar symptoms from the same geographic area, the appropriate action is:",o:["Transport all patients to different hospitals to avoid overwhelming one facility","Complete standard transport and document in PCR only","Report to medical director, agency DICO, and local/state public health authority","Wait for CDC confirmation before taking action"],a:2,e:"Unusual disease clusters may represent an emerging outbreak, bioterrorism event, or novel pathogen introduction. EMS providers are 'sentinel' healthcare workers. Immediate reporting to medical director + DICO + public health authority triggers outbreak investigation protocols."},
+  {q:"The Designated Infection Control Officer (DICO) in an EMS agency is primarily responsible for:",o:["Treating infected EMS providers","Managing exposure incidents, coordinating PEP, and ensuring OSHA compliance","Performing contact tracing for all communicable diseases","Diagnosing specific infections in providers"],a:1,e:"The DICO manages: post-exposure protocol initiation, coordination of PEP access, medical evaluation referrals, Ryan White Act compliance, OSHA bloodborne pathogen program compliance, and provider follow-up after significant exposures."}
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let studentName = '', studentId = '';
+let answers = new Array(100).fill(null); // null=skipped, index of chosen option
+let currentQ = 0;
+let reviewFilter = 'all';
+
+// ============================================================
+// INIT
+// ============================================================
+function startModule() {
+  const nm = document.getElementById('s-name').value.trim();
+  const id = document.getElementById('s-id').value.trim();
+  if (!nm || !id) { alert('Please enter your name and student ID.'); return; }
+  studentName = nm; studentId = id;
+  document.getElementById('header-name').textContent = nm;
+  document.getElementById('assess-name').textContent = nm;
+  buildDiseaseLibrary();
+  buildMedsList();
+  showScreen('content');
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'assessment') { currentQ = 0; renderQuestion(); }
+  if (id === 'results') renderResults();
+}
+
+function gotoAssessment() { showScreen('assessment'); }
+
+function showTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    const tabs = ['overview','diseases','sepsis','meds'];
+    b.classList.toggle('active', tabs[i] === tab);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+
+// ============================================================
+// DISEASE LIBRARY
+// ============================================================
+function buildDiseaseLibrary() {
+  const list = document.getElementById('disease-list');
+  list.innerHTML = DISEASES.map((d, di) => `
+    <div class="disease-card" id="dc-${di}">
+      <div class="disease-header" onclick="toggleDisease(${di})">
+        <div class="disease-header-left">
+          <div class="disease-icon">${d.icon}</div>
+          <div>
+            <div class="disease-title">${d.title}</div>
+            <div class="disease-subtitle">${d.subtitle}</div>
+            <div class="disease-badges">${d.badges.map(b=>`<span class="badge badge-${b.c}">${b.t}</span>`).join('')}</div>
+          </div>
+        </div>
+        <div class="disease-chevron">▼</div>
+      </div>
+      <div class="disease-body">
+        <div class="disease-tabs">
+          <button class="d-tab active" onclick="dTab(${di},0,this)">Pathophysiology</button>
+          <button class="d-tab" onclick="dTab(${di},1,this)">Medications</button>
+          <button class="d-tab" onclick="dTab(${di},2,this)">EMS Care</button>
+        </div>
+        <div id="dp-${di}-0" class="d-panel active">
+          <div class="d-section"><div class="d-text">${d.path}</div></div>
+          <div class="analogy-box"><div class="analogy-label">💡 Clinical Analogy</div><div class="analogy-text">${d.analogy}</div></div>
+        </div>
+        <div id="dp-${di}-1" class="d-panel">
+          ${d.meds.map(m=>`<div class="med-row"><div class="med-name">${m.name}</div><div class="med-info">${m.info}</div></div>`).join('')}
+        </div>
+        <div id="dp-${di}-2" class="d-panel">
+          ${d.ems.map((e,ei)=>`<div class="ems-step"><div class="ems-num">${ei+1}</div><div class="ems-text">${e}</div></div>`).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleDisease(i) {
+  document.getElementById('dc-'+i).classList.toggle('open');
+}
+
+function dTab(di, ti, btn) {
+  const dc = document.getElementById('dc-'+di);
+  dc.querySelectorAll('.d-tab').forEach(b => b.classList.remove('active'));
+  dc.querySelectorAll('.d-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(`dp-${di}-${ti}`).classList.add('active');
+}
+
+// ============================================================
+// MEDICATIONS
+// ============================================================
+function buildMedsList() {
+  const list = document.getElementById('med-list');
+  list.innerHTML = MEDICATIONS.map(m => `
+    <div class="med-card">
+      <div class="med-card-name">${m.name}</div>
+      <div class="med-card-class">${m.cls}</div>
+      <div class="med-detail-grid">
+        <div class="med-detail"><div class="med-detail-label">Mechanism</div><div class="med-detail-val">${m.mechanism}</div></div>
+        <div class="med-detail"><div class="med-detail-label">Indications</div><div class="med-detail-val">${m.use}</div></div>
+        <div class="med-detail"><div class="med-detail-label">Dosing</div><div class="med-detail-val">${m.dose}</div></div>
+        <div class="med-detail"><div class="med-detail-label">Clinical Notes</div><div class="med-detail-val">${m.notes}</div></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// ASSESSMENT
+// ============================================================
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  const total = QUESTIONS.length;
+  const answered = answers.filter(a => a !== null).length;
+  const pct = Math.round(((currentQ+1)/total)*100);
+  document.getElementById('q-current').textContent = currentQ+1;
+  document.getElementById('q-answered').textContent = answered;
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-pct').textContent = pct+'%';
+  const correct = answers.filter((a,i) => a !== null && QUESTIONS[i].a === a).length;
+  const attemptedSoFar = answers.filter((a,i) => i < currentQ && a !== null).length;
+  document.getElementById('q-score-live').textContent = attemptedSoFar > 0 ? `Score: ${correct}/${answers.filter(a=>a!==null).length}` : 'Score: --';
+  document.getElementById('q-num-label').textContent = `QUESTION ${currentQ+1} OF ${total}`;
+  document.getElementById('q-text').textContent = q.q;
+  const optList = document.getElementById('q-options');
+  const letters = ['A','B','C','D'];
+  optList.innerHTML = q.o.map((opt, oi) => `
+    <li><button class="option-btn" onclick="selectAnswer(${oi})" id="opt-${oi}">
+      <span class="option-letter">${letters[oi]}.</span> ${opt}
+    </button></li>
+  `).join('');
+  const fb = document.getElementById('q-feedback');
+  fb.className = 'feedback-box';
+  fb.style.display = 'none';
+  if (answers[currentQ] !== null) {
+    showAnswerState(answers[currentQ]);
+  }
+  document.getElementById('btn-prev').disabled = currentQ === 0;
+  const isLast = currentQ === total - 1;
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.textContent = isLast ? 'Submit Assessment ✓' : 'Next →';
+  nextBtn.onclick = isLast ? submitAssessment : () => navQ(1);
+}
+
+function selectAnswer(oi) {
+  if (answers[currentQ] !== null) return;
+  answers[currentQ] = oi;
+  showAnswerState(oi);
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('q-answered').textContent = answered;
+}
+
+function showAnswerState(chosen) {
+  const q = QUESTIONS[currentQ];
+  const correct = q.a;
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[correct].classList.add('correct');
+  if (chosen !== correct) btns[chosen].classList.add('incorrect');
+  const fb = document.getElementById('q-feedback');
+  fb.style.display = 'block';
+  fb.className = 'feedback-box show ' + (chosen === correct ? 'fb-correct' : 'fb-incorrect');
+  fb.innerHTML = (chosen === correct ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + q.e;
+}
+
+function navQ(dir) {
+  const next = currentQ + dir;
+  if (next < 0 || next >= QUESTIONS.length) return;
+  currentQ = next;
+  renderQuestion();
+}
+
+function submitAssessment() {
+  const unanswered = answers.filter(a => a === null).length;
+  if (unanswered > 0) {
+    if (!confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`)) return;
+  }
+  showScreen('results');
+}
+
+// ============================================================
+// RESULTS
+// ============================================================
+function renderResults() {
+  const correct = answers.filter((a,i) => a !== null && QUESTIONS[i].a === a).length;
+  const incorrect = answers.filter((a,i) => a !== null && QUESTIONS[i].a !== a).length;
+  const skipped = answers.filter(a => a === null).length;
+  const pct = Math.round((correct/QUESTIONS.length)*100);
+  document.getElementById('r-correct').textContent = correct;
+  document.getElementById('r-incorrect').textContent = incorrect;
+  document.getElementById('r-skipped').textContent = skipped;
+  document.getElementById('r-pct').textContent = pct + '%';
+  const ring = document.getElementById('score-ring');
+  const circumference = 477.5;
+  const offset = circumference - (pct/100)*circumference;
+  setTimeout(() => { ring.style.strokeDashoffset = offset; ring.style.stroke = pct >= 75 ? 'var(--green)' : 'var(--amber)'; }, 100);
+  const scoreText = ring.parentNode.querySelector('text');
+  scoreText.textContent = correct;
+  const banner = document.getElementById('pass-banner');
+  if (pct >= 75) {
+    banner.className = 'pass-banner pass';
+    banner.innerHTML = `🎓 PASSED — ${pct}% · Congratulations, ${studentName}!`;
+  } else {
+    banner.className = 'pass-banner fail';
+    banner.innerHTML = `📚 NEEDS REVIEW — ${pct}% · Passing score is 75%. Review incorrect items below.`;
+  }
+  renderReview();
+}
+
+function renderReview() {
+  const list = document.getElementById('review-list');
+  const letters = ['A','B','C','D'];
+  const items = QUESTIONS.map((q,i) => {
+    const ans = answers[i];
+    const status = ans === null ? 'skipped' : (ans === q.a ? 'correct' : 'incorrect');
+    if (reviewFilter !== 'all' && status !== reviewFilter) return '';
+    const chosenLabel = ans !== null ? `${letters[ans]}. ${q.o[ans]}` : '(not answered)';
+    const correctLabel = `${letters[q.a]}. ${q.o[q.a]}`;
+    return `<div class="review-item r-${status}">
+      <div class="review-q"><strong>Q${i+1}:</strong> ${q.q}</div>
+      <div class="review-answer" style="color:${status==='correct'?'var(--green)':status==='incorrect'?'var(--red)':'var(--text3)'}">
+        ${status==='correct'?'✅':status==='incorrect'?'❌':'⬜'} Your answer: ${chosenLabel}
+      </div>
+      ${status !== 'correct' ? `<div class="review-answer" style="color:var(--teal)">✓ Correct: ${correctLabel}</div>` : ''}
+      <div class="review-expl">${q.e}</div>
+    </div>`;
+  }).join('');
+  list.innerHTML = items || '<div style="color:var(--text3);text-align:center;padding:40px">No questions match this filter.</div>';
+}
+
+function filterReview(filter, btn) {
+  reviewFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderReview();
+}
+
+// ============================================================
+// PDF GENERATION
+// ============================================================
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'mm', format:'letter' });
+  const W = 216, M = 18, CW = W - M*2;
+  const correct = answers.filter((a,i) => a !== null && QUESTIONS[i].a === a).length;
+  const incorrect = answers.filter((a,i) => a !== null && QUESTIONS[i].a !== a).length;
+  const skipped = answers.filter(a => a === null).length;
+  const pct = Math.round((correct/QUESTIONS.length)*100);
+  const pass = pct >= 75;
+  const date = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let y = 0;
+  function addPage() {
+    doc.addPage();
+    y = 18;
+    // header strip
+    doc.setFillColor(8,14,28);
+    doc.rect(0,0,W,14,'F');
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9);
+    doc.setTextColor(0,212,170);
+    doc.text('CAMP EMS — Chapter 27: Infectious & Communicable Diseases Assessment', M, 9);
+    doc.setTextColor(150,170,190);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(8);
+    doc.text(`${studentName} · ID: ${studentId}`, W-M, 9, {align:'right'});
+  }
+  // Cover page
+  doc.setFillColor(8,14,28);
+  doc.rect(0,0,W,60,'F');
+  doc.setFillColor(0,212,170);
+  doc.rect(0,0,6,60,'F');
+  y = 16;
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(10);
+  doc.setTextColor(0,212,170);
+  doc.text('CAMP COMMUNITY COLLEGE — EMS PROGRAM', M+8, y);
+  y += 8;
+  doc.setFontSize(16);
+  doc.setTextColor(232,237,245);
+  doc.text('Chapter 27: Infectious &', M+8, y);
+  y += 9;
+  doc.text('Communicable Diseases', M+8, y);
+  y += 8;
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(10);
+  doc.setTextColor(159,179,204);
+  doc.text('Sanders\' Paramedic Textbook, 6th Edition — Knowledge Assessment Report', M+8, y);
+  y = 72;
+  // Student info box
+  doc.setFillColor(13,21,38);
+  doc.setDrawColor(30,50,80);
+  doc.roundedRect(M, y, CW, 28, 3, 3, 'FD');
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(9);
+  doc.setTextColor(0,212,170);
+  doc.text('STUDENT INFORMATION', M+6, y+8);
+  doc.setTextColor(232,237,245);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(10);
+  doc.text(studentName, M+6, y+17);
+  doc.setFontSize(9);
+  doc.setTextColor(159,179,204);
+  doc.text(`Student ID: ${studentId}`, M+6, y+24);
+  doc.text(`Assessment Date: ${date}`, M+100, y+24);
+  y += 38;
+  // Score box
+  const scoreColor = pass ? [74,222,128] : [251,191,36];
+  doc.setFillColor(pass ? 13 : 20, pass ? 38 : 16, pass ? 22 : 8);
+  doc.setDrawColor(...scoreColor);
+  doc.setLineWidth(0.5);
+  doc.roundedRect(M, y, CW, 36, 3, 3, 'FD');
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(28);
+  doc.setTextColor(...scoreColor);
+  doc.text(`${pct}%`, M+14, y+22);
+  doc.setFontSize(11);
+  doc.text(pass ? 'PASSED' : 'NEEDS REVIEW', M+14, y+31);
+  doc.setFontSize(9);
+  doc.setTextColor(159,179,204);
+  doc.setFont('helvetica','normal');
+  const col = M+55;
+  doc.text(`Correct: ${correct} / 100`, col, y+13);
+  doc.text(`Incorrect: ${incorrect}`, col, y+21);
+  doc.text(`Skipped: ${skipped}`, col, y+29);
+  doc.text(`Passing Score: 75%`, col+50, y+13);
+  doc.text(`Questions: 100`, col+50, y+21);
+  y += 48;
+  doc.setFontSize(8);
+  doc.setTextColor(107,128,153);
+  doc.text('This document is generated by the CAMP EMS Interactive Learning System. Results are for educational purposes.', M, y);
+  // Questions
+  addPage();
+  const letters = ['A','B','C','D'];
+  for (let i = 0; i < QUESTIONS.length; i++) {
+    const q = QUESTIONS[i];
+    const ans = answers[i];
+    const status = ans === null ? 'skipped' : (ans === q.a ? 'correct' : 'incorrect');
+    const statusColors = {correct:[74,222,128], incorrect:[248,113,113], skipped:[107,128,153]};
+    const statusLabels = {correct:'CORRECT', incorrect:'INCORRECT', skipped:'SKIPPED'};
+    // Estimate height needed
+    const qLines = doc.splitTextToSize(`${i+1}. ${q.q}`, CW-20);
+    const eLines = doc.splitTextToSize(q.e, CW-8);
+    const blockH = 7 + qLines.length*5 + 16 + (status !== 'correct' ? 5 : 0) + eLines.length*4.5 + 10;
+    if (y + blockH > 255) addPage();
+    // Status badge
+    doc.setFillColor(...statusColors[status].map(c=>c*0.15));
+    doc.roundedRect(M, y, CW, blockH-2, 2, 2, 'F');
+    doc.setFillColor(...statusColors[status]);
+    doc.rect(M, y, 3, blockH-2, 'F');
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(7);
+    doc.setTextColor(...statusColors[status]);
+    doc.text(statusLabels[status], W-M-2, y+5, {align:'right'});
+    // Question
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9);
+    doc.setTextColor(232,237,245);
+    doc.text(qLines, M+6, y+6);
+    y += 5 + qLines.length*5;
+    // Options
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(8);
+    for (let oi = 0; oi < q.o.length; oi++) {
+      const isCorrect = oi === q.a;
+      const isChosen = oi === ans;
+      doc.setTextColor(isCorrect ? 74 : isChosen ? 248 : 107, isCorrect ? 222 : isChosen ? 113 : 128, isCorrect ? 128 : isChosen ? 113 : 153);
+      const prefix = isCorrect ? '✓ ' : isChosen && !isCorrect ? '✗ ' : '  ';
+      doc.text(`${prefix}${letters[oi]}. ${q.o[oi]}`, M+6, y+4);
+      y += 4.5;
+    }
+    y += 3;
+    // Explanation
+    doc.setFillColor(15,24,45);
+    doc.setFont('helvetica','italic');
+    doc.setFontSize(7.5);
+    doc.setTextColor(159,179,204);
+    eLines.forEach(line => { doc.text(line, M+4, y+3.5); y += 4; });
+    y += 8;
+  }
+  // Footer on last page
+  doc.setFillColor(8,14,28);
+  doc.rect(0,282,W,12,'F');
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(7);
+  doc.setTextColor(107,128,153);
+  doc.text(`CAMP EMS Educational Report · Generated ${new Date().toLocaleString()} · Ch. 27 Infectious & Communicable Diseases`, M, 289);
+  const filename = `Ch27_Infectious_${studentName.replace(/\s+/g,'_')}_${studentId}.pdf`;
+  doc.save(filename);
+}
+</script>
+</body>
+</html>
