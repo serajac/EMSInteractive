@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EENT Module | CAMP EMS Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+// Load jsPDF synchronously so it is ready before the student can click Download
+(function(){
+  var s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+  s.async = false;
+  document.head.appendChild(s);
+})();
+</script>
+<style>
+:root {
+  --bg: #07111f;
+  --surface: #0d1e33;
+  --card: #122440;
+  --card2: #16294a;
+  --eye: #2563eb;
+  --eye-light: #3b82f6;
+  --ear: #7c3aed;
+  --ear-light: #a78bfa;
+  --nose: #059669;
+  --nose-light: #34d399;
+  --throat: #dc2626;
+  --throat-light: #f87171;
+  --gold: #f59e0b;
+  --gold-light: #fcd34d;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --border: #1e3a5f;
+  --correct: #10b981;
+  --wrong: #ef4444;
+  --radius: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+h1,h2,h3,h4,h5,h6,.label,.badge,.btn,.tab-btn,.nav-pill {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* ─── SCREENS ─── */
+.screen { display: none !important; }
+.screen.active { display: block !important; }
+
+/* ─── REGISTRATION ─── */
+#reg-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, #0a2a5e 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, #1a0a3e 0%, transparent 60%),
+    var(--bg);
+}
+.reg-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 52px 48px;
+  max-width: 500px;
+  width: 100%;
+  margin: 24px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+}
+.reg-box::before {
+  content:'';
+  position:absolute;
+  top:-2px; left:-2px; right:-2px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--eye), var(--ear), var(--nose), var(--throat));
+  border-radius: 20px 20px 0 0;
+}
+.camp-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.camp-logo .logo-mark {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--eye), var(--gold));
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.camp-logo .logo-text { line-height: 1.2; }
+.camp-logo .logo-text .school { font-family: 'Rajdhani'; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); }
+.camp-logo .logo-text .dept { font-family: 'Rajdhani'; font-size: 16px; font-weight: 700; color: var(--text); }
+.reg-box h1 { font-size: 32px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.reg-box .subtitle { color: var(--text2); font-size: 15px; margin-bottom: 36px; }
+.field { margin-bottom: 20px; }
+.field label { display: block; font-family: 'Rajdhani'; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 600; }
+.field input {
+  width: 100%;
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--text);
+  font-family: 'Crimson Pro';
+  font-size: 17px;
+  outline: none;
+  transition: border-color .2s;
+}
+.field input:focus { border-color: var(--gold); }
+.field input::placeholder { color: var(--text3); }
+.btn-start {
+  width: 100%;
+  background: linear-gradient(135deg, var(--eye), #1e40af);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-family: 'Rajdhani';
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 14px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity .2s, transform .1s;
+}
+.btn-start:hover { opacity: .9; transform: translateY(-1px); }
+.module-tags {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px;
+}
+.module-tag {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--card); border-radius: 20px;
+  padding: 5px 12px;
+  font-family: 'Rajdhani'; font-size: 13px; font-weight: 600;
+  letter-spacing: .5px;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ─── MAIN MODULE ─── */
+#module-screen { min-height: 100vh; }
+#module-screen.active { display: block !important; }
+.module-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.header-logo { display: flex; align-items: center; gap: 10px; }
+.header-logo .hlogo { font-family: 'Rajdhani'; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.header-logo .hlogo span { color: var(--gold); }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.student-badge {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-family: 'Rajdhani';
+  font-size: 14px;
+}
+.student-badge .sname { color: var(--gold); font-weight: 700; }
+.btn-quiz {
+  background: linear-gradient(135deg, var(--gold), #d97706);
+  border: none; border-radius: 8px;
+  color: #000; font-family: 'Rajdhani'; font-size: 14px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 8px 20px; cursor: pointer;
+  transition: opacity .2s;
+}
+.btn-quiz:hover { opacity: .85; }
+
+/* ─── ORGAN TABS ─── */
+.organ-tabs {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  display: flex; gap: 4px;
+}
+.otab {
+  padding: 14px 24px;
+  font-family: 'Rajdhani'; font-size: 15px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  border: none; background: none; cursor: pointer;
+  color: var(--text2);
+  border-bottom: 3px solid transparent;
+  transition: all .2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.otab.eye-tab.active { color: var(--eye-light); border-color: var(--eye-light); }
+.otab.ear-tab.active { color: var(--ear-light); border-color: var(--ear-light); }
+.otab.nose-tab.active { color: var(--nose-light); border-color: var(--nose-light); }
+.otab.throat-tab.active { color: var(--throat-light); border-color: var(--throat-light); }
+.otab:hover { color: var(--text); }
+.otab-icon { font-size: 18px; }
+
+/* ─── CONTENT ─── */
+.module-content { padding: 32px; max-width: 1200px; margin: 0 auto; }
+.organ-panel { display: none; }
+.organ-panel.active { display: block; }
+.organ-intro {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  border-left: 4px solid;
+  position: relative; overflow: hidden;
+}
+.organ-intro.eye { border-color: var(--eye); }
+.organ-intro.ear { border-color: var(--ear); }
+.organ-intro.nose { border-color: var(--nose); }
+.organ-intro.throat { border-color: var(--throat); }
+.organ-intro h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.organ-intro.eye h2 { color: var(--eye-light); }
+.organ-intro.ear h2 { color: var(--ear-light); }
+.organ-intro.nose h2 { color: var(--nose-light); }
+.organ-intro.throat h2 { color: var(--throat-light); }
+.organ-intro p { color: var(--text2); font-size: 15px; }
+.conditions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+  gap: 20px;
+}
+.cond-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.cond-card:hover { border-color: var(--text3); }
+.cond-header {
+  padding: 18px 22px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid transparent;
+  transition: background .2s;
+}
+.cond-header:hover { background: var(--card); }
+.cond-header.open { border-color: var(--border); }
+.cond-title-wrap { display: flex; align-items: center; gap: 12px; }
+.cond-icon {
+  width: 40px; height: 40px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.eye .cond-icon { background: rgba(37,99,235,.15); }
+.ear .cond-icon { background: rgba(124,58,237,.15); }
+.nose .cond-icon { background: rgba(5,150,105,.15); }
+.throat .cond-icon { background: rgba(220,38,38,.15); }
+.cond-name { font-size: 19px; font-weight: 700; letter-spacing: .5px; }
+.cond-sub { font-size: 13px; color: var(--text2); font-family: 'Crimson Pro'; font-style: italic; }
+.cond-badges { display: flex; gap: 8px; align-items: center; }
+.badge {
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+}
+.badge-em { background: rgba(239,68,68,.15); color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+.badge-mod { background: rgba(245,158,11,.12); color: #fbbf24; border: 1px solid rgba(245,158,11,.3); }
+.badge-low { background: rgba(16,185,129,.12); color: #34d399; border: 1px solid rgba(16,185,129,.3); }
+.chevron { color: var(--text3); font-size: 18px; transition: transform .3s; }
+.chevron.open { transform: rotate(180deg); }
+
+.cond-body { display: none; padding: 0 0 4px; }
+.cond-body.open { display: block; }
+
+/* ── Inner Tab Bar ── */
+.inner-tabs {
+  display: flex; flex-wrap: wrap; gap: 2px;
+  padding: 10px 14px 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--card2);
+}
+.itab {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Rajdhani'; font-size: 12px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--text3); padding: 7px 12px 8px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px; transition: color .15s, border-color .15s;
+  white-space: nowrap;
+}
+.itab:hover { color: var(--text); }
+.itab.active { color: var(--teal); border-bottom-color: var(--teal); }
+.itab.eye-itab.active   { color: var(--eye-light);    border-bottom-color: var(--eye-light); }
+.itab.ear-itab.active   { color: var(--ear-light);    border-bottom-color: var(--ear-light); }
+.itab.nose-itab.active  { color: var(--nose-light);   border-bottom-color: var(--nose-light); }
+.itab.throat-itab.active{ color: var(--throat-light); border-bottom-color: var(--throat-light); }
+
+/* ── Inner Tab Panels ── */
+.ipanel { display: none; padding: 18px 20px 20px; animation: fadeIn .2s; }
+.ipanel.active { display: block; }
+
+.section-text { font-size: 15.5px; color: var(--text2); line-height: 1.75; }
+.symptom-list {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+}
+.symptom-list li {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 5px 12px;
+  font-size: 14px; color: var(--text2);
+}
+.analogy-box {
+  background: linear-gradient(135deg, rgba(245,158,11,.08), rgba(245,158,11,.04));
+  border: 1px solid rgba(245,158,11,.25);
+  border-radius: 10px; padding: 16px 18px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.analogy-box .bulb { font-size: 22px; flex-shrink: 0; }
+.analogy-box p { font-size: 15px; color: #fcd34d; line-height: 1.65; font-style: italic; }
+.meds-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.med-pill {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 20px; padding: 5px 14px; font-size: 13px;
+}
+.med-pill .mname { color: var(--text); font-weight: 600; font-family: 'Rajdhani'; }
+.med-pill .mclass { color: var(--text3); font-size: 11px; }
+.mgmt-box {
+  background: var(--card); border-radius: 8px;
+  padding: 14px 16px; border-left: 3px solid var(--gold);
+}
+.mgmt-box p { font-size: 15px; color: var(--text2); }
+
+/* ─── QUIZ ─── */
+#quiz-screen { min-height: 100vh; background: var(--bg); }
+#quiz-screen.active { display: block !important; }
+.quiz-wrap { max-width: 820px; margin: 0 auto; padding: 32px 24px; }
+.quiz-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 32px;
+}
+.quiz-title { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); }
+.quiz-progress-text { font-size: 28px; font-weight: 700; color: var(--text); }
+.quiz-progress-text span { color: var(--gold); }
+.progress-bar-wrap { background: var(--surface); border-radius: 20px; height: 6px; margin-bottom: 40px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--eye), var(--gold)); border-radius: 20px; transition: width .4s ease; }
+.cat-tag {
+  display: inline-block;
+  padding: 4px 12px; border-radius: 20px;
+  font-family: 'Rajdhani'; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.cat-eye { background: rgba(37,99,235,.15); color: var(--eye-light); border: 1px solid rgba(37,99,235,.3); }
+.cat-ear { background: rgba(124,58,237,.15); color: var(--ear-light); border: 1px solid rgba(124,58,237,.3); }
+.cat-nose { background: rgba(5,150,105,.15); color: var(--nose-light); border: 1px solid rgba(5,150,105,.3); }
+.cat-throat { background: rgba(220,38,38,.15); color: var(--throat-light); border: 1px solid rgba(220,38,38,.3); }
+.question-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px;
+  margin-bottom: 28px;
+}
+.question-num { font-family: 'Rajdhani'; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+.question-text { font-size: 20px; line-height: 1.6; color: var(--text); margin-bottom: 28px; }
+.options { display: flex; flex-direction: column; gap: 12px; }
+.opt-btn {
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 14px 18px;
+  display: flex; align-items: flex-start; gap: 14px;
+  cursor: pointer; text-align: left;
+  transition: all .2s; color: var(--text);
+  font-family: 'Crimson Pro'; font-size: 16px; line-height: 1.5;
+}
+.opt-btn:hover:not(:disabled) { border-color: var(--gold); background: rgba(245,158,11,.06); }
+.opt-btn.selected { border-color: var(--gold); background: rgba(245,158,11,.1); }
+.opt-btn.correct { border-color: var(--correct); background: rgba(16,185,129,.12); }
+.opt-btn.wrong { border-color: var(--wrong); background: rgba(239,68,68,.1); }
+.opt-btn:disabled { cursor: default; }
+.opt-letter {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border-radius: 6px; background: var(--card2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani'; font-weight: 700; font-size: 14px; color: var(--text2);
+  transition: all .2s;
+}
+.opt-btn.selected .opt-letter { background: var(--gold); color: #000; }
+.opt-btn.correct .opt-letter { background: var(--correct); color: #fff; }
+.opt-btn.wrong .opt-letter { background: var(--wrong); color: #fff; }
+.explanation-box {
+  background: var(--card);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px 18px; margin-top: 20px;
+  display: none; animation: fadeIn .3s;
+}
+.explanation-box.show { display: block; }
+.explanation-box .ex-label { font-family: 'Rajdhani'; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+.explanation-box p { font-size: 15px; color: var(--text2); line-height: 1.65; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.quiz-nav {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.btn-nav {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text); font-family: 'Rajdhani';
+  font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 10px 24px; cursor: pointer; transition: all .2s;
+}
+.btn-nav:hover { border-color: var(--text2); }
+.btn-nav:disabled { opacity: .3; cursor: default; }
+.btn-next {
+  background: var(--eye); border: none;
+  border-radius: 8px; color: #fff; font-family: 'Rajdhani';
+  font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 10px 28px; cursor: pointer; transition: all .2s;
+}
+.btn-next:hover { background: var(--eye-light); }
+.btn-next:disabled { background: var(--text3); cursor: default; }
+.btn-submit-quiz {
+  background: linear-gradient(135deg, var(--gold), #d97706);
+  border: none; border-radius: 8px; color: #000;
+  font-family: 'Rajdhani'; font-size: 16px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 12px 36px; cursor: pointer; transition: opacity .2s;
+}
+.btn-submit-quiz:hover { opacity: .85; }
+
+/* ─── RESULTS ─── */
+#results-screen { min-height: 100vh; }
+#results-screen.active { display: block !important; }
+.results-wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+.results-hero {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 48px; text-align: center;
+  margin-bottom: 32px; position: relative; overflow: hidden;
+}
+.results-hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--eye), var(--ear), var(--nose), var(--throat));
+}
+.score-ring {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: conic-gradient(var(--gold) 0deg, var(--card) 0deg);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  position: relative;
+}
+.score-ring-inner {
+  width: 120px; height: 120px;
+  background: var(--surface); border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.score-num { font-family: 'Rajdhani'; font-size: 42px; font-weight: 700; color: var(--text); line-height: 1; }
+.score-denom { font-family: 'Rajdhani'; font-size: 16px; color: var(--text2); }
+.results-name { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+.results-id { color: var(--text2); font-size: 15px; margin-bottom: 24px; }
+.results-grade {
+  display: inline-block;
+  font-size: 48px; font-weight: 700; margin-bottom: 12px;
+  font-family: 'Rajdhani';
+}
+.results-pct { font-size: 20px; color: var(--text2); margin-bottom: 24px; }
+.cat-scores-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  margin-bottom: 32px;
+}
+.cat-score-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 16px; text-align: center;
+}
+.cat-score-card .cs-label { font-family: 'Rajdhani'; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+.cat-score-card .cs-val { font-family: 'Rajdhani'; font-size: 32px; font-weight: 700; }
+.cat-score-card.eye .cs-label { color: var(--eye-light); }
+.cat-score-card.eye .cs-val { color: var(--eye-light); }
+.cat-score-card.ear .cs-label { color: var(--ear-light); }
+.cat-score-card.ear .cs-val { color: var(--ear-light); }
+.cat-score-card.nose .cs-label { color: var(--nose-light); }
+.cat-score-card.nose .cs-val { color: var(--nose-light); }
+.cat-score-card.throat .cs-label { color: var(--throat-light); }
+.cat-score-card.throat .cs-val { color: var(--throat-light); }
+.results-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-pdf {
+  background: linear-gradient(135deg, var(--gold), #d97706);
+  border: none; border-radius: 10px; color: #000;
+  font-family: 'Rajdhani'; font-size: 16px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 14px 36px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  transition: opacity .2s;
+}
+.btn-pdf:hover { opacity: .85; }
+.btn-retake {
+  background: none; border: 1.5px solid var(--border);
+  border-radius: 10px; color: var(--text);
+  font-family: 'Rajdhani'; font-size: 16px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 14px 36px; cursor: pointer;
+  transition: border-color .2s;
+}
+.btn-retake:hover { border-color: var(--text2); }
+.review-section { margin-top: 40px; }
+.review-section h3 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 20px; }
+.review-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px; margin-bottom: 12px;
+}
+.review-item.rev-correct { border-left: 3px solid var(--correct); }
+.review-item.rev-wrong { border-left: 3px solid var(--wrong); }
+.rev-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.rev-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.rev-q { font-size: 15px; color: var(--text); font-weight: 500; }
+.rev-answers { display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; }
+.rev-correct-ans { color: var(--correct); background: rgba(16,185,129,.1); padding: 3px 10px; border-radius: 4px; }
+.rev-wrong-ans { color: var(--wrong); background: rgba(239,68,68,.1); padding: 3px 10px; border-radius: 4px; text-decoration: line-through; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+@media (max-width: 700px) {
+  .conditions-grid { grid-template-columns: 1fr; }
+  .cat-scores-grid { grid-template-columns: repeat(2,1fr); }
+  .module-header { padding: 0 16px; height: auto; flex-wrap: wrap; gap: 8px; padding: 10px 16px; }
+  .organ-tabs { padding: 0 8px; overflow-x: auto; }
+  .module-content { padding: 20px 16px; }
+  .quiz-wrap { padding: 24px 16px; }
+  .results-wrap { padding: 24px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== REGISTRATION ===== -->
+<div id="reg-screen" class="screen active">
+  <div class="reg-box">
+    <div class="camp-logo">
+      <div class="logo-mark">CAMP</div>
+      <div class="logo-text">
+        <div class="school">CAMP Community College</div>
+        <div class="dept">EMS Education Program</div>
+      </div>
+    </div>
+    <h1>EENT Module</h1>
+    <p class="subtitle">Chapter 22 — Diseases of the Eyes, Ears, Nose, and Throat<br>Sanders' Paramedic Textbook, 6th Edition</p>
+    <div class="module-tags">
+      <div class="module-tag"><span class="dot" style="background:var(--eye-light)"></span> 10 Eye Conditions</div>
+      <div class="module-tag"><span class="dot" style="background:var(--ear-light)"></span> 7 Ear Conditions</div>
+      <div class="module-tag"><span class="dot" style="background:var(--nose-light)"></span> 4 Nose Conditions</div>
+      <div class="module-tag"><span class="dot" style="background:var(--throat-light)"></span> 10 Throat Conditions</div>
+      <div class="module-tag"><span class="dot" style="background:var(--gold)"></span> 100-Question Assessment</div>
+    </div>
+    <div class="field">
+      <label>Student Full Name</label>
+      <input type="text" id="inp-name" placeholder="e.g., Jane A. Smith" autocomplete="name">
+    </div>
+    <div class="field">
+      <label>Student ID</label>
+      <input type="text" id="inp-sid" placeholder="e.g., S-20261234">
+    </div>
+    <button class="btn-start" onclick="startModule()">Begin Learning Module →</button>
+  </div>
+</div>
+
+<!-- ===== MAIN MODULE ===== -->
+<div id="module-screen" class="screen">
+  <div class="module-header">
+    <div class="header-logo">
+      <div class="hlogo">CAMP EMS &nbsp;|&nbsp; <span>EENT MODULE</span></div>
+    </div>
+    <div class="header-right">
+      <div class="student-badge">
+        <span class="sname" id="hdr-name">—</span>
+        <span style="color:var(--text3)"> · </span>
+        <span id="hdr-sid" style="color:var(--text2);font-family:'Rajdhani';font-size:14px;">—</span>
+      </div>
+      <button class="btn-quiz" onclick="startQuiz()">Take 100-Q Assessment →</button>
+    </div>
+  </div>
+  <div class="organ-tabs">
+    <button class="otab eye-tab active" onclick="showOrgan('eye',this)"><span class="otab-icon">👁️</span> Eye</button>
+    <button class="otab ear-tab" onclick="showOrgan('ear',this)"><span class="otab-icon">👂</span> Ear</button>
+    <button class="otab nose-tab" onclick="showOrgan('nose',this)"><span class="otab-icon">👃</span> Nose</button>
+    <button class="otab throat-tab" onclick="showOrgan('throat',this)"><span class="otab-icon">🗣️</span> Throat / Oropharynx</button>
+  </div>
+  <div class="module-content" id="module-content-area"></div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div id="quiz-screen" class="screen">
+  <div class="quiz-wrap">
+    <div class="quiz-topbar">
+      <div class="quiz-title">EENT Knowledge Assessment</div>
+      <div class="quiz-progress-text">Q <span id="q-num">1</span> <span style="color:var(--text3)">/ 100</span></div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="quiz-prog-bar" style="width:1%"></div>
+    </div>
+    <div id="cat-tag-wrap"></div>
+    <div class="question-card">
+      <div class="question-num" id="q-num-label">Question 1 of 100</div>
+      <div class="question-text" id="q-text"></div>
+      <div class="options" id="q-options"></div>
+      <div class="explanation-box" id="q-explanation">
+        <div class="ex-label">📚 Explanation</div>
+        <p id="q-exp-text"></p>
+      </div>
+    </div>
+    <div class="quiz-nav">
+      <button class="btn-nav" id="btn-prev" onclick="prevQ()" disabled>← Previous</button>
+      <button class="btn-next" id="btn-next" onclick="nextQ()">Next →</button>
+      <button class="btn-submit-quiz" id="btn-submit" onclick="submitQuiz()" style="display:none">Submit Assessment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RESULTS ===== -->
+<div id="results-screen" class="screen">
+  <div class="results-wrap">
+    <div class="results-hero">
+      <div class="score-ring" id="score-ring">
+        <div class="score-ring-inner">
+          <div class="score-num" id="res-score">—</div>
+          <div class="score-denom">/ 100</div>
+        </div>
+      </div>
+      <div class="results-name" id="res-name">—</div>
+      <div class="results-id" id="res-id">—</div>
+      <div class="results-grade" id="res-grade">—</div>
+      <div class="results-pct" id="res-pct">—</div>
+      <div class="results-btns">
+        <button class="btn-pdf" onclick="downloadPDF()">⬇ Download Results PDF</button>
+        <button class="btn-retake" onclick="retakeQuiz()">↺ Retake Assessment</button>
+      </div>
+    </div>
+    <div class="cat-scores-grid">
+      <div class="cat-score-card eye"><div class="cs-label">👁️ Eye</div><div class="cs-val" id="cs-eye">—</div></div>
+      <div class="cat-score-card ear"><div class="cs-label">👂 Ear</div><div class="cs-val" id="cs-ear">—</div></div>
+      <div class="cat-score-card nose"><div class="cs-label">👃 Nose</div><div class="cs-val" id="cs-nose">—</div></div>
+      <div class="cat-score-card throat"><div class="cs-label">🗣️ Throat</div><div class="cs-val" id="cs-throat">—</div></div>
+    </div>
+    <div class="review-section">
+      <h3>Detailed Question Review</h3>
+      <div id="review-list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// STUDENT DATA
+// ============================================================
+let student = { name: '', id: '' };
+let userAnswers = new Array(100).fill(null);
+let currentQ = 0;
+let quizSubmitted = false;
+
+// ============================================================
+// MODULE CONTENT
+// ============================================================
+const content = {
+  eye: {
+    label: "Conditions of the Eye",
+    intro: "The eye is a complex sensory organ responsible for vision. EMS providers must recognize urgent and emergent eye conditions, as some—such as retinal detachment, CRAO, and orbital cellulitis—can result in permanent blindness if not treated promptly. Most prehospital eye care is supportive, but rapid recognition and transport are critical.",
+    conditions: [
+      {
+        icon:"🔴", name:"Conjunctivitis", sub:"Pink Eye",
+        severity:"low",
+        patho:"The conjunctiva is a clear membrane lining the inner eyelids and covering the white of the eye (sclera). In conjunctivitis, this membrane becomes inflamed due to viral, bacterial, or allergic triggers. Viruses (adenovirus most commonly) or bacteria (Staphylococcus aureus, Streptococcus pneumoniae) invade the conjunctival epithelium, triggering an inflammatory cascade — vasodilation causes the classic redness, and goblet cells overproduce mucus creating the characteristic discharge. Allergic conjunctivitis is IgE-mediated — allergens bind mast cells which release histamine, causing itching, watery discharge, and chemosis (conjunctival edema).",
+        symptoms:["Redness (erythema)","Discharge (watery or purulent)","Itching or burning","Tearing","Foreign body sensation","Photophobia (mild)"],
+        analogy:"Think of conjunctivitis like a city traffic jam — the blood vessels in the conjunctiva become congested, and the tear glands are honking (discharging). Bacterial conjunctivitis is a 'rush hour in mud' — thick, purulent drainage. Viral is a 'light rain shower' — watery and self-limited. Allergic is a 'pollen storm' — histamine causes the itchy, watery overflow.",
+        meds:[{n:"Gentamicin / Tobramycin",c:"Aminoglycoside antibiotic drops"},{n:"Ciprofloxacin",c:"Fluoroquinolone (bacterial)"},{n:"Diphenhydramine",c:"H1-antihistamine (allergic)"},{n:"Loratadine",c:"Non-sedating antihistamine"},{n:"Naphazoline",c:"Vasoconstrictor drops (OTC)"}],
+        mgmt:"Bacterial: antibiotic eye drops. Viral: supportive, cool compresses, artificial tears. Allergic: antihistamines, avoid allergen. Highly contagious — PPE, hand hygiene, instruct patient not to touch eyes."
+      },
+      {
+        icon:"🌀", name:"Corneal Abrasion", sub:"Scratch on the Cornea",
+        severity:"mod",
+        patho:"The cornea is the transparent, dome-shaped front of the eye. Its epithelium is one of the most densely innervated tissues in the body (via CN V — trigeminal), which is why corneal injuries cause disproportionate pain. A scrape or scratch disrupts the epithelial cell layer, exposing the underlying stroma and triggering pain receptors (nociceptors). The injury also stimulates aqueous tear production and activates the pupillary light reflex abnormally, causing photophobia. Blepharospasm (eyelid muscle spasm) is a reflex protective mechanism.",
+        symptoms:["Severe eye pain","Foreign body sensation","Tearing and redness","Photophobia","Blurred vision","Headache","Blepharospasm (squinting)"],
+        analogy:"The cornea is like the clear glass screen on your phone. A corneal abrasion is a scratch — even a tiny one — that makes the whole screen suddenly unusable and painful to look at. The cornea has more nerve endings per square millimeter than almost any other tissue, so even a microscopic scratch feels catastrophic.",
+        meds:[{n:"Ketorolac (Acular)",c:"Topical NSAID — pain relief"},{n:"Tobramycin ointment",c:"Antibiotic prophylaxis"},{n:"Cyclopentolate",c:"Cycloplegic — reduces ciliary spasm"}],
+        mgmt:"Supportive — remove the foreign body if present, irrigate with saline, do NOT patch the eye (increases infection risk), cover with saline-moistened gauze for transport, transport to ophthalmology."
+      },
+      {
+        icon:"🪨", name:"Foreign Body (Eye)", sub:"Ocular Foreign Body",
+        severity:"low",
+        patho:"Small particles (dust, metal shavings, debris, insects) can lodge on the conjunctival surface or under the upper eyelid. Larger or higher-velocity objects can penetrate the globe (open globe injury — a true emergency). Superficial foreign bodies stimulate corneal and conjunctival pain receptors, triggering tearing (the natural wash mechanism), blepharospasm, and redness. Metal foreign bodies can oxidize on the corneal surface (rust ring) within hours.",
+        symptoms:["Eye pain","Tearing","Redness","Foreign body sensation","Decreased vision (if penetrating)"],
+        analogy:"Imagine your eye is a windshield and rain (tears) is the natural windshield wiper — the eye is constantly trying to wash away the debris. Surface foreign bodies usually wash out; embedded ones (like a nail in the windshield) require professional extraction.",
+        meds:[{n:"Normal Saline / LR",c:"Irrigation solution"},{n:"Tetracaine (topical)",c:"Local anesthetic (hospital use)"},{n:"Erythromycin ointment",c:"Post-removal prophylaxis"}],
+        mgmt:"Small superficial FBs: irrigate with sterile saline using IV tubing, eye cup, or Morgan lens. Never attempt to remove penetrating objects — stabilize and transport. If open globe is suspected, shield the eye (no pressure), cover both eyes."
+      },
+      {
+        icon:"👁️", name:"Eyelid Inflammation", sub:"Chalazion & Hordeolum",
+        severity:"low",
+        patho:"The eyelid contains multiple glands: Meibomian glands (along the lid margin, secreting the oily layer of tears) and glands of Zeis and Moll (at eyelash follicles). A <b>chalazion</b> is a lipogranulomatous inflammation from a blocked Meibomian gland — chronic, painless, and non-infectious. A <b>hordeolum (stye)</b> is an acute bacterial infection (usually Staph aureus) of an eyelash follicle (external) or Meibomian gland (internal), presenting as a painful, red nodule.",
+        symptoms:["Eyelid swelling / bump","Tenderness (hordeolum)","Painless lump (chalazion)","Redness of eyelid","Tearing"],
+        analogy:"A chalazion is like a clogged kitchen drain that backs up slowly — gradual, painless, builds up over time. A hordeolum (stye) is like a pimple — a bacterial infection that forms quickly, hurts, and has a head. The chalazion needs a 'plumber'; the stye needs 'antibiotics.'",
+        meds:[{n:"Warm compresses",c:"First-line for both"},{n:"Erythromycin ointment",c:"Topical antibiotic (hordeolum)"},{n:"Triamcinolone injection",c:"For persistent chalazion"}],
+        mgmt:"Most self-resolve in 5–7 days. Warm compresses QID. Prehospital: supportive only, reassurance, referral to physician if persistent or vision-threatening."
+      },
+      {
+        icon:"🔵", name:"Glaucoma", sub:"Increased Intraocular Pressure",
+        severity:"mod",
+        patho:"Glaucoma is a group of optic neuropathies caused by elevated intraocular pressure (IOP). The eye continuously produces aqueous humor in the ciliary body, which flows through the pupil into the anterior chamber and drains via the trabecular meshwork at the iridocorneal angle. In <b>open-angle glaucoma</b> (90% of cases), outflow resistance gradually increases at the trabecular meshwork — IOP rises slowly, silently destroying the optic nerve over years. In <b>acute angle-closure glaucoma</b>, the iris physically blocks the drainage angle (often triggered by pupil dilation in dim light), causing a sudden, dramatic IOP spike — a true emergency.",
+        symptoms:["Open-angle: gradual peripheral vision loss (asymptomatic early)","Angle-closure ACUTE: severe eye pain","Halos around lights","Headache / nausea / vomiting","Blurred vision","Fixed mid-dilated pupil"],
+        analogy:"Think of the eye as a sink. The faucet (ciliary body) keeps dripping water (aqueous humor). The drain (trabecular meshwork) should keep up. In open-angle glaucoma, the drain gradually clogs like lime buildup — slow, silent rise in water level until overflow (optic nerve damage). In acute angle-closure, someone slammed a plate over the drain — sudden flooding, instant crisis.",
+        meds:[{n:"Latanoprost (Xalatan)",c:"Prostaglandin analog — ↑ outflow"},{n:"Timolol",c:"Beta-blocker — ↓ aqueous production"},{n:"Brimonidine",c:"Alpha-2 agonist — ↓ production"},{n:"Acetazolamide (Diamox)",c:"Carbonic anhydrase inhibitor"},{n:"Pilocarpine",c:"Miotic — opens angle (acute closure)"}],
+        mgmt:"Open-angle: supportive, refer to ophthalmology. Acute angle-closure: EMERGENCY — rapid transport, semi-recumbent position, O2, alert receiving facility."
+      },
+      {
+        icon:"🟠", name:"Iritis (Anterior Uveitis)", sub:"Iris Inflammation",
+        severity:"mod",
+        patho:"Iritis (also called anterior uveitis) is inflammation of the iris and ciliary body. It can be caused by autoimmune conditions (ankylosing spondylitis, sarcoidosis, IBD), infections (herpes, toxoplasmosis, syphilis), or trauma. The inflammatory cascade disrupts the blood-aqueous barrier, allowing protein and inflammatory cells (flare and cells) into the anterior chamber. Ciliary muscle spasm causes pain and photophobia. Posterior synechiae (adhesions between iris and lens) can develop if untreated, compromising pupil function.",
+        symptoms:["Deep, aching eye pain","Photophobia (often severe)","Blurred vision","Redness (ciliary flush — around cornea)","Small or irregular pupil","Tearing"],
+        analogy:"Iritis is like an allergic reaction happening inside the eye. The iris becomes inflamed — swollen, painful, and hypersensitive to light — just as an allergic airway becomes hypersensitive to stimuli. The ciliary muscle goes into spasm like a bronchospasm, and the 'smoke' in the anterior chamber (inflammatory cells) clouds vision.",
+        meds:[{n:"Prednisolone acetate drops",c:"Topical corticosteroid"},{n:"Atropine / Homatropine",c:"Cycloplegic — relieves ciliary spasm"},{n:"Methylprednisolone",c:"IV/oral — severe cases"},{n:"Topical NSAIDs",c:"Adjunct pain relief"}],
+        mgmt:"Prehospital: supportive — dim environment, sunglasses, transport to ophthalmology for definitive care. Do not instill drops in field unless directed by medical director."
+      },
+      {
+        icon:"🔴", name:"Papilledema", sub:"Optic Disc Swelling from ↑ICP",
+        severity:"em",
+        patho:"Papilledema is bilateral optic disc swelling caused by elevated intracranial pressure (ICP). The mechanism: increased ICP compresses the subarachnoid space around the optic nerve, obstructing axoplasmic transport and venous drainage from the retina. This backs up at the optic disc, causing it to swell. Causes include brain tumors, subdural hematoma, meningitis, hypertensive emergency, and idiopathic intracranial hypertension (pseudotumor cerebri). It is NOT the same as optic neuritis. The appearance on fundoscopy shows blurred disc margins, venous engorgement, and elevated disc.",
+        symptoms:["Often asymptomatic early","Transient visual obscurations","Headache (worse in AM)","Nausea / vomiting","Pulsatile tinnitus","Diplopia (CN VI palsy)","In severe cases: vision loss"],
+        analogy:"Imagine a traffic bottleneck on a freeway (the optic nerve). When ICP increases — like a major accident on the highway — fluid (axoplasm) backs up at the on-ramp (optic disc), causing swelling. The disc 'mushrooms' out, venous blood can't drain, and if the pressure persists long enough, the nerve fibers die — permanent vision loss.",
+        meds:[{n:"Acetazolamide",c:"IIH — reduces CSF production"},{n:"Mannitol",c:"Osmotic diuretic — ↓ ICP"},{n:"Furosemide",c:"Diuretic — ↓ CSF"},{n:"Dexamethasone",c:"Tumor-related cerebral edema"}],
+        mgmt:"Prehospital: supportive — position of comfort, O2, treat underlying cause (hypertensive emergency, herniation), rapid transport. This is a NEUROLOGICAL EMERGENCY if caused by herniation."
+      },
+      {
+        icon:"🚨", name:"Retinal Detachment", sub:"Separation of Retinal Layers",
+        severity:"em",
+        patho:"The retina is a 10-layer neural tissue sheet lining the posterior eye that converts light into electrical signals (via rods and cones). In rhegmatogenous retinal detachment (most common), a tear in the retina allows vitreous fluid to seep beneath it, separating the neurosensory retina from the retinal pigment epithelium (RPE). Without its blood supply from the choroid, the photoreceptors begin to die within hours. Traction detachment occurs from fibrovascular tissue pulling the retina. Exudative detachment occurs from fluid accumulation without a tear.",
+        symptoms:["Sudden flashes of light (photopsias)","Floaters (new onset)","\"Curtain\" coming across visual field","Peripheral vision loss progressing centrally","Painless","Decreased visual acuity (if macula involved)"],
+        analogy:"Retinal detachment is exactly like wallpaper peeling off a wall. The retina (wallpaper) separates from the back of the eye (wall) starting from a tear. Flashes are like the wallpaper cracking under pressure — sparks of nerve firing. The 'curtain' is the separated retina folding over. Once the center (macula) peels — like the focal point of the artwork — vision is permanently compromised.",
+        meds:[{n:"No EMS-specific meds",c:"Surgical emergency"},{n:"Positioning",c:"Non-pharmacological — macula-sparing position"}],
+        mgmt:"Ophthalmologic EMERGENCY. Prehospital: cover both eyes to reduce eye movement, position supine or per ophthalmology preference, rapid transport. Do NOT delay — the macula detaching = central vision lost."
+      },
+      {
+        icon:"🔴", name:"Retinal Vascular Occlusion", sub:"CRVO & CRAO",
+        severity:"em",
+        patho:"<b>CRAO (Central Retinal Artery Occlusion)</b> — analogous to an ocular stroke. The central retinal artery (branch of ophthalmic artery from ICA) is blocked by an embolus (cholesterol, cardioembolism, or thrombosis), causing ischemia of the inner retinal layers. Photoreceptors begin dying within 90 minutes — rapid intervention window. Classic finding: 'cherry-red spot' on fundoscopy (choroidal supply intact at fovea). <b>CRVO (Central Retinal Vein Occlusion)</b> — venous thrombosis causing backpressure, hemorrhage into all four quadrants (\"blood and thunder\" fundus), macular edema, and vision loss. Risk factors: HTN, diabetes, hypercoagulable states, atherosclerosis.",
+        symptoms:["CRAO: sudden, painless, complete monocular vision loss","CRVO: sudden vision loss, may be partial","Afferent pupillary defect (CRAO)","No pain typically","Prior TIA or amaurosis fugax may precede CRAO"],
+        analogy:"CRAO is a stroke in the eye — a clot blocks the artery, and the retina 'infarcts' like brain tissue. The famous 'cherry-red spot' appears because the center (fovea) survives on the choroidal supply — like one island of tissue that stays alive in a sea of ischemia. CRVO is the opposite — the venous dam breaks, flooding the retina with blood like a burst pipe backing up into every room of the house.",
+        meds:[{n:"Aspirin",c:"CRAO — antiplatelet (if no contraindication)"},{n:"tPA",c:"Considered in some CRAO cases (<4.5h)"},{n:"Intraocular pressure lowering",c:"Dislodge embolus attempt"},{n:"Anticoagulants",c:"CRVO — anticoagulation workup"}],
+        mgmt:"CRAO = 'Time is vision' same as 'Time is brain' in stroke. Activate stroke protocol, rapid transport, alert interventional ophthalmology. Digital ocular massage to dislodge clot is controversial — follow protocols."
+      },
+      {
+        icon:"🚨", name:"Orbital Cellulitis", sub:"Post-Septal Eye Infection",
+        severity:"em",
+        patho:"Orbital cellulitis is a bacterial infection of the orbital fat and tissues POSTERIOR to the orbital septum. This distinguishes it from preseptal (periorbital) cellulitis, which is less dangerous. Most cases spread from sinusitis (ethmoid sinus — separated from orbit by a paper-thin bone). Causative organisms: Staph aureus, Strep pneumoniae, H. influenzae. The infection spreads into the orbit, compressing the extraocular muscles and optic nerve, causing proptosis, ophthalmoplegia, and vision loss. Intracranial extension can cause meningitis or cavernous sinus thrombosis — life-threatening.",
+        symptoms:["Proptosis (bulging eye)","Restricted / painful eye movement","Fever","Painful eyelid swelling (red/purple, shiny)","Decreased visual acuity","Diplopia","Chemosis","General malaise"],
+        analogy:"Orbital cellulitis is like a house fire that started next door (in the sinus) and spread through the wall (orbital septum) into your house (orbit). Once inside, the fire (infection) fills the room, pushing furniture (eyeball) toward the door (proptosis), jamming all the hinges (extraocular muscles), and threatening to burn the electrical panel (optic nerve). A cavernous sinus spread is the fire reaching the main utility corridor — catastrophic.",
+        meds:[{n:"Vancomycin",c:"Covers MRSA"},{n:"Ceftriaxone",c:"Broad-spectrum coverage"},{n:"Piperacillin-tazobactam",c:"Broad-spectrum — severe cases"},{n:"Surgical drainage",c:"Abscess decompression"}],
+        mgmt:"EMERGENCY. Prehospital: recognize (proptosis + restricted EOM + fever), rapid transport to ED with ophthalmology and ENT. Establish IV access en route, O2 prn, keep patient calm."
+      }
+    ]
+  },
+  ear: {
+    label: "Conditions of the Ear",
+    intro: "The ear is divided into the external ear (pinna, ear canal), middle ear (tympanic membrane, ossicles, Eustachian tube), and inner ear (cochlea, vestibular apparatus). EMS providers frequently encounter ear complaints including vertigo, pain, and hearing loss. Distinguishing central from peripheral causes of vertigo is critical, as central causes (stroke, cerebellar hemorrhage) require emergent intervention.",
+    conditions: [
+      {
+        icon:"🔵", name:"Foreign Body (Ear)", sub:"External Auditory Canal",
+        severity:"low",
+        patho:"The external auditory canal (EAC) is a 2.5 cm S-shaped canal from the pinna to the tympanic membrane. Foreign bodies (small toys, beads, food, insects) become lodged — particularly in toddlers. The canal's narrow isthmus traps objects. Insects can crawl in and cause significant discomfort by mechanical irritation of the sensitive EAC epithelium. Attempts at removal without proper equipment can push objects deeper, perforate the TM, or lacerate the canal.",
+        symptoms:["Ear fullness / pressure","Decreased hearing","Discomfort or pain","Drainage (if secondary infection)","Buzzing (live insect)"],
+        analogy:"The ear canal is like a one-way tunnel that narrows in the middle — easy to enter, hard to exit. An insect in the canal is like a vibrating alarm going off in a locked room — the movement is terrifying. Attempting blind removal is like reaching into a dark tunnel with a stick — you're more likely to push it deeper than pull it out.",
+        meds:[{n:"Mineral oil / lidocaine",c:"Kills insect before removal"},{n:"Analgesics",c:"Pain management"},{n:"Antibiotic drops",c:"Post-removal if TM intact"}],
+        mgmt:"Prehospital: gentle visual exam only. Do NOT attempt removal. If live insect: kill with mineral oil or lidocaine drops first (if TM intact). Transport to ED for controlled removal under direct visualization."
+      },
+      {
+        icon:"🟡", name:"Impacted Cerumen", sub:"Earwax Buildup",
+        severity:"low",
+        patho:"Cerumen (earwax) is produced by ceruminous glands in the outer third of the EAC. It is naturally self-cleaning — epithelial cell migration moves wax outward. Impaction occurs when wax accumulates faster than migration, often from cotton swab use (packing wax inward), hearing aid use, or naturally excessive production. Impacted wax creates a physical barrier against the tympanic membrane, impairing sound transmission. Pressure on the TM stimulates the vagus nerve (Arnold's reflex) — causing reflex cough.",
+        symptoms:["Earache or fullness","Partial conductive hearing loss","Tinnitus (ringing)","Itching","Cough (Arnold's reflex)","Odor or discharge if infected"],
+        analogy:"Think of the ear canal as a hallway where the janitor (epithelial migration) normally sweeps debris outward. Using a cotton swab is like taking a fire hose and blasting all the debris into the supply closet (deeper canal) — it packs tightly against the door (TM), muffling all sound. The solution isn't more swabs; it's a professional cleaning.",
+        meds:[{n:"Carbamide peroxide",c:"Softens cerumen (Debrox)"},{n:"Saline irrigation",c:"Warm water flushing"},{n:"Docusate sodium",c:"Wax softener drops"}],
+        mgmt:"Prehospital: supportive, reassurance. In-hospital: irrigation with warm water (not if TM perforated), cerumenolytic drops, manual curette removal by provider."
+      },
+      {
+        icon:"🟣", name:"Labyrinthitis", sub:"Inner Ear Inflammation",
+        severity:"mod",
+        patho:"The labyrinth is the membranous inner ear structure housing both the cochlea (hearing) and vestibular apparatus (balance). Labyrinthitis is inflammation — typically viral (post-viral, following URI) or rarely bacterial. The inflammation disrupts vestibular hair cell signaling, creating an asymmetric input between the two labyrinths. The brain interprets this mismatch as continuous movement — producing vertigo. Inflammatory edema also disrupts cochlear function, causing hearing loss and tinnitus.",
+        symptoms:["Sudden severe vertigo (room spinning)","Nausea / vomiting","Tinnitus","Temporary hearing loss","Nystagmus (horizontal)","Worsened by movement"],
+        analogy:"The vestibular system is like a two-gyroscope autopilot on a plane. Both gyroscopes send equal signals to the cockpit (brain). Labyrinthitis knocks out one gyroscope — suddenly the cockpit is getting wildly mismatched signals. The autopilot (brain) desperately tries to compensate, making the plane (you) feel like it's spinning when it isn't.",
+        meds:[{n:"Meclizine (Antivert)",c:"Vestibular suppressant / antivertigo"},{n:"Prednisone",c:"Corticosteroid — reduces inflammation"},{n:"Valacyclovir",c:"Antiviral (if herpes suspected)"},{n:"Ondansetron (Zofran)",c:"Antiemetic for nausea"},{n:"Diazepam",c:"Vestibular suppressant (severe cases)"}],
+        mgmt:"Prehospital: supportive — position of comfort, anti-emetics if available, protect from falls, calm environment. Fall precautions critical — do not leave patient ambulatory unsupported."
+      },
+      {
+        icon:"🔵", name:"Ménière Disease", sub:"Endolymphatic Hydrops",
+        severity:"mod",
+        patho:"Ménière disease results from endolymphatic hydrops — excessive accumulation of endolymph fluid in the membranous labyrinth. The increased pressure in the endolymphatic sac ruptures the Reissner's membrane, mixing endolymph and perilymph. This disrupts the normal electrochemical environment for vestibular and cochlear hair cells, causing episodic attacks. The classic triad: episodic vertigo (20 min–several hours), fluctuating sensorineural hearing loss (low-frequency initially), and tinnitus. Disease is usually unilateral.",
+        symptoms:["Episodic vertigo (20 min–24 hrs)","Fluctuating hearing loss (sensorineural)","Tinnitus (low-frequency roar)","Aural fullness/pressure","Nausea and vomiting","Drop attacks (Tumarkin crisis — sudden falls)"],
+        analogy:"Imagine the inner ear as a water balloon. Ménière disease is like someone overinflating the balloon repeatedly — the excess water (endolymph) stretches and ruptures the membrane, causing the balloon to go haywire. Between attacks the balloon re-forms, but each rupture permanently damages some of the delicate sensors inside, leading to progressive hearing loss over years.",
+        meds:[{n:"Meclizine (Antivert)",c:"Acute attacks — antivertigo"},{n:"Betahistine",c:"Improves labyrinthine blood flow"},{n:"Hydrochlorothiazide",c:"Diuretic — reduces endolymph"},{n:"Diazepam",c:"Acute severe attack"},{n:"Intratympanic gentamicin",c:"Ablative therapy (severe/refractory)"}],
+        mgmt:"No cure exists. Prehospital: supportive — fall precautions, antiemetics, safe positioning. Advise low-sodium diet, caffeine/alcohol avoidance. Transport if first episode or severe."
+      },
+      {
+        icon:"🔵", name:"BPPV", sub:"Benign Paroxysmal Positional Vertigo",
+        severity:"low",
+        patho:"BPPV is the most common cause of vertigo worldwide. Calcium carbonate crystals (otoconia/otoliths) normally sit in the utricular macula of the vestibule. When dislodged (by head trauma, aging, prolonged bed rest), they fall into one of the semicircular canals — usually the posterior canal. As the head moves, the crystals create abnormal endolymph fluid movement, sending false signals to the brain about head position. The Dix-Hallpike maneuver provokes and diagnoses BPPV; the Epley maneuver repositions the crystals.",
+        symptoms:["Brief vertigo episodes (seconds to <1 min)","Triggered by specific head position changes","Nausea (can be severe)","Nystagmus (rotatory)","No hearing loss","No tinnitus typically"],
+        analogy:"Think of your semicircular canals as three gyroscopic loops — like a gyroscope inside a spaceship that tells the navigation computer which direction you're turning. BPPV is like tiny marbles (otoliths) rolling into those loops. Every time you move your head, the marbles roll around sending false navigation data — the cockpit (brain) gets convinced you're spinning wildly when you're barely moving.",
+        meds:[{n:"Meclizine",c:"Symptom relief — not curative"},{n:"Ondansetron",c:"For severe nausea"},{n:"Epley maneuver",c:"First-line treatment — non-pharmacological"}],
+        mgmt:"Prehospital: position of comfort, fall precautions, antiemetics. The Epley canalith repositioning maneuver resolves BPPV in 80% of cases at first attempt — can be performed by trained EMS. Avoid in suspected cervical injury."
+      },
+      {
+        icon:"🟠", name:"Otitis Media", sub:"Middle Ear Infection",
+        severity:"mod",
+        patho:"Otitis media is infection/inflammation of the middle ear space, usually following an upper respiratory infection. In children, the Eustachian tube (ET) is shorter, more horizontal, and floppier, allowing nasopharyngeal bacteria (Strep pneumoniae, H. influenzae, Moraxella catarrhalis) to migrate to the middle ear via the ET. Viral infection causes mucosal edema that obstructs the ET — negative pressure draws secretions into the middle ear (otitis media with effusion). If bacterial, purulent exudate accumulates, increasing middle ear pressure, bulging the TM (sometimes causing rupture).",
+        symptoms:["Earache (otalgia)","Fever","Hearing loss","Tugging at ears (infants)","Irritability","Drainage (if TM perforated)","Nausea/vomiting/diarrhea"],
+        analogy:"The middle ear is like a pressure vessel connected to the nose by a tiny pressure-relief valve (Eustachian tube). In kids, this valve is basically defective — too short and floppy. After a cold, bacteria waltz through, the valve fails, and the pressure vessel fills up with pus like a balloon — painful, full, eventually ready to pop.",
+        meds:[{n:"Amoxicillin",c:"First-line antibiotic — 80-90 mg/kg/day"},{n:"Amoxicillin-clavulanate",c:"Beta-lactamase producers"},{n:"Ceftriaxone",c:"IM — penicillin allergy or failed treatment"},{n:"Ibuprofen / Acetaminophen",c:"Pain and fever management"},{n:"Tympanostomy tubes",c:"Recurrent OM — surgical drainage"}],
+        mgmt:"Prehospital: analgesics, antipyretics, reassurance. Transport children for physician evaluation — avoid untreated bacterial OM (risk of mastoiditis, meningitis, hearing loss)."
+      },
+      {
+        icon:"🔴", name:"Perforated Tympanic Membrane", sub:"Ruptured Eardrum",
+        severity:"mod",
+        patho:"The tympanic membrane (TM) is a three-layer membrane separating the EAC from the middle ear. Perforation occurs from trauma (Q-tip, slap to ear, blast injury), barotrauma (diving, explosion), or from middle ear infection with increased pressure bursting the TM. The TM has a highly innervated squamous epithelium — perforation causes acute pain, followed by sudden relief when middle ear pressure equalizes. Most small perforations heal spontaneously within weeks. Large perforations or those with ossicular chain disruption cause conductive hearing loss.",
+        symptoms:["Sudden, severe ear pain (then relief)","Hearing loss","Tinnitus","Bloody or fluid drainage from ear","Vertigo (inner ear exposure)","Tinnitus"],
+        analogy:"The eardrum is like a living trampoline that amplifies sound vibrations. A perforation is a tear in the trampoline — sound vibrations can't be transmitted normally (conductive hearing loss), and the protected space behind it (middle ear) is suddenly exposed to the environment. Most small tears patch themselves, like a self-healing rubber — but leave the repair process alone.",
+        meds:[{n:"Analgesics",c:"Pain management"},{n:"Topical antibiotic drops",c:"Only if TM is INTACT — AVOID if perforated"},{n:"Amoxicillin",c:"Infection prophylaxis (oral, if indicated)"}],
+        mgmt:"Prehospital: keep ear dry — do NOT irrigate, do NOT insert drops. Sterile dry dressing over the ear. Reassure patient. Transport for audiologic evaluation. Do NOT blow the nose forcefully."
+      }
+    ]
+  },
+  nose: {
+    label: "Conditions of the Nose",
+    intro: "The nose serves as the primary airway conduit, filter, and humidifier. It contains the olfactory nerve (CN I) and is highly vascular — making it susceptible to hemorrhage. Nasal complaints including epistaxis, foreign bodies, rhinitis, and sinusitis are among the most common medical complaints in EMS. Epistaxis can occasionally be life-threatening when posterior and uncontrolled.",
+    conditions: [
+      {
+        icon:"🔴", name:"Epistaxis", sub:"Nosebleed",
+        severity:"mod",
+        patho:"Epistaxis (nosebleed) is hemorrhage from the nasal vasculature. 90% is anterior, originating from Kiesselbach's plexus — an anastomotic network of five arteries on the anterior nasal septum (internal and external carotid tributaries). Anterior bleeds are visible, compressible, and usually self-limited. Posterior epistaxis originates from the sphenopalatine artery (internal maxillary artery branch) — posterior bleeds are harder to visualize, often flow back into the pharynx, and can cause significant blood loss. Risk factors: local trauma (nose picking #1), dry air (low humidity), hypertension, anticoagulants (warfarin, aspirin, NSAIDs), thrombocytopenia, liver disease.",
+        symptoms:["Visible blood from nostril(s)","Blood in posterior pharynx (posterior bleed)","Nausea from swallowed blood","Anxiety","Hemodynamic compromise (severe posterior)"],
+        analogy:"Kiesselbach's plexus is like a junction box where five electrical circuits all meet in the same wall outlet — if the box overheats (trauma, dry air, hypertension), any of those circuits can short and spark. Anterior epistaxis is a tripped breaker you can reset easily — just pinch the outlet. Posterior epistaxis is a fire in the walls — you can't see it, you can't reach it, and it can fill your lungs before you know it.",
+        meds:[{n:"Oxymetazoline (Afrin)",c:"Topical vasoconstrictor — first-line adjunct"},{n:"Tranexamic acid",c:"Antifibrinolytic — reduces clot breakdown"},{n:"Silver nitrate",c:"Chemical cautery (ED)"},{n:"Vitamin K / FFP",c:"Coagulopathy reversal"},{n:"Nasal packing",c:"Anterior — Merocel, balloon catheters"}],
+        mgmt:"Prehospital: Sit patient forward (prevents blood swallowing/aspiration), pinch fleshy part of nose for 10–15 min, apply oxymetazoline if available. Do NOT lean back. IV access if significant bleeding. Transport for posterior bleed."
+      },
+      {
+        icon:"🟡", name:"Foreign Body (Nose)", sub:"Nasal Foreign Body",
+        severity:"low",
+        patho:"Nasal foreign bodies are common in children aged 2–4 years. Objects are typically inserted into the anterior nares (most commonly the right nostril, as most children are right-handed). Button batteries are the most dangerous — they generate an electric current that causes liquefactive necrosis within 2 hours of contact with mucosal tissue. Organic material (food, beads) causes mucosal irritation and secondary infection with purulent rhinorrhea. Disc batteries require IMMEDIATE removal.",
+        symptoms:["Unilateral nasal congestion","Purulent, foul-smelling unilateral discharge","Mild discomfort","Visible in anterior nares"],
+        analogy:"A nasal foreign body in a child is like a dam being placed across one lane of a river — normal flow stops, backup and stagnation occur. A button battery is a dam that also electrocutes everything downstream — mucosal cells die within hours through electrolytic injury, not pressure.",
+        meds:[{n:"No acute pharmacologic tx",c:"Gentle removal technique"},{n:"Topical decongestant",c:"Pre-removal — improve visualization"},{n:"Antibiotic nasal drops",c:"If secondary sinusitis develops"}],
+        mgmt:"Prehospital: do NOT attempt removal with instruments — risk of pushing deeper or causing bleeding. The 'mother's kiss' technique (parent blows into child's mouth while occluding the unaffected nostril) can dislodge superficial objects. Button battery = EMERGENCY transport."
+      },
+      {
+        icon:"🟢", name:"Rhinitis", sub:"Runny Nose / Nasal Inflammation",
+        severity:"low",
+        patho:"Rhinitis is inflammation of the nasal mucosa causing rhinorrhea (runny nose), congestion, and sneezing. Allergic rhinitis (hay fever): IgE-mediated mast cell activation releases histamine → mucosal edema, increased mucus secretion, vasodilation, and itching. Triggered by pollen, dust mites, pet dander. Non-allergic rhinitis: may be triggered by irritants, temperature changes, medications (rhinitis medicamentosa from rebound decongestant overuse), or infections (viral — the common cold). Vasomotor rhinitis has no immunologic cause — direct response to environmental changes.",
+        symptoms:["Rhinorrhea (clear watery or mucoid)","Nasal congestion","Sneezing","Itching (nose, eyes, throat — allergic)","Postnasal drip","Hyposmia (reduced smell)"],
+        analogy:"The nasal mucosa is like a sophisticated air conditioning system — it warms, humidifies, and filters incoming air. Allergic rhinitis is like the A/C going into overdrive when pollen enters the system — the filters (mucosa) get overwhelmed, water pours out everywhere (rhinorrhea), and the system goes into alarm mode (sneezing). Antihistamines are the 'override button' to calm the alarm.",
+        meds:[{n:"Diphenhydramine (Benadryl)",c:"1st gen antihistamine — sedating"},{n:"Loratadine / Cetirizine",c:"2nd gen — non-sedating"},{n:"Fluticasone (Flonase)",c:"Intranasal corticosteroid — best for chronic"},{n:"Pseudoephedrine",c:"Oral decongestant (cardiac caution)"},{n:"Ipratropium nasal spray",c:"Reduces rhinorrhea (anticholinergic)"}],
+        mgmt:"Prehospital: supportive. Allergic rhinitis: antihistamines, avoid triggers. Viral: supportive — hydration, saline irrigation. Chronic: refer to PCP for intranasal corticosteroids."
+      },
+      {
+        icon:"🟡", name:"Sinusitis", sub:"Sinus Infection",
+        severity:"low",
+        patho:"Sinusitis is inflammation of the paranasal sinuses (maxillary — most commonly affected, frontal, ethmoid, sphenoid). Viral URI causes mucosal edema that obstructs the sinus ostia (drainage openings). Stagnant mucus creates an anaerobic, nutrient-rich environment for bacteria (Strep pneumoniae, H. influenzae, Moraxella catarrhalis). Bacterial sinusitis develops in ~2% of viral URIs. Chronic sinusitis (>12 weeks) may involve biofilms and fungal elements. Ethmoid sinusitis in children can spread to the orbit (orbital cellulitis) or intracranially — a dangerous complication.",
+        symptoms:["Facial pain/pressure (worse bending forward)","Nasal congestion","Purulent nasal/postnasal discharge","Headache","Hyposmia","Fever (bacterial)","Tooth pain (maxillary sinusitis)","Fatigue"],
+        analogy:"The sinuses are air-filled cavities connected to the nasal passage by narrow drainage ports — like apartments in a building sharing a single drain pipe. Viral rhinitis causes the drain pipe to swell shut. The 'apartment' (sinus) fills up with fluid — pressure builds, bacteria move in and throw a party. Antibiotics evict the bacteria; decongestants unblock the drain.",
+        meds:[{n:"Amoxicillin-clavulanate",c:"First-line for bacterial sinusitis"},{n:"Doxycycline",c:"Penicillin allergy"},{n:"Fluticasone nasal spray",c:"Reduces mucosal edema"},{n:"Pseudoephedrine",c:"Decongestant — opens ostia"},{n:"Saline irrigation",c:"Sinus rinse — mechanical drainage"}],
+        mgmt:"Prehospital: supportive — analgesics, steam inhalation, nasal irrigation. Antibiotics only for bacterial sinusitis (7–10 days). Refer to PCP. Urgent care if signs of orbital or intracranial spread."
+      }
+    ]
+  },
+  throat: {
+    label: "Conditions of the Oropharynx & Throat",
+    intro: "The oropharynx extends from the uvula to the epiglottis and is a critical crossroads for the airway and digestive tract. EMS providers must rapidly identify airway-threatening conditions (Ludwig angina, epiglottitis, tracheitis, peritonsillar abscess) that require immediate intervention and transport. The rule of thumb: any throat condition causing drooling, stridor, or inability to swallow is a potential airway emergency.",
+    conditions: [
+      {
+        icon:"🦷", name:"Toothache & Dental Abscess", sub:"Dentalgia / Periapical Abscess",
+        severity:"mod",
+        patho:"A dental abscess (periapical abscess) forms when bacteria invade the dental pulp through a cavity or crack in the tooth. Bacteria (Streptococcus viridans, Fusobacterium, anaerobes) ferment carbohydrates, producing acids that dissolve enamel — creating a pathway to the pulp (pulpitis). The pulp lacks immune surveillance vessels, so infection spreads to the periapical tissue, forming an abscess. Pressure from pus accumulation in an enclosed bony space causes intense, throbbing pain. Untreated, infection can spread to fascial spaces of the head and neck — potentially causing Ludwig angina, mediastinitis, or sepsis.",
+        symptoms:["Throbbing, constant tooth pain","Swelling around tooth/jaw","Fever","Foul-tasting drainage","Lymphadenopathy","Pain with hot/cold stimuli","Trismus (jaw spasm, if spreading)"],
+        analogy:"A dental abscess is like a pressure cooker filling up inside a concrete box (the tooth and surrounding bone). The pus has nowhere to go — every heartbeat pounds against the walls of the abscess, causing that distinctive throbbing pain. Left alone, the pressure builds until it bursts through the path of least resistance — which might be your floor of mouth (Ludwig angina) or your bloodstream (sepsis).",
+        meds:[{n:"Amoxicillin",c:"First-line antibiotic"},{n:"Clindamycin",c:"Penicillin allergy"},{n:"Metronidazole",c:"Anaerobic coverage (adjunct)"},{n:"Ibuprofen",c:"NSAID — pain + inflammation"},{n:"Acetaminophen",c:"Analgesic"},{n:"Opioids",c:"Severe pain (short-term)"},{n:"Incision & drainage",c:"Definitive — surgical"}],
+        mgmt:"Prehospital: analgesics, cold pack to jaw. Refer to dentist/ED. Alert for spread — neck swelling, dysphagia, trismus, or fever > 102°F indicate spreading infection requiring emergency evaluation."
+      },
+      {
+        icon:"🚨", name:"Ludwig Angina", sub:"Floor-of-Mouth Cellulitis",
+        severity:"em",
+        patho:"Ludwig angina is a rapidly spreading, bilateral, life-threatening cellulitis of the submandibular, sublingual, and submental spaces — the fascial spaces of the floor of the mouth. It originates in 80% of cases from a dental abscess (mandibular molars drain into the submandibular space). The infection spreads rapidly through fascial planes (not pus-filled — it's indurated cellulitis, not a true abscess). As tissues swell, the tongue is displaced superiorly and posteriorly — obstructing the airway. Airway management is EXTREMELY difficult due to distorted anatomy. Mortality historically 50%; with antibiotics and airway management, ~5%.",
+        symptoms:["Bilateral submandibular swelling","Tongue elevation / displacement","Drooling (unable to swallow)","Dysphagia / odynophagia","Stridor","Muffled 'hot potato' voice","Stiff neck","Trismus","High fever","Airway obstruction"],
+        analogy:"Ludwig angina is like a slow flood under the floorboards of the mouth. As the fascial spaces fill with infection, the 'floor' swells upward — pushing the tongue like rising floodwater pushing furniture toward the ceiling. The tongue, now pressed against the hard palate and posterior pharynx, blocks the only path for airflow. Standard intubation approaches fail because the anatomy is completely distorted — it's like trying to thread a needle in a collapsed building.",
+        meds:[{n:"Ampicillin-sulbactam (Unasyn)",c:"First-line IV antibiotic"},{n:"Penicillin G + Metronidazole",c:"Alternative coverage"},{n:"Dexamethasone",c:"Reduce edema (controversial)"},{n:"Ketamine",c:"Sedation — preserves airway tone"}],
+        mgmt:"AIRWAY EMERGENCY. Position of comfort (upright, leaning forward). Prepare for surgical airway (cricothyrotomy). Keep patient calm — crying/agitation worsens obstruction. O2 by mask (non-rebreather). Rapid transport to highest level care — ideally with ENT on standby. BVM if apnea."
+      },
+      {
+        icon:"🚨", name:"Epiglottitis", sub:"Supraglottic Airway Emergency",
+        severity:"em",
+        patho:"Epiglottitis is acute inflammation of the epiglottis and supraglottic structures. Pre-Hib vaccine era: primarily H. influenzae type B in children. Post-Hib vaccination: now predominantly in adults (Group A Strep, Staph aureus, Strep pneumoniae). The epiglottis becomes severely edematous — a cherry-red, swollen 'thumb' obstructing the airway. In children: rapid progression, classic 'tripod position.' In adults: slower onset. The epiglottis normally folds over the laryngeal inlet during swallowing; when massively swollen, it can fold and completely obstruct the airway at any moment. Agitating the patient can precipitate complete obstruction.",
+        symptoms:["Sudden onset high fever","Severe sore throat / odynophagia","Tripod position (lean forward, jaw thrust, drool)","Drooling","Muffled 'hot potato' voice","Inspiratory stridor","Dyspnea","Refusal to eat or drink","Anxious / toxic appearance"],
+        analogy:"The epiglottis is the 'trapdoor' that closes over the airway when you swallow, preventing aspiration. Epiglottitis inflames it until it swells to the size of a 'thumb' — but now instead of opening properly, this swollen thumb can flop across the airway like a drunk bouncer falling across the doorway. And it can close completely without warning. Attempting to look in the throat with a tongue depressor is like poking the drunk bouncer — they may fall and block the door permanently.",
+        meds:[{n:"Ceftriaxone",c:"IV antibiotic — covers H. influenzae, Strep"},{n:"Dexamethasone",c:"Corticosteroid — reduces edema"},{n:"Racemic epinephrine",c:"Nebulized — reduces supraglottic edema"},{n:"Helium-oxygen (Heliox)",c:"Reduces airflow resistance"},{n:"Ketamine",c:"If RSI required"}],
+        mgmt:"Allow position of comfort — NEVER lay child flat, NEVER use tongue depressor or attempt IV if child is calm. O2 by mask or blow-by. Rapid transport. Call ahead for anesthesia and ENT. Last resort: BVM, RSI, or surgical airway."
+      },
+      {
+        icon:"🟡", name:"Laryngitis", sub:"Vocal Cord Inflammation",
+        severity:"low",
+        patho:"Laryngitis is inflammation of the larynx with primary involvement of the vocal cords. Acute laryngitis is usually viral (rhinovirus, adenovirus, influenza) or caused by vocal overuse. Edema and inflammatory infiltration of the true vocal cords alters their vibration pattern — producing hoarseness, dysphonia, or complete aphonia. Reflux laryngitis (LPR) is caused by acid reflux irritating the posterior larynx chronically. The inflammatory edema is usually self-limited and resolves in 1–2 weeks.",
+        symptoms:["Hoarseness or loss of voice","Dry/scratchy throat","Sore throat","Dry cough","Low-grade fever (viral)","Throat clearing"],
+        analogy:"The vocal cords are like two stretched rubber bands that vibrate precisely to produce your voice. Laryngitis coats them in edema — like putting mud on guitar strings. The vibration becomes irregular, producing hoarseness. Voice rest is literally allowing the mud to dry and crack off. Whispering is actually worse than silence — it puts asymmetric strain on the cords.",
+        meds:[{n:"Voice rest",c:"Primary treatment"},{n:"Proton pump inhibitors",c:"If reflux-related (omeprazole)"},{n:"Hydration / humidification",c:"Supportive"},{n:"Corticosteroids",c:"Rarely — performers who must speak"},{n:"Antibiotics",c:"Only if bacterial — rare"}],
+        mgmt:"Prehospital: supportive, reassurance. Typically self-resolving in 7–14 days. Refer to ENT if persisting >3 weeks (rule out malignancy). No specific EMS intervention required."
+      },
+      {
+        icon:"🔴", name:"Tracheitis", sub:"Bacterial Subglottic Infection",
+        severity:"em",
+        patho:"Bacterial tracheitis is a severe bacterial infection of the upper airway and subglottic trachea. Primarily caused by Staph aureus (including MRSA). Affects children 3 months–8 years. Unlike croup (viral, barky cough) or epiglottitis (supraglottic), tracheitis involves diffuse mucosal ulceration of the trachea with formation of a thick, purulent pseudomembrane that can partially or completely obstruct the airway. The pseudomembrane forms a plug that can cause sudden complete airway obstruction — constituting a true pediatric emergency.",
+        symptoms:["High fever (often > 39°C)","Stridor (inspiratory and expiratory)","Productive cough with thick secretions","Hoarseness","Respiratory distress","Rapidly deteriorating course","Toxic-appearing child"],
+        analogy:"Normal croup is like a swollen garden hose nozzle — you can still get water through, just under pressure (stridor). Tracheitis is like someone stuffing a cloth rag (pseudomembrane) partway into the hose — partial blockage can become total at any moment when the rag shifts. Standard croup treatment (racemic epi, steroids) buys time, but the rag needs to be physically removed by the endoscopist.",
+        meds:[{n:"Ampicillin-sulbactam",c:"Broad-spectrum IV antibiotic"},{n:"Ceftriaxone + Vancomycin",c:"MRSA coverage"},{n:"Dexamethasone",c:"Reduce subglottic edema"},{n:"Racemic epinephrine",c:"Nebulized — temporizing measure"},{n:"Heliox",c:"Reduces airflow resistance"}],
+        mgmt:"Pediatric AIRWAY EMERGENCY. O2, BVM ready, advanced airway preparation. These children often require intubation in the OR under direct visualization due to pseudomembrane. Rapid transport, call ahead, keep child calm."
+      },
+      {
+        icon:"🟢", name:"Oral Candidiasis (Thrush)", sub:"Fungal Oral Infection",
+        severity:"low",
+        patho:"Oral candidiasis is a mucosal infection caused by Candida albicans — a commensal yeast normally held in check by competitive oral flora and host immunity. Predisposing factors: antibiotic use (kills competing flora), inhaled corticosteroids (immunosuppressive effect on oral mucosa), HIV/AIDS, diabetes mellitus, denture use, extreme age (neonates and elderly), xerostomia (dry mouth). The yeast form (blastoconidia) converts to invasive pseudohyphae that penetrate the mucosal epithelium, producing characteristic white plaques (composed of hyphae, debris, and desquamated epithelial cells).",
+        symptoms:["White, curd-like plaques on tongue/mucosa","Plaques bleed when scraped","Oral pain or discomfort","Dysphagia (if esophageal involvement)","Loss of taste","Cracked corners of mouth (angular cheilitis)"],
+        analogy:"Think of normal oral bacteria as a balanced ecosystem — like a rainforest where every niche is occupied and nothing invasive can take hold. Antibiotics are like a forest fire — they clear the rainforest, leaving bare ground. Candida is the first invasive weed that colonizes the bare ground. In immunocompromised patients, the rainforest never fully regrows — Candida runs unchecked.",
+        meds:[{n:"Nystatin suspension",c:"First-line — 'swish and swallow'"},{n:"Fluconazole (Diflucan)",c:"Oral — moderate/severe or non-responsive"},{n:"Clotrimazole troches",c:"Topical — dissolve in mouth"},{n:"IV amphotericin B",c:"Severe/systemic — ICU"}],
+        mgmt:"Prehospital: rarely an emergency. Supportive care, oral hygiene. Immunocompromised patients with dysphagia or severe involvement need urgent evaluation — rule out esophageal candidiasis. Check inhaler technique in asthmatic patients using ICS."
+      },
+      {
+        icon:"🔴", name:"Peritonsillar Abscess", sub:"Quinsy — Tonsillar Abscess",
+        severity:"mod",
+        patho:"Peritonsillar abscess (PTA) is the most common deep neck infection in adults. It forms in the peritonsillar space — between the tonsillar capsule and the superior pharyngeal constrictor muscle. It typically develops as a complication of bacterial tonsillitis (Group A Strep, Staph aureus, anaerobes). Pus accumulates in this potential space, pushing the tonsil medially and superiorly, displacing the uvula to the contralateral side. Infection can spread to the parapharyngeal space or retropharyngeal space — dangerous extensions. Trismus develops from inflammation spreading to the medial pterygoid muscle.",
+        symptoms:["Unilateral severe sore throat","Uvular deviation away from abscess","Fever","Muffled 'hot potato' voice","Drooling","Trismus (difficulty opening mouth)","Dysphagia","Ipsilateral ear pain (CN IX referred)","Cervical lymphadenopathy"],
+        analogy:"Imagine the tonsil as a punching bag hung in a corner. A PTA fills the space behind and beside the punching bag with pus — the bag (tonsil) gets pushed to the center of the room (medially), and the punching bag's hook (uvula) gets pulled toward the full corner. The inflammation spreads to the jaw's hinge mechanism (pterygoid muscle), jamming the jaw like a rusted door hinge.",
+        meds:[{n:"Penicillin G IV",c:"First-line antibiotic"},{n:"Clindamycin",c:"Penicillin allergy or MRSA"},{n:"Metronidazole",c:"Anaerobic coverage (adjunct)"},{n:"Dexamethasone",c:"Reduce edema / faster resolution"},{n:"Needle aspiration",c:"Definitive — drainage"}],
+        mgmt:"Prehospital: supportive — analgesia, airway monitoring. Transport to ED for needle aspiration/I&D. Monitor airway closely — PTA can extend to parapharyngeal/retropharyngeal space, causing severe airway compromise."
+      },
+      {
+        icon:"🟡", name:"Pharyngitis & Tonsillitis", sub:"Sore Throat",
+        severity:"low",
+        patho:"Pharyngitis is inflammation of the pharyngeal mucosa; tonsillitis involves the palatine tonsils. Most cases (75%) are viral (rhinovirus, adenovirus, EBV). Group A beta-hemolytic Streptococcus pyogenes (GABHS) causes 15–30% of pediatric cases and 5–15% of adult cases. GABHS must be treated with antibiotics to prevent post-streptococcal complications: acute rheumatic fever (ARF — autoimmune carditis, chorea) and post-streptococcal glomerulonephritis. Epstein-Barr virus causes infectious mononucleosis — characterized by exudative tonsillitis, posterior cervical lymphadenopathy, splenomegaly, and atypical lymphocytes. Amoxicillin in mono causes a morbilliform rash.",
+        symptoms:["Sore throat / odynophagia","Fever","Tonsillar erythema / exudates","Cervical lymphadenopathy","Headache","Malaise","Absence of cough (more consistent with strep)"],
+        analogy:"The pharynx is like a busy city highway — viral pharyngitis is like a minor fender-bender that slows everything down temporarily. Strep pharyngitis is like a major accident that needs the highway patrol (antibiotics) to clear it, or else it causes downstream flooding (rheumatic fever). Mono is like a protest march that occupies the highway for weeks and spreads to every nearby street (lymph nodes, spleen).",
+        meds:[{n:"Penicillin V / Amoxicillin",c:"First-line — GABHS"},{n:"Azithromycin",c:"Penicillin allergy (Z-pack)"},{n:"Ibuprofen / Acetaminophen",c:"Analgesia and antipyretic"},{n:"Dexamethasone",c:"Single dose — faster pain relief"},{n:"NOTE: Avoid amoxicillin in mono",c:"Causes rash — test for EBV first"}],
+        mgmt:"Prehospital: supportive, analgesics, ORS for dehydration. Rapid strep antigen test in ED directs antibiotic therapy. Mono patients: activity restriction (contact sports) due to splenomegaly/rupture risk."
+      },
+      {
+        icon:"🔴", name:"Postsurgical Oropharyngeal Hemorrhage", sub:"Post-Tonsillectomy Bleeding",
+        severity:"em",
+        patho:"Postsurgical bleeding in the oropharynx most commonly follows tonsillectomy or adenoidectomy. Primary hemorrhage occurs within 24 hours (surgical bed bleeding). Secondary hemorrhage occurs 5–10 days post-op when eschar (scab) sloughs from the tonsillar fossa. The bleeding is venous or from small arteries. In patients who have undergone chemotherapy or radiation therapy, blood vessel erosion from necrosis is the mechanism — these bleeds are arterial, massive, and carry a 40% mortality from aspiration. The supine patient who swallows blood may deteriorate rapidly — blood in the stomach causes nausea/vomiting, aspiration is life-threatening.",
+        symptoms:["Active bleeding from mouth/throat","Blood-stained saliva","Hemoptysis","Hematemesis (swallowed blood)","Tachycardia / hypotension (if significant)","Airway compromise (aspiration)"],
+        analogy:"A post-tonsillectomy bed is like a fresh surgical wound under a scab (eschar). The scab slowly dissolves over days, and if the underlying vessel hasn't fully sealed, blood breaks through. In radiation-damaged tissue, it's like trying to sew up tissue as fragile as wet tissue paper — the sutures don't hold, and the underlying vessels erode unpredictably.",
+        meds:[{n:"Tranexamic acid",c:"Antifibrinolytic — IV or topical gargle"},{n:"Oxymetazoline-soaked gauze",c:"Topical vasoconstriction"},{n:"FFP / Platelets",c:"If coagulopathic"},{n:"Surgical cautery / ligation",c:"Definitive"}],
+        mgmt:"AIRWAY FIRST. Sit patient upright (prevent aspiration). Suction blood from oropharynx. Establish IV access, fluid resuscitation. O2. Apply direct pressure if accessible. Rapid transport — surgical intervention likely needed. Prepare for emergent intubation if airway compromised."
+      },
+      {
+        icon:"🟡", name:"Temporomandibular Joint Disorders", sub:"TMJ Dysfunction",
+        severity:"low",
+        patho:"The temporomandibular joint (TMJ) connects the mandibular condyle to the temporal bone, with an articular disc interposed. It is the most used joint in the body (speaking, chewing, swallowing — thousands of times daily). TMJ disorders include disc displacement (clicking, locking), myofascial pain disorder (masticatory muscle dysfunction), and degenerative joint disease. Causes include bruxism (teeth grinding), dental malocclusion, trauma, and stress-related parafunctional habits. Pain is referred via CN V (trigeminal) to the ear, temple, and neck. Tinnitus and ear fullness occur due to anatomical proximity to the middle ear.",
+        symptoms:["Jaw pain (preauricular region)","Clicking/popping/grating","Limited jaw opening","Jaw locking","Ear pain and tinnitus","Headache (temporal, occipital)","Neck and shoulder pain","Facial muscle fatigue"],
+        analogy:"The TMJ is like a door hinge that opens and closes thousands of times per day. TMJ disorder is what happens when the hinge wears out, the door becomes misaligned, or the hinges are over-stressed by repeated slamming (bruxism). You hear the door squeak (clicking), it gets stuck (locking), and the frame (surrounding muscles and nerves) starts to ache from the constant strain.",
+        meds:[{n:"Ibuprofen / Naproxen",c:"NSAIDs — first-line"},{n:"Cyclobenzaprine",c:"Muscle relaxant"},{n:"Diazepam",c:"Short-term muscle relaxation + anxiety"},{n:"Amitriptyline",c:"Chronic pain — tricyclic"},{n:"Botulinum toxin",c:"Masseter injection for bruxism"},{n:"Occlusal splint",c:"Non-pharmacologic — night guard"}],
+        mgmt:"Prehospital: supportive — soft diet, analgesics, warm compresses. Not an EMS emergency. Refer to dentist, oral surgeon, or ENT. Rule out other causes of jaw pain/trismus (PTA, Ludwig angina, trigeminal neuralgia)."
+      }
+    ]
+  }
+};
+
+// ============================================================
+// 100 QUIZ QUESTIONS
+// ============================================================
+const questions = [
+  // EYE (Q1–30)
+  {q:"The conjunctiva is best described as:",opts:["The colored portion of the eye (iris)","A clear membrane lining the eyelids and covering the white of the eye","The lens that focuses light on the retina","The structure that produces tears (lacrimal gland)"],ans:1,cat:"eye",exp:"The conjunctiva is the thin, clear mucous membrane lining the inner eyelids (palpebral) and covering the sclera (bulbar). It does not include the cornea."},
+  {q:"Conjunctivitis caused by viral or bacterial infection is:",opts:["Non-contagious","Only contagious through sexual contact","Highly contagious — contact/droplet precautions required","Contagious only in immunocompromised patients"],ans:2,cat:"eye",exp:"Infectious conjunctivitis (viral and bacterial) is highly contagious. Patients should avoid touching their eyes, wash hands frequently, and not share towels or pillowcases."},
+  {q:"Which antibiotic class is commonly used for bacterial conjunctivitis?",opts:["Macrolides (erythromycin oral)","Aminoglycosides or fluoroquinolone eye drops (tobramycin, ciprofloxacin)","Cephalosporins IV","Vancomycin IV"],ans:1,cat:"eye",exp:"Bacterial conjunctivitis is treated with topical antibiotic eye drops such as tobramycin or ciprofloxacin. Oral antibiotics are generally not needed."},
+  {q:"A patient presents with severe eye pain, photophobia, tearing, and a foreign body sensation after a tree branch grazed their eye. This is most consistent with:",opts:["Open-angle glaucoma","Conjunctivitis","Corneal abrasion","Iritis"],ans:2,cat:"eye",exp:"Corneal abrasion presents with severe eye pain (the cornea is densely innervated), photophobia, tearing, and a foreign body sensation after direct trauma to the eye surface."},
+  {q:"Blepharospasm, which can occur with a corneal abrasion, refers to:",opts:["Sudden increase in intraocular pressure","Spasms of the eyelid muscles causing the patient to squint","Blurring of the optic disc margin","Forward protrusion of the eyeball"],ans:1,cat:"eye",exp:"Blepharospasm is an involuntary, reflexive spasm of the orbicularis oculi muscle — the eye's protective reflex response to corneal pain or irritation."},
+  {q:"What is the first-line prehospital management for a superficial foreign body in the eye?",opts:["Use forceps to remove it from the conjunctival surface","Irrigate with sterile saline using IV tubing or an eye cup","Patch both eyes and rapidly transport","Apply topical antibiotic ointment and monitor"],ans:1,cat:"eye",exp:"Small superficial foreign bodies can be washed away with gentle irrigation using sterile saline. A Morgan lens attached to IV tubing is effective. Never attempt to remove an embedded or penetrating object."},
+  {q:"A chalazion differs from a hordeolum in that a chalazion is:",opts:["An acute bacterial infection of an eyelash follicle","A chronically blocked Meibomian gland with granulomatous inflammation (painless)","An acute inflammation of the conjunctiva","A bacterial infection of the cornea"],ans:1,cat:"eye",exp:"A chalazion is a chronic, non-infectious, lipogranulomatous inflammation from a blocked Meibomian gland — typically painless and slow-growing. A hordeolum (stye) is an acute bacterial infection."},
+  {q:"In glaucoma, which fluid accumulates abnormally in the anterior chamber?",opts:["Vitreous humor","Aqueous humor","Cerebrospinal fluid","Purulent exudate"],ans:1,cat:"eye",exp:"Aqueous humor is produced by the ciliary body and drains through the trabecular meshwork. When drainage is impaired, aqueous humor accumulates, raising intraocular pressure and damaging the optic nerve."},
+  {q:"Which patient has the HIGHEST risk profile for developing open-angle glaucoma?",opts:["25-year-old Asian female with no comorbidities","45-year-old African American male with diabetes and myopia","30-year-old White male athlete","50-year-old Hispanic female with mild hyperopia"],ans:1,cat:"eye",exp:"Risk factors for glaucoma include African American or Hispanic ethnicity, age >40, diabetes, severe myopia, and systemic corticosteroid use. African Americans have a 6–8× higher risk."},
+  {q:"The drug acetazolamide (Diamox) reduces intraocular pressure by:",opts:["Increasing aqueous humor drainage through the trabecular meshwork","Inhibiting carbonic anhydrase, thereby reducing aqueous humor production","Constricting the pupil to open the drainage angle","Causing vasoconstriction of intraocular vessels"],ans:1,cat:"eye",exp:"Acetazolamide is a carbonic anhydrase inhibitor used systemically to decrease aqueous humor secretion by the ciliary body, thereby reducing IOP. Used in acute angle-closure glaucoma as an emergency measure."},
+  {q:"Iritis (anterior uveitis) is inflammation of which structure?",opts:["Optic nerve head","Retina","Iris and ciliary body (anterior uveal tract)","Conjunctiva"],ans:2,cat:"eye",exp:"Iritis (anterior uveitis) is inflammation of the iris and often the ciliary body. It can be associated with autoimmune conditions (HLA-B27 conditions: ankylosing spondylitis, IBD, psoriasis) or infections."},
+  {q:"Papilledema is caused by:",opts:["Decreased intraocular pressure","Increased intracranial pressure compressing the optic nerve","Bacterial infection of the optic nerve","Direct blunt trauma to the eye"],ans:1,cat:"eye",exp:"Papilledema is bilateral optic disc swelling due to elevated ICP, which compresses the subarachnoid space around the optic nerve, obstructing axoplasmic flow and venous drainage. It is a sign of a serious intracranial process."},
+  {q:"Which clinical finding is the FIRST sign of papilledema on fundoscopic examination?",opts:["Elevation of the optic disc","Venous engorgement (loss of venous pulsation)","Flame-shaped hemorrhages over the disc","Paton lines (radial retinal folds)"],ans:1,cat:"eye",exp:"The earliest sign of papilledema is venous engorgement and loss of spontaneous venous pulsation, followed by blurring of disc margins, disc elevation, and eventually hemorrhages."},
+  {q:"Retinal detachment is considered a true ocular emergency primarily because:",opts:["It always causes immediate complete blindness","Delayed treatment can cause permanent vision loss, especially if the macula detaches","It is always caused by life-threatening intracranial pathology","It always requires pharmacologic reversal"],ans:1,cat:"eye",exp:"If the macula (central retina) detaches, central vision is permanently lost. Rapid surgical repair (photocoagulation, scleral buckle, vitrectomy) can preserve vision if performed before macular involvement."},
+  {q:"Which symptom is classically described in early retinal detachment?",opts:["Severe eye pain and halos around lights","New-onset floaters, photopsias (flashes), and a curtain across the visual field","Purulent eye discharge and swollen eyelids","Deep aching eye pain with photophobia"],ans:1,cat:"eye",exp:"Retinal detachment classically presents with new flashes of light (photopsias from retinal traction), floaters (vitreous debris from a tear), and a 'curtain' or shadow across the peripheral visual field — all painless."},
+  {q:"Central Retinal Artery Occlusion (CRAO) most commonly presents with:",opts:["Gradual bilateral vision loss over weeks","Sudden, painless, complete monocular vision loss — 'ocular stroke'","Severe eye pain with halos","Purulent discharge with redness"],ans:1,cat:"eye",exp:"CRAO is an 'ocular stroke' — sudden, painless, complete loss of vision in one eye from arterial occlusion. This is an emergency with a narrow treatment window (<90 min for photoreceptor viability)."},
+  {q:"The classic fundoscopic finding in CRAO is:",opts:["'Blood and thunder' fundus with diffuse hemorrhages","A cherry-red spot at the fovea against a white (ischemic) retina","Blurred disc margins with elevated optic disc","Neovascularization of the optic disc"],ans:1,cat:"eye",exp:"CRAO causes ischemic whitening (opacity) of the retina except at the fovea, which retains its blood supply from the choroid — appearing as a 'cherry-red spot' against the pale background."},
+  {q:"Orbital cellulitis is defined as infection of tissues:",opts:["Anterior to the orbital septum (preseptal)","Posterior to the orbital septum (postseptal) — involving orbital fat","Of the conjunctival surface only","Within the vitreous chamber"],ans:1,cat:"eye",exp:"Orbital cellulitis involves the post-septal orbital contents (fat, muscles, optic nerve). This distinguishes it from the less dangerous preseptal (periorbital) cellulitis, which is anterior to the orbital septum."},
+  {q:"Which clinical finding BEST distinguishes orbital cellulitis from preseptal cellulitis?",opts:["Fever and eyelid redness (present in both)","Proptosis and restricted, painful extraocular movements","Eyelid swelling and pain with palpation","Elevated WBC on CBC"],ans:1,cat:"eye",exp:"Proptosis (forward globe displacement) and ophthalmoplegia (restricted, painful eye movement) indicate post-septal involvement — true orbital cellulitis. These findings require emergent imaging and hospitalization."},
+  {q:"What is the most dangerous potential intracranial complication of orbital cellulitis?",opts:["Papilledema alone","Cavernous sinus thrombosis and meningitis","Retinal detachment","Optic neuritis"],ans:1,cat:"eye",exp:"Orbital infection can spread posteriorly into the cavernous sinus via the orbital veins, causing septic cavernous sinus thrombosis — a life-threatening condition with risk of meningitis, brain abscess, and death."},
+  {q:"Which drug is used to open the trabecular drainage angle in acute angle-closure glaucoma?",opts:["Latanoprost (prostaglandin analog)","Pilocarpine (miotic — constricts pupil to pull iris away from angle)","Timolol (beta-blocker)","Atropine (mydriatic)"],ans:1,cat:"eye",exp:"Pilocarpine is a miotic (pupil constrictor) that contracts the ciliary muscle and pulls the iris away from the drainage angle in acute angle-closure glaucoma — the only medication that directly reverses the mechanism."},
+  {q:"Allergic conjunctivitis is mediated by:",opts:["Neutrophil-mediated inflammation (innate immunity)","IgE-mediated mast cell degranulation releasing histamine","T-cell mediated delayed hypersensitivity","Complement-mediated lysis"],ans:1,cat:"eye",exp:"Allergic conjunctivitis is a Type I (immediate) hypersensitivity reaction. Allergens cross-link IgE on conjunctival mast cells, triggering degranulation and histamine release — causing itching, watery discharge, and chemosis."},
+  {q:"A patient has a suspected open globe injury after being struck in the eye with a metal shard. The correct prehospital management is:",opts:["Irrigate the eye vigorously with 1 liter of saline","Remove the visible penetrating object to prevent further injury","Apply a rigid shield over the eye without pressure; cover both eyes; transport","Apply a pressure patch and transport"],ans:2,cat:"eye",exp:"With suspected open globe, DO NOT apply pressure (can express intraocular contents), DO NOT remove the object. Apply a rigid shield (cup) over the eye to protect without pressure. Cover both eyes to reduce conjugate eye movement."},
+  {q:"Prostaglandin analogs such as latanoprost (Xalatan) work in glaucoma by:",opts:["Reducing aqueous humor production via carbonic anhydrase inhibition","Increasing uveoscleral outflow of aqueous humor","Constricting the pupil to mechanically open the angle","Blocking beta-receptors in the ciliary body"],ans:1,cat:"eye",exp:"Latanoprost (and other prostaglandin analogs) increase uveoscleral outflow (alternative aqueous drainage pathway), reducing IOP. They are first-line for open-angle glaucoma with once-daily dosing and excellent efficacy."},
+  {q:"Which feature of corneal abrasion is different from conjunctivitis?",opts:["Both cause redness and tearing","Corneal abrasion typically causes severe pain out of proportion to visible findings, while conjunctivitis is usually mildly uncomfortable","Conjunctivitis is always more painful than corneal abrasion","Corneal abrasion causes purulent discharge while conjunctivitis causes clear discharge"],ans:1,cat:"eye",exp:"The cornea has one of the highest densities of nerve endings in the body. Corneal abrasions cause severe, disproportionate pain relative to the minor visible injury. Conjunctivitis typically causes discomfort and itching, not severe pain."},
+  {q:"A patient with papilledema is most likely to have which underlying diagnosis?",opts:["Conjunctivitis","Orbital cellulitis","Intracranial mass, hypertensive emergency, or meningitis","Retinal detachment"],ans:2,cat:"eye",exp:"Papilledema is a sign of increased ICP — causes include brain tumors, subdural hematoma, meningitis/encephalitis, hypertensive emergency, and idiopathic intracranial hypertension (pseudotumor cerebri)."},
+  {q:"Paton lines, seen in papilledema, are described as:",opts:["Dark streaks of blood overlying the optic disc","Radial retinal folds radiating from the optic disc due to mass effect","Concentric rings of retinal whitening around the disc","Vertical creases in the optic nerve head"],ans:1,cat:"eye",exp:"Paton lines are circumferential or radial retinal folds around the optic disc caused by mechanical displacement of the peripapillary retina from the underlying choroid due to optic disc swelling."},
+  {q:"In which situation should both eyes be covered in prehospital eye management?",opts:["Conjunctivitis in both eyes","Suspected open globe or retinal detachment — to reduce conjugate eye movement","Corneal abrasion in one eye","Glaucoma attack"],ans:1,cat:"eye",exp:"Both eyes are covered in suspected open globe injury or retinal detachment to minimize conjugate eye movements (which could worsen the injury), since the eyes move together (yoked movements)."},
+  {q:"The hordeolum (stye) is most commonly caused by which organism?",opts:["Streptococcus pyogenes","Staphylococcus aureus","Haemophilus influenzae","Candida albicans"],ans:1,cat:"eye",exp:"A hordeolum is an acute bacterial infection of an eyelash follicle (external) or Meibomian gland (internal), caused most commonly by Staphylococcus aureus. Treatment: warm compresses; topical antibiotics for persistent cases."},
+  {q:"A key prehospital intervention for a patient with suspected CRAO (ocular stroke) is:",opts:["Apply pressure to dislodge the clot","Activate stroke protocol and provide rapid transport — time-critical intervention","Apply cool compresses to reduce IOP","Administer ophthalmic drops from the drug kit"],ans:1,cat:"eye",exp:"CRAO is an 'ocular stroke' with a narrow intervention window. EMS should activate the stroke protocol, obtain IV access, and transport rapidly to a facility with ophthalmology — same urgency as acute ischemic stroke."},
+
+  // EAR (Q31–55)
+  {q:"The three anatomical portions of the ear are:",opts:["Pinna, canal, and eardrum","External ear, middle ear, and inner ear","Cochlea, vestibule, and semicircular canals","Malleus, incus, and stapes"],ans:1,cat:"ear",exp:"The ear is divided into the external ear (pinna, EAC), middle ear (TM, ossicles, Eustachian tube, mastoid air cells), and inner ear (cochlea for hearing, vestibular apparatus for balance)."},
+  {q:"Foreign bodies in the ear canal are most common in which population?",opts:["Elderly adults with hearing aids","Teenagers during sports","Toddlers (ages 2–4 years)","Healthcare workers"],ans:2,cat:"ear",exp:"Ear canal foreign bodies are most common in toddlers, who insert objects out of curiosity. Common objects include beads, pebbles, food, insects, and small toys. The right ear is more commonly affected as most children are right-handed."},
+  {q:"Cerumen is naturally self-cleaning through which mechanism?",opts:["Muscular contractions of the ear canal","Epithelial cell migration moving wax from deep to superficial (outward)","Lymphatic drainage of the external canal","Swallowing creating pressure changes in the Eustachian tube"],ans:1,cat:"ear",exp:"The external ear canal has a unique self-cleaning mechanism — epithelial cells migrate outward from the eardrum toward the pinna, carrying debris and old cerumen with them. Disrupting this with cotton swabs packs wax inward."},
+  {q:"Which symptom can occur with impacted cerumen due to stimulation of the vagus nerve (Arnold's reflex)?",opts:["Tinnitus","Vertigo","Reflex cough","Nausea and vomiting"],ans:2,cat:"ear",exp:"Arnold's nerve (auricular branch of the vagus nerve, CN X) innervates part of the external ear canal. Stimulation by impacted cerumen or foreign bodies can trigger a vagally mediated reflex cough — called Arnold's ear-cough reflex."},
+  {q:"Labyrinthitis causes vertigo through which primary mechanism?",opts:["Displaced otoconia in the semicircular canals","Asymmetric vestibular input from inflammation — one labyrinth signals differently from the other","Increased endolymphatic fluid pressure in the cochlea","Bacterial invasion of the middle ear ossicles"],ans:1,cat:"ear",exp:"The labyrinth sends bilateral balanced signals to the brain. Inflammation of one labyrinth disrupts this symmetry — the brain receives mismatched inputs and interprets the difference as movement, producing vertigo."},
+  {q:"The classic triad of Ménière disease consists of:",opts:["Ear pain, fever, and purulent drainage","Episodic vertigo, fluctuating sensorineural hearing loss, and tinnitus","Vertigo, headache, and visual disturbance","Tinnitus, conductive hearing loss, and facial nerve palsy"],ans:1,cat:"ear",exp:"Ménière disease presents with the classic triad of episodic vertigo (lasting 20 minutes to several hours), fluctuating low-frequency sensorineural hearing loss, and low-frequency tinnitus. Aural fullness is also characteristic."},
+  {q:"Meclizine (Antivert) is used in Ménière disease primarily for:",opts:["Treating the underlying bacterial infection","Reducing endolymphatic fluid production","Suppressing vertigo and nausea during acute attacks","Preventing permanent hearing loss"],ans:2,cat:"ear",exp:"Meclizine is an anticholinergic/antihistamine vestibular suppressant that reduces the sensation of vertigo and associated nausea. It suppresses symptoms but does not treat the underlying cause."},
+  {q:"BPPV is caused by:",opts:["Viral infection of the vestibular nerve","Displaced calcium carbonate crystals (otoconia) in the semicircular canals","Excessive endolymphatic fluid in the membranous labyrinth","Bacterial infection of the inner ear"],ans:1,cat:"ear",exp:"BPPV results from otoliths (calcium carbonate crystals, or otoconia) that have been displaced from the utricular macula into one of the semicircular canals, most commonly the posterior canal — creating false motion signals."},
+  {q:"The Epley canalith repositioning maneuver is the first-line treatment for:",opts:["Ménière disease","Labyrinthitis","BPPV","Otitis media"],ans:2,cat:"ear",exp:"The Epley maneuver uses sequential head positioning to guide displaced otoconia out of the semicircular canal back into the vestibule, resolving BPPV in 80% of cases at first attempt. It is non-pharmacologic."},
+  {q:"Why are infants and young children more susceptible to otitis media than adults?",opts:["Thinner tympanic membranes in children","Shorter, more horizontal Eustachian tubes that allow easier bacterial migration from the nasopharynx","More cerumen production in children","Larger middle ear spaces in children"],ans:1,cat:"ear",exp:"The pediatric Eustachian tube is approximately half the adult length, oriented more horizontally, and has a floppier cartilaginous portion — all of which facilitate bacterial migration from the nasopharynx to the middle ear."},
+  {q:"The first-line antibiotic for uncomplicated bacterial acute otitis media is:",opts:["Azithromycin (Z-pack)","Ciprofloxacin oral","Amoxicillin (high-dose)","Vancomycin"],ans:2,cat:"ear",exp:"Amoxicillin at high doses (80–90 mg/kg/day) is first-line for bacterial AOM. Amoxicillin-clavulanate is used for beta-lactamase-producing organisms (H. influenzae, Moraxella catarrhalis) or treatment failure."},
+  {q:"A perforated tympanic membrane causes which type of hearing loss?",opts:["Sensorineural hearing loss","Conductive hearing loss","Mixed hearing loss","Central hearing loss"],ans:1,cat:"ear",exp:"TM perforation causes conductive hearing loss — the TM can no longer effectively transmit sound vibrations to the ossicles. Sensorineural loss affects the inner ear's hair cells or cochlear nerve."},
+  {q:"Prehospital management of a suspected perforated tympanic membrane includes all of the following EXCEPT:",opts:["Keep the ear dry","Apply a sterile dry external dressing","Irrigate the ear canal with saline to prevent infection","Transport for ENT evaluation"],ans:2,cat:"ear",exp:"Irrigation of a perforated TM is CONTRAINDICATED — water entering the middle ear through the perforation can cause severe vertigo and potentially introduce infection. Keep the ear dry, apply a dry dressing externally."},
+  {q:"Which finding would indicate a potential central cause of vertigo rather than a peripheral cause (BPPV, labyrinthitis)?",opts:["Horizontal nystagmus that resolves with fixation","Brief vertigo triggered by positional changes","Vertical nystagmus, ataxia, inability to walk, new diplopia or dysphagia","Tinnitus accompanying the vertigo"],ans:2,cat:"ear",exp:"Central vertigo (cerebellar stroke, hemorrhage) presents with vertical or direction-changing nystagmus that does NOT fatigue with fixation, and is associated with ataxia, dysmetria, diplopia, or dysarthria — neurological 'stroke' signs."},
+  {q:"Tinnitus is defined as:",opts:["A sensation of vertigo with nausea and vomiting","Ringing, buzzing, or other noises in the ear without an external sound source","Painful pressure in the middle ear","Fluid accumulation behind the tympanic membrane"],ans:1,cat:"ear",exp:"Tinnitus is the perception of sound (ringing, buzzing, hissing, clicking) without an external auditory stimulus. It can be subjective (heard only by patient) or objective (audible with stethoscope — vascular pulsatile tinnitus)."},
+  {q:"Which diuretic is used in Ménière disease to reduce endolymphatic fluid buildup?",opts:["Furosemide (Lasix) IV","Hydrochlorothiazide (HCTZ) with triamterene","Mannitol","Spironolactone"],ans:1,cat:"ear",exp:"Low-sodium diet combined with a thiazide diuretic (HCTZ) ± triamterene is used for long-term Ménière management to reduce endolymph volume. This decreases the frequency of attacks."},
+  {q:"The characteristic nystagmus of BPPV (posterior canal) is:",opts:["Horizontal, bidirectional, and non-fatigable","Upbeat, vertical, and constant","Torsional (rotatory) geotropic nystagmus that fatigues — provoked by Dix-Hallpike maneuver","Downbeat vertical nystagmus"],ans:2,cat:"ear",exp:"Posterior canal BPPV produces a characteristic torsional (rotatory) nystagmus on Dix-Hallpike testing, with the upper pole of the eye beating toward the affected (down) ear. It has a brief latency, is transient, fatigues with repeated testing."},
+  {q:"The ossicles of the middle ear, in order from tympanic membrane to inner ear, are:",opts:["Malleus, incus, stapes","Incus, malleus, stapes","Stapes, incus, malleus","Cochlea, vestibule, semicircular canal"],ans:0,cat:"ear",exp:"The three ossicles transmit sound vibrations from the TM to the oval window of the inner ear in order: Malleus (attached to TM) → Incus → Stapes (footplate in oval window). They amplify sound mechanically."},
+  {q:"A patient presents with sudden onset severe vertigo, nausea, horizontal nystagmus, and mild hearing loss 2 weeks after recovering from influenza. This presentation is most consistent with:",opts:["BPPV","Otitis media","Labyrinthitis","Ménière disease"],ans:2,cat:"ear",exp:"Post-viral labyrinthitis typically follows a URI by 1–2 weeks. It presents with sudden severe vertigo, nausea/vomiting, spontaneous horizontal nystagmus, and mild hearing loss — lasting days to weeks."},
+  {q:"A button battery lodged in the ear canal requires:",opts:["Irrigation with warm water","Mineral oil drops to float it out","Immediate emergency removal — can cause liquefactive necrosis within 2 hours","Watchful waiting for 24 hours"],ans:2,cat:"ear",exp:"Button batteries generate an electric current through body fluid that causes liquefactive tissue necrosis within 2–4 hours. This is true in the ear, nose, and esophagus. Immediate removal by a specialist is mandatory."},
+  {q:"Mastoiditis, a serious complication of untreated otitis media, is best described as:",opts:["Infection of the mastoid air cells posterior to the middle ear, potentially spreading intracranially","Inflammation of the mastoid bone from repetitive barotrauma","Benign calcification of the mastoid process","Chronic cerumen buildup in the mastoid air cells"],ans:0,cat:"ear",exp:"The mastoid air cells communicate directly with the middle ear. Untreated AOM can spread into the mastoid, causing mastoiditis — presenting with post-auricular tenderness, erythema, and protrusion of the pinna. Intracranial spread (meningitis, brain abscess) is possible."},
+  {q:"An EMS provider is treating a patient with severe labyrinthitis and intractable vomiting. Which pharmacologic agent is most appropriate for symptom management?",opts:["Amoxicillin (antibiotic)","Ondansetron (Zofran) — antiemetic","Latanoprost eye drops","Ipratropium nasal spray"],ans:1,cat:"ear",exp:"Ondansetron (a 5-HT3 antagonist antiemetic) is appropriate for managing nausea and vomiting associated with labyrinthitis. Meclizine can reduce vertigo. Antibiotic treatment is only for bacterial labyrinthitis."},
+  {q:"Which of the following is a characteristic of endolymphatic hydrops in Ménière disease?",opts:["Decreased endolymph volume","Excess endolymph accumulation due to impaired resorption by the endolymphatic sac","Bacterial infection of the endolymph","Autoimmune destruction of the cochlear hair cells"],ans:1,cat:"ear",exp:"Endolymphatic hydrops — excess endolymph — is the pathological hallmark of Ménière disease. The etiology of impaired resorption is unknown but may involve autoimmune, inflammatory, or anatomic factors."},
+  {q:"Which prehospital intervention is appropriate for a patient with a suspected live insect in the ear canal?",opts:["Use forceps to immediately extract the insect","Irrigate with cold water to flush it out","Instill mineral oil or lidocaine drops (if TM intact) to kill the insect before transport","Syringe irrigate with warm hydrogen peroxide"],ans:2,cat:"ear",exp:"A live insect in the EAC should be killed before removal to prevent it from burrowing deeper or scratching the canal. Mineral oil or 2% lidocaine solution can be used to immobilize the insect (only if TM is intact). Then transport to ED for controlled removal."},
+  {q:"The sensation of 'aural fullness' in Ménière disease results from:",opts:["Cerumen buildup obstructing the external canal","Excessive endolymphatic pressure distending the membranous labyrinth","Eustachian tube dysfunction creating negative middle ear pressure","Tympanic membrane perforation"],ans:1,cat:"ear",exp:"Aural fullness (pressure or blockage sensation) in Ménière disease is caused by endolymphatic hydrops — the distension of the membranous labyrinth by excess endolymph creates pressure that is perceived as fullness or stuffiness."},
+
+  // NOSE (Q56–70)
+  {q:"Epistaxis most commonly originates from which anatomical location?",opts:["Posterior nasal cavity near the sphenopalatine artery","Kiesselbach's plexus on the anterior nasal septum","Ethmoid sinus drainage","The nasopharyngeal roof"],ans:1,cat:"nose",exp:"90% of nosebleeds are anterior, originating from Kiesselbach's plexus (Little's area) — a vascular anastomosis of five arteries on the anterior nasal septum, easily accessible for direct pressure."},
+  {q:"The correct prehospital position and technique for anterior epistaxis management is:",opts:["Lean the patient backward and tilt the head up, applying ice to the forehead","Sit the patient upright, lean FORWARD, pinch the fleshy lower portion of the nose for 10–15 minutes","Sit the patient sideways, pack both nostrils with gauze pads","Lay the patient supine with neck extended and apply a pressure bandage"],ans:1,cat:"nose",exp:"Leaning forward prevents blood from flowing posteriorly into the pharynx (which can cause nausea, vomiting, and aspiration). Pinching the fleshy nasal tip applies direct pressure to Kiesselbach's plexus."},
+  {q:"Oxymetazoline (Afrin) is useful in the management of epistaxis because it:",opts:["Promotes platelet aggregation at the bleeding site","Causes topical vasoconstriction, reducing blood flow to the nasal mucosa","Is an antifibrinolytic that prevents clot breakdown","Provides topical anesthesia to the nasal mucosa"],ans:1,cat:"nose",exp:"Oxymetazoline is an alpha-adrenergic agonist that causes vasoconstriction of nasal blood vessels when applied topically. Applied to a cotton pledget and inserted into the nostril, it reduces bleeding significantly."},
+  {q:"Posterior epistaxis is more dangerous than anterior epistaxis primarily because:",opts:["It causes more localized pain","It is harder to visualize and compress, blood flows into the pharynx, and risks aspiration","The posterior septum has thinner mucosa and bleeds more rapidly","Posterior bleeds are always caused by malignancy"],ans:1,cat:"nose",exp:"Posterior epistaxis (sphenopalatine artery area) is problematic because it cannot be seen or directly compressed, blood flows posteriorly into the pharynx (aspiration risk), and can involve large arterial bleeding requiring posterior packing or surgical ligation."},
+  {q:"Which patient condition MOST increases the risk of epistaxis?",opts:["Type 2 diabetes with controlled blood sugar","Anticoagulant use (warfarin, rivaroxaban) with therapeutic INR","Seasonal allergic rhinitis","Mild hypertension controlled on one medication"],ans:1,cat:"nose",exp:"Anticoagulants impair the coagulation cascade, making it much harder to achieve hemostasis after even minor nasal mucosal bleeding. Other risk factors: thrombocytopenia, liver disease, hemophilia, and intranasal cocaine use."},
+  {q:"Rhinitis medicamentosa (rebound congestion) is caused by:",opts:["Bacterial superinfection following viral rhinitis","Prolonged use of topical nasal decongestants (oxymetazoline) beyond 3–5 days","Long-term intranasal corticosteroid use","Allergic sensitization to nasal spray preservatives"],ans:1,cat:"nose",exp:"Rhinitis medicamentosa is a paradoxical rebound nasal congestion from overuse of topical alpha-adrenergic decongestants (oxymetazoline). The rebound vasodilation between doses becomes worse than the original congestion, creating a cycle of dependence."},
+  {q:"What makes button batteries in the nose a pediatric EMERGENCY?",opts:["They can cause choking by falling further into the airway","They generate an electric current causing liquefactive necrosis within 2 hours","They cause aspiration of toxic lithium compounds","They block nasal breathing causing respiratory distress"],ans:1,cat:"nose",exp:"Button batteries in nasal passages generate a low-voltage electric current through mucosal fluid, causing electrolytic liquefactive necrosis of the mucosa, cartilage, and adjacent tissue within 2–4 hours. Immediate removal is mandatory."},
+  {q:"Intranasal corticosteroids (e.g., fluticasone/Flonase) are the preferred maintenance treatment for allergic rhinitis because:",opts:["They provide immediate symptom relief within minutes","They kill bacteria causing secondary nasal infections","They reduce mucosal inflammation and IgE-mediated hypersensitivity over days to weeks — most effective long-term option","They prevent the immune system from reacting to allergens permanently"],ans:2,cat:"nose",exp:"Intranasal corticosteroids are the most effective treatment for allergic rhinitis, reducing all symptoms (congestion, rhinorrhea, sneezing, itch). Onset is 2–4 weeks but sustained — more effective than antihistamines alone for chronic management."},
+  {q:"The paranasal sinuses most commonly affected by sinusitis are the:",opts:["Sphenoid sinuses","Frontal sinuses","Ethmoid sinuses","Maxillary sinuses (most common, followed by ethmoid)"],ans:3,cat:"nose",exp:"The maxillary sinuses are the largest and most commonly affected by sinusitis due to their dependent position (drainage port at the top) making gravity-assisted drainage difficult. The ethmoid sinuses are frequently co-infected."},
+  {q:"A patient with sinusitis complains of upper tooth pain. This is most likely because:",opts:["Dental infection has spread to the sinus","The maxillary sinus floor is immediately adjacent to the roots of the upper molars and premolars","Fever causes referred pain to the teeth","Antihistamines cause tooth sensitivity"],ans:1,cat:"nose",exp:"The floor of the maxillary sinus sits directly over the roots of the upper premolars and molars. Maxillary sinusitis can cause referred pain that mimics toothache — and vice versa, dental abscess can cause secondary maxillary sinusitis."},
+  {q:"Which pseudoephedrine-containing decongestant requires showing an ID to purchase because it can be used in the illicit manufacture of methamphetamine?",opts:["Loratadine","Pseudoephedrine (Sudafed) — now behind pharmacy counter under Combat Methamphetamine Epidemic Act","Oxymetazoline (Afrin nasal spray)","Fexofenadine (Allegra)"],ans:1,cat:"nose",exp:"Pseudoephedrine is a precursor to methamphetamine. Under the Combat Methamphetamine Epidemic Act (2005), pseudoephedrine-containing products must be sold from behind the pharmacy counter with ID and purchase limits."},
+  {q:"The 'mother's kiss' technique for nasal foreign body removal involves:",opts:["The parent inserting a finger to dislodge the object","The parent blowing firmly into the child's mouth while occluding the unaffected nostril","The parent using a straw to create suction","Placing the child prone and applying back blows"],ans:1,cat:"nose",exp:"The 'mother's kiss' (or caregiver kiss) technique: seal the child's mouth with yours and deliver a firm puff while occluding the unaffected nostril with a finger. This generates enough positive pressure to pop the foreign body out. Success rate ~60%."},
+  {q:"Viral sinusitis typically:",opts:["Always progresses to bacterial sinusitis requiring antibiotics","Is more common than bacterial sinusitis; most resolve spontaneously within 10 days","Requires CT scan to diagnose","Is caused by Streptococcus pneumoniae"],ans:1,cat:"nose",exp:"The vast majority of sinusitis cases are viral (rhinovirus, coronavirus, influenza) and resolve spontaneously within 10 days. Antibiotics are NOT indicated for viral sinusitis. Bacterial sinusitis is suspected if symptoms worsen after 5–7 days or persist beyond 10 days."},
+  {q:"The nasal septum is composed of:",opts:["Bone only (vomer and ethmoid)","Cartilage only (septal cartilage)","Primarily cartilage anteriorly and bone posteriorly, covered by mucoperichondrium/mucoperiosteum","Fibrous connective tissue and fat"],ans:2,cat:"nose",exp:"The nasal septum has an anterior cartilaginous portion (septal/quadrilateral cartilage) and a posterior bony portion (vomer and perpendicular plate of ethmoid), both covered by mucous membranes. The cartilaginous portion is palpable externally."},
+  {q:"Tranexamic acid is used in epistaxis because it:",opts:["Directly vasoconstricts nasal blood vessels","Inhibits fibrinolysis (prevents breakdown of clots that have already formed) — antifibrinolytic","Promotes platelet aggregation at the site","Acts as a topical antibiotic to prevent secondary infection"],ans:1,cat:"nose",exp:"Tranexamic acid (TXA) is an antifibrinolytic agent that competitively inhibits plasminogen activation, preventing the breakdown of fibrin clots. It can be used IV or as a topical nasal spray to enhance hemostasis in epistaxis."},
+
+  // THROAT (Q71–100)
+  {q:"The medical term for toothache is:",opts:["Glossitis","Dentalgia (also: odontalgia)","Stomatitis","Gingivitis"],ans:1,cat:"throat",exp:"Dentalgia (or odontalgia) is the medical term for toothache — pain in or around the teeth and jaws, most commonly from dental caries, abscess, cracked tooth, or gum disease."},
+  {q:"A dental abscess forms when bacteria invade which part of the tooth?",opts:["The enamel surface","The dental pulp (neurovascular center of the tooth) — periapical abscess","The gingival sulcus only","The cementum layer"],ans:1,cat:"throat",exp:"A periapical (dental) abscess forms when bacteria penetrate the enamel and dentin to reach the pulp. The pulp becomes infected (pulpitis), and infection extends through the apex of the root into periapical bone, forming an abscess."},
+  {q:"The most dangerous potential complication of an untreated dental abscess is:",opts:["Tooth loss and nerve damage","Ludwig angina, deep neck space infection, mediastinitis, or sepsis","Temporomandibular joint dysfunction","Chronic sinusitis"],ans:1,cat:"throat",exp:"Dental infections can spread through fascial planes of the head and neck, causing Ludwig angina (floor of mouth), deep neck space infections, and ultimately descending necrotizing mediastinitis or sepsis — all potentially fatal."},
+  {q:"Ludwig angina is a bilateral cellulitis of which fascial spaces?",opts:["Tonsillar and parapharyngeal spaces","Submandibular, sublingual, and submental spaces (floor of mouth)","Retropharyngeal and parapharyngeal spaces","Pterygopalatine and masticator spaces"],ans:1,cat:"throat",exp:"Ludwig angina involves the three bilateral fascial spaces of the floor of the mouth: submandibular, sublingual, and submental. It is usually a non-fluctuant, indurated cellulitis — not a true abscess — spreading through fascial planes."},
+  {q:"The primary danger in Ludwig angina is:",opts:["Bacteremia causing endocarditis","Upward displacement of the tongue causing airway obstruction — can be rapidly fatal","Spread to the intracranial space causing meningitis","Erosion into the carotid artery causing hemorrhage"],ans:1,cat:"throat",exp:"As the floor of mouth swells, the tongue is displaced upward and backward — progressively obstructing the oropharyngeal airway. This is a rapidly evolving surgical airway emergency. Standard orotracheal intubation may be impossible due to distorted anatomy."},
+  {q:"Which intubation approach should be considered FIRST for a calm, awake patient with Ludwig angina and impending airway compromise?",opts:["Rapid sequence intubation (RSI) with succinylcholine","Awake fiberoptic intubation — preserves airway tone and allows assessment","Direct laryngoscopy with a Mac 3 blade","Blind nasotracheal intubation"],ans:1,cat:"throat",exp:"Awake fiberoptic intubation (or video laryngoscopy while awake) is preferred in Ludwig angina because RSI paralyzes all muscles including the tongue — the tongue then falls back completely, obliterating the already compromised airway. Maintaining spontaneous respirations is critical."},
+  {q:"The Hib (Haemophilus influenzae type B) vaccine has dramatically reduced epiglottitis in:",opts:["Adults over 65","Pediatric patients — epiglottitis is now primarily an adult disease","Immunocompromised adults","Neonates under 6 months"],ans:1,cat:"throat",exp:"Pre-vaccine: H. influenzae type B was the primary cause of pediatric epiglottitis. Post-Hib vaccine: pediatric epiglottitis is now rare. Adult epiglottitis (Strep, Staph) has become more relatively common."},
+  {q:"The classic 'tripod position' in pediatric epiglottitis involves the child:",opts:["Lying flat with neck hyperextended","Sitting upright, leaning forward, with jaw thrust forward, mouth open, and drooling ('sniffing position' with drooling)","Standing with arms raised overhead to open the airway","Sitting in the fetal position to protect the airway"],ans:1,cat:"throat",exp:"Epiglottitis patients instinctively adopt the tripod/sniffing position to maximize their airway patency — sitting upright, leaning forward on outstretched arms, neck extended, chin forward, mouth open, and drooling (too painful to swallow)."},
+  {q:"Which prehospital action is CONTRAINDICATED in a child with suspected epiglottitis?",opts:["Allowing the child to sit in position of comfort","Applying non-rebreather mask for O2 delivery","Inserting a tongue depressor or performing a throat examination to visualize the epiglottis","Preparing a BVM for backup ventilation"],ans:2,cat:"throat",exp:"Using a tongue depressor to examine the throat of a child with epiglottitis can precipitate laryngospasm and complete airway obstruction. Similarly, placing an IV or agitating the child increases the risk of sudden obstruction. Do NOT agitate."},
+  {q:"Laryngitis involves inflammation of which specific structure?",opts:["Epiglottis","Vocal cords (true vocal cords / glottis)","Tracheal mucosa","Tonsillar crypts"],ans:1,cat:"throat",exp:"Laryngitis is inflammation of the larynx specifically involving the true vocal cords (glottis). Edema of the vocal folds alters their vibratory pattern, producing hoarseness, dysphonia, or aphonia."},
+  {q:"Bacterial tracheitis is dangerous primarily because of:",opts:["Viral-mediated immunosuppression causing secondary pneumonia","Formation of a thick mucopurulent pseudomembrane that can completely obstruct the subglottic trachea","Laryngospasm triggered by high fever","Secondary spread to the brain causing encephalitis"],ans:1,cat:"throat",exp:"In bacterial tracheitis, Staph aureus causes diffuse tracheal mucosal ulceration and the formation of a thick, adherent pseudomembrane. This membrane can break off and completely occlude the airway — requiring emergent intubation, often in the OR."},
+  {q:"Racemic epinephrine nebulized is used in pediatric upper airway obstructions (croup, tracheitis) to:",opts:["Kill the causative bacteria","Reduce subglottic and tracheal mucosal edema through alpha-adrenergic vasoconstriction","Sedate the child and reduce respiratory effort","Promote bronchial dilation in lower airways"],ans:1,cat:"throat",exp:"Racemic epinephrine (or L-epinephrine) stimulates alpha-1 receptors in the mucosal vasculature, causing vasoconstriction and reducing subglottic edema — temporarily improving the airway diameter. The effect is temporary (2–3 hours) — 'rebound' may occur."},
+  {q:"Oral candidiasis (thrush) white plaques, when scraped off, reveal:",opts:["A yellow, purulent membrane adhering to the mucosa","An erythematous, bleeding mucosal surface","Intact, normal-appearing mucosa underneath","A gray pseudomembranous base"],ans:1,cat:"throat",exp:"The white plaques of oral candidiasis consist of Candida hyphae, desquamated epithelial cells, and debris. When scraped off (unlike leukoplakia, which cannot be scraped off), they leave a raw, erythematous, and bleeding mucosal surface."},
+  {q:"Which patient is at GREATEST risk for developing oral candidiasis?",opts:["A 25-year-old marathon runner","An HIV-positive patient with CD4 count <200 cells/μL","A healthy 40-year-old taking amoxicillin for 3 days","A child with ADHD"],ans:1,cat:"throat",exp:"Severe immunocompromise (HIV/AIDS with CD4 <200, CD4 defines AIDS-defining illness) dramatically impairs immune surveillance, allowing Candida to proliferate unchecked. Other risk factors: diabetes, chronic antibiotic use, inhaled corticosteroids, dentures."},
+  {q:"Peritonsillar abscess (PTA) is caused by infection of which space?",opts:["Within the tonsil itself","The peritonsillar space (between the tonsillar capsule and the superior pharyngeal constrictor muscle)","The retropharyngeal space","The parapharyngeal space"],ans:1,cat:"throat",exp:"PTA forms in the peritonsillar space — the potential space between the fibrous capsule of the palatine tonsil and the superior pharyngeal constrictor muscle. Pus accumulates, pushing the tonsil medially and displacing the uvula contralaterally."},
+  {q:"Deviation of the uvula in peritonsillar abscess deviates toward which side?",opts:["The same side as the abscess (ipsilateral)","The opposite side (contralateral to the abscess)","It does not deviate — it remains midline","It retracts upward toward the soft palate"],ans:1,cat:"throat",exp:"The pus-filled peritonsillar space pushes the affected tonsil medially toward the midline, which mechanically displaces the uvula to the contralateral (unaffected) side. This is a classic physical exam finding."},
+  {q:"Trismus in peritonsillar abscess is caused by:",opts:["Direct bacterial invasion of the temporomandibular joint","Reflex spasm of the medial pterygoid muscle from adjacent inflammation","Spread of infection to the masseter muscle","Pain inhibiting voluntary mouth opening"],ans:1,cat:"throat",exp:"Trismus (inability to fully open the mouth) in PTA results from inflammatory involvement of the medial pterygoid muscle, which lies immediately adjacent to the peritonsillar space. Muscle spasm limits mandibular depression."},
+  {q:"Untreated Group A Strep pharyngitis can lead to which serious post-infectious complication?",opts:["Epiglottitis","Acute rheumatic fever (affecting the heart, joints, skin, CNS) — due to molecular mimicry","Ludwig angina directly","Tracheitis"],ans:1,cat:"throat",exp:"Untreated GABHS pharyngitis can trigger acute rheumatic fever 2–4 weeks later via autoimmune molecular mimicry (streptococcal M protein antibodies cross-react with cardiac tissue). Rheumatic heart disease (mitral stenosis) is the long-term consequence."},
+  {q:"In infectious mononucleosis (EBV), which antibiotic should be AVOIDED because it causes a characteristic morbilliform rash?",opts:["Penicillin V","Amoxicillin (causes a diffuse maculopapular rash in mono — likely immune-mediated)","Ceftriaxone","Azithromycin"],ans:1,cat:"throat",exp:"Amoxicillin (and ampicillin) cause a diffuse maculopapular (morbilliform) rash in 80–100% of patients with infectious mononucleosis — likely due to immune complex deposition. The mechanism is not true penicillin allergy. Avoid amoxicillin when EBV mono is suspected."},
+  {q:"The most serious prehospital concern in a patient with post-tonsillectomy hemorrhage is:",opts:["Severe dehydration from reduced oral intake","Aspiration of blood causing airway compromise and aspiration pneumonia","Post-operative infection spreading to the neck","Reactivation of the tonsillitis"],ans:1,cat:"throat",exp:"Postsurgical oropharyngeal hemorrhage can lead to aspiration of swallowed blood — causing aspiration pneumonia or direct airway obstruction. Patients who have undergone radiation/chemotherapy can have massive arterial bleeds with 40% mortality from aspiration."},
+  {q:"For a patient with active post-tonsillectomy hemorrhage, the correct prehospital position is:",opts:["Supine with head of bed elevated to 30 degrees","Trendelenburg (head down) to maintain cerebral perfusion","Upright or recovery position to prevent aspiration of blood — lean forward","Prone to allow blood to drain from the mouth"],ans:2,cat:"throat",exp:"Upright positioning (or lateral recovery position) allows blood to drain from the mouth rather than accumulating in the pharynx where it can be aspirated. Continuous suctioning of the oropharynx is essential. Supine positioning promotes aspiration."},
+  {q:"The temporomandibular joint (TMJ) connects the:",opts:["Mandible to the maxilla","Mandibular condyle to the temporal bone, with an articular disc interposed","Hyoid bone to the mandible","Zygomatic arch to the temporal bone"],ans:1,cat:"throat",exp:"The TMJ is a synovial joint between the mandibular condyle and the glenoid fossa of the temporal bone. An articular disc sits between the joint surfaces. It is classified as a modified hinge and gliding joint."},
+  {q:"Which symptom of TMJ disorder is caused by the joint's anatomical proximity to the auditory structures?",opts:["Neck and shoulder pain","Tinnitus, ear fullness, and ear pain — from anatomical proximity to the middle ear and Eustachian tube","Headache across the forehead","Jaw clicking"],ans:1,cat:"throat",exp:"The TMJ is immediately anterior to the external auditory meatus. Inflammation and dysfunction of the TMJ can affect the middle ear through the shared ligamentous and bony architecture, causing tinnitus, aural fullness, and referred otalgia."},
+  {q:"A patient with TMJ disorder experiences jaw locking. This most likely results from:",opts:["Fracture of the mandibular condyle","Displacement of the articular disc anteriorly with failure to reduce — the disc gets trapped","Infection of the joint space (septic arthritis of TMJ)","Muscle paralysis from trigeminal nerve damage"],ans:1,cat:"throat",exp:"Closed lock of the TMJ occurs when the articular disc displaces anteriorly and the condyle cannot slide under it to fully open the mouth. The disc essentially becomes a 'door stopper.' This is different from trismus, which is muscle spasm."},
+  {q:"Which prehospital finding in a throat/neck complaint suggests the MOST IMMEDIATE airway threat requiring urgent intervention?",opts:["Mild sore throat with low-grade fever","Inspiratory stridor, drooling, and upright positioning in a febrile child or adult with neck swelling","Hoarseness gradually worsening over 3 days","Jaw pain with clicking on mouth opening"],ans:1,cat:"throat",exp:"Stridor + drooling + positional compensation (upright, leaning forward) in a febrile patient signals partial upper airway obstruction — potentially epiglottitis, Ludwig angina, or retropharyngeal abscess. This is an IMMEDIATE airway emergency requiring controlled, gentle management and rapid transport."}
+];
+
+// ============================================================
+// CONTENT RENDERING
+// ============================================================
+function buildContent() {
+  const area = document.getElementById('module-content-area');
+  area.innerHTML = '';
+  Object.entries(content).forEach(([key, organ]) => {
+    const panel = document.createElement('div');
+    panel.className = `organ-panel ${key === 'eye' ? 'active' : ''}`;
+    panel.id = `panel-${key}`;
+    let html = `<div class="organ-intro ${key}"><h2>🔬 ${organ.label}</h2><p>${organ.intro}</p></div>`;
+    html += `<div class="conditions-grid">`;
+    organ.conditions.forEach((c, ci) => {
+      const sev = c.severity === 'em' ? 'badge-em' : c.severity === 'mod' ? 'badge-mod' : 'badge-low';
+      const sevLabel = c.severity === 'em' ? '🚨 Emergency' : c.severity === 'mod' ? '⚠️ Urgent' : '✅ Supportive';
+      const medsHtml = c.meds.map(m => `<div class="med-pill"><span class="mname">${m.n}</span> <span class="mclass"> · ${m.c}</span></div>`).join('');
+      const symsHtml = c.symptoms.map(s => `<li>${s}</li>`).join('');
+      const cardId = `card-${key}-${ci}`;
+      html += `
+        <div class="cond-card ${key}" id="${cardId}">
+          <div class="cond-header" onclick="toggleCard(this)">
+            <div class="cond-title-wrap">
+              <div class="cond-icon">${c.icon}</div>
+              <div>
+                <div class="cond-name">${c.name}</div>
+                <div class="cond-sub">${c.sub}</div>
+              </div>
+            </div>
+            <div class="cond-badges">
+              <span class="badge ${sev}">${sevLabel}</span>
+              <span class="chevron">▾</span>
+            </div>
+          </div>
+          <div class="cond-body">
+            <div class="inner-tabs">
+              <button class="itab ${key}-itab active" onclick="switchItab(this,'${cardId}-patho','${cardId}')">🧬 Pathophysiology</button>
+              <button class="itab ${key}-itab" onclick="switchItab(this,'${cardId}-sx','${cardId}')">🩺 Signs &amp; Symptoms</button>
+              <button class="itab ${key}-itab" onclick="switchItab(this,'${cardId}-analogy','${cardId}')">💡 Analogy</button>
+              <button class="itab ${key}-itab" onclick="switchItab(this,'${cardId}-meds','${cardId}')">💊 Medications</button>
+              <button class="itab ${key}-itab" onclick="switchItab(this,'${cardId}-mgmt','${cardId}')">🚑 EMS Management</button>
+            </div>
+            <div class="ipanel active" id="${cardId}-patho">
+              <div class="section-text">${c.patho}</div>
+            </div>
+            <div class="ipanel" id="${cardId}-sx">
+              <ul class="symptom-list">${symsHtml}</ul>
+            </div>
+            <div class="ipanel" id="${cardId}-analogy">
+              <div class="analogy-box"><div class="bulb">💡</div><p>${c.analogy}</p></div>
+            </div>
+            <div class="ipanel" id="${cardId}-meds">
+              <div class="meds-grid">${medsHtml}</div>
+            </div>
+            <div class="ipanel" id="${cardId}-mgmt">
+              <div class="mgmt-box"><p>${c.mgmt}</p></div>
+            </div>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+    panel.innerHTML = html;
+    area.appendChild(panel);
+  });
+}
+
+function switchItab(btn, panelId, cardId) {
+  // Deactivate all tabs and panels within this card
+  const card = document.getElementById(cardId);
+  card.querySelectorAll('.itab').forEach(t => t.classList.remove('active'));
+  card.querySelectorAll('.ipanel').forEach(p => p.classList.remove('active'));
+  // Activate selected
+  btn.classList.add('active');
+  const target = document.getElementById(panelId);
+  if (target) target.classList.add('active');
+}
+
+function toggleCard(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  header.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+
+function showOrgan(key, btn) {
+  document.querySelectorAll('.organ-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.otab').forEach(t => t.classList.remove('active'));
+  document.getElementById(`panel-${key}`).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function startModule() {
+  try {
+    const nameEl = document.getElementById('inp-name');
+    const sidEl  = document.getElementById('inp-sid');
+    if (!nameEl || !sidEl) { alert('Registration form elements not found. Please reload the page.'); return; }
+    const name = nameEl.value.trim();
+    const sid  = sidEl.value.trim();
+    if (!name || !sid) { alert('Please enter your full name and student ID to continue.'); return; }
+    student.name = name; student.id = sid;
+    const hdrName = document.getElementById('hdr-name');
+    const hdrSid  = document.getElementById('hdr-sid');
+    if (hdrName) hdrName.textContent = name;
+    if (hdrSid)  hdrSid.textContent  = sid;
+    showScreen('module-screen');
+    buildContent();
+  } catch(e) {
+    console.error('startModule error:', e);
+    alert('Error starting module: ' + e.message);
+  }
+}
+
+function startQuiz() {
+  userAnswers = new Array(100).fill(null);
+  currentQ = 0;
+  quizSubmitted = false;
+  showScreen('quiz-screen');
+  renderQuestion();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('active');
+    s.style.display = 'none';
+  });
+  const el = document.getElementById(id);
+  if (el) {
+    el.style.display = 'block';
+    el.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+}
+
+// ============================================================
+// QUIZ LOGIC
+// ============================================================
+function renderQuestion() {
+  const q = questions[currentQ];
+  document.getElementById('q-num').textContent = currentQ + 1;
+  document.getElementById('q-num-label').textContent = `Question ${currentQ + 1} of ${questions.length}`;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('quiz-prog-bar').style.width = `${((currentQ + 1) / 100) * 100}%`;
+  const catWrap = document.getElementById('cat-tag-wrap');
+  const catLabels = { eye: '👁️ Eye', ear: '👂 Ear', nose: '👃 Nose', throat: '🗣️ Throat' };
+  catWrap.innerHTML = `<span class="cat-tag cat-${q.cat}">${catLabels[q.cat]}</span>`;
+  const optsEl = document.getElementById('q-options');
+  const letters = ['A', 'B', 'C', 'D'];
+  optsEl.innerHTML = q.opts.map((opt, i) => {
+    let cls = 'opt-btn';
+    if (quizSubmitted || userAnswers[currentQ] !== null) {
+      if (i === q.ans) cls += ' correct';
+      else if (userAnswers[currentQ] === i && i !== q.ans) cls += ' wrong';
+    } else if (userAnswers[currentQ] === i) cls += ' selected';
+    const dis = (quizSubmitted || userAnswers[currentQ] !== null) ? ' disabled' : '';
+    return `<button class="${cls}"${dis} onclick="selectAnswer(${i})"><span class="opt-letter">${letters[i]}</span>${opt}</button>`;
+  }).join('');
+  const expEl = document.getElementById('q-explanation');
+  const expText = document.getElementById('q-exp-text');
+  if (quizSubmitted || userAnswers[currentQ] !== null) {
+    expText.textContent = q.exp;
+    expEl.classList.add('show');
+  } else {
+    expEl.classList.remove('show');
+  }
+  document.getElementById('btn-prev').disabled = currentQ === 0;
+  const isLast = currentQ === questions.length - 1;
+  const allAnswered = userAnswers.every(a => a !== null);
+  document.getElementById('btn-next').style.display = isLast ? 'none' : 'inline-block';
+  document.getElementById('btn-submit').style.display = (isLast && !quizSubmitted) ? 'inline-block' : 'none';
+}
+
+function selectAnswer(idx) {
+  if (userAnswers[currentQ] !== null || quizSubmitted) return;
+  userAnswers[currentQ] = idx;
+  renderQuestion();
+  checkSubmitButton();
+}
+
+function checkSubmitButton() {
+  const isLast = currentQ === questions.length - 1;
+  document.getElementById('btn-submit').style.display = (isLast && !quizSubmitted) ? 'inline-block' : 'none';
+}
+
+function nextQ() {
+  if (currentQ < questions.length - 1) { currentQ++; renderQuestion(); }
+}
+function prevQ() {
+  if (currentQ > 0) { currentQ--; renderQuestion(); }
+}
+
+function submitQuiz() {
+  if (!userAnswers.every(a => a !== null)) {
+    const unanswered = userAnswers.filter(a => a === null).length;
+    if (!confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`)) return;
+  }
+  quizSubmitted = true;
+  buildResults();
+  showScreen('results-screen');
+}
+
+// ============================================================
+// RESULTS
+// ============================================================
+function buildResults() {
+  let total = 0, eyeC = 0, eyeT = 0, earC = 0, earT = 0, noseC = 0, noseT = 0, thrC = 0, thrT = 0;
+  questions.forEach((q, i) => {
+    const correct = userAnswers[i] === q.ans;
+    if (correct) total++;
+    if (q.cat === 'eye') { eyeT++; if (correct) eyeC++; }
+    else if (q.cat === 'ear') { earT++; if (correct) earC++; }
+    else if (q.cat === 'nose') { noseT++; if (correct) noseC++; }
+    else { thrT++; if (correct) thrC++; }
+  });
+  const pct = total;
+  let grade, color;
+  if (pct >= 90) { grade = 'A'; color = '#10b981'; }
+  else if (pct >= 80) { grade = 'B'; color = '#3b82f6'; }
+  else if (pct >= 70) { grade = 'C'; color = '#f59e0b'; }
+  else if (pct >= 60) { grade = 'D'; color = '#f97316'; }
+  else { grade = 'F'; color = '#ef4444'; }
+  document.getElementById('res-score').textContent = total;
+  document.getElementById('res-name').textContent = student.name;
+  document.getElementById('res-id').textContent = `Student ID: ${student.id} · ${new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'})}`;
+  const gradeEl = document.getElementById('res-grade');
+  gradeEl.textContent = grade;
+  gradeEl.style.color = color;
+  document.getElementById('res-pct').textContent = `${pct}% · ${pct >= 70 ? '🎉 Passing' : '📚 Remediation Recommended'}`;
+  const deg = Math.round((total / 100) * 360);
+  document.getElementById('score-ring').style.background = `conic-gradient(${color} ${deg}deg, var(--card) ${deg}deg)`;
+  document.getElementById('cs-eye').textContent = `${eyeC}/${eyeT}`;
+  document.getElementById('cs-ear').textContent = `${earC}/${earT}`;
+  document.getElementById('cs-nose').textContent = `${noseC}/${noseT}`;
+  document.getElementById('cs-throat').textContent = `${thrC}/${thrT}`;
+  const reviewList = document.getElementById('review-list');
+  reviewList.innerHTML = questions.map((q, i) => {
+    const correct = userAnswers[i] === q.ans;
+    const chosen = userAnswers[i] !== null ? q.opts[userAnswers[i]] : 'Not answered';
+    const correctOpt = q.opts[q.ans];
+    return `<div class="review-item ${correct ? 'rev-correct' : 'rev-wrong'}">
+      <div class="rev-header">
+        <div class="rev-icon">${correct ? '✅' : '❌'}</div>
+        <div class="rev-q"><strong>Q${i+1}.</strong> ${q.q}</div>
+      </div>
+      <div class="rev-answers">
+        <span class="rev-correct-ans">✓ ${correctOpt}</span>
+        ${!correct ? `<span class="rev-wrong-ans">✗ ${chosen}</span>` : ''}
+      </div>
+      <div style="font-size:13px;color:var(--text2);margin-top:8px;padding-left:28px;">${q.exp}</div>
+    </div>`;
+  }).join('');
+}
+
+function retakeQuiz() {
+  startQuiz();
+}
+
+// ============================================================
+// PDF GENERATION
+// ============================================================
+function downloadPDF() {
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert('PDF library failed to load. Please check your internet connection and refresh the page, then try again.');
+    return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+  const W = 215.9, margin = 20;
+  let total = 0;
+  let eyeC = 0, eyeT = 0, earC = 0, earT = 0, noseC = 0, noseT = 0, thrC = 0, thrT = 0;
+  questions.forEach((q, i) => {
+    const correct = userAnswers[i] === q.ans;
+    if (correct) total++;
+    if (q.cat === 'eye') { eyeT++; if (correct) eyeC++; }
+    else if (q.cat === 'ear') { earT++; if (correct) earC++; }
+    else if (q.cat === 'nose') { noseT++; if (correct) noseC++; }
+    else { thrT++; if (correct) thrC++; }
+  });
+  const pct = total;
+  let grade = pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : pct >= 60 ? 'D' : 'F';
+
+  // ─ PAGE 1: Summary ─
+  // Header bar
+  doc.setFillColor(10, 22, 40);
+  doc.rect(0, 0, W, 40, 'F');
+  doc.setFillColor(37, 99, 235);
+  doc.rect(0, 40, W, 3, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(22);
+  doc.text('EENT MODULE', margin, 18);
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Knowledge Assessment Results', margin, 27);
+  doc.text('CAMP Community College · EMS Education Program', margin, 34);
+
+  // Student info box
+  doc.setFillColor(18, 36, 64);
+  doc.roundedRect(margin, 52, W - 2 * margin, 32, 3, 3, 'F');
+  doc.setTextColor(148, 163, 184);
+  doc.setFontSize(9);
+  doc.text('STUDENT NAME', margin + 6, 61);
+  doc.text('STUDENT ID', 120, 61);
+  doc.text('DATE', margin + 6, 75);
+  doc.text('MODULE', 120, 75);
+  doc.setTextColor(226, 232, 240);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.text(student.name, margin + 6, 68);
+  doc.text(student.id, 120, 68);
+  doc.setFontSize(11);
+  doc.text(new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }), margin + 6, 82);
+  doc.text('Chapter 22 — EENT', 120, 82);
+
+  // Score section
+  const gradeColor = pct >= 90 ? [16,185,129] : pct >= 80 ? [59,130,246] : pct >= 70 ? [245,158,11] : pct >= 60 ? [249,115,22] : [239,68,68];
+  doc.setFillColor(18, 36, 64);
+  doc.roundedRect(margin, 93, (W - 2*margin)/2 - 4, 40, 3, 3, 'F');
+  doc.setTextColor(148, 163, 184);
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.text('TOTAL SCORE', margin + 6, 102);
+  doc.setFontSize(36);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...gradeColor);
+  doc.text(`${total}/100`, margin + 6, 124);
+
+  doc.setFillColor(18, 36, 64);
+  doc.roundedRect((W + 2*margin)/2 - 4, 93, (W - 2*margin)/2 - 4, 40, 3, 3, 'F');
+  doc.setTextColor(148, 163, 184);
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.text('LETTER GRADE', (W + 2*margin)/2 + 2, 102);
+  doc.setFontSize(36);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...gradeColor);
+  doc.text(grade, (W + 2*margin)/2 + 2, 124);
+
+  // Category scores
+  const cats = [
+    { label: '👁 Eye', score: `${eyeC}/${eyeT}`, color: [59,130,246] },
+    { label: '👂 Ear', score: `${earC}/${earT}`, color: [124,58,237] },
+    { label: '👃 Nose', score: `${noseC}/${noseT}`, color: [5,150,105] },
+    { label: '🗣 Throat', score: `${thrC}/${thrT}`, color: [220,38,38] }
+  ];
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(226,232,240);
+  doc.text('CATEGORY BREAKDOWN', margin, 146);
+  cats.forEach((cat, i) => {
+    const x = margin + i * ((W - 2*margin) / 4);
+    const bw = (W - 2*margin) / 4 - 4;
+    doc.setFillColor(18, 36, 64);
+    doc.roundedRect(x, 150, bw, 26, 2, 2, 'F');
+    doc.setTextColor(148,163,184);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text(cat.label, x + 4, 158);
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...cat.color);
+    doc.text(cat.score, x + 4, 170);
+  });
+
+  // Status message
+  const statusColor = pct >= 70 ? [16,185,129] : [239,68,68];
+  const statusMsg = pct >= 70 ? 'PASSING — Demonstrates proficiency in EENT pathophysiology and EMS management.' : 'REMEDIATION RECOMMENDED — Review conditions where errors occurred. Retake after remediation.';
+  doc.setFillColor(...statusColor.map(c => Math.floor(c * 0.15 + 10)));
+  doc.roundedRect(margin, 185, W - 2*margin, 14, 2, 2, 'F');
+  doc.setTextColor(...statusColor);
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'bold');
+  doc.text(statusMsg, margin + 5, 194, { maxWidth: W - 2*margin - 10 });
+
+  // ─ PAGE 2+: Question Review ─
+  doc.addPage();
+  let y = 20;
+  doc.setFillColor(10, 22, 40);
+  doc.rect(0, 0, W, 14, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'bold');
+  doc.text('EENT ASSESSMENT — DETAILED QUESTION REVIEW', margin, 9);
+
+  doc.setFontSize(9);
+  questions.forEach((q, i) => {
+    const correct = userAnswers[i] === q.ans;
+    const chosen = userAnswers[i] !== null ? q.opts[userAnswers[i]] : 'Not answered';
+    const correctOpt = q.opts[q.ans];
+    const catLabel = { eye: 'Eye', ear: 'Ear', nose: 'Nose', throat: 'Throat' }[q.cat];
+    if (y > 255) {
+      doc.addPage();
+      y = 20;
+    }
+    // Q block
+    const blockH = 24;
+    doc.setFillColor(correct ? 14 : 40, correct ? 30 : 10, correct ? 40 : 20);
+    doc.roundedRect(margin, y, W - 2*margin, blockH, 2, 2, 'F');
+    doc.setFillColor(...(correct ? [16,185,129] : [239,68,68]));
+    doc.rect(margin, y, 3, blockH, 'F');
+    doc.setTextColor(226,232,240);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    const qText = doc.splitTextToSize(`Q${i+1}. ${q.q}`, W - 2*margin - 30);
+    doc.text(qText, margin + 6, y + 6);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(correct ? 52 : 239, correct ? 211 : 68, correct ? 153 : 68);
+    doc.text(`✓ ${correctOpt}`, margin + 6, y + 17);
+    if (!correct) {
+      doc.setTextColor(239,68,68);
+      doc.text(`✗ Your answer: ${chosen}`, margin + 6 + 70, y + 17);
+    }
+    doc.setTextColor(148,163,184);
+    doc.setFontSize(7);
+    doc.text(catLabel, W - margin - 20, y + 6);
+    y += blockH + 2;
+  });
+
+  // Footer on last page
+  doc.setFillColor(10, 22, 40);
+  doc.rect(0, 272, W, 14, 'F');
+  doc.setTextColor(100,116,139);
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'normal');
+  doc.text('CAMP Community College | EMS Education Program | Chapter 22 — EENT', margin, 280);
+  doc.text(`Generated: ${new Date().toLocaleString()}`, W - margin, 280, { align: 'right' });
+
+  doc.save(`EENT_Assessment_${student.name.replace(/\s+/g,'_')}_${student.id}.pdf`);
+}
+</script>
+</body>
+</html>
