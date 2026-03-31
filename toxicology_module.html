@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 32 — Toxicology | CAMP EMS Paramedic Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #06090f;
+    --surface: #0d1520;
+    --surface2: #111d2e;
+    --border: #1e3448;
+    --teal: #00c6b2;
+    --teal-dim: #00957f;
+    --amber: #f5a623;
+    --red: #e05c5c;
+    --green: #4bc98a;
+    --text: #c8d8e8;
+    --text-muted: #5a7a94;
+    --text-bright: #e8f4ff;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --display: 'Rajdhani', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #060d1a 0%, #0a1828 50%, #060e1c 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-icon {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--teal), #007a9e);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(0,198,178,0.3);
+  }
+  .header-text h1 {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 1px;
+  }
+  .header-text p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .header-badge {
+    margin-left: auto;
+    background: rgba(0,198,178,0.1);
+    border: 1px solid var(--teal-dim);
+    color: var(--teal);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+  }
+
+  /* ── LAYOUT ── */
+  .layout { display: flex; min-height: calc(100vh - 89px); }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 89px;
+    height: calc(100vh - 89px);
+    overflow-y: auto;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sidebar-section {
+    padding: 0 16px 12px;
+    margin-bottom: 4px;
+  }
+  .sidebar-section-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 8px 8px 6px;
+    display: block;
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 12px;
+    border: none;
+    background: none;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 13px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .nav-btn:hover { background: rgba(0,198,178,0.07); color: var(--text-bright); }
+  .nav-btn.active {
+    background: rgba(0,198,178,0.12);
+    color: var(--teal);
+    border-left-color: var(--teal);
+    font-weight: 500;
+  }
+  .nav-icon { font-size: 14px; flex-shrink: 0; }
+  .nav-num {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main { flex: 1; padding: 36px 48px; overflow-y: auto; max-width: 960px; }
+
+  /* ── REGISTRATION ── */
+  #page-registration { max-width: 600px; margin: 0 auto; }
+  .reg-hero {
+    text-align: center;
+    padding: 40px 0 32px;
+  }
+  .reg-hero .big-icon {
+    font-size: 64px;
+    display: block;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 20px rgba(0,198,178,0.4));
+  }
+  .reg-hero h2 {
+    font-family: var(--display);
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 1px;
+  }
+  .reg-hero p { color: var(--text-muted); margin-top: 8px; font-size: 15px; }
+
+  .reg-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 24px;
+  }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .form-group input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--text-bright);
+    font-family: var(--sans);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus { border-color: var(--teal); }
+  .form-group input::placeholder { color: var(--text-muted); }
+
+  .btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--teal), #00957f);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(0,198,178,0.25);
+    margin-top: 8px;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(0,198,178,0.4); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-secondary {
+    padding: 10px 24px;
+    background: transparent;
+    border: 1px solid var(--teal-dim);
+    border-radius: 8px;
+    color: var(--teal);
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(0,198,178,0.1); }
+
+  /* ── CONTENT PAGE ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .page-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+  .page-header .chapter-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .page-header h2 {
+    font-family: var(--display);
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 0.5px;
+  }
+  .page-header p {
+    color: var(--text-muted);
+    margin-top: 8px;
+    max-width: 680px;
+  }
+
+  /* ── TOXIDROME CARDS ── */
+  .toxidrome-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .toxidrome-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .toxidrome-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--card-accent, var(--teal));
+  }
+  .toxidrome-card:hover { border-color: var(--teal-dim); transform: translateY(-2px); }
+  .toxidrome-card h3 {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+  .toxidrome-card .mnemonic {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--amber);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .toxidrome-card p { font-size: 13px; color: var(--text); line-height: 1.5; }
+  .toxidrome-card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(0,198,178,0.1);
+    color: var(--teal);
+    border: 1px solid rgba(0,198,178,0.2);
+  }
+  .tag.red { background: rgba(224,92,92,0.1); color: var(--red); border-color: rgba(224,92,92,0.2); }
+  .tag.amber { background: rgba(245,166,35,0.1); color: var(--amber); border-color: rgba(245,166,35,0.2); }
+  .tag.green { background: rgba(75,201,138,0.1); color: var(--green); border-color: rgba(75,201,138,0.2); }
+
+  /* ── SECTION BLOCKS ── */
+  .section-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .section-block-header {
+    padding: 16px 20px;
+    background: rgba(0,198,178,0.06);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+  }
+  .section-block-header h3 {
+    font-family: var(--display);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--text-bright);
+    letter-spacing: 0.5px;
+  }
+  .section-block-header .expand-icon {
+    margin-left: auto;
+    color: var(--teal);
+    font-size: 18px;
+    transition: transform 0.3s;
+  }
+  .section-block-header.collapsed .expand-icon { transform: rotate(-90deg); }
+  .section-block-body { padding: 24px; }
+  .section-block-body.hidden { display: none; }
+
+  /* ── INFO BOXES ── */
+  .info-box {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-left: 3px solid;
+    font-size: 14px;
+  }
+  .info-box.analogy { border-color: var(--amber); background: rgba(245,166,35,0.07); }
+  .info-box.analogy::before { content: '💡 ANALOGY: '; font-weight: 600; color: var(--amber); font-size: 12px; letter-spacing: 1px; display: block; margin-bottom: 6px; font-family: var(--mono); }
+  .info-box.pathophys { border-color: var(--teal); background: rgba(0,198,178,0.07); }
+  .info-box.pathophys::before { content: '🔬 PATHOPHYSIOLOGY: '; font-weight: 600; color: var(--teal); font-size: 12px; letter-spacing: 1px; display: block; margin-bottom: 6px; font-family: var(--mono); }
+  .info-box.treatment { border-color: var(--green); background: rgba(75,201,138,0.07); }
+  .info-box.treatment::before { content: '💊 TREATMENT: '; font-weight: 600; color: var(--green); font-size: 12px; letter-spacing: 1px; display: block; margin-bottom: 6px; font-family: var(--mono); }
+  .info-box.warning { border-color: var(--red); background: rgba(224,92,92,0.07); }
+  .info-box.warning::before { content: '⚠️ CRITICAL POINT: '; font-weight: 600; color: var(--red); font-size: 12px; letter-spacing: 1px; display: block; margin-bottom: 6px; font-family: var(--mono); }
+  .info-box.pearl { border-color: #9d85f5; background: rgba(157,133,245,0.07); }
+  .info-box.pearl::before { content: '🩺 CLINICAL PEARL: '; font-weight: 600; color: #9d85f5; font-size: 12px; letter-spacing: 1px; display: block; margin-bottom: 6px; font-family: var(--mono); }
+
+  /* ── DRUG TABLE ── */
+  .drug-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .drug-table th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--teal);
+    border-bottom: 1px solid var(--border);
+  }
+  .drug-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(30,52,72,0.6);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .drug-table tr:hover td { background: rgba(0,198,178,0.04); }
+  .drug-name { color: var(--amber); font-weight: 500; }
+  .drug-dose { font-family: var(--mono); font-size: 12px; color: var(--green); }
+
+  /* ── STAGES TABLE ── */
+  .stages-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  .stage-box {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 14px;
+    border-top: 2px solid var(--teal);
+    font-size: 13px;
+  }
+  .stage-box h4 { font-family: var(--display); font-size: 15px; color: var(--teal); margin-bottom: 6px; }
+  .stage-box .time { font-family: var(--mono); font-size: 10px; color: var(--text-muted); margin-bottom: 6px; }
+
+  /* ── TWO COLUMN ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 16px 0; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── LIST STYLES ── */
+  .styled-list { list-style: none; padding: 0; }
+  .styled-list li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(30,52,72,0.4);
+    color: var(--text);
+  }
+  .styled-list li:last-child { border-bottom: none; }
+  .styled-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-size: 12px;
+  }
+
+  /* ── SYMPTOM GRID ── */
+  .symptom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
+  .symptom-chip {
+    background: var(--surface2);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-left: 2px solid var(--teal-dim);
+    color: var(--text);
+  }
+
+  /* ── SLUDGE BOX ── */
+  .sludge-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .sludge-item {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .sludge-letter {
+    font-family: var(--display);
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--teal);
+    display: block;
+  }
+  .sludge-word {
+    font-size: 11px;
+    color: var(--amber);
+    font-family: var(--mono);
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 2px;
+  }
+  .sludge-meaning {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* ── ASSESSMENT ── */
+  #page-assessment { max-width: 860px; }
+  .quiz-progress-bar {
+    background: var(--surface2);
+    border-radius: 4px;
+    height: 6px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), #007a9e);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .quiz-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .q-counter { color: var(--teal); font-weight: 500; }
+
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 20px;
+    display: none;
+  }
+  .question-card.active { display: block; animation: fadeSlide 0.3s ease; }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .q-text {
+    font-size: 16px;
+    color: var(--text-bright);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .options { display: grid; gap: 10px; }
+  .option-btn {
+    width: 100%;
+    padding: 13px 18px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--teal-dim); background: rgba(0,198,178,0.08); color: var(--text-bright); }
+  .option-btn .opt-letter {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: all 0.15s;
+    margin-top: 1px;
+  }
+  .option-btn:hover:not(:disabled) .opt-letter { background: var(--teal-dim); color: #fff; }
+  .option-btn.correct { border-color: var(--green); background: rgba(75,201,138,0.1); color: var(--text-bright); }
+  .option-btn.correct .opt-letter { background: var(--green); color: #fff; }
+  .option-btn.wrong { border-color: var(--red); background: rgba(224,92,92,0.1); color: var(--text); }
+  .option-btn.wrong .opt-letter { background: var(--red); color: #fff; }
+  .option-btn:disabled { cursor: default; }
+
+  .feedback-box {
+    margin-top: 16px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    display: none;
+    line-height: 1.55;
+  }
+  .feedback-box.correct { background: rgba(75,201,138,0.1); border: 1px solid rgba(75,201,138,0.3); color: var(--text-bright); }
+  .feedback-box.wrong { background: rgba(224,92,92,0.1); border: 1px solid rgba(224,92,92,0.3); color: var(--text-bright); }
+  .feedback-box.show { display: block; }
+
+  .quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 8px;
+  }
+  .btn-next {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, var(--teal), var(--teal-dim));
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: none;
+  }
+  .btn-next.show { display: block; }
+  .btn-next:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,198,178,0.3); }
+
+  /* ── RESULTS ── */
+  #results-panel { display: none; }
+  .score-hero {
+    text-align: center;
+    padding: 40px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 32px;
+  }
+  .score-circle {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: conic-gradient(var(--teal) var(--pct, 0%), var(--surface2) 0%);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    position: relative;
+  }
+  .score-circle::before {
+    content: '';
+    position: absolute;
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: var(--surface);
+  }
+  .score-value {
+    position: relative;
+    z-index: 1;
+    font-family: var(--display);
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--teal);
+  }
+  .score-hero h2 {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+  .score-hero p { color: var(--text-muted); margin-top: 8px; }
+  .score-grade {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-top: 12px;
+    font-weight: 600;
+  }
+  .grade-A { background: rgba(75,201,138,0.15); color: var(--green); border: 1px solid rgba(75,201,138,0.3); }
+  .grade-B { background: rgba(0,198,178,0.15); color: var(--teal); border: 1px solid rgba(0,198,178,0.3); }
+  .grade-C { background: rgba(245,166,35,0.15); color: var(--amber); border: 1px solid rgba(245,166,35,0.3); }
+  .grade-D { background: rgba(224,92,92,0.15); color: var(--red); border: 1px solid rgba(224,92,92,0.3); }
+
+  .btn-pdf {
+    display: flex; align-items: center; gap: 12px; justify-content: center;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #1a3a5c, #112a45);
+    border: 1px solid var(--teal);
+    border-radius: 10px;
+    color: var(--teal);
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0 auto;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .btn-pdf:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,198,178,0.2); background: rgba(0,198,178,0.1); }
+  .btn-restart {
+    display: block;
+    margin: 16px auto 0;
+    padding: 10px 28px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-family: var(--sans);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-restart:hover { border-color: var(--teal-dim); color: var(--text); }
+
+  /* answer review */
+  .review-list { margin-top: 24px; }
+  .review-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .review-item.r-correct { border-left: 3px solid var(--green); }
+  .review-item.r-wrong { border-left: 3px solid var(--red); }
+  .review-q { color: var(--text); margin-bottom: 6px; font-size: 14px; }
+  .review-a { font-family: var(--mono); font-size: 12px; }
+  .review-a.good { color: var(--green); }
+  .review-a.bad { color: var(--red); }
+
+  h4 { font-family: var(--display); font-size: 17px; font-weight: 600; color: var(--text-bright); margin: 20px 0 10px; }
+  p { margin-bottom: 10px; }
+  .text-teal { color: var(--teal); }
+  .text-amber { color: var(--amber); }
+  .text-red { color: var(--red); }
+  .text-green { color: var(--green); }
+  .mono { font-family: var(--mono); font-size: 13px; }
+  strong { color: var(--text-bright); }
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(0,198,178,0.08), rgba(0,100,120,0.08));
+    border: 1px solid rgba(0,198,178,0.2);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .pill {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(0,198,178,0.1);
+    color: var(--teal);
+    border: 1px solid rgba(0,198,178,0.2);
+  }
+  .pill.amber { background: rgba(245,166,35,0.1); color: var(--amber); border-color: rgba(245,166,35,0.2); }
+  .pill.red { background: rgba(224,92,92,0.1); color: var(--red); border-color: rgba(224,92,92,0.2); }
+  .pill.green { background: rgba(75,201,138,0.1); color: var(--green); border-color: rgba(75,201,138,0.2); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-icon">☣️</div>
+  <div class="header-text">
+    <h1>TOXICOLOGY</h1>
+    <p>Chapter 32 · Sanders' Paramedic Textbook 6th Edition</p>
+  </div>
+  <div class="header-badge">CAMP EMS · Paramedic Program</div>
+</div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Getting Started</span>
+      <button class="nav-btn active" onclick="showPage('registration')">
+        <span class="nav-icon">📋</span> Student Registration
+      </button>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Core Content</span>
+      <button class="nav-btn" onclick="showPage('intro')">
+        <span class="nav-icon">☣️</span> Intro & Toxidromes
+        <span class="nav-num">I</span>
+      </button>
+      <button class="nav-btn" onclick="showPage('ingestion')">
+        <span class="nav-icon">💊</span> Ingested Poisons
+        <span class="nav-num">II</span>
+      </button>
+      <button class="nav-btn" onclick="showPage('inhalation')">
+        <span class="nav-icon">💨</span> Inhaled Poisons
+        <span class="nav-num">III</span>
+      </button>
+      <button class="nav-btn" onclick="showPage('injection')">
+        <span class="nav-icon">🐍</span> Injected Poisons
+        <span class="nav-num">IV</span>
+      </button>
+      <button class="nav-btn" onclick="showPage('absorption')">
+        <span class="nav-icon">🌿</span> Absorbed Poisons
+        <span class="nav-num">V</span>
+      </button>
+      <button class="nav-btn" onclick="showPage('drugs')">
+        <span class="nav-icon">💉</span> Substance Use & OD
+        <span class="nav-num">VI</span>
+      </button>
+      <button class="nav-btn" onclick="showPage('alcohol')">
+        <span class="nav-icon">🍺</span> Alcohol Emergencies
+        <span class="nav-num">VII</span>
+      </button>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Assessment</span>
+      <button class="nav-btn" onclick="showPage('assessment')">
+        <span class="nav-icon">📝</span> Knowledge Assessment
+        <span class="nav-num">100Q</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ══════════════════════════════════════ REGISTRATION ══ -->
+    <div id="page-registration" class="page active">
+      <div id="page-registration-inner">
+        <div class="reg-hero">
+          <span class="big-icon">☣️</span>
+          <h2>TOXICOLOGY MODULE</h2>
+          <p>Chapter 32 Interactive Learning Platform<br>Complete registration to unlock all content & assessment</p>
+        </div>
+        <div class="reg-card">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="studentName" placeholder="Enter your full name" />
+          </div>
+          <div class="form-group">
+            <label>Student ID</label>
+            <input type="text" id="studentId" placeholder="Enter your student ID" />
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="text" id="studentDate" id="studentDate" readonly />
+          </div>
+          <button class="btn-primary" onclick="registerStudent()">BEGIN MODULE →</button>
+        </div>
+        <script>document.getElementById('studentDate').value = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});</script>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ INTRO & TOXIDROMES ══ -->
+    <div id="page-intro" class="page">
+      <div class="page-header">
+        <span class="chapter-tag">Chapter 32 · Section I</span>
+        <h2>Introduction & Toxic Syndromes</h2>
+        <p>Toxidromes are constellations of signs and symptoms that point to a specific class of poison. Mastering these patterns is your fastest clinical shortcut.</p>
+      </div>
+
+      <!-- Poison Control -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>📞</span>
+          <h3>Poison Control Centers</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <p>There are <strong>55 poison control centers</strong> in the United States, most based in major medical centers. They provide 24/7 consultation from a database of over <strong>447,000 toxic substances</strong> — drugs, chemicals, plants, animals, cosmetics, and hazardous materials.</p>
+          <div class="highlight-box">
+            <strong class="text-teal">National Poison Control Number: 1-800-222-1222</strong><br>
+            Accessible toll-free nationwide, linked into 9-1-1 systems. Always call early — before transport when possible.
+          </div>
+          <div class="info-box analogy">
+            Think of Poison Control as your real-time toxicology consultant — a searchable library of every dangerous substance on Earth, available in seconds. They don't just tell you what's toxic; they walk you through management step by step, factoring in the dose, the patient's weight, and your local protocols.
+          </div>
+          <p>Poison control responsibilities include: treatment consultation, professional education, data collection, public education, research, and regional EMS protocol development.</p>
+        </div>
+      </div>
+
+      <!-- Toxidromes -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🧬</span>
+          <h3>The Seven Core Toxidromes</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <p>A <strong>toxidrome</strong> (toxic + syndrome) is a recognizable pattern of symptoms caused by a specific category of poison. Identifying the toxidrome guides treatment <em>before</em> you know the exact agent.</p>
+
+          <div class="toxidrome-grid">
+            <div class="toxidrome-card" style="--card-accent: #e05c5c;">
+              <h3>🐞 Cholinergic</h3>
+              <div class="mnemonic">SLUDGE / DUMBELS</div>
+              <p>Overstimulation of acetylcholine receptors — think the body's "garden hose is stuck open." Everything secretory is turned MAX UP.</p>
+              <div class="tags">
+                <span class="tag red">Bradycardia</span>
+                <span class="tag red">SLUDGE</span>
+                <span class="tag">Miosis</span>
+                <span class="tag">Bronchospasm</span>
+              </div>
+            </div>
+            <div class="toxidrome-card" style="--card-accent: #f5a623;">
+              <h3>🌵 Anticholinergic</h3>
+              <div class="mnemonic">MAD AS A HATTER</div>
+              <p>Blocks acetylcholine — the body "dries out and speeds up." Opposite of cholinergic. Common in meds and certain plants.</p>
+              <div class="tags">
+                <span class="tag amber">Tachycardia</span>
+                <span class="tag amber">Dry Skin</span>
+                <span class="tag amber">Mydriasis</span>
+                <span class="tag">Hyperthermia</span>
+              </div>
+            </div>
+            <div class="toxidrome-card" style="--card-accent: #9d85f5;">
+              <h3>👁️ Opioid</h3>
+              <div class="mnemonic">THE CLASSIC TRIAD</div>
+              <p>Respiratory depression + decreased LOC + miosis. The "3 M's": Miosis, Muteness (unresponsive), Minimal respirations.</p>
+              <div class="tags">
+                <span class="tag">Resp Depression</span>
+                <span class="tag">Pinpoint Pupils</span>
+                <span class="tag green">Naloxone reverses</span>
+              </div>
+            </div>
+            <div class="toxidrome-card" style="--card-accent: #00c6b2;">
+              <h3>⚡ Sympathomimetic</h3>
+              <div class="mnemonic">FIGHT OR FLIGHT × 10</div>
+              <p>Massive norepinephrine/epinephrine release. Everything stimulated: heart, lungs, brain. Think cocaine or amphetamines.</p>
+              <div class="tags">
+                <span class="tag">Hypertension</span>
+                <span class="tag">Tachycardia</span>
+                <span class="tag amber">Dilated Pupils</span>
+                <span class="tag red">Paranoid Delusions</span>
+              </div>
+            </div>
+            <div class="toxidrome-card" style="--card-accent: #4bc98a;">
+              <h3>😴 Sedative-Hypnotic</h3>
+              <div class="mnemonic">CNS SHUTDOWN</div>
+              <p>CNS depression without the pupil changes seen in opioids. Benzos, barbiturates — especially dangerous with alcohol.</p>
+              <div class="tags">
+                <span class="tag">CNS Depression</span>
+                <span class="tag">Ataxia</span>
+                <span class="tag red">Resp Risk w/ ETOH</span>
+              </div>
+            </div>
+            <div class="toxidrome-card" style="--card-accent: #f5a623;">
+              <h3>🎭 Hallucinogen</h3>
+              <div class="mnemonic">SENSORY OVERLOAD</div>
+              <p>Variable CNS stimulation and/or depression. LSD, PCP, peyote, psilocybin. Patient may be combative; safety is paramount.</p>
+              <div class="tags">
+                <span class="tag">Delusions</span>
+                <span class="tag amber">Tachycardia</span>
+                <span class="tag red">Seizure risk</span>
+              </div>
+            </div>
+            <div class="toxidrome-card" style="--card-accent: #e05c5c;">
+              <h3>🌡️ Serotonin Syndrome</h3>
+              <div class="mnemonic">TRIPLE THREAT</div>
+              <p>Agitation + autonomic instability + neuromuscular changes. Usually from drug combinations — SSRIs + triptans, or MDMA.</p>
+              <div class="tags">
+                <span class="tag red">Hyperthermia</span>
+                <span class="tag">Clonus</span>
+                <span class="tag amber">Diaphoresis</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLUDGE breakdown -->
+          <h4>SLUDGE: The Cholinergic Mnemonic</h4>
+          <div class="sludge-box">
+            <div class="sludge-item"><span class="sludge-letter">S</span><span class="sludge-word">Salivation</span><span class="sludge-meaning">Excess drooling</span></div>
+            <div class="sludge-item"><span class="sludge-letter">L</span><span class="sludge-word">Lacrimation</span><span class="sludge-meaning">Excessive tearing</span></div>
+            <div class="sludge-item"><span class="sludge-letter">U</span><span class="sludge-word">Urination</span><span class="sludge-meaning">Incontinence</span></div>
+            <div class="sludge-item"><span class="sludge-letter">D</span><span class="sludge-word">Defecation</span><span class="sludge-meaning">Fecal incontinence</span></div>
+            <div class="sludge-item"><span class="sludge-letter">G</span><span class="sludge-word">GI Distress</span><span class="sludge-meaning">Cramping, nausea</span></div>
+            <div class="sludge-item"><span class="sludge-letter">E</span><span class="sludge-word">Emesis</span><span class="sludge-meaning">Vomiting</span></div>
+          </div>
+          <div class="info-box analogy">
+            <strong>CHOLINERGIC vs. ANTICHOLINERGIC Analogy:</strong> Imagine acetylcholine as a sprinkler system. Cholinergic toxins leave the valve stuck open — everything is WET (SLUDGE). Anticholinergic toxins break the valve shut — everything is DRY. "Dry as a bone, blind as a bat, red as a beet, hot as a hare, mad as a hatter" describes anticholinergic perfectly.
+          </div>
+
+          <!-- Comparison table -->
+          <h4>Toxidrome Quick Comparison</h4>
+          <table class="drug-table">
+            <thead>
+              <tr><th>Toxidrome</th><th>HR</th><th>BP</th><th>Pupils</th><th>Skin</th><th>LOC</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="drug-name">Cholinergic</td><td>↓</td><td>↓</td><td>Miosis</td><td>Wet/Diaphoretic</td><td>Altered</td></tr>
+              <tr><td class="drug-name">Anticholinergic</td><td>↑</td><td>↑</td><td>Mydriasis</td><td>Dry/Flushed</td><td>Agitated</td></tr>
+              <tr><td class="drug-name">Opioid</td><td>↓</td><td>↓</td><td>Miosis (pinpoint)</td><td>Cool/Clammy</td><td>Depressed</td></tr>
+              <tr><td class="drug-name">Sympathomimetic</td><td>↑</td><td>↑</td><td>Mydriasis</td><td>Diaphoretic</td><td>Agitated</td></tr>
+              <tr><td class="drug-name">Sedative-Hypnotic</td><td>↓</td><td>↓</td><td>Normal</td><td>Normal</td><td>Depressed</td></tr>
+              <tr><td class="drug-name">Serotonin Synd.</td><td>↑</td><td>↑/↓</td><td>Mydriasis</td><td>Diaphoretic</td><td>Agitated/Coma</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ INGESTION ══ -->
+    <div id="page-ingestion" class="page">
+      <div class="page-header">
+        <span class="chapter-tag">Chapter 32 · Section II</span>
+        <h2>Poisoning by Ingestion</h2>
+        <p>77.7% of poisonings reported to US poison control centers involve ingestion. Most ingested poisons require <em>supportive care</em> — know when antidotes and decontamination apply.</p>
+      </div>
+
+      <!-- Assessment approach -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🔍</span><h3>Assessment & GI Decontamination</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <p>Focus your assessment on the <strong>three vital systems most likely to cause death</strong>: cardiovascular, respiratory, and CNS.</p>
+          <div class="two-col">
+            <div>
+              <h4>Key History Questions</h4>
+              <ul class="styled-list">
+                <li>What was ingested?</li>
+                <li>When was it ingested?</li>
+                <li>How much was taken?</li>
+                <li>Alcohol or other substances?</li>
+                <li>Was vomiting induced?</li>
+                <li>Any antidote or charcoal given?</li>
+                <li>Psychiatric history / suicidality?</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Activated Charcoal</h4>
+              <p>Inert, nontoxic product of high-temperature heated wood material. Works by <strong>adsorbing</strong> (binding) toxins in the GI tract.</p>
+              <div class="info-box pearl">
+                Activated charcoal is most effective within <strong>1 hour</strong> of ingestion. It is CONTRAINDICATED in caustic/corrosive ingestion, altered mental status (aspiration risk), and when the airway is unprotected.
+              </div>
+              <div class="info-box analogy">
+                Think of activated charcoal as a "molecular sponge" — millions of microscopic pores absorb toxin molecules before they can be absorbed by the gut lining.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caustics -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🧪</span><h3>Acids & Alkalis (Caustics/Corrosives)</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="info-box pathophys">
+            <strong>Acids</strong> cause <em>coagulation necrosis</em> — like a cauterizing iron, they sear the tissue and create a protective eschar that limits depth. Damage usually completes within 1–2 minutes.<br><br>
+            <strong>Alkalis</strong> cause <em>liquefaction necrosis</em> — they dissolve tissue like drain cleaner on a clog, continuing to penetrate deeper for minutes to hours. Far more destructive.
+          </div>
+          <div class="info-box analogy">
+            <strong>Acid vs. Alkali analogy:</strong> An acid burn is like a hot pan briefly touching skin — it hurts and chars the surface. An alkali burn is like dissolving sugar in water — it keeps dissolving deeper and deeper until diluted or neutralized. That's why alkali burns are more dangerous despite "looking less severe."
+          </div>
+          <div class="pill-row">
+            <span class="pill red">Toilet bowl cleaners (HCl)</span>
+            <span class="pill red">Rust remover (H₂SO₄)</span>
+            <span class="pill amber">Drain cleaner (NaOH)</span>
+            <span class="pill amber">Ammonia</span>
+            <span class="pill amber">Bleach</span>
+          </div>
+          <div class="info-box treatment">
+            DO NOT induce vomiting (re-exposes esophagus). Dilution with water/milk ONLY if conscious and per medical direction. Secure airway — laryngeal edema can develop rapidly. Transport priority.
+          </div>
+        </div>
+      </div>
+
+      <!-- Toxic Alcohols -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🧴</span><h3>Toxic Alcohols: Methanol, Ethylene Glycol & Isopropanol</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="two-col">
+            <div>
+              <h4>Methanol (Wood Alcohol)</h4>
+              <div class="info-box pathophys">
+                Methanol itself is mildly toxic; it's the metabolites that kill. Alcohol dehydrogenase converts methanol → formaldehyde → formic acid. Formic acid destroys the optic nerve and causes profound metabolic acidosis.
+              </div>
+              <div class="info-box analogy">
+                Methanol is like a trojan horse — it enters innocuously (even smells faintly sweet), but is converted by the same enzyme that processes beer into a metabolic bomb (formic acid) that blinds and acidifies.
+              </div>
+              <p><strong>Sources:</strong> windshield washer fluid, Sterno, paint remover</p>
+              <p><strong>Signs:</strong> visual disturbance ("snowfield" vision), severe metabolic acidosis, CNS depression</p>
+              <div class="info-box treatment">
+                <strong>Fomepizole (4-MP)</strong> — blocks alcohol dehydrogenase, stopping conversion to formic acid. Hemodialysis for severe cases. Correct metabolic acidosis with NaHCO₃.
+              </div>
+            </div>
+            <div>
+              <h4>Ethylene Glycol (Antifreeze)</h4>
+              <div class="info-box pathophys">
+                EG → glycolic acid → oxalic acid, which binds calcium to form calcium oxalate crystals. These crystals deposit in the renal tubules → acute kidney failure. The sweet taste makes accidental pediatric ingestion common.
+              </div>
+              <div class="stages-row" style="grid-template-columns: 1fr 1fr;">
+                <div class="stage-box"><h4>Stage 1</h4><div class="time">30 min – 12 hr</div>Neurologic: drunk-like, ataxia, seizure, coma</div>
+                <div class="stage-box"><h4>Stage 2</h4><div class="time">12 – 24 hr</div>Cardiopulmonary: tachycardia, pulmonary edema</div>
+                <div class="stage-box"><h4>Stage 3</h4><div class="time">24 – 72 hr</div>Renal failure — calcium oxalate crystals destroy kidneys</div>
+                <div class="stage-box"><h4>Stage 4</h4><div class="time">6 – 15 days</div>Delayed neurological sequelae</div>
+              </div>
+              <div class="info-box treatment">
+                <strong>Fomepizole</strong> (first-line antidote). Thiamine to convert glycolic acid to a non-toxic metabolite. Benzodiazepines for seizures. Hemodialysis for severe cases.
+              </div>
+            </div>
+          </div>
+
+          <h4>Isopropanol (Rubbing Alcohol)</h4>
+          <div class="info-box pathophys">
+            Isopropanol is twice as potent as ethanol as a CNS depressant. Unlike methanol and EG, it is NOT converted to as dangerous a metabolite — it breaks down to acetone. However, it still causes significant CNS depression, and the acetone produces a characteristic fruity odor.
+          </div>
+          <div class="info-box analogy">
+            If methanol is a poison disguised as a drink, isopropanol is just a very strong drink — it'll get you drunk fast and hard, but won't usually burn out your eyes or kidneys. Management is supportive.
+          </div>
+        </div>
+      </div>
+
+      <!-- Metals -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>⚙️</span><h3>Metal Poisoning: Iron, Lead & Mercury</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <table class="drug-table">
+            <thead><tr><th>Metal</th><th>Source</th><th>Pathophysiology</th><th>Key Symptoms</th><th>Treatment</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="drug-name">Iron</td>
+                <td>Prenatal vitamins, children's multivitamins</td>
+                <td>Corrosive to GI tract; disrupts mitochondrial function → metabolic acidosis</td>
+                <td>GI hemorrhage, shock, metabolic acidosis</td>
+                <td class="drug-dose">Deferoxamine chelation</td>
+              </tr>
+              <tr>
+                <td class="drug-name">Lead</td>
+                <td>Lead paint (pre-1978), pipes, dust</td>
+                <td>Displaces calcium in cellular processes; disrupts enzyme systems, neurological development</td>
+                <td>Encephalopathy, abdominal pain, peripheral neuropathy, cognitive impairment</td>
+                <td class="drug-dose">DMSA (succimer) chelation</td>
+              </tr>
+              <tr>
+                <td class="drug-name">Mercury</td>
+                <td>Broken thermometers, dental amalgam, fish</td>
+                <td>Inhalation of vapor → lung damage; elemental Hg crosses blood-brain barrier → neurological damage</td>
+                <td>Tremors, numbness, vision changes, personality changes ("Mad Hatter" syndrome)</td>
+                <td class="drug-dose">Remove from exposure, supportive care, chelation in severe cases</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="info-box analogy">
+            The "Mad Hatter" in Alice in Wonderland wasn't fictional — 19th-century hat makers used mercury nitrate to shape felt, breathing in fumes that caused tremors, paranoia, and dementia. Mercury doesn't just poison; it systematically dismantles the nervous system.
+          </div>
+        </div>
+      </div>
+
+      <!-- Acetaminophen -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>💊</span><h3>Acetaminophen Overdose — The Silent Liver Destroyer</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="info-box pathophys">
+            Normal acetaminophen metabolism: 90% is conjugated (harmless). About 5% is converted by CYP2E1 to <strong>NAPQI</strong> (highly hepatotoxic), normally neutralized by glutathione. In overdose, glutathione stores are depleted → NAPQI accumulates → massive hepatocellular necrosis — especially around the central hepatic vein (zone 3).
+          </div>
+          <div class="info-box analogy">
+            Think of glutathione as a fire extinguisher and NAPQI as a small fire. Normal doses — plenty of extinguisher to handle the flame. In overdose, you pour gasoline — the extinguisher runs dry and the whole building (your liver) burns down. This is why acetaminophen overdose is deceptively dangerous: you may feel fine for 24 hours while your liver is silently being destroyed.
+          </div>
+          <div class="stages-row">
+            <div class="stage-box"><h4>Phase I</h4><div class="time">0–24 hours</div>Nausea, vomiting, malaise — patient may feel "just sick"</div>
+            <div class="stage-box"><h4>Phase II</h4><div class="time">24–72 hours</div>Apparent improvement; LFTs rising secretly</div>
+            <div class="stage-box"><h4>Phase III</h4><div class="time">72–96 hours</div>Hepatic necrosis peaks — jaundice, coagulopathy, encephalopathy</div>
+            <div class="stage-box"><h4>Phase IV</h4><div class="time">4 days – 2 weeks</div>Recovery OR fulminant hepatic failure and death</div>
+          </div>
+          <div class="info-box warning">
+            Toxic adult dose: >150 mg/kg or >12 g. At toxic levels, the patient may feel fine for 24 hours — this is the <strong>"Walking Time Bomb"</strong> phenomenon. Always check acetaminophen levels in any intentional overdose!
+          </div>
+          <div class="info-box treatment">
+            <strong>N-Acetylcysteine (NAC)</strong> — replenishes glutathione stores. Most effective if given within 8–10 hours of ingestion. Can still help up to 24 hours. Activated charcoal if within 1 hour and patient is alert. IV fluids and supportive care.
+          </div>
+        </div>
+      </div>
+
+      <!-- Cardiac Meds -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>❤️</span><h3>Cardiac Medication Toxicity</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="two-col">
+            <div>
+              <h4>Beta-Blocker Toxicity</h4>
+              <div class="info-box pathophys">
+                Beta-blockers competitively antagonize catecholamines at β₁ and β₂ receptors. Overdose causes profound bradycardia, hypotension, and heart block by removing the sympathetic "gas pedal" from the heart.
+              </div>
+              <div class="info-box analogy">
+                Beta-blockers in overdose are like pressing the brake pedal while cutting the throttle — the heart has no way to speed up even when the body needs it. The AV node slows, contractility plummets, and cardiac output crashes.
+              </div>
+              <p><strong>Examples:</strong> atenolol, metoprolol (end in "-olol")</p>
+              <div class="info-box treatment">
+                Atropine (may be ineffective), glucagon (bypasses the blocked receptor — works differently!), calcium, high-dose insulin therapy. Activated charcoal if mental status intact.
+              </div>
+            </div>
+            <div>
+              <h4>Calcium Channel Blocker Toxicity</h4>
+              <div class="info-box pathophys">
+                Calcium influx is required for cardiac and smooth muscle contraction. CCB overdose blocks calcium entry → negative inotropy, chronotropy, dromotropy, and vasodilation. Can produce fatal bradydysrhythmias and refractory shock.
+              </div>
+              <div class="info-box analogy">
+                If the heart is a door, calcium is the key that opens it for contraction. CCB overdose jams every lock simultaneously — the heart can't contract properly AND the peripheral vessels dilate, causing a double hit of hypotension.
+              </div>
+              <p><strong>Examples:</strong> diltiazem, verapamil, amlodipine</p>
+              <div class="info-box treatment">
+                IV Calcium (chloride or gluconate), high-dose insulin/glucose therapy, vasopressors, lipid emulsion therapy for severe cases. Intralipid can act as a "lipid sink" to sequester fat-soluble CCBs.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ INHALATION ══ -->
+    <div id="page-inhalation" class="page">
+      <div class="page-header">
+        <span class="chapter-tag">Chapter 32 · Section III</span>
+        <h2>Poisoning by Inhalation</h2>
+        <p>Inhaled toxins are categorized by mechanism. Recognizing which type you're dealing with determines your intervention speed and airway strategy.</p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🌬️</span><h3>Three Categories of Inhaled Toxins</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="toxidrome-grid" style="grid-template-columns: repeat(3,1fr);">
+            <div class="toxidrome-card" style="--card-accent: #00c6b2;">
+              <h3>Simple Asphyxiants</h3>
+              <p>Displace oxygen — they're not toxic themselves, just crowd out O₂. In a confined space, even "harmless" gases become lethal.</p>
+              <div class="tags"><span class="tag">Methane</span><span class="tag">Propane</span><span class="tag">CO₂</span><span class="tag">Inert gases</span></div>
+            </div>
+            <div class="toxidrome-card" style="--card-accent: #e05c5c;">
+              <h3>Chemical Asphyxiants</h3>
+              <p>Don't displace O₂ — they prevent the body from <em>using</em> oxygen at the cellular level. Far more dangerous because O₂ is present but inaccessible.</p>
+              <div class="tags"><span class="tag red">CO</span><span class="tag red">Cyanide</span><span class="tag red">H₂S</span></div>
+            </div>
+            <div class="toxidrome-card" style="--card-accent: #f5a623;">
+              <h3>Irritants / Corrosives</h3>
+              <p>Cause direct cellular destruction upon contact with moist mucous membranes. Damage depends on water solubility — soluble ones hit upper airways; insoluble ones penetrate deep into alveoli.</p>
+              <div class="tags"><span class="tag amber">Chlorine</span><span class="tag amber">Ammonia</span><span class="tag amber">Phosgene</span></div>
+            </div>
+          </div>
+          <div class="info-box analogy">
+            <strong>Water solubility and where toxins hit:</strong> Highly water-soluble gases (like ammonia) dissolve immediately in the moist upper airway — causing instant eye/nose/throat burning. This warns people to escape. Low water-solubility gases (like phosgene) bypass the upper airway with little warning and deliver their damage deep in the alveoli — causing delayed pulmonary edema hours later. The "silent" ones are the most deadly.
+          </div>
+        </div>
+      </div>
+
+      <!-- Carbon Monoxide -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>💀</span><h3>Carbon Monoxide (CO) — The Silent Killer</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="info-box pathophys">
+            CO binds hemoglobin with <strong>240× greater affinity</strong> than oxygen, forming carboxyhemoglobin (COHb). This does two things: (1) blocks oxygen-carrying capacity and (2) shifts the oxyhemoglobin dissociation curve LEFT (remaining O₂ is held tighter and not released to tissues). CO also binds myoglobin and cytochrome oxidase (blocking mitochondrial electron transport) → true cellular asphyxia.
+          </div>
+          <div class="info-box analogy">
+            CO is the ultimate identity thief — it steals hemoglobin's "seat" by fitting in 240× better than oxygen. But O₂ is still in the blood; the patient looks pink (cherry red). Standard pulse oximetry reads <strong>falsely normal</strong> because it can't distinguish oxyhemoglobin from carboxyhemoglobin. You need CO-oximetry to detect it.
+          </div>
+          <div class="info-box warning">
+            Standard SpO₂ is UNRELIABLE in CO poisoning. Use a CO-oximeter or end-tidal CO monitor. Patients appear pink or cherry red — NOT cyanotic. Headache + flu-like symptoms without fever in multiple family members = CO poisoning until proven otherwise.
+          </div>
+          <div class="two-col">
+            <div>
+              <h4>Symptoms by COHb Level</h4>
+              <ul class="styled-list">
+                <li><strong>10–20%:</strong> Headache, nausea, dyspnea on exertion</li>
+                <li><strong>20–40%:</strong> Severe headache, confusion, syncope</li>
+                <li><strong>40–60%:</strong> Seizures, coma, cardiac dysrhythmias</li>
+                <li><strong>60–70%:</strong> Respiratory failure, death</li>
+              </ul>
+            </div>
+            <div>
+              <div class="info-box treatment">
+                <strong>100% High-Flow O₂</strong> via NRB mask. High-flow oxygen reduces CO half-life from ~5 hours (room air) to ~60–90 minutes. Hyperbaric oxygen (HBO) reduces it further to ~20 minutes and is used for severe cases: COHb >25%, neurological symptoms, pregnancy, cardiac involvement.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cyanide -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>☠️</span><h3>Cyanide Poisoning</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="info-box pathophys">
+            Cyanide binds cytochrome oxidase (Complex IV) in the mitochondrial electron transport chain, blocking the last step of aerobic respiration. Cells switch to anaerobic metabolism → massive lactic acidosis. Oxygen is delivered to tissues but CANNOT be used — classic "histotoxic hypoxia." Venous blood appears bright red because cells can't extract O₂.
+          </div>
+          <div class="info-box analogy">
+            Cyanide is like a key that fits perfectly into the engine but doesn't turn — it blocks the ignition of cellular metabolism. With cyanide, your cells are like a car with a full gas tank, engine cranking, but the fuel line is kinked. Everything is present for energy production, but nothing fires.
+          </div>
+          <div class="info-box warning">
+            In a structural fire, assume cyanide poisoning if: rapid loss of consciousness, persistent lactic acidosis despite adequate oxygenation, and the fire involved nylon, polyurethane, or plastics. CO + CN poisoning together are common and synergistic.
+          </div>
+          <div class="info-box treatment">
+            <strong>Hydroxocobalamin (Cyanokit)</strong> — preferred antidote. Binds cyanide to form cyanocobalamin (vitamin B12), which is safely excreted. Dose: 5g IV over 15 min. May be combined with <strong>sodium thiosulfate</strong>. Avoid amyl nitrite (methemoglobin formation is risky in CO + CN).
+          </div>
+        </div>
+      </div>
+
+      <!-- Ammonia -->
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🌫️</span><h3>Ammonia & Hydrocarbon Inhalation</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="two-col">
+            <div>
+              <h4>Ammonia (NH₃)</h4>
+              <div class="info-box pathophys">
+                Highly water-soluble alkaline gas. Immediate intense irritation to eyes, nose, and upper airways. In high concentrations, causes chemical bronchitis, pulmonary edema, and destruction of respiratory mucosa. Associated with large-scale agriculture and refrigeration systems.
+              </div>
+              <div class="info-box treatment">
+                Remove from environment immediately. High-flow O₂. Positive-pressure ventilation for respiratory failure. Bronchodilators (albuterol) for bronchospasm. Diuretics if pulmonary edema. Eye irrigation for exposed eyes.
+              </div>
+            </div>
+            <div>
+              <h4>Hydrocarbon Inhalation</h4>
+              <div class="info-box pathophys">
+                Most toxic via inhalation of halogenated or aromatic hydrocarbons (benzene, toluene, carbon tetrachloride). CNS depression is primary concern. Sensitizes myocardium to catecholamines → "Sudden Sniffing Death" — fatal dysrhythmia triggered by adrenaline rush, even on first exposure.
+              </div>
+              <div class="info-box warning">
+                "Sudden Sniffing Death" — an adolescent inhales a hydrocarbon (huffing), gets a catecholamine surge (fear, excitement), and the sensitized heart fibrillates. Death can occur on the very first exposure. Epinephrine is CONTRAINDICATED — will worsen dysrhythmia.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ INJECTION ══ -->
+    <div id="page-injection" class="page">
+      <div class="page-header">
+        <span class="chapter-tag">Chapter 32 · Section IV</span>
+        <h2>Poisoning by Injection — Envenomation</h2>
+        <p>Venom is a highly evolved biological weapon. Unlike manufactured poisons, venoms contain complex mixtures of enzymes, proteins, and neurotoxins designed specifically to immobilize or kill prey.</p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🕷️</span><h3>Spider Envenomation</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="two-col">
+            <div>
+              <h4>Black Widow (Latrodectus)</h4>
+              <div class="info-box pathophys">
+                α-Latrotoxin triggers massive release of neurotransmitters (acetylcholine and norepinephrine) at nerve terminals → sustained, painful muscle cramps. The nervous system is in overdrive. Only the <em>female</em> is venomous (has red hourglass marking).
+              </div>
+              <div class="info-box analogy">
+                Black widow venom is like permanently holding down the "send signal" button on every nerve in your body simultaneously — your muscles can't stop contracting. The abdomen can become board-rigid, mimicking a surgical emergency.
+              </div>
+              <p><strong>Signs:</strong> Initially painless pinprick → severe muscle cramps (especially abdominal rigidity), diaphoresis, tachycardia, hypertension, nausea.</p>
+              <div class="info-box treatment">
+                Benzodiazepines for muscle spasm and pain. Opioids for analgesia. Black widow antivenom available (used for severe cases, elderly, children). Calcium gluconate historically used (limited evidence).
+              </div>
+            </div>
+            <div>
+              <h4>Brown Recluse (Loxosceles)</h4>
+              <div class="info-box pathophys">
+                Sphingomyelinase D enzyme attacks cell membranes at the bite site → progressive necrosis. Destroys RBCs (hemolysis) and activates complement → local tissue destruction that can expand dramatically over days. The "volcano lesion" — central necrosis with surrounding erythema.
+              </div>
+              <div class="info-box analogy">
+                Brown recluse venom is like a biological wrecking ball at the cellular level — the enzyme specifically dissolves the "mortar" (sphingomyelin) holding cell membranes together, causing cells to literally fall apart from the inside out.
+              </div>
+              <p><strong>Found in:</strong> dry, abandoned spaces; violin-shaped marking on cephalothorax ("fiddle-back"). Initial bite often painless; necrosis develops over 1–2 days.</p>
+              <div class="info-box treatment">
+                Wound care, antibiotics if infected. Dapsone has been used (controversial). Surgical debridement for large necrotic wounds. Systemic involvement: steroids, blood transfusion for hemolysis.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🐍</span><h3>Snakebite Envenomation</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="two-col">
+            <div>
+              <h4>Pit Vipers (Crotalidae)</h4>
+              <p>Includes rattlesnakes, cottonmouths (water moccasins), and copperheads. Identified by <strong>triangular head, heat-sensing pit organ</strong> between eye and nostril, and elliptical pupils.</p>
+              <div class="info-box pathophys">
+                Pit viper venom contains <strong>hemotoxins</strong> (destroy blood cells, disrupt coagulation) and <strong>cytotoxins</strong> (tissue destruction). The venom immobilizes prey by destroying vascular integrity — massive local edema, hemorrhage, and tissue necrosis. Some species also contain neurotoxins.
+              </div>
+              <div class="info-box analogy">
+                Pit viper venom is a sophisticated digestive enzyme delivered in advance — the snake injects its "stomach juices" to begin breaking down tissue before eating. Local tissue literally liquefies as the venom dissolves structural proteins and destroys blood vessel walls.
+              </div>
+              <div class="info-box treatment">
+                Immobilize extremity at heart level. Do NOT apply tourniquet, ice, or suction. Antivenom (CroFab or Anavip) in ED. Treat coagulopathy. Mark the edge of swelling every 15–30 min to track progression.
+              </div>
+            </div>
+            <div>
+              <h4>Coral Snakes (Elapidae)</h4>
+              <p><strong>Mnemonic: "Red on yellow, kill a fellow; red on black, friend of Jack."</strong></p>
+              <div class="info-box pathophys">
+                Coral snake venom contains <strong>neurotoxins</strong> that block neuromuscular junction (post-synaptic) → ascending paralysis similar to myasthenia gravis. Unlike pit viper bites, there is minimal local tissue reaction — the damage is systemic and neurological.
+              </div>
+              <div class="info-box warning">
+                Coral snake bite may appear minor locally but causes delayed (6–12 hours) progressive bulbar paralysis and respiratory failure. A patient who appears fine after a coral snake bite must be observed in the hospital for 24 hours.
+              </div>
+              <div class="info-box treatment">
+                Coral snake antivenom. Supportive respiratory care. Intubation/ventilation for respiratory failure (paralysis of respiratory muscles). No significant local wound care needed.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🦂</span><h3>Arthropod Stings & Tick Diseases</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <h4>Hymenoptera (Bees, Wasps, Ants)</h4>
+          <p>Venom contains histamine, serotonin, acetylcholine, dopamine, melittin, and phospholipases. In sensitized individuals, even a single sting can trigger <strong>anaphylaxis</strong> — the most immediately dangerous complication. Honey bees leave their stinger behind (barbed) — scrape/flick it off, do NOT squeeze (injects more venom).</p>
+          <div class="info-box treatment">
+            For anaphylaxis: IM Epinephrine (EpiPen equivalent), diphenhydramine, corticosteroids, albuterol for bronchospasm, IV fluids. Scrape (not squeeze) stingers. Monitor for biphasic anaphylaxis (second wave 4–12 hrs later).
+          </div>
+
+          <h4>Tick-Borne Diseases</h4>
+          <table class="drug-table">
+            <thead><tr><th>Disease</th><th>Organism</th><th>Tick Vector</th><th>Key Features</th></tr></thead>
+            <tbody>
+              <tr><td class="drug-name">Rocky Mountain Spotted Fever</td><td>Rickettsia rickettsii</td><td>Wood tick, Dog tick</td><td>Fever, rash spreading from wrists/ankles inward; vasculitis; potentially fatal without treatment</td></tr>
+              <tr><td class="drug-name">Lyme Disease</td><td>Borrelia burgdorferi</td><td>Ixodes (deer tick)</td><td>Bull's-eye rash (EM), fatigue, arthritis, cardiac/neurological complications</td></tr>
+              <tr><td class="drug-name">Tick Paralysis</td><td>Neurotoxin (tick saliva)</td><td>Female wood tick</td><td>Ascending paralysis; reverses when tick removed; spring/summer occurrence</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box pearl">
+            <strong>Tick Paralysis vs. Guillain-Barré:</strong> Both cause ascending paralysis. The key difference — in tick paralysis, finding and removing the tick causes rapid reversal of symptoms (within hours). Always do a complete skin/hair check, including scalp.
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🌊</span><h3>Marine Envenomation</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="two-col">
+            <div>
+              <h4>Coelenterates (Jellyfish)</h4>
+              <p>Nematocysts (stinging cells) inject venom on contact. Venom causes pain, dermatitis, and potentially cardiac dysrhythmias in severe stings (box jellyfish).</p>
+              <div class="info-box treatment">
+                Vinegar (4–6% acetic acid) or baking soda slurry for 30+ seconds to inactivate nematocysts. Remove tentacle fragments with forceps (NOT bare hands). Hot water immersion for pain relief (denatures venom proteins). Do NOT use freshwater (causes nematocysts to fire).
+              </div>
+            </div>
+            <div>
+              <h4>Stingrays</h4>
+              <p>Retroserrated spine on tail delivers venom. Both local (intense burning pain, tissue necrosis) and systemic (hypotension, dysrhythmias, seizures) effects possible.</p>
+              <div class="info-box treatment">
+                Irrigate wound with seawater. Remove visible spine fragments (large ones need surgical removal). Hot water immersion (45°C/113°F) to denature heat-labile venom proteins. Pain management. Observe for systemic effects.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ ABSORPTION ══ -->
+    <div id="page-absorption" class="page">
+      <div class="page-header">
+        <span class="chapter-tag">Chapter 32 · Section V</span>
+        <h2>Poisoning by Absorption — Organophosphates & Carbamates</h2>
+        <p>Absorbed poisons penetrate through skin and mucous membranes. Organophosphates and carbamates represent the most clinically significant absorbed poisons in EMS.</p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🌿</span><h3>Organophosphates & Carbamates</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="info-box pathophys">
+            Organophosphates (OPs) and carbamates inhibit <strong>acetylcholinesterase (AChE)</strong> — the enzyme that breaks down acetylcholine at nerve synapses. When AChE is inhibited, ACh accumulates excessively at ALL cholinergic synapses:
+            <br><br>
+            • <strong>Muscarinic effects</strong> (smooth muscle, glands): SLUDGE + bradycardia, bronchospasm<br>
+            • <strong>Nicotinic effects</strong> (skeletal muscle, ganglia): MTWHF — Muscle weakness, Twitching, Weakness, Hypertension, Fasciculations<br>
+            • <strong>CNS effects</strong>: Anxiety → seizures → coma
+          </div>
+          <div class="info-box analogy">
+            Acetylcholinesterase is the OFF switch for nerve signals. Organophosphates DISABLE the OFF switch — so every nerve fires continuously, like a car alarm that won't stop. SLUDGE is your wet, secretory emergency. Muscle fasciculations occur because the neuromuscular junction is also stuck in "ON." Eventually muscles exhaust (flaccid paralysis) — respiratory muscles fail → death.
+          </div>
+          <div class="info-box warning">
+            <strong>Scene Safety First!</strong> OP-contaminated patients can contaminate responders via their clothing, skin, and vomitus. Don PPE (level B at minimum). Remove patient's clothing and decontaminate with large amounts of water BEFORE transport if possible.
+          </div>
+
+          <h4>Key Distinguishing Feature: OPs vs. Carbamates</h4>
+          <div class="two-col">
+            <div class="highlight-box">
+              <strong>Organophosphates</strong><br>
+              Bind AChE <em>irreversibly</em> (covalent bond — "ages"). Time-dependent — if not treated quickly, the bond becomes permanent. Examples: malathion, parathion, sarin, VX nerve agent.
+            </div>
+            <div class="highlight-box">
+              <strong>Carbamates</strong><br>
+              Bind AChE <em>reversibly</em> (spontaneously dissociates). Less severe and self-limiting. Examples: carbaryl (Sevin), aldicarb. Pralidoxime is controversial/less effective.
+            </div>
+          </div>
+
+          <h4>Treatment Protocol</h4>
+          <div class="info-box treatment">
+            <strong>Step 1 — Atropine:</strong> Blocks muscarinic receptors. Give LARGE doses — the endpoint is drying of secretions, NOT heart rate. Doses can be massive (2–4 mg every 5–10 min, escalating). "Drying of secretions" not tachycardia is the goal.<br><br>
+            <strong>Step 2 — Pralidoxime (2-PAM/Protopam):</strong> Reactivates AChE by displacing the OP from the enzyme. MUST be given before "aging" (irreversible bond formation). More effective for nicotinic/muscle effects than atropine. Not indicated for pure carbamate poisoning.<br><br>
+            <strong>Step 3 — Benzodiazepines (midazolam preferred):</strong> For seizure control. Phenytoin is ineffective in OP seizures — benzos are the only effective class.
+          </div>
+          <div class="info-box analogy">
+            Atropine in OP poisoning is like covering your ears so you can't hear the alarm — it blocks the signal from reaching the organ (muscarinic receptors). Pralidoxime actually fixes the alarm system itself — it removes the OP "wrench" jammed in the AChE machinery.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ DRUGS ══ -->
+    <div id="page-drugs" class="page">
+      <div class="page-header">
+        <span class="chapter-tag">Chapter 32 · Section VI</span>
+        <h2>Substance Use Disorder & Drug Overdose</h2>
+        <p>SUD affects every demographic. Approach with clinical precision and cultural humility — these are medical emergencies, not moral failures.</p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>💉</span><h3>Opioid Overdose Crisis</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="info-box pathophys">
+            Opioids bind μ (mu), κ (kappa), and δ (delta) opioid receptors throughout the CNS and periphery. <strong>Respiratory depression</strong> is the primary lethal mechanism — opioids suppress the brainstem respiratory centers (pre-Bötzinger complex), reducing hypercapnic and hypoxic drive. Death results from apnea and hypoxia.
+          </div>
+          <div class="info-box analogy">
+            The opioid triad (miosis + respiratory depression + CNS depression) is your clinical fingerprint. Think of μ-receptors as volume knobs on the brainstem's "breathing drive." Opioids turn the knob to zero — the patient stops responding to CO₂ buildup, stops breathing, and turns blue. Miosis (pinpoint pupils) occurs because μ-receptors in the Edinger-Westphal nucleus cause unopposed parasympathetic pupillary constriction.
+          </div>
+
+          <h4>The Three Waves of the Opioid Epidemic</h4>
+          <div class="stages-row" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="stage-box"><h4>Wave 1 (1999)</h4><div class="time">Prescription Opioids</div>OxyContin, hydrocodone overprescription → prescription OD epidemic</div>
+            <div class="stage-box"><h4>Wave 2 (~2010)</h4><div class="time">Heroin</div>Cheap, available heroin as prescription opioids became harder to get</div>
+            <div class="stage-box"><h4>Wave 3 (~2013)</h4><div class="time">Synthetic Fentanyl</div>Illicitly manufactured fentanyl — 100× morphine potency — drives current death toll</div>
+          </div>
+
+          <div class="info-box warning">
+            <strong>Fentanyl Scene Safety:</strong> Fentanyl is NOT absorbed through intact skin at ambient concentrations encountered at OD scenes. However, powdered fentanyl poses inhalation risk if aerosolized. Use standard precautions (gloves, eye protection). Reserve respiratory PPE for large powder/liquid fentanyl scenes.
+          </div>
+
+          <h4>Naloxone — The Life-Saving Antidote</h4>
+          <div class="info-box treatment">
+            <strong>Naloxone (Narcan)</strong> — pure opioid antagonist with NO agonist activity. Competitively displaces opioids from receptors. Routes: IV/IO (most rapid), IM, intranasal (IN), ET, SQ.<br><br>
+            <strong>Dose:</strong> 0.4–2 mg IV/IM/IN; repeat every 2–3 min PRN. For fentanyl/synthetic opioids — may require higher doses or continuous infusion.<br><br>
+            <strong>⚠️ Duration:</strong> Naloxone's half-life (30–90 min) is SHORTER than most opioids. Patients can re-narcotize after naloxone wears off — monitor closely and consider infusion.
+          </div>
+          <div class="info-box pearl">
+            <strong>Precipitation of Withdrawal:</strong> High-dose naloxone in opioid-dependent patients causes acute withdrawal — agitation, vomiting, severe pain. In non-cardiac-arrest situations, titrate low (0.1–0.4 mg) to restore respiratory drive without inducing full withdrawal. Goal: breathing spontaneously, NOT fully alert.
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>⚡</span><h3>Stimulant Overdose: Cocaine & Amphetamines</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="info-box pathophys">
+            <strong>Cocaine</strong> blocks reuptake of dopamine, norepinephrine, and serotonin at presynaptic terminals — massive sympathetic surge. Also blocks fast sodium channels (local anesthetic effect) in cardiac cells → dysrhythmias and widened QRS. The combination of sympathetic excess + sodium channel blockade creates the "deadly duo" of cocaine cardiotoxicity.
+          </div>
+          <div class="info-box analogy">
+            Cocaine is like jamming the accelerator AND cutting the brake lines simultaneously. The sympathomimetic effect floors the pedal (hypertension, tachycardia, coronary spasm), while the sodium channel blockade makes the heart's electrical system unpredictable — wide complex rhythms can deteriorate to VF without warning.
+          </div>
+          <div class="info-box warning">
+            <strong>AVOID beta-blockers in cocaine chest pain!</strong> Blocking β₂ receptors leaves α receptors unopposed → severe coronary vasospasm and hypertension. Benzodiazepines are first-line for cocaine hypertension/tachycardia.
+          </div>
+
+          <h4>Methamphetamine</h4>
+          <p>Far longer-acting than cocaine (half-life ~10 hrs vs ~60 min). Causes direct neurotoxicity — destroys dopaminergic and serotonergic neurons. Chronic users develop permanent cognitive impairment, "meth mouth," severe skin excoriation (formication = sensation of bugs crawling), and psychosis.</p>
+
+          <h4>Phencyclidine (PCP)</h4>
+          <div class="info-box pathophys">
+            PCP is a dissociative anesthetic — blocks NMDA glutamate receptors. Creates a dissociative state in which users feel detached from reality and pain. Has BOTH stimulant AND depressant properties simultaneously, plus analgesic effects. Low dose: dissociation + agitation. High dose: coma.
+          </div>
+          <p>PCP psychosis can mimic paranoid schizophrenia and may persist days after last use. Management: calm environment, minimal stimulation in low-dose toxicity; protect airway in high-dose toxicity (coma). Benzodiazepines for agitation/seizure. Antipsychotics (haloperidol) for psychosis.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🧠</span><h3>Tricyclic Antidepressants & Other CNS Drugs</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="info-box pathophys">
+            TCAs block multiple receptor types simultaneously: (1) fast sodium channels → widened QRS, dysrhythmias; (2) muscarinic receptors → anticholinergic syndrome; (3) alpha-1 adrenergic receptors → hypotension; (4) GABA-A modulation → seizures. The combination makes TCA overdose one of the most dangerous in toxicology.
+          </div>
+          <div class="info-box analogy">
+            TCA overdose is like throwing a wrench into every gear of the cardiac machine simultaneously — sodium channels stop the conduction system, alpha blockade drops blood pressure, anticholinergic effects cause tachycardia and agitation, and then seizures can push a wide-QRS patient directly into VF.
+          </div>
+          <div class="info-box warning">
+            <strong>QRS >100ms in TCA overdose = high risk for ventricular dysrhythmias and seizures.</strong> Treatment of choice: Sodium Bicarbonate IV bolus. NaHCO₃ works by (1) alkalinizing blood (sodium channel binding is pH-dependent — alkalosis improves conduction) and (2) providing sodium to overcome sodium channel blockade.
+          </div>
+
+          <h4>Lithium Toxicity</h4>
+          <p>Lithium has a narrow therapeutic window (0.6–1.2 mEq/L). At toxic levels, it disrupts sodium transport across neuronal membranes. Early signs: tremor, diarrhea, polyuria. Severe: ataxia, confusion, seizures, coma. Treatment is supportive — hemodialysis for severe toxicity.</p>
+
+          <h4>MAO Inhibitors</h4>
+          <p>Block breakdown of monoamines (NE, dopamine, serotonin). Overdose causes serotonin-like toxicity. Dangerous dietary interactions (tyramine-containing foods → hypertensive crisis). Drug interactions with SSRIs, meperidine, and dextromethorphan can be fatal.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ ALCOHOL ══ -->
+    <div id="page-alcohol" class="page">
+      <div class="page-header">
+        <span class="chapter-tag">Chapter 32 · Section VII</span>
+        <h2>Alcohol Use Disorder & Emergencies</h2>
+        <p>AUD is the most prevalent substance use disorder in the US. The physiological effects of chronic alcohol use and withdrawal create some of the most complex presentations in emergency medicine.</p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>🧪</span><h3>Alcohol Physiology & Chronic Effects</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <p>Ethanol is absorbed 80–90% within 30 minutes (20% stomach, rest small intestine). It's a potent CNS depressant that enhances GABA (inhibitory) and inhibits NMDA glutamate (excitatory) receptors.</p>
+          <div class="info-box pathophys">
+            <strong>Chronic Alcohol → Neuroadaptation:</strong> The brain adapts to constant GABA enhancement by DOWNREGULATING GABA receptors and UPREGULATING NMDA receptors. In withdrawal, when alcohol is suddenly removed, GABA inhibition crashes and NMDA excitation surges → CNS hyperexcitability → tremors, seizures, and delirium tremens.
+          </div>
+          <div class="info-box analogy">
+            Think of the CNS as a see-saw with GABA (calm) on one side and glutamate (excite) on the other. Chronic alcohol sits heavy on the GABA side. The brain compensates by lightening the GABA side and adding weight to the glutamate side. When alcohol is suddenly removed — the GABA weight disappears, and the glutamate side SLAMS down. That crash is alcohol withdrawal.
+          </div>
+
+          <h4>Chronic Medical Complications</h4>
+          <table class="drug-table">
+            <thead><tr><th>System</th><th>Condition</th><th>Mechanism</th><th>EMS Relevance</th></tr></thead>
+            <tbody>
+              <tr><td class="drug-name">Neurologic</td><td>Wernicke-Korsakoff Syndrome</td><td>Thiamine (B1) deficiency → damage to mammillary bodies and thalamus</td><td>Give thiamine BEFORE glucose (glucose without thiamine can precipitate Wernicke's)</td></tr>
+              <tr><td class="drug-name">GI</td><td>Cirrhosis / Esophageal Varices</td><td>Fibrosis obstructs portal flow → variceal formation under high pressure</td><td>Massive painless upper GI hemorrhage; variceal bleeds have 30–50% mortality</td></tr>
+              <tr><td class="drug-name">GI</td><td>Mallory-Weiss Syndrome</td><td>Repeated retching tears the gastroesophageal junction</td><td>Upper GI bleed after vomiting; typically self-limiting but can be massive</td></tr>
+              <tr><td class="drug-name">Metabolic</td><td>Hypoglycemia</td><td>Alcohol inhibits gluconeogenesis; nutritional deficiency depletes glycogen</td><td>Check glucose in all intoxicated patients — hypoglycemia mimics intoxication</td></tr>
+              <tr><td class="drug-name">Cardiac</td><td>Cardiomyopathy</td><td>Direct toxic effect of alcohol/acetaldehyde on cardiac myocytes</td><td>"Holiday heart" — AF triggered by binge drinking</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-header" onclick="toggleSection(this)">
+          <span>⚠️</span><h3>Alcohol Withdrawal Syndrome</h3>
+          <span class="expand-icon">▾</span>
+        </div>
+        <div class="section-block-body">
+          <div class="stages-row">
+            <div class="stage-box"><h4>Minor Withdrawal</h4><div class="time">6–8 hours after last drink</div>Tremor, anxiety, diaphoresis, tachycardia, nausea, insomnia, hypertension</div>
+            <div class="stage-box"><h4>Alcoholic Hallucinosis</h4><div class="time">12–24 hours</div>Visual/auditory/tactile hallucinations. Vital signs relatively normal. Patient knows they're real (unlike DTs)</div>
+            <div class="stage-box"><h4>Withdrawal Seizures</h4><div class="time">12–48 hours</div>Usually single tonic-clonic seizure. Can be multiple. Status epilepticus rare but possible.</div>
+            <div class="stage-box"><h4>Delirium Tremens (DTs)</h4><div class="time">48–96 hours</div>Full-blown autonomic storm: fever, tachycardia, hypertension, diaphoresis, global confusion, tremor. 5–15% mortality if untreated.</div>
+          </div>
+          <div class="info-box analogy">
+            DTs represent the peak of the CNS "rebound" after alcohol removal. The entire autonomic nervous system is in hyperdrive — imagine your body simultaneously having a fever, a panic attack, a seizure, and complete cognitive disintegration. Without treatment (benzodiazepines), the hemodynamic stress and hyperthermia can be fatal.
+          </div>
+          <div class="info-box treatment">
+            <strong>Benzodiazepines</strong> are first-line for ALL stages of alcohol withdrawal — they substitute at GABA receptors, preventing CNS hyperexcitability. Diazepam or lorazepam preferred. <strong>Thiamine 100 mg IV/IM</strong> before any glucose. IV fluids for dehydration. Electrolyte replacement (Mg²⁺ often deficient). Phenobarbital for refractory seizures.
+          </div>
+
+          <h4>Disulfiram (Antabuse) Reaction</h4>
+          <p>Disulfiram inhibits aldehyde dehydrogenase → accumulation of acetaldehyde. Even small amounts of alcohol cause flushing, tachycardia, nausea, hypotension, and dysrhythmias within 15–30 minutes. Treat with IV fluids and supportive care.</p>
+          <div class="info-box analogy">
+            Disulfiram turns the "sipping a beer" experience into the worst hangover of your life — compressed into 15 minutes. Acetaldehyde accumulation causes the exact same symptoms as a severe hangover: flushing, pounding pulse, nausea, vomiting, and dread. It's pharmacological aversion therapy.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ ASSESSMENT ══ -->
+    <div id="page-assessment" class="page">
+      <div class="page-header">
+        <span class="chapter-tag">Chapter 32 · Knowledge Assessment</span>
+        <h2>Toxicology — 100 Question Exam</h2>
+        <p>Complete all 100 questions. Immediate feedback provided after each answer. A graded PDF report will be generated upon completion.</p>
+      </div>
+
+      <div id="quiz-panel">
+        <div class="quiz-status">
+          <span class="q-counter" id="q-counter">Question 1 of 100</span>
+          <span id="q-score-live">Score: 0</span>
+        </div>
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quiz-progress" style="width:1%"></div>
+        </div>
+        <div id="questions-container"></div>
+        <div class="quiz-nav">
+          <span id="q-answered" style="font-family:var(--mono);font-size:12px;color:var(--text-muted);">Select an answer to continue</span>
+          <button class="btn-next" id="btn-next" onclick="nextQuestion()">NEXT →</button>
+        </div>
+      </div>
+
+      <div id="results-panel">
+        <div class="score-hero">
+          <div class="score-circle" id="scoreCircle">
+            <span class="score-value" id="scoreValue">0%</span>
+          </div>
+          <h2 id="resultName">Results</h2>
+          <p id="resultDetail"></p>
+          <span class="score-grade" id="scoreGrade">—</span>
+        </div>
+        <div style="text-align:center; margin-bottom: 24px;">
+          <button class="btn-pdf" onclick="generatePDF()">📄 &nbsp; DOWNLOAD GRADE REPORT (PDF)</button>
+          <button class="btn-restart" onclick="restartQuiz()">↺ Retake Assessment</button>
+        </div>
+        <div class="review-list" id="review-list"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ─── STUDENT DATA ───────────────────────────────
+let studentName = '';
+let studentId   = '';
+let studentDate = '';
+let unlocked    = false;
+
+function registerStudent() {
+  const n = document.getElementById('studentName').value.trim();
+  const i = document.getElementById('studentId').value.trim();
+  if (!n) { alert('Please enter your full name.'); return; }
+  if (!i) { alert('Please enter your Student ID.'); return; }
+  studentName = n;
+  studentId   = i;
+  studentDate = document.getElementById('studentDate').value;
+  unlocked = true;
+  showPage('intro');
+}
+
+// ─── NAVIGATION ─────────────────────────────────
+function showPage(id) {
+  if (!unlocked && id !== 'registration') {
+    alert('Please register first to access this content.');
+    return;
+  }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget && event.currentTarget.classList.add('active');
+  window.scrollTo(0,0);
+  if (id === 'assessment' && !quizInitialized) { initQuiz(); }
+}
+
+// ─── COLLAPSIBLE SECTIONS ────────────────────────
+function toggleSection(header) {
+  const body = header.nextElementSibling;
+  header.classList.toggle('collapsed');
+  body.classList.toggle('hidden');
+}
+
+// ─── QUIZ DATA ───────────────────────────────────
+const allQuestions = [
+  // SECTION: GENERAL PRINCIPLES & TOXIDROMES (Q1–20)
+  { q:"Which agency provides 24/7 toxicology consultation to EMS providers and the public?", o:["Emergency Medical Services","Poison Control Centers","The CDC Toxicology Division","FEMA Hazmat Teams"], a:1, exp:"There are 55 Poison Control Centers in the US, most based in major medical centers, providing 24/7 treatment advice from a database of over 447,000 toxic substances." },
+  { q:"The national toll-free Poison Control number is:", o:["1-800-911-HELP","1-800-222-1222","1-888-POISON-1","1-800-TOXIC-NOW"], a:1, exp:"1-800-222-1222 is the national Poison Control number, linked into 9-1-1 systems across the US." },
+  { q:"Which toxidrome is characterized by the mnemonic SLUDGE?", o:["Anticholinergic","Opioid","Cholinergic","Sympathomimetic"], a:2, exp:"SLUDGE (Salivation, Lacrimation, Urination, Defecation, GI upset, Emesis) is the classic cholinergic toxidrome, caused by excess acetylcholine stimulation." },
+  { q:"A patient presents with dry flushed skin, dilated pupils, tachycardia, urinary retention, and confusion. This BEST represents which toxidrome?", o:["Cholinergic","Anticholinergic","Opioid","Sedative-Hypnotic"], a:1, exp:"'Dry as a bone, blind as a bat, red as a beet, hot as a hare, mad as a hatter' — the classic anticholinergic presentation from blockade of muscarinic ACh receptors." },
+  { q:"The classic opioid toxidrome triad consists of:", o:["Hypertension, mydriasis, diaphoresis","Respiratory depression, depressed LOC, miosis","Tachycardia, hyperthermia, seizures","Bradycardia, SLUDGE, fasciculations"], a:1, exp:"The opioid triad: (1) respiratory depression, (2) decreased level of consciousness, and (3) miosis (pinpoint pupils) from μ-receptor stimulation of the Edinger-Westphal nucleus." },
+  { q:"Which two drugs taken together are MOST commonly associated with serotonin syndrome?", o:["Aspirin and ibuprofen","SSRIs and triptans (migraine medications)","Beta-blockers and calcium channel blockers","Opioids and benzodiazepines"], a:1, exp:"Serotonin syndrome most commonly results from combining two serotonergic agents — SSRIs + triptans is the classic combination. MDMA, LSD, St. John's wort, and SNRIs are also implicated." },
+  { q:"In serotonin syndrome, which finding on physical exam is MOST characteristic and differentiates it from NMS?", o:["Fever","Diaphoresis","Clonus and hyperreflexia","Muscle rigidity"], a:2, exp:"Clonus (repetitive involuntary muscle contraction) and hyperreflexia are the hallmark neuromuscular findings of serotonin syndrome. NMS features lead-pipe rigidity without clonus." },
+  { q:"Sympathomimetic toxidrome from cocaine or amphetamine overdose is BEST treated initially with:", o:["Beta-blockers","Benzodiazepines","Atropine","Naloxone"], a:1, exp:"Benzodiazepines are first-line for sympathomimetic toxidrome — they reduce CNS and cardiovascular stimulation without the risks of beta-blockers (which are contraindicated in cocaine OD)." },
+  { q:"The MOST common route of toxic exposure reported to US Poison Control Centers is:", o:["Inhalation","Injection","Ingestion","Skin absorption"], a:2, exp:"Ingestion accounts for approximately 77.7% of all toxic exposures reported to American Poison Control Centers." },
+  { q:"When assessing a poisoned patient, the three vital organ systems MOST likely to cause morbidity or death are:", o:["Renal, hepatic, and hematologic","Cardiovascular, respiratory, and CNS","Musculoskeletal, GI, and endocrine","Skin, renal, and immune"], a:1, exp:"The primary physical assessment of poisoned patients focuses on cardiovascular, respiratory, and CNS systems — the three most likely to produce fatal complications." },
+  // SECTION: INGESTED POISONS (Q11–30)
+  { q:"Activated charcoal works by which mechanism?", o:["Neutralizing acids","Adsorbing (binding) toxins before GI absorption","Inducing vomiting to eliminate toxins","Blocking toxin receptors in the brain"], a:1, exp:"Activated charcoal adsorbs (physically binds) toxin molecules in the GI lumen, preventing absorption. Think of it as a 'molecular sponge.'" },
+  { q:"Activated charcoal is CONTRAINDICATED in which situation?", o:["Recent ingestion within 30 minutes","Altered mental status without airway protection","Pediatric patients","All ingestion overdoses"], a:1, exp:"Activated charcoal is contraindicated when the airway is unprotected (altered MS) due to high aspiration risk, and in caustic/corrosive ingestions (can worsen injury)." },
+  { q:"Methanol poisoning causes damage primarily through:", o:["Direct alcohol toxicity","Conversion to formaldehyde and formic acid by alcohol dehydrogenase","Displacement of oxygen from hemoglobin","Inhibition of acetylcholinesterase"], a:1, exp:"Methanol is metabolized by alcohol dehydrogenase to formaldehyde, then to formic acid. Formic acid destroys the optic nerve and causes profound metabolic acidosis." },
+  { q:"The antidote for both methanol AND ethylene glycol poisoning is:", o:["Naloxone","N-acetylcysteine","Fomepizole (4-methylpyrazole)","Hydroxocobalamin"], a:2, exp:"Fomepizole (4-MP) blocks alcohol dehydrogenase, preventing conversion of methanol to formic acid and ethylene glycol to oxalic acid — the toxic metabolites in both poisonings." },
+  { q:"Ethylene glycol poisoning causes renal failure primarily through:", o:["Direct tubular nephrotoxicity of ethylene glycol","Calcium oxalate crystal deposition in renal tubules","Vasoconstrictive effects of glycolic acid","Immune-mediated glomerulonephritis"], a:1, exp:"Ethylene glycol is metabolized to oxalic acid, which binds calcium to form calcium oxalate crystals. These crystals deposit in renal tubules causing obstruction and tubular destruction." },
+  { q:"Acetaminophen overdose causes liver failure through which mechanism?", o:["Direct hepatotoxicity of acetaminophen","Depletion of glutathione → NAPQI accumulation → hepatocellular necrosis","Inhibition of prostaglandin synthesis in hepatocytes","Immune-mediated hepatitis"], a:1, exp:"CYP2E1 converts ~5% of acetaminophen to NAPQI (N-acetyl-p-benzoquinone imine). Normally glutathione neutralizes NAPQI. In overdose, glutathione depletes and NAPQI causes centrolobular necrosis." },
+  { q:"The antidote for acetaminophen overdose is:", o:["Fomepizole","Atropine","N-Acetylcysteine (NAC)","Flumazenil"], a:2, exp:"N-Acetylcysteine replenishes glutathione stores, allowing continued neutralization of NAPQI. Most effective within 8–10 hours of ingestion but can still help up to 24 hours." },
+  { q:"A toxic adult dose of acetaminophen is approximately:", o:["500 mg","3,000 mg","Greater than 150 mg/kg or 12 g","Any dose above the labeled maximum"], a:2, exp:"An acute ingestion of >150 mg/kg or >12 g is considered potentially toxic and poses significant risk of liver damage in adults." },
+  { q:"Why are beta-blockers CONTRAINDICATED in cocaine toxicity?", o:["They lower heart rate too much","They cause unopposed alpha-adrenergic stimulation, worsening coronary vasospasm and hypertension","They block naloxone's effect","They increase cocaine absorption"], a:1, exp:"Blocking β₂ receptors in cocaine toxicity leaves α-adrenergic receptors unopposed, causing severe peripheral vasoconstriction, hypertension, and coronary artery spasm." },
+  { q:"Tricyclic antidepressant (TCA) overdose causing a wide QRS complex should be treated with:", o:["Amiodarone IV","Sodium Bicarbonate IV","Magnesium sulfate","Cardioversion"], a:1, exp:"Sodium bicarbonate treats TCA-induced dysrhythmias by (1) alkalinizing serum (sodium channel binding decreases in alkalosis) and (2) providing excess sodium to overcome sodium channel blockade." },
+  // SECTION: INHALED POISONS (Q21–40)
+  { q:"Carbon monoxide's primary mechanism of toxicity is:", o:["Displacing oxygen from air","Binding hemoglobin with 240× greater affinity than O₂, blocking O₂ transport","Directly destroying lung tissue","Inhibiting acetylcholinesterase"], a:1, exp:"CO binds hemoglobin with 240× greater affinity than O₂, forming carboxyhemoglobin. It also shifts the oxyhemoglobin dissociation curve left AND inhibits cytochrome oxidase in mitochondria." },
+  { q:"Standard pulse oximetry in carbon monoxide poisoning will:", o:["Accurately reflect true oxygen saturation","Read falsely LOW","Read falsely NORMAL or HIGH","Not function at all"], a:2, exp:"Standard pulse oximetry cannot distinguish oxyhemoglobin from carboxyhemoglobin — both absorb light at the same wavelengths. CO-oximetry is required for accurate measurement." },
+  { q:"High-flow oxygen (100% via NRB) is the primary prehospital treatment for CO poisoning because:", o:["It reverses methemoglobinemia","It competes with CO for hemoglobin binding and reduces CO half-life from ~5 hours to ~60–90 minutes","It directly oxidizes CO to CO₂","It prevents rhabdomyolysis"], a:1, exp:"100% O₂ competitively displaces CO from hemoglobin (mass action), reducing the half-life from ~5 hours on room air to ~60–90 minutes. HBO can reduce it further to ~20 minutes." },
+  { q:"Cyanide poisoning causes 'histotoxic hypoxia' by:", o:["Binding hemoglobin","Blocking cytochrome oxidase (Complex IV) in the mitochondrial electron transport chain","Destroying lung alveoli","Causing methemoglobin formation"], a:1, exp:"Cyanide inhibits cytochrome oxidase (ETC Complex IV), completely halting aerobic respiration. Oxygen is delivered to cells but cannot be used — cells shift to anaerobic metabolism and lactic acidosis develops." },
+  { q:"A fire victim presents unconscious with severe lactic acidosis despite adequate oxygenation. The MOST likely additional toxin (beyond CO) is:", o:["Ammonia","Cyanide","Phosgene","Chlorine"], a:1, exp:"Burning nylon, polyurethane, and many plastics releases hydrogen cyanide. CO + cyanide combined poisoning is common in structural fires and explains refractory lactic acidosis and metabolic acidosis." },
+  { q:"The preferred antidote for cyanide poisoning in the US is:", o:["Amyl nitrite","Hydroxocobalamin (Cyanokit)","Sodium thiosulfate alone","Activated charcoal"], a:1, exp:"Hydroxocobalamin (5g IV over 15 min) is preferred. It binds cyanide to form cyanocobalamin (B12), which is safely excreted renally. It avoids methemoglobin formation unlike older nitrite-based antidotes." },
+  { q:"Ammonia gas is classified as which type of inhaled toxin?", o:["Simple asphyxiant","Chemical asphyxiant","Irritant/corrosive","Systemic poison"], a:2, exp:"Ammonia is a highly water-soluble irritant/corrosive. It causes immediate intense inflammation and destruction of upper airway mucosa. At high concentrations, it can reach and destroy lower respiratory structures." },
+  { q:"'Sudden Sniffing Death' associated with hydrocarbon inhalation occurs due to:", o:["Severe pulmonary edema","Catecholamine-induced ventricular fibrillation in a sensitized myocardium","Asphyxiation from oxygen displacement","Respiratory center depression"], a:1, exp:"Hydrocarbons sensitize the myocardium to catecholamines. Any emotional or physical arousal (surprise, running) triggers a catecholamine surge that causes ventricular fibrillation — even on first exposure." },
+  { q:"Simple asphyxiants cause toxicity by:", o:["Directly poisoning cellular metabolism","Displacing oxygen from the surrounding air, leading to hypoxia","Producing reactive chemical intermediates","Blocking alveolar gas exchange"], a:1, exp:"Simple asphyxiants (methane, propane, CO₂, noble gases) are not inherently toxic — they cause hypoxia solely by displacing O₂ in confined spaces." },
+  { q:"Phosgene (COCl₂) is considered MORE dangerous than chlorine as an inhalation hazard primarily because:", o:["It is more corrosive to skin","It has low water solubility, causing minimal upper airway irritation but severe delayed pulmonary edema","It penetrates clothing more easily","It persists longer in the atmosphere"], a:1, exp:"Low water solubility means phosgene doesn't warn victims with upper airway irritation. It penetrates deep into alveoli before causing symptoms — delayed pulmonary edema can appear 4–24 hours after exposure." },
+  { q:"In managing a patient who has been exposed to a toxic inhalant, the paramedic's FIRST priority is:", o:["Administering the specific antidote","Establishing IV access","Ensuring personal safety and removing the patient from the toxic environment","Calling Poison Control"], a:2, exp:"Personal safety is ALWAYS the paramedic's first priority. A rescuer who becomes incapacitated by the same toxin cannot help anyone. Proper PPE and evacuation of the patient from the source environment come first." },
+  // SECTION: INJECTED (ENVENOMATION) (Q31–50)
+  { q:"The black widow spider's venom causes toxicity by:", o:["Causing progressive tissue necrosis","Triggering massive release of neurotransmitters (ACh and NE) at nerve terminals","Blocking the neuromuscular junction","Causing systemic hemolysis"], a:1, exp:"α-Latrotoxin causes sustained, excessive release of acetylcholine and norepinephrine, leading to continuous nerve firing and severe muscle cramps, especially abdominal rigidity." },
+  { q:"The brown recluse spider bite characteristically causes:", o:["Rapid systemic anaphylaxis","Initially painless bite → progressive necrotic ulcer over days","Immediate severe local pain","Ascending paralysis"], a:1, exp:"Brown recluse (fiddle-back) spider venom contains sphingomyelinase D, which dissolves cell membrane components causing delayed, progressive necrosis. The initial bite is often painless and overlooked." },
+  { q:"Which snake species in the US uses neurotoxin-based venom rather than hemotoxin?", o:["Rattlesnake","Copperhead","Cottonmouth (Water Moccasin)","Coral Snake"], a:3, exp:"Coral snakes (Elapidae) produce primarily neurotoxic venom that blocks post-synaptic neuromuscular junctions, causing ascending paralysis. Pit vipers (Crotalidae) produce hemotoxic/cytotoxic venom." },
+  { q:"The correct interpretation of the coral snake rhyme 'Red on yellow, kill a fellow' refers to:", o:["Red stripes adjacent to yellow stripes indicate a dangerous coral snake","Red stripes adjacent to black stripes indicate danger","Yellow coloration always indicates venom","The rhyme applies to all colored snakes worldwide"], a:0, exp:"Red on yellow = coral snake (dangerous). Red on black = non-venomous mimic (like king snake). This rhyme applies to North American coral snakes only — not reliable in Central/South America." },
+  { q:"A patient bitten by a coral snake appears fine with only minor local swelling 2 hours post-bite. The CORRECT management is:", o:["Discharge with wound care instructions","Apply a tourniquet to prevent venom spread","Admit and observe for 24 hours — delayed neurological paralysis is expected","Apply ice to the bite site"], a:2, exp:"Coral snake envenomation causes DELAYED neurological effects (6–12 hours). The absence of early symptoms is deceptive — bulbar paralysis and respiratory failure can develop hours later. All patients require 24-hour observation." },
+  { q:"Prehospital management of a rattlesnake bite SHOULD include:", o:["Applying a tourniquet proximal to the bite","Incising and suctioning the wound","Immobilizing the bitten extremity at heart level and preparing for rapid transport","Applying ice packs to the bite area"], a:2, exp:"Immobilize the extremity at heart level (reduces venom spread). Transport immediately for antivenom (CroFab). Avoid tourniquets, incision, suction, electric shock, and ice — all are ineffective and potentially harmful." },
+  { q:"Pit vipers are identified by which characteristics? (Select the BEST answer)", o:["Round pupils and small fixed fangs","Heat-sensing pit organ, triangular head, elliptical pupils, and folding retractable fangs","Bright colored banding and small fixed fangs","Large round pupils and rough scales"], a:1, exp:"Pit vipers (family Crotalidae) have: triangular/arrow-shaped head, heat-sensing pit organ between eye and nostril, elliptical (cat-like) pupils, and hollow retractable fangs. They include rattlesnakes, copperheads, and cottonmouths." },
+  { q:"When removing a bee stinger, the correct technique is:", o:["Squeeze the stinger sac to push it out","Use forceps to grasp and pull the stinger","Scrape or flick the stinger away from the skin","Leave it in place and transport immediately"], a:2, exp:"Honeybee stingers have a venom sac attached. Squeezing injects MORE venom. The correct method is to scrape or flick the stinger away (using a card, fingernail, or dull instrument) without squeezing." },
+  { q:"Tick paralysis results from:", o:["Bacterial toxin from Borrelia burgdorferi","Rickettsia organisms entering the bloodstream","A neurotoxin secreted from the salivary glands of a female wood tick during prolonged attachment","Viral encephalitis transmitted by tick saliva"], a:2, exp:"Tick paralysis is caused by a neurotoxin in female wood tick (Dermacentor) salivary glands. It blocks acetylcholine release at the neuromuscular junction. Removing the tick leads to rapid reversal of paralysis." },
+  { q:"Lyme disease is caused by:", o:["Rickettsia rickettsii transmitted by dog ticks","Borrelia burgdorferi transmitted by Ixodes (deer) ticks","A virus transmitted by black flies","Staphylococcal toxin injected by fire ants"], a:1, exp:"Lyme disease is the most common tick-borne illness in the US, caused by the spirochete Borrelia burgdorferi, transmitted by Ixodes scapularis (blacklegged/deer tick) after 24–36 hours of attachment." },
+  { q:"For jellyfish stings, vinegar (4–6% acetic acid) is applied to:", o:["Neutralize the venom chemically","Inactivate unfired nematocysts (stinging cells) to prevent additional venom injection","Reduce local inflammation","Clean the wound to prevent infection"], a:1, exp:"Vinegar inactivates/inhibits unfired nematocysts, preventing them from discharging additional venom when tentacles are handled or removed. Freshwater should be AVOIDED as it causes nematocysts to fire." },
+  // SECTION: ABSORPTION (ORGANOPHOSPHATES) (Q41–55)
+  { q:"Organophosphates cause toxicity by:", o:["Blocking adrenergic receptors","Irreversibly inhibiting acetylcholinesterase, allowing acetylcholine to accumulate","Directly stimulating serotonin receptors","Binding hemoglobin with high affinity"], a:1, exp:"Organophosphates (and nerve agents) bind and inactivate acetylcholinesterase, the enzyme that breaks down ACh. ACh accumulates at ALL cholinergic synapses, producing the cholinergic toxidrome." },
+  { q:"The key difference between organophosphate and carbamate toxicity is:", o:["Carbamates cause more severe toxicity","Organophosphates bind AChE irreversibly (can 'age'); carbamates bind reversibly","Carbamates affect only muscarinic receptors","Organophosphates only affect the CNS"], a:1, exp:"Organophosphate binding to AChE is covalent and becomes irreversible ('aging'). Carbamate binding is reversible and spontaneously dissociates — making carbamate poisoning less severe and self-limiting." },
+  { q:"The drug of choice to reverse MUSCARINIC effects (SLUDGE, bronchospasm, bradycardia) of organophosphate poisoning is:", o:["Pralidoxime (2-PAM)","Atropine","Midazolam","Naloxone"], a:1, exp:"Atropine is a competitive muscarinic antagonist — it blocks the effects of excess ACh at muscarinic receptors. Large doses are needed. Endpoint: drying of secretions (not tachycardia)." },
+  { q:"Pralidoxime (2-PAM) is used in organophosphate poisoning to:", o:["Block muscarinic receptors","Reactivate acetylcholinesterase by removing the organophosphate from the enzyme","Reverse CNS depression","Provide general anesthesia during decontamination"], a:1, exp:"Pralidoxime directly reactivates AChE by displacing the bound OP. It must be given BEFORE 'aging' (irreversible bond formation). It is more effective for nicotinic (muscle) effects than atropine." },
+  { q:"Benzodiazepines are used in organophosphate poisoning primarily to:", o:["Reverse muscarinic effects","Treat hypotension","Control seizure activity","Provide sedation for intubation only"], a:2, exp:"Benzodiazepines (midazolam preferred for fastest onset) control seizure activity in OP poisoning. Phenytoin is INEFFECTIVE in OP-induced seizures — only GABAergic drugs work effectively." },
+  { q:"The correct treatment sequence for moderate-to-severe organophosphate poisoning is:", o:["Pralidoxime → Atropine → Benzos","Atropine → Pralidoxime → Benzodiazepines (if seizures)","Naloxone → Atropine → Pralidoxime","Benzos → Atropine → Activated Charcoal"], a:1, exp:"Atropine first (for immediate symptomatic control of muscarinic effects), then Pralidoxime (to reactivate AChE before aging), then Benzodiazepines if seizures are present." },
+  { q:"A paramedic arrives at a farm where a worker collapsed after handling pesticides. The patient has pinpoint pupils, profuse salivation, bronchospasm, bradycardia, and diarrhea. What is this presentation?", o:["Opioid toxidrome","Anticholinergic toxidrome","Cholinergic toxidrome (organophosphate poisoning)","Sympathomimetic toxidrome"], a:2, exp:"Classic organophosphate/cholinergic toxidrome: SLUDGE + bradycardia + bronchospasm + miosis from pesticide exposure. Initiate decontamination (remove clothing/rinse skin), atropine, and pralidoxime." },
+  { q:"When treating the organophosphate-poisoned patient, atropine administration should continue until:", o:["The heart rate reaches 100 bpm","Bronchial secretions are dry and bronchospasm resolves","Pupil dilation is observed","Blood pressure normalizes above 120 mmHg"], a:1, exp:"The therapeutic endpoint for atropine in OP poisoning is drying of secretions and resolution of bronchospasm — NOT heart rate. Achieving tachycardia does NOT indicate adequate treatment." },
+  { q:"What PPE concern is MOST critical when treating an organophosphate-poisoned patient?", o:["Patient is not contagious — no special PPE needed","Patient skin/clothing contains toxin — risk of secondary responder contamination","Only inhalation risk if patient is vomiting","Standard gloves are sufficient for all OP exposures"], a:1, exp:"OP-contaminated patients (especially from skin/clothing exposure) can cause secondary contamination of responders through contact. Remove clothing and perform water decontamination BEFORE transport when possible. Use appropriate PPE (minimum level B for unknown chemical)." },
+  { q:"Which mechanism explains fasciculations seen in organophosphate poisoning?", o:["Nicotinic receptor overstimulation at neuromuscular junctions from excess ACh","Muscarinic receptor activation in skeletal muscle","CNS seizure activity spreading to muscles","Direct toxic effect of OPs on myocyte membranes"], a:0, exp:"Fasciculations (muscle twitching) result from nicotinic receptor overstimulation at neuromuscular junctions as excess ACh depolarizes skeletal muscle repeatedly. Eventually muscles fatigue → flaccid paralysis." },
+  // SECTION: SUBSTANCE USE DISORDER (Q51–75)
+  { q:"The current preferred terminology replacing 'drug abuse' is:", o:["Chemical dependency disorder","Substance use disorder (SUD)","Behavioral addiction syndrome","Narcotic dependency syndrome"], a:1, exp:"The American Psychiatric Association's DSM-5 replaced 'drug abuse' and 'drug dependence' with 'Substance Use Disorder (SUD)' — a spectrum diagnosis recognizing it as a medical condition." },
+  { q:"Naloxone's mechanism of action in opioid overdose is:", o:["It metabolizes opioids to inactive metabolites","It is a pure opioid antagonist that competitively displaces opioids from receptors","It stimulates respiratory centers directly","It reverses sedation through GABA receptor blockade"], a:1, exp:"Naloxone is a pure opioid antagonist with NO agonist activity. It competitively displaces opioids from μ, κ, and δ receptors, reversing the three classic opioid OD effects: respiratory depression, CNS depression, and miosis." },
+  { q:"A critical pharmacokinetic concern when using naloxone for fentanyl or heroin overdose is:", o:["Naloxone causes liver toxicity with repeated doses","Naloxone's half-life is shorter than most opioids — re-narcotization can occur after it wears off","Naloxone should only be given once per patient encounter","Naloxone is ineffective against synthetic opioids"], a:1, exp:"Naloxone has a half-life of ~30–90 minutes, significantly shorter than heroin (4–6 hrs), methadone (24–36 hrs), and fentanyl. Patients can fall back into respiratory depression. Monitor closely; consider repeat doses or infusion." },
+  { q:"Which synthetic opioid is approximately 100 times more potent than morphine and is driving the current wave of opioid overdose deaths?", o:["Oxycodone","Heroin","Methadone","Fentanyl"], a:3, exp:"Illicitly manufactured fentanyl (IMF) is ~100× more potent than morphine. Even microgram quantities can cause fatal respiratory depression. It is driving the current (Wave 3) opioid epidemic since ~2013." },
+  { q:"Cocaine toxicity causes cardiac dysrhythmias through which additional mechanism beyond sympathomimetic effects?", o:["Calcium channel blockade","Sodium channel blockade (local anesthetic effect)","Potassium channel hyperstimulation","Parasympathetic stimulation"], a:1, exp:"In addition to massive catecholamine release, cocaine blocks fast Na⁺ channels in cardiac tissue — exactly like a local anesthetic. This widens the QRS and can precipitate ventricular dysrhythmias independent of heart rate." },
+  { q:"The 'Second Wave' of the US opioid epidemic (beginning ~2010) was characterized by a surge in:", o:["Prescription opioid overdoses","Heroin-related overdoses","Synthetic opioid (fentanyl) deaths","Methadone-related deaths"], a:1, exp:"The three waves: Wave 1 (~1999) = prescription opioids; Wave 2 (~2010) = heroin (as prescriptions tightened and users sought cheaper alternatives); Wave 3 (~2013) = illicit synthetic fentanyl." },
+  { q:"Phencyclidine (PCP) works primarily by:", o:["Stimulating opioid receptors","Blocking NMDA glutamate receptors (dissociative anesthetic)","Enhancing GABA inhibition","Inhibiting acetylcholinesterase"], a:1, exp:"PCP is a dissociative anesthetic that blocks NMDA glutamate receptors, creating dissociation, analgesia, and altered perception. It has BOTH stimulant and depressant properties, making it unpredictable." },
+  { q:"PCP in HIGH doses (>10 mg) typically causes:", o:["Euphoria and mild hallucinations","Coma lasting hours to days, often unresponsive to painful stimuli","Hypertensive emergency only","Respiratory arrest within minutes"], a:1, exp:"High-dose PCP (>10 mg) causes coma that can last hours to several days. Patients are often completely unresponsive to painful stimuli. Manage airway aggressively. Benzodiazepines for agitation/seizures." },
+  { q:"Tricyclic antidepressant (TCA) overdose presents with which distinctive COMBINATION of findings?", o:["Bradycardia, SLUDGE, miosis","Tachycardia, dry flushed skin, wide QRS, hypotension, and seizures","Respiratory depression, miosis, hypotension","Hypertension, tachycardia, diaphoresis, dilated pupils"], a:1, exp:"TCA overdose combines anticholinergic syndrome (tachycardia, dry skin, agitation) with sodium channel blockade (wide QRS, dysrhythmias), alpha-1 blockade (hypotension), and GABA modulation (seizures)." },
+  { q:"Lithium toxicity occurs because:", o:["Lithium has a wide therapeutic window","Lithium is only toxic in acute overdose, not chronic use","Lithium has a very narrow therapeutic window (0.6–1.2 mEq/L) and can accumulate with dehydration","Lithium is rapidly metabolized to a more toxic compound"], a:2, exp:"Lithium has a narrow therapeutic index and is NOT metabolized — it's excreted renally. Dehydration, NSAIDs, ACE inhibitors, and diuretics reduce renal clearance → lithium accumulates to toxic levels even on normal doses." },
+  { q:"Which drug combination has a LETHAL interaction risk due to excessive serotonin accumulation?", o:["Aspirin + acetaminophen","Meperidine (Demerol) + MAO inhibitors","Metoprolol + amlodipine","Naloxone + heroin"], a:1, exp:"Meperidine (Demerol) + MAO inhibitors is a classic, potentially fatal combination. Meperidine blocks serotonin reuptake while MAO inhibitors prevent serotonin breakdown → massive serotonin accumulation → potentially fatal serotonin syndrome." },
+  // SECTION: ADDITIONAL DRUG AND SUBSTANCE QUESTIONS (Q61–75)
+  { q:"Sedative-hypnotic drug overdose (benzos, barbiturates) poses the GREATEST respiratory risk when:", o:["Taken in the morning","Combined with alcohol or other CNS depressants","Administered intravenously","The patient is elderly"], a:1, exp:"Combining sedative-hypnotics with alcohol produces profound synergistic CNS/respiratory depression far exceeding the sum of each drug's effect alone. This combination is a leading cause of accidental overdose deaths." },
+  { q:"The 'date rape' drug gamma-hydroxybutyrate (GHB) falls under which toxidrome category?", o:["Sympathomimetic","Hallucinogen","Sedative-hypnotic","Opioid"], a:2, exp:"GHB is a CNS depressant with sedative-hypnotic properties. It enhances GABA and inhibits dopamine release. Causes rapid onset of sedation/unconsciousness, amnesia, and respiratory depression especially when combined with alcohol." },
+  { q:"MDMA ('Ecstasy') primarily causes toxicity through:", o:["Opioid receptor activation","Massive release of serotonin, dopamine, and norepinephrine from presynaptic terminals","Blocking all neurotransmitter reuptake without release","Direct cardiac sodium channel blockade"], a:1, exp:"MDMA triggers massive release (not just reuptake inhibition) of serotonin, dopamine, and NE. This explains both its euphoric effects and toxicity: hyperthermia, hyponatremia, serotonin syndrome, and cardiovascular stress." },
+  { q:"'Bath salts' (synthetic cathinones) cause a toxidrome MOST similar to:", o:["Opioid overdose","Anticholinergic syndrome","Sympathomimetic/stimulant syndrome","Cholinergic poisoning"], a:2, exp:"Synthetic cathinones (MDPV, mephedrone, etc.) are potent catecholamine-releasing agents similar to amphetamines/cocaine. They produce sympathomimetic syndrome: agitation, psychosis, hyperthermia, tachycardia, hypertension." },
+  { q:"In the management of hallucinogen overdose, priority is given to:", o:["Administering a specific antidote immediately","Providing a calm, low-stimulation environment and ensuring patient and responder safety","Inducing vomiting to eliminate the substance","IV benzodiazepines as a first-line response always"], a:1, exp:"There is no antidote for hallucinogens. Patient safety is paramount — calm, reassuring environment with minimal stimulation for minor toxicity. Physical restraint/benzos for dangerous agitation. Protect airway if CNS depression develops." },
+  // SECTION: ALCOHOL (Q76–90)
+  { q:"The physiologic reason alcohol withdrawal can cause seizures and delirium is:", o:["Alcohol directly destroys GABAergic neurons","Chronic alcohol upregulates NMDA receptors and downregulates GABA receptors — removing alcohol causes unbalanced CNS hyperexcitability","Withdrawal causes hypoglycemia that triggers seizures","Alcohol metabolite acetaldehyde is directly epileptogenic"], a:1, exp:"Neuroadaptation to chronic alcohol: GABA receptors downregulate, NMDA receptors upregulate. Sudden removal of alcohol removes GABA suppression while NMDA hyperexcitability surges → CNS storm = tremors, seizures, DTs." },
+  { q:"Wernicke encephalopathy is caused by deficiency of:", o:["Vitamin B12 (cobalamin)","Vitamin C (ascorbic acid)","Thiamine (Vitamin B1)","Folate (Vitamin B9)"], a:2, exp:"Wernicke encephalopathy results from thiamine (B1) deficiency, causing damage to the mammillary bodies, thalamus, and periaqueductal gray. Classic triad: ataxia, ophthalmoplegia, and confusion." },
+  { q:"In a patient with chronic alcoholism presenting with altered mental status, which should be given BEFORE administering dextrose?", o:["Naloxone","Normal saline","Thiamine (Vitamin B1)","Sodium bicarbonate"], a:2, exp:"Glucose without thiamine in thiamine-deficient patients can precipitate/worsen Wernicke encephalopathy by rapidly consuming remaining thiamine in glucose metabolism. Always give thiamine BEFORE or with glucose in AUD patients." },
+  { q:"Delirium tremens (DTs) typically appears:", o:["Immediately when the patient stops drinking","6–8 hours after the last drink","48–96 hours after cessation of alcohol","7–10 days after the last drink"], a:2, exp:"DTs (the most severe form of alcohol withdrawal) typically appears 48–96 hours after the last drink, after initial withdrawal symptoms have plateaued. It affects ~3–5% of hospitalized alcohol withdrawal patients and carries 5–15% mortality if untreated." },
+  { q:"First-line pharmacological treatment for all stages of alcohol withdrawal syndrome is:", o:["Naloxone","Haloperidol","Benzodiazepines (diazepam, lorazepam, or midazolam)","Phenytoin"], a:2, exp:"Benzodiazepines substitute at GABA receptors (since alcohol is no longer available to enhance GABA), preventing the neurological hyperexcitability of withdrawal. Phenytoin is NOT effective for withdrawal seizures." },
+  { q:"Disulfiram (Antabuse) causes a toxic reaction when combined with alcohol because it:", o:["Blocks dopamine receptors causing nausea","Inhibits aldehyde dehydrogenase, causing acetaldehyde accumulation","Competes with alcohol for hepatic metabolism","Directly blocks alcohol absorption in the GI tract"], a:1, exp:"Disulfiram inhibits aldehyde dehydrogenase — the enzyme that converts acetaldehyde (toxic) to acetate (harmless). Acetaldehyde accumulates within 15–30 minutes of drinking, causing intense flushing, tachycardia, nausea, and hypotension." },
+  { q:"The Mallory-Weiss syndrome seen in chronic alcoholics involves:", o:["Hepatic vein thrombosis","A tear at the gastroesophageal junction from repeated retching, causing upper GI hemorrhage","Portal hypertension from liver cirrhosis","Pancreatic duct rupture from chronic pancreatitis"], a:1, exp:"Mallory-Weiss syndrome = longitudinal tears of the gastric mucosa at the GEJ from forceful retching/vomiting. Presents as hematemesis (vomiting blood) often after an alcohol binge with prolonged vomiting." },
+  { q:"In a patient with known alcohol use disorder presenting with upper GI hemorrhage, the HIGHEST priority concern (besides airway) is:", o:["Suspected esophageal varices with potential for massive hemorrhage","Mallory-Weiss tear management","Gastric ulcer bleeding","All causes have equal risk and management"], a:0, exp:"Esophageal variceal hemorrhage carries 30–50% mortality per episode and can be massively hemorrhagic. Portal hypertension from cirrhosis creates varices under tremendous pressure — ruptured varices can exsanguinate in minutes." },
+  { q:"Acute alcohol intoxication resulting in coma or respiratory depression should be treated with:", o:["Flumazenil to reverse alcohol's effect","Naloxone — alcohol has some opioid properties","Supportive care: airway management, ventilation support, IV fluids, glucose monitoring","Forced diuresis with high-dose furosemide"], a:2, exp:"There is no pharmacological reversal agent for ethanol. Management is supportive: protect the airway (aspiration is a leading cause of death in alcohol OD), support ventilation, check glucose (alcohol causes hypoglycemia), IV fluids." },
+  { q:"Withdrawal seizures in alcohol use disorder typically occur:", o:["Immediately when drinking stops","6–8 hours after last drink","12–48 hours after cessation","5–7 days after cessation"], a:2, exp:"Alcohol withdrawal seizures typically peak at 12–48 hours after the last drink. They are usually single generalized tonic-clonic seizures. Status epilepticus is rare but possible. Benzodiazepines are the treatment of choice." },
+  // SECTION: COMPREHENSIVE CLINICAL (Q91–100)
+  { q:"A patient presents with unknown poisoning. Which combination of findings MOST suggests opioid toxidrome (vs. sedative-hypnotic)?", o:["Miosis + respiratory depression (opioid) vs. normal pupils + respiratory depression (sedative-hypnotic)","Both cause identical presentations","Sedative-hypnotic causes miosis; opioids cause mydriasis","Opioids cause agitation; sedative-hypnotics cause respiratory depression"], a:0, exp:"The KEY differentiator: opioids cause miosis (pinpoint pupils) due to μ-receptor action on the Edinger-Westphal nucleus. Sedative-hypnotics cause CNS/respiratory depression WITHOUT pupil changes (pupils typically normal)." },
+  { q:"A 22-year-old is found unconscious at a rave, with hyperthermia, clonus, dilated pupils, and diaphoresis after reportedly combining MDMA and an SSRI. This BEST represents:", o:["Anticholinergic toxidrome","Sympathomimetic overdose only","Serotonin syndrome","Neuroleptic malignant syndrome (NMS)"], a:2, exp:"Serotonin syndrome: agitation/altered MS + autonomic dysfunction (hyperthermia, tachycardia, diaphoresis) + NEUROMUSCULAR findings (clonus, hyperreflexia, tremor). MDMA + SSRI is a classic serotonin syndrome combination." },
+  { q:"You respond to a patient with altered mental status, fruity breath odor, and the appearance of intoxication. Blood glucose is normal. The MOST likely diagnosis is:", o:["Ethanol intoxication","Diabetic ketoacidosis","Isopropanol (rubbing alcohol) ingestion","Methanol poisoning"], a:2, exp:"Isopropanol is metabolized to acetone (not formic acid or oxalic acid), which creates the fruity/acetone breath odor. Normal blood glucose and no ketoacidosis history. Acetone is detectable on blood and urine tests." },
+  { q:"Which statement BEST describes the priority sequence in managing any poisoned patient?", o:["Identify the specific toxin before initiating any treatment","Scene safety → ABC management → history/toxin identification → specific antidotes","Administer the suspected antidote before assessment","Perform thorough physical exam before any intervention"], a:1, exp:"The universal approach: (1) Scene safety, (2) Primary survey/ABCs — most poisoned patients need only supportive care, (3) Obtain history to identify toxin, (4) Specific antidotes/treatment only when indicated." },
+  { q:"A patient with suspected beta-blocker overdose is bradycardic with hemodynamic compromise. After initial resuscitation, which treatment is MOST appropriate?", o:["High-dose epinephrine infusion","Glucagon IV bolus followed by infusion","Immediate cardioversion","Atropine 0.5mg × 3 doses only"], a:1, exp:"Glucagon bypasses the blocked beta receptors entirely — it works through glucagon-G-protein-cAMP pathway to increase heart rate and contractility, bypassing the beta-adrenergic receptor blockade. It's the unique antidote for beta-blocker OD." },
+  { q:"Which statement about naloxone in opioid overdose is CORRECT?", o:["Higher doses of naloxone always produce better outcomes","Naloxone can be safely given to anyone suspected of opioid OD without consideration of withdrawal","In opioid-dependent patients, high-dose naloxone can precipitate acute, severe withdrawal including vomiting and agitation","Naloxone is effective for all drug-induced respiratory depression"], a:2, exp:"Naloxone precipitates acute opioid withdrawal in dependent patients. Titrate to restore adequate respirations (not full consciousness) to avoid severe withdrawal with vomiting (aspiration risk), seizures, and dangerous agitation." },
+  { q:"A firefighter is extracted from a structure fire, unconscious, with cherry-red skin and no response to painful stimuli. Despite high-flow O₂, the patient has profound lactic acidosis (pH 6.9). The MOST likely additional toxin and treatment are:", o:["Methanol — give fomepizole","Cyanide — give hydroxocobalamin","Organophosphate — give atropine and pralidoxime","Ethylene glycol — give fomepizole and thiamine"], a:1, exp:"Fire victim + unconscious + refractory lactic acidosis despite O₂ = classic CO + cyanide combined poisoning. Cherry-red skin = COHb. Refractory acidosis despite O₂ = cyanide (histotoxic hypoxia). Give hydroxocobalamin (Cyanokit) immediately." },
+  { q:"Regarding organophosphate decontamination, which statement is TRUE?", o:["Rescuers cannot be contaminated by patient contact after removal from the environment","Removing the patient's clothing eliminates >80% of ongoing exposure and must be done before transport when possible","Standard gloves (nitrile) provide complete protection against all organophosphate exposure","Decontamination should wait until hospital arrival to prevent hypothermia"], a:1, exp:"Removing contaminated clothing is the single most important decontamination step, eliminating >80% of ongoing exposure. OP-contaminated skin/clothing can cause secondary responder contamination. Act early — before transport when safe." },
+  { q:"A patient presents with unknown substance overdose: tachycardia, wide QRS, hypotension, dry flushed skin, urinary retention, and altered mental status. The FIRST line treatment is:", o:["Naloxone 2mg IV","Sodium bicarbonate IV push","Flumazenil 0.2mg IV","Activated charcoal administration"], a:1, exp:"This presentation (wide QRS + anticholinergic signs + hypotension) is classic TCA overdose. Sodium bicarbonate is FIRST-LINE — it narrows the QRS by alkalizing blood (decreasing Na channel binding) and providing excess Na to overcome blockade." },
+  { q:"Which of the following is the MOST important life threat from alcohol withdrawal that the paramedic must recognize and prepare to treat?", o:["Peripheral neuropathy","Delirium tremens (DTs) — an autonomic storm with potential for dysrhythmias, hyperthermia, and cardiovascular collapse","Mallory-Weiss tear from repeated vomiting","Wernicke's encephalopathy from thiamine deficiency"], a:1, exp:"Delirium tremens carries 5–15% mortality without treatment (up to 35% historically). The autonomic hyperactivity causes hyperthermia, tachycardia, hypertension, and cardiovascular collapse. Benzodiazepines are life-saving. Early recognition and aggressive treatment are essential." },
+  // SECTION: FINAL 12 QUESTIONS (Q89–100)
+  { q:"Food poisoning caused by Clostridium botulinum toxin is MOST dangerous because:", o:["It causes severe hemorrhagic diarrhea","The toxin blocks acetylcholine release at neuromuscular junctions causing descending flaccid paralysis and potential respiratory failure","It produces a cholinergic toxidrome identical to organophosphates","It only affects the gastrointestinal tract"], a:1, exp:"Botulinum toxin (the most potent biological toxin known) cleaves SNARE proteins required for ACh vesicle fusion at the NMJ, preventing acetylcholine release. This causes descending flaccid paralysis — cranial nerve palsy first (diplopia, dysarthria, dysphagia), then respiratory muscle failure." },
+  { q:"A patient with suspected hydrofluoric (HF) acid skin exposure presents in severe pain. The systemic toxicity that makes HF uniquely dangerous (beyond local burns) is:", o:["Coagulation necrosis identical to other strong acids","Systemic hypocalcemia and hypomagnesemia from fluoride ion binding — can cause fatal cardiac dysrhythmias","Immediate pulmonary edema from off-gassing","Hepatotoxicity from dermal absorption"], a:1, exp:"Fluoride ions penetrate tissue and systemically bind calcium and magnesium, causing profound hypocalcemia and hypomagnesemia. This can precipitate fatal ventricular dysrhythmias even from small surface area burns. Treatment: calcium gluconate gel topically + IV/IA calcium for systemic toxicity." },
+  { q:"The primary prehospital intervention for a patient who has ingested a corrosive (acid or alkali) with an intact airway and mental status is:", o:["Induce vomiting immediately to remove the corrosive","Administer activated charcoal to bind the corrosive","Do NOT induce vomiting; consider dilution with water if conscious and per medical direction, and transport rapidly","Apply milk of magnesia for acid ingestion and vinegar for alkali ingestion"], a:2, exp:"Inducing vomiting re-exposes the esophagus to the corrosive (double injury). Activated charcoal is contraindicated (doesn't bind caustics, obscures endoscopic view). Dilution with small amounts of water/milk may be recommended by medical direction in a conscious patient." },
+  { q:"Which property of an inhaled toxin determines whether it primarily damages the UPPER airway vs. the LOWER airways/alveoli?", o:["Molecular weight","Lipid solubility","Water solubility — high = upper airway; low = lower airways/alveoli","Temperature of the gas"], a:2, exp:"Water-soluble gases (ammonia, chlorine) dissolve in upper airway moisture, causing immediate irritation that warns the victim to escape. Poorly water-soluble gases (phosgene, NO₂) reach the alveoli with minimal warning, causing delayed pulmonary edema hours later." },
+  { q:"Scorpion envenomation in North America causes toxicity primarily through:", o:["Tissue necrosis at the sting site","Release of acetylcholine from the stinger venom sac causing cholinergic syndrome","Venom proteins triggering massive acetylcholine release at nerve terminals, causing autonomic and neuromuscular excitation","Hemotoxin-mediated coagulopathy"], a:2, exp:"The bark scorpion (Centruroides sculpturatus) — the only dangerous North American species — delivers venom containing proteins that cause massive, uncontrolled release of acetylcholine. This produces cranial nerve dysfunction, pain, excessive secretions, and neuromuscular excitability." },
+  { q:"A 4-year-old presents lethargic and confused after finding grandmother's medications. The child has bradycardia, miosis, and respiratory depression. The MOST likely ingestion is:", o:["Aspirin (salicylates)","Acetaminophen","Opioid-containing pain medication or clonidine","Diphenhydramine (Benadryl)"], a:2, exp:"Bradycardia + miosis + respiratory depression = opioid (or opioid-like) toxidrome in a child. Clonidine (alpha-2 agonist, commonly used for hypertension/ADHD) produces an opioid-like syndrome in children and is a leading cause of pediatric medication poisoning. Naloxone may be effective for both." },
+  { q:"The 'knockdown' toxidrome refers to:", o:["A sedative-hypnotic syndrome requiring physical restraint","Sudden, rapid incapacitation from high-concentration chemical agents (nerve agents, certain industrial chemicals)","Gradual CNS depression from opioid accumulation","The initial phase of alcohol intoxication"], a:1, exp:"Knockdown refers to the rapid incapacitation caused by very high concentrations of certain agents (especially nerve agents like sarin) — victims collapse nearly immediately upon exposure due to massive cholinergic stimulation causing bronchospasm, seizures, and apnea." },
+  { q:"Pralidoxime (2-PAM) is MOST effective when administered in organophosphate poisoning:", o:["More than 24 hours after exposure","Immediately — before or early after the organophosphate-AChE bond 'ages' (becomes irreversible)","Only after three doses of atropine","Only when seizures are present"], a:1, exp:"Pralidoxime reactivates AChE by removing the OP from the enzyme active site. However, the OP-AChE bond undergoes 'aging' (becomes irreversible over hours, depending on the specific agent). Pralidoxime is most effective when given EARLY — before aging occurs." },
+  { q:"A patient presents after ingesting an unknown substance with the following: QRS duration 140ms, hypotension, dilated pupils, urinary retention, tachycardia, and a seizure. An ECG shows a terminal R wave in aVR. The BEST diagnosis is:", o:["Cocaine toxicity","Tricyclic antidepressant overdose","Organophosphate poisoning","Digoxin toxicity"], a:1, exp:"Terminal R wave in aVR >3mm combined with wide QRS (>100ms), anticholinergic signs, hypotension, and seizure is the classic TCA overdose ECG/clinical fingerprint. The R wave in aVR reflects slowed rightward depolarization from sodium channel blockade. Sodium bicarbonate is the treatment." },
+  { q:"Whole-bowel irrigation (WBI) with polyethylene glycol (GoLYTELY) is MOST appropriate for which ingestion scenario?", o:["Caustic ingestion within 30 minutes","Extended-release or enteric-coated medication overdose, body packers, or metals (iron, lead) not bound by charcoal","Any ingestion if given within 1 hour","Only when gastric lavage has failed"], a:1, exp:"WBI is indicated for: sustained-release/enteric-coated medications (charcoal may not reach them), metals (iron, lead — not adsorbed by charcoal), and body packers (drug-filled condoms/balloons in GI tract). Contraindicated with bowel obstruction, perforation, ileus." },
+  { q:"Which statement BEST describes the management of plant poisoning in the prehospital setting?", o:["Identify the specific plant species before initiating any treatment","Management should be tailored to the patient's symptoms rather than waiting for plant identification; activated charcoal for conscious patients is appropriate","Induce vomiting for all plant ingestions","Only treat if the plant is confirmed to be on the FDA toxic plant list"], a:1, exp:"Plant poisoning management is symptom-guided, not plant-specific. Inability to identify the plant should NOT delay care. Activated charcoal in conscious patients, IV fluids, airway and ventilatory support are standard. Consult poison control with whatever plant information is available." },
+  { q:"You are treating a patient in opioid-induced respiratory arrest. After two doses of naloxone (0.4mg each) the patient begins breathing but is still minimally responsive with a GCS of 9. The MOST appropriate next action is:", o:["Administer a third dose of naloxone (4mg) to fully awaken the patient","Accept this result — adequate respirations are the goal; monitor closely for re-narcotization and prepare for repeat dosing or infusion","Administer flumazenil to treat any concurrent benzodiazepine use","Withhold further naloxone since two doses have been given"], a:1, exp:"The goal of naloxone in opioid OD is restoration of adequate spontaneous respirations — NOT full consciousness. Giving excessive naloxone in an opioid-dependent patient precipitates severe withdrawal (vomiting, extreme agitation, aspiration risk). Titrate to breathing. Monitor continuously for re-narcotization as naloxone wears off before the opioid does." }
+];
+
+let currentQ = 0;
+let score = 0;
+let userAnswers = [];
+let answered = false;
+let quizInitialized = false;
+
+function initQuiz() {
+  quizInitialized = true;
+  currentQ = 0;
+  score = 0;
+  userAnswers = Array(allQuestions.length).fill(null);
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+  const q = allQuestions[currentQ];
+  const letters = ['A','B','C','D'];
+  const card = document.createElement('div');
+  card.className = 'question-card active';
+  card.innerHTML = `
+    <span class="q-number">QUESTION ${currentQ+1} OF ${allQuestions.length}</span>
+    <div class="q-text">${q.q}</div>
+    <div class="options" id="options-${currentQ}">
+      ${q.o.map((opt,i) => `
+        <button class="option-btn" onclick="selectAnswer(${i})" id="opt-${currentQ}-${i}">
+          <span class="opt-letter">${letters[i]}</span>${opt}
+        </button>`).join('')}
+    </div>
+    <div class="feedback-box" id="feedback-${currentQ}"></div>
+  `;
+  container.appendChild(card);
+  answered = false;
+  document.getElementById('btn-next').classList.remove('show');
+  document.getElementById('q-answered').textContent = 'Select an answer to continue';
+  updateProgress();
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = allQuestions[currentQ];
+  const isCorrect = idx === q.a;
+  userAnswers[currentQ] = { chosen: idx, correct: q.a, isCorrect };
+  if (isCorrect) score++;
+
+  const letters = ['A','B','C','D'];
+  q.o.forEach((_, i) => {
+    const btn = document.getElementById(`opt-${currentQ}-${i}`);
+    btn.disabled = true;
+    if (i === q.a) btn.classList.add('correct');
+    else if (i === idx && !isCorrect) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById(`feedback-${currentQ}`);
+  fb.className = 'feedback-box show ' + (isCorrect ? 'correct' : 'wrong');
+  fb.innerHTML = `<strong>${isCorrect ? '✓ Correct!' : '✗ Incorrect'}</strong> — ${q.exp}`;
+
+  document.getElementById('btn-next').classList.add('show');
+  document.getElementById('q-answered').textContent = isCorrect ? '✓ Correct' : '✗ Incorrect — review explanation';
+  document.getElementById('q-score-live').textContent = `Score: ${score}/${currentQ+1}`;
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ < allQuestions.length) {
+    renderQuestion();
+    document.getElementById('q-counter').textContent = `Question ${currentQ+1} of ${allQuestions.length}`;
+  } else {
+    showResults();
+  }
+}
+
+function updateProgress() {
+  const pct = ((currentQ+1) / allQuestions.length) * 100;
+  document.getElementById('quiz-progress').style.width = pct + '%';
+  document.getElementById('q-counter').textContent = `Question ${currentQ+1} of ${allQuestions.length}`;
+  document.getElementById('q-score-live').textContent = `Score: ${score}`;
+}
+
+function showResults() {
+  document.getElementById('quiz-panel').style.display = 'none';
+  const rp = document.getElementById('results-panel');
+  rp.style.display = 'block';
+
+  const pct = Math.round((score / allQuestions.length) * 100);
+  const circle = document.getElementById('scoreCircle');
+  circle.style.setProperty('--pct', (pct * 3.6) + 'deg');
+
+  document.getElementById('scoreValue').textContent = pct + '%';
+  document.getElementById('resultName').textContent = studentName + "'s Results";
+  document.getElementById('resultDetail').textContent = `${score} correct out of ${allQuestions.length} questions`;
+
+  const gradeEl = document.getElementById('scoreGrade');
+  let grade, cls;
+  if (pct >= 90) { grade = 'A — EXCELLENT'; cls = 'grade-A'; }
+  else if (pct >= 80) { grade = 'B — PROFICIENT'; cls = 'grade-B'; }
+  else if (pct >= 70) { grade = 'C — SATISFACTORY'; cls = 'grade-C'; }
+  else { grade = 'D — NEEDS REVIEW'; cls = 'grade-D'; }
+  gradeEl.textContent = grade;
+  gradeEl.className = 'score-grade ' + cls;
+
+  // Review list
+  const reviewEl = document.getElementById('review-list');
+  reviewEl.innerHTML = '<h4 style="margin-bottom:16px;">Answer Review</h4>';
+  const letters = ['A','B','C','D'];
+  userAnswers.forEach((ans, i) => {
+    const q = allQuestions[i];
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (ans.isCorrect ? 'r-correct' : 'r-wrong');
+    div.innerHTML = `
+      <div class="review-q"><strong>Q${i+1}.</strong> ${q.q}</div>
+      <div class="review-a ${ans.isCorrect ? 'good' : 'bad'}">
+        Your answer: ${letters[ans.chosen]}. ${q.o[ans.chosen]}
+        ${!ans.isCorrect ? `<br><span style="color:var(--green)">Correct: ${letters[ans.correct]}. ${q.o[ans.correct]}</span>` : ''}
+      </div>`;
+    reviewEl.appendChild(div);
+  });
+}
+
+function restartQuiz() {
+  document.getElementById('quiz-panel').style.display = 'block';
+  document.getElementById('results-panel').style.display = 'none';
+  initQuiz();
+}
+
+// ─── PDF GENERATION ──────────────────────────────
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+  const W = 215.9, M = 20;
+  const pct = Math.round((score / allQuestions.length) * 100);
+  const letters = ['A','B','C','D'];
+  let grade;
+  if (pct >= 90) grade = 'A';
+  else if (pct >= 80) grade = 'B';
+  else if (pct >= 70) grade = 'C';
+  else grade = 'D';
+
+  // ─ Header Banner ─
+  doc.setFillColor(6, 9, 15);
+  doc.rect(0, 0, W, 50, 'F');
+  doc.setFillColor(0, 198, 178);
+  doc.rect(0, 0, 5, 50, 'F');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(22);
+  doc.setTextColor(232, 244, 255);
+  doc.text('CAMP Community College', M, 16);
+  doc.setFontSize(13);
+  doc.setTextColor(0, 198, 178);
+  doc.text('EMS PARAMEDIC PROGRAM — CHAPTER 32: TOXICOLOGY', M, 25);
+  doc.setFontSize(10);
+  doc.setTextColor(90, 122, 148);
+  doc.text('Knowledge Assessment Report', M, 33);
+  doc.text('Sanders\' Paramedic Textbook, 6th Edition', M, 40);
+
+  // ─ Student Info Box ─
+  let y = 60;
+  doc.setFillColor(13, 21, 32);
+  doc.roundedRect(M, y, W - 2*M, 48, 3, 3, 'F');
+  doc.setDrawColor(30, 52, 72);
+  doc.roundedRect(M, y, W - 2*M, 48, 3, 3, 'S');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  doc.setTextColor(0, 198, 178);
+  doc.text('STUDENT NAME', M+8, y+10);
+  doc.text('STUDENT ID', M+8, y+24);
+  doc.text('DATE', M+8, y+38);
+  doc.text('SCORE', W/2+4, y+10);
+  doc.text('GRADE', W/2+4, y+24);
+  doc.text('CORRECT', W/2+4, y+38);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(12);
+  doc.setTextColor(232, 244, 255);
+  doc.text(studentName, M+8, y+18);
+  doc.text(studentId, M+8, y+32);
+  doc.text(studentDate, M+8, y+45);
+  doc.setFontSize(18);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(pct >= 70 ? 75 : 224, pct >= 70 ? 201 : 92, pct >= 70 ? 138 : 92);
+  doc.text(pct + '%', W/2+4, y+19);
+  doc.setFontSize(14);
+  doc.setTextColor(245, 166, 35);
+  doc.text('Grade ' + grade, W/2+4, y+32);
+  doc.setFontSize(11);
+  doc.setTextColor(200, 216, 232);
+  doc.text(score + ' / ' + allQuestions.length + ' questions correct', W/2+4, y+44);
+
+  // ─ Divider ─
+  y += 58;
+  doc.setDrawColor(0, 198, 178);
+  doc.setLineWidth(0.4);
+  doc.line(M, y, W-M, y);
+  y += 8;
+
+  // ─ Answer Review ─
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(0, 198, 178);
+  doc.text('DETAILED ANSWER REVIEW', M, y);
+  y += 8;
+
+  doc.setFontSize(8.5);
+  userAnswers.forEach((ans, i) => {
+    if (y > 255) {
+      doc.addPage();
+      y = 20;
+      doc.setFillColor(6, 9, 15);
+      doc.rect(0, 0, W, 14, 'F');
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(8);
+      doc.setTextColor(0, 198, 178);
+      doc.text('CAMP EMS — Toxicology Assessment Report (continued)', M, 9);
+      y = 22;
+    }
+    const q = allQuestions[i];
+    const bgColor = ans.isCorrect ? [13, 40, 25] : [40, 13, 13];
+    const borderColor = ans.isCorrect ? [75, 201, 138] : [224, 92, 92];
+
+    doc.setFillColor(bgColor[0], bgColor[1], bgColor[2]);
+    doc.roundedRect(M, y, W-2*M, 18, 2, 2, 'F');
+    doc.setDrawColor(borderColor[0], borderColor[1], borderColor[2]);
+    doc.setLineWidth(0.3);
+    doc.roundedRect(M, y, W-2*M, 18, 2, 2, 'S');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(200, 216, 232);
+    const qText = doc.splitTextToSize(`Q${i+1}. ${q.q}`, W-2*M-10);
+    doc.text(qText[0].length > 95 ? qText[0].substring(0,95)+'…' : qText[0], M+4, y+6);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(ans.isCorrect ? 75 : 224, ans.isCorrect ? 201 : 92, ans.isCorrect ? 138 : 92);
+    const chosen = `Your answer: ${letters[ans.chosen]}. ${q.o[ans.chosen]}`;
+    doc.text(chosen.length > 100 ? chosen.substring(0,100)+'…' : chosen, M+4, y+12);
+
+    if (!ans.isCorrect) {
+      doc.setTextColor(75, 201, 138);
+      const correct = `Correct: ${letters[ans.correct]}. ${q.o[ans.correct]}`;
+      doc.text(correct.length > 100 ? correct.substring(0,100)+'…' : correct, M+4, y+17);
+    }
+
+    y += 21;
+  });
+
+  // ─ Footer ─
+  const totalPages = doc.getNumberOfPages();
+  for (let p = 1; p <= totalPages; p++) {
+    doc.setPage(p);
+    doc.setFillColor(6, 9, 15);
+    doc.rect(0, 274, W, 12, 'F');
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(90, 122, 148);
+    doc.text('CAMP Community College · EMS Paramedic Program · Chapter 32 Toxicology', M, 280);
+    doc.text(`Page ${p} of ${totalPages} · Generated: ${new Date().toLocaleString()}`, W-M, 280, { align: 'right' });
+  }
+
+  doc.save(`Toxicology_Assessment_${studentName.replace(/\s+/g,'_')}_${studentId}.pdf`);
+}
+</script>
+</body>
+</html>
