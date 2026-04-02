@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 20 — Clinical Decision Making | CAMP EMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root[data-theme="dark"] {
+  --bg: #0a0c10;
+  --bg2: #0f1318;
+  --bg3: #141820;
+  --card: #161c26;
+  --card2: #1c2330;
+  --border: #2a3344;
+  --border2: #3a4860;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --accent: #f97316;
+  --accent2: #fb923c;
+  --accent3: #fdba74;
+  --blue: #38bdf8;
+  --blue2: #7dd3fc;
+  --green: #4ade80;
+  --green2: #86efac;
+  --red: #f87171;
+  --red2: #fca5a5;
+  --yellow: #fbbf24;
+  --purple: #a78bfa;
+  --cyan: #22d3ee;
+  --header-bg: linear-gradient(135deg, #0a0c10 0%, #0f1a2e 50%, #0a0c10 100%);
+  --nav-bg: rgba(10,12,16,0.95);
+  --glow: 0 0 40px rgba(249,115,22,0.15);
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --display: 'Bebas Neue', sans-serif;
+}
+:root[data-theme="light"] {
+  --bg: #f0f4f8;
+  --bg2: #e8eef5;
+  --bg3: #dde6f0;
+  --card: #ffffff;
+  --card2: #f7f9fc;
+  --border: #cbd5e1;
+  --border2: #94a3b8;
+  --text: #1e293b;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #ea6c00;
+  --accent2: #f97316;
+  --accent3: #c2410c;
+  --blue: #0284c7;
+  --blue2: #0369a1;
+  --green: #16a34a;
+  --green2: #15803d;
+  --red: #dc2626;
+  --red2: #b91c1c;
+  --yellow: #d97706;
+  --purple: #7c3aed;
+  --cyan: #0891b2;
+  --header-bg: linear-gradient(135deg, #1e293b 0%, #0f2a4a 50%, #1e293b 100%);
+  --nav-bg: rgba(240,244,248,0.97);
+  --glow: 0 0 40px rgba(249,115,22,0.10);
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --display: 'Bebas Neue', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.7;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; gap: 6px;
+  overflow-x: auto; padding: 10px 0;
+  scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-btn {
+  background: none; border: 1px solid var(--border);
+  color: var(--text2); padding: 5px 12px;
+  border-radius: 4px; cursor: pointer;
+  font-family: var(--mono); font-size: 11px;
+  white-space: nowrap; transition: all 0.2s;
+}
+.nav-btn:hover,.nav-btn.active{
+  background: var(--accent); border-color: var(--accent);
+  color: #fff;
+}
+.nav-logo {
+  font-family: var(--display); letter-spacing: 2px;
+  font-size: 18px; color: var(--accent); flex-shrink: 0;
+  margin-right: 8px;
+}
+.theme-toggle {
+  margin-left: auto; flex-shrink: 0;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); padding: 5px 12px;
+  border-radius: 20px; cursor: pointer;
+  font-size: 13px; transition: all 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover{border-color:var(--accent); color: var(--accent);}
+
+/* ── HEADER ── */
+header {
+  background: var(--header-bg);
+  padding: 60px 20px 50px;
+  text-align: center;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.header-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.15;
+}
+.header-content{position:relative; z-index:1;}
+.chapter-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 4px;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 14px;
+}
+header h1 {
+  font-family: var(--display); font-size: clamp(42px, 7vw, 82px);
+  letter-spacing: 4px; color: #fff; line-height: 1;
+  margin-bottom: 16px;
+}
+header h1 span { color: var(--accent); }
+.header-sub {
+  font-family: var(--sans); font-weight: 300;
+  color: rgba(255,255,255,0.65); font-size: 15px;
+  max-width: 600px; margin: 0 auto 24px;
+}
+.header-tags {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center;
+}
+.htag {
+  background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.3);
+  color: var(--accent3); font-family: var(--mono); font-size: 10px;
+  letter-spacing: 2px; padding: 4px 10px; border-radius: 3px;
+}
+
+/* ── LAYOUT ── */
+.page { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+.section { padding-top: 70px; }
+
+.section-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.section-num {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--accent); letter-spacing: 2px;
+}
+.section-header h2 {
+  font-family: var(--display); font-size: 30px;
+  letter-spacing: 2px; color: var(--text);
+}
+.section-header h2 span { color: var(--accent); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 22px 24px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.card h3 {
+  font-family: var(--display); letter-spacing: 1px;
+  font-size: 20px; color: var(--accent); margin-bottom: 10px;
+}
+.card h4 {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 2px;
+  color: var(--blue); text-transform: uppercase; margin-bottom: 8px;
+}
+.card p { color: var(--text2); line-height: 1.75; }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+@media(max-width:768px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: linear-gradient(135deg, rgba(249,115,22,0.08), rgba(249,115,22,0.03));
+  border: 1px solid rgba(249,115,22,0.25);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px; padding: 16px 20px; margin: 16px 0;
+}
+.analogy-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+  color: var(--accent); margin-bottom: 6px;
+}
+.analogy p { color: var(--text); font-style: italic; }
+
+/* ── EXAMPLE BOX ── */
+.example {
+  background: rgba(56,189,248,0.06);
+  border: 1px solid rgba(56,189,248,0.2);
+  border-left: 3px solid var(--blue);
+  border-radius: 6px; padding: 16px 20px; margin: 16px 0;
+}
+.example-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+  color: var(--blue); margin-bottom: 6px;
+}
+
+/* ── WARNING/DANGER BOX ── */
+.danger {
+  background: rgba(248,113,113,0.07);
+  border: 1px solid rgba(248,113,113,0.25);
+  border-left: 3px solid var(--red);
+  border-radius: 6px; padding: 16px 20px; margin: 16px 0;
+}
+.danger-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+  color: var(--red); margin-bottom: 6px;
+}
+
+/* ── CLINICAL PEARL ── */
+.pearl {
+  background: rgba(74,222,128,0.06);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-left: 3px solid var(--green);
+  border-radius: 6px; padding: 16px 20px; margin: 16px 0;
+}
+.pearl-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+  color: var(--green); margin-bottom: 6px;
+}
+
+/* ── ACCORDION ── */
+.acc-item { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 10px; overflow: hidden; }
+.acc-header {
+  background: var(--card2); padding: 14px 20px;
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  transition: background 0.2s;
+}
+.acc-header:hover { background: var(--card); }
+.acc-title { font-family: var(--sans); font-weight: 600; color: var(--text); }
+.acc-sub { font-family: var(--mono); font-size: 11px; color: var(--text3); margin-top: 2px; }
+.acc-icon { color: var(--accent); font-size: 18px; transition: transform 0.3s; flex-shrink:0; }
+.acc-body { display: none; padding: 18px 20px; background: var(--card); border-top: 1px solid var(--border); }
+.acc-body.open { display: block; }
+.acc-icon.open { transform: rotate(45deg); }
+
+/* ── SIX Rs ── */
+.six-r-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+@media(max-width:600px){.six-r-grid{grid-template-columns:1fr;}}
+.r-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden; cursor: pointer;
+  transition: all 0.25s;
+}
+.r-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--glow); }
+.r-header {
+  background: linear-gradient(90deg, rgba(249,115,22,0.15), transparent);
+  padding: 14px 18px; display: flex; align-items: center; gap: 14px;
+}
+.r-number {
+  font-family: var(--display); font-size: 38px; color: var(--accent);
+  line-height: 1; flex-shrink: 0;
+}
+.r-title { font-family: var(--display); font-size: 22px; letter-spacing: 1px; color: var(--text); }
+.r-subtitle { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 2px; }
+.r-body { padding: 14px 18px; display: none; border-top: 1px solid var(--border); }
+.r-body.open { display: block; }
+.r-body p { color: var(--text2); margin-bottom: 10px; }
+
+/* ── SYSTEM 1 vs 2 ── */
+.system-compare {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+}
+@media(max-width:600px){.system-compare{grid-template-columns:1fr;}}
+.sys1,.sys2 { padding: 20px 22px; }
+.sys1 { background: rgba(56,189,248,0.06); border-right: 1px solid var(--border); }
+.sys2 { background: rgba(168,139,250,0.06); }
+.sys-label { font-family: var(--display); font-size: 22px; letter-spacing: 1px; margin-bottom: 10px; }
+.sys1 .sys-label { color: var(--blue); }
+.sys2 .sys-label { color: var(--purple); }
+.sys-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--text3); margin-bottom: 12px; }
+.sys-list { list-style: none; }
+.sys-list li { padding: 4px 0; color: var(--text2); font-size: 13px; }
+.sys-list li::before { content: "→ "; color: var(--text3); }
+
+/* ── PACE TABLE ── */
+.pace-table { width: 100%; border-collapse: collapse; }
+.pace-table th {
+  background: var(--card2); padding: 10px 16px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 2px;
+  color: var(--accent); text-align: left; border-bottom: 1px solid var(--border);
+}
+.pace-table td {
+  padding: 12px 16px; border-bottom: 1px solid var(--border);
+  vertical-align: top; color: var(--text2); font-size: 14px;
+}
+.pace-table tr:last-child td { border-bottom: none; }
+.pace-letter {
+  font-family: var(--display); font-size: 28px;
+  color: var(--accent); line-height: 1;
+}
+
+/* ── HANDOFF TABS ── */
+.tab-bar { display: flex; gap: 4px; margin-bottom: 0; flex-wrap: wrap; }
+.tab-btn {
+  background: var(--card2); border: 1px solid var(--border);
+  border-bottom: none; color: var(--text2);
+  padding: 8px 16px; cursor: pointer;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 1px;
+  border-radius: 6px 6px 0 0; transition: all 0.2s;
+}
+.tab-btn.active { background: var(--card); color: var(--accent); border-color: var(--border2); }
+.tab-content {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 0 6px 6px 6px; padding: 22px 24px;
+  display: none;
+}
+.tab-content.active { display: block; }
+
+/* ── CASE STUDY ── */
+.case-hero {
+  background: linear-gradient(135deg, #0a1628, #0f1e3c, #0a1628);
+  border: 1px solid rgba(56,189,248,0.3);
+  border-radius: 10px; padding: 28px 28px 24px; margin-bottom: 20px;
+  position: relative; overflow: hidden;
+}
+.case-hero::before {
+  content: '';
+  position: absolute; top: -50%; right: -10%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(56,189,248,0.08), transparent 60%);
+}
+.case-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 3px;
+  color: var(--cyan); margin-bottom: 10px;
+}
+.case-hero h3 {
+  font-family: var(--display); font-size: 28px; letter-spacing: 2px;
+  color: #fff; margin-bottom: 12px;
+}
+.dispatch-box {
+  background: rgba(0,0,0,0.4); border: 1px solid rgba(56,189,248,0.2);
+  border-radius: 6px; padding: 14px 18px; font-family: var(--mono); font-size: 13px;
+  color: var(--cyan); line-height: 1.8;
+}
+.dispatch-box span { color: var(--text3); }
+
+.vitals-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px; margin: 16px 0;
+}
+.vital-card {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 6px; padding: 10px 14px; text-align: center;
+}
+.vital-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 4px;
+}
+.vital-value {
+  font-family: var(--mono); font-size: 18px; font-weight: 600;
+  color: var(--blue);
+}
+.vital-value.warn { color: var(--yellow); }
+.vital-value.crit { color: var(--red); }
+.vital-value.ok { color: var(--green); }
+
+.case-stage {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 14px; overflow: hidden;
+}
+.stage-header {
+  background: var(--card2); padding: 14px 20px;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: background 0.2s;
+}
+.stage-header:hover { background: var(--card); }
+.stage-num {
+  background: var(--accent); color: #fff;
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  padding: 3px 8px; border-radius: 3px; flex-shrink: 0;
+}
+.stage-title { font-weight: 600; color: var(--text); }
+.stage-tag { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-left: auto; }
+.stage-body { display: none; padding: 20px; border-top: 1px solid var(--border); }
+.stage-body.open { display: block; }
+
+/* ── MCQ QUIZ ── */
+.quiz-section { margin-top: 60px; }
+.q-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 22px 24px; margin-bottom: 18px;
+}
+.q-num {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 8px;
+}
+.q-text { font-weight: 600; color: var(--text); margin-bottom: 14px; font-size: 15px; }
+.q-options { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.q-opt {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 5px; padding: 10px 16px;
+  cursor: pointer; color: var(--text2);
+  transition: all 0.2s; font-size: 14px;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.q-opt:hover:not(.answered) { border-color: var(--blue); color: var(--text); }
+.q-opt.correct { background: rgba(74,222,128,0.1); border-color: var(--green); color: var(--green2); }
+.q-opt.wrong { background: rgba(248,113,113,0.1); border-color: var(--red); color: var(--red2); }
+.q-opt-letter {
+  font-family: var(--mono); font-size: 12px; font-weight: 600;
+  color: var(--accent); flex-shrink: 0; margin-top: 1px;
+}
+.q-feedback {
+  display: none; margin-top: 12px; padding: 12px 16px;
+  border-radius: 5px; font-size: 14px; line-height: 1.6;
+}
+.q-feedback.show { display: block; }
+.q-feedback.correct-fb { background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); color: var(--green2); }
+.q-feedback.wrong-fb { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.2); color: var(--red2); }
+
+/* ── PROGRESS BAR ── */
+.progress-bar-wrap {
+  background: var(--bg3); border-radius: 4px; height: 6px;
+  margin-bottom: 24px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; background: var(--accent); border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* ── SCORE ── */
+.score-display {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 20px 24px;
+  display: flex; align-items: center; gap: 20px; margin-bottom: 20px;
+}
+.score-circle {
+  width: 70px; height: 70px; border-radius: 50%;
+  border: 3px solid var(--accent); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 24px; color: var(--accent);
+}
+.score-info { flex: 1; }
+.score-label { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--text3); }
+.score-text { font-size: 18px; font-weight: 600; color: var(--text); }
+
+/* ── MISC ── */
+ul.styled-list { list-style: none; margin: 10px 0; }
+ul.styled-list li {
+  padding: 5px 0; color: var(--text2);
+  display: flex; align-items: flex-start; gap: 8px;
+}
+ul.styled-list li::before { content: "◆"; color: var(--accent); font-size: 8px; margin-top: 7px; flex-shrink:0; }
+
+.badge {
+  display: inline-block;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+  padding: 2px 8px; border-radius: 3px; margin-right: 6px; margin-bottom: 6px;
+}
+.badge-orange { background: rgba(249,115,22,0.15); color: var(--accent); border: 1px solid rgba(249,115,22,0.3); }
+.badge-blue { background: rgba(56,189,248,0.12); color: var(--blue); border: 1px solid rgba(56,189,248,0.25); }
+.badge-green { background: rgba(74,222,128,0.1); color: var(--green); border: 1px solid rgba(74,222,128,0.2); }
+.badge-red { background: rgba(248,113,113,0.1); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+.badge-purple { background: rgba(167,139,250,0.1); color: var(--purple); border: 1px solid rgba(167,139,250,0.2); }
+
+.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.text-mono { font-family: var(--mono); }
+.text-accent { color: var(--accent); }
+.text-blue { color: var(--blue); }
+.text-green { color: var(--green); }
+.text-red { color: var(--red); }
+
+.reset-btn {
+  background: var(--accent); color: #fff;
+  border: none; padding: 10px 24px; border-radius: 5px;
+  cursor: pointer; font-family: var(--mono); font-size: 12px;
+  letter-spacing: 1px; margin-top: 16px; transition: opacity 0.2s;
+}
+.reset-btn:hover { opacity: 0.85; }
+
+/* ── ANIMATE ── */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.section { animation: fadeUp 0.5s ease both; }
+
+/* ── FLOWCHART ── */
+.flow-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0; margin: 20px 0;
+}
+.flow-node {
+  background: var(--card2); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 12px 24px;
+  text-align: center; min-width: 240px;
+  font-weight: 600; color: var(--text); font-size: 14px;
+}
+.flow-node.start { border-color: var(--blue); background: rgba(56,189,248,0.08); }
+.flow-node.decision { border-color: var(--yellow); background: rgba(251,191,36,0.08); transform: rotate(0deg); }
+.flow-node.action { border-color: var(--green); background: rgba(74,222,128,0.08); }
+.flow-node.end { border-color: var(--accent); background: rgba(249,115,22,0.08); }
+.flow-arrow {
+  font-size: 20px; color: var(--text3); line-height: 1; padding: 2px 0;
+}
+.flow-label { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">CH20</span>
+    <button class="nav-btn" onclick="navTo(this,'overview')">Overview</button>
+    <button class="nav-btn" onclick="navTo(this,'assessment')">Assessment</button>
+    <button class="nav-btn" onclick="navTo(this,'critical')">Critical Thinking</button>
+    <button class="nav-btn" onclick="navTo(this,'sixrs')">Six Rs</button>
+    <button class="nav-btn" onclick="navTo(this,'factors')">Factors & Bias</button>
+    <button class="nav-btn" onclick="navTo(this,'systems')">Systems 1 &amp; 2</button>
+    <button class="nav-btn" onclick="navTo(this,'crm')">CRM &amp; PACE</button>
+    <button class="nav-btn" onclick="navTo(this,'pressure')">Under Pressure</button>
+    <button class="nav-btn" onclick="navTo(this,'handoff')">Handoff</button>
+    <button class="nav-btn" onclick="navTo(this,'casestudy')">Case Study</button>
+    <button class="nav-btn" onclick="navTo(this,'quiz')">Quiz</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <div class="header-grid"></div>
+  <div class="header-content">
+    <div class="chapter-label">Sanders' Paramedic Textbook · 6th Edition · Chapter 20</div>
+    <h1>CLINICAL<br><span>DECISION</span><br>MAKING</h1>
+    <p class="header-sub">Assessment-Based Management · Critical Thinking · The Six Rs · Clinical Judgment Under Pressure</p>
+    <div class="header-tags">
+      <span class="htag">CONCEPT FORMATION</span>
+      <span class="htag">DATA INTERPRETATION</span>
+      <span class="htag">FIELD IMPRESSION</span>
+      <span class="htag">SIX Rs</span>
+      <span class="htag">CRM · PACE</span>
+      <span class="htag">PATIENT HANDOFF</span>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+<!-- ── SECTION 0: OVERVIEW ── -->
+<div class="section" id="overview">
+  <div class="section-header">
+    <span class="section-num">00 //</span>
+    <h2>WHY <span>CLINICAL DECISION MAKING</span> MATTERS</h2>
+  </div>
+
+  <div class="card">
+    <h3>The Paramedic's Core Skill</h3>
+    <p>Protocols tell you <em>what</em> to do when a patient fits a textbook presentation. Clinical decision making tells you <em>what to do when they don't</em>. Most real patients are messier, vaguer, and more complex than any algorithm. Your brain is the most advanced diagnostic tool on the truck — this chapter teaches you how to use it.</p>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-label">🧠 ANALOGY — THE CHESS MASTER</div>
+    <p>A beginner chess player memorizes openings (protocols). A grandmaster understands <em>why</em> each move works — so when the opponent plays something unexpected, they don't freeze. A paramedic who only knows protocols will fail the moment a patient doesn't read the textbook. Clinical decision making is your grandmaster-level thinking.</p>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <h4>Clinical Reasoning</h4>
+      <h3>The Process</h3>
+      <p>The thought process used to evaluate the patient's problems. How you <em>think through</em> the situation from dispatch to hospital.</p>
+    </div>
+    <div class="card">
+      <h4>Clinical Decision Making</h4>
+      <h3>The Choice</h3>
+      <p>The actual decision or choice made <em>at the end</em> of clinical reasoning. What treatment, transport destination, and priority you select.</p>
+    </div>
+    <div class="card">
+      <h4>Clinical Judgment</h4>
+      <h3>The Whole Picture</h3>
+      <p>The <em>combined</em> process of reasoning + decision making. Your overall ability to assess, reason, decide, and act correctly.</p>
+    </div>
+  </div>
+
+  <div class="pearl">
+    <div class="pearl-label">💡 CLINICAL PEARL</div>
+    <p>The history gives you ~80% of the diagnosis. The physical exam adds ~19%. Diagnostic tests (12-lead, glucose, SpO₂) contribute only about <strong>1%</strong>. Learn to listen — the patient is usually telling you what's wrong.</p>
+  </div>
+</div>
+
+<!-- ── SECTION 1: ASSESSMENT-BASED MANAGEMENT ── -->
+<div class="section" id="assessment">
+  <div class="section-header">
+    <span class="section-num">01 //</span>
+    <h2>ASSESSMENT-BASED <span>MANAGEMENT</span></h2>
+  </div>
+
+  <div class="card">
+    <h3>What Is ABM?</h3>
+    <p>Assessment-based management (ABM) means your treatment decisions are <strong>driven by what you find</strong>, not by what dispatch said or what the patient looks like. Every action should trace back to a specific finding in the history or physical exam.</p>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-label">🔦 ANALOGY — THE DETECTIVE</div>
+    <p>Sherlock Holmes doesn't decide the culprit before examining the crime scene. He gathers clues, forms a theory, and tests it. You are the detective. The patient is the crime scene. Gather evidence before you convict a diagnosis — and be willing to change your theory when new evidence appears.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Differential Diagnosis</h4>
+      <h3>The Short List</h3>
+      <p>Using assessment findings + knowledge of pathophysiology, generate a list of potential causes for the patient's symptoms. Rank them by likelihood — but never forget the worst-case scenario even if it's less probable.</p>
+      <div class="example">
+        <div class="example-label">📋 EXAMPLE</div>
+        <p>Chest pain differential: ACS, pulmonary embolism, aortic dissection, tension pneumothorax, pericarditis, GERD. You can't rule out dissection in the field — so your treatment must not harm that possibility.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h4>Pattern Recognition</h4>
+      <h3>The Template Match</h3>
+      <p>Your brain matches the patient's presentation against stored patterns from training and experience. Classic STEMI pattern: crushing chest pain + diaphoresis + radiation to arm. When it matches — you move fast.</p>
+      <div class="danger">
+        <div class="danger-label">⚠️ PITFALL</div>
+        <p>New graduates have few stored patterns. Don't assume you've seen everything — every patient is a learning opportunity, not a confirmation of your assumptions.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--display);letter-spacing:2px;color:var(--text);font-size:22px;margin:24px 0 12px;">The Action Plan Flow</h3>
+
+  <div class="flow-wrap">
+    <div class="flow-node start">📡 Dispatch Information</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node">Scene Size-Up + Initial Assessment</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node">History + Physical Examination</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node decision">Pattern Recognition → Differential Diagnosis</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node action">Field Impression (Working Diagnosis)</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node action">Action Plan (BLS/ALS Treatment + Transport Decision)</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-node end">Reassessment → Modify Plan as Needed</div>
+  </div>
+
+  <h3 style="font-family:var(--display);letter-spacing:2px;color:var(--text);font-size:22px;margin:28px 0 12px;">Two Approaches to the Patient</h3>
+  <div class="grid2">
+    <div class="card">
+      <div class="badge badge-red">LIFE THREAT</div>
+      <h3>Resuscitative Approach</h3>
+      <p>Recognize and immediately intervene. You are treating before you have the full picture.</p>
+      <hr class="divider">
+      <ul class="styled-list">
+        <li>Cardiorespiratory arrest</li>
+        <li>Coma / altered LOC</li>
+        <li>Major trauma / hemorrhage</li>
+        <li>Respiratory distress/failure</li>
+        <li>Seizures</li>
+        <li>Sepsis / shock / hypotension</li>
+        <li>STEMI / unstable dysrhythmias</li>
+        <li>Stroke</li>
+      </ul>
+      <div class="example">
+        <div class="example-label">📋 EXAMPLE</div>
+        <p>Unresponsive patient → you don't get a history before starting CPR. Treat the threat, gather data simultaneously.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="badge badge-blue">STABLE</div>
+      <h3>Contemplative Approach</h3>
+      <p>History and physical exam are gathered before treatment begins. You have time to think.</p>
+      <hr class="divider">
+      <p style="color:var(--text2);">This is where ABM really shines. You have space to build a complete picture, form a differential, and select targeted treatment rather than reflexive protocols.</p>
+      <div class="example">
+        <div class="example-label">📋 EXAMPLE</div>
+        <p>85-year-old with 3-day history of fatigue and mild dyspnea. No immediate threat — get the full story. What meds? What history? What changed 3 days ago?</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 2: CRITICAL THINKING PROCESS ── -->
+<div class="section" id="critical">
+  <div class="section-header">
+    <span class="section-num">02 //</span>
+    <h2>THE CRITICAL <span>THINKING PROCESS</span></h2>
+  </div>
+
+  <div class="card">
+    <p>Critical thinking is the ability to quickly focus your thinking to get the desired results — regardless of how messy, ambiguous, or stressful the situation is. It requires creative, reflective, and analytic thinking, plus the willingness to question your own assumptions.</p>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-label">🎯 ANALOGY — THE FIGHTER PILOT</div>
+    <p>Fighter pilots use the <em>OODA Loop</em>: Observe → Orient → Decide → Act — then loop back. You can't just observe once; conditions change, and the pilot who can complete the loop faster wins. Paramedic critical thinking is the same loop, applied to medicine at 70 mph.</p>
+  </div>
+
+  <!-- ACCORDION: 5 elements -->
+  <div style="margin-top:20px;">
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">1. Concept Formation</div>
+          <div class="acc-sub">Building the Initial Impression</div>
+        </div>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <p><strong>Definition:</strong> Gathering ALL elements needed to form a general impression of the patient. This begins at dispatch and continues through your initial assessment.</p>
+        <ul class="styled-list" style="margin:12px 0;">
+          <li>Scene size-up (mechanism, hazards, number of patients)</li>
+          <li>Chief complaint (in the patient's own words)</li>
+          <li>Patient history (OPQRST, SAMPLE)</li>
+          <li>Patient affect (anxious? calm? confused?)</li>
+          <li>Initial assessment (ABCs, LOC)</li>
+          <li>Physical examination findings</li>
+          <li>Diagnostic tests (12-lead, glucose, SpO₂, EtCO₂)</li>
+        </ul>
+        <div class="analogy">
+          <div class="analogy-label">🎭 ANALOGY — THE PLAYWRIGHT</div>
+          <p>Before writing the story, a playwright gathers characters, setting, conflict, and tone. You are collecting the "ingredients" of the patient's story. Miss an ingredient, and the diagnosis — your story — will be incomplete or wrong.</p>
+        </div>
+        <div class="example">
+          <div class="example-label">📋 FIELD EXAMPLE</div>
+          <p>You arrive to find a 58M slumped in a recliner. Scene: pill bottles nearby, empty whiskey glass, wife crying. Chief complaint: "He won't wake up." Affect: unresponsive. You've already formed a concept — possible polypharmacy overdose vs. stroke vs. hypoglycemia. All three investigations will now be run simultaneously.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">2. Data Interpretation</div>
+          <div class="acc-sub">Making Sense of What You Found</div>
+        </div>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <p><strong>Definition:</strong> Using your knowledge of anatomy, physiology, and pathophysiology to interpret the data you gathered. This is where your classroom knowledge meets the real world. Quality of interpretation depends on knowledge depth + clinical experience.</p>
+        <div class="analogy">
+          <div class="analogy-label">🔬 ANALOGY — THE LAB TECHNICIAN</div>
+          <p>Raw data is meaningless without interpretation. A blood glucose of 38 is just a number until you know that normal is 70–110 mg/dL and that 38 causes altered mental status, diaphoresis, and seizures. Data interpretation is converting raw numbers into clinical meaning.</p>
+        </div>
+        <div class="example">
+          <div class="example-label">📋 FIELD EXAMPLE</div>
+          <p>SpO₂ 91%, respiratory rate 28, accessory muscle use, tripod position, history of COPD. Data interpretation: patient is in moderate-to-severe respiratory distress likely from COPD exacerbation with possible hypoxic drive risk if supplemental O₂ is titrated incorrectly. Your knowledge of COPD physiology changes your treatment plan.</p>
+        </div>
+        <div class="pearl">
+          <div class="pearl-label">💡 KEY INSIGHT</div>
+          <p>Knowing what's <em>normal</em> is the only way to recognize what's <em>abnormal</em>. Every lab value, vital sign, and assessment finding should be evaluated against a mental baseline of normal human physiology.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">3. Application of Principles</div>
+          <div class="acc-sub">Turning Knowledge Into Action</div>
+        </div>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <p><strong>Definition:</strong> Based on your conceptual understanding and data interpretation, you apply the appropriate medical principles to treat the patient. This is where protocols, pharmacology, and pathophysiology all converge into a treatment plan.</p>
+        <div class="analogy">
+          <div class="analogy-label">🔧 ANALOGY — THE MASTER MECHANIC</div>
+          <p>A novice mechanic follows the repair manual step by step. A master mechanic understands <em>why</em> each step works — so when the car is a nonstandard model, they can still fix it. "Application of principles" means you understand the underlying mechanism, not just the recipe.</p>
+        </div>
+        <div class="example">
+          <div class="example-label">📋 FIELD EXAMPLE</div>
+          <p>Suspected hypoglycemia in a diabetic patient. Application: Dextrose 50% IV or glucagon IM — but which? Patient has an IV → D50. Patient refuses IV, is combative → glucagon IM. Principles applied: treatment is matched to the clinical situation, not blindly followed.</p>
+        </div>
+        <div class="danger">
+          <div class="danger-label">⚠️ PROTOCOL LIMITATION</div>
+          <p>Protocols work for <em>classic presentations</em>. The patient who doesn't fit the protocol isn't wrong — they need a paramedic who can think beyond the algorithm. Protocols are a floor, not a ceiling.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">4. Evaluation</div>
+          <div class="acc-sub">Is the Treatment Working?</div>
+        </div>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <p><strong>Definition:</strong> Ongoing reassessment of the patient's response to treatment. Is the patient improving, staying the same, or deteriorating? Your plan must evolve with the patient's response.</p>
+        <div class="analogy">
+          <div class="analogy-label">🧪 ANALOGY — THE SCIENTIST</div>
+          <p>A scientist proposes a hypothesis, runs an experiment, and evaluates the results. If the results don't support the hypothesis, they revise the theory. Your treatment IS the experiment. If the patient doesn't improve as expected, your working diagnosis may be wrong — adjust.</p>
+        </div>
+        <div class="example">
+          <div class="example-label">📋 FIELD EXAMPLE</div>
+          <p>You treat wheezing patient with albuterol for suspected bronchospasm. After 2 treatments, SpO₂ drops further and breath sounds become equal bilaterally with decreased chest rise. Evaluation: this is not responding as bronchospasm should. Is this actually anaphylaxis? Pneumothorax? Revise the diagnosis and plan accordingly.</p>
+        </div>
+        <ul class="styled-list" style="margin:12px 0;">
+          <li>Reassess ABCs after every intervention</li>
+          <li>Repeat vitals at minimum every 5 min (critical) / 15 min (stable)</li>
+          <li>Note trends — a BP dropping from 110 to 95 to 80 is significant even if 80 is "not that bad"</li>
+          <li>Ask: "Is this patient better, same, or worse than when I arrived?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">5. Reflection on Action</div>
+          <div class="acc-sub">Learning After the Call</div>
+        </div>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <p><strong>Definition:</strong> After the call, reflecting on what you did — what worked, what didn't, and what you would do differently. This is how paramedics build experience and improve their pattern library over time.</p>
+        <div class="analogy">
+          <div class="analogy-label">📹 ANALOGY — THE GAME FILM</div>
+          <p>Elite athletes watch game film after every game — not to beat themselves up, but to find patterns, correct errors, and improve performance before the next competition. Your post-call reflection is your game film. The best paramedics are always students.</p>
+        </div>
+        <div class="pearl">
+          <div class="pearl-label">💡 METACOGNITION</div>
+          <p><em>Metacognition</em> = thinking about your thinking. Evaluating your own decision-making process for cognitive errors is one of the highest-level paramedic skills. National EMS Standard: "Evaluate decision-making strategy for cognitive errors to enhance future critical-thinking skills."</p>
+        </div>
+        <div class="example">
+          <div class="example-label">📋 REFLECTION QUESTIONS</div>
+          <p>• Did I focus too quickly on one diagnosis and miss alternatives?<br>
+          • Was I affected by the patient's appearance or demeanor?<br>
+          • Did I use all available resources (partner, medical direction)?<br>
+          • What would I do differently on the next similar call?</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SECTION 3: THE SIX Rs ── -->
+<div class="section" id="sixrs">
+  <div class="section-header">
+    <span class="section-num">03 //</span>
+    <h2>THE <span>SIX Rs</span> OF CRITICAL THINKING</h2>
+  </div>
+
+  <div class="card">
+    <p>The Six Rs are a tactical framework for applying critical thinking <em>at the scene</em>. Click each Rs card to expand the full explanation, clinical examples, and practice tips.</p>
+  </div>
+
+  <div class="six-r-grid">
+    <div class="r-card" onclick="toggleR(this)">
+      <div class="r-header">
+        <div class="r-number">1</div>
+        <div>
+          <div class="r-title">READ THE PATIENT</div>
+          <div class="r-subtitle">FIRST IMPRESSION · GLOBAL LOOK</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <p>Your first 30 seconds at the patient's side. Before you touch them, before you speak — what does the gestalt tell you? Sick or not sick?</p>
+        <p><strong>What to assess:</strong> Appearance (work of breathing, skin color, position), LOC (AVPU), environment (clues in the room).</p>
+        <div class="analogy" style="margin:10px 0;">
+          <div class="analogy-label">ANALOGY — THE POKER PLAYER</div>
+          <p>Great poker players read the table before they look at their cards. Read the patient before you open your drug bag. Your eyes and nose are data collection tools too.</p>
+        </div>
+        <div class="example" style="margin:10px 0;">
+          <div class="example-label">EXAMPLE</div>
+          <p>You walk in: 70M leaning forward on a table, pursed-lip breathing, barrel chest, nicotine-stained fingers. Before he speaks, you've already read: COPD exacerbation. High probability.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-card" onclick="toggleR(this)">
+      <div class="r-header">
+        <div class="r-number">2</div>
+        <div>
+          <div class="r-title">READ THE SCENE</div>
+          <div class="r-subtitle">ENVIRONMENT · CONTEXT · SAFETY</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <p>The scene provides context that the patient can't always tell you. Environmental cues confirm or challenge your working hypothesis.</p>
+        <p><strong>What to look for:</strong> Medication bottles (what conditions is this patient being treated for?), food/drink (alcohol? diabetic supplies?), hazards, mechanism of injury, position of patient when found.</p>
+        <div class="analogy" style="margin:10px 0;">
+          <div class="analogy-label">ANALOGY — THE ARCHAEOLOGIST</div>
+          <p>The environment is the dig site. Every artifact (pill bottle, EpiPen, walker, O₂ concentrator) tells you a story about who this patient is and what may have gone wrong.</p>
+        </div>
+        <div class="example" style="margin:10px 0;">
+          <div class="example-label">EXAMPLE</div>
+          <p>Altered patient with an insulin pen, candy wrappers, and a glucometer on the table next to them. Scene says: diabetic who may have over-treated a high blood sugar. Check glucose before doing anything else.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-card" onclick="toggleR(this)">
+      <div class="r-header">
+        <div class="r-number">3</div>
+        <div>
+          <div class="r-title">REACT</div>
+          <div class="r-subtitle">IMMEDIATE INTERVENTIONS · PRIORITIZE</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <p>Based on what you've read from the patient and scene, take appropriate immediate action. This is where resuscitative vs. contemplative approach splits.</p>
+        <p><strong>Key principle:</strong> Treat life threats <em>as you find them</em>. Don't finish your head-to-toe before addressing an airway obstruction.</p>
+        <div class="analogy" style="margin:10px 0;">
+          <div class="analogy-label">ANALOGY — THE FIREFIGHTER</div>
+          <p>Firefighters don't do a full building survey before putting out a visible flame. They suppress the immediate threat, then complete their assessment. React to what's in front of you — don't let thoroughness cause delay in an emergency.</p>
+        </div>
+        <div class="example" style="margin:10px 0;">
+          <div class="example-label">EXAMPLE</div>
+          <p>Patient with severe respiratory distress and SpO₂ 82%. React immediately: high-flow O₂, positioning, consider CPAP — then complete your assessment. The SpO₂ tells you what to do before the history tells you why.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-card" onclick="toggleR(this)">
+      <div class="r-header">
+        <div class="r-number">4</div>
+        <div>
+          <div class="r-title">REEVALUATE</div>
+          <div class="r-subtitle">ONGOING REASSESSMENT · TRENDS</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <p>The patient is a dynamic system. A snapshot assessment is never enough. Constantly loop back: Is the patient improving? Trending worse? Has new information changed the working diagnosis?</p>
+        <p><strong>Red flags:</strong> Vitals trending in the wrong direction, new symptoms appearing, interventions not working as expected.</p>
+        <div class="analogy" style="margin:10px 0;">
+          <div class="analogy-label">ANALOGY — THE NAVIGATOR</div>
+          <p>Ships don't set a course and switch off the navigation system. They continuously plot position relative to destination and correct drift. Reevaluation is your continuous navigation — staying on course toward the correct diagnosis and treatment.</p>
+        </div>
+        <div class="example" style="margin:10px 0;">
+          <div class="example-label">EXAMPLE</div>
+          <p>Patient treated for suspected hypoglycemia with D50. Two minutes later: glucose now 185, but still altered. Reevaluate — the hypoglycemia is corrected but the altered mental status persists. New differential: stroke? Postictal? Intoxication?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-card" onclick="toggleR(this)">
+      <div class="r-header">
+        <div class="r-number">5</div>
+        <div>
+          <div class="r-title">REVISE THE PLAN</div>
+          <div class="r-subtitle">ADAPT · MODIFY · ITERATE</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <p>When reevaluation shows the plan isn't working — or new data changes the picture — update the treatment plan. Commitment to a wrong diagnosis is more dangerous than changing your mind.</p>
+        <p><strong>Signs you need to revise:</strong> Patient deteriorating despite treatment, new history contradicts working diagnosis, vitals not responding as expected.</p>
+        <div class="analogy" style="margin:10px 0;">
+          <div class="analogy-label">ANALOGY — THE GPS REROUTE</div>
+          <p>When the road is blocked, GPS doesn't keep routing you down the same road. It calculates a new route. When your treatment plan is "blocked" by lack of response, reroute. Stubbornness is not a clinical virtue.</p>
+        </div>
+        <div class="example" style="margin:10px 0;">
+          <div class="example-label">EXAMPLE</div>
+          <p>Working diagnosis: CHF exacerbation. Given nitroglycerin for preload reduction. BP drops to 68/40. Revise: this patient may have a right-sided MI or severe hypovolemia. Stop the NTG, reassess — maybe the real problem is not fluid overload.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-card" onclick="toggleR(this)">
+      <div class="r-header">
+        <div class="r-number">6</div>
+        <div>
+          <div class="r-title">REVIEW PERFORMANCE</div>
+          <div class="r-subtitle">DEBRIEF · METACOGNITION · GROW</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <p>After every call — especially the hard ones — review your performance. This is the fuel for professional growth. No paramedic reaches mastery without honest self-reflection and peer feedback.</p>
+        <p><strong>Tools:</strong> Post-call debrief, QA/QI review, hospital outcome feedback, simulation review.</p>
+        <div class="analogy" style="margin:10px 0;">
+          <div class="analogy-label">ANALOGY — THE SURGEON'S M&M</div>
+          <p>Surgery departments hold Morbidity & Mortality (M&M) conferences — not to blame, but to learn. Every adverse event is a curriculum. The best EMS providers hold their own internal M&M after every call: what did I do well? What would I change?</p>
+        </div>
+        <div class="example" style="margin:10px 0;">
+          <div class="example-label">EXAMPLE</div>
+          <p>You treated a patient for suspected stroke only to find out at the hospital it was a subdural hematoma from a fall. Review: did I miss head trauma? Were there scene clues I overlooked? This review builds the pattern that catches the next one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 4: FACTORS & BIAS ── -->
+<div class="section" id="factors">
+  <div class="section-header">
+    <span class="section-num">04 //</span>
+    <h2>FACTORS, BIAS &amp; <span>COGNITIVE PITFALLS</span></h2>
+  </div>
+
+  <div class="card">
+    <p>Three categories of factors affect every assessment: <strong>Paramedic factors</strong> (your own knowledge, biases, and state of mind), <strong>Patient factors</strong> (cooperation, distracting injuries), and <strong>Environmental factors</strong> (noise, chaos, access). Understanding them helps you compensate.</p>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="badge badge-red">PARAMEDIC FACTOR</div>
+      <h3>Tunnel Vision</h3>
+      <p>Focusing on one finding so intensely that you miss others. You see the leg fracture and miss the internal abdominal hemorrhage.</p>
+      <div class="danger" style="margin-top:12px;">
+        <div class="danger-label">⚠️ REAL CONSEQUENCE</div>
+        <p>Patient with obvious ankle fracture after a fall → you splint and transport. But the fall was because of a syncopal episode from a serious cardiac dysrhythmia. Tunnel vision = missed diagnosis.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="badge badge-red">PARAMEDIC FACTOR</div>
+      <h3>Labeling</h3>
+      <p>Assuming a diagnosis based on appearance or previous encounters with this patient. "He's always drunk" → misses the subdural.</p>
+      <div class="analogy" style="margin-top:12px;">
+        <div class="analogy-label">ANALOGY</div>
+        <p>Every time you call someone "the frequent flyer" instead of "the patient," you risk not seeing their acute emergency. Labels are the enemy of assessment.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="badge badge-red">PARAMEDIC FACTOR</div>
+      <h3>Confirmation Bias</h3>
+      <p>Seeking only data that confirms your initial impression. You've decided it's anxiety — so you stop looking for pulmonary embolism.</p>
+      <div class="danger" style="margin-top:12px;">
+        <div class="danger-label">⚠️ ANTIDOTE</div>
+        <p>Always ask: "What's the worst thing this could be?" If you can't rule it out in the field, treat for it or get the patient to a facility that can.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:16px;">
+    <div class="card">
+      <div class="badge badge-blue">PATIENT FACTOR</div>
+      <h3>Distracting Injuries</h3>
+      <p>A painful, obvious injury draws attention away from a more serious but less visible problem. Classic trauma: the screaming open femur fracture distracts from the quiet tension pneumothorax.</p>
+      <div class="pearl" style="margin-top:12px;">
+        <div class="pearl-label">💡 RULE</div>
+        <p>In trauma, always complete your primary survey before getting drawn into secondary injuries. The screaming patient may not be the sickest patient.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="badge badge-orange">ENVIRONMENTAL FACTOR</div>
+      <h3>Scene Chaos &amp; Noise</h3>
+      <p>Crowded, loud, emotionally charged scenes degrade assessment quality. Family members shouting, bystanders interfering, and poor lighting all compromise your ability to gather accurate data.</p>
+      <div class="example" style="margin-top:12px;">
+        <div class="example-label">📋 STRATEGY</div>
+        <p>Designate roles early. Limit voices at the patient's side. Consider moving the patient to a controlled environment when possible. You cannot think clearly in chaos without training and deliberate practice.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pearl" style="margin-top:16px;">
+    <div class="pearl-label">💡 CULTURAL CONSIDERATIONS</div>
+    <p>Cultural and religious backgrounds affect both the paramedic's decision-making AND the patient's cooperation. In some cultures, male providers may not perform physical assessments on female patients; family members may make treatment decisions. Work within these frameworks while identifying and managing life threats.</p>
+  </div>
+</div>
+
+<!-- ── SECTION 5: SYSTEMS 1 & 2 ── -->
+<div class="section" id="systems">
+  <div class="section-header">
+    <span class="section-num">05 //</span>
+    <h2>INTUITIVE vs. ANALYTIC <span>THINKING</span></h2>
+  </div>
+
+  <div class="card">
+    <p>Paramedics and all healthcare providers make decisions using two distinct cognitive processes. Understanding both — and knowing when to use each — is a core professional skill.</p>
+  </div>
+
+  <div class="system-compare" style="margin:16px 0;">
+    <div class="sys1">
+      <div class="sys-tag">FAST · AUTOMATIC · PATTERN-BASED</div>
+      <div class="sys-label">System 1 Thinking</div>
+      <p style="color:var(--text2);margin-bottom:14px;font-size:14px;">"Intuitive" mode. Rapid, unconscious, based on pattern recognition and prior experience. The experienced medic who walks in and says "this patient is sick" before taking a single vital sign.</p>
+      <ul class="sys-list">
+        <li>Instant recognition of classic presentations</li>
+        <li>Efficient under time pressure</li>
+        <li>Relies on experience — weak in novices</li>
+        <li>Prone to bias and error when patterns don't fit</li>
+        <li>Can miss atypical presentations</li>
+      </ul>
+    </div>
+    <div class="sys2">
+      <div class="sys-tag">SLOW · DELIBERATE · ANALYTICAL</div>
+      <div class="sys-label">System 2 Thinking</div>
+      <p style="color:var(--text2);margin-bottom:14px;font-size:14px;">"Analytic" mode. Slow, deliberate, logical. Step-by-step analysis. Used for complex, unfamiliar, or unclear presentations where System 1 may lead you astray.</p>
+      <ul class="sys-list">
+        <li>Methodical differential diagnosis building</li>
+        <li>Better for atypical or ambiguous patients</li>
+        <li>Can override faulty intuitive conclusions</li>
+        <li>Requires time — difficult under extreme pressure</li>
+        <li>Requires broad knowledge base to be effective</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-label">🏎️ ANALOGY — F1 DRIVER vs. ROAD TEST STUDENT</div>
+    <p>An F1 driver's System 1 has been trained to react to a spin in milliseconds — their pattern recognition IS survival. A student driver uses System 2 for everything: check mirror, signal, check speed. Neither mode is wrong — the F1 driver still uses System 2 for race strategy. The danger is when an experienced provider's System 1 fires incorrectly on an atypical case, and they don't engage System 2 to check.</p>
+  </div>
+
+  <div class="danger">
+    <div class="danger-label">⚠️ THE EXPERT TRAP</div>
+    <p>As paramedics become more experienced, System 1 thinking dominates. This increases efficiency but creates a vulnerability: <strong>anchoring bias</strong>. The more experienced you are, the more important it is to deliberately trigger System 2 when a patient isn't responding to treatment as expected. Expertise is not infallibility.</p>
+  </div>
+
+  <div class="card">
+    <h4>When to Force System 2</h4>
+    <ul class="styled-list">
+      <li>When the patient isn't improving with expected treatment</li>
+      <li>When the presentation doesn't fit your initial impression</li>
+      <li>When new information contradicts your working diagnosis</li>
+      <li>When multiple providers disagree on the impression</li>
+      <li>When something "just doesn't feel right"</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── SECTION 6: CRM & PACE ── -->
+<div class="section" id="crm">
+  <div class="section-header">
+    <span class="section-num">06 //</span>
+    <h2>CREW RESOURCE <span>MANAGEMENT</span></h2>
+  </div>
+
+  <div class="card">
+    <h3>What Is CRM?</h3>
+    <p>Crew Resource Management (CRM) is a structured approach to <strong>communication, teamwork, situational awareness, workload management, and decision making</strong> borrowed from aviation. Core philosophy: patient care responsibility belongs to everyone on the crew — not just the medic.</p>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-label">✈️ ANALOGY — THE COCKPIT</div>
+    <p>Aviation adopted CRM after finding that most crashes were caused by communication failures, not mechanical failures. The co-pilot who didn't speak up when the captain made a fatal error. EMS had the same problem — the EMT who said nothing while the medic made a wrong call. CRM fixes this by making silence unacceptable.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>CRM Core Components</h4>
+      <ul class="styled-list">
+        <li><strong>Clear leadership</strong> — one designated team leader per call</li>
+        <li><strong>Role acknowledgment</strong> — each member knows their assignment</li>
+        <li><strong>Situational awareness</strong> — everyone shares the mental model</li>
+        <li><strong>Workload management</strong> — tasks distributed appropriately</li>
+        <li><strong>Honest communication</strong> — the core of CRM</li>
+        <li><strong>Closed-loop communication</strong> — confirm, verify, repeat back</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Why CRM Fails</h4>
+      <ul class="styled-list">
+        <li>Authority gradient — junior staff won't challenge senior staff</li>
+        <li>Communication breakdown under stress</li>
+        <li>Assumed understanding — "I thought you were going to do that"</li>
+        <li>No pre-established role clarity</li>
+        <li>Ego overriding team input</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--display);letter-spacing:2px;color:var(--text);font-size:24px;margin:28px 0 14px;">THE PACE ESCALATION MODEL</h3>
+  <p style="color:var(--text2); margin-bottom:16px;">PACE gives <em>any</em> team member a structured, safe way to challenge a decision that concerns them. It escalates progressively — use the minimum level needed.</p>
+
+  <table class="pace-table">
+    <thead>
+      <tr>
+        <th>LETTER</th>
+        <th>ACTION</th>
+        <th>WHEN TO USE</th>
+        <th>EXAMPLE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="pace-letter">P</div></td>
+        <td><strong>Probe</strong></td>
+        <td>Something feels off — you want to better understand the situation without challenging directly.</td>
+        <td><em>"Hey, what's your thinking on not giving the nitroglycerin here?"</em></td>
+      </tr>
+      <tr>
+        <td><div class="pace-letter">A</div></td>
+        <td><strong>Alert</strong></td>
+        <td>You have a specific concern. Communicate it clearly to the team leader.</td>
+        <td><em>"I'm concerned — this patient has a right bundle branch block on the 12-lead. NTG may drop his pressure."</em></td>
+      </tr>
+      <tr>
+        <td><div class="pace-letter">C</div></td>
+        <td><strong>Challenge</strong></td>
+        <td>The alert was dismissed. You believe the action is wrong and need to challenge it directly.</td>
+        <td><em>"I need you to stop — I'm not comfortable giving this medication without checking with medical direction first."</em></td>
+      </tr>
+      <tr>
+        <td><div class="pace-letter">E</div></td>
+        <td><strong>Emergency</strong></td>
+        <td>The plan will clearly cause harm. Intervene. This is used rarely but is always available.</td>
+        <td><em>Physically preventing an unsafe medication from being administered, with simultaneous contact to medical direction.</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pearl" style="margin-top:16px;">
+    <div class="pearl-label">💡 CRM IN PRACTICE</div>
+    <p>Good CRM doesn't mean challenging everything your partner does. It means building a relationship where <em>safety concerns can always be voiced without fear</em>. Pre-shift role discussions and mutual respect build the foundation for this.</p>
+  </div>
+</div>
+
+<!-- ── SECTION 7: THINKING UNDER PRESSURE ── -->
+<div class="section" id="pressure">
+  <div class="section-header">
+    <span class="section-num">07 //</span>
+    <h2>THINKING <span>UNDER PRESSURE</span></h2>
+  </div>
+
+  <div class="card">
+    <p>The fight-or-flight hormonal response (adrenaline, cortisol) has both positive and negative effects on cognitive performance. Understanding this helps you harness the positive and counter the negative.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="badge badge-green">POSITIVE EFFECTS</div>
+      <h3>The Boost</h3>
+      <ul class="styled-list">
+        <li>Enhanced visual acuity</li>
+        <li>Improved auditory keenness</li>
+        <li>Better reflexes</li>
+        <li>Increased muscle strength</li>
+        <li>Heightened alertness</li>
+      </ul>
+      <p style="color:var(--text2);margin-top:12px;font-size:13px;">These are survival advantages in a physical threat — and they help when fast decisive action is needed.</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-red">NEGATIVE EFFECTS</div>
+      <h3>The Cost</h3>
+      <ul class="styled-list">
+        <li>Reduced analytical thinking</li>
+        <li>Decreased concentration</li>
+        <li>Narrowed attentional focus</li>
+        <li>Impaired working memory</li>
+        <li>Reduced assessment thoroughness</li>
+      </ul>
+      <p style="color:var(--text2);margin-top:12px;font-size:13px;">High stress + high stakes = highest risk for cognitive error. Mental conditioning is the countermeasure.</p>
+    </div>
+  </div>
+
+  <div class="analogy">
+    <div class="analogy-label">🏋️ ANALOGY — MENTAL CONDITIONING</div>
+    <p>You train your body so it can perform under stress without thinking. Mental conditioning works the same way — you rehearse the decision-making process until the mental checklist runs automatically, even under extreme adrenaline load. Simulation training IS mental conditioning.</p>
+  </div>
+
+  <h3 style="font-family:var(--display);letter-spacing:2px;color:var(--text);font-size:22px;margin:24px 0 14px;">MENTAL CHECKLIST FOR PRESSURE SITUATIONS</h3>
+
+  <div style="display:flex;flex-direction:column;gap:10px;">
+    <div class="card" style="display:flex;align-items:center;gap:16px;padding:16px 20px;">
+      <div style="font-family:var(--display);font-size:36px;color:var(--accent);flex-shrink:0;width:50px;text-align:center;">1</div>
+      <div>
+        <div style="font-weight:700;color:var(--text);">STOP AND THINK</div>
+        <div style="color:var(--text2);font-size:13px;">Force a pause. Even one second of deliberate pause can break the panic cycle and re-engage prefrontal cortex function. "Stop. What do I actually see?"</div>
+      </div>
+    </div>
+    <div class="card" style="display:flex;align-items:center;gap:16px;padding:16px 20px;">
+      <div style="font-family:var(--display);font-size:36px;color:var(--blue);flex-shrink:0;width:50px;text-align:center;">2</div>
+      <div>
+        <div style="font-weight:700;color:var(--text);">SCAN THE SITUATION</div>
+        <div style="color:var(--text2);font-size:13px;">Get the full picture. Resist tunnel vision. Mentally categorize: threats, resources, patient status, crew status.</div>
+      </div>
+    </div>
+    <div class="card" style="display:flex;align-items:center;gap:16px;padding:16px 20px;">
+      <div style="font-family:var(--display);font-size:36px;color:var(--yellow);flex-shrink:0;width:50px;text-align:center;">3</div>
+      <div>
+        <div style="font-weight:700;color:var(--text);">DECIDE AND ACT</div>
+        <div style="color:var(--text2);font-size:13px;">Make a decision. A wrong action executed well is often better than no action at all. Commit to the plan with conviction.</div>
+      </div>
+    </div>
+    <div class="card" style="display:flex;align-items:center;gap:16px;padding:16px 20px;">
+      <div style="font-family:var(--display);font-size:36px;color:var(--green);flex-shrink:0;width:50px;text-align:center;">4</div>
+      <div>
+        <div style="font-weight:700;color:var(--text);">MAINTAIN CLEAR CONTROL</div>
+        <div style="color:var(--text2);font-size:13px;">Keep communication clear and direct. Calm voice tone matters — it calms both the patient and your team. Volume is not clarity.</div>
+      </div>
+    </div>
+    <div class="card" style="display:flex;align-items:center;gap:16px;padding:16px 20px;">
+      <div style="font-family:var(--display);font-size:36px;color:var(--purple);flex-shrink:0;width:50px;text-align:center;">5</div>
+      <div>
+        <div style="font-weight:700;color:var(--text);">CONTINUOUSLY REEVALUATE</div>
+        <div style="color:var(--text2);font-size:13px;">No call is static. Keep the evaluation loop running. If the situation changes, your response must change with it.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 8: HANDOFF ── -->
+<div class="section" id="handoff">
+  <div class="section-header">
+    <span class="section-num">08 //</span>
+    <h2>PATIENT <span>HANDOFF &amp; REPORTING</span></h2>
+  </div>
+
+  <div class="card">
+    <p>Patient transitions of care are among the <strong>most common sources of medical errors</strong> in healthcare. A strong handoff protects the patient from information loss, ambiguity, and duplicated or missed treatment.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Effective Handoff Characteristics</h4>
+      <ul class="styled-list">
+        <li><strong>Concise</strong> — less than 1 minute for stable patients</li>
+        <li><strong>Jargon-minimal</strong> — clear language, not abbreviation soup</li>
+        <li><strong>Consistent structure</strong> — same format every time</li>
+        <li><strong>Pertinent positives AND negatives</strong> — what's there AND what's absent</li>
+        <li><strong>Respectful tone</strong> — toward the receiving team</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Begin With the End in Mind</h4>
+      <p style="color:var(--text2);">Anticipate what the receiving team will want to know. What will the ED physician immediately ask? Frame your report around those anticipated questions. Don't just report what happened — tell the story that leads to the clinical decision the next provider needs to make.</p>
+      <div class="analogy" style="margin-top:12px;">
+        <div class="analogy-label">ANALOGY — THE RELAY RACE</div>
+        <p>In a relay race, the baton handoff is the most critical moment. A dropped baton loses the race. A dropped clinical detail can cost a patient's life.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--display);letter-spacing:2px;color:var(--text);font-size:22px;margin:28px 0 12px;">REPORTING FRAMEWORKS</h3>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('charte')">CHARTE</button>
+    <button class="tab-btn" onclick="switchTab('mist')">MIST</button>
+    <button class="tab-btn" onclick="switchTab('ipass')">I PASS the BATON</button>
+  </div>
+
+  <div class="tab-content active" id="tab-charte">
+    <p style="color:var(--text2);margin-bottom:16px;">Best for <strong>medical calls</strong>. A systematic memory device that ensures complete reporting.</p>
+    <table class="pace-table">
+      <tr><td><strong style="color:var(--accent);font-family:var(--display);font-size:22px;">C</strong></td><td><strong>Chief Complaint</strong></td><td style="color:var(--text2);">Why was EMS called? Patient's primary problem in their words or your words.</td></tr>
+      <tr><td><strong style="color:var(--accent);font-family:var(--display);font-size:22px;">H</strong></td><td><strong>History</strong></td><td style="color:var(--text2);">SAMPLE history — allergies, meds, past medical history, last oral intake, events.</td></tr>
+      <tr><td><strong style="color:var(--accent);font-family:var(--display);font-size:22px;">A</strong></td><td><strong>Assessment</strong></td><td style="color:var(--text2);">Your physical findings and clinical impressions. Vital signs, assessment findings.</td></tr>
+      <tr><td><strong style="color:var(--accent);font-family:var(--display);font-size:22px;">R</strong></td><td><strong>Rx (Treatment)</strong></td><td style="color:var(--text2);">All interventions performed: O₂, IVs, medications, procedures, and patient response.</td></tr>
+      <tr><td><strong style="color:var(--accent);font-family:var(--display);font-size:22px;">T</strong></td><td><strong>Transport</strong></td><td style="color:var(--text2);">Destination, priority, transport time, any changes en route.</td></tr>
+      <tr><td><strong style="color:var(--accent);font-family:var(--display);font-size:22px;">E</strong></td><td><strong>Exceptions</strong></td><td style="color:var(--text2);">Anything unusual, pending, or needing follow-up that the receiving team should know.</td></tr>
+    </table>
+  </div>
+
+  <div class="tab-content" id="tab-mist">
+    <p style="color:var(--text2);margin-bottom:16px;">Best for <strong>trauma calls</strong>. Brief, targeted, and familiar to trauma teams.</p>
+    <table class="pace-table">
+      <tr><td><strong style="color:var(--blue);font-family:var(--display);font-size:22px;">M</strong></td><td><strong>Mechanism</strong></td><td style="color:var(--text2);">How was the patient injured? Vehicle speed, height of fall, weapon type, etc.</td></tr>
+      <tr><td><strong style="color:var(--blue);font-family:var(--display);font-size:22px;">I</strong></td><td><strong>Injuries Found</strong></td><td style="color:var(--text2);">Specific injuries identified or suspected. Head-to-toe findings.</td></tr>
+      <tr><td><strong style="color:var(--blue);font-family:var(--display);font-size:22px;">S</strong></td><td><strong>Signs</strong></td><td style="color:var(--text2);">Vital signs at scene and trend during transport.</td></tr>
+      <tr><td><strong style="color:var(--blue);font-family:var(--display);font-size:22px;">T</strong></td><td><strong>Treatment</strong></td><td style="color:var(--text2);">All field interventions and patient response. Blood products, fluids, tourniquet times.</td></tr>
+    </table>
+  </div>
+
+  <div class="tab-content" id="tab-ipass">
+    <p style="color:var(--text2);margin-bottom:16px;">Most comprehensive framework. Used in high-stakes, complex, or critical care transfers.</p>
+    <table class="pace-table">
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">I</strong></td><td><strong>Introduction</strong></td><td style="color:var(--text2);">Your name, agency, and patient ID.</td></tr>
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">P</strong></td><td><strong>Patient</strong></td><td style="color:var(--text2);">Age, sex, presenting problem, code status.</td></tr>
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">A</strong></td><td><strong>Assessment</strong></td><td style="color:var(--text2);">Vital signs, exam findings, clinical impression.</td></tr>
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">S</strong></td><td><strong>Situation</strong></td><td style="color:var(--text2);">Circumstances of call, timeline, relevant history.</td></tr>
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">S</strong></td><td><strong>Safety Concerns</strong></td><td style="color:var(--text2);">Allergies, DNR status, behavioral concerns, infectious precautions.</td></tr>
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">B</strong></td><td><strong>Background</strong></td><td style="color:var(--text2);">PMH, medications, baseline function.</td></tr>
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">A</strong></td><td><strong>Actions</strong></td><td style="color:var(--text2);">All treatments performed and patient response.</td></tr>
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">T</strong></td><td><strong>Timing</strong></td><td style="color:var(--text2);">Time-sensitive elements — symptom onset, medication times, transport duration.</td></tr>
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">O</strong></td><td><strong>Ownership</strong></td><td style="color:var(--text2);">Clear confirmation that care has been transferred.</td></tr>
+      <tr><td><strong style="color:var(--green);font-family:var(--display);font-size:20px;">N</strong></td><td><strong>Next</strong></td><td style="color:var(--text2);">What needs to happen next? Outstanding issues, pending interventions, clinical concerns.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ── CASE STUDY ── -->
+<div class="section" id="casestudy">
+  <div class="section-header">
+    <span class="section-num">09 //</span>
+    <h2>COMPREHENSIVE <span>CASE STUDY</span></h2>
+  </div>
+
+  <div class="case-hero">
+    <div class="case-label">🚨 ACTIVE CASE — WORK THROUGH EACH STAGE</div>
+    <h3>OPERATION UNCERTAIN GROUND</h3>
+    <p style="color:rgba(255,255,255,0.7);margin-bottom:14px;">A multi-stage clinical decision making scenario. Work through each stage sequentially. Click each stage to reveal data, analysis, and the correct clinical decision.</p>
+    <div class="dispatch-box">
+      <span>DISPATCH // 14:32 hrs</span><br>
+      Unit 47 — respond to 814 Waterfall Dr for a <strong>SICK PERSON</strong>. Caller is the patient's adult son. States his 67-year-old father "seems confused and isn't acting right." Patient has a history of diabetes and high blood pressure. No other information at this time. Code 2 response.
+    </div>
+  </div>
+
+  <!-- Stage 1 -->
+  <div class="case-stage">
+    <div class="stage-header" onclick="toggleStage(this)">
+      <div class="stage-num">STAGE 1</div>
+      <div class="stage-title">Scene Size-Up & Initial Impression</div>
+      <div class="stage-tag">READ THE SCENE · READ THE PATIENT</div>
+      <span class="acc-icon">+</span>
+    </div>
+    <div class="stage-body">
+      <div class="grid2">
+        <div>
+          <div class="badge badge-blue">SCENE INFORMATION</div>
+          <ul class="styled-list" style="margin:10px 0;">
+            <li>Single-story home, well-maintained</li>
+            <li>Son meets you at the door — visibly anxious</li>
+            <li>No hazards identified</li>
+            <li>Multiple prescription bottles on kitchen counter</li>
+            <li>Empty OJ glass on the table</li>
+            <li>Glucometer on counter with test strip</li>
+          </ul>
+        </div>
+        <div>
+          <div class="badge badge-orange">PATIENT IMPRESSION</div>
+          <ul class="styled-list" style="margin:10px 0;">
+            <li>67M seated on couch, leaning to one side</li>
+            <li>Eyes open but glassy, slow to track your movement</li>
+            <li>Skin: pale, diaphoretic</li>
+            <li>Mouth slightly open, no abnormal sounds</li>
+            <li>When you say his name, he responds but speech is slurred</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="card" style="background:rgba(249,115,22,0.08); border-color:rgba(249,115,22,0.3);">
+        <h4>🧠 CLINICAL DECISION MAKING ANALYSIS</h4>
+        <p><strong>What the scene tells you:</strong> The glucometer, OJ glass, and diabetic medication suggest active blood sugar management. Empty OJ may mean someone tried to treat a low already — or it may mean nothing. Diaphoresis + pallor + altered mental status in a known diabetic = hypoglycemia until proven otherwise.</p>
+        <p style="margin-top:10px;"><strong>Your working concept:</strong> Altered diabetic, likely hypoglycemia. But you're also noting unilateral lean + slurred speech → stroke is on the differential. You cannot confirm either diagnosis from the doorway.</p>
+        <div class="danger" style="margin-top:12px;">
+          <div class="danger-label">⚠️ COGNITIVE TRAP TO AVOID</div>
+          <p>Don't commit to hypoglycemia just because you see a glucometer. <em>Labeling</em> this "just a sugar" before checking vitals + glucose + neuro exam could miss a concurrent ischemic stroke.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stage 2 -->
+  <div class="case-stage">
+    <div class="stage-header" onclick="toggleStage(this)">
+      <div class="stage-num">STAGE 2</div>
+      <div class="stage-title">Primary Assessment & Initial Vitals</div>
+      <div class="stage-tag">REACT · DATA INTERPRETATION</div>
+      <span class="acc-icon">+</span>
+    </div>
+    <div class="stage-body">
+      <div class="vitals-grid">
+        <div class="vital-card">
+          <div class="vital-label">GCS</div>
+          <div class="vital-value warn">12</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">BP</div>
+          <div class="vital-value warn">162/94</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">HR</div>
+          <div class="vital-value warn">112</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">RR</div>
+          <div class="vital-value warn">22</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">SpO₂</div>
+          <div class="vital-value ok">97%</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">GLUCOSE</div>
+          <div class="vital-value crit">38 mg/dL</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">TEMP</div>
+          <div class="vital-value ok">37.1°C</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">EtCO₂</div>
+          <div class="vital-value ok">38 mmHg</div>
+        </div>
+      </div>
+      <div class="badge badge-red">NEUROLOGICAL EXAM</div>
+      <ul class="styled-list" style="margin:10px 0;">
+        <li>Cincinnati Stroke Scale: <strong>POSITIVE</strong></li>
+        <li>Facial droop: subtle right-sided asymmetry</li>
+        <li>Arm drift: right arm drifts downward when held out</li>
+        <li>Speech: slurred but words are recognizable</li>
+        <li>FAST → Eyes track to left, right gaze preference noted</li>
+      </ul>
+      <hr class="divider">
+      <div class="card" style="background:rgba(56,189,248,0.06); border-color:rgba(56,189,248,0.25);">
+        <h4>🧠 DATA INTERPRETATION — THE CRITICAL QUESTION</h4>
+        <p>You now have a dilemma that separates the good paramedic from the great one. <strong>Glucose is 38 (severe hypoglycemia)</strong>. <strong>Cincinnati Stroke Scale is positive</strong>. These findings can coexist — hypoglycemia CAUSES stroke-like symptoms. But acute ischemic stroke can ALSO present this way. Which came first?</p>
+        <div class="pearl" style="margin-top:12px;">
+          <div class="pearl-label">💡 THE KEY PRINCIPLE</div>
+          <p><strong>Treat the reversible cause first.</strong> Hypoglycemia can mimic stroke. Correct the glucose — if neurological deficits resolve, you've found your answer. If they persist after normoglycemia, you have a stroke until proven otherwise. This is Systems 2 thinking at its finest.</p>
+        </div>
+        <div class="example" style="margin-top:10px;">
+          <div class="example-label">📋 CLINICAL DECISION</div>
+          <p>Establish IV access. Administer D50W 25g IVP. Reassess neurological status in 2 minutes. Meanwhile, record time of symptom onset from son (critical for stroke thrombolytics window). Notify receiving hospital of possible stroke alert — <em>simultaneously</em> treating the hypoglycemia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stage 3 -->
+  <div class="case-stage">
+    <div class="stage-header" onclick="toggleStage(this)">
+      <div class="stage-num">STAGE 3</div>
+      <div class="stage-title">Post-Treatment Reevaluation</div>
+      <div class="stage-tag">REEVALUATE · REVISE THE PLAN</div>
+      <span class="acc-icon">+</span>
+    </div>
+    <div class="stage-body">
+      <p style="color:var(--text2);margin-bottom:14px;"><strong>3 minutes post D50W administration:</strong></p>
+      <div class="vitals-grid">
+        <div class="vital-card">
+          <div class="vital-label">GCS</div>
+          <div class="vital-value warn">13</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">BP</div>
+          <div class="vital-value warn">168/98</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">HR</div>
+          <div class="vital-value ok">96</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">GLUCOSE</div>
+          <div class="vital-value ok">142 mg/dL</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:12px;background:rgba(251,191,36,0.07);border-color:rgba(251,191,36,0.25);">
+        <h4>⚡ CRITICAL DECISION POINT</h4>
+        <p>Glucose is now normal (142). GCS improved slightly (12→13). But the <strong>right-sided drift and facial asymmetry PERSIST</strong>. The patient is more verbal but still confused. Blood pressure has risen to 168/98.</p>
+        <p style="margin-top:10px;"><strong>This is the moment for plan revision:</strong> The neurological deficits are not from hypoglycemia alone. The elevated BP in the context of persistent focal deficits and symptom onset within 4.5 hours = <strong>STROKE ALERT.</strong></p>
+        <div class="danger" style="margin-top:12px;">
+          <div class="danger-label">⚠️ DO NOT LOWER THE BP</div>
+          <p>In acute ischemic stroke, the hypertension is <em>protective</em> — it maintains perfusion pressure to the ischemic penumbra. Lowering BP prehospitally can worsen the infarct. This is an Application of Principles decision — knowing the pathophysiology changes your treatment.</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="card">
+        <h4>SON'S HISTORY (obtained while treating):</h4>
+        <ul class="styled-list">
+          <li>Symptoms noted approximately 90 minutes ago</li>
+          <li>Patient took his usual metformin and metoprolol this AM</li>
+          <li>Patient skipped breakfast ("trying to cut carbs")</li>
+          <li>No recent illness, no fall, no head trauma</li>
+          <li>History: HTN × 12 years, T2DM × 8 years, hyperlipidemia</li>
+          <li>No previous strokes or TIAs</li>
+          <li>No blood thinners. No known allergies.</li>
+        </ul>
+        <div class="pearl" style="margin-top:12px;">
+          <div class="pearl-label">💡 CLINICAL PEARL — SYMPTOM ONSET TIME</div>
+          <p>In ischemic stroke, tPA (alteplase) is most effective within 3 hours of symptom onset and can be used up to 4.5 hours. At 90 minutes, this patient is in the optimal thrombolytic window — if a hemorrhagic stroke can be ruled out by CT. Time is brain.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stage 4 -->
+  <div class="case-stage">
+    <div class="stage-header" onclick="toggleStage(this)">
+      <div class="stage-num">STAGE 4</div>
+      <div class="stage-title">Transport Decision & Pre-Notification</div>
+      <div class="stage-tag">APPLICATION OF PRINCIPLES · HANDOFF</div>
+      <span class="acc-icon">+</span>
+    </div>
+    <div class="stage-body">
+      <div class="card" style="background:rgba(74,222,128,0.06);border-color:rgba(74,222,128,0.2);">
+        <h4>✅ TRANSPORT DECISION</h4>
+        <p><strong>Destination:</strong> Nearest Comprehensive Stroke Center (bypass closer hospital without neurology capability). Time-sensitive diagnosis justifies bypass protocol.</p>
+        <p style="margin-top:8px;"><strong>Priority:</strong> Code 3 (lights and sirens) — symptom onset is 90 minutes ago and window is closing.</p>
+        <p style="margin-top:8px;"><strong>Pre-notification sent:</strong> STROKE ALERT. 67M. Last known well 90 minutes ago. Glucose corrected — neuro deficits persist. Cincinnati positive. ETA 8 minutes. Requesting CT angio on arrival.</p>
+      </div>
+
+      <hr class="divider">
+      <div class="badge badge-orange">PRACTICE: CONSTRUCT THE CHARTE REPORT</div>
+      <p style="color:var(--text2);margin:12px 0;">Using what you've gathered, build a CHARTE verbal report for the receiving ED team. Key elements:</p>
+      <table class="pace-table">
+        <tr><td><strong style="color:var(--accent);">C</strong></td><td>67M found confused by son, now improving but with residual right-sided deficits</td></tr>
+        <tr><td><strong style="color:var(--accent);">H</strong></td><td>HTN, T2DM, hyperlipidemia. Metformin + metoprolol. No allergies. Skipped breakfast. Last known well 90 min ago.</td></tr>
+        <tr><td><strong style="color:var(--accent);">A</strong></td><td>GCS 13. BP 168/98. HR 96. SpO₂ 97%. Cincinnati Stroke Scale POSITIVE. Right facial droop, right arm drift, slurred speech.</td></tr>
+        <tr><td><strong style="color:var(--accent);">R</strong></td><td>IV 18g right AC. D50W 25g IVP. Glucose rose from 38 → 142. GCS improved 12→13 but deficits persist. O₂ 2L NC. 12-lead: sinus tach, no STEMI.</td></tr>
+        <tr><td><strong style="color:var(--accent);">T</strong></td><td>Code 3 to your facility. ETA 2 min. Bypass protocol activated.</td></tr>
+        <tr><td><strong style="color:var(--accent);">E</strong></td><td>Residual right-sided neurological deficits despite glucose correction. Possible concurrent ischemic stroke. Patient in possible tPA window — onset 90 min ago.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Stage 5: Reflection -->
+  <div class="case-stage">
+    <div class="stage-header" onclick="toggleStage(this)">
+      <div class="stage-num">STAGE 5</div>
+      <div class="stage-title">Post-Call Reflection & Review Performance</div>
+      <div class="stage-tag">REVIEW · METACOGNITION</div>
+      <span class="acc-icon">+</span>
+    </div>
+    <div class="stage-body">
+      <p style="color:var(--text2);margin-bottom:16px;"><strong>Hospital outcome feedback (2 days later):</strong> Patient diagnosed with acute left MCA ischemic stroke + hypoglycemic episode (missed breakfast + normal insulin dose). tPA administered 2h 15min post-onset. Significant neurological improvement at 24 hours. Patient discharged to stroke rehabilitation. Your early notification and correct bypass decision was credited by the stroke team as critical to his outcome.</p>
+
+      <div class="card">
+        <h4>REFLECTION QUESTIONS — APPLY TO YOURSELF</h4>
+        <ul class="styled-list">
+          <li>At what point did you <em>first</em> suspect stroke was concurrent with hypoglycemia?</li>
+          <li>Was there a moment where you were tempted to dismiss the neuro findings as "just hypoglycemia"? What stopped you?</li>
+          <li>How did the Six Rs framework help you structure your response?</li>
+          <li>Which stage of critical thinking was hardest for you to apply under pressure?</li>
+          <li>What would you have done differently if the glucose had normalized and symptoms resolved?</li>
+        </ul>
+      </div>
+
+      <div class="pearl" style="margin-top:16px;">
+        <div class="pearl-label">💡 THE KEY LEARNING</div>
+        <p>This case illustrates the <strong>most dangerous cognitive pitfall</strong> in clinical decision making: <em>premature closure</em> — deciding on a diagnosis and stopping the clinical thinking process too early. The paramedic who says "sugar is low, fix it, done" will miss the concurrent stroke. Clinical decision making requires holding <em>multiple hypotheses simultaneously</em> until the data forces a resolution.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── QUIZ ── -->
+<div class="section quiz-section" id="quiz">
+  <div class="section-header">
+    <span class="section-num">10 //</span>
+    <h2>KNOWLEDGE <span>ASSESSMENT</span></h2>
+  </div>
+
+  <div class="score-display" id="scoreDisplay" style="display:none;">
+    <div class="score-circle" id="scoreCircle">0%</div>
+    <div class="score-info">
+      <div class="score-label">SCORE</div>
+      <div class="score-text" id="scoreText">0 of 0 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetQuiz()">RESET QUIZ</button>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="quizProgress" style="width:0%"></div>
+  </div>
+
+  <div id="quizContainer"></div>
+</div>
+
+</div><!-- end .page -->
+
+<script>
+// ── THEME TOGGLE ──
+function toggleTheme() {
+  const root = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (root.getAttribute('data-theme') === 'dark') {
+    root.setAttribute('data-theme', 'light');
+    btn.textContent = '☀️ Light';
+  } else {
+    root.setAttribute('data-theme', 'dark');
+    btn.textContent = '🌙 Dark';
+  }
+}
+
+// ── SCROLL ──
+function navTo(btn, id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── ACCORDION ──
+function toggleAcc(header) {
+  const body = header.nextElementSibling;
+  const icon = header.querySelector('.acc-icon');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  icon.classList.toggle('open');
+}
+
+// ── SIX Rs ──
+function toggleR(card) {
+  const body = card.querySelector('.r-body');
+  body.classList.toggle('open');
+}
+
+// ── STAGE ──
+function toggleStage(header) {
+  const body = header.nextElementSibling;
+  const icon = header.querySelector('.acc-icon');
+  body.classList.toggle('open');
+  icon.classList.toggle('open');
+}
+
+// ── TABS ──
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── QUIZ DATA ──
+const quizData = [
+  {
+    q: "Which term describes the OVERALL process that combines both clinical reasoning AND clinical decision making?",
+    opts: ["Clinical reasoning", "Clinical assessment", "Clinical judgment", "Assessment-based management"],
+    ans: 2,
+    fb: "Clinical judgment is the umbrella term that encompasses the entire process — both the reasoning (thinking through the problem) and the decision making (choosing the action). Clinical reasoning is the thinking process; clinical decision making is the choice at the end."
+  },
+  {
+    q: "A paramedic arrives to find a patient who 'always calls drunk' and is slumped over. Without fully assessing, she assumes intoxication and provides supportive care. Which cognitive error is MOST demonstrated?",
+    opts: ["Tunnel vision", "Labeling", "Confirmation bias", "Premature evaluation"],
+    ans: 1,
+    fb: "This is labeling — assuming a diagnosis based on a previous pattern with this specific patient. The danger is missing a subdural hematoma, stroke, or hypoglycemia. Every patient deserves a fresh assessment on every call."
+  },
+  {
+    q: "According to the critical thinking process, which element happens AFTER the call and serves to build the paramedic's experience base?",
+    opts: ["Evaluation", "Concept formation", "Reflection on action", "Application of principles"],
+    ans: 2,
+    fb: "Reflection on action happens after the event and gives paramedics an avenue to review their performance, identify errors, and add to their experience base. This is also called metacognition — thinking about your thinking."
+  },
+  {
+    q: "In the PACE communication model, after you have already 'Alerted' the team leader to a concern and been dismissed, what is the NEXT appropriate step?",
+    opts: ["Return to patient care without further action", "Contact medical direction directly", "Challenge — directly challenge the proposed action", "Immediately escalate to Emergency intervention"],
+    ans: 2,
+    fb: "PACE is a progressive escalation model: Probe → Alert → Challenge → Emergency. After an Alert is dismissed, the next step is to Challenge — explicitly stating that you believe the action is wrong and advocating clearly against it."
+  },
+  {
+    q: "System 1 thinking is best described as which of the following?",
+    opts: [
+      "Slow, deliberate, step-by-step analytical reasoning",
+      "Fast, automatic, pattern-based intuitive recognition",
+      "Protocol-driven algorithmic decision making",
+      "Collaborative group decision making with crew input"
+    ],
+    ans: 1,
+    fb: "System 1 is the fast, intuitive, pattern-recognition based thinking. It's efficient and effective for experienced providers recognizing classic presentations — but it's vulnerable to bias and error with atypical patients. System 2 is the slow, deliberate, analytical counterpart."
+  },
+  {
+    q: "A diabetic patient has glucose of 38, slurred speech, and right arm drift. You give D50W. Three minutes later, glucose is 140 but neurological deficits persist. The MOST appropriate action is:",
+    opts: [
+      "Repeat the D50W — glucose may not be fully normalized",
+      "Treat as a stroke alert — deficits persisting after glucose correction suggest concurrent stroke",
+      "Reassess in 10 more minutes before making a transport decision",
+      "Document that the deficits are residual from hypoglycemia and transport non-emergently"
+    ],
+    ans: 1,
+    fb: "When neurological deficits persist after glucose normalization, you must treat as an acute stroke. Hypoglycemia can mimic stroke — but if the deficits don't resolve with glucose correction, there is likely a concurrent or primary stroke. Time is critical: tPA eligibility depends on symptom onset time."
+  },
+  {
+    q: "The 'contemplative approach' to a patient encounter is MOST appropriate when:",
+    opts: [
+      "The patient is in cardiorespiratory arrest",
+      "The patient has an SpO₂ of 80% and severe respiratory distress",
+      "The patient has a multi-day history of progressive weakness and fatigue without acute distress",
+      "The patient has an altered mental status and is unresponsive to verbal stimuli"
+    ],
+    ans: 2,
+    fb: "The contemplative approach is used when there is no immediate life threat — you gather history and physical exam data BEFORE initiating treatment. Patients with non-emergent presentations (like progressive weakness with no acute distress) benefit from this thorough, methodical approach."
+  },
+  {
+    q: "Which of the following is a characteristic of an EFFECTIVE patient handoff report?",
+    opts: [
+      "Comprehensive and thorough, typically 5–10 minutes in length",
+      "Includes extensive medical jargon to demonstrate clinical competence",
+      "Concise, structured, and includes pertinent positives AND pertinent negatives",
+      "Focuses only on interventions performed — diagnosis is for the ED physician"
+    ],
+    ans: 2,
+    fb: "An effective handoff is concise (typically under 1 minute), uses minimal jargon, follows a consistent format, and includes both pertinent findings AND pertinent negatives. Pertinent negatives (what wasn't present) are equally important to the receiving team's decision making."
+  },
+  {
+    q: "A paramedic notices a worsening BP trend from 120/80 → 102/70 → 88/58 over 15 minutes despite IV fluid bolus. Which element of the critical thinking process is MOST being applied?",
+    opts: [
+      "Concept formation",
+      "Application of principles",
+      "Data interpretation",
+      "Reflection on action"
+    ],
+    ans: 2,
+    fb: "Data interpretation involves giving clinical meaning to the data you've gathered. Recognizing that a downward BP trend is significant — and interpreting it as compensated shock becoming decompensated — is data interpretation. You're converting raw numbers into clinical meaning using your knowledge of pathophysiology."
+  },
+  {
+    q: "Which statement BEST reflects the relationship between protocols and clinical decision making?",
+    opts: [
+      "Protocols eliminate the need for clinical decision making in well-defined situations",
+      "Protocols are guidelines for classic presentations; clinical judgment is required when patients deviate from the standard",
+      "Clinical judgment should always override protocols, which are only for new paramedics",
+      "Protocols are legally binding and cannot be deviated from regardless of the situation"
+    ],
+    ans: 1,
+    fb: "Protocols establish standardized care for classic presentations — they are a floor, not a ceiling. The paramedic's job is to apply clinical judgment when the patient doesn't fit the protocol, recognize unique situations, and use the protocol as a foundation rather than a script."
+  }
+];
+
+let answers = new Array(quizData.length).fill(null);
+let answered = new Array(quizData.length).fill(false);
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  quizData.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.innerHTML = `
+      <div class="q-num">QUESTION ${qi+1} OF ${quizData.length}</div>
+      <div class="q-text">${q.q}</div>
+      <ul class="q-options">
+        ${q.opts.map((opt, oi) => `
+          <li class="q-opt" onclick="answerQ(${qi},${oi},this)" data-qi="${qi}" data-oi="${oi}">
+            <span class="q-opt-letter">${String.fromCharCode(65+oi)}.</span> ${opt}
+          </li>`).join('')}
+      </ul>
+      <div class="q-feedback" id="fb-${qi}"></div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function answerQ(qi, oi, el) {
+  if (answered[qi]) return;
+  answered[qi] = true;
+  answers[qi] = oi;
+
+  const card = el.closest('.q-card');
+  const opts = card.querySelectorAll('.q-opt');
+  opts.forEach(o => o.classList.add('answered'));
+
+  const correct = quizData[qi].ans;
+  if (oi === correct) {
+    opts[oi].classList.add('correct');
+  } else {
+    opts[oi].classList.add('wrong');
+    opts[correct].classList.add('correct');
+  }
+
+  const fb = document.getElementById(`fb-${qi}`);
+  fb.textContent = (oi === correct ? '✅ Correct! ' : '❌ Incorrect. ') + quizData[qi].fb;
+  fb.className = 'q-feedback show ' + (oi === correct ? 'correct-fb' : 'wrong-fb');
+
+  updateScore();
+}
+
+function updateScore() {
+  const total = answered.filter(Boolean).length;
+  const correct = answers.filter((a, i) => a === quizData[i].ans && answered[i]).length;
+  const pct = Math.round((total / quizData.length) * 100);
+
+  document.getElementById('quizProgress').style.width = pct + '%';
+
+  if (total === quizData.length) {
+    const scorePct = Math.round((correct / quizData.length) * 100);
+    document.getElementById('scoreDisplay').style.display = 'flex';
+    document.getElementById('scoreCircle').textContent = scorePct + '%';
+    document.getElementById('scoreText').textContent = `${correct} of ${quizData.length} correct`;
+    document.getElementById('scoreCircle').style.borderColor =
+      scorePct >= 80 ? 'var(--green)' : scorePct >= 60 ? 'var(--yellow)' : 'var(--red)';
+    document.getElementById('scoreCircle').style.color =
+      scorePct >= 80 ? 'var(--green)' : scorePct >= 60 ? 'var(--yellow)' : 'var(--red)';
+    document.getElementById('scoreDisplay').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function resetQuiz() {
+  answers = new Array(quizData.length).fill(null);
+  answered = new Array(quizData.length).fill(false);
+  document.getElementById('scoreDisplay').style.display = 'none';
+  document.getElementById('quizProgress').style.width = '0%';
+  buildQuiz();
+}
+
+// INIT
+buildQuiz();
+</script>
+</body>
+</html>
