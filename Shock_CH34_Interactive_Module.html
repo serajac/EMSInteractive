@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 34: Shock — CAMP EMS Paramedic Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root {
+  --bg: #090d13;
+  --surface: #0f1720;
+  --surface2: #172030;
+  --surface3: #1c2a3d;
+  --border: #1e3252;
+  --accent: #cc2233;
+  --accent2: #e05522;
+  --accent-glow: rgba(204,34,51,0.18);
+  --text: #dce8f5;
+  --text-dim: #7a9ab8;
+  --text-muted: #3a5070;
+  --green: #27ae60;
+  --yellow: #f39c12;
+  --red: #e74c3c;
+  --blue: #2980b9;
+  --purple: #8e44ad;
+  --cyan: #16a085;
+  --teal: #1abc9c;
+  --shadow: rgba(0,0,0,0.5);
+  --card-border: #1e3252;
+  --nav-bg: #080c12;
+  --mono: 'DM Mono', monospace;
+  --serif: 'Crimson Pro', Georgia, serif;
+  --display: 'Bebas Neue', sans-serif;
+}
+[data-theme="light"] {
+  --bg: #f0f4f9;
+  --surface: #ffffff;
+  --surface2: #e8eef7;
+  --surface3: #dde5f0;
+  --border: #c0cedf;
+  --accent: #c0182a;
+  --accent2: #c94a10;
+  --accent-glow: rgba(192,24,42,0.10);
+  --text: #0d1a2a;
+  --text-dim: #3a5878;
+  --text-muted: #7090b0;
+  --green: #1a8c4e;
+  --yellow: #c47d00;
+  --red: #c0392b;
+  --blue: #1e6fa0;
+  --purple: #6c3496;
+  --cyan: #0e7a65;
+  --teal: #0e9070;
+  --shadow: rgba(0,0,0,0.12);
+  --card-border: #c0cedf;
+  --nav-bg: #e4ecf5;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--serif);
+  font-size:1.05rem;
+  line-height:1.7;
+  min-height:100vh;
+  transition: background 0.3s, color 0.3s;
+}
+/* ── LAYOUT ── */
+.app-shell{display:flex;min-height:100vh}
+.sidebar{
+  position:fixed;top:0;left:0;height:100vh;width:260px;
+  background:var(--nav-bg);
+  border-right:1px solid var(--border);
+  overflow-y:auto;padding:1.5rem 0 2rem;
+  z-index:100;
+  transition:background 0.3s;
+}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.main{margin-left:260px;min-height:100vh}
+.logo-block{padding:0 1.2rem 1.5rem;border-bottom:1px solid var(--border)}
+.logo-title{font-family:var(--display);font-size:1.6rem;letter-spacing:0.05em;color:var(--accent);line-height:1.1}
+.logo-sub{font-family:var(--mono);font-size:0.65rem;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.3rem}
+.nav-section-label{
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--text-muted);padding:1.2rem 1.2rem 0.4rem;
+}
+.nav-item{
+  display:flex;align-items:center;gap:0.6rem;
+  padding:0.5rem 1.2rem;
+  color:var(--text-dim);font-family:var(--mono);font-size:0.78rem;
+  cursor:pointer;transition:all 0.2s;border-left:2px solid transparent;
+  text-decoration:none;
+}
+.nav-item:hover,.nav-item.active{color:var(--text);background:var(--accent-glow);border-left-color:var(--accent)}
+.nav-item .nav-icon{font-size:0.9rem;opacity:0.8}
+.theme-toggle{
+  margin:1.5rem 1.2rem 0;display:flex;align-items:center;gap:0.6rem;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:6px;padding:0.5rem 0.8rem;cursor:pointer;
+  font-family:var(--mono);font-size:0.72rem;color:var(--text-dim);
+  transition:all 0.2s;
+}
+.theme-toggle:hover{color:var(--text);border-color:var(--accent)}
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,#06090f 0%,#0d0016 40%,#140009 100%);
+  padding:4rem 3rem 3rem;border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+[data-theme="light"] .hero{background:linear-gradient(135deg,#dde5f5 0%,#ebd5d8 40%,#f5dce0 100%)}
+.hero::before{
+  content:'';position:absolute;top:-60px;right:-80px;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(200,20,30,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-block;
+  font-family:var(--mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);border:1px solid var(--accent);border-radius:3px;
+  padding:0.25rem 0.7rem;margin-bottom:1rem;
+}
+.hero h1{font-family:var(--display);font-size:4.5rem;letter-spacing:0.04em;line-height:0.95;color:var(--text)}
+.hero h1 span{color:var(--accent)}
+.hero-sub{font-family:var(--serif);font-size:1.15rem;color:var(--text-dim);margin-top:0.8rem;font-style:italic;max-width:560px}
+.hero-stats{display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat-val{font-family:var(--display);font-size:2.2rem;color:var(--accent);letter-spacing:0.05em}
+.hero-stat-lbl{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted)}
+/* ── SECTIONS ── */
+.section{padding:3rem 3rem 2rem;border-bottom:1px solid var(--border)}
+.section-header{display:flex;align-items:flex-end;gap:1.2rem;margin-bottom:2rem}
+.section-num{font-family:var(--display);font-size:3.5rem;color:var(--border);letter-spacing:0.05em;line-height:1}
+.section-title-block{}
+.section-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.2rem}
+.section-title{font-family:var(--display);font-size:2.2rem;letter-spacing:0.04em;color:var(--text);line-height:1}
+/* ── CARDS ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin:1.5rem 0}
+.card{
+  background:var(--surface);border:1px solid var(--card-border);
+  border-radius:8px;padding:1.4rem;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card-icon{font-size:1.8rem;margin-bottom:0.8rem}
+.card-title{font-family:var(--mono);font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+.card-body{font-size:0.95rem;color:var(--text-dim);line-height:1.6}
+/* ── SHOCK TYPE PANELS ── */
+.shock-panel{
+  background:var(--surface);border:1px solid var(--card-border);
+  border-radius:10px;margin:1.5rem 0;overflow:hidden;
+}
+.shock-panel-header{
+  display:flex;align-items:center;gap:1rem;padding:1.2rem 1.5rem;
+  cursor:pointer;transition:background 0.2s;
+  border-bottom:1px solid var(--border);
+}
+.shock-panel-header:hover{background:var(--surface2)}
+.shock-type-badge{
+  font-family:var(--mono);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;
+  padding:0.2rem 0.6rem;border-radius:3px;white-space:nowrap;
+}
+.badge-hypo{background:rgba(41,128,185,0.2);color:#5dade2;border:1px solid rgba(41,128,185,0.3)}
+.badge-cardio{background:rgba(204,34,51,0.2);color:#e74c3c;border:1px solid rgba(204,34,51,0.3)}
+.badge-obstr{background:rgba(142,68,173,0.2);color:#9b59b6;border:1px solid rgba(142,68,173,0.3)}
+.badge-neuro{background:rgba(22,160,133,0.2);color:#1abc9c;border:1px solid rgba(22,160,133,0.3)}
+.badge-anaph{background:rgba(243,156,18,0.2);color:#f39c12;border:1px solid rgba(243,156,18,0.3)}
+.badge-septic{background:rgba(231,76,60,0.2);color:#e74c3c;border:1px solid rgba(231,76,60,0.3)}
+.shock-panel-title{font-family:var(--display);font-size:1.6rem;letter-spacing:0.04em;flex:1}
+.shock-panel-toggle{font-size:1.2rem;color:var(--text-muted);transition:transform 0.3s}
+.shock-panel-toggle.open{transform:rotate(180deg)}
+.shock-panel-body{padding:1.5rem;display:none}
+.shock-panel-body.open{display:block}
+.patho-block{
+  background:var(--surface2);border-left:3px solid var(--accent);
+  border-radius:0 6px 6px 0;padding:1rem 1.2rem;margin:1rem 0;
+}
+.patho-label{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem}
+/* ── ANALOGY BOX ── */
+.analogy-box{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:8px;padding:1.2rem 1.4rem;margin:1rem 0;
+  display:flex;gap:1rem;align-items:flex-start;
+}
+.analogy-icon{font-size:2rem;flex-shrink:0}
+.analogy-content{}
+.analogy-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:0.3rem}
+.analogy-text{font-style:italic;color:var(--text-dim);font-size:0.97rem}
+/* ── MED TABLE ── */
+.med-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem}
+.med-table th{
+  background:var(--surface3);font-family:var(--mono);font-size:0.65rem;
+  letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);
+  padding:0.6rem 0.8rem;text-align:left;border-bottom:1px solid var(--border);
+}
+.med-table td{
+  padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);
+  color:var(--text-dim);vertical-align:top;
+}
+.med-table tr:hover td{background:var(--accent-glow)}
+.med-name{color:var(--accent2);font-weight:600;font-family:var(--mono);font-size:0.82rem}
+.dose-chip{
+  display:inline-block;background:var(--surface3);border:1px solid var(--border);
+  border-radius:4px;padding:0.1rem 0.4rem;font-family:var(--mono);font-size:0.72rem;
+  color:var(--cyan);
+}
+/* ── FORMULA BOX ── */
+.formula-box{
+  background:var(--surface2);border:1px solid var(--border);border-radius:6px;
+  padding:1rem 1.5rem;margin:1rem 0;text-align:center;
+  font-family:var(--mono);font-size:1.1rem;color:var(--teal);letter-spacing:0.05em;
+}
+/* ── STAGE METER ── */
+.stage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
+.stage-card{
+  background:var(--surface);border:1px solid var(--card-border);
+  border-radius:8px;padding:1.2rem;text-align:center;
+  transition:border-color 0.2s;
+}
+.stage-card:nth-child(1){border-top:3px solid var(--green)}
+.stage-card:nth-child(2){border-top:3px solid var(--yellow)}
+.stage-card:nth-child(3){border-top:3px solid var(--red)}
+.stage-name{font-family:var(--display);font-size:1.3rem;letter-spacing:0.05em;margin-bottom:0.5rem}
+.stage-card:nth-child(1) .stage-name{color:var(--green)}
+.stage-card:nth-child(2) .stage-name{color:var(--yellow)}
+.stage-card:nth-child(3) .stage-name{color:var(--red)}
+.stage-detail{font-size:0.88rem;color:var(--text-dim);margin-top:0.4rem}
+/* ── HEMORRHAGE CLASS TABLE ── */
+.hemo-bar{height:8px;border-radius:4px;margin:4px 0}
+/* ── FLOW DIAGRAM ── */
+.flow-row{display:flex;align-items:center;gap:0.5rem;margin:0.5rem 0;flex-wrap:wrap}
+.flow-box{
+  background:var(--surface2);border:1px solid var(--border);border-radius:5px;
+  padding:0.3rem 0.8rem;font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);
+}
+.flow-arrow{color:var(--accent);font-size:1rem}
+/* ── CALLOUT ── */
+.callout{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;padding:1rem 1.2rem;margin:1rem 0;
+}
+.callout-icon{font-size:1.4rem;flex-shrink:0;margin-top:0.1rem}
+.callout-body{font-size:0.92rem;color:var(--text-dim)}
+.callout-body strong{color:var(--text)}
+.callout.warn{border-left:3px solid var(--yellow)}
+.callout.danger{border-left:3px solid var(--red)}
+.callout.info{border-left:3px solid var(--blue)}
+.callout.success{border-left:3px solid var(--green)}
+/* ── ASSESSMENT ── */
+.assessment-section{padding:3rem}
+.student-form{
+  background:var(--surface);border:1px solid var(--card-border);
+  border-radius:10px;padding:2rem;max-width:600px;margin:0 auto 2rem;
+}
+.student-form h3{font-family:var(--display);font-size:1.8rem;color:var(--text);margin-bottom:1.5rem;letter-spacing:0.04em}
+.form-group{margin-bottom:1rem}
+.form-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.4rem}
+.form-input{
+  width:100%;background:var(--surface2);border:1px solid var(--border);
+  border-radius:5px;padding:0.7rem 1rem;color:var(--text);
+  font-family:var(--mono);font-size:0.9rem;outline:none;
+  transition:border-color 0.2s;
+}
+.form-input:focus{border-color:var(--accent)}
+.start-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:6px;
+  padding:0.8rem 2rem;font-family:var(--display);font-size:1.2rem;
+  letter-spacing:0.06em;cursor:pointer;width:100%;margin-top:0.5rem;
+  transition:background 0.2s,transform 0.1s;
+}
+.start-btn:hover{background:#a01824;transform:translateY(-1px)}
+/* ── QUIZ CONTAINER ── */
+#quiz-container{display:none}
+.quiz-progress-bar-wrap{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:0.8rem 3rem;position:sticky;top:0;z-index:50;
+}
+.quiz-progress-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+.quiz-progress-label{font-family:var(--mono);font-size:0.72rem;color:var(--text-muted)}
+.quiz-progress-count{font-family:var(--mono);font-size:0.72rem;color:var(--accent)}
+.progress-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.4s}
+.quiz-body{padding:2rem 3rem;max-width:860px;margin:0 auto}
+.question-block{
+  background:var(--surface);border:1px solid var(--card-border);
+  border-radius:10px;padding:1.8rem;margin-bottom:1.5rem;
+}
+.q-number{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+.q-text{font-size:1.05rem;color:var(--text);margin-bottom:1.2rem;line-height:1.5}
+.q-options{display:flex;flex-direction:column;gap:0.5rem}
+.q-option{
+  display:flex;align-items:flex-start;gap:0.8rem;padding:0.7rem 1rem;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:6px;cursor:pointer;transition:all 0.15s;
+  font-size:0.95rem;color:var(--text-dim);
+}
+.q-option:hover{border-color:var(--accent);color:var(--text);background:var(--accent-glow)}
+.q-option.selected{border-color:var(--blue);background:rgba(41,128,185,0.15);color:var(--text)}
+.q-option.correct{border-color:var(--green);background:rgba(39,174,96,0.2);color:var(--text)}
+.q-option.incorrect{border-color:var(--red);background:rgba(231,76,60,0.2);color:var(--text)}
+.q-option input[type=radio]{display:none}
+.q-option-letter{
+  font-family:var(--mono);font-size:0.78rem;font-weight:500;
+  width:22px;height:22px;flex-shrink:0;border-radius:3px;
+  background:var(--border);display:flex;align-items:center;justify-content:center;
+  transition:background 0.15s;
+}
+.q-option.selected .q-option-letter{background:var(--blue)}
+.q-option.correct .q-option-letter{background:var(--green);color:#fff}
+.q-option.incorrect .q-option-letter{background:var(--red);color:#fff}
+.q-explanation{
+  margin-top:0.8rem;padding:0.8rem 1rem;
+  background:var(--surface2);border-left:3px solid var(--teal);
+  border-radius:0 6px 6px 0;font-size:0.88rem;color:var(--text-dim);
+  display:none;
+}
+.submit-quiz-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:6px;
+  padding:1rem 3rem;font-family:var(--display);font-size:1.4rem;letter-spacing:0.06em;
+  cursor:pointer;display:block;margin:2rem auto;transition:background 0.2s;
+}
+.submit-quiz-btn:hover{background:#a01824}
+/* ── RESULTS ── */
+#results-container{display:none;padding:3rem;max-width:800px;margin:0 auto}
+.results-card{
+  background:var(--surface);border:1px solid var(--card-border);
+  border-radius:12px;padding:2.5rem;text-align:center;
+}
+.results-score{font-family:var(--display);font-size:5rem;color:var(--accent);letter-spacing:0.05em}
+.results-grade{font-family:var(--display);font-size:2.5rem;letter-spacing:0.06em;margin-bottom:0.5rem}
+.results-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:2rem}
+.results-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
+.result-stat{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem}
+.result-stat-val{font-family:var(--display);font-size:2rem;color:var(--teal)}
+.result-stat-lbl{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-top:0.2rem}
+.download-btn{
+  background:var(--teal);color:#fff;border:none;border-radius:6px;
+  padding:0.9rem 2.5rem;font-family:var(--display);font-size:1.3rem;letter-spacing:0.06em;
+  cursor:pointer;margin-top:1.5rem;transition:background 0.2s;display:inline-flex;align-items:center;gap:0.6rem;
+}
+.download-btn:hover{background:#0e7a65}
+.review-btn{
+  background:transparent;color:var(--text-dim);border:1px solid var(--border);
+  border-radius:6px;padding:0.9rem 2.5rem;font-family:var(--display);font-size:1.3rem;
+  letter-spacing:0.06em;cursor:pointer;margin-top:1rem;margin-left:1rem;transition:all 0.2s;
+}
+.review-btn:hover{border-color:var(--accent);color:var(--text)}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .sidebar{width:220px}
+  .main{margin-left:220px}
+  .hero h1{font-size:3rem}
+  .section{padding:2rem 1.5rem}
+  .assessment-section{padding:2rem 1.5rem}
+  .quiz-body{padding:1.5rem}
+  .quiz-progress-bar-wrap{padding:0.8rem 1.5rem}
+  .stage-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .hero{padding:2rem 1.2rem}
+  .section{padding:1.5rem 1rem}
+}
+/* ── CUSTOM SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-muted)}
+/* ── TRANSITION ── */
+*{transition:background-color 0.2s,border-color 0.2s,color 0.2s}
+/* disable transition on animated items */
+.progress-fill,.shock-panel-toggle{transition:none}
+.progress-fill{transition:width 0.4s}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+<!-- ═══ SIDEBAR ═══ -->
+<nav class="sidebar">
+  <div class="logo-block">
+    <div class="logo-title">CAMP EMS</div>
+    <div class="logo-sub">Paramedic Program · Ch. 34</div>
+  </div>
+  <div class="nav-section-label">Content</div>
+  <a class="nav-item active" href="#overview" onclick="setActive(this)"><span class="nav-icon">⚡</span>Overview</a>
+  <a class="nav-item" href="#physiology" onclick="setActive(this)"><span class="nav-icon">🫀</span>Perfusion Physiology</a>
+  <a class="nav-item" href="#hypovolemic" onclick="setActive(this)"><span class="nav-icon">🩸</span>Hypovolemic Shock</a>
+  <a class="nav-item" href="#cardiogenic" onclick="setActive(this)"><span class="nav-icon">💔</span>Cardiogenic Shock</a>
+  <a class="nav-item" href="#obstructive" onclick="setActive(this)"><span class="nav-icon">🚧</span>Obstructive Shock</a>
+  <a class="nav-item" href="#distributive" onclick="setActive(this)"><span class="nav-icon">🌡️</span>Distributive Shock</a>
+  <a class="nav-item" href="#stages" onclick="setActive(this)"><span class="nav-icon">📉</span>Stages of Shock</a>
+  <a class="nav-item" href="#assessment" onclick="setActive(this)"><span class="nav-icon">🔍</span>Assessment</a>
+  <a class="nav-item" href="#fluids" onclick="setActive(this)"><span class="nav-icon">💉</span>Fluid Management</a>
+  <a class="nav-item" href="#management" onclick="setActive(this)"><span class="nav-icon">🚑</span>Prehospital Mgmt</a>
+  <div class="nav-section-label">Knowledge Check</div>
+  <a class="nav-item" href="#knowledge-assessment" onclick="setActive(this)"><span class="nav-icon">📝</span>100-Q Assessment</a>
+  <div class="theme-toggle" onclick="toggleTheme()">
+    <span id="theme-icon">☀️</span>
+    <span id="theme-label">Light Mode</span>
+  </div>
+</nav>
+
+<!-- ═══ MAIN CONTENT ═══ -->
+<main class="main">
+
+<!-- ── HERO ── -->
+<div class="hero" id="overview">
+  <div class="hero-badge">Sanders' Paramedic Textbook · 6th Edition</div>
+  <h1>CHAPTER 34<br><span>SHOCK</span></h1>
+  <div class="hero-sub">Cellular hypoxia, hemodynamic failure, and the pathophysiology of inadequate tissue perfusion</div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-val">6</div><div class="hero-stat-lbl">Shock Types</div></div>
+    <div class="hero-stat"><div class="hero-stat-val">3</div><div class="hero-stat-lbl">Shock Stages</div></div>
+    <div class="hero-stat"><div class="hero-stat-val">100</div><div class="hero-stat-lbl">Assessment Qs</div></div>
+    <div class="hero-stat"><div class="hero-stat-val">NRP</div><div class="hero-stat-lbl">Exam Prep</div></div>
+  </div>
+</div>
+
+<!-- ── SECTION 1: PERFUSION PHYSIOLOGY ── -->
+<div class="section" id="physiology">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Foundational Science</div>
+      <div class="section-title">Perfusion Physiology</div>
+    </div>
+  </div>
+
+  <p style="max-width:720px;color:var(--text-dim);margin-bottom:1.5rem;font-size:1.05rem">
+    Shock is not simply "low blood pressure" — it is <strong style="color:var(--text)">cellular hypoxia</strong>: the failure to deliver adequate oxygen to tissues for aerobic metabolism. Understanding the physiology of oxygen delivery is the key to understanding every type of shock.
+  </p>
+
+  <div class="formula-box">MAP = CO × SVR &nbsp;|&nbsp; CO = HR × SV &nbsp;|&nbsp; Normal MAP = 70–100 mmHg</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🫀</div>
+      <div class="card-title">Cardiac Output (CO)</div>
+      <div class="card-body">The product of heart rate × stroke volume. Normal: 4–8 L/min. Determined by preload, afterload, and contractility (Starling's law).</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📦</div>
+      <div class="card-title">Preload</div>
+      <div class="card-body">Ventricular volume at <em>end of diastole</em> — how much blood the ventricle has to work with. Think of it as "venous return." Governed by the Frank-Starling mechanism: more stretch = more contraction, up to a point.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔩</div>
+      <div class="card-title">Afterload (SVR)</div>
+      <div class="card-body">The total resistance the ventricle must overcome to eject blood. Determined mainly by arteriolar tone. Arterioles can change diameter up to <strong style="color:var(--teal)">fivefold</strong>, making them the dominant regulator of blood flow.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">💪</div>
+      <div class="card-title">Contractility (Inotropy)</div>
+      <div class="card-body">The intrinsic force of myocardial contraction. Normal ejection fraction: <strong style="color:var(--teal)">50–70%</strong>. Borderline: 41–49%. Below 40% indicates significant impairment.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🫁</div>
+      <div class="card-title">Oxygen Content</div>
+      <div class="card-body">Blood must carry adequate O₂. Requires patent airway, adequate ventilation, SpO₂ ≥94%, and sufficient hemoglobin to transport oxygen to cells.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔬</div>
+      <div class="card-title">Microcirculation</div>
+      <div class="card-body">The capillary–cellular interface where gas exchange occurs. In shock, arteriolar narrowing reduces capillary flow → anaerobic metabolism → lactic acid accumulates → metabolic acidosis.</div>
+    </div>
+  </div>
+
+  <div class="analogy-box">
+    <div class="analogy-icon">🚿</div>
+    <div class="analogy-content">
+      <div class="analogy-label">Clinical Analogy — The Container Model</div>
+      <div class="analogy-text">Think of the cardiovascular system as a closed-loop plumbing system. The heart is the pump, the blood vessels are the pipes, and blood is the fluid. Shock occurs when: (1) the pump breaks down, (2) the fluid leaks out, or (3) the pipes dilate beyond the fluid's ability to fill them. Each type of shock maps to one of these failure modes.</div>
+    </div>
+  </div>
+
+  <div class="patho-block">
+    <div class="patho-label">🧬 Anaerobic Cascade</div>
+    <div class="flow-row">
+      <div class="flow-box">↓ O₂ Delivery</div><div class="flow-arrow">→</div>
+      <div class="flow-box">Anaerobic Metabolism</div><div class="flow-arrow">→</div>
+      <div class="flow-box">↑ Lactic Acid</div><div class="flow-arrow">→</div>
+      <div class="flow-box">Metabolic Acidosis</div><div class="flow-arrow">→</div>
+      <div class="flow-box">Microvascular DIC</div><div class="flow-arrow">→</div>
+      <div class="flow-box">Cell Death</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 2: HYPOVOLEMIC SHOCK ── -->
+<div class="section" id="hypovolemic">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Type I</div>
+      <div class="section-title">Hypovolemic Shock</div>
+    </div>
+  </div>
+
+  <div class="shock-panel">
+    <div class="shock-panel-header" onclick="togglePanel('hypo-main')">
+      <span class="shock-type-badge badge-hypo">Hypovolemic</span>
+      <span class="shock-panel-title">Hemorrhagic & Non-Hemorrhagic</span>
+      <span class="shock-panel-toggle" id="hypo-main-toggle">▼</span>
+    </div>
+    <div class="shock-panel-body open" id="hypo-main">
+      <p style="color:var(--text-dim);margin-bottom:1rem">Inadequate circulating blood volume → decreased preload → decreased cardiac output → cellular hypoxia. The <strong style="color:var(--text)">most common cause</strong> is hemorrhage; others include dehydration, burns, vomiting, diarrhea, and third-space loss (peritonitis).</p>
+
+      <div class="analogy-box">
+        <div class="analogy-icon">🪣</div>
+        <div class="analogy-content">
+          <div class="analogy-label">Analogy — The Leaky Bucket</div>
+          <div class="analogy-text">Imagine a pump connected to a bucket with a hole in it. The pump (heart) is perfectly functional, but as the bucket (vascular system) loses fluid faster than it fills, pressure drops and flow fails. Plugging the hole (hemorrhage control) is more important than pouring more water in (fluid resuscitation) if the leak is still active.</div>
+        </div>
+      </div>
+
+      <div class="patho-block">
+        <div class="patho-label">Pathophysiology Cascade</div>
+        <div class="flow-row">
+          <div class="flow-box">Volume Loss</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↓ Preload</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↓ CO</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↓ MAP</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Baroreceptor Activation</div>
+        </div>
+        <div class="flow-row" style="margin-top:0.3rem">
+          <div class="flow-box">Catecholamine Release</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↑ HR + Vasoconstriction</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Compensated (early)</div>
+        </div>
+        <div class="flow-row" style="margin-top:0.3rem">
+          <div class="flow-box">If Uncorrected</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Anaerobic Metabolism</div><div class="flow-arrow">→</div>
+          <div class="flow-box">DIC + Organ Failure</div>
+        </div>
+      </div>
+
+      <h4 style="font-family:var(--mono);font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.5rem 0 0.8rem">Hemorrhage Classification</h4>
+      <table class="med-table">
+        <thead><tr><th>Class</th><th>Blood Loss</th><th>% Volume</th><th>HR</th><th>BP</th><th>Mental Status</th></tr></thead>
+        <tbody>
+          <tr><td><span style="color:var(--green);font-weight:600">I</span></td><td>&lt;750 mL</td><td>&lt;15%</td><td>Normal / ↑</td><td>Normal</td><td>Normal / Anxious</td></tr>
+          <tr><td><span style="color:var(--yellow);font-weight:600">II</span></td><td>750–1500 mL</td><td>15–30%</td><td>100–120</td><td>Normal (↓PP)</td><td>Anxious</td></tr>
+          <tr><td><span style="color:var(--accent2);font-weight:600">III</span></td><td>1500–2000 mL</td><td>30–40%</td><td>120–140</td><td>↓ SBP</td><td>Confused</td></tr>
+          <tr><td><span style="color:var(--red);font-weight:600">IV</span></td><td>&gt;2000 mL</td><td>&gt;40%</td><td>&gt;140</td><td>↓↓ SBP</td><td>Lethargy/Obtunded</td></tr>
+        </tbody>
+      </table>
+
+      <h4 style="font-family:var(--mono);font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.5rem 0 0.8rem">Treatment Medications</h4>
+      <table class="med-table">
+        <thead><tr><th>Agent</th><th>Class</th><th>Dose/Route</th><th>Mechanism</th></tr></thead>
+        <tbody>
+          <tr><td><span class="med-name">0.9% Normal Saline</span></td><td>Isotonic Crystalloid</td><td><span class="dose-chip">30 mL/kg IV</span></td><td>Volume replacement; does NOT carry O₂</td></tr>
+          <tr><td><span class="med-name">Lactated Ringer's</span></td><td>Balanced Crystalloid</td><td><span class="dose-chip">30 mL/kg IV</span></td><td>More physiologic; lactate buffered by liver to fight acidosis</td></tr>
+          <tr><td><span class="med-name">Packed RBCs</span></td><td>Blood Product</td><td><span class="dose-chip">Protocol-based</span></td><td>Restores O₂-carrying capacity; preferred in Class III-IV hemorrhage</td></tr>
+          <tr><td><span class="med-name">Tranexamic Acid (TXA)</span></td><td>Antifibrinolytic</td><td><span class="dose-chip">1 g IV over 10 min</span></td><td>Blocks plasminogen → prevents clot breakdown; give within 3 hours of injury</td></tr>
+          <tr><td><span class="med-name">Norepinephrine</span></td><td>Vasopressor (α₁&gt;β)</td><td><span class="dose-chip">0.01–3 mcg/kg/min</span></td><td>Vasoconstriction → ↑ SVR; adjunct after volume replacement</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body"><strong>Permissive Hypotension:</strong> In penetrating trauma, target MAP 50–65 mmHg until surgical hemorrhage control. Overzealous fluid dilutes clotting factors and worsens coagulopathy ("the lethal triad": hypothermia + acidosis + coagulopathy).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 3: CARDIOGENIC SHOCK ── -->
+<div class="section" id="cardiogenic">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Type II</div>
+      <div class="section-title">Cardiogenic Shock</div>
+    </div>
+  </div>
+
+  <div class="shock-panel">
+    <div class="shock-panel-header" onclick="togglePanel('cardio-main')">
+      <span class="shock-type-badge badge-cardio">Cardiogenic</span>
+      <span class="shock-panel-title">Pump Failure</span>
+      <span class="shock-panel-toggle" id="cardio-main-toggle">▼</span>
+    </div>
+    <div class="shock-panel-body open" id="cardio-main">
+      <p style="color:var(--text-dim);margin-bottom:1rem">Severe compromise in cardiac output <em>despite adequate circulating blood volume</em>. The pump fails → blood backs up into the pulmonary circulation → pulmonary edema + forward hypoperfusion simultaneously. <strong style="color:var(--text)">Myocardial infarction is the most common cause.</strong></p>
+
+      <div class="analogy-box">
+        <div class="analogy-icon">⚙️</div>
+        <div class="analogy-content">
+          <div class="analogy-label">Analogy — The Broken Pump</div>
+          <div class="analogy-text">Imagine a water distribution system where the pump is seized. The reservoir is full, the pipes are intact, but the pump cannot push fluid forward. Water backs up behind the pump (pulmonary edema/JVD) while everything downstream dries out (systemic hypoperfusion). Adding more water to an already-full reservoir makes the backup worse — hence why fluid must be used cautiously.</div>
+        </div>
+      </div>
+
+      <div class="patho-block">
+        <div class="patho-label">Pathophysiology Cascade</div>
+        <div class="flow-row">
+          <div class="flow-box">LV Dysfunction (MI/Dysrhythmia)</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↓ Stroke Volume</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↓ CO</div>
+        </div>
+        <div class="flow-row" style="margin-top:0.3rem">
+          <div class="flow-box">↑ LVEDP</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↑ Pulmonary Capillary Pressure</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Pulmonary Edema</div>
+        </div>
+        <div class="flow-row" style="margin-top:0.3rem">
+          <div class="flow-box">Baroreceptors Activate</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↑ SVR (vasoconstriction)</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↑ Afterload → Worsens LV</div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card"><div class="card-title">Common Causes</div><div class="card-body">Acute MI (most common), severe dysrhythmias (complete heart block, VT/VF), myocarditis, myocardial contusion, acute valvular failure (acute aortic regurgitation), dilated cardiomyopathy end-stage</div></div>
+        <div class="card"><div class="card-title">Classic Presentation</div><div class="card-body">Hypotension + JVD + pulmonary edema (rales/crackles) + cool, clammy, diaphoretic skin + narrow pulse pressure. May have chest pain, dyspnea, ECG changes (ST elevation, new LBBB, dysrhythmias)</div></div>
+        <div class="card"><div class="card-title">Hemodynamic Profile</div><div class="card-body"><span style="font-family:var(--mono);font-size:0.85rem;color:var(--teal)">↓ CO · ↑ SVR · ↑ Preload (PCWP)</span><br><br>The vicious cycle: low CO → reflex ↑ SVR → ↑ afterload → worsens CO further</div></div>
+      </div>
+
+      <h4 style="font-family:var(--mono);font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:1.5rem 0 0.8rem">Treatment Medications</h4>
+      <table class="med-table">
+        <thead><tr><th>Agent</th><th>Class</th><th>Dose</th><th>Use Case</th></tr></thead>
+        <tbody>
+          <tr><td><span class="med-name">Norepinephrine</span></td><td>Vasopressor (α₁≫β₁)</td><td><span class="dose-chip">0.01–3 mcg/kg/min</span></td><td>First-line; ↑ MAP while preserving coronary perfusion pressure</td></tr>
+          <tr><td><span class="med-name">Dopamine</span></td><td>Catecholamine</td><td><span class="dose-chip">5–20 mcg/kg/min</span></td><td>Low dose: renal vasodilation; High dose: vasopressor effect</td></tr>
+          <tr><td><span class="med-name">Dobutamine</span></td><td>Inotrope (β₁)</td><td><span class="dose-chip">2–20 mcg/kg/min</span></td><td>↑ Contractility without major ↑ SVR; add when BP is maintained</td></tr>
+          <tr><td><span class="med-name">Epinephrine</span></td><td>Catecholamine (α+β)</td><td><span class="dose-chip">0.01–0.5 mcg/kg/min</span></td><td>Refractory cardiogenic shock; ↑ HR, contractility, SVR</td></tr>
+          <tr><td><span class="med-name">Amiodarone</span></td><td>Antidysrhythmic</td><td><span class="dose-chip">150 mg IV over 10 min</span></td><td>Dysrhythmia-induced cardiogenic shock (VT/VF, AF with RVR)</td></tr>
+          <tr><td><span class="med-name">Aspirin</span></td><td>Antiplatelet</td><td><span class="dose-chip">324 mg PO/chewed</span></td><td>Acute MI causing cardiogenic shock; inhibits thromboxane A₂</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout danger">
+        <div class="callout-icon">🚨</div>
+        <div class="callout-body"><strong>Fluid Caution:</strong> Unlike hypovolemic shock, aggressive IV fluids can worsen pulmonary edema in cardiogenic shock. Give cautious fluid challenges (250 mL) while monitoring lung sounds closely. The priority is improving pump function, not filling the tank.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 4: OBSTRUCTIVE SHOCK ── -->
+<div class="section" id="obstructive">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Type III</div>
+      <div class="section-title">Obstructive Shock</div>
+    </div>
+  </div>
+  <p style="max-width:720px;color:var(--text-dim);margin-bottom:1.5rem">Inability to produce adequate cardiac output <em>despite normal intravascular volume and myocardial function</em>. A mechanical obstruction blocks flow. The pump works, the fluid is there — something is physically blocking the circuit.</p>
+
+  <div class="shock-panel">
+    <div class="shock-panel-header" onclick="togglePanel('tamponade-panel')">
+      <span class="shock-type-badge badge-obstr">Obstructive</span>
+      <span class="shock-panel-title">Cardiac Tamponade</span>
+      <span class="shock-panel-toggle" id="tamponade-panel-toggle">▼</span>
+    </div>
+    <div class="shock-panel-body open" id="tamponade-panel">
+      <div class="analogy-box">
+        <div class="analogy-icon">🫀</div>
+        <div class="analogy-content">
+          <div class="analogy-label">Analogy — The Strangled Heart</div>
+          <div class="analogy-text">Imagine wrapping a rubber band tightly around a rubber squeeze-ball. You can squeeze as hard as you want, but the rubber band prevents the ball from ever fully expanding to refill. The heart cannot fill during diastole because the pericardial fluid compresses from the outside. No fill = no output.</div>
+        </div>
+      </div>
+      <div class="patho-block">
+        <div class="patho-label">Pathophysiology</div>
+        <div class="flow-row">
+          <div class="flow-box">Pericardial Fluid Accumulates</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↑ Intrapericardial Pressure</div><div class="flow-arrow">→</div>
+          <div class="flow-box">RV Diastolic Compression</div>
+        </div>
+        <div class="flow-row" style="margin-top:0.3rem">
+          <div class="flow-box">↓ RV Filling</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↓ LV Preload</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↓ CO → Shock</div>
+        </div>
+      </div>
+      <div class="card-grid">
+        <div class="card"><div class="card-title">Beck's Triad</div><div class="card-body">① Hypotension · ② Jugular Venous Distension (JVD) · ③ Muffled heart sounds<br><br>+ Pulsus paradoxus (SBP drops >10 mmHg on inspiration)</div></div>
+        <div class="card"><div class="card-title">Treatment</div><div class="card-body">Aggressive fluid boluses to maintain preload (bridge therapy). Definitive: pericardiocentesis in-hospital. Rapid transport is essential.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shock-panel">
+    <div class="shock-panel-header" onclick="togglePanel('tension-panel')">
+      <span class="shock-type-badge badge-obstr">Obstructive</span>
+      <span class="shock-panel-title">Tension Pneumothorax</span>
+      <span class="shock-panel-toggle" id="tension-panel-toggle">▼</span>
+    </div>
+    <div class="shock-panel-body open" id="tension-panel">
+      <div class="analogy-box">
+        <div class="analogy-icon">🫧</div>
+        <div class="analogy-content">
+          <div class="analogy-label">Analogy — The One-Way Valve</div>
+          <div class="analogy-text">Air enters the pleural space through a one-way valve mechanism with each breath but cannot escape. Like inflating a balloon inside a box — as the balloon expands, it shoves everything else aside. The mediastinum shifts, the SVC kinks, venous return drops to near zero, and the heart has nothing to pump.</div>
+        </div>
+      </div>
+      <div class="patho-block">
+        <div class="patho-label">Pathophysiology</div>
+        <div class="flow-row">
+          <div class="flow-box">Air Enters Pleural Space (One-Way)</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↑ Intrathoracic Pressure</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Mediastinal Shift Away</div>
+        </div>
+        <div class="flow-row" style="margin-top:0.3rem">
+          <div class="flow-box">SVC Kinking</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↓ Venous Return</div><div class="flow-arrow">→</div>
+          <div class="flow-box">↓ RV Preload → ↓ CO → Shock</div>
+        </div>
+      </div>
+      <div class="card-grid">
+        <div class="card"><div class="card-title">Classic Signs</div><div class="card-body">Absent/decreased unilateral breath sounds · Tracheal deviation (AWAY from tension side, late sign) · JVD · Hypotension · Hypoxia · Tachycardia</div></div>
+        <div class="card"><div class="card-title">Treatment</div><div class="card-body"><strong style="color:var(--teal)">Needle Decompression:</strong> 2nd ICS, MCL (or 4th/5th ICS, MAL). Converts tension PTX → simple PTX. Follow with chest tube in-hospital. Do NOT delay for X-ray — this is a clinical diagnosis!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shock-panel">
+    <div class="shock-panel-header" onclick="togglePanel('pe-panel')">
+      <span class="shock-type-badge badge-obstr">Obstructive</span>
+      <span class="shock-panel-title">Massive Pulmonary Embolism</span>
+      <span class="shock-panel-toggle" id="pe-panel-toggle">▼</span>
+    </div>
+    <div class="shock-panel-body open" id="pe-panel">
+      <div class="analogy-box">
+        <div class="analogy-icon">🚫</div>
+        <div class="analogy-content">
+          <div class="analogy-label">Analogy — The Blocked Exit Ramp</div>
+          <div class="analogy-text">Blood flowing through the right heart is like traffic heading to a highway. A massive PE is like a multi-car crash blocking the on-ramp. The right ventricle keeps pumping against the blockage, pressure builds (acute right heart failure/cor pulmonale), the RV dilates, the interventricular septum shifts left, and the LV starves for preload.</div>
+        </div>
+      </div>
+      <div class="card-grid">
+        <div class="card"><div class="card-title">Risk Factors (Virchow's Triad)</div><div class="card-body">Stasis (long immobilization, post-op) · Endothelial injury (fractures, surgery) · Hypercoagulability (malignancy, OCP, post-COVID). Also: long-bone fractures (fat embolism).</div></div>
+        <div class="card"><div class="card-title">Signs & Symptoms</div><div class="card-body">Sudden dyspnea · Pleuritic chest pain · Tachycardia · Signs of right heart failure (JVD, S3) · Hypoxia · Possible syncope. Massive PE = shock + hypoxia.</div></div>
+        <div class="card"><div class="card-title">Treatment</div><div class="card-body">Supportive O₂, IV access. In-hospital: Fibrinolytic therapy (tPA), surgical or catheter-directed embolectomy for massive PE. Prehospital: supportive care, rapid transport.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 5: DISTRIBUTIVE SHOCK ── -->
+<div class="section" id="distributive">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Type IV</div>
+      <div class="section-title">Distributive Shock</div>
+    </div>
+  </div>
+  <p style="max-width:720px;color:var(--text-dim);margin-bottom:1.5rem">Peripheral vasodilation causes a <strong style="color:var(--text)">decrease in systemic vascular resistance</strong> → the vascular "container" expands faster than the available blood volume can fill. Uniquely presents as <strong style="color:var(--teal)">"warm shock"</strong> — warm, flushed skin from vasodilation (unlike the cold, clammy skin of hypovolemic/cardiogenic shock).</p>
+
+  <!-- NEUROGENIC -->
+  <div class="shock-panel">
+    <div class="shock-panel-header" onclick="togglePanel('neuro-panel')">
+      <span class="shock-type-badge badge-neuro">Neurogenic</span>
+      <span class="shock-panel-title">Neurogenic Shock (Vasogenic)</span>
+      <span class="shock-panel-toggle" id="neuro-panel-toggle">▼</span>
+    </div>
+    <div class="shock-panel-body open" id="neuro-panel">
+      <p style="color:var(--text-dim);margin-bottom:1rem">Disruption of the spinal cord at <strong style="color:var(--text)">T6 and above</strong> interrupts sympathetic pathways → unopposed parasympathetic tone → massive vasodilation + bradycardia. Unique: the only form of shock with <strong style="color:var(--teal)">bradycardia</strong> as a feature (all others cause tachycardia).</p>
+
+      <div class="analogy-box">
+        <div class="analogy-icon">🔌</div>
+        <div class="analogy-content">
+          <div class="analogy-label">Analogy — City-Wide Power Failure</div>
+          <div class="analogy-text">Every traffic signal in a city suddenly goes dark. Normally the sympathetic nervous system acts like traffic control — keeping vessels at an appropriate tone. When the spinal cord is severed, all vessels below the injury lose their "signal" simultaneously, relaxing completely. The container expands dramatically with no compensatory response possible from below the injury level.</div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card"><div class="card-title">Classic Presentation</div><div class="card-body"><span style="color:var(--teal);font-family:var(--mono);font-size:0.85rem">BRADYCARDIA + HYPOTENSION + WARM/FLUSHED SKIN</span><br><br>This triad distinguishes neurogenic from all other shock states. MAP target: <strong>85–90 mmHg</strong> for spinal cord perfusion.</div></div>
+        <div class="card"><div class="card-title">Common Mechanism</div><div class="card-body">High cervical or thoracic spine fracture/dislocation. Also: epidural anesthesia (iatrogenic spinal block), transverse myelitis. Distinguished from spinal shock (flaccid paralysis without hemodynamic instability).</div></div>
+      </div>
+
+      <table class="med-table">
+        <thead><tr><th>Agent</th><th>Dose</th><th>Mechanism</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><span class="med-name">Norepinephrine</span></td><td><span class="dose-chip">0.01–3 mcg/kg/min</span></td><td>Alpha-1 vasoconstriction + mild β₁ inotropy</td><td>First-line vasopressor; monitor lung sounds</td></tr>
+          <tr><td><span class="med-name">Dopamine</span></td><td><span class="dose-chip">5–20 mcg/kg/min</span></td><td>Dose-dependent: DA→β₁→α₁</td><td>Alternative if persistent hypotension</td></tr>
+          <tr><td><span class="med-name">Atropine</span></td><td><span class="dose-chip">0.5–1 mg IV</span></td><td>Blocks vagal bradycardia</td><td>For symptomatic bradycardia component</td></tr>
+          <tr><td><span class="med-name">Crystalloids</span></td><td><span class="dose-chip">Cautious boluses</span></td><td>Volume restoration</td><td>Monitor for pulmonary congestion — avoid overload</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ANAPHYLACTIC -->
+  <div class="shock-panel">
+    <div class="shock-panel-header" onclick="togglePanel('anaph-panel')">
+      <span class="shock-type-badge badge-anaph">Anaphylactic</span>
+      <span class="shock-panel-title">Anaphylactic Shock</span>
+      <span class="shock-panel-toggle" id="anaph-panel-toggle">▼</span>
+    </div>
+    <div class="shock-panel-body open" id="anaph-panel">
+      <p style="color:var(--text-dim);margin-bottom:1rem">The most extreme form of anaphylaxis: IgE-mediated mast cell and basophil degranulation releases <strong style="color:var(--text)">histamine, tryptase, and leukotrienes</strong> → systemic vasodilation + bronchospasm + increased capillary permeability → distributive shock with airway compromise.</p>
+
+      <div class="analogy-box">
+        <div class="analogy-icon">🚨</div>
+        <div class="analogy-content">
+          <div class="analogy-label">Analogy — The Fire Alarm System Gone Haywire</div>
+          <div class="analogy-text">The immune system's "emergency response" (IgE on mast cells) detects what it wrongly identifies as a mortal threat. Like a fire alarm system that activates all sprinklers simultaneously for a small kitchen fire — the immune response is so overwhelming that it causes more damage than the trigger. Every blood vessel opens, capillaries leak, and bronchioles slam shut, all at once.</div>
+        </div>
+      </div>
+
+      <div class="patho-block">
+        <div class="patho-label">Immunologic Cascade</div>
+        <div class="flow-row">
+          <div class="flow-box">Prior Sensitization (IgE on Mast Cells)</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Re-Exposure to Antigen</div><div class="flow-arrow">→</div>
+          <div class="flow-box">IgE Cross-Linking</div>
+        </div>
+        <div class="flow-row" style="margin-top:0.3rem">
+          <div class="flow-box">Mast Cell Degranulation</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Histamine / Tryptase / Leukotrienes</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Vasodilation + ↑ Cap Permeability + Bronchospasm</div>
+        </div>
+      </div>
+
+      <table class="med-table">
+        <thead><tr><th>Agent</th><th>Dose</th><th>Mechanism</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr><td><span class="med-name">Epinephrine 1:1000</span></td><td><span class="dose-chip">0.3–0.5 mg IM (anterolateral thigh)</span></td><td>α₁ reverses vasodilation; β₂ reverses bronchospasm; β₁ ↑ contractility; also inhibits mast cell degranulation</td><td style="color:var(--red);font-weight:700">FIRST LINE — do not delay</td></tr>
+          <tr><td><span class="med-name">Diphenhydramine</span></td><td><span class="dose-chip">25–50 mg IV/IM</span></td><td>H1 antihistamine — blocks histamine receptor. Does NOT reverse shock alone.</td><td>Secondary</td></tr>
+          <tr><td><span class="med-name">Ranitidine/Famotidine</span></td><td><span class="dose-chip">50 mg IV</span></td><td>H2 antihistamine — blocks gastric and vascular H2 receptors</td><td>Secondary (adjunct)</td></tr>
+          <tr><td><span class="med-name">Methylprednisolone</span></td><td><span class="dose-chip">125 mg IV</span></td><td>Anti-inflammatory; prevents biphasic reaction; NOT fast-acting</td><td>Secondary</td></tr>
+          <tr><td><span class="med-name">Albuterol</span></td><td><span class="dose-chip">2.5 mg neb</span></td><td>β₂ agonist → bronchodilation for resistant bronchospasm</td><td>Airway management adjunct</td></tr>
+          <tr><td><span class="med-name">Glucagon</span></td><td><span class="dose-chip">1–2 mg IV over 5 min</span></td><td>Bypasses β-receptor → used when epinephrine fails in patients on beta-blockers</td><td>Special case</td></tr>
+          <tr><td><span class="med-name">Crystalloids</span></td><td><span class="dose-chip">1–2 L IV bolus</span></td><td>Restore intravascular volume lost to vasodilation and capillary leak</td><td>Concurrent with epi</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout danger">
+        <div class="callout-icon">🚨</div>
+        <div class="callout-body"><strong>Airway is King:</strong> Stridor = upper airway edema = imminent total obstruction. Aggressive airway management (RSI, surgical airway) may be required. The window for non-invasive management narrows rapidly — act early.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEPTIC -->
+  <div class="shock-panel">
+    <div class="shock-panel-header" onclick="togglePanel('septic-panel')">
+      <span class="shock-type-badge badge-septic">Septic</span>
+      <span class="shock-panel-title">Septic Shock</span>
+      <span class="shock-panel-toggle" id="septic-panel-toggle">▼</span>
+    </div>
+    <div class="shock-panel-body open" id="septic-panel">
+      <p style="color:var(--text-dim);margin-bottom:1rem">Sepsis = SIRS + known/suspected infection. Septic shock = sepsis + profound circulatory/cellular/metabolic abnormalities refractory to fluid resuscitation. The cytokine storm (IL-1, IL-6, TNF-α) drives endothelial dysfunction, massive vasodilation, and myocardial depression simultaneously.</p>
+
+      <div class="analogy-box">
+        <div class="analogy-icon">🌪️</div>
+        <div class="analogy-content">
+          <div class="analogy-label">Analogy — The Immune System Riot</div>
+          <div class="analogy-text">Normal infection response is like a targeted SWAT team. Septic shock is a full city riot — every branch of the immune system fires simultaneously. Cytokines (IL-1, IL-6, TNF-α) act like inflammatory gasoline: vessels dilate uncontrollably, capillary membranes become like sieves leaking protein-rich fluid, and the heart itself begins to fail from cytokine-mediated myocardial depression — a triple-threat hemodynamic catastrophe.</div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card"><div class="card-title">SIRS Criteria (2 of 4)</div><div class="card-body"><span style="font-family:var(--mono);font-size:0.82rem;color:var(--teal)">TEMP:</span> &gt;38°C or &lt;36°C<br><span style="font-family:var(--mono);font-size:0.82rem;color:var(--teal)">HR:</span> &gt;90 bpm<br><span style="font-family:var(--mono);font-size:0.82rem;color:var(--teal)">RR:</span> &gt;20/min or PaCO₂ &lt;32<br><span style="font-family:var(--mono);font-size:0.82rem;color:var(--teal)">WBC:</span> &gt;12,000 or &lt;4,000</div></div>
+        <div class="card"><div class="card-title">Common Infection Sites</div><div class="card-body">Lungs (pneumonia — most common) · Urinary tract (UTI/pyelonephritis) · GI tract (peritonitis, cholangitis) · Skin/Soft tissue (cellulitis, necrotizing fasciitis) · Catheter-associated infections</div></div>
+        <div class="card"><div class="card-title">qSOFA Screen</div><div class="card-body">Prehospital sepsis tool: ① Altered mental status · ② RR ≥22/min · ③ SBP ≤100 mmHg<br>Score ≥2 → high suspicion for sepsis → early hospital notification for antibiotic initiation</div></div>
+      </div>
+
+      <table class="med-table">
+        <thead><tr><th>Agent</th><th>Dose</th><th>Mechanism</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><span class="med-name">Crystalloids</span></td><td><span class="dose-chip">30 mL/kg IV</span></td><td>First-line volume resuscitation</td><td>Begin immediately; reassess after each bolus</td></tr>
+          <tr><td><span class="med-name">Norepinephrine</span></td><td><span class="dose-chip">0.01–3 mcg/kg/min</span></td><td>α₁ vasoconstriction — first-line vasopressor for septic shock</td><td>Start when MAP &lt;65 despite adequate fluids</td></tr>
+          <tr><td><span class="med-name">Vasopressin</span></td><td><span class="dose-chip">0.03–0.04 units/min</span></td><td>V1 receptor vasoconstriction — adjunct to norepinephrine</td><td>Spares norepinephrine dose; natural hormone depleted in sepsis</td></tr>
+          <tr><td><span class="med-name">Epinephrine</span></td><td><span class="dose-chip">0.01–0.5 mcg/kg/min</span></td><td>α+β agonism</td><td>Third-line vasopressor</td></tr>
+          <tr><td><span class="med-name">Hydrocortisone</span></td><td><span class="dose-chip">200 mg/day IV</span></td><td>Replaces cortisol in relative adrenal insufficiency</td><td>For septic shock unresponsive to vasopressors + fluids</td></tr>
+          <tr><td><span class="med-name">Broad-Spectrum ABX</span></td><td><span class="dose-chip">Within 1 hour of recognition</span></td><td>Treat underlying infection source</td><td>Each hour of delay ↑ mortality ~7%. Source: Surviving Sepsis Campaign.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <div class="callout-icon">⏱️</div>
+        <div class="callout-body"><strong>Time is Tissue:</strong> In septic shock, every hour without antibiotics increases mortality. Prehospital role: early recognition, IV access, fluid initiation, and rapid transport with hospital notification. The Surviving Sepsis Campaign Hour-1 Bundle begins in the ED.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 6: STAGES ── -->
+<div class="section" id="stages">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Progression</div>
+      <div class="section-title">Stages of Shock</div>
+    </div>
+  </div>
+
+  <div class="stage-grid">
+    <div class="stage-card">
+      <div class="stage-name">Compensated</div>
+      <div style="font-family:var(--mono);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.5rem">EARLY · REVERSIBLE</div>
+      <div class="stage-detail">Body maintains near-normal BP through catecholamine release (↑ HR, vasoconstriction, ↑ contractility). Catecholamines also stimulate gluconeogenesis. <strong style="color:var(--text)">Skin: pale, cool, diaphoretic.</strong> CO₂ rises slightly (from hyperventilation compensation). SpO₂ may still be maintained.</div>
+    </div>
+    <div class="stage-card">
+      <div class="stage-name">Uncompensated</div>
+      <div style="font-family:var(--mono);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.5rem">PROGRESSIVE · TREATABLE</div>
+      <div class="stage-detail">Compensatory mechanisms overwhelmed. <strong style="color:var(--text)">SBP drops</strong> (diastolic may rise first due to vasoconstriction, causing narrow pulse pressure). Anaerobic metabolism, lactic acidosis. Ischemia threatens myocardium — cardiodepressant substances released from ischemic pancreas worsen contractility. AMS, oliguria.</div>
+    </div>
+    <div class="stage-card">
+      <div class="stage-name">Irreversible</div>
+      <div style="font-family:var(--mono);font-size:0.7rem;color:var(--text-muted);margin-bottom:0.5rem">TERMINAL · FATAL</div>
+      <div class="stage-detail">Cellular ischemia and necrosis. Membrane pump failure → cells swell and die. DIC. MODS (multi-organ dysfunction syndrome). Even with return to normal perfusion, <strong style="color:var(--text)">patients do not survive</strong> — organelle breakdown is irreversible. Death inevitable.</div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-icon">👶</div>
+    <div class="callout-body"><strong>Age Matters:</strong> Children compensate very well for longer periods than adults (strong cardiovascular reserve), then decompensate suddenly and catastrophically. Older adults compensate poorly from the start (reduced cardiac reserve, comorbidities). Beta-blockers can mask tachycardic compensation — always review medications!</div>
+  </div>
+</div>
+
+<!-- ── SECTION 7: ASSESSMENT ── -->
+<div class="section" id="assessment">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Clinical Practice</div>
+      <div class="section-title">Assessment of Shock</div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">🩸 Control Exsanguination FIRST</div>
+      <div class="card-body">In trauma, identify and control life-threatening external hemorrhage before the airway. Use direct pressure, wound packing, or tourniquet for extremity wounds. This precedes the traditional ABCDE sequence.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">💨 Airway & Breathing</div>
+      <div class="card-body">Confirm airway patency. Respiratory pattern reflects adequacy of ventilation and offers clues to shock etiology (e.g., Kussmaul breathing = metabolic acidosis).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">💓 Circulation Assessment</div>
+      <div class="card-body">Rate, character, and location of pulses. Narrow pulse pressure = impending uncompensated shock. Skin: color, moisture, temperature, and capillary refill (most useful in pediatrics).</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🧠 Disability (Neuro)</div>
+      <div class="card-body">LOC assessment = indirect cerebral perfusion indicator. Restlessness and agitation are early signs of cerebral ischemia. AVPU or GCS serially.</div>
+    </div>
+  </div>
+
+  <h4 style="font-family:var(--mono);font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:2rem 0 1rem">Differential Shock Assessment</h4>
+  <table class="med-table">
+    <thead><tr><th>Type</th><th>Skin</th><th>HR</th><th>JVD</th><th>Lung Sounds</th><th>Key Clue</th></tr></thead>
+    <tbody>
+      <tr><td style="color:#5dade2">Hypovolemic</td><td>Cool, pale, diaphoretic</td><td>↑↑</td><td>Flat</td><td>Clear</td><td>Trauma/bleeding history</td></tr>
+      <tr><td style="color:#e74c3c">Cardiogenic</td><td>Cool, pale, diaphoretic</td><td>↑ (or ↓ if block)</td><td>Present (↑)</td><td>Crackles/Rales</td><td>Chest pain, MI history</td></tr>
+      <tr><td style="color:#9b59b6">Obstructive</td><td>Cool, pale, diaphoretic</td><td>↑↑</td><td>Present (↑)</td><td>Absent unilateral / muffled</td><td>Trauma, PE risk factors</td></tr>
+      <tr><td style="color:#1abc9c">Neurogenic</td><td>Warm, flushed, dry</td><td>↓ (bradycardia)</td><td>Flat</td><td>Clear</td><td>Spinal cord injury T6+</td></tr>
+      <tr><td style="color:#f39c12">Anaphylactic</td><td>Warm, flushed, urticaria</td><td>↑↑</td><td>Flat</td><td>Wheezing</td><td>Allergen exposure</td></tr>
+      <tr><td style="color:#e74c3c">Septic</td><td>Early: warm/flushed; Late: cool</td><td>↑↑</td><td>Flat</td><td>Variable</td><td>Fever, infection source</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── SECTION 8: FLUIDS ── -->
+<div class="section" id="fluids">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Resuscitation Science</div>
+      <div class="section-title">Fluid Management</div>
+    </div>
+  </div>
+
+  <div class="formula-box">Flow ∝ r⁴/L &nbsp;|&nbsp; Short + Large Bore = Maximum Flow Rate</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">Isotonic Crystalloids</div>
+      <div class="card-body"><strong style="color:var(--teal)">Normal Saline (0.9%):</strong> 154 mEq/L Na⁺. No buffering. Can cause hyperchloremic metabolic acidosis in large volumes.<br><br><strong style="color:var(--teal)">Lactated Ringer's:</strong> Balanced; lactate buffered by liver → combats acidosis. One-third remains intravascular after 1 hour. More physiologic choice for hemorrhagic shock.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Colloids</div>
+      <div class="card-body">Large protein molecules create oncotic pressure → stay intravascular longer. Albumin (natural), Hetastarch/Hespan (synthetic).<br><br>Synthetics: expensive, risk of allergic reaction, antiplatelet effects, may prolong bleeding time. Less commonly used prehospital.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Blood Products</div>
+      <div class="card-body">pRBCs restore O₂-carrying capacity. Fresh Frozen Plasma (FFP) replaces clotting factors. Balanced ratio (1:1:1 pRBC:FFP:Platelets) for massive transfusion.<br><br>Type and cross-match when possible. Plasma can be given without ABO compatibility concern.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">IV Access Strategy</div>
+      <div class="card-body">Poiseuille's Law: flow ∝ r⁴/length. Use <strong style="color:var(--teal)">short, large-bore catheters</strong> (16-18g preferred). Pressure bags at 300 mmHg maximize rate. Intraosseous (IO) access delivers equivalent flow when IV not obtainable.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 9: MANAGEMENT ── -->
+<div class="section" id="management">
+  <div class="section-header">
+    <div class="section-num">09</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Prehospital</div>
+      <div class="section-title">Shock Management Principles</div>
+    </div>
+  </div>
+
+  <div class="callout success">
+    <div class="callout-icon">🎯</div>
+    <div class="callout-body"><strong>Universal Shock Management Goals:</strong> Control bleeding → Airway + O₂ → Identify and treat cause → IV access → Fluid/blood as indicated → Maintain normothermia → Rapid transport with ALS notification</div>
+  </div>
+
+  <table class="med-table">
+    <thead><tr><th>Condition</th><th>MAP Target</th><th>First-Line Treatment</th><th>Key Drug</th></tr></thead>
+    <tbody>
+      <tr><td>Hypovolemic (Hemorrhagic)</td><td>50–65 mmHg (permissive)</td><td>Hemorrhage control + blood/crystalloids</td><td>TXA + pRBCs</td></tr>
+      <tr><td>Hypovolemic (Non-hemorrhagic)</td><td>≥65 mmHg</td><td>30 mL/kg crystalloid bolus (up to 3×)</td><td>Lactated Ringer's / NS</td></tr>
+      <tr><td>Cardiogenic</td><td>≥65 mmHg</td><td>Treat underlying cause; cautious fluids</td><td>Norepinephrine + Dobutamine</td></tr>
+      <tr><td>Tension PTX</td><td>ASAP</td><td>Needle decompression 2nd ICS MCL</td><td>None (procedural)</td></tr>
+      <tr><td>Tamponade</td><td>ASAP</td><td>Fluid to maintain preload; rapid transport</td><td>Crystalloids (bridge)</td></tr>
+      <tr><td>Neurogenic</td><td>85–90 mmHg (SCI)</td><td>Cautious fluids + vasopressors</td><td>Norepinephrine + Atropine</td></tr>
+      <tr><td>Anaphylactic</td><td>Restore perfusion</td><td>Epinephrine IM FIRST + airway management</td><td>Epi 1:1000 IM</td></tr>
+      <tr><td>Septic</td><td>≥65 mmHg</td><td>30 mL/kg crystalloid + hospital notification</td><td>Norepinephrine + ABX</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── KNOWLEDGE ASSESSMENT ── -->
+<div class="assessment-section" id="knowledge-assessment">
+  <div class="section-header">
+    <div class="section-num">📝</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Knowledge Assessment</div>
+      <div class="section-title">100-Question Exam</div>
+    </div>
+  </div>
+
+  <!-- STUDENT INFO FORM -->
+  <div id="student-form-wrapper">
+    <div class="student-form">
+      <h3>Student Information</h3>
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" id="student-name" type="text" placeholder="Last, First MI">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Student ID</label>
+        <input class="form-input" id="student-id" type="text" placeholder="e.g., EMS-2026-001">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input class="form-input" id="exam-date" type="date">
+      </div>
+      <button class="start-btn" onclick="startExam()">▶ BEGIN ASSESSMENT</button>
+    </div>
+  </div>
+
+  <!-- QUIZ AREA -->
+  <div id="quiz-container">
+    <div class="quiz-progress-bar-wrap">
+      <div class="quiz-progress-info">
+        <span class="quiz-progress-label">Chapter 34 · Shock Assessment</span>
+        <span class="quiz-progress-count" id="progress-text">Question 1 of 100</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:1%"></div></div>
+    </div>
+    <div class="quiz-body" id="quiz-body"></div>
+    <button class="submit-quiz-btn" id="submit-btn" onclick="submitExam()" style="display:none">
+      ✔ SUBMIT ASSESSMENT
+    </button>
+  </div>
+
+  <!-- RESULTS AREA -->
+  <div id="results-container">
+    <div class="results-card">
+      <div style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.3rem">CAMP EMS Program · Chapter 34 · Shock</div>
+      <div class="results-score" id="result-score"></div>
+      <div class="results-grade" id="result-grade"></div>
+      <div class="results-label" id="result-label"></div>
+      <div class="results-breakdown">
+        <div class="result-stat"><div class="result-stat-val" id="res-correct">—</div><div class="result-stat-lbl">Correct</div></div>
+        <div class="result-stat"><div class="result-stat-val" id="res-incorrect">—</div><div class="result-stat-lbl">Incorrect</div></div>
+        <div class="result-stat"><div class="result-stat-val" id="res-pct">—</div><div class="result-stat-lbl">Percentage</div></div>
+      </div>
+      <div>
+        <button class="download-btn" onclick="downloadPDF()">⬇ Download PDF Report</button>
+        <button class="review-btn" onclick="reviewAnswers()">🔍 Review Answers</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// QUESTION BANK — 100 Questions
+// ═══════════════════════════════════════════════
+const questions = [
+// ── BASIC PHYSIOLOGY (1-10)
+{q:"Shock is most accurately defined as:",o:["Low systolic blood pressure below 90 mmHg","Inadequate tissue perfusion resulting in cellular hypoxia","Heart rate greater than 120 bpm","Decreased cardiac output below 3 L/min"],a:1,e:"Shock is cellular hypoxia — the failure to deliver adequate oxygen to tissues. Blood pressure may be maintained in early (compensated) shock."},
+{q:"Mean arterial pressure (MAP) is calculated as:",o:["Systolic BP ÷ 2","Heart rate × stroke volume","Cardiac output × systemic vascular resistance","(Systolic + Diastolic) ÷ 2"],a:2,e:"MAP = CO × SVR. This formula connects the pump (CO) and the pipes (SVR) to determine perfusion pressure."},
+{q:"Normal ejection fraction range is:",o:["20–40%","30–50%","50–70%","70–90%"],a:2,e:"Normal EF is 50–70%. Borderline is 41–49%. Below 40% indicates significant ventricular dysfunction."},
+{q:"Cardiac output is calculated as:",o:["HR × systemic vascular resistance","Heart rate × stroke volume","MAP × preload","Stroke volume ÷ heart rate"],a:1,e:"CO = HR × SV. Normal CO is 4–8 L/min. Any factor reducing HR or SV will reduce CO."},
+{q:"Preload is defined as:",o:["Resistance the heart pumps against","Total systemic vascular resistance","Ventricular volume at end of diastole","Mean arterial pressure during systole"],a:2,e:"Preload = ventricular filling (end-diastolic volume). It reflects venous return — more preload = more stretch = more force (Frank-Starling mechanism)."},
+{q:"Afterload refers to:",o:["Venous return to the right heart","Amount of blood ejected per beat","Total resistance against which blood must be pumped","Myocardial oxygen consumption"],a:2,e:"Afterload (SVR) is the force the ventricle must overcome to eject blood. Arterioles are the primary regulators — they can change diameter fivefold."},
+{q:"Which vessels are the primary regulators of blood flow resistance?",o:["Capillaries","Arterioles","Venules","Aorta"],a:1,e:"Arterioles have the most smooth muscle and can dilate or constrict dramatically, making them the dominant regulator of blood flow distribution."},
+{q:"Anaerobic metabolism results in accumulation of:",o:["Bicarbonate","Pyruvate","Lactic acid causing metabolic acidosis","Oxygen free radicals only"],a:2,e:"Without O₂, cells switch to anaerobic glycolysis → produces ATP inefficiently + lactic acid → metabolic acidosis."},
+{q:"The 'container model' of shock states that if the vascular container dilates beyond available fluid volume, the result is:",o:["Absolute hypovolemia","Relative hypovolemia","Absolute hypervolemia","Cardiogenic failure"],a:1,e:"Relative hypovolemia occurs when the vascular compartment expands (vasodilation) beyond the blood volume — seen in distributive shock. The fluid hasn't been lost, but the container is now too large."},
+{q:"Disseminated intravascular coagulation (DIC) in shock occurs when:",o:["Clotting factors are diluted by IV fluids","Blood begins to coagulate in the microcirculation from prolonged hypoxia","Platelets are destroyed by medications","The liver fails to produce clotting factors"],a:1,e:"Prolonged microcirculatory failure → stasis → microthrombi form throughout the circulation (DIC) → simultaneous clotting and bleeding."},
+// ── HYPOVOLEMIC SHOCK (11-25)
+{q:"The most common cause of hypovolemic shock is:",o:["Severe vomiting","Burns covering >30% BSA","Hemorrhage","Diarrhea with dehydration"],a:2,e:"Hemorrhage is the most common cause. Dehydration is the next most common non-hemorrhagic cause."},
+{q:"Class I hemorrhagic shock involves blood loss of less than:",o:["500 mL","750 mL","1,000 mL","1,500 mL"],a:1,e:"Class I: <750 mL (<15% of blood volume). Compensatory mechanisms handle this effectively — HR may be normal or slightly elevated."},
+{q:"Class III hemorrhagic shock typically presents with which BP finding?",o:["Normal BP, normal pulse pressure","Elevated BP, wide pulse pressure","Decreased systolic BP, tachycardia","Bradycardia and hypertension"],a:2,e:"Class III (30–40% blood loss / 1500–2000 mL): SBP drops, HR 120–140. Body can no longer fully compensate."},
+{q:"'Third-space' fluid loss occurs when:",o:["Fluid is lost through urine production","Fluid escapes through the respiratory tract","Fluid is sequestered into a non-functional compartment such as peritonitis","Fluid moves from intracellular to extracellular space"],a:2,e:"Third-space loss: fluid shifts into a compartment where it cannot contribute to circulating volume (e.g., bowel obstruction, peritonitis, burns, ascites)."},
+{q:"The initial fluid bolus recommended for non-traumatic hypovolemic shock is:",o:["250 mL NS","500 mL NS","30 mL/kg crystalloid","2 L crystalloid regardless of weight"],a:2,e:"30 mL/kg crystalloid is the starting bolus — can be repeated up to three times if indicated based on clinical response."},
+{q:"Permissive hypotension in penetrating hemorrhagic trauma targets a MAP of approximately:",o:["40–50 mmHg","50–65 mmHg","70–80 mmHg","90–100 mmHg"],a:1,e:"Permissive hypotension targets MAP 50–65 mmHg (SBP ~80–90) until surgical hemorrhage control. Overcorrecting BP before control is achieved worsens coagulopathy and dislodges clots."},
+{q:"Tranexamic acid (TXA) works by:",o:["Increasing thrombin production","Directly stimulating platelet aggregation","Inhibiting fibrinolysis to prevent clot breakdown","Replacing lost clotting factors"],a:2,e:"TXA is an antifibrinolytic — it blocks plasminogen activation, preventing lysis of formed clots. Most effective within 3 hours of injury."},
+{q:"Narrow pulse pressure in shock indicates:",o:["Vasodilation","Bradycardia","Impending decompensation with loss of vascular tone","Compensatory vasoconstriction with falling stroke volume"],a:3,e:"Narrow pulse pressure = (SBP - DBP) <25 mmHg. DBP rises (vasoconstriction) while SBP drops (falling CO) — a critical early sign of uncompensated hypovolemic shock."},
+{q:"For a trauma patient with suspected internal hemorrhage, the highest prehospital priority is:",o:["Two large-bore IVs and 2L bolus","Establishing a definitive airway","Rapid transport to definitive surgical care","Serial blood pressure monitoring q5 minutes"],a:2,e:"Internal bleeding can only be controlled surgically. Scene time should be minimized. IV access is established en route."},
+{q:"Lactated Ringer's solution is preferred over normal saline in hemorrhagic shock primarily because:",o:["It contains dextrose for energy","It has a higher osmolarity","Lactate is metabolized to buffer acidosis and it is more physiologically balanced","It stays in the vascular space longer"],a:2,e:"LR contains 28 mEq lactate → metabolized by the liver to bicarbonate → buffers the metabolic acidosis of hemorrhagic shock. NS can worsen acidosis in large volumes (hyperchloremic metabolic acidosis)."},
+{q:"The 'lethal triad' in hemorrhagic shock consists of:",o:["Hypotension, tachycardia, and coagulopathy","Hypothermia, acidosis, and coagulopathy","Hypoxia, hypercarbia, and acidosis","Hypotension, hypoxia, and hypothermia"],a:1,e:"The lethal triad: hypothermia + metabolic acidosis + coagulopathy. Each worsens the others in a vicious cycle. Damage control resuscitation targets all three."},
+{q:"Non-hemorrhagic hypovolemic shock can be caused by all of the following EXCEPT:",o:["Severe diarrhea","Major burns","Peritonitis","Cardiac tamponade"],a:3,e:"Cardiac tamponade causes obstructive shock, not hypovolemic shock. Burns, GI losses, and peritonitis (third-spacing) all cause hypovolemic shock."},
+{q:"Glucose-containing IV solutions (D5W) are NOT ideal for shock resuscitation because:",o:["They contain too much potassium","Glucose rapidly leaves the intravascular compartment, increasing free water without sustained volume expansion","They are too hypotonic for vascular use","They cause hypernatremia"],a:1,e:"D5W is essentially free water once glucose is metabolized. It provides no sustained intravascular volume support and can dilute serum electrolytes."},
+{q:"Flow rate through an IV catheter is MOST improved by:",o:["Using a longer catheter","Decreasing catheter diameter","Using a short, large-bore catheter","Lowering the IV bag height"],a:2,e:"Poiseuille's Law: Flow ∝ r⁴/length. A short, fat catheter dramatically outperforms a long, thin one. A 14g short catheter flows more than a long central line."},
+{q:"Which blood product can be transfused without concern for ABO compatibility?",o:["Packed red blood cells","Platelets","Fresh frozen plasma","Cryoprecipitate"],a:2,e:"Fresh frozen plasma contains clotting factors without red blood cells, so ABO compatibility is less critical (though preferred). pRBCs require type-matched or type-O negative blood."},
+// ── CARDIOGENIC SHOCK (26-40)
+{q:"The most common cause of cardiogenic shock is:",o:["Cardiac tamponade","Severe aortic stenosis","Acute myocardial infarction","Dilated cardiomyopathy"],a:2,e:"Acute MI causes cardiogenic shock through direct myocardial destruction, reducing contractility and CO. It accounts for the majority of cardiogenic shock cases."},
+{q:"Cardiogenic shock is defined as severe compromise in cardiac output:",o:["Due to loss of circulating blood volume","Despite adequate circulating blood volume","Caused by pericardial compression","Due to vasodilation reducing SVR"],a:1,e:"Cardiogenic shock = pump failure with adequate volume. The tank is full, but the pump cannot move the fluid forward effectively."},
+{q:"In cardiogenic shock, jugular venous distension (JVD) occurs because:",o:["The patient is dehydrated","Blood backs up in the venous system due to poor forward flow","Vasodilation increases venous pressure","Fluid overload from aggressive resuscitation"],a:1,e:"LV failure → blood backs up through pulmonary circulation → ↑ right atrial pressure → JVD. This also causes pulmonary edema."},
+{q:"Pulmonary edema in cardiogenic shock results from:",o:["Distributive vasodilation increasing capillary permeability","Left ventricular failure causing backup pressure into the pulmonary circulation","Right heart failure causing systemic venous backup only","Decreased oncotic pressure from protein loss"],a:1,e:"LV fails → LVEDP rises → pulmonary capillary wedge pressure rises → hydrostatic pressure forces fluid into lung parenchyma = pulmonary edema."},
+{q:"Why is fluid administration cautious in cardiogenic shock?",o:["Fluids can cause hypernatremia","Fluids can worsen pulmonary edema by increasing preload on a failing heart","Fluids dilute vasopressors","Fluids increase afterload"],a:1,e:"Adding volume to a failing pump that already has elevated filling pressures can worsen pulmonary edema. Use small, monitored boluses (250 mL) and reassess lung sounds each time."},
+{q:"The hemodynamic profile of cardiogenic shock is BEST described as:",o:["High CO, low SVR, low preload","Low CO, low SVR, low preload","Low CO, high SVR, high preload","High CO, high SVR, high preload"],a:2,e:"Classic cardiogenic shock: ↓ CO (pump failure) + reflex ↑ SVR (vasoconstriction to maintain BP) + ↑ preload (backup). The vicious cycle: ↑ SVR → ↑ afterload → worsens failing LV."},
+{q:"Dobutamine is used in cardiogenic shock primarily because it:",o:["Causes powerful vasoconstriction","Increases contractility via β₁ stimulation without major increase in afterload","Decreases heart rate","Replaces dopamine in all cardiogenic cases"],a:1,e:"Dobutamine is a β₁ inotrope → ↑ contractility → ↑ CO. Its mild β₂ vasodilation prevents the excessive afterload increase seen with pure vasopressors — useful when BP is maintained but CO is inadequate."},
+{q:"Which ECG finding is most consistent with cardiogenic shock from STEMI?",o:["Normal sinus rhythm","ST elevation in a coronary distribution or new LBBB","Peaked T waves","Prolonged PR interval only"],a:1,e:"Cardiogenic shock from STEMI: ST elevation (or new LBBB equivalent) in the territory of the occluded coronary artery. New LBBB with symptoms = STEMI equivalent."},
+{q:"Aortic dissection can cause cardiogenic shock through which mechanism?",o:["Increasing systemic vascular resistance","Acute aortic regurgitation causing left ventricular volume overload","Blocking the descending aorta","Causing tension pneumothorax"],a:1,e:"Type A aortic dissection can involve the aortic root → acute severe aortic regurgitation → massive LV volume overload → cardiogenic shock. Also can cause tamponade."},
+{q:"Third-degree (complete) heart block causes cardiogenic shock by:",o:["Causing irreversible myocardial damage","Reducing heart rate to 20–40 bpm → insufficient cardiac output","Blocking epinephrine receptors","Causing ventricular hypertrophy"],a:1,e:"In complete heart block, ventricles pace themselves at an idioventricular rate (20–40 bpm). CO = HR × SV; if HR drops severely, CO falls regardless of SV."},
+{q:"A myocardial contusion causing cardiogenic shock would most likely follow:",o:["Staphylococcal bacteremia","Bee sting allergy reaction","Blunt chest trauma (steering wheel impact)","Penetrating abdominal wound"],a:2,e:"Myocardial contusion results from blunt chest trauma — the RV (right ventricle, most anterior) is most commonly injured. Can cause dysrhythmias, wall motion abnormalities, and cardiogenic shock."},
+{q:"The first-line vasopressor for cardiogenic shock is:",o:["Vasopressin","Epinephrine","Norepinephrine","Phenylephrine"],a:2,e:"Norepinephrine is first-line for cardiogenic shock: α₁ vasoconstriction raises MAP, mild β₁ maintains HR/contractility, and it supports coronary perfusion pressure better than pure vasoconstrictors."},
+{q:"Amiodarone would be indicated in cardiogenic shock caused by:",o:["Acute MI with STEMIs","Dysrhythmias such as sustained VT or atrial fibrillation with rapid ventricular response","Cardiac tamponade","Severe aortic stenosis"],a:1,e:"When a dysrhythmia (VT, VF, AF with RVR) is the primary cause of cardiogenic shock, antidysrhythmic therapy (amiodarone 150 mg IV over 10 min) targets the underlying cause."},
+{q:"In cardiogenic shock, cool and clammy skin occurs due to:",o:["Excessive fluid administration","Vasodilation from cardiac mediators","Compensatory sympathetic vasoconstriction shunting blood to vital organs","Fever from myocardial injury"],a:2,e:"The sympathetic response to ↓ CO → peripheral vasoconstriction → skin becomes cool, pale, and diaphoretic as blood is redirected to core organs."},
+{q:"An ejection fraction of 35% indicates:",o:["Normal cardiac function","Borderline cardiac function","Reduced ejection fraction — significant systolic dysfunction","Hyperdynamic cardiac state"],a:2,e:"EF <40% = reduced EF / HFrEF (heart failure with reduced ejection fraction). This level of dysfunction can cause cardiogenic shock, especially under stress (e.g., acute MI)."},
+// ── OBSTRUCTIVE SHOCK (41-55)
+{q:"Obstructive shock is defined as inability to produce adequate cardiac output despite:",o:["Adequate intravascular volume only","Normal intravascular volume AND normal myocardial function","Treatment with vasopressors","Fluid resuscitation of 30 mL/kg"],a:1,e:"The distinguishing feature: both the pump AND the tank are functional — a mechanical obstruction is blocking flow. Fix the obstruction, fix the shock."},
+{q:"Beck's Triad for cardiac tamponade consists of:",o:["Fever, tachycardia, and elevated WBC","Hypotension, jugular venous distension, and muffled heart sounds","Hypotension, tracheal deviation, and absent breath sounds","Stridor, urticaria, and bronchospasm"],a:1,e:"Beck's Triad: (1) Hypotension from ↓ CO, (2) JVD from elevated right heart pressure, (3) Muffled heart sounds from fluid surrounding the heart."},
+{q:"Pulsus paradoxus is defined as:",o:["BP dropping >10 mmHg upon standing","SBP dropping >10 mmHg during normal inspiration","HR increasing >20 bpm with exercise","BP varying more than 10 mmHg between arms"],a:1,e:"Pulsus paradoxus: during inspiration, venous return increases → RV fills more → IV septum shifts left → LV fills less → SBP drops. Exaggerated (>10 mmHg) in tamponade."},
+{q:"Tension pneumothorax causes obstructive shock primarily by:",o:["Directly compressing the myocardium","Obstructing venous return to the right heart via mediastinal shift","Causing pericardial tamponade","Releasing vasodilatory mediators"],a:1,e:"Air fills the pleural space under pressure → pushes mediastinum toward opposite side → kinks the SVC → severely reduces venous return → ↓ preload → ↓ CO → shock."},
+{q:"The correct needle decompression site for tension pneumothorax is:",o:["3rd intercostal space, midaxillary line","5th intercostal space, midclavicular line","2nd intercostal space, midclavicular line","4th intercostal space, parasternal"],a:2,e:"2nd ICS, MCL (midclavicular line) — or 4th/5th ICS MAL (midaxillary) as an alternative. Insert needle ABOVE the rib (avoids neurovascular bundle at inferior margin)."},
+{q:"Pulmonary embolism causes obstructive shock by:",o:["Decreasing systemic vascular resistance","Obstructing right ventricular outflow, increasing RV afterload","Directly injuring myocardial tissue","Causing left ventricular hypertrophy"],a:1,e:"Massive PE: large clot in main pulmonary artery → RV pumps against obstruction → acute RV failure → ↓ LV preload (insufficient blood crosses lungs) → ↓ CO → shock."},
+{q:"Risk factors for pulmonary embolism include:",o:["Hyponatremia and low albumin","Long bone fracture, recent surgery, prolonged immobilization, post-COVID status","History of anaphylaxis","Spinal cord injury at C5"],a:1,e:"Classic PE risk factors correspond to Virchow's Triad: stasis, endothelial injury, hypercoagulability. Post-COVID has emerged as a significant thrombotic risk factor."},
+{q:"Pericardial tamponade directly impairs:",o:["Ventricular systole (squeezing blood out)","Right ventricular diastolic filling","Pulmonary valve function","Coronary artery perfusion only"],a:1,e:"Pericardial fluid compresses the right ventricle during diastole — preventing it from filling. No fill → no output → obstructive shock."},
+{q:"Emergency field management of suspected cardiac tamponade focuses on:",o:["Immediate needle decompression at 2nd ICS","Epinephrine IM for hemodynamic support","Aggressive fluid administration to maintain preload and rapid transport","Applying a tourniquet proximally"],a:2,e:"Fluids 'buy time' by maintaining the filling pressure against the compressing pericardium. Definitive treatment is pericardiocentesis or surgical drainage — requires hospital."},
+{q:"Which physical exam finding best distinguishes tension pneumothorax from cardiac tamponade?",o:["Jugular venous distension (present in both)","Hypotension (present in both)","Absent/decreased unilateral breath sounds (tension) vs. muffled heart sounds (tamponade)","Tachycardia (present in both)"],a:2,e:"Both cause JVD, hypotension, and tachycardia. The key differentiator: tension PTX has absent unilateral breath sounds + tracheal deviation; tamponade has muffled heart sounds."},
+{q:"Tracheal deviation in tension pneumothorax occurs:",o:["Immediately at onset","Toward the affected side","Away from the affected side (LATE sign)","Only in spontaneously breathing patients"],a:2,e:"Tracheal deviation away from the tension side is a late sign — don't wait for it! Clinical diagnosis (absent sounds + JVD + hypotension + mechanism) warrants immediate decompression."},
+{q:"Massive pulmonary embolism is treated definitively in-hospital with:",o:["Needle decompression","Pericardiocentesis","Fibrinolytic therapy (tPA) or surgical/catheter embolectomy","IV steroids and diphenhydramine"],a:2,e:"Massive PE with shock: systemic thrombolytics (tPA), catheter-directed therapy, or surgical embolectomy. Prehospital: supportive O₂, IV, and rapid transport."},
+{q:"The D-dimer laboratory test is most useful for:",o:["Diagnosing septic shock","Ruling out pulmonary embolism in low-probability patients","Confirming cardiogenic shock","Measuring lactate levels"],a:1,e:"D-dimer is a fibrin degradation product elevated in thrombotic states. Negative D-dimer (in low-pretest probability) effectively rules out PE. Positive D-dimer is non-specific."},
+{q:"Which of the following is NOT a cause of obstructive shock?",o:["Tension pneumothorax","Cardiac tamponade","Massive pulmonary embolism","Severe septicemia"],a:3,e:"Severe septicemia causes distributive (septic) shock from vasodilation. Obstructive shock is caused by mechanical obstruction to flow: tamponade, tension PTX, and massive PE."},
+{q:"In obstructive shock from tension pneumothorax, what happens to cardiac preload?",o:["Preload dramatically increases","Preload is unaffected","Preload falls dramatically from obstructed venous return","Preload falls due to vasodilation"],a:2,e:"SVC kinking from mediastinal shift → venous return is severely obstructed → RV preload drops → CO collapses. This is why JVD appears (blood backed up upstream from the obstruction)."},
+// ── NEUROGENIC SHOCK (56-65)
+{q:"Neurogenic shock results from:",o:["Absolute blood volume loss from spinal cord bleeding","Unopposed parasympathetic tone following sympathetic pathway disruption at mid-thoracic level or above","Massive histamine release from spinal injury","Cardiogenic failure from cervical spine compression"],a:1,e:"The spinal cord carries sympathetic preganglionic fibers. Cord disruption above T6 → total loss of sympathetic outflow below the injury → vasodilation + bradycardia."},
+{q:"The spinal cord injury level most likely to produce neurogenic shock is:",o:["Lumbar (L1–L5)","Sacral (S1–S4)","At or above midthoracic (T6 and above)","Cervical injury only (C1–C2)"],a:2,e:"Sympathetic preganglionic neurons exit T1–L2. Injury at T6 and above disrupts enough sympathetic outflow to cause clinically significant neurogenic shock."},
+{q:"The hallmark that distinguishes neurogenic shock from all other shock types is:",o:["Hypotension","Tachycardia with narrow pulse pressure","Bradycardia with warm, flushed skin","Diaphoresis and pallor"],a:2,e:"Neurogenic shock: BRADYCARDIA + HYPOTENSION + WARM/DRY/FLUSHED SKIN. All other shock types cause tachycardia as compensation. Loss of sympathetic drive removes both vasoconstriction AND cardiac acceleration."},
+{q:"Why must fluid administration be cautious in neurogenic shock?",o:["Fluids worsen neurological injury","Over-resuscitation can cause pulmonary congestion since the heart is healthy","Fluids cause cerebral vasodilation","Crystalloids worsen vasodilation"],a:1,e:"The heart and lungs are functional in neurogenic shock. Adding too much volume to healthy lungs + heart can cause pulmonary edema — monitor closely for rales during resuscitation."},
+{q:"The MAP target for a patient in neurogenic shock with spinal cord injury is:",o:["50–60 mmHg","65–70 mmHg","85–90 mmHg","100–110 mmHg"],a:2,e:"85–90 mmHg MAP target for spinal cord injury — higher than other shock states because the injured spinal cord requires elevated perfusion pressure to prevent secondary ischemic injury."},
+{q:"Neurogenic shock is correctly classified as:",o:["Obstructive shock","Hypovolemic shock","Distributive shock","Cardiogenic shock"],a:2,e:"Neurogenic shock is distributive — the primary mechanism is vasodilation (↓ SVR) due to loss of sympathetic tone. The volume is there, but the 'container' has massively expanded."},
+{q:"First-line vasopressor for neurogenic shock is:",o:["Epinephrine 1:1000 IM","Vasopressin","Norepinephrine infusion","Dopamine only"],a:2,e:"Norepinephrine: potent α₁ vasoconstriction to counteract vasodilation + mild β₁ inotropy to support CO against bradycardia. First choice per most current protocols."},
+{q:"Atropine may be added to neurogenic shock management for:",o:["Vasodilation management","Symptomatic bradycardia component","Reducing bronchospasm","Treating anaphylaxis simultaneously"],a:1,e:"Atropine blocks vagal (parasympathetic) tone on the SA node → increases HR. Useful when the bradycardia component of neurogenic shock is hemodynamically significant."},
+{q:"Neurogenic shock is also referred to as:",o:["Anaphylactoid shock","Vasogenic shock","Septic shock subtype","Relative cardiac failure"],a:1,e:"Neurogenic shock = vasogenic shock. Both names refer to the same phenomenon: shock caused by loss of vascular tone from neurological disruption."},
+{q:"Which scenario is MOST likely to produce neurogenic shock?",o:["Bilateral femur fractures with 2L blood loss","Cervical spine fracture at C4 with complete motor/sensory loss","Massive PE in a post-surgical patient","Burns covering 40% BSA"],a:1,e:"Complete cervical cord injury at C4: total loss of sympathetic outflow → neurogenic shock. Bilateral femur fractures cause hypovolemic shock; PE causes obstructive shock; burns cause hypovolemic shock."},
+// ── ANAPHYLACTIC SHOCK (66-75)
+{q:"The FIRST and MOST important treatment for anaphylactic shock is:",o:["Diphenhydramine 50 mg IV","Methylprednisolone 125 mg IV","Epinephrine 0.3–0.5 mg IM (1:1000) in the anterolateral thigh","IV crystalloid 1 L bolus"],a:2,e:"Epinephrine IM is the only intervention that addresses all components of anaphylaxis simultaneously: reverses vasodilation (α₁), opens airways (β₂), improves contractility (β₁), and inhibits further mast cell degranulation."},
+{q:"In anaphylaxis, the primary immunoglobulin responsible for mast cell activation is:",o:["IgA","IgG","IgM","IgE"],a:3,e:"IgE (immunoglobulin E) is produced after initial sensitization and binds to mast cells. Re-exposure to the antigen cross-links IgE → mast cell degranulation → anaphylaxis."},
+{q:"Histamine release in anaphylaxis causes:",o:["Vasoconstriction and decreased capillary permeability","Arteriolar vasodilation, increased capillary permeability, and bronchospasm","Bradycardia and decreased CO","Increased SVR"],a:1,e:"Histamine acts on H1 and H2 receptors: H1 causes bronchospasm + arteriolar dilation; H2 causes vasodilation + increased capillary permeability → distributive shock + airway compromise."},
+{q:"Glucagon is specifically indicated in anaphylaxis for patients:",o:["With shellfish allergy","Who are allergic to epinephrine","Taking beta-blockers who are refractory to epinephrine","With a history of cardiac disease"],a:2,e:"Beta-blockers block epinephrine's β₁ and β₂ effects. Glucagon bypasses adrenergic receptors, activating adenylyl cyclase directly → ↑ cAMP → positive inotropic/chronotropic effect."},
+{q:"Stridor in anaphylaxis indicates:",o:["Lower airway bronchospasm","Upper airway edema threatening airway patency","Pulmonary edema","Tension pneumothorax"],a:1,e:"Stridor = turbulent airflow through a narrowed upper airway. In anaphylaxis: laryngeal edema from histamine/bradykinin. This is a pre-terminal sign — intubate early while anatomy is visible."},
+{q:"Diphenhydramine in anaphylaxis acts by:",o:["Reversing vasodilation directly","Blocking H1 histamine receptors","Inhibiting leukotriene synthesis","Stimulating beta-2 receptors"],a:1,e:"Diphenhydramine is an H1 antihistamine — blocks histamine at H1 receptors. It does NOT reverse established shock; epinephrine does. Diphenhydramine helps reduce urticaria/pruritus and prevents ongoing histamine effects."},
+{q:"Which of the following is a biphasic anaphylaxis concern?",o:["A second anaphylactic reaction 1–72 hours after the initial reaction","Anaphylaxis triggered by two allergens simultaneously","Anaphylaxis occurring in both lungs simultaneously","Rebound hypertension after epinephrine"],a:0,e:"Biphasic anaphylaxis: a second allergic reaction hours after the initial episode (even without re-exposure). Corticosteroids (methylprednisolone) are given to reduce biphasic reaction risk."},
+{q:"The most appropriate epinephrine route for anaphylactic shock is:",o:["IV push undiluted","Subcutaneous injection","Intramuscular injection in the anterolateral thigh","Sublingual tablet"],a:2,e:"IM injection in the vastus lateralis (anterolateral thigh) achieves the fastest, most reliable absorption. Subcutaneous absorption is slower and less reliable in shock due to vasoconstriction."},
+{q:"Anaphylaxis is correctly classified under which type of shock?",o:["Obstructive","Hypovolemic","Distributive","Cardiogenic"],a:2,e:"Anaphylaxis causes distributive shock: massive vasodilation (↓ SVR) + increased capillary permeability → relative and sometimes absolute hypovolemia. The primary mechanism is histamine-mediated loss of vascular tone."},
+{q:"Which mediators released in anaphylaxis contribute to bronchospasm?",o:["Insulin and glucagon","Angiotensin I and renin","Histamine and leukotrienes","Cortisol and aldosterone"],a:2,e:"Mast cells release histamine (immediate bronchospasm via H1 receptors) AND leukotrienes (slower, sustained bronchospasm via LTC4, LTD4, LTE4 — 'slow-reacting substances of anaphylaxis')."},
+// ── SEPTIC SHOCK (76-85)
+{q:"Sepsis is defined as systemic inflammatory response syndrome (SIRS) with:",o:["Heart rate >100 and temperature >38.5°C only","Suspected or known infectious cause","Multiple organ failure present","Positive blood cultures only"],a:1,e:"Sepsis = SIRS (≥2 of 4 criteria) + suspected/confirmed infection. SIRS criteria: Temp >38 or <36°C, HR >90, RR >20 or PaCO₂<32, WBC >12K or <4K."},
+{q:"The most common infection source leading to septic shock is:",o:["CNS infections","Joints and bones","Lungs (pneumonia)","Pericardium"],a:2,e:"Lungs are the most common source, followed by urinary tract, GI tract, and skin/soft tissue. Catheter-associated infections are also significant in hospitalized patients."},
+{q:"Septic shock is distinguished from sepsis by:",o:["A higher white blood cell count","Viral rather than bacterial etiology","Profound circulatory, cellular, and metabolic abnormalities causing greater mortality risk","Response to antibiotic therapy alone"],a:2,e:"Septic shock = sepsis + vasopressor requirement to maintain MAP ≥65 AND lactate >2 mmol/L despite adequate fluid resuscitation. This indicates cellular metabolic failure beyond hemodynamic compromise."},
+{q:"Serum lactate in septic shock reflects:",o:["Liver function and synthetic capacity","Degree of tissue hypoperfusion and anaerobic metabolism","Infection severity score","Respiratory alkalosis severity"],a:1,e:"Lactate is a byproduct of anaerobic metabolism. Elevated serum lactate (>2 mmol/L) signals inadequate tissue oxygenation — even if BP appears acceptable ('cryptic shock')."},
+{q:"The prehospital qSOFA score considers:",o:["Lactate, glucose, and WBC","Altered mental status, RR ≥22/min, and SBP ≤100 mmHg","Temperature, HR, and WBC","BP, O₂ saturation, and blood glucose"],a:1,e:"qSOFA (quick SOFA): 3 bedside criteria — (1) AMS, (2) RR ≥22, (3) SBP ≤100. Score ≥2 = high risk for poor sepsis outcomes. Simple to use prehospital without labs."},
+{q:"First-line vasopressor for septic shock is:",o:["Dopamine","Phenylephrine","Vasopressin","Norepinephrine"],a:3,e:"Norepinephrine is first-line per Surviving Sepsis Campaign: potent α₁ vasoconstriction + β₁ inotropy. Vasopressin is added as second-line adjunct. Epinephrine third-line."},
+{q:"Corticosteroids in septic shock are indicated when:",o:["Temperature exceeds 39°C","Shock is refractory to adequate fluids and vasopressors (relative adrenal insufficiency)","Leukocyte count is >15,000","SIRS criteria are met"],a:1,e:"Relative adrenal insufficiency occurs in septic shock — the adrenal gland cannot produce enough cortisol. Hydrocortisone (200 mg/day) improves vasopressor responsiveness in refractory cases."},
+{q:"The Surviving Sepsis Campaign recommends administering antibiotics:",o:["After confirming blood cultures are positive","Within 1 hour of septic shock recognition","Only after fluid resuscitation is complete","Within 6 hours of recognition"],a:1,e:"Each hour of delay in antibiotics for septic shock increases mortality approximately 7%. The Hour-1 Bundle includes: lactate, blood cultures, IV fluids, vasopressors as needed, and ANTIBIOTICS within 1 hour."},
+{q:"The cytokines primarily responsible for the septic shock inflammatory cascade include:",o:["Insulin, glucagon, and cortisol","Histamine, tryptase, and leukotrienes","IL-1, IL-6, and TNF-α","IgE, IgG, and complement"],a:2,e:"Interleukin-1 (IL-1), IL-6, and tumor necrosis factor-alpha (TNF-α) are the primary pro-inflammatory cytokines in sepsis. They mediate endothelial dysfunction, vasodilation, and myocardial depression."},
+{q:"Which finding would most support septic shock rather than hypovolemic shock in a hypotensive patient?",o:["Cool, pale, diaphoretic skin","Tachycardia","Warm, flushed skin with fever and suspected infection source","Flat neck veins with trauma history"],a:2,e:"Warm/flushed skin + fever + infection source = distributive (septic) shock. Hypovolemic shock presents with cool, pale, diaphoretic skin from compensatory vasoconstriction."},
+// ── STAGES OF SHOCK (86-92)
+{q:"In compensated shock, systolic blood pressure is:",o:["Severely decreased (<80 mmHg)","Maintained near normal by compensatory mechanisms","Elevated above baseline","Unmeasurable by cuff"],a:1,e:"Compensated shock: catecholamine release maintains near-normal BP via ↑ HR + vasoconstriction. The body is 'working hard' to compensate — but the underlying problem remains."},
+{q:"Which catecholamine response maintains cardiac output during compensated shock?",o:["Decreased HR and vasodilation","Increased HR, vasoconstriction, and increased contractility","Decreased SVR and increased preload","Bradycardia with preserved stroke volume"],a:1,e:"Catecholamine surge (epinephrine, norepinephrine) → ↑ HR (chronotropy) + ↑ contractility (inotropy) + peripheral vasoconstriction (↑ SVR) = maintained CO and BP."},
+{q:"In uncompensated shock, diastolic blood pressure may initially:",o:["Drop before systolic","Rise due to ongoing vasoconstriction","Remain normal permanently","Fall to zero immediately"],a:1,e:"DBP may rise initially (from ongoing vasoconstriction) while SBP falls (from ↓ CO). This narrows the pulse pressure — a critical clinical sign of impending decompensation."},
+{q:"Irreversible shock is characterized by:",o:["Rapid response to fluid resuscitation","Return to normal perfusion restoring cell function","Cellular necrosis unresponsive to treatment even after perfusion restoration","Reversible lactic acidosis"],a:2,e:"Irreversible shock: organelles break down sequentially, membrane pumps fail, cells necrose. Even if perfusion is restored, the damage is permanent. Death is inevitable despite treatment."},
+{q:"Children in shock typically:",o:["Decompensate early and recover slowly","Compensate well for a longer period, then decompensate suddenly and rapidly","Follow the same decompensation pattern as adults","Show neurogenic shock more commonly"],a:1,e:"Children have greater cardiovascular reserve and compensate remarkably well — sometimes maintaining near-normal BP until 25–30% blood loss. Then decompensation occurs rapidly ('pediatric cliff effect')."},
+{q:"Beta-blocker medications can mask shock signs by:",o:["Causing paradoxical hypertension","Blocking the catecholamine-mediated tachycardic response","Increasing vasodilation","Suppressing the renin-angiotensin system only"],a:1,e:"Beta-blockers inhibit β₁ adrenergic receptors → prevent compensatory tachycardia → patient in shock may present with inappropriate bradycardia. Always review medications in shock assessment!"},
+{q:"Metabolic acidosis in shock results from:",o:["Hyperventilation washing out CO₂","Accumulation of lactic acid from anaerobic metabolism","Excess bicarbonate administration","Respiratory alkalosis compensation"],a:1,e:"Anaerobic metabolism → lactic acid accumulates → hydrogen ion concentration rises → metabolic acidosis (↓ pH, ↓ HCO₃, ↑ lactate). Acidosis worsens myocardial function — perpetuating shock."},
+// ── ASSESSMENT (93-96)
+{q:"During primary assessment of a trauma patient in shock, the FIRST priority is:",o:["Establishing large-bore IV access","Administering high-flow oxygen","Controlling exsanguinating external hemorrhage","Obtaining a 12-lead ECG"],a:2,e:"The 'C-ABCDE' approach in trauma: Control hemorrhage BEFORE the airway. Exsanguinating extremity wounds get tourniquets immediately; truncal wounds get wound packing."},
+{q:"Capillary refill time assessment is MOST clinically useful in:",o:["Elderly patients with chronic illness","Pediatric patients as an indicator of tissue perfusion","Patients with peripheral vascular disease","Patients in anaphylactic shock"],a:1,e:"Capillary refill >2 seconds is a reliable perfusion indicator in pediatrics. In adults, it is less reliable (affected by cold temperature, medications, age), though still useful as one of many assessments."},
+{q:"Which finding is MOST specific to distributive shock compared to hypovolemic or cardiogenic shock?",o:["Tachycardia","Hypotension","Warm, flushed skin from peripheral vasodilation","Altered mental status"],a:2,e:"Warm, flushed skin = peripheral vasodilation = distributive shock. All shock types cause tachycardia, hypotension, and eventual AMS. Warm skin is unique to distributive (vasodilatory) pathophysiology."},
+{q:"Orthostatic vital signs (tilt test) are MOST appropriate for:",o:["A patient with active external hemorrhage","A patient with suspected tension pneumothorax","A conscious patient with suspected mild-to-moderate volume loss","A patient in irreversible shock"],a:2,e:"Orthostatic vitals: BP and HR measured supine then standing. A drop >20 mmHg SBP or rise >20 bpm HR = positive test → suggests ≥500–700 mL volume deficit. Contraindicated in active bleeding or unstable patients."},
+// ── FLUID MANAGEMENT (97-100)
+{q:"According to Poiseuille's Law, IV flow rate is MOST improved by:",o:["Increasing catheter length","Reducing catheter radius","Using a short, large-bore catheter with pressure bag","Administering colloids instead of crystalloids"],a:2,e:"Flow ∝ r⁴/length. Doubling catheter radius increases flow 16-fold. A short, fat catheter + 300 mmHg pressure bag is the fastest possible peripheral IV setup."},
+{q:"Colloid solutions remain in the intravascular compartment longer than crystalloids because:",o:["They have lower osmolarity","They contain large protein molecules that exert oncotic pressure","They are hypertonic solutions","They are isotonic and equilibrate slowly"],a:1,e:"Colloid molecules are too large to cross the capillary membrane → they exert oncotic (colloid osmotic) pressure → hold water in the vascular space. Crystalloids equilibrate between compartments — only ~1/3 remains intravascular after 1 hour."},
+{q:"The goal MAP in most shock states (excluding TBI/SCI) is:",o:["40–50 mmHg","60–65 mmHg or greater","70–75 mmHg","80–90 mmHg"],a:1,e:"MAP ≥60–65 mmHg is the standard target for most shock states — sufficient to perfuse vital organs. For TBI/SCI, target MAP 85–90 to maintain CNS perfusion pressure."},
+{q:"The MOST important prehospital intervention for a patient in hemorrhagic shock from internal abdominal trauma is:",o:["Administration of 2 L crystalloid before transport","Immediate transport to a surgical facility with concurrent IV access and resuscitation","Application of MAST/PASG trousers","Administering dopamine infusion"],a:1,e:"Internal hemorrhage = surgical emergency. No amount of IV fluid fixes an actively bleeding vessel. Rapid transport with concurrent IV access, permissive hypotension strategy, and advance hospital notification is the standard of care."}
+];
+
+// ═══════════════════════════════════════════════
+// STATE & LOGIC
+// ═══════════════════════════════════════════════
+let studentName = '';
+let studentId = '';
+let examDate = '';
+let userAnswers = {};
+let examSubmitted = false;
+
+function setActive(el) {
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-icon').textContent = isDark ? '🌙' : '☀️';
+  document.getElementById('theme-label').textContent = isDark ? 'Dark Mode' : 'Light Mode';
+}
+
+function togglePanel(id) {
+  const body = document.getElementById(id);
+  const toggle = document.getElementById(id + '-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  body.style.display = isOpen ? 'none' : 'block';
+  if (toggle) toggle.classList.toggle('open', !isOpen);
+}
+
+// Initialize all panels to show correctly
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.shock-panel-body.open').forEach(b => b.style.display = 'block');
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('exam-date').value = today;
+});
+
+function startExam() {
+  studentName = document.getElementById('student-name').value.trim();
+  studentId = document.getElementById('student-id').value.trim();
+  examDate = document.getElementById('exam-date').value;
+  if (!studentName || !studentId) {
+    alert('Please enter your name and student ID before starting the assessment.');
+    return;
+  }
+  document.getElementById('student-form-wrapper').style.display = 'none';
+  document.getElementById('quiz-container').style.display = 'block';
+  renderQuiz();
+  document.getElementById('knowledge-assessment').scrollIntoView({behavior:'smooth'});
+}
+
+function renderQuiz() {
+  const body = document.getElementById('quiz-body');
+  body.innerHTML = '';
+  questions.forEach((q, idx) => {
+    const block = document.createElement('div');
+    block.className = 'question-block';
+    block.id = 'q-block-' + idx;
+    const letters = ['A','B','C','D'];
+    block.innerHTML = `
+      <div class="q-number">Question ${idx+1} of ${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options" id="opts-${idx}">
+        ${q.o.map((opt, oi) => `
+          <label class="q-option" id="opt-${idx}-${oi}" onclick="selectAnswer(${idx},${oi})">
+            <input type="radio" name="q${idx}" value="${oi}">
+            <span class="q-option-letter">${letters[oi]}</span>
+            <span>${opt}</span>
+          </label>
+        `).join('')}
+      </div>
+      <div class="q-explanation" id="exp-${idx}">${q.e}</div>
+    `;
+    body.appendChild(block);
+  });
+  document.getElementById('submit-btn').style.display = 'block';
+  updateProgress();
+}
+
+function selectAnswer(qIdx, optIdx) {
+  if (examSubmitted) return;
+  userAnswers[qIdx] = optIdx;
+  const opts = document.querySelectorAll(`#opts-${qIdx} .q-option`);
+  opts.forEach(o => o.classList.remove('selected'));
+  document.getElementById(`opt-${qIdx}-${optIdx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = Object.keys(userAnswers).length;
+  const pct = (answered / questions.length) * 100;
+  document.getElementById('progress-fill').style.width = Math.max(pct, 1) + '%';
+  document.getElementById('progress-text').textContent = `${answered} of ${questions.length} answered`;
+}
+
+function submitExam() {
+  const answered = Object.keys(userAnswers).length;
+  if (answered < questions.length) {
+    const unanswered = questions.length - answered;
+    if (!confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`)) return;
+  }
+  examSubmitted = true;
+  let correct = 0;
+  questions.forEach((q, idx) => {
+    const userAns = userAnswers[idx];
+    const correctAns = q.a;
+    const opts = document.querySelectorAll(`#opts-${idx} .q-option`);
+    opts.forEach(o => o.style.pointerEvents = 'none');
+    // Mark correct answer
+    document.getElementById(`opt-${idx}-${correctAns}`).classList.add('correct');
+    if (userAns !== undefined) {
+      if (userAns === correctAns) { correct++; }
+      else { document.getElementById(`opt-${idx}-${userAns}`).classList.add('incorrect'); }
+    }
+    document.getElementById(`exp-${idx}`).style.display = 'block';
+  });
+  document.getElementById('submit-btn').style.display = 'none';
+  showResults(correct);
+}
+
+function showResults(correct) {
+  const pct = Math.round((correct / questions.length) * 100);
+  const incorrect = questions.length - correct;
+  let grade, gradeColor, label;
+  if (pct >= 93) { grade = 'A'; gradeColor = '#27ae60'; label = 'Excellent — Mastery Level'; }
+  else if (pct >= 90) { grade = 'A−'; gradeColor = '#2ecc71'; label = 'Superior Performance'; }
+  else if (pct >= 87) { grade = 'B+'; gradeColor = '#f39c12'; label = 'Above Average'; }
+  else if (pct >= 83) { grade = 'B'; gradeColor = '#f39c12'; label = 'Above Average'; }
+  else if (pct >= 80) { grade = 'B−'; gradeColor = '#e67e22'; label = 'Average Performance'; }
+  else if (pct >= 77) { grade = 'C+'; gradeColor = '#e67e22'; label = 'Average'; }
+  else if (pct >= 70) { grade = 'C'; gradeColor = '#e74c3c'; label = 'Minimum Passing'; }
+  else { grade = 'F'; gradeColor = '#c0392b'; label = 'Below Passing — Review Required'; }
+
+  document.getElementById('result-score').textContent = pct + '%';
+  document.getElementById('result-score').style.color = gradeColor;
+  document.getElementById('result-grade').textContent = grade;
+  document.getElementById('result-grade').style.color = gradeColor;
+  document.getElementById('result-label').textContent = label;
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-incorrect').textContent = incorrect;
+  document.getElementById('res-pct').textContent = pct + '%';
+
+  document.getElementById('results-container').style.display = 'block';
+  document.getElementById('results-container').scrollIntoView({behavior:'smooth'});
+}
+
+function reviewAnswers() {
+  document.querySelector('.quiz-body').scrollIntoView({behavior:'smooth'});
+}
+
+// ═══════════════════════════════════════════════
+// PDF GENERATION
+// ═══════════════════════════════════════════════
+function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+  const correct = Object.keys(userAnswers).filter(i => userAnswers[i] === questions[i].a).length;
+  const pct = Math.round((correct / questions.length) * 100);
+  let grade;
+  if (pct >= 93) grade = 'A';
+  else if (pct >= 90) grade = 'A−';
+  else if (pct >= 87) grade = 'B+';
+  else if (pct >= 83) grade = 'B';
+  else if (pct >= 80) grade = 'B−';
+  else if (pct >= 77) grade = 'C+';
+  else if (pct >= 70) grade = 'C';
+  else grade = 'F';
+  const dateStr = examDate ? new Date(examDate + 'T12:00:00').toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}) : new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+
+  // ── Cover page ──
+  doc.setFillColor(9, 13, 19);
+  doc.rect(0, 0, 216, 279, 'F');
+  doc.setFillColor(204, 34, 51);
+  doc.rect(0, 0, 216, 6, 'F');
+  doc.setFillColor(204, 34, 51);
+  doc.rect(0, 273, 216, 6, 'F');
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  doc.setTextColor(180, 180, 180);
+  doc.text('CAMP COMMUNITY COLLEGE — EMS PROGRAM', 108, 22, {align:'center'});
+  doc.text("SANDERS' PARAMEDIC TEXTBOOK, 6TH EDITION", 108, 29, {align:'center'});
+
+  doc.setFontSize(36);
+  doc.setTextColor(204, 34, 51);
+  doc.text('CHAPTER 34', 108, 55, {align:'center'});
+  doc.setFontSize(28);
+  doc.setTextColor(220, 232, 245);
+  doc.text('SHOCK', 108, 67, {align:'center'});
+  doc.setFontSize(11);
+  doc.setTextColor(120, 150, 180);
+  doc.text('Knowledge Assessment Report', 108, 77, {align:'center'});
+
+  // Score box
+  doc.setFillColor(23, 32, 48);
+  doc.roundedRect(55, 90, 106, 60, 5, 5, 'F');
+  doc.setDrawColor(204, 34, 51);
+  doc.setLineWidth(0.5);
+  doc.roundedRect(55, 90, 106, 60, 5, 5, 'S');
+  doc.setFontSize(48);
+  const scoreColor = pct >= 80 ? [39, 174, 96] : pct >= 70 ? [243, 156, 18] : [231, 76, 60];
+  doc.setTextColor(...scoreColor);
+  doc.text(pct + '%', 108, 125, {align:'center'});
+  doc.setFontSize(14);
+  doc.setTextColor(220, 232, 245);
+  doc.text('Grade: ' + grade, 108, 137, {align:'center'});
+  doc.setFontSize(10);
+  doc.setTextColor(120, 150, 180);
+  doc.text(correct + ' correct  |  ' + (questions.length - correct) + ' incorrect  |  ' + questions.length + ' total', 108, 145, {align:'center'});
+
+  // Student info
+  doc.setFontSize(11);
+  doc.setTextColor(220, 232, 245);
+  doc.text('Student:', 55, 170);
+  doc.setFont('helvetica', 'normal');
+  doc.text(studentName, 82, 170);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Student ID:', 55, 180);
+  doc.setFont('helvetica', 'normal');
+  doc.text(studentId, 82, 180);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Date:', 55, 190);
+  doc.setFont('helvetica', 'normal');
+  doc.text(dateStr, 82, 190);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Instructor:', 55, 200);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Dr. Carlos Cajares, DHSc, MPA, NRP', 82, 200);
+
+  // ── Answer Review Pages ──
+  doc.addPage();
+
+  const letters = ['A','B','C','D'];
+  let y = 20;
+  const margin = 15;
+  const pageW = 216;
+  const contentW = pageW - margin * 2;
+
+  function addPageHeader(pageNum) {
+    doc.setFillColor(23, 32, 48);
+    doc.rect(0, 0, 216, 12, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(180, 180, 180);
+    doc.text('CAMP EMS · Chapter 34: Shock · Knowledge Assessment', margin, 8);
+    doc.text(`${studentName} | ${studentId}`, pageW - margin, 8, {align:'right'});
+    doc.setDrawColor(204, 34, 51);
+    doc.setLineWidth(0.3);
+    doc.line(0, 12, 216, 12);
+  }
+
+  addPageHeader(2);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(220, 232, 245);
+  doc.text('DETAILED ANSWER REVIEW', margin, y + 5);
+  y += 14;
+
+  doc.setFontSize(9);
+  questions.forEach((q, idx) => {
+    const userAns = userAnswers[idx];
+    const isCorrect = userAns === q.a;
+    const status = userAns === undefined ? 'SKIPPED' : isCorrect ? 'CORRECT' : 'INCORRECT';
+    const statusColor = userAns === undefined ? [120,150,180] : isCorrect ? [39,174,96] : [231,76,60];
+
+    // Estimate height needed
+    const qLines = doc.splitTextToSize(`${idx+1}. ${q.q}`, contentW - 20);
+    const expLines = doc.splitTextToSize(q.e, contentW - 6);
+    const blockH = 10 + qLines.length * 5 + (isCorrect ? 0 : expLines.length * 4.5) + 18;
+
+    if (y + blockH > 262) {
+      doc.addPage();
+      addPageHeader(0);
+      y = 20;
+    }
+
+    // Question header
+    doc.setFillColor(30, 50, 82);
+    doc.roundedRect(margin, y, contentW, 8, 1, 1, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.5);
+    doc.setTextColor(...statusColor);
+    doc.text(`Q${idx+1}  ${status}`, margin + 2, y + 5.5);
+    if (userAns !== undefined) {
+      const ansText = isCorrect ? `✓ ${letters[q.a]}` : `✗ Your: ${letters[userAns]}  |  Correct: ${letters[q.a]}`;
+      doc.text(ansText, pageW - margin - 2, y + 5.5, {align:'right'});
+    }
+    y += 10;
+
+    // Question text
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(200, 215, 230);
+    const splitQ = doc.splitTextToSize(`${q.q}`, contentW - 4);
+    doc.text(splitQ, margin + 2, y);
+    y += splitQ.length * 4.8 + 2;
+
+    // Options
+    q.o.forEach((opt, oi) => {
+      let bgColor, txtColor;
+      if (oi === q.a) { bgColor = [15, 40, 25]; txtColor = [39, 174, 96]; }
+      else if (oi === userAns && !isCorrect) { bgColor = [40, 15, 15]; txtColor = [200, 80, 80]; }
+      else { bgColor = [20, 30, 45]; txtColor = [130, 155, 175]; }
+      doc.setFillColor(...bgColor);
+      const optLines = doc.splitTextToSize(`${letters[oi]}. ${opt}`, contentW - 10);
+      const optH = optLines.length * 4 + 4;
+      doc.roundedRect(margin + 1, y, contentW - 2, optH, 1, 1, 'F');
+      doc.setFont('helvetica', oi === q.a ? 'bold' : 'normal');
+      doc.setFontSize(7.5);
+      doc.setTextColor(...txtColor);
+      doc.text(optLines, margin + 4, y + 3.5);
+      y += optH + 1;
+    });
+
+    // Explanation (always show)
+    const expSplit = doc.splitTextToSize(q.e, contentW - 6);
+    const expH = expSplit.length * 4 + 5;
+    doc.setFillColor(10, 40, 40);
+    doc.roundedRect(margin, y + 1, contentW, expH, 1, 1, 'F');
+    doc.setDrawColor(22, 160, 133);
+    doc.setLineWidth(0.3);
+    doc.line(margin, y + 1, margin, y + 1 + expH);
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(7);
+    doc.setTextColor(100, 180, 160);
+    doc.text(expSplit, margin + 3, y + 4.5);
+    y += expH + 6;
+  });
+
+  // Summary footer page
+  doc.addPage();
+  doc.setFillColor(9, 13, 19);
+  doc.rect(0, 0, 216, 279, 'F');
+  doc.setFillColor(204, 34, 51);
+  doc.rect(0, 0, 216, 3, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(16);
+  doc.setTextColor(220, 232, 245);
+  doc.text('PERFORMANCE SUMMARY', 108, 25, {align:'center'});
+  
+  // Category breakdown
+  const categories = [
+    {name:'Basic Physiology', range:[0,9]},
+    {name:'Hypovolemic Shock', range:[10,24]},
+    {name:'Cardiogenic Shock', range:[25,39]},
+    {name:'Obstructive Shock', range:[40,54]},
+    {name:'Neurogenic Shock', range:[55,64]},
+    {name:'Anaphylactic Shock', range:[65,74]},
+    {name:'Septic Shock', range:[75,84]},
+    {name:'Stages of Shock', range:[85,91]},
+    {name:'Assessment', range:[92,95]},
+    {name:'Fluid Management', range:[96,99]},
+  ];
+
+  let cy = 40;
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(120, 150, 180);
+  doc.text('CATEGORY', margin, cy);
+  doc.text('SCORE', 150, cy, {align:'right'});
+  doc.text('RESULT', pageW - margin, cy, {align:'right'});
+  cy += 5;
+  doc.setDrawColor(50, 80, 120);
+  doc.line(margin, cy, pageW - margin, cy);
+  cy += 6;
+
+  categories.forEach(cat => {
+    const [start, end] = cat.range;
+    let catCorrect = 0;
+    let catTotal = end - start + 1;
+    for (let i = start; i <= end; i++) {
+      if (userAnswers[i] === questions[i].a) catCorrect++;
+    }
+    const catPct = Math.round((catCorrect / catTotal) * 100);
+    const catColor = catPct >= 80 ? [39, 174, 96] : catPct >= 70 ? [243, 156, 18] : [231, 76, 60];
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(200, 215, 230);
+    doc.text(cat.name, margin, cy);
+    doc.setTextColor(...catColor);
+    doc.text(`${catCorrect}/${catTotal}`, 150, cy, {align:'right'});
+    doc.text(catPct + '%', pageW - margin, cy, {align:'right'});
+    
+    // Mini progress bar
+    const barStart = 95;
+    const barWidth = 50;
+    doc.setFillColor(30, 50, 80);
+    doc.rect(barStart, cy - 4, barWidth, 3, 'F');
+    doc.setFillColor(...catColor);
+    doc.rect(barStart, cy - 4, barWidth * (catPct / 100), 3, 'F');
+    cy += 10;
+  });
+
+  cy += 5;
+  doc.setDrawColor(50, 80, 120);
+  doc.line(margin, cy, pageW - margin, cy);
+  cy += 8;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(220, 232, 245);
+  doc.text('OVERALL SCORE:', margin, cy);
+  doc.setTextColor(...scoreColor);
+  doc.text(`${correct}/${questions.length} = ${pct}%  (Grade: ${grade})`, margin + 40, cy);
+
+  cy += 20;
+  doc.setFont('helvetica', 'italic');
+  doc.setFontSize(8);
+  doc.setTextColor(100, 130, 160);
+  doc.text('This report was automatically generated by the CAMP EMS Interactive Learning Platform.', 108, cy, {align:'center'});
+  doc.text('Sanders\' Paramedic Textbook, 6th Edition · Chapter 34: Shock', 108, cy + 6, {align:'center'});
+  doc.text(`Generated: ${new Date().toLocaleString()}`, 108, cy + 12, {align:'center'});
+
+  const filename = `Shock_Ch34_${studentName.replace(/[^a-zA-Z0-9]/g,'_')}_${studentId}.pdf`;
+  doc.save(filename);
+}
+</script>
+</body>
+</html>
