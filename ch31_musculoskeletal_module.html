@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chapter 31 — Nontraumatic Musculoskeletal Disorders | CAMP EMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root[data-theme="dark"] {
+  --bg: #0b0e13;
+  --bg2: #111620;
+  --bg3: #161d2a;
+  --card: #1a2235;
+  --card2: #1f2940;
+  --border: #2a3650;
+  --accent: #e8a020;
+  --accent2: #f0c060;
+  --accent3: #c07010;
+  --red: #e05060;
+  --green: #40c080;
+  --blue: #4090e0;
+  --purple: #9060d0;
+  --cyan: #30b0c0;
+  --text: #d0daf0;
+  --text2: #8899bb;
+  --text3: #5a6a8a;
+  --mono: 'JetBrains Mono', monospace;
+  --heading: 'Rajdhani', sans-serif;
+  --body: 'DM Sans', sans-serif;
+  --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  --glow: 0 0 20px rgba(232,160,32,0.15);
+}
+:root[data-theme="light"] {
+  --bg: #f4f6fa;
+  --bg2: #eaeef5;
+  --bg3: #e0e6f0;
+  --card: #ffffff;
+  --card2: #f0f4fc;
+  --border: #c8d4e8;
+  --accent: #b06800;
+  --accent2: #d48000;
+  --accent3: #8a5000;
+  --red: #c03040;
+  --green: #207050;
+  --blue: #1060b0;
+  --purple: #6040a0;
+  --cyan: #107080;
+  --text: #1a2540;
+  --text2: #4a5a7a;
+  --text3: #8090a8;
+  --shadow: 0 4px 24px rgba(0,0,0,0.1);
+  --glow: 0 0 20px rgba(176,104,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.7;transition:background 0.3s,color 0.3s}
+
+/* TOP BAR */
+#topbar{position:fixed;top:0;left:0;right:0;height:56px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:16px;z-index:1000;transition:background 0.3s}
+#topbar .logo{font-family:var(--heading);font-size:1.15rem;font-weight:700;color:var(--accent);letter-spacing:0.05em;white-space:nowrap}
+#topbar .chapter-label{font-family:var(--heading);font-size:0.85rem;color:var(--text2);letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap}
+#topbar .spacer{flex:1}
+#theme-toggle{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 14px;cursor:pointer;font-family:var(--body);font-size:0.85rem;color:var(--text2);display:flex;align-items:center;gap:6px;transition:all 0.2s}
+#theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+#topbar .menu-btn{display:none;background:none;border:none;cursor:pointer;color:var(--text);font-size:1.4rem;padding:4px}
+
+/* LAYOUT */
+#shell{display:flex;padding-top:56px;min-height:100vh}
+#sidebar{width:260px;min-width:260px;background:var(--bg2);border-right:1px solid var(--border);height:calc(100vh - 56px);position:fixed;top:56px;left:0;overflow-y:auto;transition:transform 0.3s,background 0.3s}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-track{background:transparent}
+#sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+#main{margin-left:260px;flex:1;padding:40px 48px;max-width:1000px;transition:margin 0.3s}
+@media(max-width:900px){
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  #main{margin-left:0;padding:24px 20px}
+  #topbar .menu-btn{display:block}
+}
+
+/* NAV */
+.nav-section{padding:18px 0 4px}
+.nav-section-label{font-family:var(--heading);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);padding:0 20px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 20px;cursor:pointer;color:var(--text2);font-size:0.88rem;border-left:3px solid transparent;transition:all 0.15s;text-decoration:none}
+.nav-item:hover{color:var(--text);background:var(--bg3)}
+.nav-item.active{color:var(--accent);border-left-color:var(--accent);background:var(--card)}
+.nav-item .nav-icon{width:20px;text-align:center;font-size:0.9rem;flex-shrink:0}
+
+/* SECTIONS */
+.section{margin-bottom:64px;scroll-margin-top:76px}
+.section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.section-number{font-family:var(--mono);font-size:0.75rem;color:var(--accent);background:rgba(232,160,32,0.1);border:1px solid rgba(232,160,32,0.25);border-radius:4px;padding:4px 8px;white-space:nowrap;margin-top:4px}
+.section-title{font-family:var(--heading);font-size:1.9rem;font-weight:700;color:var(--text);line-height:1.15}
+.section-subtitle{font-size:0.9rem;color:var(--text2);margin-top:4px}
+
+/* HERO CARD */
+.hero-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:32px;position:relative;overflow:hidden}
+.hero-card::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle at top right,rgba(232,160,32,0.08),transparent 70%);pointer-events:none}
+.hero-card h3{font-family:var(--heading);font-size:1.1rem;font-weight:600;color:var(--accent);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.05em}
+.hero-card p{color:var(--text2);font-size:0.95rem;line-height:1.75}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;transition:border-color 0.2s,box-shadow 0.2s}
+.card:hover{border-color:var(--accent3);box-shadow:var(--glow)}
+.card h4{font-family:var(--heading);font-size:1.0rem;font-weight:600;color:var(--accent2);margin-bottom:8px}
+.card p,.card ul{color:var(--text2);font-size:0.9rem;line-height:1.7}
+.card ul{padding-left:18px}
+.card ul li{margin-bottom:4px}
+
+/* PATHOPHYS BOX */
+.path-box{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:22px 24px;margin-bottom:20px}
+.path-box h4{font-family:var(--heading);font-size:1.05rem;font-weight:700;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.04em}
+.path-box p,.path-box ul{color:var(--text2);font-size:0.92rem;line-height:1.75}
+.path-box ul{padding-left:20px}
+.path-box ul li{margin-bottom:5px}
+
+/* ANALOGY BOX */
+.analogy{background:var(--bg3);border:1px solid var(--border);border-left:4px solid var(--cyan);border-radius:8px;padding:18px 22px;margin:20px 0;display:flex;gap:14px;align-items:flex-start}
+.analogy .icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
+.analogy-text{color:var(--text2);font-size:0.9rem;line-height:1.7;font-style:italic}
+.analogy-text strong{color:var(--cyan);font-style:normal}
+
+/* ALERT BOXES */
+.alert{border-radius:8px;padding:16px 20px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start}
+.alert .alert-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.alert p{font-size:0.9rem;line-height:1.65}
+.alert-red{background:rgba(224,80,96,0.1);border:1px solid rgba(224,80,96,0.25)}
+.alert-red p{color:var(--red)}
+.alert-green{background:rgba(64,192,128,0.08);border:1px solid rgba(64,192,128,0.2)}
+.alert-green p{color:var(--green)}
+.alert-blue{background:rgba(64,144,224,0.08);border:1px solid rgba(64,144,224,0.2)}
+.alert-blue p{color:var(--blue)}
+.alert-amber{background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.2)}
+.alert-amber p{color:var(--accent2)}
+
+/* MED TABLE */
+.table-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);margin-bottom:24px}
+table{width:100%;border-collapse:collapse;font-size:0.88rem}
+thead tr{background:var(--card2)}
+th{font-family:var(--heading);font-weight:600;font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);padding:12px 16px;text-align:left;border-bottom:1px solid var(--border)}
+td{padding:11px 16px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg3)}
+.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-family:var(--mono);font-weight:500}
+.pill-red{background:rgba(224,80,96,0.15);color:var(--red)}
+.pill-green{background:rgba(64,192,128,0.12);color:var(--green)}
+.pill-amber{background:rgba(232,160,32,0.12);color:var(--accent2)}
+.pill-blue{background:rgba(64,144,224,0.12);color:var(--blue)}
+.pill-purple{background:rgba(144,96,208,0.12);color:var(--purple)}
+.pill-cyan{background:rgba(48,176,192,0.12);color:var(--cyan)}
+
+/* SIGNS GRID */
+.signs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px}
+.sign-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;gap:10px;align-items:flex-start}
+.sign-chip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dot-red{background:var(--red);box-shadow:0 0 6px var(--red)}
+.dot-amber{background:var(--accent);box-shadow:0 0 6px var(--accent)}
+.dot-green{background:var(--green);box-shadow:0 0 6px var(--green)}
+.dot-blue{background:var(--blue);box-shadow:0 0 6px var(--blue)}
+.dot-cyan{background:var(--cyan);box-shadow:0 0 6px var(--cyan)}
+.sign-chip span{font-size:0.87rem;color:var(--text2);line-height:1.4}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:32px 0}
+
+/* ASSESSMENT */
+#assessment-section{background:var(--bg2);border-radius:16px;padding:40px;border:1px solid var(--border)}
+.assess-header{text-align:center;margin-bottom:36px}
+.assess-header h2{font-family:var(--heading);font-size:2rem;font-weight:700;color:var(--accent);margin-bottom:8px}
+.assess-header p{color:var(--text2);font-size:0.95rem}
+
+/* STUDENT INFO FORM */
+#student-info-form{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;max-width:540px;margin:0 auto 36px}
+#student-info-form h3{font-family:var(--heading);font-size:1.2rem;color:var(--accent);margin-bottom:20px;text-transform:uppercase;letter-spacing:0.05em}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:0.85rem;font-weight:500;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em}
+.form-group input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px 14px;color:var(--text);font-family:var(--body);font-size:0.95rem;outline:none;transition:border-color 0.2s}
+.form-group input:focus{border-color:var(--accent)}
+.start-btn{width:100%;background:var(--accent);color:#000;font-family:var(--heading);font-size:1rem;font-weight:700;letter-spacing:0.08em;border:none;border-radius:8px;padding:14px;cursor:pointer;text-transform:uppercase;transition:background 0.2s,transform 0.1s}
+.start-btn:hover{background:var(--accent2)}
+.start-btn:active{transform:scale(0.98)}
+
+/* QUESTIONS */
+.q-progress{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.progress-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 0.4s ease}
+.q-counter{font-family:var(--mono);font-size:0.85rem;color:var(--text2);white-space:nowrap}
+
+.question-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px;display:none}
+.question-block.active{display:block}
+.question-num{font-family:var(--mono);font-size:0.75rem;color:var(--accent);margin-bottom:10px}
+.question-text{font-size:0.98rem;color:var(--text);font-weight:500;margin-bottom:18px;line-height:1.6}
+.options{display:flex;flex-direction:column;gap:10px}
+.option-label{display:flex;align-items:flex-start;gap:12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all 0.15s}
+.option-label:hover{border-color:var(--accent3);background:var(--card2)}
+.option-label input[type=radio]{margin-top:3px;flex-shrink:0;accent-color:var(--accent)}
+.option-label .opt-text{font-size:0.91rem;color:var(--text2);line-height:1.5}
+.option-label.selected{border-color:var(--accent);background:rgba(232,160,32,0.08)}
+.option-label.selected .opt-text{color:var(--text)}
+.option-label.correct{border-color:var(--green) !important;background:rgba(64,192,128,0.1) !important}
+.option-label.correct .opt-text{color:var(--green) !important}
+.option-label.wrong{border-color:var(--red) !important;background:rgba(224,80,96,0.1) !important}
+.option-label.wrong .opt-text{color:var(--red) !important}
+.feedback{margin-top:14px;padding:12px 16px;border-radius:6px;font-size:0.88rem;display:none}
+.feedback.show{display:block}
+.feedback.correct-fb{background:rgba(64,192,128,0.1);border:1px solid rgba(64,192,128,0.25);color:var(--green)}
+.feedback.wrong-fb{background:rgba(224,80,96,0.1);border:1px solid rgba(224,80,96,0.25);color:var(--red)}
+
+.nav-btns{display:flex;gap:12px;margin-top:20px;justify-content:space-between}
+.btn-prev,.btn-next,.btn-submit{font-family:var(--heading);font-size:0.9rem;font-weight:600;letter-spacing:0.06em;border-radius:7px;padding:10px 24px;border:none;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.btn-prev{background:var(--card2);border:1px solid var(--border);color:var(--text2)}
+.btn-prev:hover{color:var(--text);border-color:var(--text3)}
+.btn-next{background:var(--accent);color:#000}
+.btn-next:hover{background:var(--accent2)}
+.btn-submit{background:var(--green);color:#000;flex:1}
+.btn-submit:hover{opacity:0.9}
+
+/* RESULTS */
+#results-panel{display:none;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}
+#results-panel.show{display:block}
+.score-circle{width:140px;height:140px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 24px;border:6px solid var(--accent);background:rgba(232,160,32,0.05)}
+.score-pct{font-family:var(--heading);font-size:2.8rem;font-weight:700;color:var(--accent);line-height:1}
+.score-label{font-size:0.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px}
+.grade-badge{display:inline-block;font-family:var(--heading);font-size:1.4rem;font-weight:700;padding:8px 24px;border-radius:8px;margin-bottom:20px}
+.grade-A{background:rgba(64,192,128,0.15);color:var(--green);border:1px solid rgba(64,192,128,0.3)}
+.grade-B{background:rgba(64,144,224,0.12);color:var(--blue);border:1px solid rgba(64,144,224,0.25)}
+.grade-C{background:rgba(232,160,32,0.12);color:var(--accent);border:1px solid rgba(232,160,32,0.25)}
+.grade-D,.grade-F{background:rgba(224,80,96,0.12);color:var(--red);border:1px solid rgba(224,80,96,0.25)}
+.result-stats{display:flex;gap:20px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+.stat-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px 22px;min-width:110px}
+.stat-box .stat-val{font-family:var(--heading);font-size:1.4rem;font-weight:700}
+.stat-box .stat-desc{font-size:0.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em}
+.correct-val{color:var(--green)}
+.wrong-val{color:var(--red)}
+.dl-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#000;font-family:var(--heading);font-size:0.95rem;font-weight:700;letter-spacing:0.08em;border:none;border-radius:8px;padding:14px 32px;cursor:pointer;margin-top:24px;text-transform:uppercase;transition:background 0.2s}
+.dl-btn:hover{background:var(--accent2)}
+.retake-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text2);font-family:var(--heading);font-size:0.9rem;font-weight:600;border:1px solid var(--border);border-radius:8px;padding:12px 24px;cursor:pointer;margin-top:12px;margin-left:12px;text-transform:uppercase;transition:all 0.2s}
+.retake-btn:hover{color:var(--text);border-color:var(--text3)}
+
+/* REVIEW TABLE */
+.review-table{margin-top:32px;text-align:left}
+.review-table h3{font-family:var(--heading);font-size:1.1rem;color:var(--text);margin-bottom:16px;text-transform:uppercase;letter-spacing:0.05em}
+
+/* MISC */
+h2.sub{font-family:var(--heading);font-size:1.35rem;font-weight:700;color:var(--text);margin:28px 0 16px}
+p{color:var(--text2);margin-bottom:14px;line-height:1.75}
+strong{color:var(--text);font-weight:600}
+.tag{display:inline-block;font-family:var(--mono);font-size:0.72rem;padding:2px 8px;border-radius:3px;border:1px solid var(--border);color:var(--text3);margin-right:4px;margin-bottom:4px}
+
+/* INTRO HERO */
+#intro-hero{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px 48px;margin-bottom:48px;position:relative;overflow:hidden}
+#intro-hero::after{content:'🦴';position:absolute;right:48px;top:24px;font-size:5rem;opacity:0.06;pointer-events:none}
+#intro-hero h1{font-family:var(--heading);font-size:2.4rem;font-weight:700;color:var(--text);margin-bottom:6px}
+#intro-hero .chapter-tag{font-family:var(--mono);font-size:0.78rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+#intro-hero p{color:var(--text2);font-size:0.95rem;max-width:640px}
+.topic-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.topic-tag{font-family:var(--mono);font-size:0.75rem;padding:5px 12px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);color:var(--text3)}
+
+/* OVERLAY */
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999}
+#overlay.show{display:block}
+</style>
+</head>
+<body>
+<!-- TOPBAR -->
+<div id="topbar">
+  <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+  <div class="logo">CAMP EMS</div>
+  <div class="chapter-label">Chapter 31 · Musculoskeletal</div>
+  <div class="spacer"></div>
+  <button id="theme-toggle" onclick="toggleTheme()">
+    <span id="theme-icon">☀️</span><span id="theme-text">Light Mode</span>
+  </button>
+</div>
+<div id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="nav-section">
+    <div class="nav-section-label">Overview</div>
+    <a class="nav-item active" onclick="navTo('intro')"><span class="nav-icon">🏠</span>Introduction</a>
+    <a class="nav-item" onclick="navTo('anatomy')"><span class="nav-icon">🦴</span>Anatomy &amp; Physiology</a>
+    <a class="nav-item" onclick="navTo('assessment')"><span class="nav-icon">🔍</span>Assessment Strategies</a>
+    <a class="nav-item" onclick="navTo('management')"><span class="nav-icon">🩺</span>Management Guidelines</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Bone Disorders</div>
+    <a class="nav-item" onclick="navTo('osteo')"><span class="nav-icon">🦠</span>Osteomyelitis</a>
+    <a class="nav-item" onclick="navTo('tumors')"><span class="nav-icon">⚠️</span>Bone Tumors</a>
+    <a class="nav-item" onclick="navTo('lowback')"><span class="nav-icon">🔩</span>Low Back Pain</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Joint Disorders</div>
+    <a class="nav-item" onclick="navTo('arthritis')"><span class="nav-icon">🔴</span>Arthritis Types</a>
+    <a class="nav-item" onclick="navTo('gout')"><span class="nav-icon">💎</span>Gout</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Muscle Disorders</div>
+    <a class="nav-item" onclick="navTo('myalgia')"><span class="nav-icon">💪</span>Myalgia &amp; Myopathies</a>
+    <a class="nav-item" onclick="navTo('cfs')"><span class="nav-icon">😴</span>Chronic Fatigue Syndrome</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Overuse &amp; Nerve</div>
+    <a class="nav-item" onclick="navTo('overuse')"><span class="nav-icon">🔄</span>Overuse Syndromes</a>
+    <a class="nav-item" onclick="navTo('nerve')"><span class="nav-icon">⚡</span>Peripheral Nerve Syndromes</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Soft Tissue</div>
+    <a class="nav-item" onclick="navTo('fasciitis')"><span class="nav-icon">🦷</span>Necrotizing Fasciitis</a>
+    <a class="nav-item" onclick="navTo('gangrene')"><span class="nav-icon">🖤</span>Gangrene</a>
+    <a class="nav-item" onclick="navTo('other-soft')"><span class="nav-icon">🤚</span>Other Soft Tissue Infections</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-label">Knowledge Check</div>
+    <a class="nav-item" onclick="navTo('exam')"><span class="nav-icon">📝</span>100-Question Exam</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+<!-- INTRO -->
+<div id="intro" class="section">
+  <div id="intro-hero">
+    <div class="chapter-tag">Sanders' Paramedic Textbook 6th Ed. · Chapter 31</div>
+    <h1>Nontraumatic Musculoskeletal Disorders</h1>
+    <p>Master bone, joint, muscle, nerve, and soft-tissue disorders — their pathophysiology, clinical presentation, pharmacology, and prehospital management. Built for CAMP EMS paramedic students.</p>
+    <div class="topic-tags">
+      <span class="topic-tag">Osteomyelitis</span><span class="topic-tag">Bone Tumors</span><span class="topic-tag">Low Back Pain</span><span class="topic-tag">Cauda Equina</span><span class="topic-tag">Arthritis</span><span class="topic-tag">Gout</span><span class="topic-tag">Myalgia</span><span class="topic-tag">Bursitis</span><span class="topic-tag">Carpal Tunnel</span><span class="topic-tag">Necrotizing Fasciitis</span><span class="topic-tag">Gangrene</span>
+    </div>
+  </div>
+  <div class="grid-3">
+    <div class="card"><h4>🦴 Bone Disorders</h4><p>Infections, tumors, and degenerative processes affecting the structural integrity of bone.</p></div>
+    <div class="card"><h4>🔴 Joint Disorders</h4><p>Inflammatory, degenerative, and infectious arthritides including gout and septic arthritis.</p></div>
+    <div class="card"><h4>💪 Muscle &amp; Nerve</h4><p>Myopathies, overuse syndromes, carpal tunnel, and chronic fatigue syndrome.</p></div>
+  </div>
+</div>
+
+<!-- ANATOMY -->
+<div id="anatomy" class="section">
+  <div class="section-header">
+    <div class="section-number">I</div>
+    <div><div class="section-title">Anatomy &amp; Physiology Review</div><div class="section-subtitle">206 bones · 3 joint types · 3 muscle types</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>The Musculoskeletal System</h3>
+    <p>The musculoskeletal system consists of <strong>bones, muscles, tendons, ligaments, and articulating surfaces</strong>. Bones provide structural support and protection; muscles generate movement and maintain posture; tendons anchor muscle to bone; ligaments bind bone to bone; and cartilage cushions articulating surfaces.</p>
+  </div>
+  <h2 class="sub">Skeletal System</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Axial Skeleton</h4>
+      <ul>
+        <li>Skull &amp; hyoid bone</li>
+        <li>Vertebral column (cervical, thoracic, lumbar, sacral, coccyx)</li>
+        <li>Thoracic cage (sternum + 12 pairs of ribs)</li>
+        <li>Forms the central axis of the body</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Appendicular Skeleton</h4>
+      <ul>
+        <li>Upper extremities &amp; shoulder girdle</li>
+        <li>Lower extremities &amp; pelvic girdle</li>
+        <li>126 bones total</li>
+        <li>Most joints are synovial (freely moveable)</li>
+      </ul>
+    </div>
+  </div>
+  <h2 class="sub">Joint Classification</h2>
+  <div class="grid-3">
+    <div class="card"><h4>🔩 Fibrous</h4><p>Bones joined by dense fibrous tissue with little or no movement. Example: skull sutures, distal tibiofibular joint.</p></div>
+    <div class="card"><h4>💠 Cartilaginous</h4><p>Bones united by hyaline cartilage/fibrocartilage. Slightly moveable. Example: pubic symphysis, intervertebral discs.</p></div>
+    <div class="card"><h4>💧 Synovial</h4><p>Fluid-filled joint capsule allows for free movement. Most joints of the appendicular skeleton. Example: knee, hip, shoulder.</p></div>
+  </div>
+  <h2 class="sub">Muscular System</h2>
+  <div class="grid-3">
+    <div class="card"><h4>Skeletal Muscle</h4><p>Voluntary, striated. Attached to bone via tendons. Generates locomotion and postural control through contraction/relaxation cycles of muscle fibers.</p></div>
+    <div class="card"><h4>Cardiac Muscle</h4><p>Involuntary, striated. Found only in the heart. Self-excitatory with intrinsic pacemaker activity. Highly resistant to fatigue.</p></div>
+    <div class="card"><h4>Smooth Muscle</h4><p>Involuntary, non-striated. Found in viscera, blood vessels, and airways. Controls internal organ function under autonomic regulation.</p></div>
+  </div>
+  <div class="analogy">
+    <span class="icon">🔦</span>
+    <div class="analogy-text"><strong>Muscle Tone Analogy:</strong> Think of muscle tone like the idle speed of a car engine — it's not full throttle, but the engine is running, keeping the body upright and ready to move. Without proper tone, the "engine stalls" and posture collapses. Conditions like myopathies or stroke reduce this idle, while spasticity revs it too high.</div>
+  </div>
+</div>
+
+<!-- ASSESSMENT -->
+<div id="assessment" class="section">
+  <div class="section-header">
+    <div class="section-number">II</div>
+    <div><div class="section-title">General Assessment Strategies</div><div class="section-subtitle">Extremity · Spine · Vascular · Motor Examination</div></div>
+  </div>
+  <div class="path-box">
+    <h4>Assessment Framework</h4>
+    <p>A systematic musculoskeletal assessment includes evaluation of the <strong>extremities, spine, vascular status, and motor/neurological function</strong>. The goal is to identify abnormal findings that guide prehospital management decisions.</p>
+  </div>
+  <h2 class="sub">Abnormal Findings to Identify</h2>
+  <div class="signs-grid">
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Pain or tenderness</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Swelling / edema</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Abnormal movement</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Loss of movement</span></div>
+    <div class="sign-chip"><div class="dot dot-blue"></div><span>Decreased sensation</span></div>
+    <div class="sign-chip"><div class="dot dot-cyan"></div><span>Circulatory changes</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Deformity</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Crepitus</span></div>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h4>Extremity Exam</h4><ul><li>Hands/wrists: contour, alignment, tenderness</li><li>Elbows: palpate flexed and extended</li><li>Shoulders: structural integrity</li><li>Pelvis/hips: stability, no deformity</li><li>Knees: patella midline, non-tender</li><li>Ankles/feet: contour, alignment, no nodules</li></ul></div>
+    <div class="card"><h4>Spine Exam</h4><ul><li>Check cervical, thoracic, lumbar curves</li><li>Neck: flex/extend/lateral without pain</li><li>Inspect thoracic/lumbar for swelling, discoloration</li><li>Note abnormal curvature (kyphosis, scoliosis, lordosis)</li></ul></div>
+    <div class="card"><h4>Vascular Exam</h4><ul><li>Skin color and texture (pallor, cyanosis)</li><li>Pulse quality distal to injury</li><li>Temperature (cold = poor perfusion)</li><li>Pitting edema</li><li>Lymph node assessment</li></ul></div>
+    <div class="card"><h4>Motor Exam</h4><ul><li>Gait observation (antalgic gait?)</li><li>Agility, flexion, extension, abduction</li><li>Point-to-point coordination</li><li>Sensation: pain, vibration, touch</li><li>Involuntary movements (tremor, spasm)</li></ul></div>
+  </div>
+</div>
+
+<!-- MANAGEMENT -->
+<div id="management" class="section">
+  <div class="section-header">
+    <div class="section-number">III</div>
+    <div><div class="section-title">General Management Guidelines</div><div class="section-subtitle">Prehospital Principles · Pain Management · Transport</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>Prehospital Management Framework</h3>
+    <p>Prehospital care for musculoskeletal disorders is primarily <strong>supportive</strong>. The foundation includes scene safety, primary assessment (ABCs), secondary assessment, pain management (pharmacologic and non-pharmacologic), and careful transport for physician evaluation.</p>
+  </div>
+  <div class="grid-2">
+    <div class="path-box">
+      <h4>Non-Pharmacologic Measures</h4>
+      <ul>
+        <li><strong>Immobilization</strong> — splint affected extremity in position of comfort</li>
+        <li><strong>Ice/Cryotherapy</strong> — reduce swelling and inflammation (15–20 min on/off)</li>
+        <li><strong>Elevation</strong> — reduce edema by promoting venous drainage</li>
+        <li><strong>Rest</strong> — prevent further injury</li>
+        <li><strong>Gentle transport</strong> — minimize jolting and patient movement</li>
+      </ul>
+    </div>
+    <div class="path-box">
+      <h4>Pharmacologic Measures</h4>
+      <ul>
+        <li><strong>Analgesics</strong> — morphine, fentanyl, ketorolac (per protocol)</li>
+        <li><strong>NSAIDs</strong> — ibuprofen, ketorolac (anti-inflammatory)</li>
+        <li><strong>Muscle relaxants</strong> — cyclobenzaprine, methocarbamol</li>
+        <li><strong>Corticosteroids</strong> — methylprednisolone (severe inflammation)</li>
+        <li><strong>Antibiotics</strong> — when infectious etiology is present (hospital-initiated)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-amber"><span class="alert-icon">⚠️</span><p><strong>Cultural Sensitivity:</strong> Not all cultures embrace Western pharmacologic pain management. Be aware of non-pharmaceutical pain management preferences and remain non-judgmental. Pediatric patients are frequently undertreated for pain — use validated pediatric pain scales and treat accordingly.</p></div>
+</div>
+
+<!-- OSTEOMYELITIS -->
+<div id="osteo" class="section">
+  <div class="section-header">
+    <div class="section-number">IV</div>
+    <div><div class="section-title">Osteomyelitis</div><div class="section-subtitle">Acute and chronic bone infection</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>Pathophysiology</h3>
+    <p>Osteomyelitis is an <strong>acute or chronic infection of bone</strong> caused most commonly by <em>Staphylococcus aureus</em> (70–80% of cases). The infection typically reaches bone via <strong>hematogenous spread</strong> (bloodborne), direct inoculation (puncture wound, open fracture), or contiguous spread from adjacent infected tissue.</p>
+    <p>Once bacteria seed the bone, they colonize the highly vascular metaphysis of long bones in children. The resulting inflammatory response causes increased intraosseous pressure, leading to <strong>vascular compromise and ischemic necrosis</strong>. Dead bone (sequestrum) becomes a nidus for persistent infection that antibiotics struggle to penetrate — the mechanism behind chronic osteomyelitis.</p>
+  </div>
+  <div class="analogy">
+    <span class="icon">🏰</span>
+    <div class="analogy-text"><strong>Fortress Under Siege Analogy:</strong> Imagine bone as a fortress with its own blood supply (the moat). Bacteria that breach the walls (via a puncture or bloodstream) set up camp inside. The body's immune response floods the area, but increased pressure cuts off the moat — essentially <strong>starving the fortress's own defenders</strong>. Dead bone becomes a "castle ruin" — structurally compromised and sheltering bacteria that antibiotics cannot easily reach through the blocked supply lines.</div>
+  </div>
+  <h2 class="sub">Risk Factors</h2>
+  <div class="signs-grid">
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Recent orthopedic surgery</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>IV drug abuse</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Sickle cell disease</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Diabetes mellitus</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Immunocompromise</span></div>
+    <div class="sign-chip"><div class="dot dot-blue"></div><span>Hemodialysis patients</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Elderly (> 60 yrs)</span></div>
+    <div class="sign-chip"><div class="dot dot-blue"></div><span>Open fractures</span></div>
+  </div>
+  <h2 class="sub">Signs &amp; Symptoms</h2>
+  <div class="signs-grid">
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Bone pain / tenderness</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Localized swelling &amp; warmth</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Fever (may be high-grade)</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Chills &amp; rigors</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Diaphoresis</span></div>
+    <div class="sign-chip"><div class="dot dot-blue"></div><span>Reduced ROM of adjacent joint</span></div>
+  </div>
+  <h2 class="sub">Medications &amp; Treatment</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Agent</th><th>Class</th><th>Role</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Nafcillin / Oxacillin</strong></td><td><span class="pill pill-amber">Antibiotic</span></td><td>1st-line MSSA osteomyelitis</td><td>4–6 weeks IV; must determine organism sensitivity</td></tr>
+        <tr><td><strong>Vancomycin</strong></td><td><span class="pill pill-amber">Antibiotic</span></td><td>MRSA osteomyelitis</td><td>Monitor renal function; trough-guided dosing</td></tr>
+        <tr><td><strong>Ciprofloxacin</strong></td><td><span class="pill pill-amber">Antibiotic</span></td><td>Gram-negative organisms</td><td>Excellent bone penetration; IV or oral step-down</td></tr>
+        <tr><td><strong>Morphine / Fentanyl</strong></td><td><span class="pill pill-purple">Opioid</span></td><td>Prehospital pain control</td><td>Titrate to effect; monitor respiratory status</td></tr>
+        <tr><td><strong>Ketorolac</strong></td><td><span class="pill pill-green">NSAID</span></td><td>Adjunct analgesia</td><td>15–30 mg IV/IM; caution in renal impairment</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-red"><span class="alert-icon">🚨</span><p><strong>Prehospital Pearl:</strong> Osteomyelitis can be misidentified as musculoskeletal pain or minor injury. Consider it in any patient with bone pain + fever + risk factors. Systemic sepsis can develop rapidly — perform a full sepsis screening (vital signs, mental status, glucose). Transport for IV antibiotics is definitive treatment.</p></div>
+</div>
+
+<!-- BONE TUMORS -->
+<div id="tumors" class="section">
+  <div class="section-header">
+    <div class="section-number">V</div>
+    <div><div class="section-title">Bone Tumors</div><div class="section-subtitle">Benign &amp; Malignant · Primary &amp; Secondary</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>Pathophysiology</h3>
+    <p>Bone tumors arise from <strong>abnormal proliferation of bone-forming cells</strong>. Benign tumors are locally expansile without metastatic potential; malignant tumors invade locally and disseminate via the hematogenous or lymphatic route. Primary bone cancers originate in bone; secondary (metastatic) tumors arise elsewhere (breast, prostate, lung, kidney, thyroid) and seed to bone — the most common form of bone malignancy overall.</p>
+    <p>Tumor growth disrupts normal bone architecture, weakening cortical and trabecular structure. This leads to <strong>pathologic fractures</strong> — fractures occurring with minimal or no trauma through bone that has been structurally compromised by tumor invasion.</p>
+  </div>
+  <div class="analogy">
+    <span class="icon">🏗️</span>
+    <div class="analogy-text"><strong>Building Demolition Analogy:</strong> Healthy bone is like reinforced concrete. A bone tumor is like a demolition crew quietly working from the inside — <strong>replacing structural beams with defective material</strong>. The building looks normal on the outside until one day a minor stress (stepping off a curb) causes catastrophic collapse — a pathologic fracture. The taller the building (longer bone like femur), the more force transmitted and the greater the fracture risk.</div>
+  </div>
+  <h2 class="sub">Primary Bone Tumors</h2>
+  <div class="grid-3">
+    <div class="card"><h4>🔴 Osteosarcoma</h4><p>Most common primary bone cancer. Peak incidence in <strong>teens &amp; young adults</strong>. Occurs near knee (distal femur, proximal tibia) or proximal humerus. Highly aggressive — early metastasis to lungs.</p></div>
+    <div class="card"><h4>🟡 Ewing Sarcoma</h4><p>Ages <strong>5–20 years</strong>. Affects diaphysis of long bones (femur, tibia, fibula), also pelvis, ribs, spine. Second most common primary bone tumor in children. "Onion skin" appearance on x-ray.</p></div>
+    <div class="card"><h4>🔵 Chondrosarcoma</h4><p>Arises from cartilaginous tissue. Primarily <strong>adults > 20 years</strong>. Occurs in hip, pelvis, and shoulder. Slower-growing than osteosarcoma; relatively resistant to chemo/radiation — surgery is primary treatment.</p></div>
+  </div>
+  <h2 class="sub">Signs, Symptoms &amp; Management</h2>
+  <div class="signs-grid">
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Dull, aching bone pain</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Pain worsened by activity</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Palpable painless mass</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Pathologic fracture</span></div>
+    <div class="sign-chip"><div class="dot dot-blue"></div><span>Swelling without trauma</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Night pain unrelieved by rest</span></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Treatment</th><th>Indication</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Surgery (resection/amputation)</strong></td><td>Primary malignant tumors</td><td>Wide margins critical; limb salvage preferred when possible</td></tr>
+        <tr><td><strong>Chemotherapy</strong> (Cisplatin, Doxorubicin, Methotrexate)</td><td>Osteosarcoma, Ewing sarcoma</td><td>Pre/post-operative; dramatically improved survival rates</td></tr>
+        <tr><td><strong>Radiation therapy</strong></td><td>Ewing sarcoma, metastatic disease</td><td>Osteosarcoma is relatively radio-resistant</td></tr>
+        <tr><td><strong>Cryosurgery</strong></td><td>Benign/localized tumors</td><td>Liquid nitrogen freezes tumor cells</td></tr>
+        <tr><td><strong>Opioid analgesics</strong></td><td>Prehospital pain management</td><td>Pathologic fracture = severe pain; titrate cautiously</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-red"><span class="alert-icon">🚨</span><p><strong>Prehospital Alert:</strong> <strong>Pathologic fractures</strong> may present with minimal mechanism — a "fracture with no force." Any patient with known or suspected cancer who sustains a fracture with trivial trauma should be immobilized gently, pain managed aggressively, and transported to a trauma-capable facility. Do not attribute skeletal pain in young patients to "growing pains" without thorough evaluation.</p></div>
+</div>
+
+<!-- LOW BACK PAIN -->
+<div id="lowback" class="section">
+  <div class="section-header">
+    <div class="section-number">VI</div>
+    <div><div class="section-title">Low Back Pain, Disc Disorders &amp; Cauda Equina</div><div class="section-subtitle">Most common musculoskeletal complaint · Potential surgical emergency</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>Intervertebral Disc Pathophysiology</h3>
+    <p>Each intervertebral disc has a <strong>nucleus pulposus</strong> (gelatinous center) surrounded by the <strong>annulus fibrosus</strong> (fibrous outer ring). Discs act as hydraulic shock absorbers distributing axial load. With repetitive mechanical stress or aging, the annulus fibrosus dehydrates and weakens. Progressive annular tears allow the nucleus pulposus to bulge outward (<strong>disc herniation</strong>), impinging adjacent nerve roots.</p>
+    <p>90% of disc herniations occur at <strong>L4–L5 or L5–S1</strong>, producing radicular symptoms along the sciatic nerve distribution (sciatica). The lumbar spine bears the greatest compressive load, making it the most vulnerable segment.</p>
+  </div>
+  <div class="analogy">
+    <span class="icon">🍩</span>
+    <div class="analogy-text"><strong>Jelly Donut Analogy:</strong> An intervertebral disc is like a jelly-filled donut — the jelly is the nucleus pulposus, and the pastry ring is the annulus fibrosus. When you <strong>squeeze the donut unevenly</strong> (poor lifting mechanics, repetitive bending), the jelly pushes toward the weakest spot in the ring. A small push = disc bulge. A bigger push that breaks through = disc herniation. The jelly then <strong>squirts onto the nerve root</strong> next door, causing the burning, shooting pain of sciatica. The fix? Reduce the pressure and let the donut "dry out" through rest and PT — or surgically remove the errant jelly (discectomy).</div>
+  </div>
+  <div class="grid-2">
+    <div class="path-box">
+      <h4>Herniated Disc — Signs &amp; Symptoms</h4>
+      <ul>
+        <li>Low back ache radiating to buttock and leg</li>
+        <li>"Shooting" / electric pain down leg (sciatica)</li>
+        <li>Numbness or weakness in lower extremities</li>
+        <li>Deep muscle pain and spasms</li>
+        <li>Pain worsened by Valsalva (coughing, sneezing)</li>
+        <li>Positive straight-leg raise test</li>
+      </ul>
+    </div>
+    <div class="path-box">
+      <h4>Sprains &amp; Strains</h4>
+      <ul>
+        <li><strong>Strain</strong> — injury to muscle or tendon (overstretching)</li>
+        <li><strong>Sprain</strong> — stretching/tearing of ligament beyond normal ROM</li>
+        <li>Causes: twisting, pulling, improper lifting</li>
+        <li>S/S: pain, warmth, muscle spasms, swelling</li>
+        <li>Tx: 24–48 hrs bed rest, NSAIDs, muscle relaxants, PT</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-red">
+    <span class="alert-icon">🚨</span>
+    <p><strong>CAUDA EQUINA SYNDROME — Surgical Emergency</strong><br/>
+    Rare compression of the sacral nerve root bundle at the lumbar spine. Hallmark: <strong>saddle anesthesia</strong> (loss of sensation in perineum, inner thighs, genitals), bladder/bowel dysfunction, bilateral leg weakness/pain. Without emergent decompression, permanent paralysis and incontinence result. <strong>This is a time-sensitive surgical emergency — transport immediately.</strong></p>
+  </div>
+
+  <h2 class="sub">Cauda Equina — Cardinal Features</h2>
+  <div class="signs-grid">
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Saddle anesthesia</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Bladder/bowel dysfunction</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Bilateral leg weakness</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Sexual dysfunction</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Progressive leg weakness</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Foot drop</span></div>
+  </div>
+
+  <h2 class="sub">Low Back Pain Management</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Medication</th><th>Class</th><th>Mechanism</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ibuprofen / Naproxen</strong></td><td><span class="pill pill-green">NSAID</span></td><td>COX-1/2 inhibition → ↓ prostaglandins → analgesia + anti-inflammation</td><td>First-line for acute LBP; GI protection with food</td></tr>
+        <tr><td><strong>Ketorolac</strong></td><td><span class="pill pill-green">NSAID</span></td><td>Parenteral NSAID; COX inhibition</td><td>15–30 mg IV/IM; ≤5 days; avoid in renal failure</td></tr>
+        <tr><td><strong>Cyclobenzaprine</strong></td><td><span class="pill pill-cyan">Muscle Relaxant</span></td><td>CNS-mediated ↓ muscle hyperactivity (brainstem)</td><td>10 mg TID; sedating; avoid in elderly</td></tr>
+        <tr><td><strong>Methocarbamol</strong></td><td><span class="pill pill-cyan">Muscle Relaxant</span></td><td>CNS depression → ↓ spasm</td><td>Can be given IV in prehospital setting per protocol</td></tr>
+        <tr><td><strong>Methylprednisolone</strong></td><td><span class="pill pill-blue">Corticosteroid</span></td><td>Inhibits inflammation cascade; ↓ edema around nerve root</td><td>Used for acute radiculopathy; short course</td></tr>
+        <tr><td><strong>Morphine / Fentanyl</strong></td><td><span class="pill pill-purple">Opioid</span></td><td>μ-opioid receptor agonist</td><td>Reserve for severe acute pain; avoid chronic use in LBP</td></tr>
+        <tr><td><strong>Gabapentin</strong></td><td><span class="pill pill-amber">Neuropathic</span></td><td>Calcium channel α-2-δ subunit blocker → ↓ neuropathic pain</td><td>For radicular/neuropathic component</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ARTHRITIS -->
+<div id="arthritis" class="section">
+  <div class="section-header">
+    <div class="section-number">VII</div>
+    <div><div class="section-title">Arthritis &amp; Joint Disorders</div><div class="section-subtitle">58.5 million Americans affected · Leading cause of disability in the US</div></div>
+  </div>
+
+  <h2 class="sub">Osteoarthritis (OA)</h2>
+  <div class="hero-card">
+    <h3>Pathophysiology</h3>
+    <p>OA is a <strong>degenerative joint disease</strong> characterized by progressive breakdown of articular cartilage. Chondrocytes (cartilage cells) are lost, the underlying subchondral bone becomes sclerotic and forms <strong>osteophytes</strong> (bone spurs). The joint space narrows, synovial fluid decreases, and bone-on-bone contact causes severe pain. OA primarily affects weight-bearing joints (knees, hips) and the spine.</p>
+  </div>
+  <div class="analogy">
+    <span class="icon">⚙️</span>
+    <div class="analogy-text"><strong>Worn Brake Pad Analogy:</strong> OA is like worn-down brake pads on a car — the protective material erodes over decades of use. Eventually you get <strong>metal on metal</strong> (bone on bone) contact — grinding, squealing, and pain. The body tries to compensate by laying down extra material (osteophytes/bone spurs) — like welding reinforcement plates onto the worn brake assembly — but this just makes the joint stiffer and less functional.</div>
+  </div>
+
+  <h2 class="sub">Rheumatoid Arthritis (RA)</h2>
+  <div class="hero-card">
+    <h3>Pathophysiology</h3>
+    <p>RA is an <strong>autoimmune synovitis</strong> — the immune system mistakenly targets the synovial membrane. Activated lymphocytes (T and B cells) infiltrate the synovium, releasing cytokines (TNF-α, IL-1, IL-6) that cause <strong>synovial hyperplasia and pannus formation</strong>. The pannus is a layer of granulation tissue that aggressively invades and destroys cartilage and subchondral bone. RA follows a <strong>symmetrical distribution</strong> (bilateral wrists, MCPs, PIPs) and can affect extra-articular tissues (lungs, heart, eyes).</p>
+  </div>
+  <div class="analogy">
+    <span class="icon">🔥</span>
+    <div class="analogy-text"><strong>Friendly Fire Analogy:</strong> RA is the immune system's "friendly fire" — the body's soldiers (lymphocytes) receive bad intelligence and attack their own base (the synovium). They set up a <strong>permanent occupation force</strong> (pannus) that dismantles the joint from the inside out. The harder the immune system fights, the more structural damage accumulates. DMARDs and biologics work by <strong>calling off the soldiers</strong> or disrupting their chemical communication lines (cytokines like TNF-α).</div>
+  </div>
+
+  <h2 class="sub">Septic Arthritis</h2>
+  <div class="path-box">
+    <h4>Pathophysiology</h4>
+    <p>Direct invasion of the joint space by bacteria (most commonly <em>Staphylococcus aureus</em>, <em>Streptococcus</em>, or <em>Neisseria gonorrhoeae</em> in young sexually active adults). Bacteria trigger a massive immune response within the synovial space. Proteolytic enzymes destroy cartilage within <strong>hours to days</strong> if untreated. The knee is most commonly affected, followed by hip, shoulder, ankle, and wrist. Septic arthritis of the hip in children is a true emergency — avascular necrosis of the femoral head can result.</p>
+  </div>
+  <div class="signs-grid">
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Fever + shaking chills</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Severe joint pain</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Warmth &amp; erythema</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Swollen joint effusion</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Refusal to move joint</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Rapid onset</span></div>
+  </div>
+
+  <h2 class="sub">Arthritis Medication Summary</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Drug Class</th><th>Examples</th><th>Use</th><th>Mechanism</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill pill-green">NSAIDs</span></td><td>Ibuprofen, Naproxen, Indomethacin</td><td>All arthritis types — first-line pain/inflammation</td><td>COX inhibition → ↓ prostaglandin synthesis</td></tr>
+        <tr><td><span class="pill pill-blue">DMARDs</span></td><td>Methotrexate, Hydroxychloroquine, Sulfasalazine</td><td>RA — slow disease progression</td><td>Inhibit lymphocyte proliferation and immune activation</td></tr>
+        <tr><td><span class="pill pill-purple">Biologics</span></td><td>Adalimumab (Humira), Etanercept, Infliximab</td><td>Moderate-severe RA, Ankylosing Spondylitis</td><td>TNF-α inhibitors; block pro-inflammatory cytokine</td></tr>
+        <tr><td><span class="pill pill-amber">Corticosteroids</span></td><td>Prednisone, Methylprednisolone</td><td>Acute flares; RA, septic arthritis adjunct</td><td>Broad immunosuppression; ↓ cytokine production</td></tr>
+        <tr><td><span class="pill pill-red">Antibiotics</span></td><td>Vancomycin + Ceftriaxone (empiric)</td><td>Septic arthritis</td><td>Bactericidal; cover Staph, Strep, gram-negatives</td></tr>
+        <tr><td><span class="pill pill-cyan">JAK Inhibitors</span></td><td>Tofacitinib, Baricitinib</td><td>RA (biologic-refractory)</td><td>Block Janus kinase signaling → ↓ cytokine cascade</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- GOUT -->
+<div id="gout" class="section">
+  <div class="section-header">
+    <div class="section-number">VIII</div>
+    <div><div class="section-title">Gout</div><div class="section-subtitle">Crystal arthropathy · Monoarticular · Hyperuricemia</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>Pathophysiology</h3>
+    <p>Gout results from <strong>hyperuricemia</strong> — elevated serum uric acid levels. Uric acid is the end product of purine metabolism (purines are found in high concentrations in meat, seafood, alcohol, and fructose). When uric acid supersaturates synovial fluid, it crystallizes as <strong>monosodium urate (MSU) crystals</strong> — needle-shaped and negatively birefringent on polarized light microscopy.</p>
+    <p>Macrophages engulf the MSU crystals, triggering <strong>NLRP3 inflammasome activation</strong> and massive IL-1β release. This causes the sudden, excruciating inflammation characteristic of acute gout attacks. Classic presentation: red, hot, swollen, exquisitely tender <strong>first MTP joint (podagra)</strong>.</p>
+  </div>
+  <div class="analogy">
+    <span class="icon">🪡</span>
+    <div class="analogy-text"><strong>Broken Glass Analogy:</strong> MSU crystals in a joint are like broken glass shards scattered on the floor of your knee or toe. Every movement of the joint <strong>grinds the shards into the synovium</strong>, triggering a massive inflammatory response. The macrophages (the cleanup crew) try to vacuum up the glass but are cut in the process, releasing a flood of inflammatory chemicals (IL-1β) that cause the intense redness, heat, and agonizing pain. <strong>Allopurinol</strong> works by stopping the production of new "glass" (uric acid) at the source — blocking xanthine oxidase.</div>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h4>Acute Gout Features</h4><ul><li>Sudden onset (often nocturnal)</li><li>Monoarticular (1st MTP = classic "podagra")</li><li>Intense, excruciating pain</li><li>Red, hot, swollen joint</li><li>Exquisitely tender — even bedsheet contact painful</li><li>Resolves in 7–14 days without treatment</li></ul></div>
+    <div class="card"><h4>Risk Factors</h4><ul><li>Male sex (women post-menopause)</li><li>Diets rich in meat, shellfish, beer</li><li>Obesity and metabolic syndrome</li><li>Hypertension and heart failure</li><li>Diuretics (thiazide, loop)</li><li>Cyclosporine (transplant patients)</li><li>CKD (impaired uric acid excretion)</li></ul></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Drug</th><th>Class</th><th>Use</th><th>Mechanism</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Colchicine</strong></td><td><span class="pill pill-cyan">Anti-gout</span></td><td>Acute attack; prophylaxis</td><td>Inhibits microtubule assembly → blocks neutrophil migration to joint</td></tr>
+        <tr><td><strong>Indomethacin</strong></td><td><span class="pill pill-green">NSAID</span></td><td>Acute attack</td><td>Potent COX inhibitor; superior to other NSAIDs for gout</td></tr>
+        <tr><td><strong>Prednisone</strong></td><td><span class="pill pill-amber">Corticosteroid</span></td><td>Acute attack if NSAIDs/colchicine CI</td><td>Broad anti-inflammatory; ↓ IL-1β, TNF-α</td></tr>
+        <tr><td><strong>Allopurinol</strong></td><td><span class="pill pill-blue">Xanthine Oxidase Inhibitor</span></td><td>Chronic gout prevention</td><td>Blocks xanthine oxidase → ↓ uric acid production</td></tr>
+        <tr><td><strong>Febuxostat</strong></td><td><span class="pill pill-blue">Xanthine Oxidase Inhibitor</span></td><td>Chronic prevention (allopurinol intolerant)</td><td>Non-purine XO inhibitor; ↓ uric acid synthesis</td></tr>
+        <tr><td><strong>Probenecid</strong></td><td><span class="pill pill-purple">Uricosuric</span></td><td>Chronic prevention (underexcreters)</td><td>Blocks renal urate reabsorption → ↑ uric acid excretion</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MYALGIA -->
+<div id="myalgia" class="section">
+  <div class="section-header">
+    <div class="section-number">IX</div>
+    <div><div class="section-title">Myalgia &amp; Inflammatory Myopathies</div><div class="section-subtitle">Autoimmune · Progressive · Multi-system</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>Pathophysiology</h3>
+    <p><strong>Myalgia</strong> is generalized muscle pain that can be acute (infection, overuse, rhabdomyolysis) or chronic (myopathy, fibromyalgia). <strong>Inflammatory myopathies</strong> are autoimmune conditions in which immune cells attack skeletal muscle fibers, causing chronic inflammation, fiber necrosis, and progressive proximal muscle weakness. There are four major inflammatory myopathies: dermatomyositis, polymyositis, inclusion body myositis, and necrotizing autoimmune myopathy.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h4>🔴 Dermatomyositis</h4><p>Skin rash (heliotrope — blue-purple eyelid rash, Gottron's papules over joints) + progressive proximal muscle weakness. Can be paraneoplastic (associated with underlying malignancy). Treat with corticosteroids + immunosuppressants.</p></div>
+    <div class="card"><h4>🟡 Polymyositis</h4><p>Bilateral proximal muscle weakness (shoulder/hip girdle) without skin involvement. Ages > 20. May cause dysphagia, respiratory muscle weakness, and cardiac dysrhythmias. No cure — manage with steroids, azathioprine.</p></div>
+    <div class="card"><h4>🔵 Inclusion Body Myositis</h4><p>Most common inflammatory myopathy in adults > 50. Slowly progressive weakness of wrist/finger flexors and quadriceps. Inclusion bodies visible on muscle biopsy. Poorly responsive to immunosuppression.</p></div>
+    <div class="card"><h4>⚫ Necrotizing Autoimmune Myopathy</h4><p>Rapid onset (weeks). Associated with statin use, viral infections (HIV, HTLV-1), or connective tissue disorders. High CK levels. Requires aggressive immunosuppression; may be paraneoplastic.</p></div>
+  </div>
+  <div class="analogy">
+    <span class="icon">🛡️</span>
+    <div class="analogy-text"><strong>Autoimmune Analogy:</strong> Think of inflammatory myopathy as <strong>the body's security system going rogue</strong> — the antivirus software starts deleting healthy muscle files instead of viral ones. In dermatomyositis, the complement system attacks the microvasculature of muscle. In polymyositis, cytotoxic T-cells directly invade muscle fibers. Corticosteroids work by essentially <strong>"turning down the sensitivity" of the security system</strong>, while DMARDs change the underlying software code to prevent recurring false attacks.</div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Drug</th><th>Use</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Prednisone</strong></td><td>First-line all inflammatory myopathies</td><td>High-dose (1 mg/kg/day); taper over months; monitor glucose, BP, bone density</td></tr>
+        <tr><td><strong>Azathioprine</strong></td><td>Steroid-sparing agent; maintenance RA/polymyositis</td><td>Monitor CBC for myelosuppression; slow onset (3–6 months)</td></tr>
+        <tr><td><strong>Methotrexate</strong></td><td>Dermatomyositis, polymyositis</td><td>Weekly dosing; folic acid supplementation required; hepatotoxic</td></tr>
+        <tr><td><strong>IVIG</strong> (IV Immunoglobulin)</td><td>Severe/refractory cases; dermatomyositis</td><td>Monthly infusions; rapid but temporary effect</td></tr>
+        <tr><td><strong>Rituximab</strong></td><td>Refractory inflammatory myopathy</td><td>Anti-CD20; depletes B-cells; biologic agent</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CFS -->
+<div id="cfs" class="section">
+  <div class="section-header">
+    <div class="section-number">X</div>
+    <div><div class="section-title">Chronic Fatigue Syndrome (CFS/ME)</div><div class="section-subtitle">Myalgic Encephalomyelitis · 2.5 million Americans</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>Pathophysiology</h3>
+    <p>CFS (Myalgic Encephalomyelitis/Chronic Fatigue Syndrome, ME/CFS) is a complex multi-system disorder characterized by <strong>profound, unexplained fatigue lasting ≥ 6 months</strong> that is not improved by rest and worsens with physical or mental exertion (<strong>post-exertional malaise</strong>). The exact pathophysiology is incompletely understood but evidence points to <strong>immune dysregulation</strong> (elevated pro-inflammatory cytokines), <strong>autonomic nervous system dysfunction</strong> (orthostatic intolerance), <strong>mitochondrial dysfunction</strong> (impaired energy production), and potential viral triggers (EBV, HHV-6, SARS-CoV-2 in Long COVID).</p>
+  </div>
+  <div class="signs-grid">
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Profound fatigue (&gt; 6 months)</span></div>
+    <div class="sign-chip"><div class="dot dot-red"></div><span>Post-exertional malaise</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Unrefreshing sleep</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Cognitive impairment ("brain fog")</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Orthostatic intolerance</span></div>
+    <div class="sign-chip"><div class="dot dot-blue"></div><span>Lymph node tenderness</span></div>
+    <div class="sign-chip"><div class="dot dot-blue"></div><span>Sore throat (recurrent)</span></div>
+    <div class="sign-chip"><div class="dot dot-amber"></div><span>Night sweats</span></div>
+  </div>
+  <div class="alert alert-blue"><span class="alert-icon">ℹ️</span><p><strong>Prehospital Note:</strong> CFS patients often call EMS during "crashes" (severe post-exertional relapses). Treat symptomatically — pain, dehydration, tachycardia from orthostatic intolerance. Avoid dismissive language like "it's just stress." These patients face significant diagnostic invalidation. Perform standard workup to rule out other emergent causes of fatigue (sepsis, cardiac, endocrine).</p></div>
+</div>
+
+<!-- OVERUSE -->
+<div id="overuse" class="section">
+  <div class="section-header">
+    <div class="section-number">XI</div>
+    <div><div class="section-title">Overuse Syndromes</div><div class="section-subtitle">Bursitis · Muscle Strains · Tendonitis · PRICEM Method</div></div>
+  </div>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Bursitis</h4>
+      <p>Inflammation of bursae (fluid-filled cushioning sacs) from repetitive compression, overuse, trauma, or infection. Common sites: olecranon, subacromial, trochanteric, prepatellar, Achilles bursa.</p>
+      <p><strong>Tx:</strong> Corticosteroid injection, ice, rest, NSAIDs, needle aspiration, PT.</p>
+    </div>
+    <div class="card">
+      <h4>Muscle Strains</h4>
+      <p>Microscopic to macroscopic tears in muscle fibers or myotendinous junction from excessive force or overstretching. Grades 1–3.</p>
+      <p><strong>Common:</strong> Hamstrings, quadriceps, hip flexors, lower back.</p>
+      <p><strong>Tx:</strong> PRICEM, surgery for Grade 3.</p>
+    </div>
+    <div class="card">
+      <h4>Tendonitis</h4>
+      <p>Tendon inflammation from repetitive mechanical loading. Affects wrist (de Quervain's), Achilles, patellar, rotator cuff, and common extensor origin (tennis elbow).</p>
+      <p><strong>Tx:</strong> PRICEM method, eccentric PT, corticosteroid injection, PRP.</p>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <h3>The PRICEM Method</h3>
+    <div class="grid-3" style="margin-top:16px;margin-bottom:0">
+      <div style="text-align:center;padding:12px"><div style="font-size:2rem">🛑</div><div style="font-family:var(--heading);font-size:1.1rem;color:var(--accent)">P — Protection</div><div style="font-size:0.85rem;color:var(--text2)">Prevent further injury</div></div>
+      <div style="text-align:center;padding:12px"><div style="font-size:2rem">😴</div><div style="font-family:var(--heading);font-size:1.1rem;color:var(--accent)">R — Rest</div><div style="font-size:0.85rem;color:var(--text2)">Relative rest of affected area</div></div>
+      <div style="text-align:center;padding:12px"><div style="font-size:2rem">🧊</div><div style="font-family:var(--heading);font-size:1.1rem;color:var(--accent)">I — Ice</div><div style="font-size:0.85rem;color:var(--text2)">Cryotherapy 15–20 min q2h</div></div>
+      <div style="text-align:center;padding:12px"><div style="font-size:2rem">🩹</div><div style="font-family:var(--heading);font-size:1.1rem;color:var(--accent)">C — Compression</div><div style="font-size:0.85rem;color:var(--text2)">Reduce edema formation</div></div>
+      <div style="text-align:center;padding:12px"><div style="font-size:2rem">⬆️</div><div style="font-family:var(--heading);font-size:1.1rem;color:var(--accent)">E — Elevation</div><div style="font-size:0.85rem;color:var(--text2)">Promote venous/lymphatic return</div></div>
+      <div style="text-align:center;padding:12px"><div style="font-size:2rem">💊</div><div style="font-family:var(--heading);font-size:1.1rem;color:var(--accent)">M — Medications</div><div style="font-size:0.85rem;color:var(--text2)">NSAIDs, analgesics</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PERIPHERAL NERVE -->
+<div id="nerve" class="section">
+  <div class="section-header">
+    <div class="section-number">XII</div>
+    <div><div class="section-title">Peripheral Nerve Syndromes</div><div class="section-subtitle">Entrapment Neuropathies · Compression · Ischemia</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>Carpal Tunnel Syndrome — Pathophysiology</h3>
+    <p>CTS occurs when the <strong>median nerve is compressed</strong> within the carpal tunnel — a narrow, rigid canal bounded by the carpal bones dorsally and the transverse carpal ligament volarly. Compression causes <strong>myelin sheath damage and axonal ischemia</strong>, initially demyelinating (reversible), then axonal (permanent) if untreated. Increased pressure from edema, hypertrophy, or structural changes reduces epineural blood flow — causing the classic nocturnal paresthesias (when wrist is held in flexion during sleep).</p>
+  </div>
+  <div class="analogy">
+    <span class="icon">🚰</span>
+    <div class="analogy-text"><strong>Kinked Garden Hose Analogy:</strong> The median nerve is like a water hose running through a narrow tunnel. When the tunnel swells (from pregnancy, hypothyroidism, RA, repetitive wrist use), the hose gets <strong>kinked</strong>. Water (nerve signals) can still trickle through initially — producing the tingling and burning of early CTS. Over time, the sustained kinking damages the hose itself — first the outer coating (myelin), then the inner tube (axon) — causing permanent numbness and thenar wasting. <strong>Wrist splinting keeps the hose unkinked; surgery widens the tunnel.</strong></div>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h4>Carpal Tunnel Syndrome</h4><ul><li>Median nerve compression at wrist</li><li>3× more common in women</li><li>Nocturnal paresthesias (thumb, index, middle fingers)</li><li>Thenar atrophy (advanced)</li><li>Positive Tinel's sign, Phalen's test</li><li>Tx: wrist splint, corticosteroid injection, surgical carpal tunnel release</li></ul></div>
+    <div class="card"><h4>Ulnar Nerve Entrapment (Cubital Tunnel)</h4><ul><li>Ulnar nerve compressed behind medial epicondyle</li><li>Numbness/tingling in ring and little finger</li><li>Weakness of intrinsic hand muscles ("claw hand")</li><li>Worsens with elbow flexion (leaning on elbow)</li><li>Diagnosed by nerve conduction studies</li><li>Tx: padding, splinting, surgical decompression</li></ul></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Treatment</th><th>When Used</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wrist Splint (neutral position)</strong></td><td>Mild-moderate CTS</td><td>Nocturnal splinting; prevents flexion during sleep</td></tr>
+        <tr><td><strong>Corticosteroid injection</strong></td><td>Moderate CTS; bursitis</td><td>Triamcinolone or methylprednisolone; 70–80% short-term response</td></tr>
+        <tr><td><strong>NSAIDs</strong></td><td>Mild symptoms</td><td>Reduce edema and inflammation</td></tr>
+        <tr><td><strong>Carpal Tunnel Release</strong></td><td>Severe or refractory CTS</td><td>Surgical division of transverse carpal ligament; high success rate</td></tr>
+        <tr><td><strong>Gabapentin / Pregabalin</strong></td><td>Neuropathic pain component</td><td>Adjunct for chronic neuropathic pain</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- NECROTIZING FASCIITIS -->
+<div id="fasciitis" class="section">
+  <div class="section-header">
+    <div class="section-number">XIII</div>
+    <div><div class="section-title">Necrotizing Fasciitis</div><div class="section-subtitle">"Flesh-Eating Bacteria" · Rapid progression · Surgical emergency</div></div>
+  </div>
+  <div class="alert alert-red"><span class="alert-icon">🚨</span><p><strong>TRUE EMERGENCY:</strong> Necrotizing fasciitis is a rapidly progressive, life-threatening infection. Mortality approaches 30–70% without prompt surgical debridement. Time from onset to surgery is the most important determinant of outcome. <strong>Transport immediately — do not delay for extended on-scene management.</strong></p></div>
+  <div class="hero-card">
+    <h3>Pathophysiology</h3>
+    <p>NF is a <strong>polymicrobial or monomicrobial necrotizing infection of the deep fascia</strong> that spreads along fascial planes with sparing of overlying skin (initially). Group A Streptococcus (<em>Strep pyogenes</em>) is the classic causative organism in Type II NF. Bacteria release exotoxins and superantigens that trigger a massive cytokine storm — causing <strong>microthrombi in fascial blood vessels</strong>, leading to ischemia, necrosis, and tissue liquefaction. The infection tracks far beyond the visible skin changes — the area of tenderness almost always exceeds the area of visible skin abnormality.</p>
+  </div>
+  <div class="analogy">
+    <span class="icon">🧨</span>
+    <div class="analogy-text"><strong>Underground Fire Analogy:</strong> NF is like a <strong>fire burning in the walls and floors of a building</strong>, not on the surface. The outside walls (skin) look only mildly discolored while the interior (fascia, subcutaneous tissue) is completely ablaze. By the time the surface shows obvious changes — bullae, skin necrosis, violaceous discoloration — the fire has already spread through the entire interior. <strong>Surgical debridement</strong> means tearing out the walls to expose and extinguish the fire, even if it means sacrificing structurally intact-looking material around it.</div>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h4>Signs &amp; Symptoms (Temporal Progression)</h4><ul><li><strong>Early:</strong> Intense pain disproportionate to appearance, erythema, warmth, swelling</li><li><strong>Mid:</strong> Skin discoloration (dusky, violet-purple), blistering/bullae, "wooden" texture</li><li><strong>Late:</strong> Skin necrosis, crepitus (gas), frank anesthesia (nerve destruction), septic shock</li></ul></div>
+    <div class="card"><h4>Risk Factors</h4><ul><li>Immunocompromise (HIV, DM, malignancy)</li><li>IV drug use (injection site entry)</li><li>Recent surgery or trauma</li><li>Skin infections (infected wounds, insect bites)</li><li>Cirrhosis / ESRD</li><li>NSAIDs may mask early warning pain</li></ul></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Treatment</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Emergency surgical debridement</strong></td><td>Wide excision of all necrotic tissue; may require multiple returns to OR</td></tr>
+        <tr><td><strong>Broad-spectrum IV antibiotics</strong></td><td>Piperacillin-tazobactam + Clindamycin (anti-toxin) + Vancomycin (MRSA coverage)</td></tr>
+        <tr><td><strong>Hyperbaric oxygen (HBO)</strong></td><td>Adjunct; ↑ tissue O₂ levels → inhibit anaerobic growth, promote wound healing</td></tr>
+        <tr><td><strong>ICU resuscitation</strong></td><td>Aggressive IV fluids, vasopressors for septic shock, nutritional support</td></tr>
+        <tr><td><strong>IVIG</strong></td><td>Adjunct for streptococcal toxic shock syndrome; neutralizes superantigens</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- GANGRENE -->
+<div id="gangrene" class="section">
+  <div class="section-header">
+    <div class="section-number">XIV</div>
+    <div><div class="section-title">Gangrene</div><div class="section-subtitle">Tissue Necrosis · Dry vs. Wet · Vascular &amp; Infectious Etiology</div></div>
+  </div>
+  <div class="hero-card">
+    <h3>Pathophysiology</h3>
+    <p>Gangrene is <strong>necrosis and decay of body tissue</strong> resulting from critical ischemia or overwhelming infection. The two major types have distinct mechanisms. <strong>Dry gangrene</strong> results from progressive arterial insufficiency (atherosclerosis, Buerger's disease, frostbite) — the tissue desiccates and mummifies without infection. <strong>Wet gangrene</strong> results from bacterial infection of ischemic or traumatized tissue; anaerobes produce gas (crepitus on palpation) — giving rise to the rare but deadly <strong>gas gangrene</strong> caused by <em>Clostridium perfringens</em>.</p>
+  </div>
+  <div class="analogy">
+    <span class="icon">🌿</span>
+    <div class="analogy-text"><strong>Plant Analogy:</strong> Dry gangrene is like a <strong>branch cut off from the tree</strong> in dry conditions — it slowly desiccates, turns brown, hardens, and eventually falls off on its own. Wet gangrene is the same branch in a <strong>warm, moist environment</strong> — bacteria colonize and decompose it rapidly, producing foul odors and toxins that can infect the entire tree. Gas gangrene is the most aggressive form — like a fast-acting blight that produces gas bubbles as it digests tissue at alarming speed. <strong>Amputation is sometimes the only way to save the tree.</strong></div>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h4>Dry Gangrene</h4><ul><li>Gradual onset; arterial occlusion</li><li>Tissue: dry, shrunken, discolored (black/brown)</li><li>Well-demarcated boundary</li><li>Less immediate threat — may be managed medically</li><li>Associated with PVD, diabetes, frostbite, arterial embolism</li><li>Tx: revascularization or amputation when indicated</li></ul></div>
+    <div class="card"><h4>Wet Gangrene</h4><ul><li>Rapid onset; infected tissue</li><li>Tissue: moist, swollen, oozing pus, malodorous</li><li>Poorly demarcated; spreads rapidly</li><li>Systemic sepsis common</li><li>May present with crepitus (gas-forming organisms)</li><li>Tx: <strong>immediate</strong> surgery + IV antibiotics + ICU support</li></ul></div>
+  </div>
+</div>
+
+<!-- OTHER SOFT TISSUE -->
+<div id="other-soft" class="section">
+  <div class="section-header">
+    <div class="section-number">XV</div>
+    <div><div class="section-title">Paronychia &amp; Flexor Tenosynovitis</div><div class="section-subtitle">Hand infections · Kanavel Signs · Orthopedic Emergency</div></div>
+  </div>
+  <div class="grid-2">
+    <div class="path-box">
+      <h4>Paronychia</h4>
+      <p>Infection of the lateral nail fold caused by injury (nail biting, pulled hangnail, manicure trauma) allowing entry of bacteria (<em>Staph aureus</em>, most common), yeast (<em>Candida</em>), or fungus.</p>
+      <ul>
+        <li>Acute: bacterial — pain, redness, purulent discharge</li>
+        <li>Chronic: fungal — thickened, discolored nail, less pain</li>
+        <li><strong>Treatment:</strong> I&amp;D (incision &amp; drainage), antibiotics (clindamycin, TMP-SMX), warm soaks, nail removal if subungual abscess</li>
+        <li>Watch for systemic signs: red streaks (lymphangitis), fever, malaise — indicates spreading cellulitis</li>
+      </ul>
+    </div>
+    <div class="path-box">
+      <h4>Flexor Tenosynovitis — Orthopedic Emergency</h4>
+      <p>Infection within the closed flexor tendon sheath of the hand. When bacteria enter the sheath (puncture, bite), the resulting inflammatory edema disrupts the gliding mechanism, causing tendon rupture, permanent contracture, or vascular compromise if untreated within hours.</p>
+      <p><strong>Kanavel's Four Cardinal Signs:</strong></p>
+      <ul>
+        <li>1️⃣ Severe pain on passive extension of the finger</li>
+        <li>2️⃣ Uniform fusiform swelling of the digit</li>
+        <li>3️⃣ Finger held in slight flexion (position of comfort)</li>
+        <li>4️⃣ Tenderness along the flexor tendon sheath</li>
+      </ul>
+      <p><strong>Prehospital Tx:</strong> Elevate, ice for comfort, rapid transport. Hospital: surgical drainage + IV antibiotics + splinting.</p>
+    </div>
+  </div>
+  <div class="alert alert-red"><span class="alert-icon">🚨</span><p><strong>Kanavel's Signs = Immediate Transport:</strong> Any patient presenting with Kanavel's four cardinal signs has pyogenic flexor tenosynovitis until proven otherwise — this is an orthopedic emergency. Delay in surgical drainage results in permanent tendon destruction and loss of hand function.</p></div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider"></div>
+
+<!-- EXAM SECTION -->
+<div id="exam" class="section">
+  <div id="assessment-section">
+    <div class="assess-header">
+      <h2>📝 Knowledge Assessment</h2>
+      <p>Chapter 31 — Nontraumatic Musculoskeletal Disorders · 100 Questions · Sanders' Paramedic Textbook 6th Edition</p>
+    </div>
+
+    <!-- STUDENT INFO FORM -->
+    <div id="student-info-form">
+      <h3>Student Identification</h3>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="student-name" placeholder="e.g., Jane Smith" autocomplete="name"/>
+      </div>
+      <div class="form-group">
+        <label>Student ID</label>
+        <input type="text" id="student-id" placeholder="e.g., 12345678" autocomplete="off"/>
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="text" id="student-date" readonly/>
+      </div>
+      <button class="start-btn" onclick="startExam()">Begin Assessment →</button>
+    </div>
+
+    <!-- QUIZ CONTAINER -->
+    <div id="quiz-container" style="display:none">
+      <div class="q-progress">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+        <div class="q-counter"><span id="q-current">1</span> / 100</div>
+      </div>
+      <div id="questions-container"></div>
+      <div class="nav-btns">
+        <button class="btn-prev" onclick="prevQ()" id="btn-prev" style="display:none">← Previous</button>
+        <button class="btn-next" onclick="nextQ()" id="btn-next">Next →</button>
+        <button class="btn-submit" onclick="submitExam()" id="btn-submit" style="display:none">Submit Exam</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results-panel">
+      <div class="score-circle">
+        <div class="score-pct" id="score-pct">0%</div>
+        <div class="score-label">Score</div>
+      </div>
+      <div class="grade-badge" id="grade-badge">A</div>
+      <p style="color:var(--text2)" id="student-result-name"></p>
+      <div class="result-stats">
+        <div class="stat-box"><div class="stat-val correct-val" id="stat-correct">0</div><div class="stat-desc">Correct</div></div>
+        <div class="stat-box"><div class="stat-val wrong-val" id="stat-wrong">0</div><div class="stat-desc">Incorrect</div></div>
+        <div class="stat-box"><div class="stat-val" id="stat-pct" style="color:var(--accent)">0%</div><div class="stat-desc">Percentage</div></div>
+      </div>
+      <div>
+        <button class="dl-btn" onclick="generatePDF()">⬇ Download PDF Report</button>
+        <button class="retake-btn" onclick="retakeExam()">↺ Retake Exam</button>
+      </div>
+      <div class="review-table">
+        <h3>Question Review</h3>
+        <div class="table-wrap"><table id="review-table-body">
+          <thead><tr><th>#</th><th>Question (Abbreviated)</th><th>Your Answer</th><th>Correct Answer</th><th>Result</th></tr></thead>
+          <tbody id="review-tbody"></tbody>
+        </table></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<script>
+// ==================== THEME ====================
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('theme-icon').textContent=isDark?'🌙':'☀️';
+  document.getElementById('theme-text').textContent=isDark?'Dark Mode':'Light Mode';
+}
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+function navTo(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  closeSidebar();
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+}
+
+// Date
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('student-date').value=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+});
+
+// ==================== QUESTIONS ====================
+const questions=[
+  // ANATOMY & PHYSIOLOGY (1-10)
+  {q:"The musculoskeletal system is comprised of which of the following structures?",opts:["Bones, muscles, tendons, ligaments, and articulating surfaces","Bones and cartilage only","Ligaments and cartilage only","Bones and joints only"],ans:0,exp:"The musculoskeletal system consists of bones, muscles, tendons, ligaments, and articulating surfaces working together."},
+  {q:"The human body contains how many bones?",opts:["186","206","226","246"],ans:1,exp:"The adult human body contains 206 bones divided into the axial and appendicular skeleton."},
+  {q:"The axial skeleton includes which of the following?",opts:["Bones of the upper and lower extremities","Skull, hyoid bone, vertebral column, and thoracic cage","Pelvis and shoulder girdle only","Femur, tibia, and fibula"],ans:1,exp:"The axial skeleton forms the central axis: skull, hyoid, vertebral column, and thoracic cage."},
+  {q:"Which joint type allows the MOST freedom of movement?",opts:["Fibrous","Cartilaginous","Synovial","Osseous"],ans:2,exp:"Synovial joints contain synovial fluid that lubricates the joint allowing maximal range of motion."},
+  {q:"Muscle tone is best described as:",opts:["Maximum voluntary contraction","Constant tension maintained in muscles over time","Involuntary spasm","The force generated during a single twitch"],ans:1,exp:"Muscle tone is the constant tension produced by muscles over time, keeping the back straight, head upright, and abdomen in."},
+  {q:"Which type of muscle is responsible for voluntary movement and is attached to bone by tendons?",opts:["Smooth muscle","Cardiac muscle","Skeletal muscle","Visceral muscle"],ans:2,exp:"Skeletal muscle is voluntary, striated, and attached to bones via tendons to produce movement."},
+  {q:"Cartilaginous joints are characterized by:",opts:["No movement and fibrous tissue connections","Slight movement and connection by hyaline/fibrocartilage","Free movement with synovial fluid","Complete fusion of bones"],ans:1,exp:"Cartilaginous joints unite bones with hyaline cartilage or fibrocartilage and allow slight movement (e.g., pubic symphysis, intervertebral discs)."},
+  {q:"Tendons connect:",opts:["Bone to bone","Muscle to bone","Cartilage to cartilage","Nerve to muscle"],ans:1,exp:"Tendons are connective tissue structures that connect muscle to bone, transmitting the force of muscular contraction."},
+  {q:"Ligaments connect:",opts:["Muscle to bone","Bone to cartilage or bone to bone","Tendon to muscle","Nerve to bone"],ans:1,exp:"Ligaments connect bone to cartilage or bone to bone, helping stabilize and support joints."},
+  {q:"The appendicular skeleton consists of:",opts:["The skull and vertebral column","The thoracic cage and pelvis","The bones of the upper and lower extremities and their girdles","The skull, hyoid, and sternum"],ans:2,exp:"The appendicular skeleton comprises the 126 bones of the upper and lower extremities and their associated girdles (shoulder and pelvic girdles)."},
+
+  // ASSESSMENT (11-18)
+  {q:"Which of the following is NOT a component of a complete musculoskeletal assessment?",opts:["Extremity examination","Vascular examination","Pulmonary function testing","Motor examination"],ans:2,exp:"A musculoskeletal assessment includes extremity, spine, vascular, and motor examination — not pulmonary function testing."},
+  {q:"When performing an extremity examination, the patella should be:",opts:["Laterally displaced and tender","Non-tender and midline","Slightly superior and non-tender","Mobile in all directions"],ans:1,exp:"The patella should be nontender and midline during examination of the knee."},
+  {q:"Abnormal vascular findings in a musculoskeletal assessment include all of the following EXCEPT:",opts:["Pale or cyanotic skin","Warm, well-perfused extremities","Cold extremity to the touch","Pitting edema"],ans:1,exp:"Warm, well-perfused extremities are normal vascular findings. Abnormal findings include pallor, cyanosis, cold extremities, diminished pulses, and pitting edema."},
+  {q:"During a motor examination, a paramedic should evaluate:",opts:["Gait, coordination, agility, and sensation","Heart rate and blood pressure only","Pupillary reflexes and cranial nerves only","Deep tendon reflexes only"],ans:0,exp:"Motor examination includes observation of gait, point-to-point movements, agility, ROM (flexion, extension, abduction), and sensation testing (pain, vibration, touch)."},
+  {q:"General prehospital management of nontraumatic musculoskeletal disorders is best described as:",opts:["Aggressive pharmacological intervention","Primarily supportive with immobilization, ice, elevation, analgesics, and gentle transport","Surgical preparation","IV antibiotic administration in all cases"],ans:1,exp:"Prehospital care is primarily supportive: immobilization of affected areas, ice/elevation, analgesics, and gentle transport for physician evaluation."},
+  {q:"Which of the following abnormal spine findings should be documented during assessment?",opts:["Ability to flex the neck","Abnormal curvature (kyphosis, scoliosis)","Normal lumbar lordosis","Equal shoulder height"],ans:1,exp:"Abnormal spinal curvatures such as kyphosis, scoliosis, or lordosis are important findings to document during spinal assessment."},
+  {q:"Point-to-point movements during motor assessment evaluate:",opts:["Muscle strength","Coordination","Vascular integrity","Sensation"],ans:1,exp:"Point-to-point movements (e.g., finger-to-nose test) evaluate cerebellar coordination, which can be impaired in neurological or musculoskeletal disorders."},
+  {q:"The PRICEM mnemonic in overuse syndrome treatment stands for:",opts:["Pain, Rest, Ice, Compression, Elevation, Medication","Protection, Rest, Ice, Compression, Elevation, Medication","Pain, Relief, Ice, Cast, Elevation, Mobilization","Protection, Rest, Ibuprofen, Cast, Elevation, Monitoring"],ans:1,exp:"PRICEM = Protection, Rest, Ice, Compression, Elevation, Medication — the standard approach for overuse injuries and soft tissue trauma."},
+
+  // OSTEOMYELITIS (19-27)
+  {q:"What is the most common causative organism of osteomyelitis?",opts:["Streptococcus pyogenes","Staphylococcus aureus","Pseudomonas aeruginosa","Escherichia coli"],ans:1,exp:"Staphylococcus aureus accounts for approximately 70-80% of osteomyelitis cases and is the most common causative organism."},
+  {q:"Osteomyelitis most commonly reaches bone via which route?",opts:["Direct inoculation only","Lymphatic spread only","Hematogenous (bloodborne) spread","Contiguous spread from lung infection"],ans:2,exp:"Hematogenous spread (bacteria traveling through the bloodstream) is the most common route by which pathogens reach and infect bone."},
+  {q:"Which of the following is a risk factor for developing osteomyelitis?",opts:["Regular aerobic exercise","Intravenous drug abuse","Vegetarian diet","Low BMI"],ans:1,exp:"IV drug abuse creates repeated bacteremic events and non-sterile injection sites, significantly increasing the risk for hematogenous osteomyelitis."},
+  {q:"A patient with osteomyelitis will most likely present with:",opts:["Severe chest pain and dyspnea","Local bone pain/tenderness, swelling, warmth, and fever","Sudden vision loss","Diffuse abdominal pain"],ans:1,exp:"Classic osteomyelitis presentation includes localized bone pain and tenderness, swelling and warmth over the infected area, fever, and chills."},
+  {q:"Definitive treatment of osteomyelitis requires:",opts:["Physical therapy alone","IV antibiotics and potentially surgical drainage","Over-the-counter analgesics","Bed rest for 2 weeks"],ans:1,exp:"Treatment requires IV antibiotics (typically 4-6 weeks) and surgical drainage of abscesses or infected necrotic bone when present."},
+  {q:"The 'dead bone' that can form in chronic osteomyelitis that serves as a persistent infection reservoir is called:",opts:["Sequestrum","Callus","Trabecula","Periosteum"],ans:0,exp:"A sequestrum is dead bone that becomes avascular and harbors bacteria within chronic osteomyelitis, making the infection difficult to eradicate with antibiotics alone."},
+  {q:"Which antibiotic is first-line for MRSA osteomyelitis?",opts:["Nafcillin","Ciprofloxacin","Vancomycin","Amoxicillin"],ans:2,exp:"Vancomycin is the drug of choice for MRSA (methicillin-resistant Staphylococcus aureus) osteomyelitis, given the organism's resistance to beta-lactam antibiotics."},
+  {q:"In children, osteomyelitis most commonly affects which area of bone?",opts:["Epiphysis","Diaphysis","Metaphysis","Periosteum"],ans:2,exp:"In children, the highly vascular metaphysis (the growth plate region near the end of long bones) is the most common site of hematogenous seeding."},
+  {q:"A patient on chronic hemodialysis develops fever, bone pain, and localized swelling. Which condition should be high on the differential?",opts:["Muscle strain","Osteomyelitis","Tendonitis","Gout"],ans:1,exp:"Chronic hemodialysis patients are at significantly increased risk for hematogenous osteomyelitis due to repeated vascular access, immunocompromise, and bacteremic episodes."},
+
+  // BONE TUMORS (28-35)
+  {q:"Which is the most common primary bone cancer?",opts:["Ewing sarcoma","Chondrosarcoma","Osteosarcoma","Multiple myeloma"],ans:2,exp:"Osteosarcoma is the most common primary malignant bone tumor, with peak incidence in teenagers and young adults."},
+  {q:"Osteosarcoma most commonly occurs around which joint?",opts:["Shoulder","Elbow","Knee","Ankle"],ans:2,exp:"Approximately half of osteosarcomas occur near the knee — in the distal femur or proximal tibia — with the proximal humerus being the second most common site."},
+  {q:"Ewing sarcoma primarily affects patients in which age group?",opts:["Infants (0-2 years)","Ages 5-20 years","Adults aged 40-60","Elderly (70+)"],ans:1,exp:"Ewing sarcoma predominantly affects children and young adults between ages 5 and 20, making it the second most common bone tumor in this age group."},
+  {q:"A pathologic fracture is defined as:",opts:["A fracture requiring surgical fixation","A fracture occurring through structurally weakened bone with minimal trauma","A fracture at a joint surface","A fracture caused by high-velocity trauma"],ans:1,exp:"A pathologic fracture occurs through bone that has been structurally compromised by a disease process (tumor, infection, metabolic disease), with minimal or no traumatic force."},
+  {q:"A patient with bone cancer complains of 'dull, aching bone pain that is worse with activity and does not improve at night.' This is characteristic of:",opts:["Simple muscle strain","Bone tumor-related pain","Acute gout attack","Peripheral neuropathy"],ans:1,exp:"Tumor-related bone pain is characteristically dull and aching, worsened by physical activity, persistent at night (unlike mechanical pain), and may be associated with a palpable mass."},
+  {q:"Chondrosarcoma primarily affects patients:",opts:["Under age 10","Ages 5-20","Over age 20","Only elderly patients"],ans:2,exp:"Chondrosarcoma arises from cartilaginous tissue and most commonly occurs in patients over 20 years of age, typically in the hip, pelvis, or shoulder region."},
+  {q:"Which of the following is TRUE regarding the prehospital management of suspected bone tumors?",opts:["Avoid analgesics to preserve the diagnostic examination","Pain management is unnecessary for bone tumor patients","Immobilize, manage pain aggressively, watch for pathologic fractures, and transport","Apply PRICEM and discharge on scene"],ans:2,exp:"Prehospital care focuses on gentle immobilization, aggressive pain management (opioids may be needed for severe pain), and awareness that pathologic fractures can occur with minimal mechanism."},
+  {q:"Secondary bone tumors (metastatic) arise most commonly from primary cancers of the:",opts:["Pancreas and gallbladder","Breast, prostate, lung, kidney, and thyroid","Intestines and colon","Brain and spinal cord"],ans:1,exp:"The most common sources of bone metastases are primary cancers of the breast, prostate, lung, kidney, and thyroid — using the mnemonic 'BLT with Kosher Pickles' (Breast, Lung, Thyroid, Kidney, Prostate)."},
+
+  // LOW BACK PAIN (36-46)
+  {q:"A herniated disc occurs when:",opts:["The vertebral body fractures through the end plate","The nucleus pulposus breaks through the annulus fibrosus and compresses a nerve root","The spinal cord is completely transected","The facet joints fuse together"],ans:1,exp:"A herniated disc (HNP) occurs when the gelatinous nucleus pulposus herniates through a tear in the annulus fibrosus, potentially impinging adjacent nerve roots and causing radicular symptoms."},
+  {q:"The majority of lumbar disc herniations occur at:",opts:["L1-L2 or L2-L3","L3-L4 or L4-L5","L4-L5 or L5-S1","The thoracolumbar junction"],ans:2,exp:"90% of lumbar disc herniations occur at L4-L5 or L5-S1, the segments bearing the greatest compressive loads and undergoing the most motion."},
+  {q:"'Sciatica' refers to pain that:",opts:["Originates in the buttock and radiates to the shoulder","Radiates from the low back through the buttock and down the leg","Is localized to the lumbar spine only","Occurs only at rest"],ans:1,exp:"Sciatica is radicular pain that follows the distribution of the sciatic nerve — from the low back, through the buttock, and down the posterior leg — caused by L4-S1 nerve root compression."},
+  {q:"Cauda equina syndrome is best characterized by:",opts:["Unilateral arm weakness and numbness","Saddle anesthesia, bladder/bowel dysfunction, and bilateral leg weakness","Intermittent claudication only","Cervical myelopathy"],ans:1,exp:"Cauda equina syndrome classically presents with saddle anesthesia (perineal/inner thigh numbness), bladder and bowel dysfunction (urinary retention), and bilateral lower extremity weakness."},
+  {q:"Cauda equina syndrome is classified as:",opts:["A common, benign condition","A non-emergent spine disorder","A true surgical emergency","A condition managed conservatively with steroids"],ans:2,exp:"Cauda equina syndrome is a true surgical emergency — without emergent decompressive surgery, it can result in permanent paraplegia and irreversible bladder/bowel/sexual dysfunction."},
+  {q:"The classic presentation of cauda equina syndrome includes all of the following EXCEPT:",opts:["Saddle anesthesia","Urinary retention or incontinence","Bilateral lower extremity weakness","Focal right arm weakness"],ans:3,exp:"Cauda equina syndrome involves the lumbosacral nerve roots — producing bilateral lower extremity findings, saddle anesthesia, and bladder/bowel dysfunction, NOT upper extremity symptoms."},
+  {q:"A muscle strain is defined as:",opts:["Stretching or tearing of a ligament","Injury to muscle or tendon from overstretching or excessive use","Inflammation of a bursa","Infection of the tendon sheath"],ans:1,exp:"A muscle strain is an injury to a muscle or tendon (myotendinous unit) from excessive force, overstretching, or overuse, resulting in micro- to macroscopic fiber tears."},
+  {q:"A sprain is defined as:",opts:["Injury to muscle fiber","Stretching or tearing of a ligament beyond its normal range","Inflammation of a bursa","Disc herniation"],ans:1,exp:"A sprain is an injury to a ligament — the connective tissue connecting bone to bone — from stretching or tearing beyond normal range of motion."},
+  {q:"Initial treatment for acute low back strain/sprain includes:",opts:["Immediate surgery","24-48 hours of bed rest, NSAIDs, muscle relaxants, and physical therapy","IV antibiotics","High-dose corticosteroids for 6 months"],ans:1,exp:"Initial management of acute low back strain includes 24-48 hours of rest, NSAIDs, muscle relaxants, ice, and early progressive physical therapy and exercise."},
+  {q:"Which medication is commonly used prehospital for acute low back pain when oral NSAIDs are insufficient?",opts:["Oral prednisone","IV/IM Ketorolac","Oral gabapentin","Oral cyclobenzaprine"],ans:1,exp:"Ketorolac (Toradol) is a parenteral NSAID available in the prehospital setting — 15-30 mg IV/IM provides effective analgesia and anti-inflammatory effect for acute musculoskeletal pain."},
+  {q:"Risk factors for lumbar disc herniation include all of the following EXCEPT:",opts:["Repetitive bending and twisting","Prolonged sedentary lifestyle with weak back muscles","Regular core-strengthening exercise","Occupational heavy lifting"],ans:2,exp:"Regular core-strengthening exercise is protective against disc herniation. Risk factors include sedentary lifestyle, weak core muscles, repetitive bending/twisting, and heavy occupational lifting."},
+
+  // ARTHRITIS (47-57)
+  {q:"Osteoarthritis is primarily caused by:",opts:["Autoimmune destruction of synovium","Wear-and-tear degeneration of articular cartilage","Uric acid crystal deposition","Bacterial invasion of the joint space"],ans:1,exp:"Osteoarthritis is a degenerative joint disease caused by progressive wear-and-tear breakdown of articular cartilage, subchondral bone sclerosis, and osteophyte formation."},
+  {q:"Osteoarthritis most commonly affects people:",opts:["Under 30 years","Between 30-40 years","Over 50 years, more commonly women","Equally in all age groups"],ans:2,exp:"OA primarily affects adults over 50, with onset being gradual and more common in women. The knee, hip, hands, and spine are most commonly affected."},
+  {q:"Osteophytes in osteoarthritis are:",opts:["Fragments of torn ligament","Bone spurs formed in response to cartilage loss and joint stress","Uric acid crystal deposits","Calcium pyrophosphate crystals"],ans:1,exp:"Osteophytes are bony outgrowths (bone spurs) that develop at the edges of joints in response to cartilage loss in OA, contributing to joint stiffness and pain."},
+  {q:"Rheumatoid arthritis is characterized by which joint distribution pattern?",opts:["Asymmetric, affecting only large joints","Symmetric, affecting multiple joints (especially wrists, MCPs, PIPs)","Only affecting the large toe (MTP)","Only affecting the axial spine"],ans:1,exp:"RA follows a characteristic symmetrical distribution, primarily affecting the wrists, MCPs, and PIPs bilaterally — differentiating it from OA and gout."},
+  {q:"In rheumatoid arthritis, the 'pannus' refers to:",opts:["A type of bone spur","Hyperplastic synovial tissue that invades and destroys joint cartilage and bone","A crystal deposit in synovial fluid","A calcium deposit around the joint"],ans:1,exp:"The pannus is a layer of hyperplastic granulation/synovial tissue driven by inflammatory cytokines (TNF-α, IL-1, IL-6) that aggressively invades and destroys articular cartilage and subchondral bone in RA."},
+  {q:"Disease-modifying antirheumatic drugs (DMARDs) work by:",opts:["Providing immediate pain relief","Blocking only prostaglandin synthesis","Slowing or halting the progression of RA by modifying the underlying immune response","Replacing damaged cartilage"],ans:2,exp:"DMARDs (e.g., methotrexate, hydroxychloroquine) modify the underlying immunopathology of RA, slowing or halting disease progression — unlike NSAIDs which only address symptoms."},
+  {q:"TNF-alpha inhibitors such as adalimumab (Humira) are used in RA because they:",opts:["Kill bacteria in the joint","Block the pro-inflammatory cytokine TNF-α, reducing joint destruction","Replace synovial fluid","Stimulate cartilage regeneration"],ans:1,exp:"TNF-α inhibitors are biologics that block tumor necrosis factor-alpha, a key pro-inflammatory cytokine driving synovitis and joint destruction in RA."},
+  {q:"Septic arthritis most commonly affects which joint?",opts:["Elbow","Hip","Knee","Ankle"],ans:2,exp:"The knee is the most commonly affected joint in septic arthritis, followed by the hip, shoulder, ankle, and wrist."},
+  {q:"The causative organism most commonly responsible for septic arthritis is:",opts:["Streptococcus pneumoniae","Staphylococcus aureus","Neisseria meningitidis","Haemophilus influenzae"],ans:1,exp:"Staphylococcus aureus is the most common cause of septic arthritis across all age groups. Neisseria gonorrhoeae is the most common in sexually active young adults."},
+  {q:"Septic arthritis requires immediate treatment with:",opts:["Physical therapy and splinting","NSAIDs and rest","Surgical drainage and irrigation, followed by antibiotics","Colchicine and bed rest"],ans:2,exp:"Septic arthritis requires urgent surgical drainage and irrigation of the infected joint followed by systemic antibiotics — the bacteria rapidly destroy cartilage within hours to days if untreated."},
+  {q:"Approximately how many Americans are affected by some form of arthritis?",opts:["10 million","25 million","58.5 million","100 million"],ans:2,exp:"Arthritis affects approximately 58.5 million adults in the United States, making it the leading cause of disability in the country."},
+
+  // GOUT (58-65)
+  {q:"Gout is caused by:",opts:["Calcium pyrophosphate crystal deposition","Monosodium urate crystal deposition from hyperuricemia","Bacterial invasion of the joint","Autoimmune destruction of cartilage"],ans:1,exp:"Gout is caused by the deposition of monosodium urate (MSU) crystals in joints and surrounding tissues, resulting from chronic hyperuricemia (elevated serum uric acid)."},
+  {q:"The classic joint affected in acute gout is:",opts:["Knee","Elbow","First metatarsophalangeal joint (big toe) — 'podagra'","Wrist"],ans:2,exp:"The first MTP joint of the great toe (podagra) is the classic site of acute gout, affected in approximately 50% of initial attacks and 90% of patients at some point."},
+  {q:"Gout predominantly affects:",opts:["Children under 10","Young women","Men; post-menopausal women are also at risk","Exclusively elderly patients over 80"],ans:2,exp:"Gout predominantly affects men (due to higher uric acid levels). Women become susceptible after menopause when estrogen's protective effect on uric acid excretion is lost."},
+  {q:"Which of the following dietary items is associated with triggering gout?",opts:["Green leafy vegetables","Red meat, shellfish, and alcohol","Low-fat dairy products","Citrus fruits"],ans:1,exp:"Purines are metabolized to uric acid. Foods rich in purines — red meat, organ meats, shellfish, and beer — increase serum uric acid levels and can trigger gout attacks."},
+  {q:"Which diuretic medications are known to precipitate gout?",opts:["ACE inhibitors","Thiazide and loop diuretics","Beta-blockers","Calcium channel blockers"],ans:1,exp:"Thiazide and loop diuretics reduce renal urate excretion, increasing serum uric acid levels and predisposing to gout attacks."},
+  {q:"Allopurinol prevents gout attacks by:",opts:["Blocking MSU crystal formation in joints","Inhibiting xanthine oxidase to reduce uric acid production","Accelerating renal excretion of uric acid","Dissolving existing uric acid crystals"],ans:1,exp:"Allopurinol is a xanthine oxidase inhibitor — it blocks the enzyme that converts xanthine to uric acid, reducing the overall production of uric acid and preventing crystal formation."},
+  {q:"Colchicine treats acute gout by:",opts:["Lowering serum uric acid levels","Inhibiting xanthine oxidase","Blocking neutrophil migration to the joint by disrupting microtubule assembly","Dissolving uric acid crystals directly"],ans:2,exp:"Colchicine inhibits microtubule polymerization in neutrophils, impairing their ability to migrate to and engulf MSU crystals — thus blunting the acute inflammatory response."},
+  {q:"Gout crystals under polarized light microscopy appear as:",opts:["Calcium deposits with positive birefringence","Needle-shaped crystals with negative birefringence","Rhomboid-shaped with positive birefringence","Round granules with no birefringence"],ans:1,exp:"MSU crystals in gout are needle-shaped (acicular) and negatively birefringent under polarized light microscopy — a key diagnostic finding on arthrocentesis."},
+
+  // MUSCLE DISORDERS (66-73)
+  {q:"Dermatomyositis is characterized by:",opts:["Unilateral proximal muscle weakness only","Skin rash (heliotrope, Gottron's papules) preceding progressive proximal muscle weakness","Distal muscle weakness with normal skin","Only lower extremity weakness"],ans:1,exp:"Dermatomyositis features a distinctive heliotrope rash (blue-purple discoloration of eyelids) and Gottron's papules over joints, followed by progressive proximal muscle weakness."},
+  {q:"Polymyositis causes muscle weakness that is:",opts:["Asymmetric and distal","Symmetric and proximal, affecting both sides of the body","Only in the facial muscles","Only in small intrinsic hand muscles"],ans:1,exp:"Polymyositis causes symmetrical proximal muscle weakness — difficulty climbing stairs, rising from sitting, lifting arms overhead — affecting both sides of the body equally."},
+  {q:"Inclusion body myositis typically begins after age:",opts:["20","30","40","50"],ans:3,exp:"Inclusion body myositis characteristically begins after age 50, predominantly affecting wrist/finger flexors and quadriceps, and is the most common inflammatory myopathy in patients over 50."},
+  {q:"Necrotizing autoimmune myopathy may be associated with the use of which medication class?",opts:["Antibiotics","Statins (HMG-CoA reductase inhibitors)","ACE inhibitors","Calcium channel blockers"],ans:1,exp:"Necrotizing autoimmune myopathy (NAM) is associated with statin use, viral infections, cancer, and connective tissue disorders. It is characterized by rapidly developing proximal weakness and markedly elevated CK."},
+  {q:"Chronic Fatigue Syndrome (ME/CFS) is characterized by:",opts:["Fatigue that improves with rest and activity","Profound fatigue not improved by rest that worsens with physical or mental activity","Fatigue that only occurs at night","Fatigue caused exclusively by anemia"],ans:1,exp:"ME/CFS is defined by profound, unexplained fatigue lasting ≥ 6 months that is NOT improved by rest, and that characteristically worsens with physical or mental exertion (post-exertional malaise)."},
+  {q:"Post-exertional malaise in CFS means:",opts:["Improved energy after exercise","Fatigue only occurring the morning after exercise","Worsening of all symptoms following even minor physical or mental activity","Malnutrition from reduced activity"],ans:2,exp:"Post-exertional malaise (PEM) is the hallmark of ME/CFS — a worsening of all symptoms (fatigue, pain, cognitive impairment) following minimal exertion, often delayed by 12-48 hours."},
+  {q:"Which of the following best describes appropriate prehospital management of a CFS patient in a 'crash'?",opts:["Dismiss the patient as having anxiety","Administer stimulant medications to increase energy","Provide supportive care, address specific symptoms, rule out other emergent causes, and treat respectfully","Push the patient to exercise and 'break the cycle'"],ans:2,exp:"CFS patients in severe relapses need empathetic supportive care, symptom management, and standard assessment to rule out emergent causes. These patients are frequently dismissed — validate their experience."},
+  {q:"The first-line pharmacological treatment for inflammatory myopathies (dermatomyositis and polymyositis) is:",opts:["Colchicine","High-dose corticosteroids (Prednisone)","Allopurinol","Methotrexate monotherapy"],ans:1,exp:"High-dose corticosteroids (prednisone 1 mg/kg/day) are the initial treatment for dermatomyositis and polymyositis, providing broad immunosuppression to reduce muscle inflammation."},
+
+  // OVERUSE SYNDROMES (74-81)
+  {q:"Bursitis is defined as:",opts:["Inflammation of a tendon from overuse","Inflammation of one or more bursae (fluid-filled cushioning sacs)","Inflammation of the joint synovium","Muscle fiber necrosis"],ans:1,exp:"Bursitis is inflammation of bursae — small fluid-filled sacs that cushion bones, tendons, and muscles near joints — most commonly caused by overuse, compression, or infection."},
+  {q:"Which joint is most commonly affected by bursitis?",opts:["Elbow","Shoulder","Hip (trochanteric bursa)","Knee"],ans:1,exp:"While multiple joints can be affected, the shoulder (subacromial bursa) is the most commonly affected site, followed by the elbow (olecranon bursa), hip (trochanteric), and knee (prepatellar)."},
+  {q:"Muscle strains are graded according to severity. A Grade 3 strain indicates:",opts:["Mild injury healing within days","Moderate injury with some fiber tearing","Severe injury with complete or near-complete muscle/tendon rupture","A fracture through muscle tissue"],ans:2,exp:"Grade 3 muscle strains involve severe damage — a complete or near-complete rupture of the muscle-tendon unit — requiring months to heal and often necessitating surgical repair."},
+  {q:"Which athletes are most commonly affected by hamstring and quadriceps strains?",opts:["Swimmers","Golfers","Track athletes, sprinters, and football players","Bowlers"],ans:2,exp:"Hamstring and quadriceps strains are most common in athletes requiring explosive speed — sprinters, hurdlers, and football/soccer players — due to the rapid eccentric loading during deceleration."},
+  {q:"Tendonitis risk factors include all of the following EXCEPT:",opts:["Older age","Repetitive occupational motions","Regular flexibility stretching","Certain sports (bowling, tennis, baseball)"],ans:2,exp:"Regular flexibility and stretching are protective factors. Risk factors for tendonitis include older age, repetitive occupational motions, forceful exertion, awkward positions, and high-demand sports."},
+  {q:"The 'PRICEM' method is used in treatment of:",opts:["Septic arthritis","Osteomyelitis","Tendonitis and overuse injuries","Cauda equina syndrome"],ans:2,exp:"PRICEM (Protection, Rest, Ice, Compression, Elevation, Medication) is the standard treatment framework for overuse injuries including tendonitis, muscle strains, and bursitis."},
+  {q:"Rheumatoid arthritis (RA) is a recognized risk factor for developing:",opts:["Osteosarcoma","Carpal tunnel syndrome","Bursitis","Necrotizing fasciitis"],ans:2,exp:"RA causes chronic synovial inflammation that makes bursae more susceptible to inflammation, making it a recognized risk factor for bursitis development."},
+  {q:"Corticosteroid injection for bursitis or tendonitis works by:",opts:["Eliminating bacteria from the bursa","Providing broad anti-inflammatory effect to reduce local swelling and pain","Replacing damaged bursal tissue","Stimulating collagen production"],ans:1,exp:"Corticosteroid injections (e.g., triamcinolone, methylprednisolone) provide potent local anti-inflammatory effects, reducing prostaglandin synthesis, cytokine release, and edema in the affected bursa or tendon."},
+
+  // PERIPHERAL NERVE (82-88)
+  {q:"Carpal tunnel syndrome is caused by compression of which nerve?",opts:["Radial nerve","Ulnar nerve","Median nerve","Axillary nerve"],ans:2,exp:"CTS results from compression of the median nerve as it passes through the carpal tunnel at the wrist — the narrow passageway bounded by carpal bones and the transverse carpal ligament."},
+  {q:"Which gender is three times MORE likely to develop carpal tunnel syndrome?",opts:["Men","Women","Equal in both","Children under 10"],ans:1,exp:"Women are three times more likely than men to develop CTS, possibly due to smaller carpal tunnel dimensions and hormonal influences (fluid retention during pregnancy/menopause)."},
+  {q:"The classic symptom pattern of carpal tunnel syndrome includes:",opts:["Constant burning pain throughout the entire arm","Nocturnal paresthesias (burning, tingling, numbness) in the palm, thumb, index, and middle fingers","Weakness and atrophy of the forearm flexors","Pain with neck rotation"],ans:1,exp:"CTS characteristically causes nocturnal paresthesias (burning, tingling, numbness) in the distribution of the median nerve: palm, thumb, index, middle fingers, and radial half of the ring finger."},
+  {q:"Thenar muscle wasting in CTS indicates:",opts:["Early, reversible nerve compression","Advanced, long-standing compression with axonal damage","Normal aging","Ulnar nerve involvement"],ans:1,exp:"Thenar atrophy indicates severe, long-standing CTS with axonal degeneration — the thenar muscles (opponens pollicis, abductor pollicis brevis) are innervated by the recurrent branch of the median nerve."},
+  {q:"Ulnar nerve entrapment most commonly occurs at the:",opts:["Wrist (Guyon's canal)","Behind the medial epicondyle (cubital tunnel)","Axilla","Shoulder"],ans:1,exp:"Ulnar nerve entrapment most commonly occurs at the cubital tunnel, posterior to the medial epicondyle at the elbow — caused by sustained elbow flexion, direct pressure, or prior injury."},
+  {q:"First-line management of mild-moderate carpal tunnel syndrome includes:",opts:["Immediate surgical carpal tunnel release","Aggressive opioid therapy","Wrist splinting in neutral position and NSAIDs","Amputation of the affected finger"],ans:2,exp:"Conservative management of mild-moderate CTS includes neutral-position wrist splinting (especially nocturnal) to reduce compressive forces, combined with NSAIDs to reduce inflammation and edema."},
+  {q:"Which of the following is NOT a contributing factor to carpal tunnel syndrome?",opts:["Hypothyroidism","Rheumatoid arthritis","Pregnancy-associated fluid retention","Regular physical exercise without repetitive wrist strain"],ans:3,exp:"Regular exercise without repetitive wrist strain is not a risk factor for CTS. Contributing factors include hypothyroidism, RA, pregnancy, prior wrist injury, repetitive use of vibrating tools, and elevated BMI."},
+
+  // NECROTIZING FASCIITIS (89-94)
+  {q:"Necrotizing fasciitis is best described as:",opts:["Inflammation of the subcutaneous fat only","A rare, rapidly progressive infection of the deep fascia with secondary necrosis of skin and subcutaneous tissue","A chronic, low-grade infection of the dermis","A fungal infection of the nail bed"],ans:1,exp:"NF is a rare, rapidly progressive, life-threatening inflammatory infection of the deep fascia that quickly spreads along fascial planes, causing secondary tissue necrosis."},
+  {q:"A key clinical clue to necrotizing fasciitis is that:",opts:["Pain is mild and proportionate to appearance","The area of tenderness often exceeds the area of visible skin abnormality","Skin changes are always dramatic from the start","The infection is easily controlled with oral antibiotics"],ans:1,exp:"In NF, infection spreads along deep fascial planes far beyond visible skin changes — the extent of tenderness and destruction consistently exceeds what the skin appearance suggests."},
+  {q:"The definitive treatment for necrotizing fasciitis is:",opts:["IV antibiotics alone","Hyperbaric oxygen alone","Emergency surgical debridement plus broad-spectrum IV antibiotics","Oral antifungals"],ans:2,exp:"NF requires emergency wide surgical debridement of all necrotic tissue plus broad-spectrum IV antibiotics (typically piperacillin-tazobactam + clindamycin + vancomycin). Surgery cannot be delayed."},
+  {q:"Crepitus (crackling sensation) on palpation of infected tissue suggests:",opts:["Normal joint fluid","Gas-forming organisms causing subcutaneous emphysema","Bone fracture","Tendon rupture"],ans:1,exp:"Crepitus in soft tissue indicates subcutaneous emphysema from gas-producing anaerobic bacteria — a critical finding suggesting necrotizing fasciitis or gas gangrene requiring emergent surgical intervention."},
+  {q:"Which population is at highest risk for necrotizing fasciitis?",opts:["Healthy young athletes","Immunocompromised individuals (diabetes, HIV, malignancy)","Children under 5","Pregnant women"],ans:1,exp:"Immunocompromised individuals — including those with diabetes, HIV, cancer, cirrhosis, or chronic steroid use — are at highest risk for necrotizing fasciitis due to impaired immune defense."},
+  {q:"Prehospital management priorities for suspected necrotizing fasciitis include:",opts:["Wound debridement on scene","Antibiotics and delay for complete wound assessment","Scene safety, ABCs, vascular access, pain management, and rapid transport — do not delay","Full surgical workup on scene"],ans:2,exp:"Prehospital NF management focuses on recognition (pain disproportionate to appearance + systemic signs), ABCs, vascular access, analgesia, and immediate transport. Scene time should be minimized — definitive treatment is surgical."},
+
+  // GANGRENE & SOFT TISSUE (95-100)
+  {q:"Dry gangrene is primarily caused by:",opts:["Bacterial infection of tissue","Progressive arterial insufficiency leading to tissue ischemia and desiccation","Venous thrombosis only","Autoimmune destruction of tissue"],ans:1,exp:"Dry gangrene results from progressive arterial insufficiency (atherosclerosis, Buerger's disease, frostbite, embolism) — the tissue loses its blood supply, desiccates, turns black/brown, and mummifies without significant infection."},
+  {q:"Wet gangrene differs from dry gangrene in that:",opts:["Wet gangrene is less dangerous","Wet gangrene involves infected, moist, rapidly spreading tissue necrosis with systemic sepsis risk","Wet gangrene is caused by arterial occlusion only","Wet gangrene is not treated with surgery"],ans:1,exp:"Wet gangrene involves infected tissue necrosis — moist, rapidly spreading with pus, foul odor, and a high risk of systemic sepsis. It is a surgical emergency unlike the more gradual dry gangrene."},
+  {q:"Kanavel's four cardinal signs indicate which condition?",opts:["Septic arthritis","Necrotizing fasciitis","Pyogenic flexor tenosynovitis","Carpal tunnel syndrome"],ans:2,exp:"Kanavel's signs (pain on passive extension, fusiform swelling, flexed position, tenderness along tendon sheath) are pathognomonic for pyogenic flexor tenosynovitis — an orthopedic emergency."},
+  {q:"Paronychia is best described as:",opts:["Infection of the deep fascial planes","Infection of the lateral nail folds caused by bacteria, yeast, or fungus","Inflammation of a tendon sheath","Osteomyelitis of the finger"],ans:1,exp:"Paronychia is a common infection of the lateral (and sometimes proximal) nail folds, typically caused by Staph aureus (acute) or Candida (chronic), following minor nail trauma."},
+  {q:"A patient presents with a fever, red streak extending up the forearm from the nail area, and a painful, swollen nail fold. This presentation suggests:",opts:["Benign chronic paronychia requiring warm soaks only","Simple bursitis of the wrist","Paronychia with lymphangitis — systemic spread requiring immediate medical treatment","Normal healing after nail injury"],ans:2,exp:"Red streaks (lymphangitis) extending from an infected area indicate bacteremia/lymphangitic spread — a sign of systemic infection requiring urgent antibiotic therapy and medical evaluation."},
+  {q:"Which of the following BEST differentiates necrotizing fasciitis from cellulitis in the prehospital setting?",opts:["NF always has a dramatic skin rash at onset","Pain disproportionate to appearance, rapid progression, systemic toxicity, and possible skin crepitus suggest NF","Cellulitis always causes crepitus","NF only affects immunocompetent patients"],ans:1,exp:"Key differentiators favoring NF over cellulitis: pain disproportionate to appearance, rapid progression (hours), systemic toxicity (sepsis), skin crepitus, skin color changes from red → purple → black, and tenderness beyond visible margins."}
+];
+
+let currentQ=0, userAnswers=Array(100).fill(null), examStarted=false;
+let studentName='', studentId='', examDate='';
+
+function startExam(){
+  studentName=document.getElementById('student-name').value.trim();
+  studentId=document.getElementById('student-id').value.trim();
+  examDate=document.getElementById('student-date').value;
+  if(!studentName||!studentId){alert('Please enter your name and student ID to begin.');return;}
+  document.getElementById('student-info-form').style.display='none';
+  document.getElementById('quiz-container').style.display='block';
+  renderQuestion(0);
+}
+
+function renderQuestion(idx){
+  currentQ=idx;
+  const container=document.getElementById('questions-container');
+  container.innerHTML='';
+  const q=questions[idx];
+  const block=document.createElement('div');
+  block.className='question-block active';
+  const saved=userAnswers[idx];
+  block.innerHTML=`
+    <div class="question-num">Question ${idx+1} of 100</div>
+    <div class="question-text">${q.q}</div>
+    <div class="options">
+      ${q.opts.map((o,i)=>`
+        <label class="option-label${saved===i?' selected':''}">
+          <input type="radio" name="q${idx}" value="${i}" ${saved===i?'checked':''} onchange="selectAnswer(${idx},${i})"/>
+          <span class="opt-text"><strong>${['A','B','C','D'][i]}.</strong> ${o}</span>
+        </label>
+      `).join('')}
+    </div>
+    <div class="feedback" id="feedback-${idx}"></div>
+  `;
+  container.appendChild(block);
+  updateProgress(idx);
+  document.getElementById('btn-prev').style.display=idx>0?'inline-flex':'none';
+  document.getElementById('btn-next').style.display=idx<99?'inline-flex':'none';
+  document.getElementById('btn-submit').style.display=idx===99?'inline-flex':'none';
+}
+
+function selectAnswer(idx,val){
+  userAnswers[idx]=val;
+  document.querySelectorAll(`input[name="q${idx}"]`).forEach(r=>{
+    r.closest('.option-label').classList.remove('selected');
+  });
+  document.querySelector(`input[name="q${idx}"][value="${val}"]`).closest('.option-label').classList.add('selected');
+}
+
+function updateProgress(idx){
+  document.getElementById('progress-fill').style.width=`${((idx+1)/100)*100}%`;
+  document.getElementById('q-current').textContent=idx+1;
+}
+
+function nextQ(){if(currentQ<99)renderQuestion(currentQ+1);}
+function prevQ(){if(currentQ>0)renderQuestion(currentQ-1);}
+
+function submitExam(){
+  const unanswered=userAnswers.filter(a=>a===null).length;
+  if(unanswered>0){
+    if(!confirm(`You have ${unanswered} unanswered questions. Submit anyway?`))return;
+  }
+  showResults();
+}
+
+function showResults(){
+  document.getElementById('quiz-container').style.display='none';
+  const panel=document.getElementById('results-panel');
+  panel.classList.add('show');
+  let correct=0;
+  const tbody=document.getElementById('review-tbody');
+  tbody.innerHTML='';
+  questions.forEach((q,i)=>{
+    const ua=userAnswers[i];
+    const isCorrect=ua===q.ans;
+    if(isCorrect)correct++;
+    const row=document.createElement('tr');
+    row.innerHTML=`
+      <td>${i+1}</td>
+      <td>${q.q.substring(0,60)}...</td>
+      <td>${ua!==null?['A','B','C','D'][ua]:'—'}</td>
+      <td>${['A','B','C','D'][q.ans]}</td>
+      <td>${isCorrect?'<span class="pill pill-green">✓ Correct</span>':'<span class="pill pill-red">✗ Wrong</span>'}</td>
+    `;
+    tbody.appendChild(row);
+  });
+  const pct=Math.round((correct/100)*100);
+  document.getElementById('score-pct').textContent=`${pct}%`;
+  document.getElementById('stat-correct').textContent=correct;
+  document.getElementById('stat-wrong').textContent=100-correct;
+  document.getElementById('stat-pct').textContent=`${pct}%`;
+  document.getElementById('student-result-name').textContent=`${studentName} · ID: ${studentId} · ${examDate}`;
+  const gradeBadge=document.getElementById('grade-badge');
+  let grade,gradeClass;
+  if(pct>=90){grade='A';gradeClass='grade-A';}
+  else if(pct>=80){grade='B';gradeClass='grade-B';}
+  else if(pct>=70){grade='C';gradeClass='grade-C';}
+  else if(pct>=60){grade='D';gradeClass='grade-D';}
+  else{grade='F';gradeClass='grade-F';}
+  gradeBadge.textContent=`Grade: ${grade}`;
+  gradeBadge.className=`grade-badge ${gradeClass}`;
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function retakeExam(){
+  userAnswers=Array(100).fill(null);
+  currentQ=0;
+  document.getElementById('results-panel').classList.remove('show');
+  document.getElementById('student-info-form').style.display='block';
+  document.getElementById('quiz-container').style.display='none';
+  document.getElementById('student-info-form').scrollIntoView({behavior:'smooth'});
+}
+
+function generatePDF(){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'letter'});
+  const correct=userAnswers.filter((a,i)=>a===questions[i].ans).length;
+  const pct=Math.round((correct/100)*100);
+  let grade;
+  if(pct>=90)grade='A';
+  else if(pct>=80)grade='B';
+  else if(pct>=70)grade='C';
+  else if(pct>=60)grade='D';
+  else grade='F';
+
+  // Header
+  doc.setFillColor(17,22,32);
+  doc.rect(0,0,216,40,'F');
+  doc.setTextColor(232,160,32);
+  doc.setFontSize(20);
+  doc.setFont('helvetica','bold');
+  doc.text('CAMP COMMUNITY COLLEGE — EMS PROGRAM',108,14,{align:'center'});
+  doc.setFontSize(14);
+  doc.setTextColor(200,210,230);
+  doc.text('Chapter 31: Nontraumatic Musculoskeletal Disorders',108,24,{align:'center'});
+  doc.setFontSize(11);
+  doc.text('Knowledge Assessment — Score Report',108,33,{align:'center'});
+
+  // Student info box
+  doc.setFillColor(26,34,53);
+  doc.roundedRect(14,46,188,36,3,3,'F');
+  doc.setTextColor(200,210,230);
+  doc.setFontSize(11);
+  doc.setFont('helvetica','bold');
+  doc.text('STUDENT INFORMATION',108,55,{align:'center'});
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(10);
+  doc.text(`Name: ${studentName}`,20,64);
+  doc.text(`Student ID: ${studentId}`,20,71);
+  doc.text(`Date: ${examDate}`,120,64);
+  doc.text(`Textbook: Sanders\' Paramedic, 6th Ed.`,120,71);
+
+  // Score box
+  doc.setFillColor(30,41,64);
+  doc.roundedRect(14,88,188,44,3,3,'F');
+  doc.setTextColor(232,160,32);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(22);
+  doc.text(`${pct}%`,108,108,{align:'center'});
+  doc.setFontSize(14);
+  doc.text(`Grade: ${grade}`,108,120,{align:'center'});
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(10);
+  doc.setTextColor(200,210,230);
+  doc.text(`Correct: ${correct} / 100`,50,130,{align:'center'});
+  doc.text(`Incorrect: ${100-correct} / 100`,166,130,{align:'center'});
+
+  // Grade scale
+  doc.setFontSize(9);
+  doc.setTextColor(130,145,170);
+  doc.text('Grading Scale: A=90-100% | B=80-89% | C=70-79% | D=60-69% | F=<60%',108,140,{align:'center'});
+
+  // Question review table header
+  doc.setFillColor(17,22,32);
+  doc.rect(14,146,188,8,'F');
+  doc.setTextColor(232,160,32);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(9);
+  doc.text('#',18,152);
+  doc.text('Question',28,152);
+  doc.text('Your Ans.',148,152);
+  doc.text('Correct',164,152);
+  doc.text('Result',183,152);
+
+  let yPos=158;
+  const pageH=272;
+
+  questions.forEach((q,i)=>{
+    if(yPos>pageH){
+      doc.addPage();
+      doc.setFillColor(17,22,32);
+      doc.rect(0,0,216,12,'F');
+      doc.setTextColor(232,160,32);
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(8);
+      doc.text(`Ch.31 Musculoskeletal Assessment — ${studentName} — Page ${doc.getCurrentPageInfo().pageNumber}`,108,8,{align:'center'});
+      yPos=20;
+      doc.setFillColor(26,34,53);
+      doc.rect(14,yPos,188,7,'F');
+      doc.setTextColor(232,160,32);
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(9);
+      doc.text('#',18,yPos+5);
+      doc.text('Question',28,yPos+5);
+      doc.text('Your Ans.',148,yPos+5);
+      doc.text('Correct',164,yPos+5);
+      doc.text('Result',183,yPos+5);
+      yPos+=12;
+    }
+    const ua=userAnswers[i];
+    const isCorrect=ua===q.ans;
+    const bg=i%2===0?[26,34,53]:[31,41,64];
+    doc.setFillColor(...bg);
+    doc.rect(14,yPos-4,188,7,'F');
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(8);
+    doc.setTextColor(200,210,230);
+    doc.text(`${i+1}`,18,yPos);
+    const qText=q.q.length>70?q.q.substring(0,70)+'...':q.q;
+    doc.text(qText,28,yPos);
+    doc.text(ua!==null?['A','B','C','D'][ua]:'—',153,yPos,{align:'center'});
+    doc.text(['A','B','C','D'][q.ans],169,yPos,{align:'center'});
+    if(isCorrect){doc.setTextColor(64,192,128);doc.text('✓',189,yPos);}
+    else{doc.setTextColor(224,80,96);doc.text('✗',189,yPos);}
+    yPos+=7;
+  });
+
+  // Footer on last page
+  doc.setFontSize(8);
+  doc.setTextColor(90,106,138);
+  doc.text('CAMP Community College — EMS Program — Chapter 31 Knowledge Assessment',108,284,{align:'center'});
+  doc.text(`Generated: ${new Date().toLocaleString()}`,108,289,{align:'center'});
+
+  doc.save(`Ch31_Musculoskeletal_${studentName.replace(/\s+/g,'_')}_${studentId}.pdf`);
+}
+
+// Active nav highlighting on scroll
+const sectionIds=['intro','anatomy','assessment','management','osteo','tumors','lowback','arthritis','gout','myalgia','cfs','overuse','nerve','fasciitis','gangrene','other-soft','exam'];
+window.addEventListener('scroll',()=>{
+  let current='';
+  sectionIds.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-100)current=id;
+  });
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    n.classList.remove('active');
+    if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes(`'${current}'`))n.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
