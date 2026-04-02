@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 33 – Behavioral & Psychiatric Disorders | CAMP EMS</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #080c18;
+  --bg-secondary: #0d1225;
+  --bg-card: #111827;
+  --bg-card2: #141d30;
+  --border: #1e2d4a;
+  --accent: #7c3aed;
+  --accent2: #a78bfa;
+  --accent3: #c4b5fd;
+  --teal: #0891b2;
+  --teal-light: #22d3ee;
+  --gold: #f59e0b;
+  --gold-light: #fcd34d;
+  --rose: #e11d48;
+  --rose-light: #fb7185;
+  --green: #059669;
+  --green-light: #34d399;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --pill-bg: #1e1b4b;
+  --shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+.light-mode {
+  --bg-primary: #f0f4ff;
+  --bg-secondary: #e8edfa;
+  --bg-card: #ffffff;
+  --bg-card2: #f5f8ff;
+  --border: #c7d2fe;
+  --accent: #7c3aed;
+  --accent2: #6d28d9;
+  --accent3: #5b21b6;
+  --teal: #0891b2;
+  --teal-light: #0e7490;
+  --gold: #d97706;
+  --gold-light: #b45309;
+  --rose: #e11d48;
+  --rose-light: #be123c;
+  --green: #059669;
+  --green-light: #047857;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --pill-bg: #ede9fe;
+  --shadow: 0 4px 24px rgba(100,100,200,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Source Sans 3',sans-serif;
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  min-height:100vh;
+  transition:background 0.3s,color 0.3s;
+}
+/* HEADER */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:var(--bg-secondary);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:58px;
+  box-shadow:var(--shadow);
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Rajdhani',sans-serif;
+  font-size:1.15rem;font-weight:700;
+  color:var(--accent2);
+  letter-spacing:0.5px;
+}
+.logo-badge{
+  background:var(--accent);
+  color:#fff;font-size:0.65rem;font-weight:700;
+  padding:2px 7px;border-radius:4px;letter-spacing:1px;
+}
+.header-right{display:flex;align-items:center;gap:1rem;}
+.chapter-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.72rem;color:var(--text-muted);
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  padding:3px 10px;border-radius:20px;
+}
+.theme-btn{
+  background:var(--bg-card);border:1px solid var(--border);
+  color:var(--text-secondary);
+  padding:5px 14px;border-radius:20px;
+  cursor:pointer;font-size:0.8rem;
+  transition:all 0.2s;
+}
+.theme-btn:hover{border-color:var(--accent2);color:var(--accent2);}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,var(--bg-secondary) 0%,var(--bg-primary) 100%);
+  padding:3.5rem 2rem 2.5rem;
+  text-align:center;
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(124,58,237,0.08) 0%,transparent 60%),
+             radial-gradient(ellipse at 70% 50%,rgba(8,145,178,0.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hero-label{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent2);
+  background:var(--pill-bg);
+  border:1px solid var(--accent);
+  padding:4px 14px;border-radius:20px;
+  margin-bottom:1rem;
+}
+.hero h1{
+  font-family:'Rajdhani',sans-serif;
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:700;line-height:1.1;
+  color:var(--text-primary);
+  margin-bottom:0.5rem;
+}
+.hero h1 span{color:var(--accent2);}
+.hero-sub{
+  color:var(--text-secondary);
+  font-size:1rem;max-width:560px;margin:0 auto 1.5rem;
+}
+.hero-stats{
+  display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+  margin-top:1.5rem;
+}
+.stat-pill{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:30px;
+  padding:6px 18px;
+  font-size:0.82rem;
+  color:var(--text-secondary);
+  display:flex;align-items:center;gap:6px;
+}
+.stat-pill span{color:var(--accent2);font-weight:700;}
+
+/* NAV TABS */
+.nav-tabs{
+  display:flex;gap:0;
+  overflow-x:auto;
+  background:var(--bg-secondary);
+  border-bottom:2px solid var(--border);
+  padding:0 1rem;
+  scrollbar-width:none;
+}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{
+  padding:14px 20px;
+  font-family:'Rajdhani',sans-serif;
+  font-size:0.9rem;font-weight:600;
+  color:var(--text-muted);
+  cursor:pointer;border:none;background:none;
+  white-space:nowrap;
+  border-bottom:3px solid transparent;
+  margin-bottom:-2px;
+  transition:all 0.2s;
+}
+.nav-tab:hover{color:var(--accent2);}
+.nav-tab.active{color:var(--accent2);border-bottom-color:var(--accent);}
+
+/* MAIN CONTENT */
+.main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+.section{display:none;}
+.section.active{display:block;}
+
+/* CARDS */
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.5rem;
+  margin-bottom:1.5rem;
+  box-shadow:var(--shadow);
+}
+.card-header{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:1.2rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+}
+.card-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.card-title{
+  font-family:'Rajdhani',sans-serif;
+  font-size:1.25rem;font-weight:700;
+  color:var(--text-primary);
+}
+.card-sub{font-size:0.82rem;color:var(--text-muted);margin-top:1px;}
+
+/* SECTION TAGS */
+.tag{
+  display:inline-block;
+  font-size:0.68rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;
+  padding:2px 9px;border-radius:4px;margin-bottom:0.6rem;
+}
+.tag-purple{background:rgba(124,58,237,0.15);color:var(--accent2);}
+.tag-teal{background:rgba(8,145,178,0.15);color:var(--teal-light);}
+.tag-gold{background:rgba(245,158,11,0.15);color:var(--gold);}
+.tag-rose{background:rgba(225,29,72,0.15);color:var(--rose-light);}
+.tag-green{background:rgba(5,150,105,0.15);color:var(--green-light);}
+
+/* DISORDER BLOCK */
+.disorder-block{
+  border-left:3px solid var(--accent);
+  padding-left:1.2rem;
+  margin-bottom:2rem;
+}
+.disorder-title{
+  font-family:'Rajdhani',sans-serif;
+  font-size:1.35rem;font-weight:700;
+  color:var(--accent2);margin-bottom:0.3rem;
+}
+.disorder-subtitle{
+  font-size:0.8rem;color:var(--text-muted);
+  font-family:'JetBrains Mono',monospace;
+  margin-bottom:0.8rem;
+}
+.body-text{
+  color:var(--text-secondary);
+  line-height:1.7;font-size:0.95rem;
+  margin-bottom:0.7rem;
+}
+
+/* ANALOGY BOX */
+.analogy-box{
+  background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(245,158,11,0.04));
+  border:1px solid rgba(245,158,11,0.25);
+  border-left:4px solid var(--gold);
+  border-radius:0 10px 10px 0;
+  padding:1rem 1.2rem;
+  margin:1rem 0;
+}
+.analogy-label{
+  font-size:0.7rem;font-weight:700;letter-spacing:1px;
+  color:var(--gold);text-transform:uppercase;margin-bottom:0.4rem;
+  display:flex;align-items:center;gap:5px;
+}
+.analogy-text{
+  color:var(--text-secondary);font-size:0.92rem;line-height:1.6;
+  font-style:italic;
+}
+
+/* PATHO BOX */
+.patho-box{
+  background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(124,58,237,0.04));
+  border:1px solid rgba(124,58,237,0.2);
+  border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;
+  padding:1rem 1.2rem;
+  margin:1rem 0;
+}
+.patho-label{
+  font-size:0.7rem;font-weight:700;letter-spacing:1px;
+  color:var(--accent2);text-transform:uppercase;margin-bottom:0.4rem;
+}
+.patho-text{color:var(--text-secondary);font-size:0.92rem;line-height:1.65;}
+
+/* SYMPTOMS GRID */
+.sx-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:0.6rem;margin:0.8rem 0;
+}
+.sx-item{
+  background:var(--bg-card2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:0.5rem 0.8rem;
+  font-size:0.85rem;
+  color:var(--text-secondary);
+  display:flex;align-items:center;gap:6px;
+}
+.sx-dot{
+  width:7px;height:7px;border-radius:50%;flex-shrink:0;
+}
+
+/* MEDICATION TABLE */
+.med-table{
+  width:100%;border-collapse:collapse;
+  margin-top:0.8rem;font-size:0.85rem;
+}
+.med-table th{
+  background:var(--bg-card2);
+  color:var(--text-muted);
+  font-size:0.72rem;letter-spacing:0.8px;text-transform:uppercase;
+  padding:8px 12px;
+  text-align:left;
+  border-bottom:2px solid var(--border);
+  font-family:'Rajdhani',sans-serif;font-weight:700;
+}
+.med-table td{
+  padding:8px 12px;
+  border-bottom:1px solid var(--border);
+  color:var(--text-secondary);
+  vertical-align:top;
+}
+.med-table tr:last-child td{border-bottom:none;}
+.med-table tr:hover td{background:var(--bg-card2);}
+.drug-name{
+  color:var(--teal-light);
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.82rem;font-weight:600;
+}
+.drug-class{
+  display:inline-block;
+  font-size:0.68rem;font-weight:700;
+  padding:1px 7px;border-radius:4px;
+  background:rgba(8,145,178,0.12);color:var(--teal);
+}
+.drug-dose{
+  color:var(--gold);
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.78rem;
+}
+
+/* WARNING BOX */
+.warn-box{
+  background:rgba(225,29,72,0.07);
+  border:1px solid rgba(225,29,72,0.2);
+  border-left:4px solid var(--rose);
+  border-radius:0 10px 10px 0;
+  padding:0.9rem 1.2rem;
+  margin:0.8rem 0;
+  font-size:0.88rem;
+  color:var(--text-secondary);
+  line-height:1.6;
+}
+.warn-label{color:var(--rose-light);font-weight:700;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;}
+
+/* CLINICAL PEARL */
+.pearl-box{
+  background:rgba(5,150,105,0.07);
+  border:1px solid rgba(5,150,105,0.2);
+  border-left:4px solid var(--green);
+  border-radius:0 10px 10px 0;
+  padding:0.9rem 1.2rem;
+  margin:0.8rem 0;
+  font-size:0.88rem;
+  color:var(--text-secondary);
+  line-height:1.6;
+}
+.pearl-label{color:var(--green-light);font-weight:700;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;}
+
+/* MNEMONIC */
+.mnemonic-box{
+  background:var(--bg-card2);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1rem 1.2rem;
+  margin:0.8rem 0;
+}
+.mnemonic-title{
+  font-family:'Rajdhani',sans-serif;
+  font-size:1.05rem;font-weight:700;
+  color:var(--accent2);margin-bottom:0.6rem;
+}
+.mnemonic-row{
+  display:flex;gap:10px;align-items:baseline;
+  margin-bottom:0.3rem;
+  font-size:0.88rem;color:var(--text-secondary);
+}
+.mnemonic-letter{
+  font-family:'Rajdhani',sans-serif;
+  font-size:1.2rem;font-weight:700;
+  color:var(--accent2);
+  min-width:22px;
+}
+
+/* ASSESSMENT SECTION */
+.assess-header{
+  text-align:center;padding:2rem 1rem 1.5rem;
+}
+.assess-header h2{
+  font-family:'Rajdhani',sans-serif;
+  font-size:2rem;font-weight:700;
+  color:var(--text-primary);margin-bottom:0.4rem;
+}
+.student-form{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.8rem;
+  max-width:500px;margin:0 auto 2rem;
+}
+.form-label{
+  font-size:0.8rem;font-weight:600;letter-spacing:0.5px;
+  color:var(--text-muted);text-transform:uppercase;
+  margin-bottom:0.4rem;display:block;
+}
+.form-input{
+  width:100%;padding:10px 14px;
+  background:var(--bg-card2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  color:var(--text-primary);
+  font-size:0.95rem;
+  transition:border-color 0.2s;
+  margin-bottom:1rem;
+}
+.form-input:focus{outline:none;border-color:var(--accent);}
+.light-mode .form-input{background:#f0f4ff;}
+
+.start-btn{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,var(--accent),#6d28d9);
+  color:#fff;font-family:'Rajdhani',sans-serif;
+  font-size:1.1rem;font-weight:700;letter-spacing:0.5px;
+  border:none;border-radius:10px;cursor:pointer;
+  transition:opacity 0.2s,transform 0.1s;
+}
+.start-btn:hover{opacity:0.9;transform:translateY(-1px);}
+
+/* QUIZ */
+.quiz-progress-bar{
+  width:100%;height:5px;
+  background:var(--border);
+  border-radius:5px;margin-bottom:1.5rem;
+  overflow:hidden;
+}
+.quiz-progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--teal));
+  border-radius:5px;
+  transition:width 0.4s ease;
+}
+.quiz-info{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1.2rem;
+  font-size:0.85rem;color:var(--text-muted);
+}
+.q-counter{font-family:'JetBrains Mono',monospace;}
+.q-category{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.8px;
+  padding:2px 10px;border-radius:4px;
+  background:var(--pill-bg);color:var(--accent2);
+}
+.question-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.8rem;
+  margin-bottom:1rem;
+}
+.question-text{
+  font-size:1rem;line-height:1.6;
+  color:var(--text-primary);
+  margin-bottom:1.3rem;
+  font-weight:500;
+}
+.options{display:flex;flex-direction:column;gap:0.6rem;}
+.option{
+  padding:11px 16px;
+  background:var(--bg-card2);
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  cursor:pointer;
+  font-size:0.92rem;color:var(--text-secondary);
+  transition:all 0.15s;
+  display:flex;align-items:flex-start;gap:10px;
+  text-align:left;
+  line-height:1.4;
+}
+.option:hover:not(.selected):not(.correct):not(.wrong){
+  border-color:var(--accent);color:var(--text-primary);
+  background:rgba(124,58,237,0.06);
+}
+.option.selected{border-color:var(--accent);background:rgba(124,58,237,0.1);}
+.option.correct{
+  border-color:var(--green);
+  background:rgba(5,150,105,0.1);
+  color:var(--green-light);
+}
+.option.wrong{
+  border-color:var(--rose);
+  background:rgba(225,29,72,0.08);
+  color:var(--rose-light);
+}
+.option-letter{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.75rem;font-weight:700;
+  min-width:20px;height:20px;
+  border-radius:4px;
+  background:var(--border);
+  color:var(--text-muted);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.option.correct .option-letter{background:var(--green);color:#fff;}
+.option.wrong .option-letter{background:var(--rose);color:#fff;}
+.feedback-box{
+  background:var(--bg-card2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:0.9rem 1.1rem;
+  margin-top:0.8rem;
+  font-size:0.88rem;
+  color:var(--text-secondary);
+  line-height:1.6;
+  display:none;
+}
+.feedback-box.show{display:block;}
+.feedback-correct{border-left:4px solid var(--green);}
+.feedback-wrong{border-left:4px solid var(--rose);}
+.quiz-nav{display:flex;justify-content:flex-end;gap:1rem;margin-top:1rem;}
+.nav-btn{
+  padding:10px 22px;
+  border-radius:8px;font-family:'Rajdhani',sans-serif;
+  font-size:0.95rem;font-weight:700;
+  cursor:pointer;border:none;
+  transition:all 0.2s;
+}
+.btn-next{background:var(--accent);color:#fff;}
+.btn-next:hover{background:#6d28d9;}
+.btn-submit{background:var(--green);color:#fff;}
+.btn-submit:hover{background:#047857;}
+
+/* RESULTS */
+.results-hero{
+  text-align:center;padding:2.5rem 1rem 2rem;
+}
+.score-ring{
+  width:140px;height:140px;
+  margin:0 auto 1.5rem;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.score-ring svg{position:absolute;inset:0;transform:rotate(-90deg);}
+.score-ring circle{fill:none;stroke-width:10;stroke-linecap:round;}
+.score-bg{stroke:var(--border);}
+.score-fill{stroke:url(#scoreGrad);transition:stroke-dashoffset 1s ease;}
+.score-num{
+  font-family:'Rajdhani',sans-serif;
+  font-size:2.4rem;font-weight:700;
+  color:var(--text-primary);
+  text-align:center;
+  z-index:1;
+  line-height:1;
+}
+.score-pct{font-size:1rem;color:var(--text-muted);}
+.results-name{
+  font-family:'Rajdhani',sans-serif;
+  font-size:1.4rem;font-weight:700;
+  color:var(--text-primary);margin-bottom:0.3rem;
+}
+.results-grade{
+  font-size:1.8rem;font-weight:700;
+  font-family:'Rajdhani',sans-serif;
+}
+.grade-A{color:var(--green-light);}
+.grade-B{color:var(--teal-light);}
+.grade-C{color:var(--gold);}
+.grade-D{color:var(--rose-light);}
+.grade-F{color:var(--rose);}
+.results-stats{
+  display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;
+  margin:1.5rem 0;
+}
+.r-stat{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:10px;padding:1rem 1.5rem;
+  text-align:center;min-width:100px;
+}
+.r-stat-num{
+  font-family:'Rajdhani',sans-serif;
+  font-size:1.8rem;font-weight:700;
+}
+.r-stat-label{font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;}
+.pdf-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;
+  background:linear-gradient(135deg,var(--teal),#0e7490);
+  color:#fff;font-family:'Rajdhani',sans-serif;
+  font-size:1.05rem;font-weight:700;letter-spacing:0.5px;
+  border:none;border-radius:10px;cursor:pointer;
+  transition:all 0.2s;margin-top:0.5rem;
+}
+.pdf-btn:hover{opacity:0.9;transform:translateY(-2px);}
+.review-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;
+  background:var(--bg-card);
+  color:var(--text-secondary);
+  font-family:'Rajdhani',sans-serif;
+  font-size:1.05rem;font-weight:700;
+  border:1.5px solid var(--border);border-radius:10px;
+  cursor:pointer;transition:all 0.2s;margin-top:0.5rem;
+}
+.review-btn:hover{border-color:var(--accent2);color:var(--accent2);}
+.review-list{margin-top:1.5rem;}
+.review-item{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.2rem;margin-bottom:0.8rem;
+  font-size:0.88rem;
+}
+.review-q{color:var(--text-primary);font-weight:500;margin-bottom:0.5rem;line-height:1.5;}
+.review-correct{color:var(--green-light);font-size:0.84rem;}
+.review-wrong{color:var(--rose-light);font-size:0.84rem;}
+.review-explanation{color:var(--text-muted);font-size:0.82rem;margin-top:0.4rem;line-height:1.5;}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .hero{padding:2.5rem 1rem 2rem;}
+  .main{padding:1.5rem 1rem;}
+  .card{padding:1.2rem;}
+  .sx-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">
+    <span class="logo-badge">CAMP</span>
+    EMS Paramedic Program
+  </div>
+  <div class="header-right">
+    <span class="chapter-tag">SANDERS 6E · CH. 33</span>
+    <button class="theme-btn" onclick="toggleTheme()">☀ Light Mode</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-label">📘 Chapter 33 · Sanders' Paramedic Textbook 6th Edition</div>
+  <h1>Behavioral &amp; <span>Psychiatric Disorders</span></h1>
+  <p class="hero-sub">Deep pathophysiology, clinical analogies, medication profiles, and prehospital management strategies for the paramedic clinician.</p>
+  <div class="hero-stats">
+    <div class="stat-pill">🧠 <span>13</span> Disorder Categories</div>
+    <div class="stat-pill">💊 <span>25+</span> Medications Covered</div>
+    <div class="stat-pill">📝 <span>100</span> Question Assessment</div>
+  </div>
+</div>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('overview')">Overview</button>
+  <button class="nav-tab" onclick="showTab('neurocog')">Neurocognitive</button>
+  <button class="nav-tab" onclick="showTab('psychotic')">Psychotic</button>
+  <button class="nav-tab" onclick="showTab('anxiety')">Anxiety & Trauma</button>
+  <button class="nav-tab" onclick="showTab('mood')">Mood Disorders</button>
+  <button class="nav-tab" onclick="showTab('other')">Other Disorders</button>
+  <button class="nav-tab" onclick="showTab('violence')">Violence & Restraint</button>
+  <button class="nav-tab" onclick="showTab('meds')">Medication Reference</button>
+  <button class="nav-tab" onclick="showTab('assessment')">📝 Assessment</button>
+</nav>
+
+<div class="main">
+
+<!-- ===== OVERVIEW ===== -->
+<div id="tab-overview" class="section active">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(124,58,237,0.15);">🧬</div>
+      <div>
+        <div class="card-title">Understanding Behavioral Emergencies</div>
+        <div class="card-sub">Biologic, Psychosocial &amp; Sociocultural Causes</div>
+      </div>
+    </div>
+    <div class="tag tag-purple">Core Concept</div>
+    <p class="body-text">A <strong style="color:var(--accent2)">behavioral emergency</strong> is any situation in which a patient's mood or behavior presents an imminent risk of harm or death to self or others requiring immediate attention. Approximately 1 in 5.6 people have mental illnesses that severely limit their daily activities — and about 15% of ED visits relate to mental health or substance use disorders.</p>
+    <div class="patho-box">
+      <div class="patho-label">🔬 Pathophysiology — The Three Root Causes</div>
+      <div class="patho-text">
+        <strong style="color:var(--accent3)">Biologic:</strong> Physical or biochemical brain disturbances — genetic factors, prenatal/postnatal injury, neurotransmitter imbalance (dopamine, serotonin, norepinephrine, GABA). These are true medical conditions, not character flaws.<br><br>
+        <strong style="color:var(--accent3)">Psychosocial:</strong> Personality, coping mechanisms, and life experiences — childhood trauma, abuse, dysfunctional family structure. The brain's "wiring" shaped by experience.<br><br>
+        <strong style="color:var(--accent3)">Sociocultural:</strong> How a person balances emotions in society — personal relationships, economic status, social cohesion, belief systems. When this balance shifts rapidly, emotional turmoil can trigger a crisis.
+      </div>
+    </div>
+    <div class="analogy-box">
+      <div class="analogy-label">💡 Clinical Analogy</div>
+      <div class="analogy-text">Think of the brain as a complex sound system. Biologic causes are hardware failures — broken speakers or a damaged amplifier. Psychosocial causes are bad recordings that only play distorted sounds. Sociocultural causes are an unstable power supply — everything works in the right conditions but fluctuates under stress. Most psychiatric disorders involve some combination of all three.</div>
+    </div>
+    <div class="pearl-box">
+      <div class="pearl-label">⚕ Paramedic Pearl</div>
+      Always consider organic (medical) causes before assuming a purely psychiatric etiology. Hypoglycemia, hypoxia, head trauma, drug toxicity, and sepsis can all produce psychiatric-appearing symptoms. Your differential diagnosis must rule out the killers first.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(8,145,178,0.15);">🏥</div>
+      <div>
+        <div class="card-title">Assessment Approach</div>
+        <div class="card-sub">Mental Status Examination &amp; Interview Techniques</div>
+      </div>
+    </div>
+    <div class="tag tag-teal">Clinical Assessment</div>
+    <p class="body-text">The <strong style="color:var(--teal-light)">Mental Status Examination (MSE)</strong> is your primary diagnostic tool. Assess all four domains:</p>
+    <div class="sx-grid">
+      <div class="sx-item"><div class="sx-dot" style="background:var(--accent2)"></div>Appearance &amp; Behavior</div>
+      <div class="sx-item"><div class="sx-dot" style="background:var(--teal-light)"></div>Speech &amp; Language</div>
+      <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Cognitive Abilities</div>
+      <div class="sx-item"><div class="sx-dot" style="background:var(--green-light)"></div>Emotional Stability</div>
+    </div>
+    <p class="body-text" style="margin-top:0.8rem"><strong style="color:var(--accent2)">Key Interview Principles:</strong> Active listening. Show support and empathy. Prevent interruptions. Respect personal space. Never argue with delusions — acknowledge the patient's feelings without reinforcing false beliefs.</p>
+    <div class="analogy-box">
+      <div class="analogy-label">💡 Clinical Analogy</div>
+      <div class="analogy-text">Interviewing a psychiatric patient is like defusing a bomb — your tone of voice, body language, and word choice are your tools. A calm, non-threatening presence can lower sympathetic activation more effectively than any medication in the early moments of a behavioral emergency.</div>
+    </div>
+    <div class="warn-box">
+      <div class="warn-label">⚠ Critical</div>
+      Always rule out AEIOU-TIPS causes: Alcohol/Acidosis, Epilepsy, Insulin (glucose), Overdose, Uremia, Trauma, Infection, Psychiatric, Stroke/Shock. A patient who "acts crazy" may be dying from hypoglycemia or hypoxia.
+    </div>
+  </div>
+</div>
+
+<!-- ===== NEUROCOGNITIVE ===== -->
+<div id="tab-neurocog" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(8,145,178,0.15);">🧠</div>
+      <div>
+        <div class="card-title">Neurocognitive Disorders</div>
+        <div class="card-sub">Delirium · Dementia · Neurodevelopmental Disorders</div>
+      </div>
+    </div>
+
+    <div class="disorder-block">
+      <div class="disorder-title">Delirium</div>
+      <div class="disorder-subtitle">ICD-10: F05 | Acute Organic Brain Syndrome</div>
+      <div class="tag tag-rose">Acute · Reversible · Life-Threatening</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Deep Pathophysiology</div>
+        <div class="patho-text">Delirium results from diffuse cerebral dysfunction caused by systemic insults rather than primary brain disease. Multiple mechanisms converge: <strong style="color:var(--accent3)">neuroinflammation</strong> (cytokine release disrupts blood-brain barrier), <strong style="color:var(--accent3)">neurotransmitter dysregulation</strong> (excess dopamine, deficient acetylcholine — the "too much gas, not enough brakes" problem), <strong style="color:var(--accent3)">oxidative stress</strong>, and disrupted sleep-wake cycles mediated by the reticular activating system. The hippocampus and prefrontal cortex (attention, memory, executive function) are particularly vulnerable to these metabolic insults.</div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Computer Analogy</div>
+        <div class="analogy-text">Delirium is like a computer running too many background processes while the power supply is unstable. The hardware (brain) is intact, but the operating system is crashing. Fix the power supply issue (the underlying medical cause) and the computer returns to normal. This is why delirium is reversible — unlike dementia where the hardware itself degrades.</div>
+      </div>
+      <p class="body-text"><strong>Key distinctions:</strong> ACUTE onset (hours to days), FLUCTUATING course (waxes and wanes), INATTENTION as hallmark feature, often reversible with treatment of underlying cause.</p>
+      <div class="tag tag-rose">Signs &amp; Symptoms</div>
+      <div class="sx-grid">
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div>Acute disorientation</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div>Inattention (cardinal sign)</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div>Fluctuating consciousness</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div>Visual/tactile hallucinations</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div>Disorganized thinking</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div>Loss of judgment</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div>Psychomotor agitation</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div>Memory impairment</div>
+      </div>
+      <div class="warn-box">
+        <div class="warn-label">⚠ High-Risk Populations</div>
+        Elderly patients, critically ill children, post-surgical patients, alcohol/drug withdrawal, poor nutritional status, vision/hearing impairment, pre-existing depression.
+      </div>
+      <p class="body-text"><strong>EMS Management:</strong> Target the underlying cause — correct hypoglycemia, ensure oxygenation, establish IV access, monitor vitals. Sedatives (benzodiazepines) may be required to reduce dangerous agitation. Avoid physical restraint alone — it worsens agitation and can cause positional asphyxia.</p>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--teal)">
+      <div class="disorder-title">Dementia (Major Neurocognitive Disorder)</div>
+      <div class="disorder-subtitle">ICD-10: F03 | Chronic, Progressive, Irreversible</div>
+      <div class="tag tag-teal">Chronic · Progressive · Irreversible</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Deep Pathophysiology — The Four Main Types</div>
+        <div class="patho-text">
+          <strong style="color:var(--accent3)">Alzheimer Disease (60-70%):</strong> Accumulation of amyloid-beta plaques between neurons and tau protein tangles inside neurons. Progressive loss of acetylcholine-producing neurons in the nucleus basalis. The hippocampus (memory formation) degrades first, then spreads to temporal, parietal, and frontal cortex.<br><br>
+          <strong style="color:var(--accent3)">Vascular Dementia (15-20%):</strong> Cumulative ischemic damage from multiple small strokes. "Stroke by a thousand cuts" — each infarct destroys more cognitive reserve.<br><br>
+          <strong style="color:var(--accent3)">Lewy Body Dementia:</strong> Alpha-synuclein protein deposits in cortical neurons. Often presents with parkinsonian features, visual hallucinations, and dramatic sleep disturbances. Paradoxically, antipsychotics can be fatal in Lewy body patients.<br><br>
+          <strong style="color:var(--accent3)">Frontotemporal Dementia:</strong> Tau protein accumulation in frontal/temporal lobes. Personality changes and disinhibition precede memory loss — patients may appear to have a personality disorder.
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Library Analogy</div>
+        <div class="analogy-text">Dementia is like a library where the books are slowly being destroyed, starting from the newest acquisitions (recent memories) and working backward toward the oldest (remote memories, procedural skills). The librarian (working memory) eventually loses the ability to catalog or retrieve information. Unlike delirium, you cannot restore the burned books — management focuses on preserving what remains and preventing dangerous behaviors.</div>
+      </div>
+      <div class="pearl-box">
+        <div class="pearl-label">⚕ Paramedic Pearl — Delirium vs. Dementia</div>
+        Use the "DELIRIOUS" heuristic: Delirium = acutELY onset, fLUCTUATING, Inattention, Usually Reversible. Dementia = Insidious onset, Stable progression, NOT primarily inattention, Ultimately irreversible. A demented patient can develop superimposed delirium — always assess for this in any dementia patient who "suddenly seems worse."
+      </div>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--gold)">
+      <div class="disorder-title">Autism Spectrum Disorder (ASD)</div>
+      <div class="disorder-subtitle">Neurodevelopmental | Variable Severity</div>
+      <div class="tag tag-gold">Neurodevelopmental</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Pathophysiology</div>
+        <div class="patho-text">ASD involves disrupted neural connectivity — particularly between the frontal cortex (social cognition, executive function) and other brain regions. Abnormal synaptic pruning during development leads to hyper-connectivity in local circuits but reduced long-range connectivity. Mirror neuron system dysfunction impairs social mirroring and empathy processing. Many ASD patients have altered sensory gating, making ordinary stimuli overwhelming — their nervous system cannot filter out irrelevant sensory input like a neurotypical brain does.</div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The High-Speed WiFi Problem</div>
+        <div class="analogy-text">Imagine having every WiFi network in the building broadcasting at full strength simultaneously, with no ability to filter or prioritize. For an ASD patient in a busy EMS scene — sirens, lights, strangers, unfamiliar smells, physical touch — each stimulus competes equally for processing. This sensory overload, not stubbornness or defiance, drives behavioral crises.</div>
+      </div>
+      <p class="body-text"><strong>EMS Strategies:</strong> Remain calm and move slowly. Examine from toe to head. Remove sensory distractions. Use simple, clear language. Minimize adhesives and tactile contact. Ask caregivers for calming techniques. Recognize pain may manifest as laughing, singing, or disrobing.</p>
+      <div class="warn-box">
+        <div class="warn-label">⚠ Critical EMS Point</div>
+        About 30% of ASD patients engage in self-injurious behaviors. These are not suicide attempts — they are regulatory behaviors to manage overwhelming internal states. Treat the injury; address the underlying sensory or emotional trigger.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PSYCHOTIC ===== -->
+<div id="tab-psychotic" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(124,58,237,0.15);">👁</div>
+      <div>
+        <div class="card-title">Schizophrenia Spectrum Disorders</div>
+        <div class="card-sub">Thought Disorders · Psychosis · Dopamine Hypothesis</div>
+      </div>
+    </div>
+    <div class="disorder-block">
+      <div class="disorder-title">Schizophrenia</div>
+      <div class="disorder-subtitle">ICD-10: F20 | Onset typically 16–30 years</div>
+      <div class="tag tag-purple">Chronic · Treatable · Multifactorial</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Deep Pathophysiology — The Dopamine Hypothesis &amp; Beyond</div>
+        <div class="patho-text">
+          <strong style="color:var(--accent3)">Dopamine Dysregulation:</strong> The mesolimbic pathway (VTA → limbic system) shows dopamine HYPERACTIVITY → positive symptoms (hallucinations, delusions). The mesocortical pathway (VTA → prefrontal cortex) shows dopamine HYPOACTIVITY → negative/cognitive symptoms (flat affect, poverty of speech, cognitive deficits). This is why treating only dopamine excess can worsen negative symptoms.<br><br>
+          <strong style="color:var(--accent3)">Glutamate Hypothesis:</strong> NMDA receptor hypofunction in the prefrontal cortex impairs GABAergic interneurons, which normally regulate dopamine release. This creates a "disinhibited" dopamine system — explaining why PCP and ketamine (NMDA antagonists) can produce schizophrenia-like states.<br><br>
+          <strong style="color:var(--accent3)">Structural Changes:</strong> Enlarged ventricles, reduced gray matter in temporal and prefrontal cortex, abnormal thalamic gating (the brain's "sensory filter" fails, flooding consciousness with unfiltered information).
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Broken Spam Filter</div>
+        <div class="analogy-text">The thalamus normally acts as a spam filter for consciousness — irrelevant sensory data gets blocked before reaching awareness. In schizophrenia, this filter breaks. Internal thoughts get tagged as external voices. Background patterns become meaningful signals. Random events become coordinated conspiracies. The brain isn't lying — it's receiving and processing real signals; they just aren't originating where the patient believes they are.</div>
+      </div>
+      <div class="tag tag-purple" style="margin-top:1rem">Three Symptom Clusters</div>
+      <div class="sx-grid">
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div><strong>Positive:</strong> Hallucinations</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div><strong>Positive:</strong> Delusions</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--rose)"></div><strong>Positive:</strong> Disorganized thought</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>Negative:</strong> Flat affect</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>Negative:</strong> Anhedonia</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>Negative:</strong> Reduced speech</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div><strong>Cognitive:</strong> Poor executive function</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div><strong>Cognitive:</strong> Working memory deficits</div>
+      </div>
+      <div class="tag tag-teal" style="margin-top:1rem">Antipsychotic Medications</div>
+      <table class="med-table">
+        <thead>
+          <tr><th>Drug</th><th>Class</th><th>Mechanism</th><th>EMS Relevance</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="drug-name">Haloperidol</span><br>(Haldol)</td><td><span class="drug-class">1st Gen</span></td><td>D2 receptor blockade</td><td><span class="drug-dose">5–10 mg IM</span> chemical restraint; risk of EPS, QTc prolongation</td></tr>
+          <tr><td><span class="drug-name">Droperidol</span><br>(Inapsine)</td><td><span class="drug-class">1st Gen</span></td><td>D2 blockade, alpha-1 blockade</td><td><span class="drug-dose">5–10 mg IM</span> rapid sedation; black box QTc warning</td></tr>
+          <tr><td><span class="drug-name">Olanzapine</span><br>(Zyprexa)</td><td><span class="drug-class">2nd Gen</span></td><td>D2 + 5-HT2A blockade</td><td>DO NOT combine with benzos — respiratory depression risk</td></tr>
+          <tr><td><span class="drug-name">Ziprasidone</span><br>(Geodon)</td><td><span class="drug-class">2nd Gen</span></td><td>D2, 5-HT2A, 5-HT1A</td><td>Used in agitation; QTc monitoring required</td></tr>
+          <tr><td><span class="drug-name">Risperidone</span><br>(Risperdal)</td><td><span class="drug-class">2nd Gen</span></td><td>D2 + 5-HT2 blockade</td><td>Maintenance; EPS at higher doses</td></tr>
+          <tr><td><span class="drug-name">Clozapine</span><br>(Clozaril)</td><td><span class="drug-class">2nd Gen</span></td><td>D4, 5-HT2, multiple receptors</td><td>Agranulocytosis risk — patients on clozapine may present septic</td></tr>
+        </tbody>
+      </table>
+      <div class="warn-box" style="margin-top:1rem">
+        <div class="warn-label">⚠ EPS Warning — Extrapyramidal Symptoms</div>
+        First-generation antipsychotics block D2 receptors in the nigrostriatal pathway → dystonia (acute muscle spasm), akathisia (restlessness), parkinsonism (tremor, rigidity, bradykinesia), tardive dyskinesia (late-onset). Treat acute dystonia with diphenhydramine (Benadryl) 25–50 mg IV/IM or benztropine (Cogentin) 1–2 mg.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ANXIETY ===== -->
+<div id="tab-anxiety" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(245,158,11,0.15);">⚡</div>
+      <div>
+        <div class="card-title">Anxiety, OCD &amp; Trauma-Related Disorders</div>
+        <div class="card-sub">Panic Disorder · Phobia · OCD · PTSD</div>
+      </div>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--gold)">
+      <div class="disorder-title">Panic Disorder</div>
+      <div class="disorder-subtitle">ICD-10: F41.0 | Sympathetic Storm</div>
+      <div class="tag tag-gold">Anxiety Spectrum</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Deep Pathophysiology — The False Alarm System</div>
+        <div class="patho-text">The amygdala's fear circuit fires a massive sympathetic response without any real threat. Norepinephrine surges, activating the locus coeruleus (the brain's "alarm center"). Simultaneously, the prefrontal cortex (which would normally evaluate and suppress the alarm) is overwhelmed, creating a positive feedback loop: physiologic symptoms → catastrophic interpretation → more fear → more symptoms.<br><br>
+        The disorder involves hypersensitivity of chemoreceptors (CO₂ receptors), causing patients to physiologically "hyperventilate" their own panic into escalation. Serotonin deficiency in the amygdala reduces the threshold for fear activation.
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Smoke Alarm in a Fireproof Room</div>
+        <div class="analogy-text">Panic disorder is like a hypersensitive smoke alarm that triggers full building evacuation every time someone makes toast. The threat assessment (prefrontal cortex) knows there's no fire, but the alarm system (amygdala) has already put the body on full emergency alert. The racing heart, shortness of breath, and chest pain are real physiologic responses to a false alarm signal.</div>
+      </div>
+      <div class="tag tag-gold">Diagnostic Criteria — 4+ of These During an Attack</div>
+      <div class="sx-grid">
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Palpitations/tachycardia</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Diaphoresis</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Shortness of breath</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Chest pain</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Nausea/GI distress</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Derealization</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Fear of losing control</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Fear of dying</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Paresthesias</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Trembling</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Chills or flushing</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--gold)"></div>Choking sensation</div>
+      </div>
+      <div class="warn-box">
+        <div class="warn-label">⚠ Critical Assessment Point</div>
+        Panic attacks MIMIC ACS, PE, hypoglycemia, and hyperthyroidism. NEVER diagnose "just anxiety" in the field. Every patient with chest pain, dyspnea, and fear must receive full cardiac/respiratory workup. The patient who "always does this" may be having a real MI today.
+      </div>
+      <table class="med-table" style="margin-top:0.8rem">
+        <thead><tr><th>Drug</th><th>Class</th><th>EMS Use</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><span class="drug-name">Lorazepam</span> (Ativan)</td><td><span class="drug-class">Benzo</span></td><td><span class="drug-dose">1–2 mg IV/IM</span></td><td>First-line for acute panic/anxiety</td></tr>
+          <tr><td><span class="drug-name">Diazepam</span> (Valium)</td><td><span class="drug-class">Benzo</span></td><td><span class="drug-dose">2–10 mg IV</span></td><td>Longer duration; use with caution</td></tr>
+          <tr><td><span class="drug-name">Midazolam</span> (Versed)</td><td><span class="drug-class">Benzo</span></td><td><span class="drug-dose">2–5 mg IM/IN</span></td><td>Fastest onset; sedation/agitation</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--green)">
+      <div class="disorder-title">Obsessive-Compulsive Disorder (OCD)</div>
+      <div class="disorder-subtitle">ICD-10: F42 | Cortico-Striato-Thalamo-Cortical Loop</div>
+      <div class="tag tag-green">OCD Spectrum</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Pathophysiology — The Stuck Record</div>
+        <div class="patho-text">OCD involves hyperactivity of the cortico-striato-thalamo-cortical (CSTC) circuit — a loop that normally processes behavioral patterns and habits. In OCD, this circuit gets "stuck" — the orbitofrontal cortex generates an alarm signal (obsession), the thalamus amplifies it, and the caudate nucleus (which should inhibit the loop) fails to shut it off. Serotonin is critical for caudate function; SSRIs (which boost serotonin) are the primary pharmacological treatment. Related disorders (hoarding, body dysmorphic disorder, trichotillomania) share this neural substrate.</div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Error-Checking Loop</div>
+        <div class="analogy-text">Imagine a computer program with a bug in its error-checking routine — it keeps running the same error check infinitely because it can't get a "clear" signal. The patient knows intellectually that their hands aren't contaminated after the 20th washing, but the brain's error-checking system keeps insisting something is wrong. The compulsion temporarily resets the error flag, but the bug remains.</div>
+      </div>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--rose)">
+      <div class="disorder-title">Post-Traumatic Stress Disorder (PTSD)</div>
+      <div class="disorder-subtitle">ICD-10: F43.1 | HPA Axis Dysregulation</div>
+      <div class="tag tag-rose">Trauma &amp; Stressor Related</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Deep Pathophysiology — The Permanent Alarm State</div>
+        <div class="patho-text">PTSD involves structural and functional changes in three key areas:<br>
+        <strong style="color:var(--accent3)">Amygdala:</strong> Hyperactive — triggers fear responses to trauma-related cues, even when safe. The "smoke alarm" remains permanently on high sensitivity.<br>
+        <strong style="color:var(--accent3)">Hippocampus:</strong> Reduced volume from cortisol-mediated neurotoxicity — impairs context processing, so memories aren't stored as "past" — they feel present and real during flashbacks.<br>
+        <strong style="color:var(--accent3)">Prefrontal Cortex:</strong> Hypoactive — reduced ability to inhibit the amygdala or reality-test. The "supervisor" has lost authority over the alarm system.<br>
+        HPA axis dysregulation leads to abnormal cortisol rhythms. Norepinephrine hypersensitivity explains hyperarousal, startle responses, and sleep disturbances.
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Trauma Scar</div>
+        <div class="analogy-text">Normal memory is stored like a properly filed document with a timestamp. Traumatic memory in PTSD is stored without a timestamp — the hippocampal damage means the brain cannot mark it as "past." During a flashback, the nervous system experiences the event as happening NOW, generating an identical physiologic response to the original trauma. The wound doesn't have a scar — it keeps reopening.</div>
+      </div>
+      <p class="body-text"><strong>Four Symptom Clusters:</strong> Intrusion (flashbacks, nightmares), Avoidance (trauma reminders), Arousal/Reactivity (hypervigilance, irritability), Cognition/Mood (negative beliefs, emotional numbing). EMS responders are at high PTSD risk — know your own triggers and use peer support resources.</p>
+      <div class="warn-box">
+        <div class="warn-label">⚠ EMS Provider Risk</div>
+        EMS personnel are subject to PTSD as a direct result of occupational trauma exposure. Recognize that PTSD is a neurobiologic injury, not weakness. Seek peer support, CISM debriefings, and professional counseling when needed.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MOOD DISORDERS ===== -->
+<div id="tab-mood" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(225,29,72,0.15);">🌊</div>
+      <div>
+        <div class="card-title">Mood Disorders</div>
+        <div class="card-sub">Depression · Bipolar Disorder · Suicide Risk Assessment</div>
+      </div>
+    </div>
+
+    <div class="disorder-block">
+      <div class="disorder-title">Major Depressive Disorder (MDD)</div>
+      <div class="disorder-subtitle">ICD-10: F32 | Monoamine Deficiency + Neuroinflammation</div>
+      <div class="tag tag-rose">Most Common Psychiatric Disorder</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Deep Pathophysiology — Beyond "Low Serotonin"</div>
+        <div class="patho-text">The classic monoamine hypothesis (serotonin, norepinephrine, dopamine deficiency) is necessary but insufficient. Modern understanding includes:<br>
+        <strong style="color:var(--accent3)">Neuroinflammation:</strong> Elevated cytokines (IL-6, TNF-α) reduce neurogenesis in the hippocampus and disrupt monoamine synthesis. This explains the strong link between systemic illness (MI, stroke, diabetes, cancer) and depression.<br>
+        <strong style="color:var(--accent3)">HPA Axis Hyperactivation:</strong> Chronic cortisol elevation causes hippocampal atrophy — destroying the very structure needed for memory and contextual processing.<br>
+        <strong style="color:var(--accent3)">Default Mode Network (DMN):</strong> Hyperactive DMN produces excessive self-referential, ruminating thought — the "hamster wheel" of depressive cognition.<br>
+        <strong style="color:var(--accent3)">Glutamate Dysregulation:</strong> NMDA receptor overactivation (the mechanism targeted by ketamine's rapid antidepressant effect within hours rather than the weeks needed by SSRIs).
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Dead Battery</div>
+        <div class="analogy-text">Depression is like a phone with a dying battery and a corrupted operating system. The hardware works, but the battery drains faster than it charges (anhedonia, fatigue) and the OS keeps running a loop that tells the user the phone is worthless and irreparable (hopelessness, worthlessness). SSRIs don't "add" serotonin — they prevent its reuptake, giving the brain more time to use what little it's producing, like using power-saving mode to extend a dying battery.</div>
+      </div>
+      <div class="mnemonic-box">
+        <div class="mnemonic-title">📚 IN SAD CAGES — Major Depression Features</div>
+        <div class="mnemonic-row"><div class="mnemonic-letter">IN</div><div>Loss of <strong>IN</strong>terest in activities (anhedonia)</div></div>
+        <div class="mnemonic-row"><div class="mnemonic-letter">S</div><div><strong>S</strong>leep disturbance (insomnia or hypersomnia)</div></div>
+        <div class="mnemonic-row"><div class="mnemonic-letter">A</div><div><strong>A</strong>ppetite change (loss or increase)</div></div>
+        <div class="mnemonic-row"><div class="mnemonic-letter">D</div><div><strong>D</strong>epressed mood most of the day</div></div>
+        <div class="mnemonic-row"><div class="mnemonic-letter">C</div><div>Difficulty <strong>C</strong>oncentrating, indecisiveness</div></div>
+        <div class="mnemonic-row"><div class="mnemonic-letter">A</div><div><strong>A</strong>ctivity level change (psychomotor agitation or retardation)</div></div>
+        <div class="mnemonic-row"><div class="mnemonic-letter">G</div><div>Excessive <strong>G</strong>uilt or worthlessness</div></div>
+        <div class="mnemonic-row"><div class="mnemonic-letter">E</div><div>Loss of <strong>E</strong>nergy, fatigue</div></div>
+        <div class="mnemonic-row"><div class="mnemonic-letter">S</div><div><strong>S</strong>uicidal ideation, thoughts, plan, or attempt</div></div>
+      </div>
+      <div class="tag tag-teal" style="margin-top:1rem">Antidepressant Medications</div>
+      <table class="med-table">
+        <thead><tr><th>Drug</th><th>Class</th><th>Mechanism</th><th>EMS Relevance</th></tr></thead>
+        <tbody>
+          <tr><td><span class="drug-name">Fluoxetine</span> (Prozac)</td><td><span class="drug-class">SSRI</span></td><td>Serotonin reuptake inhibition</td><td>Serotonin syndrome risk if combined with MAOIs</td></tr>
+          <tr><td><span class="drug-name">Sertraline</span> (Zoloft)</td><td><span class="drug-class">SSRI</span></td><td>Serotonin reuptake inhibition</td><td>Most prescribed antidepressant; QTc at high doses</td></tr>
+          <tr><td><span class="drug-name">Venlafaxine</span> (Effexor)</td><td><span class="drug-class">SNRI</span></td><td>5-HT + NE reuptake inhibition</td><td>Hypertension, sweating; discontinuation syndrome</td></tr>
+          <tr><td><span class="drug-name">Amitriptyline</span></td><td><span class="drug-class">TCA</span></td><td>5-HT + NE reuptake, anticholinergic</td><td>TOXIC in overdose: QRS widening, arrhythmia, seizure → treat with NaHCO₃</td></tr>
+          <tr><td><span class="drug-name">Phenelzine</span> (Nardil)</td><td><span class="drug-class">MAOI</span></td><td>Monoamine oxidase inhibition</td><td>Hypertensive crisis with tyramine foods; lethal with sympathomimetics</td></tr>
+          <tr><td><span class="drug-name">Ketamine</span></td><td><span class="drug-class">NMDA Ant.</span></td><td>NMDA receptor blockade → neuroplasticity</td><td>Rapid antidepressant effect; also used for chemical restraint</td></tr>
+        </tbody>
+      </table>
+      <div class="warn-box" style="margin-top:0.8rem">
+        <div class="warn-label">⚠ TCA Overdose — A Killer</div>
+        Tricyclic antidepressant (TCA) overdose is rapidly fatal. Look for: anticholinergic toxidrome (dry, hot, red, blind, mad, tachycardic) + QRS widening on ECG. Treatment: sodium bicarbonate 1–2 mEq/kg IV to alkalinize serum and sodium-load the cardiac conduction system.
+      </div>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--teal)">
+      <div class="disorder-title">Bipolar Disorder</div>
+      <div class="disorder-subtitle">ICD-10: F31 | Neurochemical Pendulum</div>
+      <div class="tag tag-teal">Biphasic · Cyclic · Lithium-Responsive</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Pathophysiology — The Sensitization Model</div>
+        <div class="patho-text">Bipolar disorder involves dysregulation of second messenger systems (cAMP, phosphoinositol) in neurons, leading to unstable mood states. The kindling model explains escalating episode frequency over time — each mood episode sensitizes the brain to future episodes, like how a broken bone heals with calcium deposits that make re-fracture more likely at the same site. Lithium works by stabilizing these second messenger cascades, preventing both poles of the mood swing.</div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Thermostat with a Broken Setpoint</div>
+        <div class="analogy-text">Imagine a building thermostat that oscillates between -10°F and 120°F with no stable setpoint. Mania is the 120° state — everything running at maximum: talking, spending, thinking, sexual activity. Depression is the -10° state — nothing moving at all. Lithium repairs the thermostat's setpoint mechanism, maintaining a stable range. Without it, the oscillations tend to get wider and more frequent over time.</div>
+      </div>
+      <p class="body-text"><strong>Mania Hallmarks:</strong> Impulsive activities, excessive elation, talkativeness, flight of ideas, distractibility, accelerated speech, decreased need for sleep, delusions of grandeur. DIGFAST mnemonic: Distractibility, Impulsivity/Indiscretion, Grandiosity, Flight of ideas, Activity increase, Sleep decrease, Talkativeness.</p>
+      <table class="med-table">
+        <thead><tr><th>Drug</th><th>Class</th><th>EMS Relevance</th></tr></thead>
+        <tbody>
+          <tr><td><span class="drug-name">Lithium</span></td><td><span class="drug-class">Mood Stabilizer</span></td><td>NARROW therapeutic window. Toxicity: tremor, ataxia, confusion, seizures. Check renal function. Dehydration → toxicity.</td></tr>
+          <tr><td><span class="drug-name">Valproate</span> (Depakote)</td><td><span class="drug-class">Mood Stabilizer</span></td><td>Hepatotoxicity risk; pancreatitis. Overdose: altered MS, respiratory depression.</td></tr>
+          <tr><td><span class="drug-name">Lamotrigine</span> (Lamictal)</td><td><span class="drug-class">Mood Stabilizer</span></td><td>Stevens-Johnson syndrome risk. Used for depressive episodes in bipolar.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--rose)">
+      <div class="disorder-title">Suicide Risk Assessment</div>
+      <div class="disorder-subtitle">Critical Life-Threatening Emergency</div>
+      <div class="tag tag-rose">⚠ HIGH PRIORITY — Every Call</div>
+      <div class="warn-box">
+        <div class="warn-label">⚠ Epidemiology — Know the Numbers</div>
+        45,000+ suicides annually in the US. Suicide was the 9th leading cause of death ages 10–64 (2020). For every completed suicide, 275 people seriously considered it. Firearms used in &gt;50% of suicides. Men die from suicide at 4× the rate of women. Highest risk: non-Hispanic White and American Indian/Alaska Native males over 85.
+      </div>
+      <div class="mnemonic-box" style="margin-top:0.8rem">
+        <div class="mnemonic-title">📚 Suicide Risk Assessment — Ask These Three</div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">1</span><div>Does the patient have a <strong>PLAN</strong> to commit suicide?</div></div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">2</span><div>Is the plan <strong>LETHAL/INTENDED</strong> to be successful?</div></div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">3</span><div>Does the patient have the <strong>MEANS/METHOD</strong> to follow through?</div></div>
+      </div>
+      <p class="body-text" style="margin-top:0.8rem"><strong>Direct questions to ask:</strong> "Do you have thoughts about killing yourself or others?" "Have you ever tried to kill yourself?" Direct questioning does NOT increase suicide risk — it opens a therapeutic dialogue.</p>
+      <p class="body-text"><strong>Additional Risk Factors:</strong> History of prior attempts (strongest predictor), family history of suicide, recent loss or grief, financial setback/job loss, chronic illness, social isolation, alcohol/drug use, major depression, bipolar, schizophrenia.</p>
+      <div class="pearl-box">
+        <div class="pearl-label">⚕ Paramedic Pearl — Six Steps to Reduce Suicide Risk</div>
+        1) Provide honest assurance about well-being. 2) Ensure physical AND emotional security. 3) Listen without requiring answers to every statement. 4) Determine support systems. 5) Encourage and reassure during the crisis. 6) Transport to appropriate facility. Scene safety FIRST — request law enforcement before approaching.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OTHER DISORDERS ===== -->
+<div id="tab-other" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(5,150,105,0.15);">🔄</div>
+      <div>
+        <div class="card-title">Other Psychiatric Disorders</div>
+        <div class="card-sub">Somatic · Dissociative · Eating · Personality Disorders</div>
+      </div>
+    </div>
+
+    <div class="disorder-block">
+      <div class="disorder-title">Somatic Symptom &amp; Factitious Disorders</div>
+      <div class="disorder-subtitle">Real Suffering, No Organic Cause</div>
+      <div class="tag tag-green">Functional Disorders</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Pathophysiology — When the Brain Creates Real Symptoms</div>
+        <div class="patho-text">Somatic symptom disorders arise from disruptions in the brain-body communication network. The anterior cingulate cortex (ACC) and insula, which process pain and interoception, show abnormal activity — generating genuine pain, weakness, and sensory changes without peripheral pathology. In <strong style="color:var(--accent3)">Conversion Disorder</strong>, emotional conflict is "converted" into neurologic symptoms (paralysis, blindness, seizures) via suppression of motor/sensory cortex activity by the ACC. The symptom is not faked — it represents a real but functional (not structural) disruption of neural pathways.</div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — Software vs Hardware</div>
+        <div class="analogy-text">Conversion disorder is a software bug in a hardware system that's perfectly intact. The motor cortex could activate the leg, but the software instructions are blocked by an emotional "firewall." This is why symptoms don't follow anatomic distributions and why they can disappear suddenly with psychological treatment — you're patching the software, not the hardware.</div>
+      </div>
+      <p class="body-text"><strong>Munchausen Syndrome (Factitious Disorder):</strong> Patient deliberately feigns or induces illness to assume the sick role and gain attention/sympathy. Munchausen By Proxy: patient causes illness in others (usually a child) to gain sympathy. Document findings objectively without confrontation — your PCR may be evidence in a legal investigation.</p>
+      <div class="pearl-box">
+        <div class="pearl-label">⚕ EMS Management Principle</div>
+        ALWAYS treat somatic symptoms as real because you cannot differentiate functional from organic disease in the field. The patient experiencing conversion disorder has real functional impairment. Dismissing them risks missing a true organic emergency AND traumatizes an already vulnerable patient.
+      </div>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--teal)">
+      <div class="disorder-title">Dissociative Disorders</div>
+      <div class="disorder-subtitle">ICD-10: F44 | Consciousness Fragmentation</div>
+      <div class="tag tag-teal">Trauma-Related</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Pathophysiology — The Mind's Emergency Exit</div>
+        <div class="patho-text">Dissociation is the brain's protective mechanism during overwhelming trauma — a functional disconnection between normally integrated mental processes. Neuroimaging shows reduced activity in the prefrontal cortex (the "narrator" of self) and altered thalamic gating during dissociative episodes. In <strong style="color:var(--accent3)">Dissociative Identity Disorder (DID)</strong>, different neural networks can dominate consciousness with distinct memory, affect, and behavioral patterns — formerly called "multiple personality disorder."</div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Emergency Bulkhead</div>
+        <div class="analogy-text">When a ship is flooding, emergency bulkheads seal off compartments to prevent total sinking. Dissociation seals off traumatic memories or aspects of identity to prevent psychological flooding. The problem is that the bulkheads remain sealed even after the storm — creating isolated compartments of memory and identity that cannot communicate with each other.</div>
+      </div>
+      <p class="body-text"><strong>Key Types:</strong> Dissociative Amnesia (blocking vital personal information, typically trauma-related), Dissociative Identity Disorder (distinct identity states), Depersonalization Disorder (feeling detached from one's own body/mind — "watching yourself from outside").</p>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--gold)">
+      <div class="disorder-title">Eating Disorders</div>
+      <div class="disorder-subtitle">Anorexia Nervosa · Bulimia Nervosa</div>
+      <div class="tag tag-gold">Life-Threatening Metabolic Emergencies</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Pathophysiology — The Broken Body Map</div>
+        <div class="patho-text">Eating disorders involve disruption of the brain's interoceptive representation of the body. In <strong style="color:var(--accent3)">Anorexia Nervosa</strong>, the insula (body map) shows a distorted representation — patients genuinely perceive their body as larger than it is (not a cognitive distortion but a perceptual one). Starvation amplifies serotonin signaling in the hypothalamus, paradoxically reducing hunger — creating a positive feedback loop where not eating reduces anxiety. In <strong style="color:var(--accent3)">Bulimia</strong>, dopamine dysregulation creates binge-purge cycles analogous to other impulse control disorders.</div>
+      </div>
+      <div class="warn-box">
+        <div class="warn-label">⚠ Critical EMS Complications</div>
+        Anorexia: electrolyte imbalances (hypokalemia → dysrhythmia), hypoglycemia, hypothermia, cardiac failure. Bulimia: hypokalemia from purging → QTc prolongation and Torsades de Pointes, esophageal tears (Mallory-Weiss), dental erosion, Russell's sign (calluses on dorsum of hand). The HIGHEST mortality of any psychiatric disorder belongs to Anorexia Nervosa (up to 10%).
+      </div>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--accent)">
+      <div class="disorder-title">Personality Disorders</div>
+      <div class="disorder-subtitle">DSM-5 Cluster A, B &amp; C</div>
+      <div class="tag tag-purple">Enduring Patterns | Developmental</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Overview — DSM-5 Cluster Classification</div>
+        <div class="patho-text">
+          <strong style="color:var(--accent3)">Cluster A (Odd/Eccentric):</strong> Paranoid, Schizoid, Schizotypal — characterized by social isolation, magical thinking, and perceptual distortions. Genetically linked to schizophrenia spectrum.<br><br>
+          <strong style="color:var(--accent3)">Cluster B (Dramatic/Erratic):</strong> Antisocial (ASPD), Borderline (BPD), Histrionic, Narcissistic — dysregulated emotion, impulsivity, interpersonal dysfunction. BPD is associated with childhood trauma and HPA axis dysregulation.<br><br>
+          <strong style="color:var(--accent3)">Cluster C (Anxious/Fearful):</strong> Avoidant, Dependent, Obsessive-Compulsive — pervasive anxiety and fear. High overlap with anxiety disorders.
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — Personality as a Cognitive Lens</div>
+        <div class="analogy-text">Everyone views the world through a cognitive "lens" shaped by genetics and experience. Personality disorders are like a severely distorted lens — the patient consistently misinterprets interactions through their particular distortion. You cannot correct the lens in the field. Your job is to avoid triggering the distortion while providing care. A patient with Borderline PD splitting you as "all good" then "all bad" within one call is not manipulating you — it's their neurobiologic reality.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VIOLENCE & RESTRAINT ===== -->
+<div id="tab-violence" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(225,29,72,0.15);">⚠️</div>
+      <div>
+        <div class="card-title">Violent Patients &amp; Restraint</div>
+        <div class="card-sub">Hyperactive Delirium · De-escalation · Chemical &amp; Physical Restraint</div>
+      </div>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--rose)">
+      <div class="disorder-title">Delirium with Agitated Behavior (Hyperactive Delirium)</div>
+      <div class="disorder-subtitle">Formerly "Excited Delirium" — Acute Life-Threatening Emergency</div>
+      <div class="tag tag-rose">⚡ LIFE-THREATENING — Immediate Management Required</div>
+      <div class="patho-box">
+        <div class="patho-label">🔬 Pathophysiology — Dopamine Storm + Hyperthermia</div>
+        <div class="patho-text">Hyperactive delirium with severe agitation represents a massive catecholamine surge — dopamine and norepinephrine release at levels that exceed the body's regulatory capacity. Stimulant intoxication (cocaine, methamphetamine) blocks dopamine reuptake, creating dopamine toxicity in the limbic system. The resulting extreme agitation generates tremendous heat through sustained isometric muscle activity, while the hypothalamic thermostat is simultaneously impaired. This combination — catecholamine storm + hyperthermia + metabolic acidosis + physical struggle — creates a perfect storm for sudden cardiac death via ventricular fibrillation.</div>
+      </div>
+      <div class="analogy-box">
+        <div class="analogy-label">💡 Clinical Analogy — The Engine Running Without Oil</div>
+        <div class="analogy-text">Hyperactive delirium is like an engine redlining at maximum RPM without oil or cooling. The sustained muscle activity burns glucose rapidly, produces dangerous lactate, raises core temperature to levels that denature proteins, and ultimately pushes the heart — also under extreme catecholamine load — into fatal arrhythmia. Rapid sedation is the equivalent of cutting the ignition before the engine seizes. Every minute of continued struggle is organ damage.</div>
+      </div>
+      <div class="mnemonic-box">
+        <div class="mnemonic-title">📚 PRIORITY — Screening Tool for Hyperactive Delirium</div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">P</span><div><strong>P</strong>sychological issues</div></div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">R</span><div><strong>R</strong>ecent drug or alcohol use</div></div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">I</span><div><strong>I</strong>ncoherent thought processes</div></div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">O</span><div><strong>O</strong>ff (removing clothing) and sweating profusely</div></div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">R</span><div><strong>R</strong>esistant to presence or dialogue</div></div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">I</span><div><strong>I</strong>nanimate objects: violent toward shiny or glass objects</div></div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">T</span><div><strong>T</strong>ough, unstoppable, exhibits superhuman strength</div></div>
+        <div class="mnemonic-row"><span class="mnemonic-letter">Y</span><div><strong>Y</strong>elling</div></div>
+      </div>
+      <div class="warn-box" style="margin-top:0.8rem">
+        <div class="warn-label">⚠ Avoid Prone Restraint</div>
+        Prone restraint + agitation + obesity + excited delirium = positional asphyxia risk. After restraint, monitor airway, breathing, and circulation continuously. Reposition to lateral or supine position whenever possible. Never leave a restrained patient unmonitored.
+      </div>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--teal)">
+      <div class="disorder-title">De-escalation — Ten Domains</div>
+      <div class="disorder-subtitle">Communication as Intervention</div>
+      <div class="tag tag-teal">Evidence-Based De-escalation</div>
+      <div class="sx-grid" style="grid-template-columns:1fr;max-width:600px">
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>1. Respect Personal Space</strong> — Stay ≥2 arm lengths from patient</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>2. Avoid Provocation</strong> — Unclenched hands visible, calm body language</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>3. Establish Verbal Contact</strong> — ONE person talks; introduce yourself; address by name</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>4. Be Concise</strong> — Short sentences, non-clinical words, repeat key messages</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>5. Identify Wants &amp; Feelings</strong> — Determine patient's top priority</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>6. Active Listening</strong> — Full attention, validate emotions</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>7. Agree or Agree to Disagree</strong> — Find common ground; agree with truth, principle, or odds</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>8. Set Clear Limits</strong> — Calmly state what is and is not acceptable</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>9. Offer Choice &amp; Optimism</strong> — Propose alternatives to violence; no false promises</div>
+        <div class="sx-item"><div class="sx-dot" style="background:var(--teal)"></div><strong>10. Debrief</strong> — Explain all restraint actions to patient, family, and crew afterward</div>
+      </div>
+    </div>
+
+    <div class="disorder-block" style="border-left-color:var(--accent)">
+      <div class="disorder-title">Chemical Restraint — Pharmacologic Options</div>
+      <div class="disorder-subtitle">Goal: Rapid Sedation to Prevent Self-Harm and Provider Harm</div>
+      <div class="tag tag-purple">Pharmacologic Management</div>
+      <table class="med-table">
+        <thead><tr><th>Drug</th><th>Class</th><th>Dose</th><th>Onset</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="drug-name">Ketamine</span></td>
+            <td><span class="drug-class">Dissociative</span></td>
+            <td><span class="drug-dose">4–5 mg/kg IM<br>1–2 mg/kg IV</span></td>
+            <td>3–5 min IM</td>
+            <td>Drug of choice for severe agitation. Provides sedation + analgesia. Post-emergence dysphoria. Laryngospasm risk (rare).</td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Midazolam</span><br>(Versed)</td>
+            <td><span class="drug-class">Benzo</span></td>
+            <td><span class="drug-dose">2–5 mg IM/IN<br>1–2.5 mg IV</span></td>
+            <td>5–10 min IM</td>
+            <td>Good first-line option. Respiratory depression — monitor closely. Flumazenil reversal available.</td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Lorazepam</span><br>(Ativan)</td>
+            <td><span class="drug-class">Benzo</span></td>
+            <td><span class="drug-dose">1–4 mg IV/IM</span></td>
+            <td>5–10 min IV</td>
+            <td>Anxiety reduction, muscle relaxation, anticonvulsant. Monitor respirations.</td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Haloperidol</span><br>(Haldol)</td>
+            <td><span class="drug-class">Antipsychotic</span></td>
+            <td><span class="drug-dose">5–10 mg IM</span></td>
+            <td>15–30 min</td>
+            <td>Blocks D2 receptors. QTc prolongation. EPS risk. Slower onset than ketamine.</td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Droperidol</span><br>(Inapsine)</td>
+            <td><span class="drug-class">Antipsychotic</span></td>
+            <td><span class="drug-dose">5–10 mg IM</span></td>
+            <td>10–20 min</td>
+            <td>Black box QTc warning. Faster than haloperidol. ECG monitoring required.</td>
+          </tr>
+          <tr>
+            <td><span class="drug-name">Olanzapine</span><br>(Zyprexa)</td>
+            <td><span class="drug-class">Antipsychotic</span></td>
+            <td><span class="drug-dose">10 mg IM</span></td>
+            <td>15–30 min</td>
+            <td>⚠ NEVER combine with IV/IM benzos — fatal respiratory depression reported.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pearl-box" style="margin-top:1rem">
+        <div class="pearl-label">⚕ Agitation Scales — Assessment Before Restraint</div>
+        <strong>RASS (Richmond Agitation-Sedation Scale):</strong> -5 (unarousable) to +4 (combative). Goal sedation: -1 to 0.<br>
+        <strong>BARS (Behavioral Activity Rating Scale):</strong> 1 (difficult to arouse) to 7 (violent).<br>
+        <strong>AMSS (Altered Mental Status Scale):</strong> Measures both agitation and sedation. Use validated tool before and after chemical restraint and document.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MEDICATION REFERENCE ===== -->
+<div id="tab-meds" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="background:rgba(8,145,178,0.15);">💊</div>
+      <div>
+        <div class="card-title">Complete Psychiatric Medication Reference</div>
+        <div class="card-sub">EMS-Relevant Drug Classes · Mechanisms · Toxicity</div>
+      </div>
+    </div>
+    <div class="tag tag-teal">Antipsychotics</div>
+    <table class="med-table">
+      <thead><tr><th>Drug</th><th>Gen</th><th>Primary Use</th><th>Key Toxicity / EMS Alert</th></tr></thead>
+      <tbody>
+        <tr><td><span class="drug-name">Haloperidol</span></td><td>1st</td><td>Schizophrenia, acute agitation</td><td>EPS (treat with Benadryl), QTc↑, NMS risk</td></tr>
+        <tr><td><span class="drug-name">Droperidol</span></td><td>1st</td><td>Acute agitation</td><td>QTc↑ (black box), hypotension</td></tr>
+        <tr><td><span class="drug-name">Chlorpromazine</span></td><td>1st</td><td>Schizophrenia</td><td>Profound hypotension, anticholinergic</td></tr>
+        <tr><td><span class="drug-name">Risperidone</span></td><td>2nd</td><td>Schizophrenia, bipolar</td><td>EPS at higher doses, weight gain</td></tr>
+        <tr><td><span class="drug-name">Olanzapine</span></td><td>2nd</td><td>Schizophrenia, agitation</td><td>⚠ No IV/IM benzo combo! Metabolic syndrome</td></tr>
+        <tr><td><span class="drug-name">Clozapine</span></td><td>2nd</td><td>Treatment-resistant schizophrenia</td><td>Agranulocytosis — patient may present septic</td></tr>
+        <tr><td><span class="drug-name">Quetiapine</span></td><td>2nd</td><td>Bipolar, schizophrenia, depression</td><td>QTc↑, sedation, orthostatic hypotension</td></tr>
+        <tr><td><span class="drug-name">Aripiprazole</span></td><td>3rd</td><td>Schizophrenia, bipolar, depression</td><td>Minimal EPS, akathisia in some patients</td></tr>
+      </tbody>
+    </table>
+    <div class="warn-box" style="margin:1rem 0">
+      <div class="warn-label">⚠ Neuroleptic Malignant Syndrome (NMS)</div>
+      Life-threatening reaction to antipsychotics: FEVER (high-grade), RIGIDITY ("lead-pipe" muscle rigidity), ALTERED MENTAL STATUS, AUTONOMIC INSTABILITY (tachycardia, BP lability, diaphoresis). Mortality up to 20% if untreated. Stop the antipsychotic. Cool the patient aggressively. IVF. Rapid transport. Treatment: dantrolene, bromocriptine.
+    </div>
+    <div class="tag tag-teal">Antidepressants</div>
+    <table class="med-table">
+      <thead><tr><th>Drug</th><th>Class</th><th>Overdose Alert</th></tr></thead>
+      <tbody>
+        <tr><td><span class="drug-name">Fluoxetine, Sertraline, Citalopram</span></td><td><span class="drug-class">SSRI</span></td><td>Serotonin syndrome; QTc↑ (citalopram &gt;40 mg). Treat serotonin syndrome with cyproheptadine, benzos, cooling.</td></tr>
+        <tr><td><span class="drug-name">Venlafaxine, Duloxetine</span></td><td><span class="drug-class">SNRI</span></td><td>Hypertension, tachycardia in overdose. Discontinuation syndrome: "brain zaps"</td></tr>
+        <tr><td><span class="drug-name">Amitriptyline, Nortriptyline, Imipramine</span></td><td><span class="drug-class">TCA</span></td><td>⚠ LETHAL in OD: QRS widening, wide-complex arrhythmia, seizures, coma. Treat with NaHCO₃ 1–2 mEq/kg IV.</td></tr>
+        <tr><td><span class="drug-name">Phenelzine, Tranylcypromine</span></td><td><span class="drug-class">MAOI</span></td><td>⚠ Hypertensive crisis with tyramine (aged cheese, wine), fatal with sympathomimetics (epinephrine, dopamine). DO NOT give meperidine (Demerol) — can be fatal.</td></tr>
+        <tr><td><span class="drug-name">Bupropion</span></td><td><span class="drug-class">NDRI</span></td><td>Lowers seizure threshold — OD → seizures (even without other symptoms first)</td></tr>
+        <tr><td><span class="drug-name">Mirtazapine</span></td><td><span class="drug-class">NaSSA</span></td><td>Sedation (antihistamine), weight gain, serotonin syndrome risk if combined with SSRI</td></tr>
+      </tbody>
+    </table>
+    <div class="tag tag-teal" style="margin-top:1rem">Anxiolytics &amp; Mood Stabilizers</div>
+    <table class="med-table">
+      <thead><tr><th>Drug</th><th>Class</th><th>EMS Use / Toxicity</th></tr></thead>
+      <tbody>
+        <tr><td><span class="drug-name">Diazepam, Lorazepam, Midazolam, Alprazolam</span></td><td><span class="drug-class">Benzo</span></td><td>Anxiety, seizure, agitation. OD: respiratory depression — flumazenil reversal (use cautiously, may precipitate withdrawal seizures). Chronic use → dependence.</td></tr>
+        <tr><td><span class="drug-name">Buspirone</span></td><td><span class="drug-class">5-HT1A partial agonist</span></td><td>Non-benzo anxiolytic — no dependence, no acute EMS use. Delayed onset 2–4 weeks.</td></tr>
+        <tr><td><span class="drug-name">Lithium</span></td><td><span class="drug-class">Mood Stabilizer</span></td><td>Narrow therapeutic window (0.6–1.2 mEq/L). Toxicity: tremor → ataxia → confusion → seizures → death. Dehydration precipitates toxicity. Monitor renal function.</td></tr>
+        <tr><td><span class="drug-name">Valproate</span></td><td><span class="drug-class">Anticonvulsant/Mood</span></td><td>OD: altered MS, respiratory depression, pancreatitis. Hepatotoxicity.</td></tr>
+        <tr><td><span class="drug-name">Lamotrigine</span></td><td><span class="drug-class">Anticonvulsant/Mood</span></td><td>Rarely: Stevens-Johnson syndrome (rash → sloughing skin). Also used for bipolar depression.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== ASSESSMENT ===== -->
+<div id="tab-assessment" class="section">
+  <div class="assess-header">
+    <h2>📝 Chapter 33 Knowledge Assessment</h2>
+    <p style="color:var(--text-muted);font-size:0.9rem">100 Questions · Based on Sanders' Paramedic Textbook 6th Edition, Chapter 33</p>
+  </div>
+
+  <div id="student-form-section">
+    <div class="student-form">
+      <div class="tag tag-purple" style="margin-bottom:1rem">Student Information Required</div>
+      <label class="form-label">Full Name</label>
+      <input type="text" id="studentName" class="form-input" placeholder="e.g., John Smith">
+      <label class="form-label">Student ID</label>
+      <input type="text" id="studentID" class="form-input" placeholder="e.g., EMS-2024-001">
+      <label class="form-label">Instructor / Program</label>
+      <input type="text" id="studentInstructor" class="form-input" placeholder="e.g., Dr. Cajares / CAMP EMS">
+      <button class="start-btn" onclick="startQuiz()">Begin Assessment →</button>
+    </div>
+  </div>
+
+  <div id="quiz-section" style="display:none">
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill" style="width:1%"></div></div>
+    <div class="quiz-info">
+      <span class="q-counter" id="qCounter">Question 1 of 100</span>
+      <span class="q-category" id="qCategory">Category</span>
+    </div>
+    <div class="question-card">
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="optionsContainer"></div>
+      <div class="feedback-box" id="feedbackBox"></div>
+    </div>
+    <div class="quiz-nav">
+      <button class="nav-btn btn-next" id="nextBtn" onclick="nextQuestion()" style="display:none">Next Question →</button>
+      <button class="nav-btn btn-submit" id="submitBtn" onclick="submitQuiz()" style="display:none">Submit &amp; Grade</button>
+    </div>
+  </div>
+
+  <div id="results-section" style="display:none">
+    <div class="results-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 140 140" width="140" height="140">
+          <defs>
+            <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#7c3aed"/>
+              <stop offset="100%" stop-color="#0891b2"/>
+            </linearGradient>
+          </defs>
+          <circle class="score-bg" cx="70" cy="70" r="60" />
+          <circle class="score-fill" id="scoreCircle" cx="70" cy="70" r="60"
+            stroke-dasharray="376.99" stroke-dashoffset="376.99"/>
+        </svg>
+        <div class="score-num"><span id="scoreNum">0</span><div class="score-pct">/ 100</div></div>
+      </div>
+      <div class="results-name" id="resultsName"></div>
+      <div class="results-grade" id="resultsGrade"></div>
+      <div class="results-stats">
+        <div class="r-stat"><div class="r-stat-num" id="statCorrect" style="color:var(--green-light)">0</div><div class="r-stat-label">Correct</div></div>
+        <div class="r-stat"><div class="r-stat-num" id="statWrong" style="color:var(--rose-light)">0</div><div class="r-stat-label">Incorrect</div></div>
+        <div class="r-stat"><div class="r-stat-num" id="statPct" style="color:var(--accent2)">0%</div><div class="r-stat-label">Score</div></div>
+      </div>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
+        <button class="pdf-btn" onclick="generatePDF()">⬇ Download PDF Report</button>
+        <button class="review-btn" onclick="showReview()">📋 Review Answers</button>
+      </div>
+    </div>
+    <div id="review-section" style="display:none" class="review-list"></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ===== THEME =====
+function toggleTheme(){
+  document.body.classList.toggle('light-mode');
+  const btn=document.querySelector('.theme-btn');
+  btn.textContent=document.body.classList.contains('light-mode')?'🌙 Dark Mode':'☀ Light Mode';
+}
+
+// ===== TABS =====
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== QUESTIONS =====
+const questions=[
+// BEHAVIORAL EMERGENCIES (1-15)
+{q:"Which of the following BEST defines a behavioral emergency?",opts:["Any situation involving a patient with a history of psychiatric illness","A situation in which a patient's mood or behavior presents imminent risk of harm or death to self or others","A patient who refuses transport to the hospital","Any call involving substance use disorder"],ans:1,cat:"Behavioral Emergencies",exp:"A behavioral emergency is defined as a situation in which a patient's mood or behavior presents an imminent risk of harm or death to self or others, requiring immediate attention."},
+{q:"Which of the following represents a BIOLOGIC cause of behavioral emergencies?",opts:["Childhood trauma","Dysfunctional family structure","Economic stress","Neurotransmitter imbalance in the brain"],ans:3,cat:"Behavioral Emergencies",exp:"Biologic causes include genetic factors, prenatal/postnatal injury, and neurotransmitter imbalance. Childhood trauma and family dysfunction are psychosocial causes; economic stress is sociocultural."},
+{q:"Approximately what percentage of emergency department visits relate to mental health or substance use disorders?",opts:["5%","10%","15%","25%"],ans:2,cat:"Mental Health System",exp:"Approximately 15% of emergency department visits relate to mental health or substance use disorders (SUDs)."},
+{q:"The 9-8-8 dialing code was established to provide:",opts:["Emergency law enforcement dispatch","24/7 access to trained mental health crisis counselors","Ambulance dispatch for psychiatric emergencies","Hotline for EMS providers with PTSD"],ans:1,cat:"Mental Health System",exp:"The 9-8-8 hotline offers 24/7 call, text, and chat access to trained crisis counselors for people experiencing a mental health emergency, including thoughts of suicide."},
+{q:"During a behavioral emergency assessment, which action BEST helps establish rapport with the patient?",opts:["Immediately performing a head-to-toe physical examination","Using active listening and showing empathy","Allowing law enforcement to conduct the initial interview","Asking multiple rapid questions to gather information quickly"],ans:1,cat:"Assessment",exp:"Active listening and showing empathy are key interview techniques that strengthen the paramedic's rapport with the patient, helping establish and maintain a therapeutic relationship."},
+{q:"The Mental Status Examination (MSE) evaluates which of the following?",opts:["Blood pressure, heart rate, and temperature","Appearance, speech, cognitive abilities, and emotional stability","GCS, pupil response, and motor strength","Airway patency, breathing rate, and circulation"],ans:1,cat:"Assessment",exp:"The MSE assesses four domains: appearance and behavior, speech and language, cognitive abilities, and emotional stability."},
+{q:"When conducting a difficult interview with a talkative patient, the MOST effective technique is:",opts:["Ignoring the patient until they stop speaking","Raising a hand or calling the patient's name to refocus attention","Administering a sedative medication","Asking law enforcement to restrain the patient"],ans:1,cat:"Assessment",exp:"For talkative patients, raising a hand or calling the person's name may accomplish the task of redirecting their attention to the interview."},
+{q:"Which of the following is a SOCIOCULTURAL cause of mental illness?",opts:["Genetic predisposition to schizophrenia","Childhood sexual abuse","Economic status and social cohesion","Prenatal brain injury"],ans:2,cat:"Behavioral Emergencies",exp:"Sociocultural causes include personal relationships, family stability, economic status, social cohesion, work environment, and personal belief systems."},
+{q:"A paramedic is responding to a patient with known psychiatric history who is now presenting with acute confusion and hallucinations. What should be the FIRST consideration?",opts:["Begin immediate psychiatric evaluation","Rule out organic/medical causes such as hypoglycemia or hypoxia","Administer a sedative medication","Contact medical direction for psychiatric hold"],ans:1,cat:"Assessment",exp:"Always rule out organic (medical) causes before assuming purely psychiatric etiology. Hypoglycemia, hypoxia, head trauma, and drug toxicity can all mimic psychiatric emergencies."},
+{q:"Which statement BEST describes abnormal (maladaptive) behavior?",opts:["Any behavior that is unusual in the eyes of the paramedic","Behavior that deviates from society's norms, interferes with well-being, and harms the person or group","Behavior seen exclusively in patients with diagnosed mental illness","Any refusal to cooperate with EMS providers"],ans:1,cat:"Behavioral Emergencies",exp:"Abnormal (maladaptive) behavior deviates from society's norms and expectations, interferes with well-being and ability to function, and harms the person or group."},
+{q:"Crisis Intervention Teams (CITs) primarily:",opts:["Physically restrain psychiatric patients","Train law enforcement to recognize mental health crises and identify community resources","Provide EMS transport for psychiatric patients only","Replace EMS on psychiatric calls"],ans:1,cat:"Mental Health System",exp:"CIT programs train law enforcement officers to recognize and intervene with appropriate communication strategies and to identify community resources for people in mental health crisis."},
+{q:"Which of the following is NOT a biologic cause of behavioral emergencies?",opts:["Substance use disorder","Brain tumors","Dysfunctional family structure","Dementia"],ans:2,cat:"Behavioral Emergencies",exp:"Dysfunctional family structure is a psychosocial cause. Biologic causes include genetic factors, substance use disorder, trauma, illness, infections, tumors, and dementia."},
+{q:"Which neurotransmitter class is MOST implicated in the positive symptoms of schizophrenia?",opts:["Serotonin excess in the hippocampus","Dopamine hyperactivity in the mesolimbic pathway","GABA deficiency in the cerebellum","Norepinephrine excess in the amygdala"],ans:1,cat:"Psychotic Disorders",exp:"Positive symptoms of schizophrenia result from dopamine hyperactivity in the mesolimbic pathway (VTA → limbic system). This is why dopamine-blocking antipsychotics reduce positive symptoms."},
+{q:"The number of people who seriously consider suicide for every 1 person who dies by it is approximately:",opts:["10","50","100","275"],ans:3,cat:"Mood Disorders",exp:"There are approximately 275 people who seriously consider suicide for every 1 person who completes it, highlighting the importance of recognizing and addressing suicidal ideation."},
+{q:"According to the chapter, in 2020, suicide was the _____ leading cause of death for those aged 10 to 64 years:",opts:["3rd","5th","9th","15th"],ans:2,cat:"Mood Disorders",exp:"In 2020, suicide was the 9th leading cause of death for those age 10 to 64 years, with more than 45,000 suicides occurring in the United States."},
+
+// NEUROCOGNITIVE (16-28)
+{q:"What is the CARDINAL feature that distinguishes delirium from dementia?",opts:["Presence of hallucinations","Acute onset with fluctuating course and prominent inattention","Gradual memory loss over months","Personality changes preceding cognitive decline"],ans:1,cat:"Neurocognitive Disorders",exp:"The cardinal features of delirium are acute onset, fluctuating course, and prominent inattention. Dementia has an insidious onset and progressive course."},
+{q:"A 78-year-old male with no known psychiatric history suddenly becomes confused, agitated, and reports seeing spiders on the wall. His symptoms fluctuate over 2 hours. This presentation is MOST consistent with:",opts:["Alzheimer dementia","Schizophrenia","Delirium","Major depressive disorder"],ans:2,cat:"Neurocognitive Disorders",exp:"Sudden onset confusion with fluctuating consciousness, agitation, and visual hallucinations in an elderly patient is classic for delirium. It is acute and reversible, unlike dementia."},
+{q:"Which type of dementia is characterized by accumulation of amyloid-beta plaques and tau protein tangles?",opts:["Vascular dementia","Lewy body disease","Alzheimer disease","Frontotemporal dementia"],ans:2,cat:"Neurocognitive Disorders",exp:"Alzheimer disease is characterized by amyloid-beta plaques between neurons and tau protein tangles inside neurons, leading to progressive loss of acetylcholine-producing neurons."},
+{q:"A patient with suspected Lewy body dementia is acutely agitated. The paramedic should be MOST cautious about administering:",opts:["Oxygen","IV normal saline","Antipsychotic medications","Glucose"],ans:2,cat:"Neurocognitive Disorders",exp:"In Lewy body dementia, antipsychotics can be fatal due to the disease's sensitivity to dopamine blockade. This is a critical clinical distinction from other dementias."},
+{q:"The most common cause of dementia accounts for approximately what percentage of cases?",opts:["20–30%","40–50%","60–70%","80–90%"],ans:2,cat:"Neurocognitive Disorders",exp:"Alzheimer disease accounts for approximately 60–70% of all dementia cases, making it the most common cause."},
+{q:"An EMS provider is treating an 8-year-old child with known autism spectrum disorder who is becoming increasingly agitated on scene. Which strategy is MOST appropriate?",opts:["Speak rapidly and loudly to maintain their attention","Apply soft restraints to prevent self-injury","Remove sensory distractions and use simple, clear language","Administer oral diazepam immediately"],ans:2,cat:"Neurodevelopmental",exp:"For ASD patients in crisis: remain calm, move slowly, remove sensory distractions, use simple language, minimize tactile sensations, and involve parents for calming strategies."},
+{q:"In autism spectrum disorder, repetitive self-injurious behaviors should be interpreted as:",opts:["Signs of suicidal ideation requiring psychiatric hold","Regulatory behaviors to manage overwhelming internal states, not suicide attempts","Willful noncompliance requiring physical restraint","Evidence of physical abuse"],ans:1,cat:"Neurodevelopmental",exp:"About 30% of ASD patients engage in self-injurious behaviors. These are regulatory behaviors to manage overwhelming sensory or emotional states, not suicide attempts."},
+{q:"Which region of the brain is PRIMARILY associated with the earliest memory loss in Alzheimer disease?",opts:["Amygdala","Hippocampus","Cerebellum","Brainstem"],ans:1,cat:"Neurocognitive Disorders",exp:"The hippocampus (memory formation and spatial navigation) degrades first in Alzheimer disease. This is why recent memories are lost before remote memories."},
+{q:"Frontotemporal dementia MOST characteristically presents with:",opts:["Memory loss preceding personality changes","Visual hallucinations and parkinsonian features","Personality changes and disinhibition preceding memory loss","Sudden-onset deficits suggesting stroke"],ans:2,cat:"Neurocognitive Disorders",exp:"Frontotemporal dementia involves tau accumulation in frontal/temporal lobes, so personality changes and disinhibition precede memory loss — patients may initially appear to have a personality disorder."},
+
+// SCHIZOPHRENIA (29-38)
+{q:"Which of the following is a POSITIVE symptom of schizophrenia?",opts:["Flat affect","Anhedonia","Auditory hallucinations","Reduced speaking"],ans:2,cat:"Psychotic Disorders",exp:"Positive symptoms are maladaptive behaviors not found in healthy people: delusions, thought disorders, movement disorders, and hallucinations. Flat affect, anhedonia, and reduced speaking are negative symptoms."},
+{q:"The NEGATIVE symptoms of schizophrenia primarily result from:",opts:["Excess dopamine in the mesolimbic pathway","Dopamine deficiency in the mesocortical pathway","Excess serotonin in the raphe nuclei","NMDA receptor hyperactivation"],ans:1,cat:"Psychotic Disorders",exp:"Negative/cognitive symptoms result from dopamine HYPOACTIVITY in the mesocortical pathway (VTA → prefrontal cortex). This explains why treating positive symptoms with dopamine blockers can worsen negative symptoms."},
+{q:"A 22-year-old male with schizophrenia who stopped taking his antipsychotic medications presents with acute psychosis. He reports that the TV is sending him personal messages. This is BEST described as:",opts:["Hallucination","Delusion of reference","Flat affect","Flight of ideas"],ans:1,cat:"Psychotic Disorders",exp:"A delusion of reference is the belief that external events, objects, or messages are specifically directed at oneself. The patient believes the TV is communicating directly with him."},
+{q:"First-generation antipsychotics that block nigrostriatal D2 receptors can cause which serious adverse effect?",opts:["Serotonin syndrome","Extrapyramidal symptoms (EPS)","Malignant hyperthermia","Anticholinergic toxidrome"],ans:1,cat:"Psychotic Disorders",exp:"EPS (extrapyramidal symptoms) result from D2 receptor blockade in the nigrostriatal pathway: acute dystonia, akathisia, drug-induced parkinsonism, and tardive dyskinesia."},
+{q:"The INITIAL treatment for a patient experiencing acute dystonia from antipsychotic medication is:",opts:["Naloxone 0.4–2 mg IV","Diphenhydramine 25–50 mg IV/IM","Sodium bicarbonate 1–2 mEq/kg","Activated charcoal"],ans:1,cat:"Psychotic Disorders",exp:"Acute dystonia from antipsychotics is treated with diphenhydramine (Benadryl) 25–50 mg IV/IM or benztropine (Cogentin) 1–2 mg. These anticholinergic agents reverse the dopaminergic imbalance."},
+{q:"Which of the following is MOST dangerous when co-administered with IM olanzapine?",opts:["Oral lithium","IV/IM benzodiazepines","Oral fluoxetine","IM haloperidol"],ans:1,cat:"Psychotic Disorders",exp:"Combining IM olanzapine with IV or IM benzodiazepines carries a risk of fatal respiratory depression. This combination must be avoided."},
+{q:"NMDA receptor hypofunction in schizophrenia PRIMARILY affects the:",opts:["Basal ganglia","Prefrontal cortex","Cerebellum","Hippocampus"],ans:1,cat:"Psychotic Disorders",exp:"NMDA receptor hypofunction in the prefrontal cortex impairs GABAergic interneurons, which normally regulate dopamine release. This creates an unregulated dopamine system, contributing to psychotic symptoms."},
+{q:"A patient with schizophrenia is well-managed on antipsychotic medications. They most likely take these medications to:",opts:["Increase serotonin production","Block dopamine receptors to reduce positive symptoms","Increase acetylcholine in the hippocampus","Suppress the immune response"],ans:1,cat:"Psychotic Disorders",exp:"Antipsychotics primarily work by blocking dopamine receptors (especially D2), reducing the mesolimbic dopamine hyperactivity responsible for positive symptoms."},
+{q:"According to Neuroleptic Malignant Syndrome (NMS), the 'FEVER triad' includes:",opts:["Fever, rash, bronchospasm","Fever, muscle rigidity, autonomic instability with altered mental status","Fever, bradycardia, diarrhea","Fever, seizures, urticaria"],ans:1,cat:"Psychotic Disorders",exp:"NMS presents with high fever, lead-pipe muscle rigidity, altered mental status, and autonomic instability (tachycardia, BP lability, diaphoresis). Mortality can reach 20% if untreated."},
+
+// ANXIETY/OCD/PTSD (39-52)
+{q:"A panic attack is diagnosed when a patient reaches maximum intensity within minutes and has:",opts:["2 or more symptoms from the diagnostic list","4 or more symptoms from the diagnostic list","All 13 symptoms on the diagnostic list","At least 1 episode per week for 1 month"],ans:1,cat:"Anxiety Disorders",exp:"A panic attack reaches its maximum intensity within minutes, at which point 4 or more of the 13 listed symptoms are present."},
+{q:"Which condition is a paramedic MOST likely to confuse with a panic attack in the field?",opts:["Migraine headache","Acute coronary syndrome (ACS)","Urinary tract infection","Appendicitis"],ans:1,cat:"Anxiety Disorders",exp:"Panic attacks mimic ACS, PE, hypoglycemia, and hyperthyroidism — presenting with chest pain, dyspnea, tachycardia, and fear. Never diagnose 'just anxiety' without ruling out medical causes."},
+{q:"Agoraphobia is BEST described as:",opts:["Fear of spiders and insects","Intense fear of open or public spaces where escape might be difficult","Irrational fear of other people","Fear of heights"],ans:1,cat:"Anxiety Disorders",exp:"Agoraphobia is intense fear of open or public spaces where escape might be difficult, or help unavailable during a panic attack. It is one of the three main groups of phobias."},
+{q:"OCD (obsessive-compulsive disorder) is neurologically characterized by:",opts:["Amygdala atrophy","Hyperactivity of the cortico-striato-thalamo-cortical (CSTC) circuit","Reduced hippocampal volume","Dopamine depletion in the mesolimbic pathway"],ans:1,cat:"OCD Spectrum",exp:"OCD involves hyperactivity of the CSTC circuit. The orbitofrontal cortex generates alarm signals (obsessions) and the caudate nucleus fails to shut the loop off. SSRIs improve caudate function."},
+{q:"Which of the following is classified in the OCD and related disorders category?",opts:["PTSD","Agoraphobia","Hoarding disorder","Dissociative amnesia"],ans:2,cat:"OCD Spectrum",exp:"OCD-related disorders include hoarding disorder, body dysmorphic disorder, trichotillomania (hair pulling), and excoriation (skin picking) disorder."},
+{q:"PTSD involves hyperactivity of which brain structure that triggers fear responses to trauma cues?",opts:["Thalamus","Cerebellum","Amygdala","Basal ganglia"],ans:2,cat:"PTSD",exp:"The amygdala is hyperactive in PTSD, triggering fear responses to trauma-related cues even in safe environments. The 'smoke alarm' remains permanently on high sensitivity."},
+{q:"In PTSD, reduced hippocampal volume is caused by:",opts:["Dopamine-mediated neurotoxicity","Cortisol-mediated neurotoxicity","Excess serotonin","Amyloid plaque formation"],ans:1,cat:"PTSD",exp:"Elevated cortisol from chronic HPA axis dysregulation causes hippocampal atrophy in PTSD. This impairs context processing, so traumatic memories feel present rather than past."},
+{q:"The four symptom clusters of PTSD include all of the following EXCEPT:",opts:["Intrusion symptoms","Cognitive and mood symptoms","Dissociative symptoms","Arousal and reactivity symptoms"],ans:2,cat:"PTSD",exp:"PTSD's four clusters are: Intrusion, Avoidance, Arousal/Reactivity, and Cognition/Mood symptoms. Dissociative symptoms are associated with a PTSD subtype but not one of the four main clusters."},
+{q:"During a PTSD flashback, the patient is MOST likely experiencing:",opts:["A psychotic break from schizophrenia","The traumatic event as occurring in the present, with full physiologic response","Deliberate manipulation to avoid treatment","A simple memory recall without emotional response"],ans:1,cat:"PTSD",exp:"During a flashback, the brain experiences the trauma as happening NOW. Because hippocampal damage prevents time-stamping memories, the nervous system generates an identical physiologic response to the original trauma."},
+{q:"PTSD in EMS providers is BEST described as:",opts:["A sign of professional weakness requiring disciplinary action","A neurobiologic injury from occupational trauma exposure","Uncommon because EMS providers are trained to handle stress","Only occurring after single catastrophic events"],ans:1,cat:"PTSD",exp:"EMS personnel are at high risk for PTSD due to repetitive trauma exposure. PTSD is a neurobiologic injury, not weakness. Seek peer support, CISM debriefings, and professional counseling."},
+{q:"Which medication class is FIRST-LINE for long-term treatment of both PTSD and OCD?",opts:["Benzodiazepines","First-generation antipsychotics","SSRIs (Selective Serotonin Reuptake Inhibitors)","Monoamine oxidase inhibitors (MAOIs)"],ans:2,cat:"PTSD",exp:"SSRIs are first-line pharmacotherapy for both PTSD and OCD, improving serotonergic tone in the amygdala (PTSD) and caudate nucleus (OCD)."},
+{q:"A patient with a phobia of needles becomes severely anxious when you attempt IV access. The MOST appropriate response is:",opts:["Forcibly restrain the patient and establish the IV","Ignore the fear and proceed quickly","Explain each step of the procedure and allow the patient time to process","Tell the patient their fear is irrational"],ans:2,cat:"Anxiety Disorders",exp:"Take care to explain each step of an emergency procedure to phobic patients. Acknowledging the fear and providing step-by-step communication reduces anxiety and promotes cooperation."},
+{q:"Benzodiazepines treat anxiety primarily by:",opts:["Blocking dopamine D2 receptors","Inhibiting serotonin reuptake","Enhancing GABA-A receptor activity, increasing chloride conductance","Blocking NMDA glutamate receptors"],ans:2,cat:"Anxiety Disorders",exp:"Benzodiazepines enhance GABA-A receptor activity by increasing the frequency of chloride channel opening, producing anxiolysis, sedation, muscle relaxation, and anticonvulsant effects."},
+{q:"Which benzodiazepine has the FASTEST onset when administered intranasally for acute agitation?",opts:["Diazepam","Lorazepam","Chlordiazepoxide","Midazolam"],ans:3,cat:"Anxiety Disorders",exp:"Midazolam (Versed) has the fastest onset of the benzodiazepines, especially via IN (intranasal) or IM routes, making it preferred for acute agitation management in the prehospital setting."},
+
+// MOOD DISORDERS (53-68)
+{q:"The mnemonic IN SAD CAGES is used to identify the major features of:",opts:["Bipolar disorder manic phase","Major depressive disorder","Generalized anxiety disorder","PTSD"],ans:1,cat:"Mood Disorders",exp:"IN SAD CAGES identifies the major features of major depressive disorder: INterest loss, Sleep disturbance, Appetite change, Depressed mood, Concentration difficulty, Activity change, Guilt, Energy loss, Suicidal thoughts."},
+{q:"Anhedonia is defined as:",opts:["Excessive, irrational guilt","Inability to feel pleasure from experiences that are ordinarily pleasurable","Persistent worry about future events","Alternating episodes of mania and depression"],ans:1,cat:"Mood Disorders",exp:"Anhedonia — the inability to feel pleasure or happiness from ordinarily pleasurable experiences — is a hallmark feature of severe depression."},
+{q:"Depression associated with heart attack, stroke, diabetes, and cancer is BEST explained by:",opts:["Patient denial of their illness","Neuroinflammation and cytokine-mediated disruption of monoamine synthesis","Social isolation from hospitalization only","Medication side effects exclusively"],ans:1,cat:"Mood Disorders",exp:"Neuroinflammation (elevated IL-6, TNF-α) in systemic illness reduces neurogenesis and disrupts monoamine synthesis, explaining the strong link between chronic medical conditions and depression."},
+{q:"The primary mechanism by which SSRIs treat depression is:",opts:["Increasing serotonin production in the raphe nuclei","Blocking serotonin reuptake transporters, increasing synaptic serotonin availability","Blocking D2 dopamine receptors","Enhancing GABA receptor activity"],ans:1,cat:"Mood Disorders",exp:"SSRIs block serotonin reuptake transporters (SERT), preventing serotonin from re-entering the presynaptic neuron and increasing the duration of serotonin activity in the synapse."},
+{q:"An ECG shows QRS widening in a patient found unresponsive with antidepressant bottles nearby. The MOST appropriate treatment is:",opts:["Activated charcoal only","Naloxone 2 mg IV","Sodium bicarbonate 1–2 mEq/kg IV","Flumazenil 0.2 mg IV"],ans:2,cat:"Mood Disorders",exp:"TCA (tricyclic antidepressant) overdose causes QRS widening, wide-complex arrhythmias, and seizures. Treatment is sodium bicarbonate 1–2 mEq/kg IV to alkalinize serum and overcome sodium channel blockade."},
+{q:"Which antidepressant class carries a BLACK BOX WARNING for fatal interactions with tyramine-containing foods?",opts:["SSRIs","SNRIs","TCAs","MAOIs"],ans:3,cat:"Mood Disorders",exp:"MAOIs (monoamine oxidase inhibitors) like phenelzine have a black box warning for hypertensive crisis with tyramine-containing foods (aged cheese, wine, cured meats) and lethal interactions with sympathomimetics."},
+{q:"A patient taking phenelzine (an MAOI) requires pain management. The paramedic should AVOID:",opts:["Morphine","Acetaminophen","Ibuprofen","Fentanyl"],ans:0,cat:"Mood Disorders",exp:"Meperidine (Demerol) is the most dangerous opioid with MAOIs (causes serotonin syndrome). While morphine/fentanyl have some interaction risk, meperidine is absolutely contraindicated. Avoid opioids with MAOIs when possible."},
+{q:"The hallmark feature of mania in bipolar disorder is:",opts:["Profound sadness and withdrawal","Excessive elation, decreased need for sleep, and impulsive/grandiose behavior","Flat affect and poverty of speech","Intense fear and avoidance behaviors"],ans:1,cat:"Mood Disorders",exp:"Mania is characterized by excessive elation, impulsive activities, talkativeness, flight of ideas, distractibility, accelerated speech, decreased sleep need, and delusions of personal grandeur."},
+{q:"Lithium has a NARROW therapeutic window. Signs of lithium TOXICITY include:",opts:["Urinary retention and constipation","Tremor, ataxia, confusion, and seizures","Bradycardia and hypotension","Rash and photosensitivity"],ans:1,cat:"Mood Disorders",exp:"Lithium toxicity progresses: tremor → ataxia → confusion → seizures → death. Therapeutic level is 0.6–1.2 mEq/L. Dehydration or renal impairment precipitates toxicity."},
+{q:"The 'kindling model' of bipolar disorder refers to:",opts:["The gradual increase in antipsychotic dosing requirements","Each mood episode sensitizing the brain to future episodes, increasing frequency over time","The combustible nature of manic episodes in hot climates","The use of ECT to 'restart' neural firing"],ans:1,cat:"Mood Disorders",exp:"The kindling model explains that each manic or depressive episode sensitizes the brain to future episodes, like repeated small seizures lowering the seizure threshold — episodes tend to become more frequent and severe over time."},
+{q:"The highest suicide rate in the United States occurs among which demographic?",opts:["African American females aged 25–35","Non-Hispanic White and American Indian/Alaska Native populations","Hispanic males aged 15–25","Asian American females aged 45–55"],ans:1,cat:"Suicide",exp:"The highest suicide rates occur among non-Hispanic American Indian/Alaska Native and non-Hispanic White people. Caucasian men older than 85 years have the single highest suicide rate."},
+{q:"Which of the following is the STRONGEST predictor of future suicide attempts?",opts:["Unemployment","History of prior suicide attempts","Divorce","Living alone"],ans:1,cat:"Suicide",exp:"A history of prior suicide attempts is the single strongest predictor of future attempts. Previous attempts indicate the person has overcome the psychological barrier to self-harm."},
+{q:"Firearms are used in what percentage of completed suicides in the United States?",opts:["20%","35%","50%","70%"],ans:2,cat:"Suicide",exp:"Firearms are used in more than one-half (>50%) of completed suicides in the United States, making them the most lethal and common method."},
+{q:"After establishing scene safety at a suspected suicide attempt, the FIRST priority of paramedics is:",opts:["Psychiatric assessment","Contacting mental health crisis line","Medical care — airway, ventilatory, and circulatory support","Documenting the patient's intent"],ans:2,cat:"Suicide",exp:"The first priority is medical care — airway, ventilatory, and circulatory support, and rapid transport. Psychiatric assessment is secondary to managing life-threatening medical emergencies."},
+{q:"Nonsuicidal Self-Injury (NSSI) disorder is MOST accurately described as:",opts:["Suicide attempts that are considered minor","Intentional self-harm without suicidal intent, often to relieve negative feelings","Self-inflicted injury due to psychotic command hallucinations","Accidental self-harm in patients with intellectual disabilities"],ans:1,cat:"Mood Disorders",exp:"NSSI involves deliberate self-harm (cutting, burning, biting) without suicidal intent. Patients believe NSSI will relieve interpersonal difficulty or negative feelings or produce a positive feeling."},
+{q:"Men die from suicide at how many times the rate of women?",opts:["Twice (2×)","Three times (3×)","Four times (4×)","Six times (6×)"],ans:2,cat:"Suicide",exp:"Men die from suicide at approximately four times the rate of women, though women make more attempts. Men tend to use more lethal methods."},
+
+// OTHER DISORDERS (69-81)
+{q:"Somatic symptom disorder is BEST described as:",opts:["Physical symptoms deliberately faked for monetary gain","Conditions with physical symptoms lasting 6+ months with no identifiable organic cause","Factitious disorder imposed on another person","Physical symptoms caused by substance intoxication"],ans:1,cat:"Somatic Disorders",exp:"Somatic symptom disorders present with physical symptoms lasting 6 months or more when no physical cause can be found. Contributing factors include childhood neglect, sexual abuse, and substance abuse history."},
+{q:"In conversion disorder, neurologic symptoms (paralysis, blindness, seizures) are:",opts:["Deliberately faked for secondary gain","Genuinely experienced, resulting from functional (not structural) neural disruption","Always accompanied by organic pathology","Caused exclusively by malingering"],ans:1,cat:"Somatic Disorders",exp:"In conversion disorder, symptoms are not faked — they represent real functional disruption of neural pathways (ACC suppression of motor/sensory cortex activity) without structural damage. The 'software bug' analogy applies."},
+{q:"Munchausen syndrome (factitious disorder) is BEST characterized by:",opts:["Genuine illness with dramatic exaggeration of symptoms","Deliberate feigning of illness to assume the sick role and gain attention","Physical illness caused by excessive anxiety","Psychosomatic pain resulting from childhood trauma"],ans:1,cat:"Somatic Disorders",exp:"In Munchausen syndrome (factitious disorder), symptoms are deliberately invented so the person may assume the role of a patient to gain attention and sympathy."},
+{q:"When treating a patient you suspect has somatic symptom disorder, the paramedic should:",opts:["Confront the patient about the lack of organic findings","Refuse transport since there is no 'real' illness","Treat symptoms as real because differentiation from organic illness is impossible in the field","Administer placebo medications"],ans:2,cat:"Somatic Disorders",exp:"Always treat somatic symptoms as real because you cannot differentiate functional from organic disease in the field. Dismissing these patients risks missing a true emergency and traumatizes vulnerable patients."},
+{q:"Dissociative Identity Disorder (DID) was formerly known as:",opts:["Borderline personality disorder","Multiple personality disorder","Bipolar II disorder","Conversion disorder"],ans:1,cat:"Dissociative Disorders",exp:"Dissociative Identity Disorder (DID) was formerly called 'multiple personality disorder.' It involves distinct identity states that can dominate consciousness with different memories, affects, and behaviors."},
+{q:"The eating disorder with the HIGHEST mortality rate of any psychiatric condition is:",opts:["Bulimia nervosa","Binge-eating disorder","Anorexia nervosa","Avoidant/restrictive food intake disorder"],ans:2,cat:"Eating Disorders",exp:"Anorexia nervosa has the highest mortality of any psychiatric disorder (up to 10%), primarily from cardiac arrhythmias due to electrolyte imbalances, malnutrition, and organ failure."},
+{q:"Which cardiac complication is MOST associated with bulimia nervosa due to purging behaviors?",opts:["Aortic stenosis from malnutrition","QTc prolongation and Torsades de Pointes from hypokalemia","Pericarditis from autoimmune mechanisms","Complete heart block from electrolyte imbalance"],ans:1,cat:"Eating Disorders",exp:"Purging in bulimia causes hypokalemia (low potassium). Hypokalemia prolongs the QTc interval and can precipitate Torsades de Pointes, a potentially fatal ventricular arrhythmia."},
+{q:"Cluster B personality disorders are characterized by:",opts:["Odd, bizarre, eccentric behavior","Dramatic, erratic behavior with emotional dysregulation","Anxious, fearful behavior with social inhibition","Organized, detail-oriented behavior"],ans:1,cat:"Personality Disorders",exp:"Cluster B personality disorders (Antisocial, Borderline, Histrionic, Narcissistic) are characterized by dramatic, erratic behavior and emotional dysregulation."},
+{q:"The DSM-5 categorizes how many personality disorders?",opts:["5","8","10","15"],ans:2,cat:"Personality Disorders",exp:"The DSM-5 lists 10 personality disorders allocated to three clusters: A (odd/eccentric), B (dramatic/erratic), and C (anxious/fearful)."},
+{q:"Intermittent Explosive Disorder is BEST characterized by:",opts:["Gradual buildup of anger over months","Frequent and often unpredictable episodes of extreme anger or physical outbursts disproportionate to provocation","Deliberate fire-setting for non-monetary gain","Persistent pattern of stealing unnecessary items"],ans:1,cat:"Impulse Control",exp:"Intermittent Explosive Disorder involves frequent and often unpredictable episodes of extreme anger or physical outbursts that are grossly disproportionate to the precipitating stressor."},
+{q:"Pyromania is distinguished from general arson by the fact that it involves:",opts:["Deliberate fire-setting for insurance fraud","Deliberate fire-setting for psychological tension relief, not for monetary gain","Accidental fires caused by cognitive impairment","Fire-setting as a command hallucination"],ans:1,cat:"Impulse Control",exp:"Pyromania involves deliberate and purposeful fire-setting for NON-monetary gain — for psychological tension relief and fascination with fire. It differs from arson (profit/revenge motive)."},
+{q:"A patient with borderline personality disorder rapidly shifts from idealization of EMS providers to angry devaluation within a single call. This is BEST described as:",opts:["Intentional manipulation to avoid transport","Malingering","Psychological 'splitting' — a neurobiologic feature of BPD, not deliberate manipulation","Evidence of psychosis"],ans:2,cat:"Personality Disorders",exp:"'Splitting' is a hallmark feature of Borderline Personality Disorder where the person can only see others as all-good or all-bad, with sudden shifts between these views. It is a neurobiologic reality, not deliberate manipulation."},
+{q:"Which substance use pattern creates a 'dual diagnosis' challenge in psychiatric patients?",opts:["Caffeine use in depression","Alcohol or illicit drug use occurring alongside serious mental illness","Medication noncompliance in schizophrenia","Tobacco use in patients with anxiety"],ans:1,cat:"Substance Disorders",exp:"Dual diagnosis occurs when serious mental illness co-exists with substance use disorder (SUD). One disorder may mimic the other, and integrated treatment for both should be done simultaneously."},
+
+// VIOLENCE & RESTRAINT (82-100)
+{q:"The 'PRIORITY' acronym used to screen for hyperactive delirium with severe agitation stands for:",opts:["Psychosis, Resistance, Intoxication, Overheating, Rigidity, Incoherence, Tremor, Yelling","Psychological issues, Recent drug use, Incoherent thought, Off/sweating, Resistant, Inanimate violence, Tough/superhuman, Yelling","Pain, Restlessness, Immobility, Orientation, Rhythm, Insight, Temperature, Yield","Paranoia, Rage, Isolation, Overdose, Reasoning, Impulse, Threat, Youth"],ans:1,cat:"Violence & Restraint",exp:"PRIORITY: Psychological issues, Recent drug/alcohol use, Incoherent thought processes, Off (removing clothing) and sweating, Resistant to dialogue, Inanimate objects (violent toward), Tough/superhuman strength, Yelling."},
+{q:"Hyperactive delirium with severe agitation can be caused by all of the following EXCEPT:",opts:["Stimulant intoxication","Hypoglycemia","Pure social phobia","Head trauma"],ans:2,cat:"Violence & Restraint",exp:"Causative factors include stimulant intoxication, withdrawal from alcohol/drugs, head trauma, hypoglycemia, stroke, brain tumors, psychiatric illnesses, and metabolic abnormalities. Social phobia alone does not cause hyperactive delirium."},
+{q:"The RASS (Richmond Agitation-Sedation Scale) measures:",opts:["Only agitation severity from 1 to 10","Alertness and agitation from -5 (unarousable) to +4 (combative)","Only sedation depth after medication administration","Pain level in nonverbal patients"],ans:1,cat:"Violence & Restraint",exp:"The RASS measures alertness and agitation on a scale from -5 (unarousable) to +4 (combative). It is used before and after sedation to assess response to chemical restraint."},
+{q:"When approaching a potentially violent patient, de-escalation experts recommend maintaining a minimum distance of:",opts:["One arm's length","Two arm lengths","Six feet (social distance)","Ten feet"],ans:1,cat:"Violence & Restraint",exp:"De-escalation domain #1: Respect personal space — remain at least TWO arm lengths from the patient. This respects their perceived boundary and keeps you outside immediate striking range."},
+{q:"During de-escalation of an agitated patient, body language MOST important to demonstrate is:",opts:["Standing directly in front of the patient with arms crossed","Unclenched hands visible to the patient with a calm demeanor","Maintaining direct eye contact at all times","Standing slightly behind the patient"],ans:1,cat:"Violence & Restraint",exp:"De-escalation domain #2: Avoid provocation — crew body language should appear calm with unclenched hands visible to the patient. Crossed arms and tense posture signal threat."},
+{q:"When multiple EMS providers must restrain a violent patient, the MINIMUM number of people recommended to restrain an adult is:",opts:["2","3","4","6"],ans:2,cat:"Violence & Restraint",exp:"At least FOUR capable people should be available to help restrain an adult patient safely. Fewer providers increases risk of injury to both patient and crew."},
+{q:"Physical restraint is INDICATED in which of the following situations?",opts:["The patient refuses verbal assessment","The patient has a history of violence but is currently calm","To protect the patient, EMS crew, or public from imminent danger","Any involuntary psychiatric transport"],ans:2,cat:"Violence & Restraint",exp:"Physical or chemical restraint is indicated ONLY to protect the patient, EMS crew, or public from harm; to facilitate assessment; or to permit treatment of life-threatening conditions."},
+{q:"After physical restraints are applied, the patient MUST be positioned:",opts:["Prone (face down) to prevent escape","Lateral or supine to prevent positional asphyxia","Sitting upright in the captain's chair","In the recovery position without monitoring"],ans:1,cat:"Violence & Restraint",exp:"Avoid prone positioning — it increases risk of positional asphyxia. Reposition to lateral or supine as quickly as possible and monitor airway, breathing, and circulation continuously."},
+{q:"Ketamine is classified as which type of chemical restraint agent?",opts:["Benzodiazepine","First-generation antipsychotic","Dissociative anesthetic agent","Selective serotonin reuptake inhibitor"],ans:2,cat:"Violence & Restraint",exp:"Ketamine is a dissociative anesthetic agent that provides sedation, analgesia, and amnesia via NMDA receptor blockade. It is the drug of choice for severe agitation/hyperactive delirium in many EMS systems."},
+{q:"A significant advantage of ketamine over benzodiazepines for chemical restraint is:",opts:["Lower cost","No risk of respiratory depression at standard IM doses","Oral availability","Longer duration of action"],ans:1,cat:"Violence & Restraint",exp:"Ketamine maintains airway reflexes and does not cause significant respiratory depression at standard IM doses (4–5 mg/kg), unlike benzodiazepines which can cause respiratory depression, especially in combination."},
+{q:"The goal of chemical restraint in agitated patients is PRIMARILY to:",opts:["Achieve unconsciousness for all procedures","Medically manage dangerous behavior to protect the patient and providers from harm","Provide analgesia for pain management","Facilitate diagnostic imaging"],ans:1,cat:"Violence & Restraint",exp:"The goal of chemical restraint is to administer medications to medically manage dangerous behavior to protect patients from self-injury and protect responders from harm — not necessarily to achieve unconsciousness."},
+{q:"After applying physical or chemical restraints, the paramedic must:",opts:["Transfer care immediately to law enforcement","Document the event and monitor respiratory and circulatory status frequently","Remove restraints if the patient calms during transport","Allow a brief unsupervised period for patient privacy"],ans:1,cat:"Violence & Restraint",exp:"After restraint, monitor respiratory and circulatory status frequently and document thoroughly. Restraints should NOT be removed until delivered to the ED or adequate resources are present."},
+{q:"When assessing a child with behavioral problems, which approach is MOST appropriate?",opts:["Use adult interview techniques to save time","Ask complex, open-ended questions to assess cognitive level","Keep questions developmentally appropriate and brief; involve parents when appropriate","Avoid involving parents to prevent coaching"],ans:2,cat:"Special Populations",exp:"Pediatric behavioral emergencies require developmentally appropriate, brief questions. Involve parents/caregivers when appropriate; gain the child's trust; be honest and never lie."},
+{q:"In older adult patients with behavioral problems, the paramedic should be MOST alert to:",opts:["Exaggeration of symptoms for attention","Adverse drug interactions and multiple medications","Deliberate noncompliance with treatment","Social manipulation of family members"],ans:1,cat:"Special Populations",exp:"Older adults on psychiatric medications are at high risk for adverse drug interactions. Careful assessment of medical history and current medications is critical, as polypharmacy is common in this population."},
+{q:"Restraint procedures MUST be fully documented on the patient care report because:",opts:["Documentation is only required if the patient complains","Legal liability exists and the report provides evidence of appropriate care","Only law enforcement requires documentation","Documentation prevents prosecution for assault"],ans:1,cat:"Violence & Restraint",exp:"Restraint documentation is legally and ethically required. The PCR provides evidence that restraint was appropriate, necessary, and properly monitored. It protects both patient rights and provider legal standing."},
+{q:"The 9-8-8 system is designed to integrate with 9-1-1 by:",opts:["Replacing 9-1-1 for all psychiatric calls","Sharing information with 9-1-1 when danger to life is suspected","Providing ambulance dispatch directly","Connecting police directly to inpatient psychiatric facilities"],ans:1,cat:"Mental Health System",exp:"When danger to life is suspected, the 9-8-8 system shares information with 9-1-1, and emergency services are dispatched to the scene. The two systems are closely integrated."},
+{q:"A patient with probable hyperactive delirium is thrashing violently and multiple restraint attempts have failed. The MOST appropriate next step is:",opts:["Apply more physical force until the patient tires","Continue verbal de-escalation indefinitely","Contact medical direction and consider chemical restraint with ketamine or benzodiazepine","Wait for law enforcement to deploy a Taser"],ans:2,cat:"Violence & Restraint",exp:"When verbal de-escalation is ineffective and physical restraint attempts have failed, chemical restraint with ketamine (4–5 mg/kg IM) or a benzodiazepine (midazolam 5 mg IM) is appropriate, following protocol and medical direction."},
+{q:"Serotonin syndrome, potentially triggered by combining MAOIs with SSRIs, is CHARACTERIZED by:",opts:["Bradycardia, hypotension, and sedation","Hyperthermia, clonus, hyperreflexia, agitation, and diaphoresis","QRS widening, seizures, and anticholinergic toxidrome","Muscle rigidity, fever, and autonomic instability without clonus"],ans:1,cat:"Mood Disorders",exp:"Serotonin syndrome presents with: hyperthermia, clonus (rhythmic muscle jerks), hyperreflexia, agitation, diaphoresis, and GI symptoms. It differs from NMS by the presence of clonus and faster onset."},
+{q:"The BARS (Behavioral Activity Rating Scale) is PRIMARILY used to:",opts:["Diagnose specific psychiatric disorders in the field","Measure the degree of agitated behavior before and after intervention","Determine the appropriate psychiatric facility for transport","Assess suicide risk level"],ans:1,cat:"Violence & Restraint",exp:"The BARS (Behavioral Activity Rating Scale) measures the degree of agitated behavior (scale 1–7). It is used to objectively assess agitation severity before and after restraint or chemical sedation."}
+];
+
+// ===== QUIZ STATE =====
+let currentQ=0, userAnswers=[], quizStarted=false;
+let studentName='', studentID='', studentInstructor='';
+
+function startQuiz(){
+  studentName=document.getElementById('studentName').value.trim();
+  studentID=document.getElementById('studentID').value.trim();
+  studentInstructor=document.getElementById('studentInstructor').value.trim();
+  if(!studentName||!studentID){alert('Please enter your name and student ID to begin.');return;}
+  userAnswers=new Array(questions.length).fill(null);
+  currentQ=0;
+  document.getElementById('student-form-section').style.display='none';
+  document.getElementById('quiz-section').style.display='block';
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q=questions[currentQ];
+  const pct=((currentQ)/questions.length)*100;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('qCounter').textContent=`Question ${currentQ+1} of ${questions.length}`;
+  document.getElementById('qCategory').textContent=q.cat;
+  document.getElementById('questionText').textContent=q.q;
+  const fb=document.getElementById('feedbackBox');
+  fb.className='feedback-box';fb.style.display='none';
+  const opts=document.getElementById('optionsContainer');
+  opts.innerHTML='';
+  const letters=['A','B','C','D'];
+  q.opts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='option';
+    btn.innerHTML=`<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
+    btn.onclick=()=>selectAnswer(i);
+    if(userAnswers[currentQ]===i){
+      btn.classList.add(i===q.ans?'correct':'wrong');
+    }
+    opts.appendChild(btn);
+  });
+  const nextBtn=document.getElementById('nextBtn');
+  const subBtn=document.getElementById('submitBtn');
+  if(userAnswers[currentQ]!==null){
+    nextBtn.style.display=currentQ<questions.length-1?'block':'none';
+    subBtn.style.display=currentQ===questions.length-1?'block':'none';
+    showFeedback(userAnswers[currentQ]);
+  } else {
+    nextBtn.style.display='none';
+    subBtn.style.display='none';
+  }
+}
+
+function selectAnswer(idx){
+  if(userAnswers[currentQ]!==null) return;
+  userAnswers[currentQ]=idx;
+  const q=questions[currentQ];
+  const opts=document.querySelectorAll('.option');
+  opts.forEach((btn,i)=>{
+    if(i===q.ans) btn.classList.add('correct');
+    else if(i===idx&&idx!==q.ans) btn.classList.add('wrong');
+    btn.onclick=null;
+  });
+  showFeedback(idx);
+  const nextBtn=document.getElementById('nextBtn');
+  const subBtn=document.getElementById('submitBtn');
+  nextBtn.style.display=currentQ<questions.length-1?'block':'none';
+  subBtn.style.display=currentQ===questions.length-1?'block':'none';
+}
+
+function showFeedback(idx){
+  const q=questions[currentQ];
+  const fb=document.getElementById('feedbackBox');
+  const correct=(idx===q.ans);
+  fb.className='feedback-box show '+(correct?'feedback-correct':'feedback-wrong');
+  fb.innerHTML=`<strong style="color:${correct?'var(--green-light)':'var(--rose-light)'}">${correct?'✓ Correct!':'✗ Incorrect'}</strong> ${q.exp}`;
+}
+
+function nextQuestion(){
+  if(currentQ<questions.length-1){currentQ++;renderQuestion();}
+}
+
+function submitQuiz(){
+  const correct=userAnswers.filter((a,i)=>a===questions[i].ans).length;
+  const pct=Math.round((correct/questions.length)*100);
+  document.getElementById('quiz-section').style.display='none';
+  document.getElementById('results-section').style.display='block';
+  document.getElementById('scoreNum').textContent=correct;
+  document.getElementById('statCorrect').textContent=correct;
+  document.getElementById('statWrong').textContent=questions.length-correct;
+  document.getElementById('statPct').textContent=pct+'%';
+  let grade, gradeClass;
+  if(pct>=93){grade='A';gradeClass='grade-A';}
+  else if(pct>=85){grade='B';gradeClass='grade-B';}
+  else if(pct>=75){grade='C';gradeClass='grade-C';}
+  else if(pct>=65){grade='D';gradeClass='grade-D';}
+  else{grade='F';gradeClass='grade-F';}
+  document.getElementById('resultsName').textContent=studentName;
+  document.getElementById('resultsGrade').className='results-grade '+gradeClass;
+  document.getElementById('resultsGrade').textContent=`Grade: ${grade} (${pct}%)`;
+  const circumference=376.99;
+  const offset=circumference*(1-pct/100);
+  document.getElementById('scoreCircle').style.strokeDashoffset=offset;
+}
+
+function showReview(){
+  const rs=document.getElementById('review-section');
+  if(rs.style.display==='block'){rs.style.display='none';return;}
+  rs.style.display='block';rs.innerHTML='<h3 style="font-family:Rajdhani,sans-serif;font-size:1.3rem;margin-bottom:1rem;color:var(--text-primary)">📋 Answer Review</h3>';
+  questions.forEach((q,i)=>{
+    const userAns=userAnswers[i];
+    const correct=userAns===q.ans;
+    const div=document.createElement('div');
+    div.className='review-item';
+    div.style.borderLeft=`3px solid ${correct?'var(--green)':'var(--rose)'}`;
+    const letters=['A','B','C','D'];
+    div.innerHTML=`<div class="review-q">${i+1}. ${q.q}</div>
+      ${!correct&&userAns!==null?`<div class="review-wrong">Your answer: ${letters[userAns]}. ${q.opts[userAns]}</div>`:''}
+      <div class="review-correct">${correct?'✓':'Correct:'} ${letters[q.ans]}. ${q.opts[q.ans]}</div>
+      <div class="review-explanation">${q.exp}</div>`;
+    rs.appendChild(div);
+  });
+}
+
+function generatePDF(){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'letter'});
+  const correct=userAnswers.filter((a,i)=>a===questions[i].ans).length;
+  const pct=Math.round((correct/questions.length)*100);
+  let grade;
+  if(pct>=93)grade='A';
+  else if(pct>=85)grade='B';
+  else if(pct>=75)grade='C';
+  else if(pct>=65)grade='D';
+  else grade='F';
+  const now=new Date();
+  const dateStr=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const timeStr=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+
+  // Header bar
+  doc.setFillColor(30,43,74);
+  doc.rect(0,0,215.9,40,'F');
+  doc.setTextColor(167,139,250);
+  doc.setFontSize(9);doc.setFont('helvetica','bold');
+  doc.text('CAMP COMMUNITY COLLEGE — EMS PARAMEDIC PROGRAM',107.95,12,{align:'center'});
+  doc.setTextColor(241,245,249);
+  doc.setFontSize(16);doc.setFont('helvetica','bold');
+  doc.text('Chapter 33: Behavioral & Psychiatric Disorders',107.95,22,{align:'center'});
+  doc.setFontSize(10);doc.setFont('helvetica','normal');
+  doc.text('Knowledge Assessment — Score Report',107.95,30,{align:'center'});
+  doc.setTextColor(148,163,184);
+  doc.setFontSize(8);
+  doc.text(`Generated: ${dateStr} at ${timeStr}`,107.95,37,{align:'center'});
+
+  // Student info box
+  doc.setFillColor(17,24,39);
+  doc.roundedRect(14,48,187.9,38,3,3,'F');
+  doc.setDrawColor(30,43,74);
+  doc.roundedRect(14,48,187.9,38,3,3,'S');
+  doc.setTextColor(148,163,184);doc.setFontSize(8);doc.setFont('helvetica','bold');
+  doc.text('STUDENT NAME',20,56);doc.text('STUDENT ID',95,56);
+  doc.text('PROGRAM / INSTRUCTOR',20,70);doc.text('DATE',95,70);
+  doc.setTextColor(241,245,249);doc.setFontSize(10);doc.setFont('helvetica','normal');
+  doc.text(studentName||'—',20,63);
+  doc.text(studentID||'—',95,63);
+  doc.text(studentInstructor||'CAMP EMS',20,77);
+  doc.text(dateStr,95,77);
+
+  // Score display
+  doc.setFillColor(17,24,39);
+  doc.roundedRect(14,92,90,55,3,3,'F');
+  doc.setDrawColor(pct>=75?5:225,pct>=75?150:29,pct>=75?105:72);
+  doc.roundedRect(14,92,90,55,3,3,'S');
+  const scoreColor=pct>=93?[52,211,153]:pct>=85?[34,211,238]:pct>=75?[252,211,77]:pct>=65?[251,113,133]:[225,29,72];
+  doc.setTextColor(...scoreColor);
+  doc.setFontSize(42);doc.setFont('helvetica','bold');
+  doc.text(`${correct}`,59,127,{align:'center'});
+  doc.setFontSize(12);
+  doc.text('/100 Questions',59,137,{align:'center'});
+  doc.setTextColor(148,163,184);doc.setFontSize(9);
+  doc.text('TOTAL SCORE',59,100,{align:'center'});
+
+  doc.setFillColor(17,24,39);
+  doc.roundedRect(110,92,91.9,55,3,3,'F');
+  doc.setDrawColor(30,43,74);
+  doc.roundedRect(110,92,91.9,55,3,3,'S');
+  doc.setTextColor(148,163,184);doc.setFontSize(9);doc.setFont('helvetica','bold');
+  doc.text('PERCENTAGE',155.95,100,{align:'center'});
+  doc.setTextColor(...scoreColor);
+  doc.setFontSize(32);doc.setFont('helvetica','bold');
+  doc.text(`${pct}%`,155.95,122,{align:'center'});
+  doc.setFontSize(16);doc.setFont('helvetica','bold');
+  doc.text(`Grade: ${grade}`,155.95,137,{align:'center'});
+
+  // Performance summary
+  const cats={};
+  questions.forEach((q,i)=>{
+    if(!cats[q.cat])cats[q.cat]={total:0,correct:0};
+    cats[q.cat].total++;
+    if(userAnswers[i]===q.ans)cats[q.cat].correct++;
+  });
+  doc.setFillColor(17,24,39);
+  doc.roundedRect(14,153,187.9,8,2,2,'F');
+  doc.setTextColor(167,139,250);doc.setFontSize(9);doc.setFont('helvetica','bold');
+  doc.text('PERFORMANCE BY CATEGORY',107.95,159,{align:'center'});
+  let y=166;
+  Object.entries(cats).forEach(([cat,[obj]])=>{
+    const catData=cats[cat];
+    const cpct=Math.round((catData.correct/catData.total)*100);
+    const barColor=cpct>=75?[52,211,153]:cpct>=60?[252,211,77]:[251,113,133];
+    doc.setFillColor(30,43,74);
+    doc.rect(14,y,187.9,9,'F');
+    doc.setTextColor(200,210,230);doc.setFontSize(8);doc.setFont('helvetica','normal');
+    doc.text(cat,18,y+6);
+    doc.text(`${catData.correct}/${catData.total} (${cpct}%)`,187.9,y+6,{align:'right'});
+    doc.setFillColor(...barColor);
+    doc.rect(120,y+2,(67.9*cpct)/100,5,'F');
+    doc.setDrawColor(60,73,104);
+    doc.rect(120,y+2,67.9,5,'S');
+    y+=11;
+    if(y>250){doc.addPage();y=20;}
+  });
+
+  // Incorrect answers review
+  const wrongItems=questions.map((q,i)=>({q,i,ua:userAnswers[i]})).filter(x=>x.ua!==x.q.ans);
+  if(wrongItems.length>0){
+    doc.addPage();
+    doc.setFillColor(30,43,74);
+    doc.rect(0,0,215.9,18,'F');
+    doc.setTextColor(241,245,249);doc.setFontSize(12);doc.setFont('helvetica','bold');
+    doc.text('INCORRECT ANSWERS — STUDY REVIEW',107.95,12,{align:'center'});
+    let ry=26;
+    const letters=['A','B','C','D'];
+    wrongItems.forEach((item,idx)=>{
+      if(ry>240){doc.addPage();ry=20;}
+      doc.setFillColor(30,20,30);
+      doc.roundedRect(14,ry,187.9,4,1,1,'F');
+      doc.setTextColor(251,113,133);doc.setFontSize(8);doc.setFont('helvetica','bold');
+      doc.text(`Q${item.i+1}: [${item.q.cat}] ${item.q.q}`.substring(0,100),16,ry+2.8);
+      ry+=6;
+      if(item.ua!==null){
+        doc.setTextColor(251,113,133);doc.setFontSize(7.5);doc.setFont('helvetica','normal');
+        const wrongText=`✗ Your answer: ${letters[item.ua]}. ${item.q.opts[item.ua]}`;
+        const wrapped=doc.splitTextToSize(wrongText,183);
+        doc.text(wrapped,16,ry);ry+=wrapped.length*4;
+      }
+      doc.setTextColor(52,211,153);doc.setFont('helvetica','normal');
+      const corrText=`✓ Correct: ${letters[item.q.ans]}. ${item.q.opts[item.q.ans]}`;
+      const wrapped2=doc.splitTextToSize(corrText,183);
+      doc.text(wrapped2,16,ry);ry+=wrapped2.length*4;
+      doc.setTextColor(148,163,184);
+      const expText=`Explanation: ${item.q.exp}`;
+      const wrapped3=doc.splitTextToSize(expText,183);
+      doc.text(wrapped3,16,ry);ry+=wrapped3.length*4+4;
+    });
+  }
+
+  // Footer on all pages
+  const pageCount=doc.internal.getNumberOfPages();
+  for(let p=1;p<=pageCount;p++){
+    doc.setPage(p);
+    doc.setFillColor(17,24,39);doc.rect(0,271,215.9,15,'F');
+    doc.setTextColor(75,85,104);doc.setFontSize(7.5);doc.setFont('helvetica','normal');
+    doc.text('Sanders\' Paramedic Textbook 6th Edition · Chapter 33 · CAMP EMS Paramedic Program',107.95,278,{align:'center'});
+    doc.text(`Page ${p} of ${pageCount}`,200,278,{align:'right'});
+  }
+
+  doc.save(`Ch33_Assessment_${studentName.replace(/\s+/g,'_')}_${studentID}.pdf`);
+}
+</script>
+</body>
+</html>
