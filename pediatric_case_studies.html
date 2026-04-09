@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pediatric Emergency Case Studies | CAMP EMS Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0d12;
+    --surface: #111620;
+    --surface2: #181e2a;
+    --border: #1e2d40;
+    --accent: #00c8ff;
+    --accent2: #ff6b35;
+    --accent3: #7efb98;
+    --warn: #ffcc00;
+    --critical: #ff4545;
+    --text: #d4e3f0;
+    --muted: #5a7a96;
+    --font-head: 'Bebas Neue', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --font-body: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #060a10 0%, #0d1b2a 60%, #0a1520 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 32px 40px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 2px;
+    background: var(--accent);
+  }
+  .header h1 {
+    font-family: var(--font-head);
+    font-size: 52px;
+    letter-spacing: 3px;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: var(--accent); }
+  .header-sub {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .case-badges {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .badge-red { background: rgba(255,69,69,0.15); color: var(--critical); border: 1px solid rgba(255,69,69,0.3); }
+  .badge-orange { background: rgba(255,107,53,0.15); color: var(--accent2); border: 1px solid rgba(255,107,53,0.3); }
+  .badge-blue { background: rgba(0,200,255,0.1); color: var(--accent); border: 1px solid rgba(0,200,255,0.25); }
+  .badge-green { background: rgba(126,251,152,0.1); color: var(--accent3); border: 1px solid rgba(126,251,152,0.25); }
+
+  /* MAIN LAYOUT */
+  .container { max-width: 1060px; margin: 0 auto; padding: 32px 24px 60px; }
+
+  /* STUDENT INFO */
+  .student-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .student-panel .panel-title {
+    grid-column: 1 / -1;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .student-panel .panel-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .field-group { display: flex; flex-direction: column; gap: 6px; }
+  .field-group label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .field-group input {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field-group input:focus { border-color: var(--accent); }
+  .field-group input::placeholder { color: var(--muted); font-style: italic; }
+  .field-group.full { grid-column: 1 / -1; }
+
+  /* INSTRUCTIONS */
+  .instructions {
+    background: rgba(0,200,255,0.04);
+    border: 1px solid rgba(0,200,255,0.15);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin-bottom: 36px;
+    font-size: 14px;
+    color: #9bb8cc;
+    line-height: 1.7;
+  }
+  .instructions strong { color: var(--accent); }
+
+  /* NAV TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0;
+    overflow-x: auto;
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border-bottom: none;
+    position: relative;
+  }
+  .tab-btn.t1 { background: rgba(255,69,69,0.1); color: #ff8888; border: 1px solid rgba(255,69,69,0.2); }
+  .tab-btn.t1.active { background: rgba(255,69,69,0.2); color: #ffaaaa; border-color: rgba(255,69,69,0.5); border-bottom: 2px solid var(--critical); }
+  .tab-btn.t2 { background: rgba(255,107,53,0.1); color: #ffaa88; border: 1px solid rgba(255,107,53,0.2); }
+  .tab-btn.t2.active { background: rgba(255,107,53,0.2); color: #ffcc99; border-color: rgba(255,107,53,0.5); border-bottom: 2px solid var(--accent2); }
+  .tab-btn.t3 { background: rgba(0,200,255,0.07); color: #88ccff; border: 1px solid rgba(0,200,255,0.2); }
+  .tab-btn.t3.active { background: rgba(0,200,255,0.15); color: var(--accent); border-color: rgba(0,200,255,0.45); border-bottom: 2px solid var(--accent); }
+  .tab-btn.t4 { background: rgba(126,251,152,0.07); color: #88dd99; border: 1px solid rgba(126,251,152,0.2); }
+  .tab-btn.t4.active { background: rgba(126,251,152,0.15); color: var(--accent3); border-color: rgba(126,251,152,0.45); border-bottom: 2px solid var(--accent3); }
+
+  /* CASE PANELS */
+  .cases-wrapper {
+    border: 1px solid var(--border);
+    border-radius: 0 4px 4px 4px;
+    overflow: hidden;
+  }
+  .case-panel { display: none; }
+  .case-panel.active { display: block; }
+
+  /* CASE HEADER STRIP */
+  .case-header {
+    padding: 28px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .c1 .case-header { background: linear-gradient(135deg, #1a0808 0%, #120a10 100%); border-bottom: 1px solid rgba(255,69,69,0.3); }
+  .c2 .case-header { background: linear-gradient(135deg, #1a0f06 0%, #12100a 100%); border-bottom: 1px solid rgba(255,107,53,0.3); }
+  .c3 .case-header { background: linear-gradient(135deg, #061018 0%, #080e14 100%); border-bottom: 1px solid rgba(0,200,255,0.2); }
+  .c4 .case-header { background: linear-gradient(135deg, #081408 0%, #08100a 100%); border-bottom: 1px solid rgba(126,251,152,0.2); }
+
+  .case-number {
+    font-family: var(--font-head);
+    font-size: 72px;
+    position: absolute;
+    right: 30px; top: 10px;
+    opacity: 0.07;
+    line-height: 1;
+  }
+  .c1 .case-number { color: var(--critical); }
+  .c2 .case-number { color: var(--accent2); }
+  .c3 .case-number { color: var(--accent); }
+  .c4 .case-number { color: var(--accent3); }
+
+  .case-type-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; }
+  .c1 .dot { background: var(--critical); }
+  .c2 .dot { background: var(--accent2); }
+  .c3 .dot { background: var(--accent); }
+  .c4 .dot { background: var(--accent3); }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .case-title {
+    font-family: var(--font-head);
+    font-size: 36px;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .case-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+
+  /* DISPATCH BOX */
+  .dispatch-box {
+    margin: 24px 36px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 22px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .dispatch-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .c1 .dispatch-label { color: var(--critical); }
+  .c2 .dispatch-label { color: var(--accent2); }
+  .c3 .dispatch-label { color: var(--accent); }
+  .c4 .dispatch-label { color: var(--accent3); }
+  .dispatch-label::after { content: ''; flex:1; height:1px; background: var(--border); }
+
+  /* VITALS GRID */
+  .vitals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin: 0 36px 24px;
+  }
+  .vital-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .vital-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .vital-value {
+    font-family: var(--font-head);
+    font-size: 26px;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .vital-unit {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .v-red { color: var(--critical); }
+  .v-orange { color: var(--accent2); }
+  .v-yellow { color: var(--warn); }
+  .v-green { color: var(--accent3); }
+  .v-blue { color: var(--accent); }
+
+  /* SECTIONS */
+  .case-body { padding: 0 36px 36px; }
+
+  .section-block {
+    margin-bottom: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .section-head {
+    padding: 12px 20px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--border);
+  }
+  .c1 .section-head { color: #ff8888; }
+  .c2 .section-head { color: #ffaa88; }
+  .c3 .section-head { color: #88ccff; }
+  .c4 .section-head { color: #88dd99; }
+  .section-head .chevron { margin-left: auto; transition: transform 0.2s; font-size: 14px; }
+  .section-head.collapsed .chevron { transform: rotate(-90deg); }
+  .section-content { padding: 20px; display: block; }
+  .section-content.hidden { display: none; }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .info-item {}
+  .info-item-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .info-item-value {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .info-item.full { grid-column: 1 / -1; }
+
+  ul.findings-list {
+    list-style: none;
+    padding: 0;
+  }
+  ul.findings-list li {
+    padding: 6px 0 6px 20px;
+    font-size: 14px;
+    color: var(--text);
+    border-bottom: 1px dashed rgba(255,255,255,0.05);
+    position: relative;
+    line-height: 1.5;
+  }
+  ul.findings-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+    top: 8px;
+  }
+  .c1 ul.findings-list li::before { color: var(--critical); }
+  .c2 ul.findings-list li::before { color: var(--accent2); }
+  .c3 ul.findings-list li::before { color: var(--accent); }
+  .c4 ul.findings-list li::before { color: var(--accent3); }
+
+  /* ALERT BOX */
+  .alert-box {
+    border-radius: 3px;
+    padding: 14px 18px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .alert-critical { background: rgba(255,69,69,0.08); border-left: 3px solid var(--critical); color: #ffaaaa; }
+  .alert-warn { background: rgba(255,204,0,0.08); border-left: 3px solid var(--warn); color: #ffee99; }
+  .alert-info { background: rgba(0,200,255,0.06); border-left: 3px solid var(--accent); color: #aaddff; }
+  .alert-box strong { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+
+  /* STUDENT RESPONSE AREAS */
+  .response-section { margin: 0 36px 36px; }
+
+  .response-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .c1 .response-title { color: var(--critical); }
+  .c2 .response-title { color: var(--accent2); }
+  .c3 .response-title { color: var(--accent); }
+  .c4 .response-title { color: var(--accent3); }
+  .response-title span.icon { font-size: 14px; }
+
+  .response-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .response-grid.full-col { grid-template-columns: 1fr; }
+
+  .response-field { display: flex; flex-direction: column; gap: 6px; }
+  .response-field label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .response-field textarea {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 12px 14px;
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+  }
+  .response-field textarea:focus { border-color: rgba(0,200,255,0.4); }
+  .response-field textarea::placeholder { color: var(--muted); font-style: italic; font-size: 13px; }
+  .response-field textarea.tall { min-height: 140px; }
+  .response-field textarea.short { min-height: 80px; }
+
+  .rating-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .rating-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1px solid;
+  }
+  .rating-btn[data-val="critical"] { background: rgba(255,69,69,0.1); color: #ff8888; border-color: rgba(255,69,69,0.3); }
+  .rating-btn[data-val="unstable"] { background: rgba(255,107,53,0.1); color: #ffaa88; border-color: rgba(255,107,53,0.3); }
+  .rating-btn[data-val="guarded"] { background: rgba(255,204,0,0.1); color: #ffdd88; border-color: rgba(255,204,0,0.3); }
+  .rating-btn[data-val="stable"] { background: rgba(126,251,152,0.08); color: #88dd99; border-color: rgba(126,251,152,0.25); }
+  .rating-btn.selected { filter: brightness(1.4); box-shadow: 0 0 10px rgba(255,255,255,0.1); transform: scale(1.05); }
+
+  /* PROGRESS */
+  .progress-bar-outer {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 12px 0 24px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+  }
+  .progress-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    margin-top: -20px;
+    margin-bottom: 8px;
+  }
+
+  /* ACTION BAR */
+  .action-bar {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 20px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .action-bar-left { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    font-weight: 600;
+  }
+  .btn-primary:hover { background: #33d4ff; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,200,255,0.3); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-pdf {
+    background: rgba(255,69,69,0.15);
+    color: #ff8888;
+    border: 1px solid rgba(255,69,69,0.3);
+    font-weight: 600;
+  }
+  .btn-pdf:hover { background: rgba(255,69,69,0.25); box-shadow: 0 4px 20px rgba(255,69,69,0.2); }
+
+  /* GLOBAL PDF BUTTON */
+  .global-pdf-row {
+    text-align: center;
+    padding: 32px 0;
+  }
+  .btn-pdf-global {
+    font-family: var(--font-head);
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 18px 48px;
+    border-radius: 4px;
+    border: 2px solid rgba(255,69,69,0.5);
+    background: linear-gradient(135deg, rgba(255,69,69,0.12), rgba(255,107,53,0.08));
+    color: #ff8888;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn-pdf-global:hover {
+    border-color: var(--critical);
+    background: linear-gradient(135deg, rgba(255,69,69,0.2), rgba(255,107,53,0.15));
+    box-shadow: 0 6px 30px rgba(255,69,69,0.25);
+    transform: translateY(-2px);
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* SCROLL TO TOP */
+  .scroll-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 36px;
+    border-top: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background: var(--accent);
+    color: #000;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 14px 24px;
+    border-radius: 4px;
+    box-shadow: 0 8px 30px rgba(0,200,255,0.4);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 700px) {
+    .header { padding: 20px; }
+    .header h1 { font-size: 36px; }
+    .student-panel { grid-template-columns: 1fr; padding: 20px; }
+    .case-header, .case-body, .response-section { padding-left: 20px; padding-right: 20px; }
+    .vitals-grid { margin: 0 20px 20px; }
+    .dispatch-box { margin: 16px 20px; }
+    .info-grid, .response-grid { grid-template-columns: 1fr; }
+    .action-bar { padding: 16px 20px; }
+    .tab-btn { font-size: 10px; padding: 10px 14px; }
+    .case-title { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">CAMP EMS Program // Paramedic Education</div>
+  <h1>PEDIATRIC <span>EMERGENCY</span></h1>
+  <h1 style="font-size:38px;color:var(--muted);letter-spacing:2px;">CASE STUDIES</h1>
+  <div class="header-sub">Sanders' Paramedic Textbook — Pediatric Emergencies Module &nbsp;|&nbsp; 4 High-Acuity Cases</div>
+  <div class="case-badges">
+    <span class="badge badge-red">CASE 01 // STATUS ASTHMATICUS</span>
+    <span class="badge badge-orange">CASE 02 // EPIGLOTTITIS</span>
+    <span class="badge badge-blue">CASE 03 // VALVULAR DISEASE</span>
+    <span class="badge badge-green">CASE 04 // ANAPHYLAXIS</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- STUDENT INFO -->
+  <div class="student-panel">
+    <div class="panel-title">Student Identification</div>
+    <div class="field-group">
+      <label>Student Full Name</label>
+      <input type="text" id="stu-name" placeholder="Enter your full name"/>
+    </div>
+    <div class="field-group">
+      <label>Student ID</label>
+      <input type="text" id="stu-id" placeholder="CAMP-XXXXX"/>
+    </div>
+    <div class="field-group">
+      <label>Program / Level</label>
+      <input type="text" id="stu-program" placeholder="e.g., Paramedic — Cohort Spring 2026"/>
+    </div>
+    <div class="field-group">
+      <label>Date Submitted</label>
+      <input type="date" id="stu-date"/>
+    </div>
+    <div class="field-group full">
+      <label>Instructor</label>
+      <input type="text" id="stu-instructor" placeholder="Instructor name"/>
+    </div>
+  </div>
+
+  <!-- INSTRUCTIONS -->
+  <div class="instructions">
+    <strong>INSTRUCTIONS:</strong> Review each case thoroughly. Use your textbook, clinical references, and course materials to research each condition. Complete <strong>all response fields</strong> in each case before class. Be prepared to present your findings, differential diagnoses, and proposed treatment plans to the group. When all four cases are complete, click <strong>"Download Full PDF Report"</strong> to generate your submission document.
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn t1 active" onclick="showCase(0)">⚡ Case 01 &nbsp;|&nbsp; Status Asthmaticus</button>
+    <button class="tab-btn t2" onclick="showCase(1)">🔥 Case 02 &nbsp;|&nbsp; Epiglottitis</button>
+    <button class="tab-btn t3" onclick="showCase(2)">💙 Case 03 &nbsp;|&nbsp; Valvular Disease</button>
+    <button class="tab-btn t4" onclick="showCase(3)">🌿 Case 04 &nbsp;|&nbsp; Anaphylaxis</button>
+  </div>
+
+  <div class="cases-wrapper">
+
+    <!-- ==================== CASE 1: STATUS ASTHMATICUS ==================== -->
+    <div class="case-panel c1 active" id="case-0">
+      <div class="case-header">
+        <div class="case-number">01</div>
+        <div class="case-type-tag"><span class="dot"></span> CRITICAL / RESPIRATORY</div>
+        <div class="case-title">STATUS ASTHMATICUS</div>
+        <div class="case-subtitle">Pediatric Airway Emergency &nbsp;·&nbsp; Severe Bronchospasm / Refractory Asthma</div>
+      </div>
+
+      <div class="dispatch-box">
+        <div class="dispatch-label">📡 Dispatch Notification</div>
+        <strong>Unit dispatched to:</strong> 412 Maple Street — Private residence<br/>
+        <strong>Call type:</strong> 7-year-old male, difficulty breathing — mother states child "can't catch his breath" and is turning blue. Child has a history of asthma. Last albuterol treatment 45 minutes ago with no improvement.
+      </div>
+
+      <div class="vitals-grid">
+        <div class="vital-card"><div class="vital-label">HR</div><div class="vital-value v-red">138</div><div class="vital-unit">bpm</div></div>
+        <div class="vital-card"><div class="vital-label">RR</div><div class="vital-value v-red">36</div><div class="vital-unit">breaths/min</div></div>
+        <div class="vital-card"><div class="vital-label">SpO₂</div><div class="vital-value v-red">84%</div><div class="vital-unit">room air</div></div>
+        <div class="vital-card"><div class="vital-label">BP</div><div class="vital-value v-yellow">94/62</div><div class="vital-unit">mmHg</div></div>
+        <div class="vital-card"><div class="vital-label">Temp</div><div class="vital-value v-blue">98.9°F</div><div class="vital-unit">oral</div></div>
+        <div class="vital-card"><div class="vital-label">ETCO₂</div><div class="vital-value v-orange">52</div><div class="vital-unit">mmHg</div></div>
+        <div class="vital-card"><div class="vital-label">GCS</div><div class="vital-value v-yellow">13</div><div class="vital-unit">/15</div></div>
+        <div class="vital-card"><div class="vital-label">Weight</div><div class="vital-value v-blue">22</div><div class="vital-unit">kg (est.)</div></div>
+      </div>
+
+      <div class="case-body">
+
+        <div class="alert-box alert-critical">
+          <strong>⚠ Critical Finding</strong>
+          Child is in <em>tripod position</em>, speaking only 1–2 words between breaths. Audible expiratory wheeze. No breath sounds in right lower lobe. Accessory muscle use severe. Nasal flaring noted. Cyanosis visible around lips.
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📋 Patient History <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <div class="info-grid">
+              <div class="info-item"><div class="info-item-label">Patient</div><div class="info-item-value">Jaylen M., 7-year-old male</div></div>
+              <div class="info-item"><div class="info-item-label">Chief Complaint</div><div class="info-item-value">Severe dyspnea, unresponsive to home bronchodilator therapy</div></div>
+              <div class="info-item"><div class="info-item-label">PMHx</div><div class="info-item-value">Moderate persistent asthma (dx age 4), allergic rhinitis, eczema. Two prior intubations (age 5 and 6).</div></div>
+              <div class="info-item"><div class="info-item-label">Medications</div><div class="info-item-value">Fluticasone (Flovent) inhaler daily, Albuterol MDI PRN, Montelukast (Singulair). No Epi-Pen.</div></div>
+              <div class="info-item"><div class="info-item-label">Allergies</div><div class="info-item-value">NKDA (No Known Drug Allergies)</div></div>
+              <div class="info-item"><div class="info-item-label">Onset/Trigger</div><div class="info-item-value">Woke from sleep 90 minutes ago with coughing, progressively worsening. Playing with a neighbor's cat yesterday.</div></div>
+              <div class="info-item full"><div class="info-item-label">Pertinent Negatives</div><div class="info-item-value">No fever, no stridor, no foreign body ingestion reported. No URI symptoms this week. No recent steroid use.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">🔬 Physical Examination Findings <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <ul class="findings-list">
+              <li><strong>General:</strong> Anxious, diaphoretic male in severe respiratory distress. Skin pale with circumoral cyanosis.</li>
+              <li><strong>Airway:</strong> Patent, no foreign body, no stridor. Severe expiratory wheeze bilateral, diminished RLL.</li>
+              <li><strong>Breathing:</strong> Tachypneic at 36/min, severe intercostal/suprasternal retractions. Accessory muscle use. Tripod positioning. Paradoxical breathing noted.</li>
+              <li><strong>Circulation:</strong> Tachycardic 138 bpm, peripheral pulses weak. Cap refill 3 seconds. Skin pale, diaphoretic.</li>
+              <li><strong>Neuro:</strong> Alert but extremely anxious. GCS 13. Eye contact appropriate. Moving all extremities.</li>
+              <li><strong>Abdomen:</strong> Non-distended. No guarding. No bowel sounds auscultated (due to respiratory effort).</li>
+              <li><strong>Peak Flow:</strong> Unable to perform — patient too distressed.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📚 Background — Pathophysiology Review <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <div class="alert-box alert-info">
+              <strong>📖 Research This</strong>
+              Status asthmaticus is defined as a severe asthma attack that fails to respond to standard bronchodilator therapy. Review the following topics: bronchospasm cascade, mucus plugging, air trapping and dynamic hyperinflation, the role of hypoxia-driven tachycardia, and why ETCO₂ rising in an asthmatic is a <em>late and ominous sign</em>. Consider Heliox, magnesium sulfate, and ketamine indications in pediatric status asthmaticus.
+            </div>
+            <ul class="findings-list">
+              <li>Pathophysiology: Bronchospasm → air trapping → V/Q mismatch → hypoxemia → hypercarbia (late)</li>
+              <li>Pulsus paradoxus: SBP drops >10 mmHg with inspiration — a marker of severity</li>
+              <li>Silent chest: Loss of wheeze in severe attack = airflow too limited to produce wheeze — DANGER SIGN</li>
+              <li>Fatigue leads to hypercapnia, respiratory failure, and apnea without intervention</li>
+              <li>Pediatric considerations: smaller airway diameter = disproportionate resistance increase</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">💊 Key Pharmacology (Reference) <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <ul class="findings-list">
+              <li><strong>Albuterol (Salbutamol):</strong> 2.5mg NEB or MDI — β2-agonist bronchodilator. Continuous NEB in severe cases. Peds: 0.15 mg/kg min 2.5mg q20min × 3</li>
+              <li><strong>Ipratropium Bromide:</strong> 0.5mg NEB — Anticholinergic, inhibits bronchoconstriction. Used adjunct to albuterol in first hour only.</li>
+              <li><strong>Methylprednisolone:</strong> 1–2 mg/kg IV (max 60mg) — Corticosteroid to reduce airway inflammation. Onset 4–6 hours.</li>
+              <li><strong>Magnesium Sulfate:</strong> 25–75 mg/kg IV (max 2g) over 20 min — Smooth muscle relaxant. Used in severe refractory cases.</li>
+              <li><strong>Epinephrine 1:1000:</strong> 0.01 mg/kg IM — Reserved for impending respiratory failure or anaphylaxis component.</li>
+              <li><strong>Ketamine:</strong> 1–2 mg/kg IV for RSI if intubation needed — Bronchodilatory properties; anesthetic of choice in status asthmaticus.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- STUDENT RESPONSE -->
+      <div class="response-section">
+        <div class="response-title"><span class="icon">✍️</span> Student Assessment & Response — Case 01</div>
+
+        <div class="progress-bar-outer"><div class="progress-bar-fill" id="prog-0" style="width:0%"></div></div>
+        <div class="progress-label" id="prog-label-0">0 of 6 fields completed</div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Primary Impression & Scene Size-Up</label>
+            <textarea class="tall" data-case="0" data-field="impression" oninput="updateProgress(0)" placeholder="Describe your initial impression. What do you see, hear, feel when you arrive? What resources do you call? What are your immediate concerns?"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Primary Survey (ABCDE) Findings</label>
+            <textarea class="tall" data-case="0" data-field="abcde" oninput="updateProgress(0)" placeholder="Walk through A-Airway, B-Breathing, C-Circulation, D-Disability, E-Exposure. Document abnormal findings and immediate life threats."></textarea>
+          </div>
+        </div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Differential Diagnosis (List at least 3)</label>
+            <textarea data-case="0" data-field="differential" oninput="updateProgress(0)" placeholder="1. Status Asthmaticus (primary)&#10;2. &#10;3. &#10;Justify each with clinical evidence from the case."></textarea>
+          </div>
+          <div class="response-field">
+            <label>Working Field Diagnosis</label>
+            <textarea data-case="0" data-field="diagnosis" oninput="updateProgress(0)" placeholder="State your working diagnosis. What clinical criteria confirm this? Reference your SAMPLE history, vitals, and physical exam findings."></textarea>
+          </div>
+        </div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Prehospital Treatment Plan (Step-by-Step)</label>
+            <textarea class="tall" data-case="0" data-field="treatment" oninput="updateProgress(0)" placeholder="List your treatment priorities in order:&#10;1. High-flow O2 / positioning&#10;2. Medications with doses/routes&#10;3. IV access&#10;4. Reassessment intervals&#10;5. Transport decision & notification&#10;6. Escalation plan (intubation criteria)"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Research Notes & Pathophysiology Summary</label>
+            <textarea class="tall" data-case="0" data-field="notes" oninput="updateProgress(0)" placeholder="Summarize what you researched about this condition. What additional information did you find? What questions do you have for class discussion?"></textarea>
+          </div>
+        </div>
+
+        <div class="response-field" style="margin-bottom:16px;">
+          <label>Patient Condition Severity Assessment</label>
+          <div class="rating-row" id="rating-0">
+            <button class="rating-btn" data-val="critical" onclick="selectRating(0, this)">🔴 CRITICAL</button>
+            <button class="rating-btn" data-val="unstable" onclick="selectRating(0, this)">🟠 UNSTABLE</button>
+            <button class="rating-btn" data-val="guarded" onclick="selectRating(0, this)">🟡 GUARDED</button>
+            <button class="rating-btn" data-val="stable" onclick="selectRating(0, this)">🟢 STABLE</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <span class="action-bar-left">Case 01 of 04 &nbsp;·&nbsp; Status Asthmaticus</span>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-outline" onclick="clearCase(0)">Clear Fields</button>
+          <button class="btn btn-primary" onclick="showCase(1)">Next Case →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== CASE 2: EPIGLOTTITIS ==================== -->
+    <div class="case-panel c2" id="case-1">
+      <div class="case-header">
+        <div class="case-number">02</div>
+        <div class="case-type-tag"><span class="dot"></span> CRITICAL / AIRWAY</div>
+        <div class="case-title">EPIGLOTTITIS</div>
+        <div class="case-subtitle">Supraglottic Airway Emergency &nbsp;·&nbsp; Acute Bacterial Epiglottitis</div>
+      </div>
+
+      <div class="dispatch-box">
+        <div class="dispatch-label">📡 Dispatch Notification</div>
+        <strong>Unit dispatched to:</strong> 890 Jefferson Boulevard — Pediatric Urgent Care<br/>
+        <strong>Call type:</strong> Urgent Care requesting ALS transport for 4-year-old female with "rapidly worsening sore throat and high fever." Staff state child is drooling, sounds like she's breathing through a straw, and is very agitated. Vaccinations unknown — recently adopted internationally.
+      </div>
+
+      <div class="vitals-grid">
+        <div class="vital-card"><div class="vital-label">HR</div><div class="vital-value v-red">152</div><div class="vital-unit">bpm</div></div>
+        <div class="vital-card"><div class="vital-label">RR</div><div class="vital-value v-red">32</div><div class="vital-unit">breaths/min</div></div>
+        <div class="vital-card"><div class="vital-label">SpO₂</div><div class="vital-value v-orange">91%</div><div class="vital-unit">2L NC</div></div>
+        <div class="vital-card"><div class="vital-label">BP</div><div class="vital-value v-yellow">102/68</div><div class="vital-unit">mmHg</div></div>
+        <div class="vital-card"><div class="vital-label">Temp</div><div class="vital-value v-red">103.8°F</div><div class="vital-unit">tympanic</div></div>
+        <div class="vital-card"><div class="vital-label">ETCO₂</div><div class="vital-value v-yellow">38</div><div class="vital-unit">mmHg</div></div>
+        <div class="vital-card"><div class="vital-label">GCS</div><div class="vital-value v-yellow">14</div><div class="vital-unit">/15</div></div>
+        <div class="vital-card"><div class="vital-label">Weight</div><div class="vital-value v-blue">16</div><div class="vital-unit">kg (est.)</div></div>
+      </div>
+
+      <div class="case-body">
+        <div class="alert-box alert-critical">
+          <strong>⚠ CRITICAL AIRWAY WARNING</strong>
+          Child is sitting bolt upright, leaning forward with jaw extended ("sniffing position"). Drooling present — child refuses to swallow. Inspiratory stridor audible without stethoscope. Marked agitation when approached. Uvula midline but oropharynx examination CONTRAINDICATED. Staff attempted throat exam — child became combative and SpO₂ dropped to 85% transiently.
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📋 Patient History <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <div class="info-grid">
+              <div class="info-item"><div class="info-item-label">Patient</div><div class="info-item-value">Sofia A., 4-year-old female</div></div>
+              <div class="info-item"><div class="info-item-label">Chief Complaint</div><div class="info-item-value">Severe sore throat, stridor, drooling, high fever — 4-hour progression</div></div>
+              <div class="info-item"><div class="info-item-label">PMHx</div><div class="info-item-value">No known medical history. Recently adopted from Eastern Europe 6 months ago. Vaccination records incomplete — presumed unvaccinated or undervaccinated.</div></div>
+              <div class="info-item"><div class="info-item-label">Medications</div><div class="info-item-value">None</div></div>
+              <div class="info-item"><div class="info-item-label">Allergies</div><div class="info-item-value">Unknown</div></div>
+              <div class="info-item"><div class="info-item-label">Onset</div><div class="info-item-value">Parents noticed sore throat and fever this morning. Over 4 hours, child progressed from mild throat pain to inability to swallow, drooling, and stridor.</div></div>
+              <div class="info-item full"><div class="info-item-label">Key Observations</div><div class="info-item-value">Classic "3 D's" potentially present: Drooling, Dysphagia, Distress. Child prefers sitting forward — becomes more distressed when repositioned supine.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">🔬 Physical Examination Findings <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <ul class="findings-list">
+              <li><strong>General:</strong> Toxic-appearing child, markedly anxious, in classic "tripod" (sniffing) position. Refuses to lie down.</li>
+              <li><strong>Airway:</strong> Inspiratory stridor — high-pitched, progressive. Drooling. Muffled "hot potato" voice quality. DO NOT examine oropharynx — risk of complete obstruction.</li>
+              <li><strong>Breathing:</strong> Tachypneic, mild intercostal retractions. SpO₂ 91% on 2L NC. No wheeze. Inspiratory noise predominates.</li>
+              <li><strong>Circulation:</strong> Tachycardic 152 bpm, warm flushed skin (febrile), cap refill &lt;2 sec. Peripheral pulses strong.</li>
+              <li><strong>Neuro:</strong> GCS 14 — alert, extremely anxious and frightened. Recognizes parents. Moving all extremities.</li>
+              <li><strong>Neck:</strong> Tender on anterior palpation. Subtle fullness noted at the level of the hyoid. No lymphadenopathy palpated (neck exam brief to avoid agitation).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📚 Background — Pathophysiology Review <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <div class="alert-box alert-warn">
+              <strong>⚠ Research Priority</strong>
+              Epiglottitis is historically caused by <em>Haemophilus influenzae type B (HiB)</em> — now rare due to vaccination but re-emerging in undervaccinated populations. Review: anatomy of the supraglottic airway, why the epiglottis swells so rapidly, why stimulation can cause complete obstruction, and the "thumb sign" on lateral neck X-ray. Research the management hierarchy: BVM vs. surgical airway in complete obstruction.
+            </div>
+            <ul class="findings-list">
+              <li>Etiology: HiB (classic), Group A Streptococcus, Staphylococcus aureus, thermal/chemical burns</li>
+              <li>Anatomy: Epiglottis sits at C3-C4 level; edema causes rapid supraglottic narrowing</li>
+              <li>The "4 D's": Drooling, Dysphagia, Dysphonia (muffled voice), Distress</li>
+              <li>Danger: Manipulation, crying, or agitation can trigger laryngospasm and complete obstruction</li>
+              <li>"Thumb sign": Enlarged epiglottis on lateral neck XR — looks like an adult thumb</li>
+              <li>Management: Keep child calm, allow parent to hold, blow-by O2, prepare for emergent airway</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">💊 Key Pharmacology & Airway Adjuncts (Reference) <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <ul class="findings-list">
+              <li><strong>Dexamethasone:</strong> 0.6 mg/kg IV/IM (max 10mg) — Reduce epiglottic edema; controversial in field but useful during transport</li>
+              <li><strong>Racemic Epinephrine:</strong> 0.5mL of 2.25% solution via NEB — Vasoconstriction to temporarily reduce edema (bridge to definitive airway)</li>
+              <li><strong>Midazolam:</strong> 0.05–0.1 mg/kg IV — For anxiolysis if agitation escalates and intubation is imminent; use cautiously</li>
+              <li><strong>Ketamine + Succinylcholine (RSI):</strong> Preferred agents if intubation is required — Ketamine 1–2 mg/kg IV, Succinylcholine 2 mg/kg IV (pediatric dose)</li>
+              <li><strong>Surgical Airway:</strong> Needle cricothyrotomy or surgical cric — Last resort for cannot-intubate cannot-oxygenate scenario</li>
+              <li><strong>Avoid:</strong> IV access attempts that agitate the child, throat exam, laying child flat until definitive airway is secured</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="response-section">
+        <div class="response-title"><span class="icon">✍️</span> Student Assessment & Response — Case 02</div>
+
+        <div class="progress-bar-outer"><div class="progress-bar-fill" id="prog-1" style="width:0%"></div></div>
+        <div class="progress-label" id="prog-label-1">0 of 6 fields completed</div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Primary Impression & Scene Size-Up</label>
+            <textarea class="tall" data-case="1" data-field="impression" oninput="updateProgress(1)" placeholder="What is your initial impression? What do you do FIRST? What do you NOT do? How do you approach this patient to minimize agitation?"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Primary Survey (ABCDE) Findings</label>
+            <textarea class="tall" data-case="1" data-field="abcde" oninput="updateProgress(1)" placeholder="Document your A-B-C-D-E assessment. What do you examine? What do you intentionally SKIP and why? What is the most immediate life threat?"></textarea>
+          </div>
+        </div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Differential Diagnosis (List at least 3)</label>
+            <textarea data-case="1" data-field="differential" oninput="updateProgress(1)" placeholder="1. Epiglottitis (primary)&#10;2. &#10;3. &#10;How do you differentiate epiglottitis from croup at the bedside?"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Working Field Diagnosis</label>
+            <textarea data-case="1" data-field="diagnosis" oninput="updateProgress(1)" placeholder="State your working diagnosis. What clinical features clinch this? Discuss the significance of vaccination history in this case."></textarea>
+          </div>
+        </div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Prehospital Treatment Plan (Step-by-Step)</label>
+            <textarea class="tall" data-case="1" data-field="treatment" oninput="updateProgress(1)" placeholder="What is your #1 priority? List your treatment plan:&#10;1. Minimize agitation strategy&#10;2. Oxygen delivery method&#10;3. When do you intervene with airway?&#10;4. Transport positioning&#10;5. Hospital notification&#10;6. Escalation plan if obstruction worsens"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Research Notes & Pathophysiology Summary</label>
+            <textarea class="tall" data-case="1" data-field="notes" oninput="updateProgress(1)" placeholder="Compare epiglottitis and croup (LTB). What did you find in your research about vaccine-preventable causes? How has the epidemiology changed post-HiB vaccine? What questions do you have?"></textarea>
+          </div>
+        </div>
+
+        <div class="response-field" style="margin-bottom:16px;">
+          <label>Patient Condition Severity Assessment</label>
+          <div class="rating-row" id="rating-1">
+            <button class="rating-btn" data-val="critical" onclick="selectRating(1, this)">🔴 CRITICAL</button>
+            <button class="rating-btn" data-val="unstable" onclick="selectRating(1, this)">🟠 UNSTABLE</button>
+            <button class="rating-btn" data-val="guarded" onclick="selectRating(1, this)">🟡 GUARDED</button>
+            <button class="rating-btn" data-val="stable" onclick="selectRating(1, this)">🟢 STABLE</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <span class="action-bar-left">Case 02 of 04 &nbsp;·&nbsp; Epiglottitis</span>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-outline" onclick="showCase(0)">← Previous</button>
+          <button class="btn btn-outline" onclick="clearCase(1)">Clear Fields</button>
+          <button class="btn btn-primary" onclick="showCase(2)">Next Case →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== CASE 3: VALVULAR DISEASE ==================== -->
+    <div class="case-panel c3" id="case-2">
+      <div class="case-header">
+        <div class="case-number">03</div>
+        <div class="case-type-tag"><span class="dot"></span> URGENT / CARDIAC</div>
+        <div class="case-title">PEDIATRIC VALVULAR DISEASE</div>
+        <div class="case-subtitle">Congenital Heart Disease Exacerbation &nbsp;·&nbsp; Aortic Stenosis with Acute Decompensation</div>
+      </div>
+
+      <div class="dispatch-box">
+        <div class="dispatch-label">📡 Dispatch Notification</div>
+        <strong>Unit dispatched to:</strong> 33 Riverside Drive — School Nurse's Office<br/>
+        <strong>Call type:</strong> 11-year-old male collapsed during gym class. School nurse states the child "passed out" and briefly lost consciousness. Child has a known heart murmur. Patient is now awake but pale and diaphoretic.
+      </div>
+
+      <div class="vitals-grid">
+        <div class="vital-card"><div class="vital-label">HR</div><div class="vital-value v-orange">118</div><div class="vital-unit">bpm</div></div>
+        <div class="vital-card"><div class="vital-label">RR</div><div class="vital-value v-yellow">26</div><div class="vital-unit">breaths/min</div></div>
+        <div class="vital-card"><div class="vital-label">SpO₂</div><div class="vital-value v-orange">92%</div><div class="vital-unit">room air</div></div>
+        <div class="vital-card"><div class="vital-label">BP</div><div class="vital-value v-orange">72/50</div><div class="vital-unit">mmHg</div></div>
+        <div class="vital-card"><div class="vital-label">Temp</div><div class="vital-value v-blue">98.2°F</div><div class="vital-unit">oral</div></div>
+        <div class="vital-card"><div class="vital-label">ETCO₂</div><div class="vital-value v-yellow">34</div><div class="vital-unit">mmHg</div></div>
+        <div class="vital-card"><div class="vital-label">GCS</div><div class="vital-value v-blue">15</div><div class="vital-unit">/15</div></div>
+        <div class="vital-card"><div class="vital-label">12-Lead</div><div class="vital-value v-yellow" style="font-size:18px">LVH</div><div class="vital-unit">ST changes</div></div>
+      </div>
+
+      <div class="case-body">
+        <div class="alert-box alert-warn">
+          <strong>⚠ Cardiac Alert</strong>
+          ECG shows left ventricular hypertrophy pattern with diffuse ST-segment depression and T-wave inversions in V4–V6. Auscultation reveals a harsh, crescendo-decrescendo systolic ejection murmur best heard at the right upper sternal border with radiation to the carotid arteries. Pedal edema absent. Jugular venous distension not assessed (school age, cooperative).
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📋 Patient History <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <div class="info-grid">
+              <div class="info-item"><div class="info-item-label">Patient</div><div class="info-item-value">Marcus T., 11-year-old male</div></div>
+              <div class="info-item"><div class="info-item-label">Chief Complaint</div><div class="info-item-value">Syncope during exertion, chest tightness, dyspnea on exertion</div></div>
+              <div class="info-item"><div class="info-item-label">PMHx</div><div class="info-item-value">Known congenital aortic stenosis (bicuspid aortic valve — diagnosed infancy). Followed by pediatric cardiology. No prior surgeries. Parents report cardiologist suggested "watching it" until symptoms develop.</div></div>
+              <div class="info-item"><div class="info-item-label">Medications</div><div class="info-item-value">Atenolol 25mg daily (beta-blocker). No other medications.</div></div>
+              <div class="info-item"><div class="info-item-label">Allergies</div><div class="info-item-value">Penicillin (rash)</div></div>
+              <div class="info-item"><div class="info-item-label">Onset</div><div class="info-item-value">During 60-yard dash in PE class. Brief LOC approximately 30 seconds per coach. Pre-syncopal symptoms of "tunnel vision" and nausea. Similar (milder) episode 3 weeks ago — not reported to parents.</div></div>
+              <div class="info-item full"><div class="info-item-label">Pertinent History</div><div class="info-item-value">Mother states Marcus has had decreased exercise tolerance recently — "can't keep up with his teammates." Reports occasional chest pain with exertion over the past 2 months. No prior syncope documented in medical records.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">🔬 Physical Examination Findings <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <ul class="findings-list">
+              <li><strong>General:</strong> Alert male, pale, anxious, diaphoretic. Reports chest tightness and shortness of breath. Oriented × 4.</li>
+              <li><strong>Airway:</strong> Patent. Speaking full sentences but breathless with minimal exertion.</li>
+              <li><strong>Cardiac Auscultation:</strong> Harsh 4/6 systolic ejection murmur — RUSB, radiation to bilateral carotids. S3 or S4 may be present (listen carefully). Diminished S2.</li>
+              <li><strong>Pulses:</strong> Pulsus parvus et tardus — weak, delayed radial pulse rise compared to carotid. Peripheral pulses weak bilaterally.</li>
+              <li><strong>Circulation:</strong> BP 72/50 (narrow pulse pressure). Cap refill 3 seconds. Skin pale and cool.</li>
+              <li><strong>Respiratory:</strong> Mild basilar crackles (early pulmonary edema). No overt wheeze.</li>
+              <li><strong>Extremities:</strong> No clubbing, no edema. Slight cyanosis in nail beds.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📚 Background — Pathophysiology Review <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <div class="alert-box alert-info">
+              <strong>📖 Research This</strong>
+              Aortic stenosis (AS) is the most common obstructive valvular lesion in children. The classic triad of severe AS is: <em>Angina, Syncope, and Heart Failure</em> ("ASH"). The appearance of syncope — especially exertional syncope — marks a critical turning point in the disease. Research: bicuspid aortic valve anatomy, compensatory LVH, the Gorlin formula, and why afterload reduction agents (nitroglycerin, morphine) are DANGEROUS in severe AS.
+            </div>
+            <ul class="findings-list">
+              <li>Bicuspid aortic valve: Present in 1–2% of population; most common congenital cardiac anomaly requiring intervention</li>
+              <li>Obstruction → increased afterload → LVH → increased O2 demand → subendocardial ischemia → angina</li>
+              <li>Exertional syncope: During exercise, peripheral vasodilation + fixed cardiac output → cerebral hypoperfusion → syncope</li>
+              <li>Narrow pulse pressure: Small difference between SBP and DBP = low stroke volume (a critical sign)</li>
+              <li>Pulsus parvus et tardus: Weak and slow-rising arterial pulse — hallmark of severe AS</li>
+              <li>CONTRAINDICATED: Preload-reducing agents (nitrates), afterload reduction (vasodilators) — will cause cardiovascular collapse</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">💊 Key Pharmacology & Considerations (Reference) <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <ul class="findings-list">
+              <li><strong>Oxygen:</strong> High-flow O2 — reduces hypoxic pulmonary vasoconstriction, supports myocardial oxygenation</li>
+              <li><strong>IV Fluid (Cautious):</strong> 10 mL/kg NS bolus — maintain preload carefully. Over-resuscitation risks pulmonary edema.</li>
+              <li><strong>Dopamine:</strong> 5–10 mcg/kg/min — for hypotension and poor perfusion. Maintain SVR.</li>
+              <li><strong>Avoid Nitroglycerin:</strong> ABSOLUTELY CONTRAINDICATED — preload reduction → catastrophic hypotension in severe AS</li>
+              <li><strong>Avoid Morphine:</strong> May cause vasodilation — use extreme caution</li>
+              <li><strong>Transcutaneous Pacing:</strong> Available if bradyarrhythmia contributes to hypotension</li>
+              <li><strong>Definitive:</strong> Surgical aortic valve replacement or balloon valvuloplasty — hospital procedure</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="response-section">
+        <div class="response-title"><span class="icon">✍️</span> Student Assessment & Response — Case 03</div>
+
+        <div class="progress-bar-outer"><div class="progress-bar-fill" id="prog-2" style="width:0%"></div></div>
+        <div class="progress-label" id="prog-label-2">0 of 6 fields completed</div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Primary Impression & Scene Size-Up</label>
+            <textarea class="tall" data-case="2" data-field="impression" oninput="updateProgress(2)" placeholder="What is your initial impression at the school nurse's office? What additional history from school staff and witnesses is critical? What do you call for?"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Primary Survey (ABCDE) Findings</label>
+            <textarea class="tall" data-case="2" data-field="abcde" oninput="updateProgress(2)" placeholder="Document your primary survey. What is the most critical finding? How does the ECG change your management? What are early signs of cardiogenic shock?"></textarea>
+          </div>
+        </div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Differential Diagnosis (List at least 3)</label>
+            <textarea data-case="2" data-field="differential" oninput="updateProgress(2)" placeholder="1. Aortic Stenosis exacerbation (primary)&#10;2. &#10;3. &#10;What other causes of exertional syncope in a child must you rule out?"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Working Field Diagnosis</label>
+            <textarea data-case="2" data-field="diagnosis" oninput="updateProgress(2)" placeholder="State your working diagnosis. What makes you most concerned about cardiac etiology vs. simple vasovagal syncope? What is the danger of missing this diagnosis?"></textarea>
+          </div>
+        </div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Prehospital Treatment Plan (Step-by-Step)</label>
+            <textarea class="tall" data-case="2" data-field="treatment" oninput="updateProgress(2)" placeholder="List your treatment priorities:&#10;1. Positioning&#10;2. O2 therapy&#10;3. IV access and fluid strategy&#10;4. Medications (and what to AVOID)&#10;5. ECG and monitoring&#10;6. Transport decision&#10;7. Hospital notification (STEMI? Cath lab?)"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Research Notes & Pathophysiology Summary</label>
+            <textarea class="tall" data-case="2" data-field="notes" oninput="updateProgress(2)" placeholder="Explain the 'ASH' triad. Why is exertional syncope in a child a red flag? How does bicuspid aortic valve differ from normal valve anatomy? What did your research uncover?"></textarea>
+          </div>
+        </div>
+
+        <div class="response-field" style="margin-bottom:16px;">
+          <label>Patient Condition Severity Assessment</label>
+          <div class="rating-row" id="rating-2">
+            <button class="rating-btn" data-val="critical" onclick="selectRating(2, this)">🔴 CRITICAL</button>
+            <button class="rating-btn" data-val="unstable" onclick="selectRating(2, this)">🟠 UNSTABLE</button>
+            <button class="rating-btn" data-val="guarded" onclick="selectRating(2, this)">🟡 GUARDED</button>
+            <button class="rating-btn" data-val="stable" onclick="selectRating(2, this)">🟢 STABLE</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <span class="action-bar-left">Case 03 of 04 &nbsp;·&nbsp; Valvular Disease</span>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-outline" onclick="showCase(1)">← Previous</button>
+          <button class="btn btn-outline" onclick="clearCase(2)">Clear Fields</button>
+          <button class="btn btn-primary" onclick="showCase(3)">Next Case →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== CASE 4: ANAPHYLAXIS ==================== -->
+    <div class="case-panel c4" id="case-3">
+      <div class="case-header">
+        <div class="case-number">04</div>
+        <div class="case-type-tag"><span class="dot"></span> LIFE-THREATENING / ALLERGIC</div>
+        <div class="case-title">ANAPHYLAXIS</div>
+        <div class="case-subtitle">Severe Systemic Allergic Reaction &nbsp;·&nbsp; IgE-Mediated Anaphylactic Shock</div>
+      </div>
+
+      <div class="dispatch-box">
+        <div class="dispatch-label">📡 Dispatch Notification</div>
+        <strong>Unit dispatched to:</strong> 750 Harbor View Park — Public park / outdoor event<br/>
+        <strong>Call type:</strong> 9-year-old girl stung by a bee 10 minutes ago. Parent states child is allergic to bee stings, has an Epi-Pen, but parent "couldn't get it to work." Child is now having difficulty breathing and has widespread hives. Child became very "floppy" in the last 2 minutes.
+      </div>
+
+      <div class="vitals-grid">
+        <div class="vital-card"><div class="vital-label">HR</div><div class="vital-value v-red">148</div><div class="vital-unit">bpm</div></div>
+        <div class="vital-card"><div class="vital-label">RR</div><div class="vital-value v-red">34</div><div class="vital-unit">breaths/min</div></div>
+        <div class="vital-card"><div class="vital-label">SpO₂</div><div class="vital-value v-red">87%</div><div class="vital-unit">room air</div></div>
+        <div class="vital-card"><div class="vital-label">BP</div><div class="vital-value v-red">68/40</div><div class="vital-unit">mmHg</div></div>
+        <div class="vital-card"><div class="vital-label">Temp</div><div class="vital-value v-blue">98.6°F</div><div class="vital-unit">estimated</div></div>
+        <div class="vital-card"><div class="vital-label">ETCO₂</div><div class="vital-value v-orange">44</div><div class="vital-unit">mmHg</div></div>
+        <div class="vital-card"><div class="vital-label">GCS</div><div class="vital-value v-red">11</div><div class="vital-unit">/15</div></div>
+        <div class="vital-card"><div class="vital-label">Skin</div><div class="vital-value v-orange" style="font-size:18px">Hives</div><div class="vital-unit">generalized urticaria</div></div>
+      </div>
+
+      <div class="case-body">
+        <div class="alert-box alert-critical">
+          <strong>⚠ CRITICAL — ANAPHYLACTIC SHOCK</strong>
+          Child is supine on the ground, limp, barely responsive to voice. Generalized urticaria covering trunk and extremities. Angioedema visible — lips markedly swollen, tongue edema noted. Audible expiratory wheeze and inspiratory stridor. No IV access. Stinger may still be present at the left forearm.
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📋 Patient History <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <div class="info-grid">
+              <div class="info-item"><div class="info-item-label">Patient</div><div class="info-item-value">Amara J., 9-year-old female</div></div>
+              <div class="info-item"><div class="info-item-label">Chief Complaint</div><div class="info-item-value">Bee sting → anaphylaxis with respiratory compromise and circulatory collapse</div></div>
+              <div class="info-item"><div class="info-item-label">PMHx</div><div class="info-item-value">Known severe bee venom allergy — previous anaphylaxis at age 6 (required epinephrine, hospitalized). Otherwise healthy. No asthma. No other allergies documented.</div></div>
+              <div class="info-item"><div class="info-item-label">Medications</div><div class="info-item-value">EpiPen Jr (0.15mg auto-injector) — prescribed but parent unable to administer. Cetirizine (Zyrtec) daily for seasonal allergies.</div></div>
+              <div class="info-item"><div class="info-item-label">Allergies</div><div class="info-item-value">Bee venom (SEVERE — anaphylaxis); Peanuts (mild — rash only, no systemic)</div></div>
+              <div class="info-item"><div class="info-item-label">Onset/Mechanism</div><div class="info-item-value">Stung left forearm while playing approximately 10 minutes ago. Immediate local pain. Hives appeared within 3 minutes. Shortness of breath 5 minutes post-sting. Altered consciousness in last 2 minutes.</div></div>
+              <div class="info-item full"><div class="info-item-label">Parent Reports</div><div class="info-item-value">"She said her throat felt like it was closing." Child's last oral intake was 30 min prior (snacks at the park). No other medications given. Stinger may be embedded.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">🔬 Physical Examination Findings <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <ul class="findings-list">
+              <li><strong>General:</strong> Limp, lethargic child. Responds to painful stimuli. Skin warm and flushed (massive vasodilation). Widespread raised, blanching urticaria — trunk, arms, legs.</li>
+              <li><strong>Airway:</strong> Lips markedly edematous. Tongue swollen. Stridor audible — progressive supraglottic edema. Drooling. Voice muffled/hoarse.</li>
+              <li><strong>Breathing:</strong> Tachypnea 34/min. Bilateral expiratory wheeze — bronchospasm. SpO₂ 87% on room air. Moderate accessory muscle use.</li>
+              <li><strong>Circulation:</strong> Profound hypotension 68/40. Tachycardia 148 bpm. Peripheral pulses faint and thready. Cap refill >4 seconds. Distributive shock pattern.</li>
+              <li><strong>Skin:</strong> Urticaria generalized. Angioedema face/lips/tongue. Left forearm: local wheal and flare at sting site. Stinger visible.</li>
+              <li><strong>Neuro:</strong> GCS 11 (E3V3M5). Altered — decreasing LOC. Was verbal 2 minutes ago, now only groaning.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">📚 Background — Pathophysiology Review <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <div class="alert-box alert-info">
+              <strong>📖 Research This</strong>
+              Anaphylaxis is a life-threatening, IgE-mediated systemic allergic reaction causing massive mast cell and basophil degranulation. This releases histamine, tryptase, prostaglandins, and leukotrienes causing simultaneous vasodilation, increased vascular permeability, and bronchospasm. Research: the role of epinephrine as the ONLY first-line treatment, biphasic anaphylaxis, and why antihistamines (Benadryl) are NOT first-line treatment despite common misconception.
+            </div>
+            <ul class="findings-list">
+              <li>IgE-mediated: Prior sensitization → IgE antibodies on mast cells → re-exposure → massive degranulation</li>
+              <li>Histamine effects: H1 → bronchospasm, urticaria; H2 → vasodilation, gastric; combined → distributive shock</li>
+              <li>Angioedema: Deep tissue edema from vascular permeability — can cause complete airway obstruction</li>
+              <li>Distributive shock: Massive vasodilation + fluid shift → low SVR → hypotension despite normal/high HR</li>
+              <li>Biphasic anaphylaxis: Recurrence 8–12 hours later (in 20% of cases) even after initial resolution — requires monitoring</li>
+              <li>Epinephrine MOA: α1 → vasoconstriction (reverses shock); β1 → increased HR/contractility; β2 → bronchodilation; also mast cell stabilization</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-head" onclick="toggleSection(this)">💊 Key Pharmacology (Reference) <span class="chevron">▾</span></div>
+          <div class="section-content">
+            <ul class="findings-list">
+              <li><strong>Epinephrine 1:1,000 IM (FIRST-LINE):</strong> 0.01 mg/kg IM lateral thigh (max 0.5mg). Peds: EpiPen Jr 0.15mg for &lt;30kg, EpiPen 0.3mg for ≥30kg. Repeat q5–15 min if needed.</li>
+              <li><strong>Epinephrine 1:10,000 IV:</strong> 0.1 mL/kg slow IV push — for refractory anaphylaxis with cardiovascular collapse. Use extreme caution.</li>
+              <li><strong>Normal Saline:</strong> 20 mL/kg IV bolus — for distributive shock, repeat as needed for hemodynamic instability</li>
+              <li><strong>Diphenhydramine (Benadryl):</strong> 1 mg/kg IV/IM (max 50mg) — H1 blocker, adjunct ONLY — NOT a substitute for epinephrine. Does not reverse shock.</li>
+              <li><strong>Methylprednisolone:</strong> 1–2 mg/kg IV — for preventing biphasic reaction and reducing ongoing inflammation</li>
+              <li><strong>Albuterol NEB:</strong> 2.5mg NEB — for bronchospasm component that persists after epinephrine</li>
+              <li><strong>Glucagon:</strong> 1 mg IV — for anaphylaxis in patients on beta-blockers (reverses β-blocker effects on myocardium)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="response-section">
+        <div class="response-title"><span class="icon">✍️</span> Student Assessment & Response — Case 04</div>
+
+        <div class="progress-bar-outer"><div class="progress-bar-fill" id="prog-3" style="width:0%"></div></div>
+        <div class="progress-label" id="prog-label-3">0 of 6 fields completed</div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Primary Impression & Scene Size-Up</label>
+            <textarea class="tall" data-case="3" data-field="impression" oninput="updateProgress(3)" placeholder="What is your first action upon scene arrival? The parent is panicking. What do you do simultaneously? What is killing this patient right now?"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Primary Survey (ABCDE) Findings</label>
+            <textarea class="tall" data-case="3" data-field="abcde" oninput="updateProgress(3)" placeholder="Document your rapid ABCDE. Multiple simultaneous life threats are present. Prioritize — Airway? Circulation? Both? How do you manage them at the same time without a team?"></textarea>
+          </div>
+        </div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Differential Diagnosis (List at least 3)</label>
+            <textarea data-case="3" data-field="differential" oninput="updateProgress(3)" placeholder="1. Anaphylactic Shock (primary)&#10;2. &#10;3. &#10;What other conditions can mimic anaphylaxis? When do you treat empirically?"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Working Field Diagnosis</label>
+            <textarea data-case="3" data-field="diagnosis" oninput="updateProgress(3)" placeholder="State your working diagnosis. What specific clinical criteria confirm anaphylaxis? Does confirmation of allergen exposure change your management?"></textarea>
+          </div>
+        </div>
+
+        <div class="response-grid">
+          <div class="response-field">
+            <label>Prehospital Treatment Plan (Step-by-Step)</label>
+            <textarea class="tall" data-case="3" data-field="treatment" oninput="updateProgress(3)" placeholder="List your treatment priorities in exact order:&#10;1. Epinephrine (dose, route, site)&#10;2. Airway management strategy&#10;3. IV access and fluid resuscitation&#10;4. Additional medications&#10;5. Transport — position?&#10;6. Hospital notification&#10;7. Reassessment interval and when to redose Epi"></textarea>
+          </div>
+          <div class="response-field">
+            <label>Research Notes & Pathophysiology Summary</label>
+            <textarea class="tall" data-case="3" data-field="notes" oninput="updateProgress(3)" placeholder="Explain why Benadryl is NOT first-line. What is biphasic anaphylaxis and why does it matter for transport? How does epinephrine work at each receptor? What questions do you have for class discussion?"></textarea>
+          </div>
+        </div>
+
+        <div class="response-field" style="margin-bottom:16px;">
+          <label>Patient Condition Severity Assessment</label>
+          <div class="rating-row" id="rating-3">
+            <button class="rating-btn" data-val="critical" onclick="selectRating(3, this)">🔴 CRITICAL</button>
+            <button class="rating-btn" data-val="unstable" onclick="selectRating(3, this)">🟠 UNSTABLE</button>
+            <button class="rating-btn" data-val="guarded" onclick="selectRating(3, this)">🟡 GUARDED</button>
+            <button class="rating-btn" data-val="stable" onclick="selectRating(3, this)">🟢 STABLE</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <span class="action-bar-left">Case 04 of 04 &nbsp;·&nbsp; Anaphylaxis</span>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-outline" onclick="showCase(2)">← Previous</button>
+          <button class="btn btn-outline" onclick="clearCase(3)">Clear Fields</button>
+        </div>
+      </div>
+
+      <!-- SCROLL NAV -->
+      <div class="scroll-nav">
+        <button class="btn btn-outline" onclick="showCase(0)" style="font-size:10px;padding:8px 14px;">Case 01</button>
+        <button class="btn btn-outline" onclick="showCase(1)" style="font-size:10px;padding:8px 14px;">Case 02</button>
+        <button class="btn btn-outline" onclick="showCase(2)" style="font-size:10px;padding:8px 14px;">Case 03</button>
+        <button class="btn btn-outline" onclick="showCase(3)" style="font-size:10px;padding:8px 14px;">Case 04</button>
+      </div>
+    </div>
+
+  </div><!-- end cases-wrapper -->
+
+  <!-- GLOBAL PDF DOWNLOAD -->
+  <div class="global-pdf-row">
+    <button class="btn-pdf-global" onclick="generatePDF()">
+      📄 Download Full PDF Report
+    </button>
+  </div>
+
+</div><!-- end container -->
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// NAVIGATION
+// ============================================================
+const tabBtns = document.querySelectorAll('.tab-btn');
+const casePanels = document.querySelectorAll('.case-panel');
+
+function showCase(idx) {
+  casePanels.forEach((p,i) => p.classList.toggle('active', i===idx));
+  tabBtns.forEach((b,i) => b.classList.toggle('active', i===idx));
+  window.scrollTo({top: document.querySelector('.tabs').offsetTop - 20, behavior:'smooth'});
+}
+
+// ============================================================
+// SECTION TOGGLE
+// ============================================================
+function toggleSection(head) {
+  const content = head.nextElementSibling;
+  content.classList.toggle('hidden');
+  head.classList.toggle('collapsed');
+}
+
+// ============================================================
+// RATINGS
+// ============================================================
+const ratings = ['','','',''];
+function selectRating(caseIdx, btn) {
+  const row = document.getElementById(`rating-${caseIdx}`);
+  row.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  ratings[caseIdx] = btn.dataset.val;
+}
+
+// ============================================================
+// PROGRESS TRACKING
+// ============================================================
+function updateProgress(caseIdx) {
+  const textareas = document.querySelectorAll(`[data-case="${caseIdx}"]`);
+  let filled = 0;
+  textareas.forEach(t => { if(t.value.trim().length > 10) filled++; });
+  const pct = Math.round((filled / textareas.length) * 100);
+  document.getElementById(`prog-${caseIdx}`).style.width = pct + '%';
+  document.getElementById(`prog-label-${caseIdx}`).textContent = `${filled} of ${textareas.length} fields completed`;
+}
+
+// ============================================================
+// CLEAR FIELDS
+// ============================================================
+function clearCase(caseIdx) {
+  if(!confirm(`Clear all responses for Case ${caseIdx+1}?`)) return;
+  document.querySelectorAll(`[data-case="${caseIdx}"]`).forEach(t => t.value = '');
+  const row = document.getElementById(`rating-${caseIdx}`);
+  row.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+  ratings[caseIdx] = '';
+  updateProgress(caseIdx);
+}
+
+// ============================================================
+// SET DEFAULT DATE
+// ============================================================
+document.getElementById('stu-date').valueAsDate = new Date();
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ============================================================
+// PDF GENERATION
+// ============================================================
+function collectData() {
+  const data = {
+    student: {
+      name: document.getElementById('stu-name').value || 'Not provided',
+      id: document.getElementById('stu-id').value || 'Not provided',
+      program: document.getElementById('stu-program').value || 'Not provided',
+      date: document.getElementById('stu-date').value || 'Not provided',
+      instructor: document.getElementById('stu-instructor').value || 'Not provided',
+    },
+    cases: []
+  };
+  const caseNames = [
+    'Status Asthmaticus',
+    'Epiglottitis',
+    'Pediatric Valvular Disease',
+    'Anaphylaxis'
+  ];
+  const fieldNames = {
+    impression: 'Primary Impression & Scene Size-Up',
+    abcde: 'Primary Survey (ABCDE) Findings',
+    differential: 'Differential Diagnosis',
+    diagnosis: 'Working Field Diagnosis',
+    treatment: 'Prehospital Treatment Plan',
+    notes: 'Research Notes & Pathophysiology'
+  };
+  for(let i=0;i<4;i++) {
+    const caseData = { name: `Case ${i+1}: ${caseNames[i]}`, fields: [], rating: ratings[i] || 'Not assessed' };
+    document.querySelectorAll(`[data-case="${i}"]`).forEach(t => {
+      caseData.fields.push({ label: fieldNames[t.dataset.field] || t.dataset.field, value: t.value.trim() || '(Not completed)' });
+    });
+    data.cases.push(caseData);
+  }
+  return data;
+}
+
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+  const data = collectData();
+
+  const W = 215.9;
+  const MARGIN = 18;
+  const LINE_W = W - MARGIN * 2;
+  let y = 0;
+
+  const colors = {
+    bg: [10, 13, 18],
+    accent: [0, 200, 255],
+    c1: [220, 53, 53],
+    c2: [220, 120, 60],
+    c3: [60, 160, 220],
+    c4: [80, 210, 100],
+    text: [210, 227, 240],
+    muted: [90, 122, 150],
+    surface: [17, 22, 32],
+  };
+
+  function newPage() {
+    doc.addPage();
+    y = MARGIN;
+    // subtle page header
+    doc.setFillColor(...colors.surface);
+    doc.rect(0, 0, W, 10, 'F');
+    doc.setFontSize(7);
+    doc.setTextColor(...colors.muted);
+    doc.text('CAMP EMS PROGRAM — PEDIATRIC EMERGENCY CASE STUDIES', MARGIN, 6);
+    doc.text(`${data.student.name} | ${data.student.id}`, W - MARGIN, 6, {align:'right'});
+    y = 16;
+  }
+
+  function checkY(needed=20) {
+    if(y + needed > 255) newPage();
+  }
+
+  function sectionTitle(text, color) {
+    checkY(12);
+    doc.setFillColor(...color);
+    doc.rect(MARGIN, y, LINE_W, 0.6, 'F');
+    y += 3;
+    doc.setFontSize(8);
+    doc.setTextColor(...color);
+    doc.setFont('helvetica','bold');
+    doc.text(text.toUpperCase(), MARGIN, y);
+    y += 6;
+  }
+
+  function bodyText(text, indent=0) {
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(9);
+    doc.setTextColor(...colors.text);
+    const lines = doc.splitTextToSize(text, LINE_W - indent);
+    lines.forEach(line => {
+      checkY(5);
+      doc.text(line, MARGIN + indent, y);
+      y += 4.5;
+    });
+    y += 1;
+  }
+
+  function label(text) {
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(8);
+    doc.setTextColor(...colors.muted);
+    checkY(6);
+    doc.text(text.toUpperCase(), MARGIN, y);
+    y += 4;
+  }
+
+  function fieldBlock(lbl, val, col) {
+    checkY(16);
+    doc.setFillColor(col[0], col[1], col[2], 0.08);
+    doc.setDrawColor(...col);
+    doc.setLineWidth(0.4);
+    const lines = doc.splitTextToSize(val, LINE_W - 6);
+    const blockH = Math.max(14, lines.length * 4.5 + 10);
+    checkY(blockH + 4);
+    doc.rect(MARGIN, y, LINE_W, blockH, 'S');
+    doc.setFillColor(col[0], col[1], col[2]);
+    doc.rect(MARGIN, y, 1.5, blockH, 'F');
+    doc.setFontSize(7);
+    doc.setTextColor(...col);
+    doc.setFont('helvetica','bold');
+    doc.text(lbl.toUpperCase(), MARGIN + 4, y + 5);
+    doc.setFontSize(9);
+    doc.setTextColor(...colors.text);
+    doc.setFont('helvetica','normal');
+    lines.forEach((line, i) => {
+      doc.text(line, MARGIN + 4, y + 10 + i * 4.5);
+    });
+    y += blockH + 4;
+  }
+
+  // ---- COVER PAGE ----
+  doc.setFillColor(...colors.bg);
+  doc.rect(0, 0, W, 279, 'F');
+
+  // accent stripe
+  doc.setFillColor(...colors.accent);
+  doc.rect(0, 0, 4, 279, 'F');
+
+  // title
+  doc.setFontSize(28);
+  doc.setFont('helvetica','bold');
+  doc.setTextColor(...colors.accent);
+  doc.text('PEDIATRIC EMERGENCY', 20, 50);
+  doc.setTextColor(255,255,255);
+  doc.text('CASE STUDIES', 20, 64);
+
+  doc.setFontSize(10);
+  doc.setFont('helvetica','normal');
+  doc.setTextColor(...colors.muted);
+  doc.text('CAMP EMS PROGRAM  //  Sanders\' Paramedic Textbook', 20, 76);
+  doc.text('Paramedic Education — Pediatric Emergencies Module', 20, 82);
+
+  // separator
+  doc.setDrawColor(...colors.accent);
+  doc.setLineWidth(0.5);
+  doc.line(20, 92, W - 20, 92);
+
+  // student info box
+  doc.setFillColor(...colors.surface);
+  doc.rect(20, 100, W - 40, 80, 'F');
+  doc.setDrawColor(...colors.accent);
+  doc.setLineWidth(0.3);
+  doc.rect(20, 100, W - 40, 80, 'S');
+
+  doc.setFontSize(8);
+  doc.setFont('helvetica','bold');
+  doc.setTextColor(...colors.accent);
+  doc.text('STUDENT INFORMATION', 28, 112);
+
+  const stuFields = [
+    ['Name', data.student.name],
+    ['Student ID', data.student.id],
+    ['Program', data.student.program],
+    ['Date Submitted', data.student.date],
+    ['Instructor', data.student.instructor],
+  ];
+  let sy = 122;
+  stuFields.forEach(([k,v]) => {
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(8);
+    doc.setTextColor(...colors.muted);
+    doc.text(k.toUpperCase() + ':', 28, sy);
+    doc.setFont('helvetica','normal');
+    doc.setTextColor(...colors.text);
+    doc.text(v, 70, sy);
+    sy += 10;
+  });
+
+  // case list
+  doc.setFontSize(9);
+  doc.setFont('helvetica','bold');
+  doc.setTextColor(255,255,255);
+  doc.text('CASES INCLUDED:', 20, 194);
+
+  const caseList = [
+    { n:'01', t:'STATUS ASTHMATICUS', col: colors.c1 },
+    { n:'02', t:'EPIGLOTTITIS', col: colors.c2 },
+    { n:'03', t:'PEDIATRIC VALVULAR DISEASE', col: colors.c3 },
+    { n:'04', t:'ANAPHYLAXIS', col: colors.c4 },
+  ];
+  let cy = 202;
+  caseList.forEach(c => {
+    doc.setFillColor(...c.col);
+    doc.circle(25, cy - 2, 2, 'F');
+    doc.setFontSize(8);
+    doc.setTextColor(...c.col);
+    doc.setFont('helvetica','bold');
+    doc.text(`CASE ${c.n}`, 30, cy);
+    doc.setTextColor(200,220,240);
+    doc.setFont('helvetica','normal');
+    doc.text(c.t, 55, cy);
+    cy += 10;
+  });
+
+  doc.setFontSize(7);
+  doc.setTextColor(...colors.muted);
+  doc.text(`Generated: ${new Date().toLocaleString()}`, 20, 264);
+
+  // ---- CASE PAGES ----
+  const caseColors = [colors.c1, colors.c2, colors.c3, colors.c4];
+
+  data.cases.forEach((c, ci) => {
+    newPage();
+    const col = caseColors[ci];
+
+    // Case header bar
+    doc.setFillColor(col[0]*0.3, col[1]*0.3, col[2]*0.3);
+    doc.rect(MARGIN - 2, y - 4, LINE_W + 4, 22, 'F');
+    doc.setFillColor(...col);
+    doc.rect(MARGIN - 2, y - 4, 3, 22, 'F');
+
+    doc.setFontSize(16);
+    doc.setFont('helvetica','bold');
+    doc.setTextColor(...col);
+    doc.text(c.name.toUpperCase(), MARGIN + 5, y + 6);
+
+    doc.setFontSize(8);
+    doc.setFont('helvetica','normal');
+    doc.setTextColor(...colors.muted);
+    const subtitles = ['Severe Bronchospasm · Refractory Asthma', 'Supraglottic Airway Emergency · Bacterial', 'Congenital Heart Disease · Aortic Stenosis', 'IgE-Mediated Systemic Allergic Reaction'];
+    doc.text(subtitles[ci], MARGIN + 5, y + 13);
+    y += 26;
+
+    // Rating
+    const ratingLabels = { critical:'🔴 CRITICAL', unstable:'🟠 UNSTABLE', guarded:'🟡 GUARDED', stable:'🟢 STABLE', '':'Not assessed' };
+    doc.setFontSize(8);
+    doc.setFont('helvetica','bold');
+    doc.setTextColor(...colors.muted);
+    doc.text('SEVERITY ASSESSMENT:', MARGIN, y);
+    doc.setTextColor(...col);
+    doc.text((ratingLabels[c.rating] || c.rating).toUpperCase(), MARGIN + 45, y);
+    y += 10;
+
+    // Fields
+    c.fields.forEach(f => {
+      fieldBlock(f.label, f.value, col);
+    });
+
+    y += 4;
+  });
+
+  // ---- SIGNATURE PAGE ----
+  newPage();
+  doc.setFillColor(...colors.surface);
+  doc.rect(MARGIN, y, LINE_W, 60, 'F');
+  doc.setDrawColor(...colors.accent);
+  doc.setLineWidth(0.3);
+  doc.rect(MARGIN, y, LINE_W, 60, 'S');
+  doc.setFontSize(9);
+  doc.setFont('helvetica','bold');
+  doc.setTextColor(...colors.accent);
+  doc.text('STUDENT DECLARATION', MARGIN + 6, y + 10);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...colors.text);
+  const decl = 'I certify that all responses contained in this document represent my own work, completed using approved course materials, clinical references, and independent research. I understand that these case studies are for educational purposes and will be presented and discussed in class.';
+  const declLines = doc.splitTextToSize(decl, LINE_W - 12);
+  declLines.forEach((l,i) => doc.text(l, MARGIN + 6, y + 20 + i*5));
+  doc.setDrawColor(...colors.muted);
+  doc.setLineWidth(0.3);
+  doc.line(MARGIN + 6, y + 50, MARGIN + 80, y + 50);
+  doc.line(MARGIN + 100, y + 50, MARGIN + 160, y + 50);
+  doc.setFontSize(7);
+  doc.setTextColor(...colors.muted);
+  doc.text('Student Signature', MARGIN + 6, y + 55);
+  doc.text('Date', MARGIN + 100, y + 55);
+
+  const fileName = `Pediatric_Cases_${data.student.name.replace(/\s+/g,'_') || 'Student'}_${data.student.id || 'ID'}.pdf`;
+  doc.save(fileName);
+  showToast('✓ PDF downloaded successfully!');
+}
+</script>
+</body>
+</html>
