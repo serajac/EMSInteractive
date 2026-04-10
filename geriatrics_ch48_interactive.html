@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 48: Geriatrics | CAMP EMS Paramedic Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.6.0/jspdf.plugin.autotable.min.js"></script>
+<style>
+:root[data-theme="dark"]{
+  --bg-primary:#0d1117;--bg-secondary:#161b22;--bg-card:#1c2333;--bg-card-hover:#21283a;
+  --bg-tab-active:#1e3a5f;--border-color:#2d3748;--border-accent:#3b82f6;
+  --text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;
+  --accent-teal:#10b981;--accent-coral:#f87171;--accent-gold:#fbbf24;
+  --accent-blue:#60a5fa;--accent-purple:#a78bfa;--accent-green:#34d399;
+  --accent-orange:#fb923c;--nav-bg:#0d1117;--input-bg:#0d1117;
+  --shadow:0 4px 24px rgba(0,0,0,0.5);--correct-bg:rgba(52,211,153,0.08);
+  --correct-border:#34d399;--wrong-bg:rgba(248,113,113,0.08);--wrong-border:#f87171;
+  --hero-gradient:linear-gradient(135deg,#0d1117 0%,#0f2040 50%,#0d1117 100%);
+}
+:root[data-theme="light"]{
+  --bg-primary:#f8fafc;--bg-secondary:#f1f5f9;--bg-card:#ffffff;--bg-card-hover:#f8fafc;
+  --bg-tab-active:#dbeafe;--border-color:#e2e8f0;--border-accent:#3b82f6;
+  --text-primary:#1e293b;--text-secondary:#475569;--text-muted:#94a3b8;
+  --accent-teal:#059669;--accent-coral:#dc2626;--accent-gold:#d97706;
+  --accent-blue:#2563eb;--accent-purple:#7c3aed;--accent-green:#16a34a;
+  --accent-orange:#ea580c;--nav-bg:#e2e8f0;--input-bg:#ffffff;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);--correct-bg:rgba(22,163,74,0.06);
+  --correct-border:#16a34a;--wrong-bg:rgba(220,38,38,0.06);--wrong-border:#dc2626;
+  --hero-gradient:linear-gradient(135deg,#eff6ff 0%,#dbeafe 50%,#eff6ff 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;transition:background .3s,color .3s;}
+header{background:var(--nav-bg);border-bottom:2px solid var(--border-accent);padding:0 2rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
+.header-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.9rem 0;}
+.logo-area{display:flex;align-items:center;gap:1rem;}
+.logo-icon{font-size:2rem;}
+.logo-text h1{font-family:'Crimson Pro',serif;font-size:1.4rem;font-weight:700;color:var(--accent-teal);line-height:1.1;}
+.logo-text p{font-size:.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+.header-right{display:flex;align-items:center;gap:.8rem;}
+.chapter-badge{background:var(--accent-teal);color:#fff;padding:.3rem .85rem;border-radius:20px;font-size:.72rem;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.theme-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-primary);padding:.4rem .9rem;border-radius:20px;cursor:pointer;font-size:.8rem;font-family:'Outfit',sans-serif;transition:all .2s;}
+.theme-btn:hover{border-color:var(--accent-teal);color:var(--accent-teal);}
+.nav-tabs{background:var(--nav-bg);border-bottom:1px solid var(--border-color);overflow-x:auto;}
+.nav-tabs-inner{max-width:1300px;margin:0 auto;display:flex;}
+.nav-tab{padding:.85rem 1.3rem;cursor:pointer;font-size:.88rem;font-weight:500;color:var(--text-muted);border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;}
+.nav-tab:hover{color:var(--text-primary);background:var(--bg-tab-active);}
+.nav-tab.active{color:var(--accent-teal);border-bottom-color:var(--accent-teal);background:var(--bg-tab-active);}
+main{max-width:1300px;margin:0 auto;padding:2rem;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+/* HERO */
+.hero{background:var(--hero-gradient);border:1px solid var(--border-accent);border-radius:16px;padding:2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(16,185,129,.12) 0%,transparent 70%);border-radius:50%;}
+.hero h2{font-family:'Crimson Pro',serif;font-size:2.2rem;font-weight:700;color:var(--accent-teal);margin-bottom:.5rem;}
+.hero p{color:var(--text-secondary);font-size:1.02rem;line-height:1.75;max-width:780px;}
+.hero-stats{display:flex;gap:1.2rem;margin-top:1.5rem;flex-wrap:wrap;}
+.stat-box{background:rgba(0,0,0,.22);border:1px solid var(--border-color);border-radius:10px;padding:.9rem 1.4rem;text-align:center;}
+[data-theme="light"] .stat-box{background:rgba(255,255,255,.6);}
+.stat-box .num{font-family:'JetBrains Mono',monospace;font-size:1.7rem;font-weight:700;color:var(--accent-teal);}
+.stat-box .label{font-size:.72rem;color:var(--text-muted);margin-top:.15rem;}
+/* SECTION TITLES */
+.section-title{font-family:'Crimson Pro',serif;font-size:1.6rem;color:var(--accent-blue);margin-bottom:1.1rem;padding-bottom:.4rem;border-bottom:1px solid var(--border-color);}
+/* OBJECTIVES */
+.objectives-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:2rem;}
+.objective-item{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;padding:.85rem 1rem;display:flex;gap:.75rem;align-items:flex-start;}
+.obj-num{background:var(--accent-teal);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:.1rem;}
+.obj-text{font-size:.86rem;color:var(--text-secondary);line-height:1.55;}
+/* INFO GRIDS */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem;margin-bottom:2rem;}
+.info-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.2rem;border-left:4px solid var(--accent-teal);}
+.info-card.blue{border-left-color:var(--accent-blue);}
+.info-card.gold{border-left-color:var(--accent-gold);}
+.info-card.coral{border-left-color:var(--accent-coral);}
+.info-card.purple{border-left-color:var(--accent-purple);}
+.info-card.orange{border-left-color:var(--accent-orange);}
+.info-card h4{font-size:.95rem;font-weight:600;margin-bottom:.5rem;}
+.info-card.blue h4{color:var(--accent-blue);}
+.info-card.gold h4{color:var(--accent-gold);}
+.info-card.coral h4{color:var(--accent-coral);}
+.info-card.purple h4{color:var(--accent-purple);}
+.info-card.orange h4{color:var(--accent-orange);}
+.info-card h4{color:var(--accent-teal);}
+.info-card p,.info-card li{font-size:.84rem;color:var(--text-secondary);line-height:1.65;}
+.info-card ul{padding-left:1.1rem;margin-top:.3rem;}
+/* TABLES */
+.table-wrapper{overflow-x:auto;margin-bottom:1.5rem;}
+table{width:100%;border-collapse:collapse;font-size:.86rem;}
+th{background:var(--accent-teal);color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600;}
+td{padding:.65rem 1rem;border-bottom:1px solid var(--border-color);color:var(--text-secondary);}
+tr:hover td{background:var(--bg-card-hover);}
+tr:nth-child(even) td{background:var(--bg-card);}
+/* CATEGORY TITLES */
+.category-title{font-family:'Crimson Pro',serif;font-size:1.4rem;margin:1.8rem 0 1rem;display:flex;align-items:center;gap:.6rem;}
+.category-title.teal{color:var(--accent-teal);}
+.category-title.blue{color:var(--accent-blue);}
+.category-title.gold{color:var(--accent-gold);}
+.category-title.coral{color:var(--accent-coral);}
+.category-title.purple{color:var(--accent-purple);}
+.category-title.orange{color:var(--accent-orange);}
+.category-title.green{color:var(--accent-green);}
+.category-title::after{content:'';flex:1;height:1px;background:var(--border-color);}
+/* DISEASE CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.1rem;margin-bottom:1rem;}
+.disease-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;overflow:hidden;transition:all .3s;}
+.disease-card:hover{border-color:var(--border-accent);box-shadow:var(--shadow);}
+.card-header{padding:1.05rem 1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:.5rem;}
+.card-left{display:flex;align-items:center;gap:.7rem;}
+.card-icon{font-size:1.45rem;}
+.card-title{font-weight:600;font-size:.93rem;color:var(--text-primary);}
+.card-subtitle{font-size:.73rem;color:var(--text-muted);margin-top:.1rem;}
+.card-chevron{color:var(--text-muted);font-size:.78rem;transition:transform .3s;}
+.disease-card.open .card-chevron{transform:rotate(180deg);}
+.card-body{display:none;border-top:1px solid var(--border-color);}
+.disease-card.open .card-body{display:block;}
+.card-tabs{display:flex;border-bottom:1px solid var(--border-color);}
+.card-tab{flex:1;padding:.6rem;text-align:center;cursor:pointer;font-size:.76rem;color:var(--text-muted);transition:all .2s;font-weight:500;}
+.card-tab:hover{background:var(--bg-card-hover);}
+.card-tab.active{color:var(--accent-teal);background:var(--bg-tab-active);border-bottom:2px solid var(--accent-teal);}
+.card-tab-content{display:none;padding:1.1rem 1.2rem;}
+.card-tab-content.active{display:block;}
+.card-tab-content p,.card-tab-content li{font-size:.84rem;color:var(--text-secondary);line-height:1.65;}
+.card-tab-content ul{padding-left:1.2rem;margin-top:.4rem;}
+.card-tab-content li{margin-bottom:.3rem;}
+.med-table{width:100%;border-collapse:collapse;margin-top:.5rem;font-size:.8rem;}
+.med-table th{background:var(--bg-tab-active);color:var(--accent-teal);padding:.5rem .7rem;text-align:left;font-size:.75rem;}
+.med-table td{padding:.42rem .7rem;border-bottom:1px solid var(--border-color);color:var(--text-secondary);}
+.analogy-box{background:linear-gradient(135deg,var(--bg-secondary),var(--bg-card));border-left:3px solid var(--accent-purple);border-radius:6px;padding:.9rem;margin-top:.3rem;}
+.analogy-box p{font-family:'Crimson Pro',serif;font-style:italic;font-size:.95rem;color:var(--text-secondary);line-height:1.75;}
+.tag{display:inline-block;padding:.18rem .6rem;border-radius:12px;font-size:.7rem;font-weight:600;margin-bottom:.6rem;}
+.tag-pulmonary{background:rgba(96,165,250,.12);color:var(--accent-blue);border:1px solid rgba(96,165,250,.3);}
+.tag-cardiac{background:rgba(248,113,113,.12);color:var(--accent-coral);border:1px solid rgba(248,113,113,.3);}
+.tag-neuro{background:rgba(167,139,250,.12);color:var(--accent-purple);border:1px solid rgba(167,139,250,.3);}
+.tag-endo{background:rgba(251,191,36,.12);color:var(--accent-gold);border:1px solid rgba(251,191,36,.3);}
+.tag-gi{background:rgba(52,211,153,.12);color:var(--accent-green);border:1px solid rgba(52,211,153,.3);}
+.tag-msk{background:rgba(251,146,60,.12);color:var(--accent-orange);border:1px solid rgba(251,146,60,.3);}
+.tag-toxicology{background:rgba(16,185,129,.12);color:var(--accent-teal);border:1px solid rgba(16,185,129,.3);}
+.tag-trauma{background:rgba(248,113,113,.12);color:var(--accent-coral);border:1px solid rgba(248,113,113,.3);}
+.tag-behavioral{background:rgba(167,139,250,.12);color:var(--accent-purple);border:1px solid rgba(167,139,250,.3);}
+/* ASSESSMENT */
+.student-form{background:var(--bg-card);border:1px solid var(--border-accent);border-radius:12px;padding:2rem;margin-bottom:1.5rem;max-width:600px;margin-left:auto;margin-right:auto;}
+.student-form h3{font-family:'Crimson Pro',serif;font-size:1.5rem;color:var(--accent-teal);margin-bottom:1.1rem;text-align:center;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:.84rem;color:var(--text-secondary);margin-bottom:.38rem;font-weight:500;}
+.form-group input{width:100%;background:var(--input-bg);border:1px solid var(--border-color);border-radius:8px;padding:.68rem 1rem;color:var(--text-primary);font-size:.9rem;font-family:'Outfit',sans-serif;transition:border .2s;}
+.form-group input:focus{outline:none;border-color:var(--accent-teal);}
+.btn-start{display:block;width:100%;background:var(--accent-teal);color:#fff;border:none;padding:1rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:1.2rem;transition:opacity .2s;}
+.btn-start:hover{opacity:.88;}
+.quiz-container{display:none;}
+.quiz-header{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.1rem 1.5rem;margin-bottom:1.3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.quiz-info span{font-size:.84rem;color:var(--text-muted);}
+.quiz-info strong{color:var(--text-primary);}
+.progress-bar{background:var(--bg-secondary);border-radius:20px;height:8px;flex:1;min-width:140px;}
+.progress-fill{background:linear-gradient(90deg,var(--accent-teal),var(--accent-blue));height:100%;border-radius:20px;transition:width .3s;}
+.live-score{font-family:'JetBrains Mono',monospace;font-size:.88rem;color:var(--accent-green);}
+.question-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1rem;}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--text-muted);margin-bottom:.55rem;}
+.q-text{font-size:.96rem;color:var(--text-primary);line-height:1.62;margin-bottom:1.1rem;font-weight:500;}
+.options{display:flex;flex-direction:column;gap:.55rem;}
+.option-btn{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:8px;padding:.72rem 1rem;text-align:left;color:var(--text-secondary);cursor:pointer;font-size:.86rem;font-family:'Outfit',sans-serif;transition:all .2s;line-height:1.45;}
+.option-btn:hover:not(:disabled){background:var(--bg-card-hover);border-color:var(--accent-blue);color:var(--text-primary);}
+.option-btn.correct{background:var(--correct-bg);border-color:var(--correct-border);color:var(--accent-green);}
+.option-btn.wrong{background:var(--wrong-bg);border-color:var(--wrong-border);color:var(--accent-coral);}
+.option-btn:disabled{cursor:default;}
+.explanation{margin-top:.75rem;padding:.78rem 1rem;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--accent-teal);font-size:.82rem;color:var(--text-secondary);line-height:1.62;display:none;}
+.explanation.show{display:block;}
+/* RESULTS */
+.results-container{display:none;text-align:center;}
+.score-circle{width:155px;height:155px;border-radius:50%;border:6px solid var(--accent-teal);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.4rem;}
+.score-pct{font-family:'JetBrains Mono',monospace;font-size:2.4rem;font-weight:700;color:var(--accent-teal);}
+.score-label{font-size:.78rem;color:var(--text-muted);}
+.grade-label{font-size:1.8rem;font-weight:700;margin-bottom:.4rem;}
+.results-stats{display:flex;gap:1rem;justify-content:center;margin:1.4rem 0;flex-wrap:wrap;}
+.result-stat{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:.9rem 1.4rem;text-align:center;}
+.result-stat .num{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;}
+.result-stat .lbl{font-size:.73rem;color:var(--text-muted);}
+.btn-pdf{background:var(--accent-coral);color:#fff;border:none;padding:.9rem 2rem;border-radius:8px;font-size:.94rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;margin:.4rem;transition:opacity .2s;}
+.btn-pdf:hover{opacity:.85;}
+.btn-review{background:var(--bg-card);border:1px solid var(--accent-blue);color:var(--accent-blue);padding:.9rem 2rem;border-radius:8px;font-size:.94rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin:.4rem;transition:all .2s;}
+.btn-review:hover{background:var(--accent-blue);color:#fff;}
+.btn-retake{background:var(--bg-card);border:1px solid var(--accent-teal);color:var(--accent-teal);padding:.9rem 2rem;border-radius:8px;font-size:.94rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin:.4rem;transition:all .2s;}
+.btn-retake:hover{background:var(--accent-teal);color:#fff;}
+.review-list{text-align:left;margin-top:1.8rem;}
+.review-item{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1rem;margin-bottom:.75rem;}
+.review-item.correct-r{border-left:4px solid var(--accent-green);}
+.review-item.wrong-r{border-left:4px solid var(--accent-coral);}
+.review-q{font-size:.88rem;font-weight:600;color:var(--text-primary);margin-bottom:.45rem;}
+.review-ans{font-size:.81rem;margin-bottom:.25rem;}
+.review-ans.correct-a{color:var(--accent-green);}
+.review-ans.wrong-a{color:var(--accent-coral);}
+.review-exp{font-size:.78rem;color:var(--text-muted);margin-top:.35rem;font-style:italic;}
+@media(max-width:768px){
+  .objectives-grid,.cards-grid{grid-template-columns:1fr;}
+  .nav-tab{padding:.7rem .9rem;font-size:.78rem;}
+  .hero-stats{gap:.7rem;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-icon">👴</div>
+      <div class="logo-text">
+        <h1>CAMP EMS Paramedic Program</h1>
+        <p>Sanders' Paramedic Textbook · 6th Edition</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="chapter-badge">CH 48</span>
+      <button class="theme-btn" onclick="toggleTheme()">☀️ Light Mode</button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <div class="nav-tab active" onclick="switchTab('overview',this)">📋 Overview</div>
+    <div class="nav-tab" onclick="switchTab('conditions',this)">🩺 Conditions</div>
+    <div class="nav-tab" onclick="switchTab('assessment',this)">🔍 Assessment & Special Topics</div>
+    <div class="nav-tab" onclick="switchTab('quiz',this)">📝 Assessment</div>
+  </div>
+</nav>
+
+<main>
+<!-- ===== OVERVIEW ===== -->
+<div id="tab-overview" class="tab-content active">
+  <div class="hero">
+    <h2>Chapter 48: Geriatrics</h2>
+    <p>As the number of individuals older than 65 continues to grow rapidly — nearly 56 million Americans in 2022 — EMS providers face increasing complexity in caring for this population. Master the physiologic changes of aging, atypical presentations, polypharmacy risks, trauma considerations, and the full spectrum of geriatric emergencies.</p>
+    <div class="hero-stats">
+      <div class="stat-box"><div class="num">56M</div><div class="label">Americans ≥65 in 2022</div></div>
+      <div class="stat-box"><div class="num">98M</div><div class="label">Projected by 2060</div></div>
+      <div class="stat-box"><div class="num">5–10×</div><div class="label">Greater pneumonia mortality risk</div></div>
+      <div class="stat-box"><div class="num">1 in 4</div><div class="label">Falls per year ≥65</div></div>
+      <div class="stat-box"><div class="num">18%</div><div class="label">Of all US suicides ≥65</div></div>
+      <div class="stat-box"><div class="num">29.2%</div><div class="label">Older adults with diabetes</div></div>
+    </div>
+  </div>
+
+  <h3 class="section-title">Learning Objectives</h3>
+  <div class="objectives-grid">
+    <div class="objective-item"><div class="obj-num">1</div><div class="obj-text">Explain the physiology of the aging process as it relates to major body systems and homeostasis.</div></div>
+    <div class="objective-item"><div class="obj-num">2</div><div class="obj-text">Describe general principles of assessment specific to older adults.</div></div>
+    <div class="objective-item"><div class="obj-num">3</div><div class="obj-text">Describe the pathophysiology, assessment, and management of specific illnesses affecting geriatric patients.</div></div>
+    <div class="objective-item"><div class="obj-num">4</div><div class="obj-text">Identify specific problems with sensations experienced by geriatric patients.</div></div>
+    <div class="objective-item"><div class="obj-num">5</div><div class="obj-text">Discuss effects of drug toxicity and alcoholism in the older adult.</div></div>
+    <div class="objective-item"><div class="obj-num">6</div><div class="obj-text">Identify factors that contribute to environmental emergencies in the geriatric patient.</div></div>
+    <div class="objective-item"><div class="obj-num">7</div><div class="obj-text">Discuss prehospital assessment and management of depression and suicide in the older adult.</div></div>
+    <div class="objective-item"><div class="obj-num">8</div><div class="obj-text">Describe epidemiology, assessment, and management of trauma in the geriatric patient.</div></div>
+    <div class="objective-item"><div class="obj-num">9</div><div class="obj-text">Identify characteristics of elder abuse.</div></div>
+  </div>
+
+  <h3 class="section-title">Physiologic Changes of Aging by Body System</h3>
+  <div class="info-grid">
+    <div class="info-card blue"><h4>🫁 Respiratory System</h4><p>Reduced pulmonary function from decreased elastic recoil, diminished respiratory muscle strength, and reduced chest wall compliance. PaO₂ slowly declines; chemoreceptor response to hypoxia and hypercapnia is blunted. Loss of cilia, diminished cough reflex, and impaired gag reflex increase infection risk.</p></div>
+    <div class="info-card coral"><h4>❤️ Cardiovascular System</h4><p>Diminished ability to raise HR; decreased ventricular compliance; prolonged contraction; decreased catecholamine response. Myocardial hypertrophy and CAD predispose to dysrhythmias, CHF, and sudden cardiac arrest. Conduction system fibrosis leads to AFib, sick sinus syndrome, bradycardias, and blocks.</p></div>
+    <div class="info-card gold"><h4>🫘 Renal System</h4><p>Decreased renal blood flow → reduced GFR. Loss of concentrating ability, sodium conservation, free water clearance. Reduced drug clearance → drug toxicity and adverse events more likely. Decreased liver/kidney function increases electrolyte disturbances.</p></div>
+    <div class="info-card purple"><h4>🧠 Nervous System</h4><p>11% reduction in brain weight by age 70. Decreased cerebral blood flow, altered neurotransmitter levels. Peripheral nerve conduction slows → delayed reaction time and motor responses. Intellectual functioning deteriorates selectively, not globally.</p></div>
+    <div class="info-card orange"><h4>💪 Musculoskeletal System</h4><p>Muscles shrink; ligaments calcify; intervertebral disks thin. Osteoporosis common (⅓ loss of bone density by age 70). Kyphosis alters balance and mobility. Decreased total muscle mass increases fall risk. Falls are the leading traumatic injury in this population.</p></div>
+    <div class="info-card"><h4>🌡️ Thermoregulation & Immunity</h4><p>Declining thermoregulatory mechanisms increase risk of both hypothermia and hyperthermia. Decreased primary antibody response and cellular immunity. Age is the greatest cancer risk factor — 60% of cancer patients are ≥65. Decreased lean body mass and increased body fat affect drug pharmacokinetics.</p></div>
+  </div>
+
+  <h3 class="section-title">Key Geriatric Assessment Principles</h3>
+  <div class="info-grid">
+    <div class="info-card blue"><h4>🕵️ Atypical Presentations</h4><p>Pain may be diminished or absent. Multiple simultaneous illnesses. Chronic symptoms mask acute conditions. Social and emotional factors heavily influence health. Patient may minimize or deny symptoms. Confusion may be the ONLY presenting sign of pneumonia or UTI.</p></div>
+    <div class="info-card gold"><h4>💊 Medication History</h4><p>Obtain detailed medication list including OTC drugs and herbals. Polypharmacy: prescriptions from multiple physicians, OTC + Rx combinations. Verify patient is taking medications as prescribed — forgetfulness and vision impairment are major barriers. Bring ALL medications to ED.</p></div>
+    <div class="info-card coral"><h4>📋 Functional Assessment</h4><p>Assess changes in Activities of Daily Living (ADLs) — decline signals acute illness or need for social intervention. Use six-item cognitive screener for cognitive impairment early in assessment. Ask discreetly about advance directives and DNR status.</p></div>
+    <div class="info-card purple"><h4>🏠 Environmental Assessment</h4><p>Assess immediate surroundings for alcohol or medication use, presence of food, housing condition, and hygiene. Poverty affects 15 million older adults. Fixed income limits heating — hypothermia risk. 25% forgo food, utilities, or medicine to pay for health care.</p></div>
+  </div>
+
+  <h3 class="section-title">Trauma in the Geriatric Patient — Key Statistics</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Trauma Type</th><th>Key Facts</th><th>Prehospital Consideration</th></tr></thead>
+      <tbody>
+        <tr><td>Falls</td><td>Leading cause; 1 in 4 per year; 3M ED visits annually</td><td>STEADI program; assess fall risk; fear of falling compounds injury</td></tr>
+        <tr><td>Hip Fractures</td><td>20% mortality in year 1; 33% by year 2</td><td>Pain management, immobilization; decreased pain perception may mask fracture</td></tr>
+        <tr><td>Motor Vehicle Crashes</td><td>7,500+ deaths in 2020; 20% of all pedestrian deaths</td><td>Increased morbidity/mortality from comorbid disease + aging effects</td></tr>
+        <tr><td>Head Injury</td><td>Brain atrophy → stretched veins → subdural hematoma risk</td><td>Large bleed may occur before ICP signs; lower threshold for imaging</td></tr>
+        <tr><td>Burns</td><td>1,200+ older adult deaths/year from fires and burns</td><td>Careful fluid resuscitation; skin changes increase burn depth</td></tr>
+        <tr><td>Chest Trauma</td><td>Aged thorax less elastic; marginal pulmonary reserve</td><td>Consider aortic dissection with rapid deceleration; ECG monitoring</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="section-title">I WATCH DEATH — Delirium Differential Mnemonic</h3>
+  <div class="info-grid">
+    <div class="info-card blue"><h4>I — Infection</h4><p>Encephalitis, meningitis, UTI, pneumonia</p></div>
+    <div class="info-card gold"><h4>W — Withdrawal</h4><p>Alcohol, barbiturates, sedative-hypnotics</p></div>
+    <div class="info-card coral"><h4>A — Acute Metabolic</h4><p>Acidosis, alkalosis, electrolyte imbalance, liver/kidney failure</p></div>
+    <div class="info-card purple"><h4>T — Trauma</h4><p>Head injury, heatstroke, severe burns</p></div>
+    <div class="info-card orange"><h4>C — CNS Problem</h4><p>Abscess, hemorrhage, hydrocephalus, subdural hematoma, seizures, stroke</p></div>
+    <div class="info-card"><h4>H — Hypoxia</h4><p>Anemia, carbon monoxide, pulmonary/cardiac failure</p></div>
+    <div class="info-card blue"><h4>D — Deficiencies</h4><p>Vitamin B₁₂, folate, niacin, thiamine</p></div>
+    <div class="info-card gold"><h4>E — Endocrine</h4><p>Hypo/hyperadrenocorticism, hypo/hyperglycemia, myxedema</p></div>
+    <div class="info-card coral"><h4>A — Acute Vascular</h4><p>Hypertensive encephalopathy, stroke, arrhythmia, shock</p></div>
+    <div class="info-card purple"><h4>T — Toxins/Drugs</h4><p>Prescription or illicit drugs, pesticides, solvents</p></div>
+    <div class="info-card orange"><h4>H — Heavy Metals</h4><p>Lead, manganese, mercury poisoning</p></div>
+  </div>
+</div>
+
+<!-- ===== CONDITIONS ===== -->
+<div id="tab-conditions" class="tab-content">
+
+  <div class="category-title blue">🫁 Pulmonary Conditions</div>
+  <div class="cards-grid" id="pulmonary-cards"></div>
+
+  <div class="category-title coral">❤️ Cardiovascular Conditions</div>
+  <div class="cards-grid" id="cardiac-cards"></div>
+
+  <div class="category-title purple">🧠 Neurological & Cognitive Conditions</div>
+  <div class="cards-grid" id="neuro-cards"></div>
+
+  <div class="category-title gold">🧬 Endocrine & Metabolic Conditions</div>
+  <div class="cards-grid" id="endo-cards"></div>
+
+  <div class="category-title green">🫀 GI & Integumentary Conditions</div>
+  <div class="cards-grid" id="gi-cards"></div>
+
+  <div class="category-title orange">💪 Musculoskeletal Conditions</div>
+  <div class="cards-grid" id="msk-cards"></div>
+
+  <div class="category-title teal">⚗️ Toxicology & Environmental</div>
+  <div class="cards-grid" id="tox-cards"></div>
+
+  <div class="category-title coral">🤕 Trauma & Behavioral</div>
+  <div class="cards-grid" id="trauma-cards"></div>
+</div>
+
+<!-- ===== ASSESSMENT & SPECIAL TOPICS ===== -->
+<div id="tab-assessment" class="tab-content">
+  <h3 class="section-title">Sensory Impairments in the Geriatric Patient</h3>
+  <div class="info-grid">
+    <div class="info-card blue"><h4>👁️ Vision — Cataracts</h4><p>Loss of transparency of the lens from protein fiber changes. Progressive loss of clarity and detail — never causes full blindness. Very common — surgical removal is routine. Vision changes begin ~age 40 and worsen gradually.</p></div>
+    <div class="info-card gold"><h4>👁️ Vision — Glaucoma</h4><p>Elevated intraocular pressure damages the optic nerve → partial or complete loss of peripheral then central vision. Rarely seen before age 40. Treated with oral medications and eye drops to reduce pressure if detected early.</p></div>
+    <div class="info-card coral"><h4>👂 Hearing — Presbycusis</h4><p>Age-related degeneration of the hearing mechanism — the most common cause of hearing loss in older adults. Ménière disease, ototoxic drugs, tumors, and viral infections can also cause hearing loss. Hearing aids and surgical implants may restore or improve hearing.</p></div>
+    <div class="info-card purple"><h4>🔔 Tinnitus</h4><p>Perception of noise in the ear (ringing, buzzing, whistling) — almost always associated with hearing loss from aging. Present at all times with intermittent awareness. May change in nature and intensity but usually permanent.</p></div>
+    <div class="info-card orange"><h4>🗣️ Speech & Communication</h4><p>Difficulty in word retrieval, decreased fluency, slowed speech rate, changes in voice quality. Causes include damage to language centers, CNS degeneration, hearing loss, laryngeal disorders, and poor-fitting dentures. Critical for EMS communication strategy.</p></div>
+  </div>
+
+  <h3 class="section-title">Elder Abuse — Recognition & Reporting</h3>
+  <div class="info-grid">
+    <div class="info-card coral"><h4>📖 Definition</h4><p>Infliction of physical pain, injury, debilitating mental anguish, unreasonable confinement, or willful deprivation of services necessary to maintain mental and physical health of a geriatric person by a caregiver.</p></div>
+    <div class="info-card purple"><h4>🚨 Types of Abuse</h4><ul><li>Physical abuse</li><li>Sexual abuse</li><li>Emotional/psychological abuse</li><li>Neglect</li><li>Abandonment</li><li>Financial/material exploitation</li><li>Self-neglect</li></ul></div>
+    <div class="info-card gold"><h4>📊 Epidemiology</h4><p>Estimated to affect 5 million older adults each year. May occur in the home or residential care facilities. A growing and increasingly recognized problem. Affects all socioeconomic levels.</p></div>
+    <div class="info-card blue"><h4>⚖️ Mandatory Reporting</h4><p>ALL 50 states have elder abuse statutes. Reporting of suspected elder abuse is MANDATORY. Follow established local protocol for reporting. Paramedics are mandated reporters — document and report any suspicion.</p></div>
+  </div>
+
+  <h3 class="section-title">Suicide Risk Assessment in Geriatric Patients</h3>
+  <div class="info-grid">
+    <div class="info-card coral"><h4>📊 Epidemiology</h4><p>Patients ≥65 account for ~18% of all US suicides. Rate of completed suicides is HIGHER than the general population. Most visited their primary care physician in the month before. Most were suffering from their FIRST episode of major depression — unrecognized and untreated.</p></div>
+    <div class="info-card purple"><h4>⚠️ Warning Signs</h4><ul><li>Talking about death or "getting affairs in order"</li><li>Stating benefits of dying ("My family would be better off")</li><li>Giving away prized possessions</li><li>Not adhering to medical regimen</li><li>Acquiring a weapon (especially firearm)</li></ul></div>
+    <div class="info-card gold"><h4>🔫 Method of Choice</h4><p>Most suicides by older adults involve FIREARMS. Scene safety and crew safety are the priority when caring for a patient with suicidal tendencies. Secure the scene before approaching — law enforcement may be needed.</p></div>
+    <div class="info-card blue"><h4>🤝 Approach</h4><p>Many depressed patients will discuss suicidal thoughts if asked directly. Establish rapport and encourage open discussion. Interview family about mental state and depression history. Refer to physician for evaluation — depression is treatable!</p></div>
+  </div>
+
+  <h3 class="section-title">Polypharmacy & Adverse Drug Events</h3>
+  <div class="info-grid">
+    <div class="info-card blue"><h4>💊 Most Common Culprits</h4><p>Cardiovascular medications (first), then diuretics, non-opioid and opioid analgesics, hypoglycemics, and anticoagulants — these categories cause the most preventable ADEs leading to hospital admission.</p></div>
+    <div class="info-card coral"><h4>⚠️ Why Geriatric Patients Are Vulnerable</h4><ul><li>Increased gastric pH, decreased GI motility (altered absorption)</li><li>Decreased cardiac output and total body water</li><li>Decreased liver blood flow (slower metabolism)</li><li>Decreased renal clearance (drug accumulation)</li><li>Altered CNS sensitivity</li></ul></div>
+    <div class="info-card gold"><h4>🔄 Causes of Drug Mishaps</h4><ul><li>Dispensing errors</li><li>Noncompliance / forgetfulness</li><li>Vision impairment</li><li>Self-selection of OTC drugs</li><li>Multiple prescribers</li><li>Resuming old medications alongside new ones</li></ul></div>
+    <div class="info-card purple"><h4>📉 Dose Adjustment</h4><p>Drug doses may need to be reduced by as much as 50% in older adults due to changes in metabolism and elimination. Fat-soluble drugs accumulate in increased fat tissue. Water-soluble drugs become more concentrated with decreased total body water. Always consider dose-related ADE.</p></div>
+  </div>
+
+  <h3 class="section-title">STEADI Fall Prevention Program</h3>
+  <div class="info-grid">
+    <div class="info-card blue"><h4>❓ Three Screening Questions</h4><ul><li>Have you fallen in the past year?</li><li>Do you feel unsteady when standing or walking?</li><li>Do you worry about falling?</li></ul><p style="margin-top:.5rem;">Yes to ANY = increased fall risk</p></div>
+    <div class="info-card gold"><h4>🔍 Identifiable Risk Factors</h4><ul><li>Lower body weakness</li><li>Gait and balance problems</li><li>Postural dizziness</li><li>History of previous falls</li><li>Home safety hazards</li><li>Medications (sedatives, diuretics, antihypertensives)</li></ul></div>
+    <div class="info-card coral"><h4>🚑 EMS Role</h4><p>Paramedics assess fall risk during lift-assist and medical calls. Provide educational materials on fall reduction. Assess for postural hypotension. Refer to mobile integrated health or social services for follow-up. Document fall circumstances thoroughly.</p></div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div id="tab-quiz" class="tab-content">
+  <div id="student-form-wrapper">
+    <div class="student-form">
+      <h3>📝 Knowledge Assessment</h3>
+      <p style="text-align:center;font-size:.84rem;color:var(--text-muted);margin-bottom:1.4rem;">Chapter 48: Geriatrics · 100 Questions</p>
+      <div class="form-group"><label>Student Full Name</label><input type="text" id="student-name" placeholder="Enter your full name"></div>
+      <div class="form-group"><label>Student ID</label><input type="text" id="student-id" placeholder="Enter your student ID"></div>
+      <div class="form-group"><label>Date</label><input type="text" id="quiz-date" placeholder="Auto-filled"></div>
+      <button class="btn-start" onclick="startQuiz()">Begin Assessment →</button>
+    </div>
+  </div>
+  <div class="quiz-container" id="quiz-container">
+    <div class="quiz-header">
+      <div class="quiz-info"><span>Answered: </span><strong id="q-counter">0 / 100</strong></div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <div class="live-score">Score: <span id="live-score">0</span>/100</div>
+    </div>
+    <div id="questions-area"></div>
+  </div>
+  <div class="results-container" id="results-container">
+    <div class="score-circle"><div class="score-pct" id="score-pct">0%</div><div class="score-label">Final Score</div></div>
+    <div class="grade-label" id="grade-label"></div>
+    <p style="color:var(--text-secondary);margin-bottom:1rem;" id="grade-comment"></p>
+    <div class="results-stats">
+      <div class="result-stat"><div class="num" id="correct-count" style="color:var(--accent-green);">0</div><div class="lbl">Correct</div></div>
+      <div class="result-stat"><div class="num" id="wrong-count" style="color:var(--accent-coral);">0</div><div class="lbl">Incorrect</div></div>
+      <div class="result-stat"><div class="num" id="pct-display" style="color:var(--accent-teal);">0%</div><div class="lbl">Percentage</div></div>
+    </div>
+    <button class="btn-pdf" onclick="generatePDF()">⬇️ Download PDF Report</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+    <button class="btn-retake" onclick="retakeQuiz()">🔄 Retake Quiz</button>
+    <div class="review-list" id="review-list" style="display:none;"></div>
+  </div>
+</div>
+</main>
+
+<script>
+// ===== THEME =====
+function toggleTheme(){
+  const r=document.documentElement;
+  const isDark=r.getAttribute('data-theme')==='dark';
+  r.setAttribute('data-theme',isDark?'light':'dark');
+  document.querySelector('.theme-btn').textContent=isDark?'🌙 Dark Mode':'☀️ Light Mode';
+}
+// ===== TABS =====
+function switchTab(id,el){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  el.classList.add('active');
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('quiz-date').value=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  buildAllCards();
+});
+
+// ===== CARD DATA =====
+const pulmonaryCards=[
+{icon:'🦠',title:'Bacterial Pneumonia',subtitle:'Pulmonary infection with atypical geriatric presentation',tag:'pulmonary',
+patho:'Geriatric patients ≥65 face a 5–10× greater risk of death from pneumonia compared to younger adults. Reduced cilia function, diminished cough and gag reflexes, and impaired immune function allow pathogens to colonize the throat and aspirate into the lungs. Chronic diseases impair respiratory tract clearance. The typical clinical picture (fever, productive cough, pleurisy, sweating, pulmonary congestion) is frequently ABSENT or dramatically diminished. Instead, confusion or delirium may be the ONLY early indicator — leading to delayed diagnosis and worse outcomes. Respiratory failure requiring ventilator support and sepsis are common complications.',
+signs:'Confusion or delirium (often the ONLY early sign). Tachycardia and tachypnea are the most reliable prehospital indicators. May lack fever, productive cough, or pleurisy. Too weak to cough or produce sputum. Unable to breathe deeply.',
+tx:'Supplemental O₂, airway support (remove dentures if needed for BVM). IV access, fluid resuscitation if septic. Monitor SpO₂ — target ≥94%. Rapid transport. Hospital: culture-directed antibiotics, possible ventilatory support.',
+meds:[{drug:'O₂ (titrated)',dose:'Maintain SpO₂ ≥94%',note:'Caution: COPD patients — avoid suppressing hypoxic drive'},{drug:'Azithromycin',dose:'Hospital: 500mg IV/PO day 1',note:'Community-acquired pneumonia (CAP) coverage'},{drug:'Ceftriaxone',dose:'Hospital: 1-2g IV daily',note:'Combined with macrolide for CAP in hospitalized patients'},{drug:'Levofloxacin',dose:'Hospital: 750mg IV/PO',note:'Respiratory fluoroquinolone — monotherapy option for CAP'}],
+analogy:'Pneumonia in a geriatric patient is like a fire alarm system with dead batteries — the lungs are actually on fire (infected), but all the warning bells (cough, fever, pain) fail to sound because the detection system (immune response, cough reflex) is broken. You have to look for smoke (delirium, tachycardia) because the alarm isn\'t working.'},
+
+{icon:'💨',title:'COPD Exacerbation',subtitle:'Acute worsening of chronic obstructive pulmonary disease',tag:'pulmonary',
+patho:'COPD is nearly universal in geriatric patients with a significant smoking history. Physiologically, loss of alveolar elasticity and airway destruction create air trapping and barrel chest deformity. Exacerbations are triggered by acute respiratory infections (most common), air pollution, or medication non-compliance. Infection causes airway edema, bronchial smooth muscle spasm, and increased mucus production — all narrowing the already compromised airway. The already-diminished chemoreceptor sensitivity means the patient may not mount an appropriate hypoxic/hypercapnic response. High-flow O₂ can suppress the hypoxic ventilatory drive in chronic CO₂ retainers (some COPD patients reset their baseline PCO₂ chronically — their drive to breathe is hypoxia, not hypercapnia).',
+signs:'Dyspnea (often severe), increased work of breathing, accessory muscle use, pursed-lip breathing, barrel chest, prolonged expiratory phase, wheezing, decreased SpO₂, increased sputum production.',
+tx:'Controlled O₂ (titrate to SpO₂ 88-92% in known CO₂ retainers). CPAP/BiPAP for moderate-severe. Bronchodilators via nebulizer. Corticosteroids IV/IM to reduce airway inflammation. Antibiotics if infection suspected.',
+meds:[{drug:'Albuterol (Salbutamol)',dose:'2.5mg NEB q20min × 3',note:'Short-acting beta-2 agonist — first-line bronchodilator'},{drug:'Ipratropium bromide',dose:'0.5mg NEB with albuterol',note:'Anticholinergic — synergistic with albuterol in COPD'},{drug:'Methylprednisolone',dose:'125mg IV',note:'Corticosteroid — reduces airway inflammation; shortens exacerbation'},{drug:'O₂',dose:'Titrate to SpO₂ 88–92%',note:'AVOID high-flow O₂ in CO₂ retainers — suppresses hypoxic drive'}],
+analogy:'COPD is like trying to blow air through a kinked straw that\'s also coated inside with rubber cement — getting air IN is possible (inspiration is active), but GETTING AIR OUT (passive expiration) is the real problem. Air gets trapped behind the kink and the gunk, progressively inflating the barrel like a bike tire that can only partially deflate.'},
+];
+
+const cardiacCards=[
+{icon:'💔',title:'Myocardial Infarction (Silent/Atypical)',subtitle:'Coronary occlusion with atypical presentation in geriatric patients',tag:'cardiac',
+patho:'With advancing age, classic chest pain as an MI symptom becomes progressively less common — only 45% of patients over 85 with confirmed MI report chest pain. Pain perception declines with aging as peripheral nociceptors and central pain processing pathways deteriorate. Autonomic neuropathy (especially in diabetics) further blunts pain. Instead, the ischemic myocardium manifests through atypical pathways: dyspnea from acutely reduced cardiac output, abdominal/epigastric pain from referred diaphragmatic irritation, fatigue and weakness from poor perfusion, and nausea from vagal activation. Many events are entirely "silent" — only discovered on routine ECG showing Q waves or during cardiac workup for another complaint.',
+signs:'Dyspnea (most common substitute for chest pain in elderly), abdominal/epigastric pain, jaw pain, fatigue, nausea, weakness. Women: sharp pain, fatigue, breathlessness. 85+: often totally "silent." 12-lead ECG indicated for any atypical complaint with risk factors.',
+tx:'O₂ if SpO₂ <94%. Aspirin 324mg PO (if not contraindicated). 12-lead ECG. IV access. Nitroglycerin for ongoing ischemia (caution: hypotension, especially with inferior MI and RV involvement). Fentanyl or morphine for pain. Rapid transport.',
+meds:[{drug:'Aspirin',dose:'324mg PO (chewed)',note:'Antiplatelet — reduces clot propagation; give immediately if no contraindication'},{drug:'Nitroglycerin',dose:'0.4mg SL q5min × 3',note:'Vasodilator — caution hypotension, RV MI; check BP before each dose'},{drug:'Fentanyl',dose:'1-2 mcg/kg IV slow',note:'Pain management — less emetic than morphine; reduces sympathetic activation'},{drug:'Heparin',dose:'Hospital: 60 IU/kg bolus',note:'Anticoagulation — prevents clot extension; initiated in hospital'}],
+analogy:'A silent MI in a geriatric patient is like a slow gas leak in a building that nobody can smell — the leak (ischemia) is real and dangerous, but the alarm system (pain sensation) has been disabled by age. By the time someone notices the smoke (atypical symptoms like fatigue or nausea), significant damage has already been done. The building needs an inspector (12-lead ECG) to detect the problem.'},
+
+{icon:'💧',title:'Heart Failure',subtitle:'Leading cause of hospitalization in adults ≥65',tag:'cardiac',
+patho:'Heart failure in geriatric patients results from decades of cumulative cardiac insults — hypertension causes ventricular hypertrophy, CAD reduces myocyte viability, and normal aging decreases ventricular compliance. Systolic HF (reduced ejection fraction): weakened ventricle cannot generate adequate stroke volume. Diastolic HF (preserved EF): stiff ventricle cannot relax and fill normally — this type is MORE common in older adults. Either way, the result is inadequate cardiac output → peripheral fluid retention (increased aldosterone, ADH), pulmonary venous congestion, and eventual pulmonary edema. Treatment non-compliance (from memory impairment, cost, vision problems) is a major driver of exacerbations — patients cannot remember or afford multiple daily medications.',
+signs:'Progressive dyspnea, orthopnea, paroxysmal nocturnal dyspnea, bilateral dependent pitting edema, JVD, S3 gallop, crackles bilaterally, fatigue, weight gain. BP >160/90 is a major risk factor.',
+tx:'Sit upright (reduce preload), O₂, CPAP/BiPAP for respiratory distress (most powerful non-pharmacologic intervention). Nitroglycerin for afterload reduction. Furosemide IV. Morphine (cautiously — suppress dyspnea, venodilate). Monitor for hypotension.',
+meds:[{drug:'Furosemide (Lasix)',dose:'0.5-1 mg/kg IV',note:'Loop diuretic — removes fluid; onset 5-10 min (vasodilation), 30-60 min (diuresis)'},{drug:'Nitroglycerin',dose:'0.4mg SL or 400-800 mcg IV infusion',note:'Vasodilator — reduces preload and afterload; watch BP'},{drug:'CPAP/BiPAP',dose:'CPAP 5-10 cmH₂O; BiPAP 10/5 cmH₂O',note:'Non-invasive ventilation — reduces work of breathing; may prevent intubation'},{drug:'Morphine',dose:'2-4mg IV slow (controversial)',note:'Venodilator + anxiolytic; avoid if hypotensive or hypercarbic'}],
+analogy:'Heart failure is like a garden hose pump that\'s running at 30% power — not enough pressure to push all the water forward, so it backs up in the hose and overflows at every junction (pulmonary edema, dependent edema, ascites). Furosemide drains the backed-up water. Nitroglycerine widens the hose. CPAP keeps the airways from collapsing under the overflow pressure.'},
+
+{icon:'⚡',title:'Cardiac Dysrhythmias',subtitle:'Rhythm disturbances from structural and electrical aging changes',tag:'cardiac',
+patho:'The aging conduction system undergoes progressive fibrosis and loss of functional cells in the SA and AV nodes. Chronic hypertension causes left ventricular hypertrophy — stretching the atria and creating substrate for AFib. Calcium and sodium channel dysfunction alters automaticity and conduction velocity. Atherosclerosis reduces coronary perfusion of the conduction system. Electrolyte disturbances (hypokalemia from diuretics, hypomagnesemia) alter membrane potential and precipitate dysrhythmias. Drug toxicity (digoxin, antiarrhythmics, beta blockers) is a major iatrogenic cause. AFib is the most common dysrhythmia — creates irregular ventricular response, reduces cardiac output by ~20% (loss of atrial kick), and predisposes to thromboembolic stroke.',
+signs:'Palpitations (may be absent due to blunted sensation), irregular pulse, bradycardia, syncope, near-syncope, falls from cerebral hypoperfusion, TIA, dyspnea from reduced CO, hypotension.',
+tx:'Treat underlying cause (electrolytes, hypoxia, pain, toxicity). AFib with RVR: rate control preferred in stable patients. Unstable (hypotension, altered LOC, chest pain): synchronized cardioversion. Bradycardia with symptoms: atropine, transcutaneous pacing.',
+meds:[{drug:'Atropine',dose:'0.5-1mg IV q3-5min (max 3mg)',note:'Parasympatholytic — chronotropic for symptomatic bradycardia'},{drug:'Amiodarone',dose:'150mg IV over 10 min, then infusion',note:'Rate/rhythm control for AFib with RVR or V-tach'},{drug:'Diltiazem',dose:'0.25 mg/kg IV over 2 min',note:'Ca-channel blocker — rate control for AFib/flutter with preserved EF'},{drug:'Adenosine',dose:'6mg rapid IV push (SVT)',note:'Blocks AV node — terminates re-entry SVT'}],
+analogy:'The aging heart\'s electrical system is like an old factory\'s power grid — corroded wiring (fibrosis), worn-out circuit breakers (SA/AV node cells), and unreliable power sources (ischemic myocardium). Some circuits run too slow (sick sinus syndrome), some run out of control (AFib), and some randomly trip the whole system (heart blocks). Managing dysrhythmias is like an electrical contractor trying to keep a 70-year-old power plant running safely.'},
+
+{icon:'🩸',title:'Aortic Aneurysm (AAA/TAA)',subtitle:'Atherosclerotic dilation and risk of dissection/rupture',tag:'cardiac',
+patho:'Atherosclerosis is the primary driver of both abdominal aortic aneurysm (AAA) and thoracic aortic aneurysm (TAA). The atherosclerotic process weakens the aortic media and elastin framework, allowing progressive dilation. Chronic hypertension adds circumferential wall stress. AAA affects 4-8% of older men. Acute dissection occurs when a tear in the intima allows blood to enter the media and track longitudinally — creating a false lumen. Dissection is more common than AAA rupture and carries extremely high mortality. Signs vary by location: anterior abdominal pain (AAA), tearing/ripping back or chest pain (dissection), syncope, pulse deficits, differential BP in arms. Any rapid deceleration mechanism in an older patient should raise suspicion for aortic injury.',
+signs:'Tearing/ripping chest or back pain (dissection), pulsatile abdominal mass (AAA), pain radiating to back/flanks, hypotension, syncope, diminished or absent distal pulses, differential blood pressure between arms (>20 mmHg), neurologic deficits.',
+tx:'Gentle handling (minimize movement), blood pressure CONTROL (target SBP 100-120 mmHg — high BP worsens dissection), pain management with opioids, large-bore IV access, fluid resuscitation only if severe hypotension, immediate transport to surgical facility.',
+meds:[{drug:'Fentanyl',dose:'1-2 mcg/kg IV slow',note:'Opioid analgesia — reduce pain-mediated hypertension and tachycardia'},{drug:'Esmolol (hospital)',dose:'500 mcg/kg IV load',note:'Short-acting beta blocker — control HR and BP; cornerstone of dissection management'},{drug:'Sodium nitroprusside (hospital)',dose:'0.3-0.5 mcg/kg/min IV',note:'Vasodilator for BP control in dissection'},{drug:'IV Saline',dose:'Large-bore access — judicious bolus only if severe shock',note:'Permissive hypotension until surgical control'}],
+analogy:'An aortic aneurysm is like a garden hose that\'s been run over repeatedly — the inner liner (intima) is damaged, the rubber walls (media) are thinning, and the hose is bulging dangerously under pressure. In dissection, a crack in the inner liner lets water get between the layers and track down the length of the hose. Every increase in pressure makes the tracking worse. The goal is to reduce water pressure (blood pressure) until the plumber (surgeon) can repair the hose.'},
+
+{icon:'📈',title:'Hypertension Emergency',subtitle:'Blood pressure causing end-organ damage',tag:'cardiac',
+patho:'Hypertension (resting BP consistently >130/80 mmHg) is extremely prevalent in geriatric patients due to progressive arterial stiffening from atherosclerosis and loss of vascular compliance. The aging vasculature cannot accommodate cardiac output elastically — systolic pressure rises while diastolic may remain stable (isolated systolic hypertension). Hypertensive emergency is defined by blood pressure elevation WITH evidence of end-organ damage: hypertensive encephalopathy (cerebral edema, altered LOC), acute MI, acute decompensated HF, acute aortic dissection, or hypertensive nephropathy. Distinguished from hypertensive urgency (very high BP WITHOUT end-organ damage).',
+signs:'Severe headache, visual changes, altered mental status, chest pain, SOB, neurologic deficits. BP typically >180/120 mmHg with end-organ involvement. Signs of HF, neurologic deficits, retinal changes (papilledema).',
+tx:'Hypertensive EMERGENCY: Controlled BP reduction (not too fast — rapidly lowering BP can cause cerebral, coronary, or renal ischemia from loss of autoregulation). Target: reduce MAP by no more than 25% in first hour. Labetalol or nicardipine IV preferred. Nonemergent: educate, encourage physician follow-up.',
+meds:[{drug:'Labetalol',dose:'10-20mg IV slow (hospital)',note:'Alpha+beta blocker — smooth BP reduction; avoid in asthma/COPD, acute HF'},{drug:'Nicardipine',dose:'5 mg/hr IV infusion (hospital)',note:'Dihydropyridine CCB — titratable, safe, effective for most hypertensive emergencies'},{drug:'Hydralazine',dose:'10-20mg IV (hospital)',note:'Direct vasodilator — used in pregnancy-related hypertension; unpredictable'},{drug:'Nitroglycerin',dose:'Infusion (hospital) for HF or ACS complication',note:'Reduces preload; good for HF/ACS-related hypertensive emergency'}],
+analogy:'Hypertensive emergency is like a municipal water system where the main pump is cranking at maximum pressure and the pipes (arteries) are brittle old iron pipes — they weren\'t built for this sustained pressure. The brain\'s pipes start to leak (cerebral edema), the heart pipes bulge (coronary ischemia), and the kidney filters get damaged. The goal is to gradually reduce water pressure — not abruptly (which would deprive the city of water completely) but steadily.'},
+];
+
+const neuroCards=[
+{icon:'⚡',title:'Stroke',subtitle:'Ischemic or hemorrhagic brain infarction',tag:'neuro',
+patho:'Stroke is a leading cause of death and disability in the US. Ischemic stroke (87%): thrombotic or embolic occlusion of a cerebral artery. Emboli most commonly arise from cardiac sources (AFib — clot forms in fibrillating left atrium). Hemorrhagic stroke: arterial rupture from hypertension or vascular malformation. Risk factors amplify with age: hypertension (>140/90 in 75% of stroke patients), diabetes, atherosclerosis, hyperlipidemia, polycythemia, and heart disease. The infarcted brain tissue is surrounded by a penumbra — ischemic but still salvageable tissue if perfusion is restored quickly ("time is brain" — 1.9 million neurons die every minute in stroke). Nearly 1 in 4 stroke patients will have another within 5 years.',
+signs:'FAST/BE-FAST: Balance, Eyes (visual changes), Face drooping, Arm weakness, Speech difficulty, Time. Hemiplegia/hemiparesis, aphasia, dysarthria, dysphagia, visual deficits, sudden severe headache (hemorrhagic). Assess Cincinnati/LAPSS scale.',
+tx:'Rapid assessment and transport to stroke center — door-to-CT goal is 25 minutes. O₂ only if SpO₂ <94%. IV access, blood glucose check (hypoglycemia mimics stroke). NPO (swallowing dysfunction risk). Position head of bed at 15-30°. Avoid hypotension. Treat fever. Do NOT lower BP in field unless extreme (>185/110 if tPA candidate).',
+meds:[{drug:'tPA (Alteplase)',dose:'0.9 mg/kg IV (max 90mg) — hospital only',note:'Thrombolytic — must be within 3–4.5 hours of symptom onset; absolute contraindications apply'},{drug:'D50/D10W',dose:'25g IV if BG <60 mg/dL',note:'Rule out hypoglycemia — always check glucose before treating suspected stroke'},{drug:'Aspirin',dose:'325mg PO (hospital) — after ruling out hemorrhage',note:'Antiplatelet — for ischemic stroke if tPA not given'},{drug:'Mechanical thrombectomy (hospital)',dose:'Up to 24 hours for large vessel occlusion',note:'Catheter-based clot retrieval; revolutionized large-vessel stroke outcomes'}],
+analogy:'A stroke is like a dam suddenly blocking a river that feeds an entire downstream valley — the valley (brain tissue downstream) starts dying without water (blood/oxygen). The upstream brain cells downstream are already dead (core infarct), but the farms on the riverbanks (penumbra) can still be saved if we remove the dam (tPA, thrombectomy) fast enough. Every minute of delay, more farms die permanently.'},
+
+{icon:'🌀',title:'Delirium',subtitle:'Acute, reversible confusional state from organic cause',tag:'neuro',
+patho:'Delirium is an acute disruption of brain function characterized by fluctuating attention, disorganized thinking, and altered level of consciousness — caused by an identifiable, often reversible medical condition. The pathophysiology involves global cerebral dysfunction from metabolic insults: neurotransmitter imbalances (excess dopamine, acetylcholine deficiency), neuroinflammation, oxidative stress, and impaired cerebral perfusion. The aging brain has reduced neurological reserve — it takes much less metabolic stress to tip an older brain into delirium. CRITICAL distinction: Delirium is ACUTE and REVERSIBLE (if treated). Dementia is CHRONIC and PROGRESSIVE. Key differentiator: delirium fluctuates; dementia generally does not fluctuate hour-to-hour.',
+signs:'Hyperactive: agitation, hallucinations, incoherent speech, wandering, combativeness. Hypoactive: stupor, lethargy, coma (often missed). Fluctuating level of consciousness. Inattention, disorganized thinking, acute onset. Richmond Agitation-Sedation Scale (RASS) is a prehospital screening tool.',
+tx:'Treat the underlying cause (use I WATCH DEATH to guide). O₂ for hypoxia, glucose for hypoglycemia, antipyretics for fever, IV fluids for dehydration, halt offending medications. Low-stimulus environment — calm voice, reorientation. Avoid restraints if possible. Rapid transport for workup.',
+meds:[{drug:'Haloperidol',dose:'0.5-1mg IM/IV (hospital)',note:'Low-dose antipsychotic — for severe agitation risking harm to patient/staff; not first-line'},{drug:'Lorazepam',dose:'0.5-1mg IV (hospital)',note:'ONLY for alcohol/benzodiazepine withdrawal delirium — otherwise may WORSEN delirium'},{drug:'Thiamine',dose:'100mg IV before glucose (hospital)',note:'Prevent Wernicke encephalopathy — always give before D50 if alcoholism suspected'},{drug:'O₂, D50, IV fluids',dose:'Per assessment findings',note:'Treat reversible causes — most powerful intervention in delirium management'}],
+analogy:'Delirium is like a computer that\'s overheating and glitching from a hardware crisis — the software (personality, memories) is still mostly intact underneath, but the processor is overwhelmed by a thermal emergency (metabolic crisis, infection, hypoxia). Shut down the heat source (treat the underlying cause) and most computers reboot to normal. Don\'t confuse this with a computer that has failing hardware (dementia) — the glitching looks similar but has very different causes and very different outcomes.'},
+
+{icon:'🧩',title:'Dementia',subtitle:'Progressive decline in cognitive function affecting independence',tag:'neuro',
+patho:'Dementia is not a single disease but a syndrome of progressive cognitive decline — memory, concentration, language, reasoning, and visuospatial abilities — severe enough to impair independence in daily activities. Multiple pathophysiologic mechanisms exist depending on the subtype: Alzheimer\'s involves amyloid-beta plaque deposition and tau neurofibrillary tangles in the cerebral cortex, causing neuronal death and progressive cortical atrophy. Vascular dementia involves ischemic damage from multiple micro-strokes or large-vessel events. Lewy body disease involves alpha-synuclein protein deposits depleting acetylcholine and dopamine. Frontotemporal dementia involves selective frontal and temporal lobe neurodegeneration affecting personality, judgment, and language first. All types eventually lead to full dependence.',
+signs:'Impaired memory (especially new memories — "I know it was somewhere, I just can\'t find it"). Disorientation, confusion, language difficulty, impaired judgment, personality changes. Late stage: unable to perform basic ADLs, immobile, unable to swallow. Key difference from delirium: GRADUAL onset over months-years; less fluctuation.',
+tx:'Prehospital: ensure safety, gentle communication (calm voice, simple sentences, eye contact), treat any superimposed acute illness (delirium on dementia is common), assess for injury (falls), caregiver support. NO disease-modifying prehospital treatment.',
+meds:[{drug:'Donepezil (Aricept)',dose:'5-10mg PO daily',note:'Acetylcholinesterase inhibitor — slows progression of mild-moderate Alzheimer\'s; does not reverse'},{drug:'Memantine',dose:'5-20mg PO daily',note:'NMDA receptor antagonist — reduces glutamate excitotoxicity; moderate-severe Alzheimer\'s'},{drug:'Rivastigmine',dose:'Patch or PO capsule',note:'AChE inhibitor — approved for Alzheimer\'s and Parkinson\'s dementia'},{drug:'Haloperidol (low dose)',dose:'0.5mg PO/IM (hospital — behavioral)',note:'For severe behavioral disturbances in dementia — significant risk of side effects'}],
+analogy:'Dementia is like a library where the librarian (neurons) retires a few at a time, and the books (memories) are left unorganized. At first, recent books are hard to find (short-term memory loss) because they weren\'t catalogued yet. Older books are still findable for a while (long-term memories survive longer). Eventually, entire wings of the library close (language, executive function, personality), until the library is permanently shuttered. Unlike a fire (delirium), this closure is slow and inevitable — but the building didn\'t need to catch fire; it just aged out.'},
+
+{icon:'🔮',title:'Alzheimer Disease',subtitle:'Most common dementia subtype — amyloid plaques and tau tangles',tag:'neuro',
+patho:'Alzheimer disease is the single most common dementia subtype, responsible for one-third of cases in patients over 85. Pathologically, abnormal processing of amyloid precursor protein produces beta-amyloid peptides that aggregate into plaques between neurons. Simultaneously, hyperphosphorylated tau protein forms neurofibrillary tangles within neurons. These plaques and tangles spread in a predictable pattern: hippocampus first (new memory formation), then association cortices (language, judgment, reasoning), then primary cortices. The cholinergic system is selectively targeted — acetylcholine-producing neurons in the basal forebrain degenerate, explaining the memory symptoms and the rationale for AChE inhibitor therapy. Risk factors: age (greatest), family history, APOE ε4 gene, prior head trauma, vascular disease.',
+signs:'Early: inability to form and recall new memories (asks same questions repeatedly). Progressive: impaired abstract thinking, agitation, violence, language decline. Advanced: bedridden, unaware of surroundings, unable to eat. Ultimately dies from aspiration pneumonia or infection from immobility.',
+tx:'No cure. Social/nursing care is primary treatment. AChE inhibitors slow progression. Memantine reduces glutamate-mediated excitotoxicity. Address behavior (wandering, agitation) with environmental modification first, medications second. Palliative/hospice for advanced disease.',
+meds:[{drug:'Donepezil',dose:'5mg PO daily (increase to 10mg after 4-6 wks)',note:'Most prescribed AChE inhibitor; all stages of Alzheimer\'s'},{drug:'Galantamine',dose:'8mg PO daily',note:'AChE inhibitor + nicotinic receptor modulator; mild-moderate'},{drug:'Memantine',dose:'5mg PO daily (titrate to 20mg)',note:'NMDA antagonist; moderate-severe; often combined with AChE inhibitor'},{drug:'Lecanemab (Leqembi)',dose:'Hospital infusion protocol',note:'New monoclonal antibody — targets amyloid beta; approved 2023 for early AD'}],
+analogy:'Alzheimer\'s is like a city being invaded by two gangs simultaneously: one gang (amyloid plaques) sets up roadblocks between buildings (synaptic dysfunction between neurons), and the other (tau tangles) collapses the buildings from the inside. The city\'s power grid starts failing in the oldest, most central district (hippocampus/memory) first, then spreads outward. The utility company (AChE inhibitors) can patch the power lines temporarily, but can\'t stop the gangs from continuing their takeover.'},
+
+{icon:'🌊',title:'Vascular Dementia',subtitle:'Cognitive decline from cerebrovascular disease',tag:'neuro',
+patho:'Vascular dementia results from ischemic brain injury — either from a single large stroke (sudden onset) or cumulative damage from multiple small-vessel lacunar infarcts (stepwise decline). Chronic hypertension, diabetes, AFib, and atherosclerosis are major risk factors. Small vessel disease affects the white matter (leukoaraiosis) and subcortical structures, impairing the connections between brain regions rather than destroying cortical neurons directly. This explains why planning, attention, and executive function are impaired early — the "network cable" is damaged even though the "servers" (cortical neurons) are still functional. The second most common cause of dementia after Alzheimer\'s, and often coexists with it (mixed dementia).',
+signs:'Impaired planning and judgment (early), uncontrolled emotional lability (crying/laughing), difficulty paying attention, impaired social function, difficulty finding words. History of TIA or stroke. Neurological signs (focal deficits) often present. Stepwise progression (sudden worsening after each ischemic event).',
+tx:'Prevention is primary treatment: aggressive control of vascular risk factors (hypertension, diabetes, hyperlipidemia, AFib). Aspirin/anticoagulation for AF (reduces embolic events). AChE inhibitors may have limited benefit. Stroke prevention protocols.',
+meds:[{drug:'Aspirin',dose:'81-325mg PO daily',note:'Antiplatelet — reduces risk of additional ischemic events'},{drug:'Warfarin/Apixaban (Eliquis)',dose:'Per INR/protocol',note:'Anticoagulation for AFib-associated embolic vascular dementia'},{drug:'Antihypertensives',dose:'Target BP <130/80',note:'Most important modifiable risk factor — ACE inhibitors, ARBs, Ca channel blockers'},{drug:'Statins',dose:'Atorvastatin 40-80mg PO daily',note:'Lipid-lowering — reduces atherosclerotic progression'}],
+analogy:'Vascular dementia is like a city whose roads keep getting sinkholes — each sinkhole (micro-infarct) blocks another route between neighborhoods. The buildings (neurons) are fine, but the roads (white matter connections) keep getting damaged. The city still functions, but it\'s progressively harder to get anywhere. Preventing more sinkholes (vascular risk factor control) is the only effective intervention.'},
+];
+
+const endoCards=[
+{icon:'🍬',title:'Hyperglycemic Hyperosmolar State (HHS)',subtitle:'Severe hyperglycemia in older type 2 diabetics without ketosis',tag:'endo',
+patho:'HHS is the extreme metabolic complication of type 2 diabetes in older adults — distinct from DKA by the ABSENCE of significant ketoacidosis and the presence of PROFOUND hyperosmolality (serum osmolality often >320 mOsm/kg). Because type 2 diabetics retain some insulin activity, it is enough to suppress lipolysis (preventing ketone production) but NOT enough to prevent severe hyperglycemia. Glucose accumulates to extraordinary levels (often >600-1000 mg/dL). This creates massive osmotic diuresis — the kidneys spill glucose and water, leading to profound dehydration (water deficit often 8-10 liters). The resulting hyperosmolality causes CNS depression, altered consciousness, and — if severe — coma. Triggers include infection, illness, medication non-compliance, dehydration, or steroids.',
+signs:'Profound dehydration (dry mucous membranes, poor skin turgor, tachycardia, orthostatic hypotension), altered mental status (confusion to coma), blood glucose >600 mg/dL, NO fruity acetone breath (unlike DKA), serum osmolality markedly elevated.',
+tx:'Aggressive IV fluid resuscitation (NS 1L/hr initially) — priority is restoring intravascular volume before insulin. Electrolyte monitoring (potassium depleted — replace before/with insulin). Insulin infusion after initial fluids. Monitor for cerebral edema with rapid correction. Identify and treat precipitating cause.',
+meds:[{drug:'Normal Saline (0.9%)',dose:'500mL-1L/hr initially (prehospital)',note:'Restore intravascular volume — priority before insulin; prevents osmotic shift complications'},{drug:'Regular Insulin',dose:'0.1 units/kg/hr IV infusion (hospital)',note:'Lower glucose gradually; start AFTER initial fluids'},{drug:'Potassium Chloride',dose:'10-40 mEq/hr IV (hospital — monitor ECG)',note:'Potassium shifts intracellularly with insulin — replace to prevent hypokalemic dysrhythmias'},{drug:'Glucose check',dose:'Prehospital — glucometer BG',note:'Identify hyperosmolar state; transport to ED for lab confirmation'}],
+analogy:'HHS is like a swimming pool that\'s been left evaporating in the desert sun — the water (body fluid) evaporates while the salt (glucose, electrolytes) stays behind, making the remaining water denser and denser until the fish (brain cells) literally shrink and stop functioning in the hyperosmolar sludge. Refilling the pool slowly with fresh water (IV saline) is the priority — dumping chlorine (insulin) into a near-empty pool solves nothing and creates new problems.'},
+
+{icon:'🦋',title:'Hypothyroidism (Geriatric)',subtitle:'Thyroid deficiency with subtle, atypical presentation in older adults',tag:'endo',
+patho:'Hypothyroidism is common in geriatric patients and may directly relate to the aging process — progressive autoimmune destruction of thyroid tissue (Hashimoto\'s thyroiditis) reduces hormone production. Thyroid hormones (T3, T4) regulate basal metabolic rate, cardiac output, GI motility, cognition, and thermogenesis. In older adults, the classic hallmarks (goiter, cold intolerance, paresthesias, muscle cramps) are frequently ABSENT. Instead, hypothyroidism in geriatric patients presents as: nonspecific musculoskeletal complaints, confusion, and fatigue — easily attributed to "normal aging." More serious manifestations include myxedema coma (the extreme end — profound hypothermia, bradycardia, and coma), heart failure, anemia, hyponatremia, depression, dementia-like presentation, seizures.',
+signs:'Fatigue, weakness, nonspecific musculoskeletal complaints, confusion, bradycardia, constipation, weight gain, dry skin, hair loss, hypothermia, hoarse voice, periorbital edema (myxedema). Severe: myxedema coma — hypothermia, bradycardia, altered consciousness.',
+tx:'Prehospital: supportive — airway management, warming for hypothermia, cardiac monitoring, IV access. Myxedema coma is a life-threatening emergency. Hospital: IV levothyroxine + IV corticosteroids (adrenal insufficiency is co-common).',
+meds:[{drug:'Levothyroxine (Synthroid)',dose:'1.6 mcg/kg/day PO (chronic); 200-500 mcg IV loading (myxedema coma)',note:'T4 replacement — start low in elderly (25-50 mcg) to avoid cardiac stress'},{drug:'Hydrocortisone',dose:'100mg IV q8h (myxedema coma)',note:'Concomitant adrenal insufficiency; always give before thyroid hormone to prevent adrenal crisis'},{drug:'Passive rewarming',dose:'Warm blankets, warm IV fluids',note:'Hypothermia from hypothyroidism — warm carefully; avoid rapid external rewarming'},{drug:'Cardiac monitoring',dose:'12-lead ECG',note:'Bradycardia, prolonged QT, low voltage — monitor for dysrhythmias'}],
+analogy:'Hypothyroidism is like the thermostat in a factory being turned to its lowest setting — every process slows down: the conveyor belts move slower (GI motility → constipation), the boilers cool down (bradycardia, hypothermia), the workers think slower (cognitive slowing), and quality control loses track of what\'s happening (confusion). In older adults, everyone thinks the factory is just "old and running slower" — but it\'s actually the thermostat that\'s malfunctioning and completely fixable with the right adjustment (thyroid hormone replacement).'},
+];
+
+const giCards=[
+{icon:'🩸',title:'GI Hemorrhage',subtitle:'Upper or lower GI bleeding — most common in adults >60',tag:'gi',
+patho:'GI bleeding most commonly affects patients over 60 years. Upper GI bleeding (proximal to ligament of Treitz): peptic ulcer disease (most common — H. pylori and NSAID use damage gastric/duodenal mucosa), esophagitis, esophageal varices (cirrhosis), and gastric cancer. NSAIDs are a major culprit in geriatric patients who chronically use them for arthritis pain — they inhibit prostaglandins protecting the gastric mucosa. Lower GI bleeding: diverticulosis is the most common cause — thin-walled outpouchings rupture, causing sudden painless hematochezia. Colon cancer is another cause. Both can be chronic (slow blood loss → anemia) or acute (rapid hemorrhage → hemodynamic instability). The older the patient, the higher the mortality risk.',
+signs:'Upper GI: hematemesis (bright red blood or coffee-ground emesis), melena (black tarry stools), epigastric pain. Lower GI: hematochezia (bright red or maroon blood per rectum). Both: weakness, syncope, orthostatic hypotension, tachycardia, pallor, diaphoresis. Jaundice if liver involved.',
+tx:'Airway protection (aspiration risk with hematemesis — position left lateral). O₂, large-bore IV access × 2, aggressive fluid resuscitation with NS or LR (target SBP >90). Elevate legs. Monitor ECG. Rapid transport. Hospital: endoscopy for diagnosis and treatment.',
+meds:[{drug:'Normal Saline / LR',dose:'250-500mL bolus, titrate to SBP >90',note:'Volume resuscitation — maintain perfusion; avoid overhydration (HF risk in elderly)'},{drug:'Ondansetron (Zofran)',dose:'4mg IV/IM/ODT',note:'Antiemetic — control nausea/vomiting; reduce aspiration risk'},{drug:'Octreotide (hospital)',dose:'50 mcg IV bolus then 25-50 mcg/hr',note:'Somatostatin analogue — reduces portal pressure for variceal bleeding'},{drug:'Blood products (hospital)',dose:'PRBCs: target Hgb >7-8 g/dL',note:'Massive GI bleeding — type and crossmatch early; transfuse for hemodynamic instability'}],
+analogy:'GI hemorrhage is like a water main burst inside a building — if it\'s in the attic (upper GI), the water rushes down through the walls (melena — dark stool from hemoglobin digestion) and out through the lower floors (hematemesis if the burst is accessible). A break in the basement plumbing (lower GI) shows up immediately at the source. The priority is always to shut off the main water valve (hemostatic endoscopy) while keeping the building pressurized enough to function (fluid resuscitation).'},
+
+{icon:'🧱',title:'Pressure Ulcers',subtitle:'Skin breakdown from sustained pressure over bony prominences',tag:'gi',
+patho:'Pressure ulcers develop when sustained pressure on soft tissue exceeds capillary filling pressure (~32 mmHg) — causing tissue hypoxia, ischemia, and ultimately necrosis. The aging integumentary system is uniquely vulnerable: reduced dermal thickness, loss of elasticity, diminished vascular reserve, impaired immune response, and nutritional deficiencies all reduce tolerance to ischemia. Geriatric patients who are immobile from neurologic deficits, debility, or orthopedic injuries are at highest risk. Common sites: sacrum, heels, greater trochanter, occiput, medial malleoli, lateral malleoli — all bony prominences where tissue is compressed between bone and mattress. Can develop within 1-24 hours. Progress from Stage I (non-blanching erythema) through Stage IV (exposed bone/tendon/muscle). Once skin integrity is lost, infection follows — sepsis risk is real.',
+signs:'Stage I: intact skin with non-blanching redness. Stage II: partial thickness loss — blister or shallow open wound. Stage III: full thickness loss — adipose tissue visible. Stage IV: full thickness loss — bone, muscle, tendon visible. Unstageable: covered in eschar. Often malodorous, exudating, with surrounding erythema.',
+tx:'Aseptic wound care — cover with sterile dressing. Relieve pressure immediately. Reposition patient at scene. Gentle handling — debridement is contraindicated prehospital. Pain management. Transport for wound care, nutritional assessment, and infection evaluation.',
+meds:[{drug:'Sterile NS irrigation',dose:'Wound cleansing',note:'Remove debris without damaging granulation tissue — use gentle pressure'},{drug:'Non-adherent sterile dressings',dose:'Per wound stage',note:'Protect wound from contamination; moisture-balanced dressings for healing'},{drug:'Pain management (oral/IV opioids)',dose:'Per pain severity',note:'Wound debridement/care is painful; assess pain prior to transport'},{drug:'Antibiotics (hospital)',dose:'Culture-directed',note:'For infected wounds — wound cultures guide choice; sepsis protocols if systemic infection'}],
+analogy:'A pressure ulcer is like what happens when you park a car on a garden hose — the hose (capillary) is compressed, water (blood) stops flowing, and the plants (cells) in that zone start dying from drought. The longer the car parks there, the bigger the dead zone. Moving the car (repositioning) restores flow, but the already-dead plants need time, moisture, and nutrients to be replaced. The key is never letting the car park in the same spot long enough to kill anything.'},
+];
+
+const mskCards=[
+{icon:'🦴',title:'Osteoarthritis',subtitle:'Degenerative joint disease from cartilage loss',tag:'msk',
+patho:'Osteoarthritis is the most common form of arthritis and a nearly universal finding in geriatric patients. The pathophysiology involves progressive degradation of articular cartilage — the smooth, friction-reducing surface lining joint surfaces. Cartilage loss is driven by aging-related reduced chondrocyte repair capacity, mechanical wear, and inflammatory mediators (cytokines, matrix metalloproteinases) that accelerate degradation. As cartilage thins, subchondral bone is exposed and undergoes remodeling — producing osteophytes (bony spurs) at joint margins. The inflammatory response within the joint (synovitis) contributes significantly to pain, warmth, and swelling. Weight-bearing joints (knees, hips), spine, and hands are most affected. NSAIDs are the pharmacological cornerstone but carry serious GI, cardiovascular, and renal risks in geriatric patients with chronic use.',
+signs:'Joint pain (worse with activity, better with rest initially — later constant), morning stiffness (<30 min — distinguishes from rheumatoid), crepitus, joint line tenderness, osteophyte-related bony enlargement (Heberden\'s nodes at DIP, Bouchard\'s nodes at PIP in fingers), reduced range of motion.',
+tx:'Prehospital: pain management (acetaminophen first-line over NSAIDs in elderly), comfortable positioning, assist with mobility. Heat/ice for acute flares. Identify falls from mobility impairment.',
+meds:[{drug:'Acetaminophen',dose:'500-1000mg PO q6h (max 3g/day in elderly)',note:'First-line analgesic — fewer GI/CV/renal risks than NSAIDs in older adults'},{drug:'Ibuprofen (NSAID)',dose:'400mg PO q6-8h (USE CAUTIOUSLY — 4-6 weeks max)',note:'Prostaglandin inhibitor — effective but GI, renal, and CV risks limit long-term use'},{drug:'Topical Diclofenac (Voltaren gel)',dose:'4g topically QID to affected joint',note:'NSAID with systemic absorption — preferred topical option for isolated joint pain'},{drug:'Intra-articular corticosteroid (hospital)',dose:'Methylprednisolone 40-80mg IA injection',note:'Rapid local anti-inflammatory; for acute flares; limited frequency (cartilage toxicity)'}],
+analogy:'Osteoarthritis is like the rubber bushings on a car\'s suspension system wearing down — at first, driving is a little rougher, but over time metal meets metal (subchondral bone exposed). The car tries to compensate by growing extra metal bumpers at the joints (osteophytes), but this makes the suspension rigid and painful. The car can still drive, but every pothole (activity) is now felt directly in the frame.'},
+
+{icon:'🦴',title:'Osteoporosis',subtitle:'Decreased bone density with fracture risk',tag:'msk',
+patho:'Osteoporosis is defined by reduced bone mineral density — WHO criteria: T-score ≤-2.5 on DEXA scan. By age 70, bone density has typically diminished by one-third. Two mechanisms drive age-related bone loss: (1) Reduced bone formation — osteoblast activity declines with age. (2) Increased bone resorption — osteoclast activity predominates, especially after estrogen withdrawal in postmenopausal women. Estrogen directly inhibits osteoclast activity — its loss unleashes resorption. The structural consequence is a skeleton with thinned cortical bone and disrupted trabecular architecture — like Styrofoam instead of solid foam. These bones fracture under forces that would not injure a younger person. Classic fragility fracture sites: distal radius (Colles\' fracture), vertebral bodies (compression fractures), femoral neck (hip fracture — the most clinically devastating).',
+signs:'May be asymptomatic until fracture. Acute fracture: sudden localized pain. Vertebral compression fractures: height loss, kyphosis (dowager\'s hump), acute or chronic back pain. Hip fracture: groin/thigh pain, leg shortened and externally rotated, inability to bear weight. Fragility fracture with minimal trauma should always raise suspicion.',
+tx:'Fracture management: splinting, pain control, careful packaging. Hip fracture: traction splint if mid-shaft femur; otherwise immobilize in position found, manage pain. Prevention: bisphosphonates, adequate calcium/Vitamin D, weight-bearing exercise, fall prevention.',
+meds:[{drug:'Alendronate (Fosamax)',dose:'70mg PO weekly (prevention/treatment)',note:'Bisphosphonate — inhibits osteoclast activity; must take fasted, upright for 30 min after'},{drug:'Denosumab (Prolia)',dose:'60mg SQ q6 months',note:'RANKL inhibitor — reduces osteoclast activity; option when bisphosphonates not tolerated'},{drug:'Calcium + Vitamin D',dose:'Ca: 1200mg/day; Vit D: 800-1000 IU/day',note:'Essential for bone mineralization — most geriatric patients are deficient'},{drug:'Fentanyl (prehospital)',dose:'1-2 mcg/kg IV/IM slow',note:'Pain management for acute fragility fractures — improved patient comfort during transport'}],
+analogy:'Osteoporosis is like changing a brick building to a hollow plaster replica — from the outside it looks the same, but one good bump (minor fall, cough, reaching overhead) can cause the whole structure to crack or collapse. The building didn\'t get weaker overnight — it lost its bricks (bone mineral) slowly over decades while appearing intact. The first fracture is often the FIRST SIGN that the building needs structural reinforcement.'},
+];
+
+const toxCards=[
+{icon:'💊',title:'Polypharmacy & Adverse Drug Events',subtitle:'Drug-related illness from multiple medications and altered pharmacokinetics',tag:'toxicology',
+patho:'Polypharmacy (≥5 medications) is nearly universal in geriatric patients — nearly 40% of older adults take ≥5 prescription medications. Altered pharmacokinetics in geriatric patients affect every phase of drug processing: Absorption (increased gastric pH, decreased GI motility), Distribution (decreased total body water → increased concentration of water-soluble drugs; increased body fat → prolonged action of fat-soluble drugs; decreased protein binding → more free/active drug), Metabolism (decreased liver blood flow and CYP enzyme activity → slower metabolism), Excretion (decreased GFR → drug accumulation). The result: standard doses may produce toxic levels. Drug-drug interactions multiply with each added medication. Cardiovascular drugs are the single largest category of ADEs causing hospitalization.',
+signs:'Highly variable by drug class: CNS depression (opioids, benzodiazepines, antiepileptics), bradycardia/heart block (digoxin, beta-blockers, Ca-channel blockers), bleeding (warfarin, NSAIDs, antiplatelet agents), hypoglycemia (insulin, sulfonylureas), delirium (anticholinergics, opioids), falls (any sedating or antihypertensive medication).',
+tx:'Supportive prehospital care: airway, breathing, circulation. Identify suspected drug. Bring ALL medications to the ED — vital diagnostic information. Reverse specific drug toxicity per protocol (naloxone for opioid, flumazenil for BZD — use with extreme caution in chronic users). Glucose for hypoglycemia.',
+meds:[{drug:'Naloxone (Narcan)',dose:'0.4-2mg IV/IM/IN; titrate to respirations',note:'Opioid reversal; short half-life — may need redosing; avoid precipitating acute withdrawal'},{drug:'Dextrose 50%',dose:'25g (50mL) IV slow',note:'Hypoglycemia from oral hypoglycemics or insulin overdose'},{drug:'Atropine',dose:'0.5-1mg IV for drug-induced bradycardia',note:'Reverses cholinergic excess or enhances chronotropy; may be limited in severe toxicity'},{drug:'Calcium gluconate/chloride',dose:'1g IV (Ca-channel blocker overdose)',note:'Bypasses blocked Ca channels; improves cardiac contractility and conduction'}],
+analogy:'Polypharmacy in an elderly patient is like running 10 software programs simultaneously on an old computer with a small processor and limited RAM — each program (drug) runs fine alone, but together they slow each other down, crash, or cause unexpected errors (drug-drug interactions). The old hardware (aging liver/kidneys) can\'t process all the requests fast enough, so some programs overrun their memory allocation (drug accumulation → toxicity) while the user wonders why everything is glitching.'},
+
+{icon:'🥶',title:'Geriatric Hypothermia',subtitle:'Thermoregulatory failure in the older adult',tag:'toxicology',
+patho:'Thermoregulatory mechanisms decline significantly with aging: peripheral vasoconstriction response is blunted, shivering thermogenesis is less effective, perception of cold is reduced (cannot "feel" the cold as efficiently), and hypothalamic temperature regulation deteriorates. Geriatric patients can develop hypothermia while INDOORS — from inadequate heating (fixed income limitations), thin insulation (reduced subcutaneous fat, muscle mass), or underlying illness (hypothyroidism, hypoglycemia, sepsis, stroke). Cardiovascular consequences of hypothermia include J-wave (Osborn wave) on ECG, bradycardia, atrial and ventricular dysrhythmias, and ultimately ventricular fibrillation. Severe hypothermia (core temp <30°C) mimics death — remember "not dead until warm and dead."',
+signs:'Mild (<32°C): altered mental status, slurred speech, ataxia, shivering (may be absent in geriatric patients). Moderate (<28°C): no shivering, severe confusion, bradycardia, hypotension, dysrhythmias. Severe (<24°C): coma, absence of signs of life, VF risk. Classic ECG finding: J-wave (Osborn wave) after QRS complex.',
+tx:'Handle gently (dysrhythmia triggered by movement). Passive rewarming (warm environment, warm blankets, warm sweet drinks if alert). Active external rewarming (warm compresses to groin/axilla/neck for moderate). Active core rewarming (hospital: warm IV fluids, warm humidified O₂, bladder irrigation, pleural lavage, ECMO for severe). Treat dysrhythmias per ACLS (hypothermic heart may not respond until rewarmed).',
+meds:[{drug:'Warm IV saline (NS or LR)',dose:'Warmed to 40-42°C, 500mL IV',note:'Core rewarming via IV; prevents ongoing heat loss through IV fluids'},{drug:'Warm humidified O₂',dose:'Warm and humidify O₂ delivery',note:'Core airway rewarming — reduces heat loss through respiration'},{drug:'Amiodarone (hospital)',dose:'150mg IV for refractory VF in hypothermia',note:'Antiarrhythmic — VF in hypothermia is often refractory until rewarmed'},{drug:'Thiamine',dose:'100mg IV before glucose',note:'Prevent Wernicke\'s if alcoholism (cofactor in hypothermia from alcohol) is suspected'}],
+analogy:'Geriatric hypothermia is like a building\'s boiler going out on the coldest night of the year in a building with no insulation and no backup heat — the older building (elderly body) can\'t retain the little heat remaining, and every system that depends on warmth (heart rhythm, metabolism, cognition) starts shutting down. A young, well-insulated building would survive the same night fine. Warming the building must be gradual — blast furnace heat on frozen pipes (rapid rewarming) causes them to crack.'},
+
+{icon:'🔥',title:'Geriatric Hyperthermia',subtitle:'Heat illness with impaired thermoregulation',tag:'toxicology',
+patho:'Older adults are less able to regulate body temperature in response to heat because of: impaired sweat gland function (reduced sweat production), decreased cardiac output (less efficient skin vasodilatation for heat dissipation), blunted thirst perception (underdrinking → dehydration → less capacity for sweating), and altered hypothalamic thermoregulation. Medications commonly prescribed to geriatric patients impair heat tolerance: anticholinergics (block sweating), beta blockers (reduce cardiac response), diuretics (worsen dehydration), and antipsychotics (impair hypothalamic regulation). Heat cramps → heat exhaustion → heat stroke represent a spectrum of severity. Heat stroke (core temp >40°C with CNS dysfunction) is life-threatening — uncontrolled hyperthermia destroys proteins, causes rhabdomyolysis, multi-organ failure, and coagulopathy.',
+signs:'Heat cramps: painful muscle spasms during or after exertion in heat. Heat exhaustion: profuse sweating, weakness, dizziness, tachycardia, cool moist skin, nausea. Heat stroke (classic): hot DRY skin (loss of sweating), altered mental status, temperature >40°C, tachycardia.',
+tx:'Move to cool environment. Remove excess clothing. Active cooling immediately: cool water misting + fanning (evaporative cooling), ice packs to axilla/groin/neck. Cold IV saline. Monitor core temperature. Transport. Hospital: ice bath immersion, cold gastric lavage.',
+meds:[{drug:'Cool IV Normal Saline',dose:'500mL-1L bolus cold NS',note:'Rehydration + internal cooling; critical in heat stroke dehydration'},{drug:'Benzodiazepines (hospital)',dose:'Lorazepam 2-4mg IV for shivering',note:'Control shivering (thermogenesis) during cooling to prevent rebound temperature increase'},{drug:'No antipyretics',dose:'—',note:'NSAIDs/acetaminophen ineffective for environmental hyperthermia — the hypothalamus is not "reset" as in fever'},{drug:'Dantrolene (hospital)',dose:'2.5mg/kg IV for NMS or malignant hyperthermia',note:'Muscle relaxant — reduces heat-generating muscle contractions in drug-induced hyperthermia'}],
+analogy:'Geriatric hyperthermia is like an old car\'s cooling system failing on the hottest day of the year — the radiator (sweat glands) is clogged, the coolant (fluid/sweat) is depleted, and the engine (metabolism) keeps running hot. The dashboard light (thirst sensation) doesn\'t warn the driver until the engine is already overheating. Without intervention, the engine seizes (cellular protein denaturation) and the entire powertrain fails (multi-organ failure).'},
+];
+
+const traumaCards=[
+{icon:'🤕',title:'Falls & Hip Fractures',subtitle:'Leading geriatric traumatic injury with high mortality',tag:'trauma',
+patho:'One in four Americans over 65 falls every year, making falls the leading cause of traumatic injury and trauma-related death in this population. The fall cycle is devastating: osteoporotic bones fracture from low-energy mechanisms (standing height), causing hip fractures (femoral neck or intertrochanteric) — 20% mortality in year 1, rising to 33% by year 2. But the cascade extends beyond the fracture: patients who fall develop fear of falling → self-imposed immobility → deconditioning → muscle atrophy → increased fall risk → more falls. Immobility leads to pressure ulcers, UTI, pneumonia, DVT/PE, depression, and functional dependence. Importantly, geriatric patients have DECREASED PAIN PERCEPTION — major fractures may present with surprisingly minimal tenderness. Always maintain high suspicion for fracture in any fall from standing height in a geriatric patient.',
+signs:'Hip fracture: groin/hip pain, externally rotated and shortened leg, inability to bear weight, may have only mild tenderness. Vertebral fracture: back pain (may be chronic). Wrist (Colles\'): dorsal displacement of distal radius, pain, swelling. Head injury: altered LOC, vomiting, confusion. Head-to-toe assessment is CRITICAL — multi-trauma is common in geriatric falls.',
+tx:'Scene safety and mechanism assessment. Immobilize suspected fractures (position found — do not force). Pain management. Hip fracture: immobilize hip in position found, traction splint for mid-shaft femur fractures only. ATLS principles. Prevent hypothermia. 2021 trauma triage: SBP <110 or HR > SBP → highest-level trauma center.',
+meds:[{drug:'Fentanyl',dose:'1-2 mcg/kg IV/IM slow',note:'First-line pain management — titratable, hemodynamically safer than morphine in elderly'},{drug:'Ketamine (low dose)',dose:'0.3-0.5 mg/kg IV slow',note:'Analgesic dose — pain management without respiratory depression; good for hemodynamically unstable'},{drug:'TXA (Tranexamic Acid)',dose:'1g IV over 10 min (if suspected major hemorrhage within 3 hours)',note:'Antifibrinolytic — reduces hemorrhage in trauma; best efficacy early'},{drug:'Normal Saline',dose:'Judicious bolus — 250-500mL titrated',note:'Avoid over-resuscitation; target SBP >90 mmHg; elderly prone to pulmonary edema'}],
+analogy:'Falls in geriatric patients are like dropping a crystal vase versus a rubber ball from the same height — the crystal vase (osteoporotic bone) shatters from an impact that the rubber ball (young bone) would bounce back from. The consequences cascade: a shattered vase doesn\'t just need gluing; the fall disrupts everything around it (fear, immobility, infection, death). Prevention (padding the shelf — fall risk reduction) is infinitely more effective than gluing (surgery) after the break.'},
+
+{icon:'🧠',title:'Subdural Hematoma',subtitle:'Venous hemorrhage from brain atrophy stretching bridging veins',tag:'trauma',
+patho:'The aging brain undergoes progressive atrophy — losing volume, pulling away from the skull, and stretching the bridging veins that span the subdural space. This anatomy is uniquely dangerous: the bridging veins are under constant tension, requiring much less force to tear. A minor bump to the head — or even whiplash without direct head contact — can tear a bridging vein, allowing blood to accumulate slowly between the dura and arachnoid. Critically, because the atrophic brain provides extra space, a LARGE volume of blood can accumulate before producing clinical symptoms (mass effect). This explains why the history of trauma may be dismissed or forgotten, and why symptoms may not appear for days to weeks (chronic SDH). Always maintain suspicion in any geriatric patient with altered mental status — even without a clear trauma history.',
+signs:'Acute SDH: LOC after significant trauma, progressive headache, altered mental status, hemiplegia contralateral to bleed, ipsilateral pupil dilation (blown pupil = herniation). Chronic SDH: slow decline in cognition, personality change, headache, weeks after minor trauma. Classic: lucid interval then deterioration.',
+tx:'Airway management (intubation if GCS ≤8 or declining). Avoid hypotension (cerebral perfusion pressure = MAP - ICP). Avoid hyperventilation (only for herniation). O₂. Head elevation 30°. Reverse anticoagulation if applicable (Vitamin K, FFP, PCC, idarucizumab for dabigatran). Emergent neurosurgical evacuation.',
+meds:[{drug:'O₂',dose:'Supplemental to maintain SpO₂ >95%',note:'Cerebral oxygen delivery depends on oxygenation AND perfusion'},{drug:'Mannitol (hospital)',dose:'0.25-1g/kg IV (20% solution)',note:'Osmotic diuretic — reduces cerebral edema and ICP; used for herniation pending OR'},{drug:'Hypertonic Saline (3%)',dose:'250mL IV (hospital)',note:'Alternative to mannitol; better for hypotensive TBI patients'},{drug:'Tranexamic Acid',dose:'1g IV over 10 min within 3 hours of injury',note:'Antifibrinolytic — reduce hemorrhage expansion; prehospital administration recommended'}],
+analogy:'Subdural hematoma in a geriatric patient is like having a tent staked to the ground with very long ropes (bridging veins). As the tent shrinks with age (brain atrophy), the ropes get pulled tight across a longer span. The slightest wind (minor trauma) snaps the rope. Blood slowly pools inside the tent. Because the tent is already small relative to the original poles (skull), the pole structure (skull) provides extra space — you don\'t see the tent collapsing until the pooled blood finally fills that extra space. By then, the pole may already be compromised.'},
+
+{icon:'😔',title:'Geriatric Depression & Suicide',subtitle:'Underrecognized and undertreated mental health emergency',tag:'behavioral',
+patho:'Depression in older adults results from a complex interplay of physiologic and psychosocial factors. Neurobiological: monoamine depletion (serotonin, norepinephrine, dopamine), hypercortisolemia from chronic stress, and cytokine-mediated neuroinflammation following major illness. Medical comorbidities directly cause or amplify depression: hypothyroidism, stroke (post-stroke depression in 40%), Parkinson\'s, dementia, cancer, and medications (beta blockers, corticosteroids, opioids). Psychosocial: loss of spouse/friends, retirement (loss of identity and purpose), loss of independence, chronic pain, financial stress, and social isolation. Depression in older adults is the leading risk factor for suicide — and the geriatric suicide rate is HIGHER than the general population despite the fact that most were recently seen by a physician.',
+signs:'Persistent sadness, hopelessness, anhedonia (inability to feel pleasure), appetite/weight changes, insomnia or hypersomnia, psychomotor retardation, fatigue, poor concentration, thoughts of worthlessness or death, suicidal ideation. Somatic complaints (pain, fatigue) may be the only presenting symptoms. Ask directly about suicidal thoughts.',
+tx:'Establish rapport — calm, non-judgmental, empathetic approach. Ask directly about suicidal thoughts (asking does NOT plant the idea). Scene safety if firearm or medication overdose is involved. Transport for psychiatric evaluation. Interview family about baseline mental state and depression history. Encourage follow-up with physician.',
+meds:[{drug:'SSRIs (Sertraline)',dose:'25-50mg PO daily (START LOW in elderly)',note:'First-line for geriatric depression; fewer anticholinergic effects than TCAs; takes 4-6 weeks'},{drug:'SNRIs (Venlafaxine)',dose:'37.5mg PO daily',note:'Dual serotonin/NE reuptake inhibition; effective for comorbid pain and depression'},{drug:'Mirtazapine',dose:'7.5-15mg PO at night',note:'Noradrenergic/serotonergic; good for elderly with weight loss and insomnia'},{drug:'Benzodiazepines (CAUTIOUS)',dose:'Only for acute crisis agitation',note:'Avoid routine use — increases fall risk, cognitive impairment, and dependence in elderly'}],
+analogy:'Depression in a geriatric patient is like a phone battery that\'s been slowly draining with no charger in sight — job (retired), partner (deceased), independence (compromised), health (declining). Each loss drains the battery further. What\'s most dangerous is that nobody sees the phone is at 2% because the screen (outward appearance) still lights up sometimes. Asking directly "How is your battery?" (asking about mood and suicidal thoughts) is the most powerful diagnostic and therapeutic intervention — not the sophisticated tests — just charging the conversation.'},
+];
+
+function buildCard(data,tagClass){
+  return `<div class="disease-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-left">
+        <div class="card-icon">${data.icon}</div>
+        <div><div class="card-title">${data.title}</div><div class="card-subtitle">${data.subtitle}</div></div>
+      </div>
+      <div class="card-chevron">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="card-tabs">
+        <div class="card-tab active" onclick="switchCardTab(this,'patho')">Pathophysiology</div>
+        <div class="card-tab" onclick="switchCardTab(this,'meds')">Medications</div>
+        <div class="card-tab" onclick="switchCardTab(this,'analogy')">Analogy</div>
+      </div>
+      <div class="card-tab-content active" data-tab="patho">
+        <span class="tag tag-${tagClass}">${tagClass.charAt(0).toUpperCase()+tagClass.slice(1)}</span>
+        <p><strong>Pathophysiology:</strong> ${data.patho}</p>
+        <p style="margin-top:.6rem;"><strong>Signs & Symptoms:</strong> ${data.signs}</p>
+        <p style="margin-top:.6rem;"><strong>Treatment:</strong> ${data.tx}</p>
+      </div>
+      <div class="card-tab-content" data-tab="meds">
+        <table class="med-table">
+          <thead><tr><th>Drug</th><th>Dose/Route</th><th>Notes</th></tr></thead>
+          <tbody>${data.meds.map(m=>`<tr><td>${m.drug}</td><td>${m.dose}</td><td>${m.note}</td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+      <div class="card-tab-content" data-tab="analogy">
+        <div class="analogy-box"><p>"${data.analogy}"</p></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildAllCards(){
+  document.getElementById('pulmonary-cards').innerHTML=pulmonaryCards.map(c=>buildCard(c,'pulmonary')).join('');
+  document.getElementById('cardiac-cards').innerHTML=cardiacCards.map(c=>buildCard(c,'cardiac')).join('');
+  document.getElementById('neuro-cards').innerHTML=neuroCards.map(c=>buildCard(c,'neuro')).join('');
+  document.getElementById('endo-cards').innerHTML=endoCards.map(c=>buildCard(c,'endo')).join('');
+  document.getElementById('gi-cards').innerHTML=giCards.map(c=>buildCard(c,'gi')).join('');
+  document.getElementById('msk-cards').innerHTML=mskCards.map(c=>buildCard(c,'msk')).join('');
+  document.getElementById('tox-cards').innerHTML=toxCards.map(c=>buildCard(c,'toxicology')).join('');
+  document.getElementById('trauma-cards').innerHTML=traumaCards.map(c=>buildCard(c,'trauma')).join('');
+}
+
+function toggleCard(h){h.closest('.disease-card').classList.toggle('open');}
+function switchCardTab(tab,name){
+  const b=tab.closest('.card-body');
+  b.querySelectorAll('.card-tab').forEach(t=>t.classList.remove('active'));
+  b.querySelectorAll('.card-tab-content').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  b.querySelector('[data-tab="'+name+'"]').classList.add('active');
+}
+
+// ===== QUIZ =====
+const questions=[
+  {q:"In 2022, approximately how many Americans were aged 65 years or older?",opts:["36 million","56 million","76 million","46 million"],a:1,exp:"In 2022, almost 56 million Americans (16.8% of the US population) were aged 65 years or older. This number is expected to reach 98 million by 2060."},
+  {q:"Which of the following EMS complaints is MORE likely in geriatric patients compared to younger adults?",opts:["Extremity trauma","Syncope and cardiac arrest","Pediatric emergencies","Psychiatric crisis"],a:1,exp:"Complaints of syncope, cardiac arrest or rhythm disturbance, stroke, and shock are more likely in geriatric patients compared to EMS calls for younger adults."},
+  {q:"The study of the problems of all aspects of aging is called:",opts:["Gerontology","Geriatrics","Gerodynamics","Senesiology"],a:0,exp:"Gerontology is the study of the problems of all aspects of aging. Geriatrics refers to the medical care specialty for older adults."},
+  {q:"What happens to the PaO₂ (arterial partial pressure of oxygen) with advancing age?",opts:["It increases progressively","It remains the same throughout life","It slowly decreases with age","It fluctuates widely"],a:2,exp:"The arterial partial pressure of oxygen (PaO₂) slowly decreases with age. In an 85-year-old, predicted PaO₂ values could range from 63 to 84 mm Hg. Arterial CO₂ pressure stays the same."},
+  {q:"Loss of cilia and diminished cough/gag reflexes in geriatric patients most directly increases risk for:",opts:["Pulmonary hypertension","Infectious pulmonary diseases","Pneumothorax","Pleural effusion"],a:1,exp:"Loss of cilia in airways and diminished cough and gag reflexes impair the defense against inhaled bacteria and particulate matter, making infectious pulmonary diseases more common in older adults."},
+  {q:"What is the MOST common dysrhythmia in geriatric patients?",opts:["Ventricular fibrillation","Sick sinus syndrome","Atrial fibrillation","Complete heart block"],a:2,exp:"Atrial fibrillation is the most common dysrhythmia in geriatric patients. It results from degenerative changes in the conduction system and predisposes to stroke, TIA, and heart failure."},
+  {q:"By age 70, the brain has undergone approximately what reduction in weight?",opts:["5%","11%","20%","30%"],a:1,exp:"By age 70, an 11% reduction in brain weight has occurred, due to gradual loss of neurons in certain cortical areas."},
+  {q:"Which of the following is a common cause of osteoporosis in older women after menopause?",opts:["Increased estrogen levels","Increased calcium absorption","Decreased estrogen levels","Elevated PTH causing bone deposition"],a:2,exp:"Osteoporosis is especially common in older women after menopause because of the decrease in estrogen. Estrogen normally inhibits osteoclast activity — its loss leads to accelerated bone resorption."},
+  {q:"Which of the following is the MOST reliable early indicator of bacterial pneumonia in a geriatric patient in the prehospital setting?",opts:["High fever and productive cough","Pleuritic chest pain","Tachycardia and tachypnea","Purulent sputum"],a:2,exp:"The usual clinical picture of pneumonia may be absent or diminished in geriatric patients. Tachycardia and tachypnea are often the most reliable indicators of bacterial pneumonia in the prehospital setting."},
+  {q:"What may be the ONLY early indicator of pneumonia in a geriatric patient?",opts:["Fever >101°F","Confusion or delirium","Productive cough","Pleuritic chest pain"],a:1,exp:"Confusion or delirium may be the only early indicator of pneumonia in geriatric patients. Atypical presentation is responsible for the common delay in diagnosis."},
+  {q:"How does the risk of death from pneumonia compare between adults ≥65 and younger adults?",opts:["Equal risk","2-3 times greater","5-10 times greater","20 times greater"],a:2,exp:"Patients aged 65 years and older have a risk of death from pneumonia that is 5 to 10 times greater than that in younger adults."},
+  {q:"What percentage of patients older than 85 years with a confirmed MI report chest pain?",opts:["75%","60%","45%","25%"],a:2,exp:"Only 45% of patients older than 85 years with MI have chest pain as a complaint. This causes MI to be unrecognized in many geriatric patients."},
+  {q:"Heart failure is the leading cause of hospitalization for people aged:",opts:["45 years and older","55 years and older","65 years and older","75 years and older"],a:2,exp:"Heart failure is the leading cause of hospitalizations for people aged 65 years and older. It occurs when one or both ventricles cannot pump effectively."},
+  {q:"A resting blood pressure consistently greater than which level is associated with increased risk of heart failure in older adults?",opts:["120/80 mmHg","130/80 mmHg","160/90 mmHg","180/100 mmHg"],a:2,exp:"The risk of heart failure is greater in older adults whose blood pressure is greater than 160/90 mm Hg."},
+  {q:"In the context of aortic aneurysm prehospital care, which is a PRIMARY goal?",opts:["Aggressive IV fluid resuscitation to normalize BP","High-flow oxygen administration","Gentle handling and blood pressure control","Immediate synchronized cardioversion"],a:2,exp:"Goals of prehospital care for aortic aneurysm are gentle handling, blood pressure control, relief of pain, and immediate transport to a hospital."},
+  {q:"Hypertension in geriatric patients is typically defined as a resting BP consistently greater than:",opts:["120/80 mmHg","130/80 mmHg","140/90 mmHg","160/100 mmHg"],a:1,exp:"Hypertension is often defined as a resting blood pressure consistently greater than 130/80 mm Hg in guidelines. A hypertensive emergency occurs when BP begins causing end-organ damage."},
+  {q:"What is the leading cause of death in the United States for which stroke is responsible?",opts:["Stroke is the leading cause of preventable death","Stroke is a leading cause of death and the leading cause of serious long-term disability","Stroke is the leading cause of death only in men","Stroke only causes temporary disability"],a:1,exp:"Stroke is a leading cause of death in the United States. Neurologic impairment is caused by ischemic or hemorrhagic interruption in blood supply to the brain and is the leading cause of serious long-term disability."},
+  {q:"Delirium differs from dementia primarily in that delirium is:",opts:["Chronic and progressive","Acute in onset and potentially reversible","Caused only by Alzheimer pathology","Always associated with hallucinations"],a:1,exp:"The key difference between delirium and dementia is that delirium is new with rapid onset and is potentially reversible; dementia is progressive and generally not reversible."},
+  {q:"What does the 'A' stand for in the I WATCH DEATH delirium mnemonic?",opts:["Anemia and anoxia","Acute metabolic condition (acidosis, alkalosis, electrolyte imbalance)","Alcohol and drug abuse","Anxiety and agitation"],a:1,exp:"In I WATCH DEATH: I=Infection, W=Withdrawal, A=Acute metabolic, T=Trauma, C=CNS problem, H=Hypoxia, D=Deficiencies, E=Endocrine, A=Acute vascular, T=Toxins/drugs, H=Heavy metals."},
+  {q:"Alzheimer disease is responsible for approximately what fraction of dementia cases in people older than 85?",opts:["One-fifth","One-quarter","One-third","One-half"],a:2,exp:"Alzheimer disease is the single most common subtype of dementia and is responsible for one-third of cases in people older than 85 years."},
+  {q:"The microscopic changes seen in Alzheimer disease include:",opts:["Alpha-synuclein deposits and Lewy bodies","Beta-amyloid plaques and neurofibrillary tangles","Prion protein deposits","Pick bodies and tau inclusions in frontal lobe"],a:1,exp:"Microscopic buildup of beta-amyloid plaques and neurofibrillary tangles are the hallmark pathologic observations in Alzheimer disease."},
+  {q:"Vascular dementia is widely considered the _____ most common cause of dementia:",opts:["First","Second","Third","Fourth"],a:1,exp:"Vascular dementia is widely considered the second-most common cause of dementia after Alzheimer disease. It results from conditions that block or reduce circulation in the brain."},
+  {q:"Lewy body disease involves abnormal deposits of which protein?",opts:["Beta-amyloid","Tau protein","Alpha-synuclein","TDP-43"],a:2,exp:"Lewy bodies are abnormal deposits of a protein called alpha-synuclein in the brain. Both types of LBD (DLB and PDD) deplete acetylcholine and dopamine neurotransmitters."},
+  {q:"Approximately what percentage of adults older than 65 years have diabetes mellitus?",opts:["10.2%","19.5%","29.2%","39.8%"],a:2,exp:"About 29.2% of adults older than 65 years have diabetes mellitus. Roughly 90% of older patients with diabetes have type 2 diabetes."},
+  {q:"Hyperglycemic hyperosmolar state (HHS) differs from DKA primarily in that HHS:",opts:["Has much lower blood glucose levels","Does not have acetone odor on the breath and typically has higher glucose","Only affects type 1 diabetics","Presents with severe metabolic acidosis"],a:1,exp:"HHS presents with many of the same signs as DKA, but the patient typically has a higher blood glucose level and does NOT have an acetone odor on the breath. HHS primarily occurs in older adults with type 2 diabetes."},
+  {q:"Classic signs of hypothyroidism (such as goiter and cold intolerance) in geriatric patients are:",opts:["More severe than in younger patients","Usually present and diagnostic","Often absent — nonspecific complaints are more common","Always accompanied by tachycardia"],a:2,exp:"Classic signs and symptoms of thyroid disorders are often NOT present in geriatric patients. Suspect thyroid dysfunction in any geriatric patient complaining of fatigue and weakness without other obvious cause."},
+  {q:"GI bleeding most commonly affects which patient population?",opts:["Children under 10","Adults aged 30-45","Patients older than 60 years","Adolescents"],a:2,exp:"GI bleeding most commonly affects patients older than 60 years. The older the patient, the higher the risk of death from GI hemorrhage."},
+  {q:"The most common cause of upper GI bleeding is:",opts:["Esophageal varices","Peptic ulcer disease","Colon cancer","Diverticulitis"],a:1,exp:"Possible causes of upper GI bleeding include peptic ulcer disease (most common), esophagitis, duodenal ulcer, gastritis, esophageal varices, and cancer."},
+  {q:"Lower GI bleeding in geriatric patients is most often related to:",opts:["Peptic ulcer disease","Esophageal varices","Diverticulitis","Colorectal polyps"],a:2,exp:"Lower GI bleeding occurs less frequently than upper GI bleeding and is often related to diverticulitis — thin-walled outpouchings in the colon that can rupture and bleed."},
+  {q:"Pressure ulcers most commonly occur over which anatomical areas?",opts:["Arms and hands","Face and scalp","Lower legs, back, buttocks, and over bony prominences","Chest and abdomen"],a:2,exp:"Most pressure ulcers occur in the lower legs, back, and buttocks, and over bony areas such as the greater trochanter or the sacrum — areas where tissue is compressed between bone and surface."},
+  {q:"How long can it take for a pressure ulcer to begin developing after the original injury?",opts:["Minimum 72 hours","1 to 24 hours","Only after several days","At least 1 week"],a:1,exp:"Pressure ulcers can develop from 1 to 24 hours after the original injury. They generally start as red, non-blanching painful areas and progress to full-thickness injury if untreated."},
+  {q:"Osteoarthritis is best described as:",opts:["An autoimmune inflammatory arthritis","A degenerative condition from cartilage loss causing pain, stiffness, and joint dysfunction","An infection of the joint space","A systemic inflammatory disease affecting small joints symmetrically"],a:1,exp:"Osteoarthritis is a degenerative condition that results from cartilage loss and wear and tear on the joints, leading to pain, stiffness, and sometimes loss of function of the affected joint."},
+  {q:"By age 70, bone density has typically diminished by approximately:",opts:["10%","20%","33% (one-third)","50%"],a:2,exp:"Osteoporosis is present in most people by age 70, by which time the density of the skeleton has diminished by one-third. This significantly increases fracture risk from minimal trauma."},
+  {q:"What type of hearing loss develops from age-related degeneration of the hearing mechanism?",opts:["Conductive hearing loss","Sensorineural hearing loss","Presbycusis","Tinnitus"],a:2,exp:"Presbycusis is the type of hearing loss resulting from degeneration of the hearing mechanism due to aging. It is the most common cause of hearing loss in older adults."},
+  {q:"Glaucoma is caused by:",opts:["Loss of transparency of the lens","Increased intraocular pressure damaging the optic nerve","Degeneration of the macula","Detachment of the retina"],a:1,exp:"Glaucoma is a condition in which intraocular pressure increases. This pressure causes damage to the optic nerve and results in nerve fiber destruction and partial or full loss of peripheral and central vision."},
+  {q:"A cataract is best described as:",opts:["Increased intraocular pressure","Loss of transparency of the lens of the eye","Detachment of the retina","Inflammation of the cornea"],a:1,exp:"A cataract is a loss of transparency of the lens of the eye, resulting from changes in the delicate protein fibers within the lens. It never causes full blindness but progressively reduces clarity."},
+  {q:"Which drug category is most commonly associated with preventable adverse drug events leading to hospital admission in older adults?",opts:["Antibiotics","Cardiovascular medications","Antihistamines","Vitamins and supplements"],a:1,exp:"Cardiovascular medications, followed by diuretics, nonopioid or opioid analgesics, hypoglycemics, and anticoagulants, are the most common medication categories associated with preventable adverse drug events in older adults."},
+  {q:"Drug doses may need to be reduced by as much as what percentage when giving certain drugs to older adults?",opts:["10%","25%","50%","75%"],a:2,exp:"As a result of changes in metabolism and elimination, it is important to recognize the need to reduce the dose of specific drugs sometimes by as much as 50% when giving them to older adults."},
+  {q:"Polypharmacy refers to:",opts:["Taking herbal supplements instead of medications","Prescriptions from multiple physicians, old medications plus new ones, and OTC plus Rx combinations that can cause medication-related problems","Using only one medication for multiple conditions","Administering medications via multiple routes"],a:1,exp:"Polypharmacy refers to situations where patients have prescriptions from multiple physicians, improperly resume old medications, or take prescribed medications with OTC drugs that may have synergistic or cumulative effects — leading to significant medication-related problems."},
+  {q:"Geriatric patients can develop hypothermia while indoors primarily because of:",opts:["Increased metabolic rate","Socioeconomic factors like fixed income limiting heating, poor nutrition, and impaired thermoregulation","Hyperthyroidism increasing heat loss","Increased perspiration from heat intolerance"],a:1,exp:"Geriatric patients are more prone to developing hypothermia due to socioeconomic factors (fixed income limiting heating), poor nutrition (decreased fat stores), and impaired thermoregulatory mechanisms."},
+  {q:"What is the classic ECG finding associated with hypothermia?",opts:["ST elevation in all leads","T-wave inversion","J-wave (Osborn wave) following the QRS complex","Prolonged PR interval only"],a:2,exp:"The J-wave (Osborn wave) appearing after the QRS complex is the classic ECG finding in hypothermia. Bradycardia and dysrhythmias are also common findings."},
+  {q:"The correct principle for management of hypothermia is:",opts:["'Not dead until warm and dead' — do not withhold resuscitation until core temperature is restored","Immediately use paddles for defibrillation regardless of temperature","Aggressive rapid rewarming using heating pads directly on skin","Administer epinephrine first before warming"],a:0,exp:"'Not dead until warm and dead' is the principle for hypothermia management. Resuscitation should not be withheld until core temperature has been restored, as many patients may survive if properly rewarmed."},
+  {q:"Which medications can INCREASE the risk of hyperthermia in geriatric patients?",opts:["ACE inhibitors and beta blockers only","Anticholinergics, beta-blockers, diuretics, and antipsychotics","SSRIs and antibiotics","Aspirin and acetaminophen"],a:1,exp:"Alcohol and certain medications can increase the risk of hyperthermia, including anticholinergics (block sweating), beta-blockers (reduce cardiovascular heat-dissipation response), diuretics (worsen dehydration), and antipsychotics (impair hypothalamic regulation)."},
+  {q:"How common is depression as a contributor to geriatric suicide?",opts:["Rarely associated","About 25% of geriatric suicides had depression","Most were suffering from their first episode of major depression — often unrecognized and untreated","Only severe, longstanding depression leads to geriatric suicide"],a:2,exp:"Most geriatric suicide victims were suffering from their first episode of major depression, which was only moderately severe, yet the depressive symptoms were unrecognized and untreated."},
+  {q:"What percentage of all US suicides are committed by patients older than 65?",opts:["5%","10%","18%","25%"],a:2,exp:"Patients older than 65 years account for about 18% of all suicides in the United States. The rate of completed suicides for geriatric patients is higher than that of the general population."},
+  {q:"Most suicides committed by older adults involve:",opts:["Medication overdose","Asphyxiation","Firearms","Self-poisoning"],a:2,exp:"Most suicides committed by older adults involve firearms. Safety of those at the scene and the EMS crew is a priority when caring for a patient with suicidal tendencies."},
+  {q:"Falls are the leading cause of traumatic injury in geriatric patients, accounting for approximately:",opts:["25% of trauma","50% of trauma","Nearly three-quarters of trauma","90% of trauma"],a:2,exp:"Falls are the leading cause of traumatic injury in geriatric patients, accounting for nearly three-quarters of trauma. Motor vehicle crashes are the second leading cause."},
+  {q:"The mortality risk for hip fractures in geriatric patients is:",opts:["5% in the first year","10% in 2 years","20% in the first year, rising to 33% by 2 years","50% in the first year"],a:2,exp:"Mortality risk for hip fractures is 20% in the first year after injury and increases to 33% in 2 years. Most patients who survive will have significant problems with mobility and may become unable to live independently."},
+  {q:"Why are geriatric patients at greater risk for subdural hematomas?",opts:["Their blood does not clot as well","Their skulls are thinner","Brain atrophy increases the distance between the brain and skull, stretching bridging veins that are more easily torn","They have higher cerebrospinal fluid pressure"],a:2,exp:"With age, the brain becomes smaller (cerebral atrophy), producing an increase in distance between the surface of the brain and the skull. Veins stretched across this space are more easily torn, resulting in subdural hematomas."},
+  {q:"In geriatric trauma patients, extra space within the skull after brain atrophy means:",opts:["Less risk of increased intracranial pressure","A large amount of bleeding can occur before signs and symptoms of increased ICP are seen","The brain can better tolerate additional mass","There is less risk of herniation"],a:1,exp:"Extra space within the skull from brain atrophy often allows a large amount of bleeding to occur before signs and symptoms of increased intracranial pressure are seen. This explains why SDH presentation can be delayed."},
+  {q:"According to 2021 trauma triage guidelines, patients 65 and older should be transported to the highest-level trauma center when:",opts:["SBP is less than 120 mmHg","SBP is less than 110 mmHg or HR is higher than SBP value","Any fall from standing height","They cannot answer orientation questions"],a:1,exp:"The 2021 trauma triage guidelines specify that patients 65 years and older with a systolic blood pressure less than 110 mm Hg, or a heart rate value that is higher than the systolic blood pressure value, should be transported to the highest-level trauma center."},
+  {q:"What is the leading cause of traumatic injury requiring ED care in the US for people over 65?",opts:["Motor vehicle crashes","Burns","Falls","Assaults"],a:2,exp:"Falls are the leading cause — 1 in 4 Americans older than 65 falls each year, resulting in 3 million injuries requiring ED care annually. Most are preventable."},
+  {q:"What STEADI screening question indicates increased fall risk if answered 'yes'?",opts:["'Have you ever been hospitalized?'","'Do you use multiple medications?'","'Have you fallen in the past year?'","'Do you have diabetes?'"],a:2,exp:"The STEADI fall assessment uses three questions: Have you fallen in the past year? Do you feel unsteady when standing or walking? Do you worry about falling? An answer of yes to any indicates increased fall risk."},
+  {q:"Elder abuse is estimated to affect how many older adults each year in the US?",opts:["500,000","1 million","5 million","10 million"],a:2,exp:"Elder abuse is estimated to affect 5 million older adults each year in the United States. It is becoming more and more recognized as a growing problem."},
+  {q:"Reporting of suspected elder abuse is:",opts:["Voluntary and at the paramedic's discretion","Mandatory in all 50 states","Required only in cases of physical abuse","Only mandatory in nursing home settings"],a:1,exp:"All 50 states have elder abuse statutes, and the reporting of suspected elder abuse is mandatory. Paramedics are mandated reporters who must follow established local protocol."},
+  {q:"Which of the following is a warning sign for suicidal risk in a geriatric patient?",opts:["Starting a new hobby","Asking about community resources","Giving away prized possessions","Expressing concern about health care costs"],a:2,exp:"Warning signs for geriatric suicide include giving away prized possessions, talking about death or getting affairs in order, stating benefits of dying, not adhering to medical regimen, and acquiring a weapon."},
+  {q:"Person-centered care in geriatric patients means:",opts:["Only family members make decisions","Care that is disregarding patient preferences to standardize treatment","Care that is respectful of and responsive to individual patient preferences, needs, and values","Providing care based on the patient's age and diagnosis only"],a:2,exp:"Practicing person-centered care is key when caring for older adults — providing care that is respectful of and responsive to individual patient preferences, needs, and values, ensuring patient values guide all clinical decisions."},
+  {q:"When assessing a geriatric patient with cognitive impairment, the six-item screener is:",opts:["Only used in hospital settings","A reliable tool to identify cognitive impairment that is relatively easy to perform prehospital","Used exclusively for delirium diagnosis","Only applicable after ruling out acute medical illness"],a:1,exp:"The six-item screener is a reliable tool to identify cognitive impairment and is relatively easy to perform in the prehospital setting. Impaired cognition is found in as many as 13% of older adults who use EMS."},
+  {q:"COPD exacerbations in geriatric patients are MOST commonly triggered by:",opts:["Exercise","Temperature extremes","Acute respiratory tract infections","Dietary changes"],a:2,exp:"An exacerbation of COPD often follows an acute respiratory tract infection that causes airway edema, bronchial smooth muscle irritability, and increased mucus secretion."},
+  {q:"When providing supplemental oxygen to a geriatric patient with COPD, the primary concern is:",opts:["Oxygen tanks running out","High-concentration oxygen may suppress the hypoxic drive in some patients","Oxygen causing vasoconstriction","Oxygen increasing secretions"],a:1,exp:"High-concentration oxygen may suppress the hypoxic drive in some patients with COPD who have become chronic CO₂ retainers and rely on hypoxia as their primary stimulus to breathe. Titrate O₂ to target SpO₂ 88-92%."},
+  {q:"What is the MOST important early intervention in HHS (Hyperglycemic Hyperosmolar State)?",opts:["Insulin administration","Aggressive potassium replacement","IV fluid resuscitation to restore intravascular volume","Bicarbonate infusion"],a:0,exp:"IV fluid resuscitation is the priority in HHS — restoring intravascular volume BEFORE insulin. Insulin without adequate volume can cause osmotic shifts and worsen hemodynamic instability. Normal saline is first-line."},
+  {q:"A geriatric patient with myxedema coma should ALWAYS receive which medication BEFORE thyroid hormone?",opts:["Insulin","Hydrocortisone (corticosteroids)","Bicarbonate","Naloxone"],a:1,exp:"Hydrocortisone (corticosteroids) should always be given before thyroid hormone in myxedema coma because co-occurring adrenal insufficiency is common. Giving thyroid hormone first without corticosteroids can precipitate an adrenal crisis."},
+  {q:"A woman over 85 calls EMS reporting fatigue and weakness, and 'just feeling off' for several days. She denies chest pain. What should you strongly consider?",opts:["Anxiety attack","Silent MI with atypical presentation","Normal aging","Hyponatremia from excess water intake"],a:1,exp:"For patients aged 85 years and older, atypical MI presentation should be anticipated. Fatigue, breathlessness, nausea, or abdominal pain may be the only symptoms. Vague complaints or 'feeling off' in this age group with risk factors warrants a 12-lead ECG."},
+  {q:"Which of the following is TRUE about pain perception in geriatric trauma patients?",opts:["Pain is always more severe than in younger patients","Geriatric patients have enhanced pain perception","Pain may be diminished or absent, leading to underestimation of injury severity","Pain perception is unchanged with aging"],a:2,exp:"Pain may be diminished or absent in geriatric patients due to age-related changes in nociception and peripheral nerve conduction. Geriatric trauma patients may have amazingly little tenderness with major fractures."},
+  {q:"The risk of GI complications from regular analgesic use is most significant for which medication class?",opts:["Acetaminophen","Opioids","NSAIDs","Muscle relaxants"],a:2,exp:"Regular or long-term use of analgesic medications (particularly NSAIDs) in older patients may result in serious GI complications including peptic ulcer disease and GI hemorrhage."},
+  {q:"Which of the following changes in body composition specifically increases concentration of water-soluble drugs in geriatric patients?",opts:["Increased body fat","Increased muscle mass","Decreased total body water","Increased plasma proteins"],a:2,exp:"Decrease in total body water is likely to increase the concentration of water-soluble drugs. Less fluid available means the same dose is dissolved in less water, yielding a higher concentration."},
+  {q:"The primary cause of reduced GFR (glomerular filtration rate) in geriatric patients is:",opts:["Increased renal mass","Decreased renal blood flow","Increased aldosterone secretion","Diabetic nephropathy exclusively"],a:1,exp:"Renal blood flow decreases with aging, which is associated with a proportional decrease in the glomerular filtration rate (GFR). This leads to decreased clearance of renally excreted medications."},
+  {q:"A geriatric patient is found in an apartment set to 58°F (14°C). He is drowsy with slurred speech but no shivering. His core temperature is 29°C. The MOST appropriate initial action is:",opts:["Aggressive external rewarming with heating pads","Administer epinephrine immediately","Handle gently, apply warm blankets, warm IV fluids, transport","Perform synchronized cardioversion immediately"],a:2,exp:"Handle gently (movement can trigger dysrhythmias in hypothermia). Apply warm blankets, administer warm IV fluids, establish IV access, and transport. Aggressive rapid external rewarming risks 'afterdrop' and dysrhythmias. CPR if cardiac arrest. 'Not dead until warm and dead.'"},
+  {q:"In geriatric patients with heat stroke, antipyretics such as ibuprofen or acetaminophen are:",opts:["The first-line treatment","Given after cooling measures to maintain temperature","Ineffective — environmental hyperthermia doesn't involve a pathologically reset hypothalamic setpoint","Used to prevent seizures"],a:2,exp:"Antipyretics (NSAIDs/acetaminophen) are ineffective for environmental heat stroke — they work by lowering the hypothalamic fever setpoint, but in environmental hyperthermia the setpoint is NORMAL. The body is simply overwhelmed by external heat. Active cooling is the treatment."},
+  {q:"The use of benzodiazepines in geriatric patients for routine anxiety management carries which specific risk?",opts:["They improve sleep quality significantly","They increase fall risk, cognitive impairment, and dependence","They are completely safe in low doses","They have no interaction with other medications"],a:1,exp:"Benzodiazepines in elderly patients increase fall risk (sedation, impaired balance), cause cognitive impairment, and lead to physical and psychological dependence. They should be used only for acute crisis management, not routine anxiety."},
+  {q:"Which of the following is characteristic of frontotemporal lobe dementia (FTLD)?",opts:["Memory is severely impaired first","Alpha-synuclein deposits are the hallmark","Fairly intact memory but impaired planning, judgment, and personality changes early","Sudden onset after a stroke"],a:2,exp:"Frontotemporal lobe dementia is characterized by fairly intact memory but struggles to plan or make decisions. Personality deteriorates — judgment, empathy, and foresight decline. Three types: behavioral/personality, language, and motor."},
+  {q:"When assessing a geriatric patient with altered mental status, which assessment tool is useful for identifying delirium in the prehospital setting?",opts:["Mini-Mental State Examination (MMSE)","Richmond Agitation-Sedation Scale (RASS) followed by delirium-specific questions","Glasgow Coma Scale only","National Institutes of Health Stroke Scale (NIHSS)"],a:1,exp:"The paramedic can quickly assess for the likelihood of delirium by first calculating the Richmond Agitation-Sedation Scale (RASS) and then asking delirium-specific questions that are part of the Delirium Triage Screen and Brief Confusion Assessment Method."},
+  {q:"A geriatric patient taking warfarin sustains a minor head bump. You should:",opts:["Reassure the patient and advise follow-up in a few weeks","Assume no significant injury because the mechanism was trivial","Maintain high suspicion for intracranial hemorrhage and transport — anticoagulation dramatically worsens outcome","Only transport if the patient loses consciousness"],a:2,exp:"Anticoagulant-taking geriatric patients sustaining ANY head trauma must be transported and evaluated urgently. Anticoagulation dramatically increases hemorrhage volume and speed. The atrophic brain with stretched bridging veins is already at high risk. Trivial trauma can produce life-threatening SDH."},
+  {q:"Which type of HHS vs DKA comparison is CORRECT?",opts:["HHS has lower glucose and more ketones than DKA","DKA primarily affects type 2 diabetics in elderly; HHS affects type 1","HHS has higher glucose, no significant ketoacidosis, and primarily affects older type 2 diabetics","DKA and HHS are clinically identical"],a:2,exp:"HHS has a typically higher blood glucose level (often >600 mg/dL), does NOT have an acetone odor (no significant ketoacidosis), and primarily occurs in older adults with type 2 diabetes — unlike DKA which involves significant ketone production."},
+  {q:"Parkinson disease dementia (PDD) is a type of:",opts:["Alzheimer disease","Frontotemporal dementia","Lewy body disease","Vascular dementia"],a:2,exp:"There are two types of Lewy body disease (LBD): dementia with Lewy bodies (DLB) and Parkinson disease dementia (PDD). Both cause depletion of acetylcholine and dopamine."},
+  {q:"Which of the following best describes the role of decreased liver blood flow in geriatric drug pharmacokinetics?",opts:["It increases first-pass metabolism","It causes faster drug absorption","It reduces metabolism, leading to higher plasma drug levels and prolonged drug activity","It has no clinically significant effect"],a:2,exp:"Decreased liver blood flow reduces hepatic drug metabolism, leading to higher plasma concentrations of normally liver-metabolized drugs and prolonged drug activity — increasing the risk of toxicity."},
+  {q:"A geriatric patient complains of progressive confusion, fatigue, and weakness over several weeks, with bradycardia. Thyroid disease should be suspected. The most likely diagnosis is:",opts:["Hyperthyroidism","Hypothyroidism","Thyroid storm","Hyperparathyroidism"],a:1,exp:"Hypothyroidism in geriatric patients presents with nonspecific musculoskeletal complaints, confusion, fatigue, weakness, and bradycardia — without the classic signs (goiter, cold intolerance). Always suspect it in elderly patients with these vague symptoms."},
+  {q:"The five-million dollar error in geriatric medication management is often attributed to:",opts:["Too few medications being prescribed","Multiple prescribers, resumed old medications, OTC-Rx combinations, and cognitive barriers leading to non-compliance","Patient refusal of all medications","Incorrect medication routes"],a:1,exp:"Common reasons for drug-induced illness include prescriptions from multiple physicians, improperly resumed old medications alongside new ones, OTC + Rx combinations, dispensing errors, non-compliance, confusion, forgetfulness, and vision impairment."},
+  {q:"In geriatric patients, the bodily defense mechanisms against respiratory pathogens are impaired by:",opts:["Increased antibody production","Loss of cilia and diminished cough and gag reflexes","Increased lung volumes","Hypersensitivity of chemoreceptors"],a:1,exp:"Loss of cilia in the airways and a diminished cough reflex and impaired gag reflex are the specific changes that impair the defense against inhaled bacteria and particulate matter in geriatric patients."},
+  {q:"The STEADI program stands for:",opts:["Stopping Traffic Emergencies and Accidents in the Disabled and Injured","Stopping Elderly Accidents, Deaths, and Injuries","Safe Transportation for Every Aging Disabled Individual","Standard Treatment for Every Accidental Disability and Injury"],a:1,exp:"STEADI stands for Stopping Elderly Accidents, Deaths, and Injuries — an evidence-based program developed by the CDC and National Council on Aging to reduce fall incidence in older adults."},
+  {q:"Changes in the conduction system of aging hearts include:",opts:["Hypersensitivity of SA node cells","Increased number of conduction cells","Cells in the SA and AV nodes and conduction system lose their ability to function, leading to fibrosis","All conduction changes are benign"],a:2,exp:"Physiologic changes occur as cells in the sinoatrial and atrioventricular nodes and the rest of the conduction system lose the ability to function. These changes often lead to dysrhythmias including chronic atrial fibrillation, sick sinus syndrome, and various bradycardias and heart blocks."},
+  {q:"What is the significance of bowel sounds heard in the chest cavity of a geriatric patient with acute respiratory distress?",opts:["Normal finding in older adults","Suggests abdominal aortic aneurysm","Classic sign of diaphragmatic hernia with abdominal organ herniation into the thorax","Indicates esophageal rupture"],a:2,exp:"Bowel sounds in the chest cavity is a classic sign of diaphragmatic hernia. In geriatric patients with respiratory distress and a scaphoid abdomen, this finding should prompt immediate suspicion of this diagnosis."},
+  {q:"What is the recommended approach when asking a geriatric patient about suicidal thoughts?",opts:["Avoid the question — it may plant the idea","Ask directly — many depressed people will discuss suicidal thoughts if asked","Only ask if the patient brings it up first","Delegate the question to family members, not the patient"],a:1,exp:"Question the patient about suicidal thoughts if you suspect high risk. Many depressed people are willing to discuss their suicidal thoughts. Asking directly does NOT plant the idea — it opens a critical therapeutic conversation."},
+  {q:"Heart failure in geriatric patients is most commonly which type?",opts:["Systolic heart failure (reduced EF) exclusively","Diastolic heart failure (preserved EF) is more common in older adults due to ventricular stiffening","Both types occur equally","Only right-sided heart failure occurs in older adults"],a:1,exp:"Diastolic heart failure (preserved EF) is more common in older adults due to progressive ventricular stiffening from hypertension and aging. The stiff ventricle cannot relax and fill normally, reducing cardiac output despite preserved contractility."},
+  {q:"Over three-fourths of people with a stroke had a blood pressure of greater than:",opts:["120/80 mmHg","130/85 mmHg","140/90 mmHg","160/100 mmHg"],a:2,exp:"Over three-fourths of people with a stroke had a blood pressure of greater than 140/90 mmHg, and heavy smoking doubles the risk. Hypertension is the single most modifiable risk factor for stroke."},
+  {q:"Which of the following is MOST characteristic of a typical geriatric patient presentation for MI?",opts:["Always presents with classic crushing substernal chest pain","Never has any cardiac symptoms","May present with dyspnea, epigastric pain, fatigue, or nausea without chest pain","Always has diaphoresis and radiating arm pain"],a:2,exp:"Geriatric patients with MI commonly have only vague symptoms such as dyspnea, abdominal pain/indigestion, epigastric distress, jaw pain, fatigue, or nausea. The event may be totally silent. Chest pain becomes progressively LESS common with advancing age."},
+  {q:"In COPD management in an older patient, CPAP or BiPAP is indicated for:",opts:["All COPD patients regardless of severity","Mild exacerbations with SpO₂ >94%","Moderate-to-severe exacerbations with significant respiratory distress and poor oxygenation","Only when the patient has a natural airway problem"],a:2,exp:"CPAP/BiPAP is indicated for moderate-to-severe COPD exacerbations. It reduces work of breathing, improves oxygenation, and may prevent the need for intubation. Per medical direction, guided by the severity of respiratory distress and oxygenation status."},
+  {q:"According to social determinants of health data, what proportion of Black and Hispanic older adults live at or below the federal poverty level?",opts:["10%","25%","50%","75%"],a:2,exp:"In 2021, more than 15 million older adults lived at or below the federal poverty level. 50% of Black and Hispanic older adults were represented in this group. Women are also overrepresented."},
+  {q:"A geriatric patient complains of falling 3 times in the past year, unsteadiness when walking, and fear of falling. Per STEADI criteria, this patient is:",opts:["At low risk — only needs education","At moderate risk — no intervention needed yet","At significantly increased fall risk — requires comprehensive fall risk assessment and intervention","Only at risk if there were injuries with the falls"],a:2,exp:"Per STEADI, a yes answer to ANY of the three screening questions (fallen in past year, unsteadiness when walking, worry about falling) indicates increased fall risk. This patient answered yes to all three — highest risk category requiring comprehensive assessment and intervention."},
+  {q:"In geriatric patients with burns, special approaches to fluid therapy are needed to prevent:",opts:["Hypotension","Kidney damage","Hypervolemia and air embolism","Hypoglycemia"],a:1,exp:"Geriatric burn patients need special approaches to fluid therapy to prevent damage to the kidneys. The impaired renal function of aging means that even appropriate fluid resuscitation volumes can be nephrotoxic."},
+  {q:"What is the primary risk of RAPID IV fluid administration in geriatric trauma patients?",opts:["Metabolic alkalosis","Volume overload and pulmonary edema (heart failure)","Acute hypertension","Hemolytic reaction"],a:1,exp:"Rapid IV fluid administration to geriatric patients may cause volume overload. Older adults as a group are more susceptible to heart failure. Decreased cardiac reserve and renal function limit the capacity to handle rapid fluid administration."},
+  {q:"When assessing a geriatric patient's medication list, what is the most important prehospital action?",opts:["Leave the medications at home for family to bring later","Administer the most recently prescribed medications","Bring ALL medications to the emergency department with the patient or have a family member bring them","Only bring controlled substances to the ED"],a:2,exp:"When transporting the older adult, all medicines should be delivered to the emergency department with the patient or brought by a family member. The medication list provides critical diagnostic information about current conditions, interactions, and potential drug toxicity."},
+  {q:"Delayed reaction time and decreased motor response in geriatric patients result from:",opts:["Increased brain volume","Increased nerve conduction velocity","Decreased velocity of nerve conduction in the peripheral nervous system","Hypersensitivity of motor neurons"],a:2,exp:"Velocity of nerve conduction in the peripheral nervous system decreases with aging and may lead to changes in motor or position sense and delays in reaction time and motor responses — contributing to fall risk and impaired emergency response."},
+  {q:"A patient with Lewy body disease will exhibit which combination of features?",opts:["Memory loss only with no movement disorder","Cognitive impairment, parkinsonism, visual hallucinations, rapid eye movement sleep disorder, and fluctuating attention","Only motor symptoms without cognitive changes","Progressive language decline as the primary feature"],a:1,exp:"The clinical features of both types of Lewy body disease include cognitive impairment, parkinsonism, visual hallucinations, rapid eye movement sleep disorder, and fluctuating attention — a distinctive clinical syndrome."},
+  {q:"The most common cause of chest injury-related death in geriatric patients from rapid deceleration is:",opts:["Pneumothorax","Flail chest","Dissecting aortic aneurysm","Cardiac contusion"],a:2,exp:"When the mechanism of injury produces rapid deceleration, always consider the possibility of a dissecting aortic aneurysm. This is a greater risk in geriatric patients because of anatomic changes that make injury in these areas more significant."},
+  {q:"Impaired cognition is found in what percentage of older adults who use EMS?",opts:["2-3%","5-7%","13%","25%"],a:2,exp:"Impaired cognition is found in as many as 13% of older adults who use EMS, so it is important to establish the patient's cognition early in the examination using validated tools."},
+  {q:"In a geriatric patient with suspected GI hemorrhage, which IV access should be established?",opts:["Single 22-gauge IV in the antecubital fossa","Large-bore IV × 2","Central line only","No IV access — oral hydration preferred"],a:1,exp:"Large-bore IV access × 2 is essential for GI hemorrhage — aggressive fluid resuscitation with NS or LR targeting SBP >90 mmHg is required, and blood product administration may be necessary."},
+  {q:"An 82-year-old woman presents with sudden onset of right arm weakness, facial droop, and difficulty speaking. She takes warfarin for AFib. Your PRIORITY action after assessment is:",opts:["Administer aspirin 324mg immediately","Start a large-bore IV and administer 1L NS","Rapidly transport to the nearest stroke center — time is critical","Reverse anticoagulation with Vitamin K in the field"],a:2,exp:"Rapid transport to a stroke center is the priority. Time to thrombolytics or thrombectomy is critical — 'time is brain' (1.9 million neurons die per minute). Aspirin should NOT be given before ruling out hemorrhagic stroke (especially in an anticoagulated patient). IV access is important but should not delay transport."},
+  {q:"Which of the following is the BEST approach when communicating with a geriatric patient who has hearing loss?",opts:["Shout loudly to overcome the hearing deficit","Speak quickly to avoid tiring the patient","Speak clearly, face the patient, reduce background noise, and ask if they have a hearing aid","Use only written communication and avoid speaking"],a:2,exp:"Best practices for communicating with patients who have hearing loss include speaking clearly (not shouting), facing the patient (lip reading aid), reducing background noise, speaking slowly, and checking for hearing aids or assistive devices."},
+  {q:"A geriatric patient who regularly takes NSAIDs for osteoarthritis presents with coffee-ground emesis. The most likely cause is:",opts:["Esophageal rupture","Peptic ulcer disease from NSAID-induced mucosal damage","Gastric cancer from NSAID use","Aortoenteric fistula"],a:1,exp:"NSAIDs inhibit prostaglandins that normally protect the gastric mucosa, leading to peptic ulcer disease. Coffee-ground emesis indicates upper GI hemorrhage with digested blood — classic for peptic ulcer. NSAID use in geriatric patients is a major risk factor."},
+];
+
+let studentName='',studentId='',quizDate='',answered=[],score=0;
+
+function startQuiz(){
+  studentName=document.getElementById('student-name').value.trim();
+  studentId=document.getElementById('student-id').value.trim();
+  quizDate=document.getElementById('quiz-date').value;
+  if(!studentName||!studentId){alert('Please enter your name and student ID.');return;}
+  document.getElementById('student-form-wrapper').style.display='none';
+  document.getElementById('quiz-container').style.display='block';
+  answered=new Array(questions.length).fill(null);
+  score=0;
+  renderQuestions();
+}
+
+function renderQuestions(){
+  const area=document.getElementById('questions-area');
+  area.innerHTML=questions.map((q,qi)=>`
+    <div class="question-card" id="qcard-${qi}">
+      <div class="q-num">Question ${qi+1} of ${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o,oi)=>`<button class="option-btn" onclick="answerQ(${qi},${oi})" id="opt-${qi}-${oi}">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="explanation" id="exp-${qi}">${q.exp}</div>
+    </div>`).join('');
+}
+
+function answerQ(qi,oi){
+  if(answered[qi]!==null)return;
+  answered[qi]=oi;
+  const q=questions[qi];
+  for(let i=0;i<q.opts.length;i++){
+    const btn=document.getElementById(`opt-${qi}-${i}`);
+    btn.disabled=true;
+    if(i===q.a)btn.classList.add('correct');
+    else if(i===oi&&oi!==q.a)btn.classList.add('wrong');
+  }
+  document.getElementById(`exp-${qi}`).classList.add('show');
+  if(oi===q.a)score++;
+  document.getElementById('live-score').textContent=score;
+  const done=answered.filter(a=>a!==null).length;
+  document.getElementById('q-counter').textContent=`${done} / ${questions.length}`;
+  document.getElementById('progress-fill').style.width=`${(done/questions.length)*100}%`;
+  if(done===questions.length)setTimeout(showResults,800);
+}
+
+function showResults(){
+  document.getElementById('quiz-container').style.display='none';
+  const res=document.getElementById('results-container');
+  res.style.display='block';
+  const pct=Math.round((score/questions.length)*100);
+  document.getElementById('score-pct').textContent=pct+'%';
+  document.getElementById('pct-display').textContent=pct+'%';
+  document.getElementById('correct-count').textContent=score;
+  document.getElementById('wrong-count').textContent=questions.length-score;
+  let grade,comment;
+  if(pct>=90){grade='A — Excellent';comment='Outstanding performance! You demonstrate strong mastery of geriatric care.';}
+  else if(pct>=80){grade='B — Above Average';comment='Strong performance! Review the topics you missed to achieve mastery.';}
+  else if(pct>=70){grade='C — Satisfactory';comment='Satisfactory. Focus on reviewing physiologic changes, conditions, and assessment principles.';}
+  else if(pct>=60){grade='D — Needs Improvement';comment='Additional study is recommended. Review all sections of Chapter 48.';}
+  else{grade='F — Unsatisfactory';comment='Significant additional study required. Please review all chapter content before retesting.';}
+  document.getElementById('grade-label').textContent=grade;
+  document.getElementById('grade-comment').textContent=comment;
+}
+
+function showReview(){
+  const list=document.getElementById('review-list');
+  list.style.display=list.style.display==='none'?'block':'none';
+  if(list.innerHTML===''){
+    list.innerHTML=questions.map((q,i)=>{
+      const correct=answered[i]===q.a;
+      return `<div class="review-item ${correct?'correct-r':'wrong-r'}">
+        <div class="review-q">${i+1}. ${q.q}</div>
+        ${!correct?`<div class="review-ans wrong-a">Your answer: ${String.fromCharCode(65+answered[i])}. ${q.opts[answered[i]]??'Not answered'}</div>`:''}
+        <div class="review-ans correct-a">Correct: ${String.fromCharCode(65+q.a)}. ${q.opts[q.a]}</div>
+        <div class="review-exp">${q.exp}</div>
+      </div>`;
+    }).join('');
+  }
+}
+
+function retakeQuiz(){
+  document.getElementById('results-container').style.display='none';
+  document.getElementById('quiz-container').style.display='block';
+  answered=new Array(questions.length).fill(null);
+  score=0;
+  document.getElementById('live-score').textContent='0';
+  document.getElementById('q-counter').textContent='0 / 100';
+  document.getElementById('progress-fill').style.width='0%';
+  document.getElementById('review-list').innerHTML='';
+  document.getElementById('review-list').style.display='none';
+  renderQuestions();
+}
+
+function generatePDF(){
+  const{jsPDF}=window.jspdf;
+  const doc=new jsPDF();
+  const pct=Math.round((score/questions.length)*100);
+  doc.setFillColor(13,17,23);
+  doc.rect(0,0,210,40,'F');
+  doc.setTextColor(16,185,129);
+  doc.setFontSize(17);
+  doc.setFont('helvetica','bold');
+  doc.text('CAMP EMS Paramedic Program',105,13,{align:'center'});
+  doc.setFontSize(11);
+  doc.setTextColor(148,163,184);
+  doc.text("Sanders' Paramedic Textbook, 6th Edition",105,21,{align:'center'});
+  doc.text('Chapter 48: Geriatrics — Knowledge Assessment',105,29,{align:'center'});
+  doc.setFillColor(28,35,51);
+  doc.rect(10,44,190,32,'F');
+  doc.setDrawColor(16,185,129);
+  doc.rect(10,44,190,32,'S');
+  doc.setTextColor(16,185,129);
+  doc.setFontSize(10);
+  doc.setFont('helvetica','bold');
+  doc.text('Student Information',14,52);
+  doc.setFont('helvetica','normal');
+  doc.setTextColor(226,232,240);
+  doc.setFontSize(9);
+  doc.text(`Name: ${studentName}`,14,60);
+  doc.text(`Student ID: ${studentId}`,14,67);
+  doc.text(`Date: ${quizDate}`,120,60);
+  doc.text('Chapter: 48 — Geriatrics',120,67);
+  const scoreColor=pct>=70?[16,185,129]:pct>=60?[251,191,36]:[248,113,113];
+  doc.setFillColor(...scoreColor);
+  doc.rect(10,80,60,30,'F');
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(22);
+  doc.setFont('helvetica','bold');
+  doc.text(`${pct}%`,40,98,{align:'center'});
+  doc.setFontSize(8);
+  doc.text('FINAL SCORE',40,104,{align:'center'});
+  doc.setFillColor(28,35,51);
+  doc.rect(75,80,60,30,'F');
+  doc.setTextColor(52,211,153);
+  doc.setFontSize(16);
+  doc.text(`${score}/100`,105,96,{align:'center'});
+  doc.setFontSize(8);
+  doc.setTextColor(148,163,184);
+  doc.text('Correct Answers',105,104,{align:'center'});
+  doc.setFillColor(28,35,51);
+  doc.rect(140,80,60,30,'F');
+  doc.setTextColor(248,113,113);
+  doc.setFontSize(16);
+  doc.text(`${questions.length-score}/100`,170,96,{align:'center'});
+  doc.setFontSize(8);
+  doc.setTextColor(148,163,184);
+  doc.text('Incorrect Answers',170,104,{align:'center'});
+  let grade='';
+  if(pct>=90)grade='A — Excellent';
+  else if(pct>=80)grade='B — Above Average';
+  else if(pct>=70)grade='C — Satisfactory';
+  else if(pct>=60)grade='D — Needs Improvement';
+  else grade='F — Unsatisfactory';
+  doc.setFillColor(13,17,23);
+  doc.rect(10,114,190,12,'F');
+  doc.setTextColor(251,191,36);
+  doc.setFontSize(11);
+  doc.setFont('helvetica','bold');
+  doc.text(`Grade: ${grade}`,105,123,{align:'center'});
+  const tableData=questions.map((q,i)=>[
+    i+1,
+    q.q.length>68?q.q.substring(0,68)+'...':q.q,
+    answered[i]!==null?`${String.fromCharCode(65+answered[i])}. ${(q.opts[answered[i]]||'').substring(0,28)}`:'N/A',
+    `${String.fromCharCode(65+q.a)}. ${q.opts[q.a].substring(0,28)}`,
+    answered[i]===q.a?'✓':'✗'
+  ]);
+  doc.autoTable({
+    head:[['#','Question','Your Answer','Correct Answer','Result']],
+    body:tableData,startY:130,
+    styles:{fontSize:6.5,cellPadding:2,textColor:[226,232,240],fillColor:[28,35,51]},
+    headStyles:{fillColor:[16,185,129],textColor:[13,17,23],fontStyle:'bold'},
+    alternateRowStyles:{fillColor:[21,30,46]},
+    columnStyles:{0:{cellWidth:8},4:{cellWidth:12,halign:'center'}},
+  });
+  const pg=doc.internal.getNumberOfPages();
+  for(let i=1;i<=pg;i++){
+    doc.setPage(i);
+    doc.setFillColor(13,17,23);
+    doc.rect(0,287,210,10,'F');
+    doc.setTextColor(100,116,139);
+    doc.setFontSize(7);
+    doc.setFont('helvetica','normal');
+    doc.text(`CAMP Community College EMS Program | Chapter 48: Geriatrics | Page ${i} of ${pg}`,105,293,{align:'center'});
+  }
+  doc.save(`CH48_Geriatrics_${studentName.replace(/\s+/g,'_')}_${pct}pct.pdf`);
+}
+</script>
+</body>
+</html>
