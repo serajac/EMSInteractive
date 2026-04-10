@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 46: Neonatal Care | CAMP EMS Paramedic Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.6.0/jspdf.plugin.autotable.min.js"></script>
+<style>
+:root[data-theme="dark"] {
+  --bg-primary: #0b1426;
+  --bg-secondary: #0f1e35;
+  --bg-card: #132038;
+  --bg-card-hover: #1a2d4a;
+  --bg-tab-active: #1e3a5f;
+  --border-color: #1e3a5f;
+  --border-accent: #2a5298;
+  --text-primary: #e8f4fd;
+  --text-secondary: #94b8d4;
+  --text-muted: #5a8ab0;
+  --accent-teal: #00d4aa;
+  --accent-coral: #ff6b6b;
+  --accent-gold: #ffd166;
+  --accent-blue: #4fc3f7;
+  --accent-purple: #b39ddb;
+  --accent-green: #69f0ae;
+  --nav-bg: #0d1929;
+  --input-bg: #0d1929;
+  --shadow: 0 4px 20px rgba(0,0,0,0.4);
+  --correct-bg: rgba(105,240,174,0.1);
+  --correct-border: #69f0ae;
+  --wrong-bg: rgba(255,107,107,0.1);
+  --wrong-border: #ff6b6b;
+  --hero-gradient: linear-gradient(135deg, #0b1426 0%, #0f2a4a 50%, #0b1426 100%);
+}
+:root[data-theme="light"] {
+  --bg-primary: #f0f4f8;
+  --bg-secondary: #e2eaf2;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f7fafd;
+  --bg-tab-active: #dceeff;
+  --border-color: #c5d8ea;
+  --border-accent: #4a90d9;
+  --text-primary: #1a2c3d;
+  --text-secondary: #3d6080;
+  --text-muted: #6a8faa;
+  --accent-teal: #00897b;
+  --accent-coral: #e53935;
+  --accent-gold: #f57f17;
+  --accent-blue: #1565c0;
+  --accent-purple: #6a1b9a;
+  --accent-green: #2e7d32;
+  --nav-bg: #daeaf8;
+  --input-bg: #ffffff;
+  --shadow: 0 4px 20px rgba(0,0,0,0.1);
+  --correct-bg: rgba(46,125,50,0.08);
+  --correct-border: #2e7d32;
+  --wrong-bg: rgba(229,57,53,0.08);
+  --wrong-border: #e53935;
+  --hero-gradient: linear-gradient(135deg, #e8f4fd 0%, #d0e8f7 50%, #e8f4fd 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;transition:background 0.3s,color 0.3s;}
+/* HEADER */
+header{background:var(--nav-bg);border-bottom:2px solid var(--border-accent);padding:0 2rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1rem 0;}
+.logo-area{display:flex;align-items:center;gap:1rem;}
+.logo-icon{font-size:2rem;}
+.logo-text h1{font-family:'Crimson Pro',serif;font-size:1.4rem;font-weight:700;color:var(--accent-teal);line-height:1;}
+.logo-text p{font-size:0.75rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+.header-right{display:flex;align-items:center;gap:1rem;}
+.chapter-badge{background:var(--accent-teal);color:#0b1426;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.75rem;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.theme-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-primary);padding:0.4rem 0.9rem;border-radius:20px;cursor:pointer;font-size:0.8rem;font-family:'Outfit',sans-serif;transition:all 0.2s;}
+.theme-btn:hover{border-color:var(--accent-teal);color:var(--accent-teal);}
+/* NAV TABS */
+.nav-tabs{background:var(--nav-bg);border-bottom:1px solid var(--border-color);}
+.nav-tabs-inner{max-width:1200px;margin:0 auto;display:flex;gap:0;}
+.nav-tab{padding:0.9rem 1.5rem;cursor:pointer;font-size:0.9rem;font-weight:500;color:var(--text-muted);border-bottom:3px solid transparent;transition:all 0.2s;white-space:nowrap;}
+.nav-tab:hover{color:var(--text-primary);background:var(--bg-tab-active);}
+.nav-tab.active{color:var(--accent-teal);border-bottom-color:var(--accent-teal);background:var(--bg-tab-active);}
+/* MAIN */
+main{max-width:1200px;margin:0 auto;padding:2rem;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+/* HERO SECTION */
+.hero{background:var(--hero-gradient);border:1px solid var(--border-accent);border-radius:16px;padding:2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(0,212,170,0.15) 0%,transparent 70%);border-radius:50%;}
+.hero h2{font-family:'Crimson Pro',serif;font-size:2.2rem;font-weight:700;color:var(--accent-teal);margin-bottom:0.5rem;}
+.hero p{color:var(--text-secondary);font-size:1.05rem;line-height:1.7;max-width:700px;}
+.hero-stats{display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap;}
+.stat-box{background:rgba(0,0,0,0.25);border:1px solid var(--border-color);border-radius:10px;padding:1rem 1.5rem;text-align:center;}
+[data-theme="light"] .stat-box{background:rgba(255,255,255,0.5);}
+.stat-box .num{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:600;color:var(--accent-teal);}
+.stat-box .label{font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem;}
+/* OBJECTIVES */
+.section-title{font-family:'Crimson Pro',serif;font-size:1.6rem;color:var(--accent-blue);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border-color);}
+.objectives-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:2rem;}
+.objective-item{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;padding:0.9rem 1.1rem;display:flex;gap:0.8rem;align-items:flex-start;}
+.obj-num{background:var(--accent-teal);color:#0b1426;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;flex-shrink:0;margin-top:0.1rem;}
+.obj-text{font-size:0.88rem;color:var(--text-secondary);line-height:1.5;}
+/* APGAR TABLE */
+.table-wrapper{overflow-x:auto;margin-bottom:2rem;}
+table{width:100%;border-collapse:collapse;font-size:0.88rem;}
+th{background:var(--accent-teal);color:#0b1426;padding:0.75rem 1rem;text-align:left;font-weight:600;}
+td{padding:0.7rem 1rem;border-bottom:1px solid var(--border-color);color:var(--text-secondary);}
+tr:hover td{background:var(--bg-card-hover);}
+tr:nth-child(even) td{background:var(--bg-card);}
+/* ADAPTATIONS */
+.adaptations-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:2rem;}
+.adaptation-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.2rem;border-left:4px solid var(--accent-teal);}
+.adaptation-card h4{color:var(--accent-teal);font-size:0.95rem;font-weight:600;margin-bottom:0.5rem;}
+.adaptation-card p{color:var(--text-secondary);font-size:0.85rem;line-height:1.6;}
+/* GOLDEN MINUTE */
+.golden-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;}
+.golden-step{background:linear-gradient(135deg,var(--bg-card),var(--bg-card-hover));border:1px solid var(--border-color);border-radius:10px;padding:1.1rem;text-align:center;position:relative;}
+.step-num{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--accent-gold);margin-bottom:0.5rem;font-weight:600;}
+.step-icon{font-size:1.8rem;margin-bottom:0.5rem;}
+.step-text{font-size:0.85rem;color:var(--text-secondary);line-height:1.4;}
+/* DISEASE CARDS */
+.category-title{font-family:'Crimson Pro',serif;font-size:1.4rem;margin:1.5rem 0 1rem;color:var(--accent-gold);display:flex;align-items:center;gap:0.5rem;}
+.category-title::after{content:'';flex:1;height:1px;background:var(--border-color);}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.2rem;margin-bottom:1.5rem;}
+.disease-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;overflow:hidden;transition:all 0.3s;}
+.disease-card:hover{border-color:var(--border-accent);box-shadow:var(--shadow);}
+.card-header{padding:1.1rem 1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:0.5rem;}
+.card-left{display:flex;align-items:center;gap:0.75rem;}
+.card-icon{font-size:1.5rem;}
+.card-title{font-weight:600;font-size:0.95rem;color:var(--text-primary);}
+.card-subtitle{font-size:0.75rem;color:var(--text-muted);margin-top:0.1rem;}
+.card-chevron{color:var(--text-muted);font-size:0.8rem;transition:transform 0.3s;}
+.disease-card.open .card-chevron{transform:rotate(180deg);}
+.card-body{display:none;border-top:1px solid var(--border-color);}
+.disease-card.open .card-body{display:block;}
+.card-tabs{display:flex;border-bottom:1px solid var(--border-color);}
+.card-tab{flex:1;padding:0.6rem;text-align:center;cursor:pointer;font-size:0.78rem;color:var(--text-muted);transition:all 0.2s;font-weight:500;}
+.card-tab:hover{background:var(--bg-card-hover);}
+.card-tab.active{color:var(--accent-teal);background:var(--bg-tab-active);border-bottom:2px solid var(--accent-teal);}
+.card-tab-content{display:none;padding:1.1rem 1.2rem;}
+.card-tab-content.active{display:block;}
+.card-tab-content p,.card-tab-content li{font-size:0.85rem;color:var(--text-secondary);line-height:1.65;}
+.card-tab-content ul{padding-left:1.2rem;margin-top:0.4rem;}
+.card-tab-content li{margin-bottom:0.3rem;}
+.med-table{width:100%;border-collapse:collapse;margin-top:0.5rem;font-size:0.82rem;}
+.med-table th{background:var(--bg-tab-active);color:var(--accent-teal);padding:0.5rem 0.7rem;text-align:left;font-size:0.78rem;}
+.med-table td{padding:0.45rem 0.7rem;border-bottom:1px solid var(--border-color);color:var(--text-secondary);}
+.analogy-box{background:linear-gradient(135deg,var(--bg-secondary),var(--bg-card));border-left:3px solid var(--accent-purple);border-radius:6px;padding:0.9rem;margin-top:0.3rem;}
+.analogy-box p{font-family:'Crimson Pro',serif;font-style:italic;font-size:0.95rem;color:var(--text-secondary);line-height:1.7;}
+.tag{display:inline-block;padding:0.2rem 0.6rem;border-radius:12px;font-size:0.72rem;font-weight:600;margin-bottom:0.6rem;}
+.tag-emergency{background:rgba(255,107,107,0.15);color:var(--accent-coral);border:1px solid rgba(255,107,107,0.3);}
+.tag-structural{background:rgba(79,195,247,0.15);color:var(--accent-blue);border:1px solid rgba(79,195,247,0.3);}
+.tag-cardiac{background:rgba(255,209,102,0.15);color:var(--accent-gold);border:1px solid rgba(255,209,102,0.3);}
+.tag-abdominal{background:rgba(105,240,174,0.15);color:var(--accent-green);border:1px solid rgba(105,240,174,0.3);}
+/* RESUSCITATION */
+.algo-container{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;}
+.algo-step{display:flex;gap:1rem;margin-bottom:0.5rem;align-items:flex-start;}
+.algo-diamond{background:var(--accent-teal);color:#0b1426;border-radius:6px;padding:0.4rem 0.9rem;font-size:0.8rem;font-weight:700;white-space:nowrap;min-width:100px;text-align:center;}
+.algo-diamond.red{background:var(--accent-coral);color:#fff;}
+.algo-diamond.gold{background:var(--accent-gold);color:#0b1426;}
+.algo-text{font-size:0.88rem;color:var(--text-secondary);line-height:1.6;padding-top:0.3rem;}
+.algo-arrow{text-align:center;color:var(--accent-teal);font-size:1.2rem;margin:0.3rem 0;}
+.mnemonic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;}
+.mnemonic-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1rem;text-align:center;}
+.mnemonic-letter{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;color:var(--accent-teal);}
+.mnemonic-word{font-size:0.9rem;font-weight:600;color:var(--text-primary);margin:0.2rem 0;}
+.mnemonic-desc{font-size:0.78rem;color:var(--text-muted);}
+/* ASSESSMENT */
+.student-form{background:var(--bg-card);border:1px solid var(--border-accent);border-radius:12px;padding:2rem;margin-bottom:1.5rem;max-width:600px;margin-left:auto;margin-right:auto;}
+.student-form h3{font-family:'Crimson Pro',serif;font-size:1.5rem;color:var(--accent-teal);margin-bottom:1.2rem;text-align:center;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.4rem;font-weight:500;}
+.form-group input{width:100%;background:var(--input-bg);border:1px solid var(--border-color);border-radius:8px;padding:0.7rem 1rem;color:var(--text-primary);font-size:0.9rem;font-family:'Outfit',sans-serif;transition:border 0.2s;}
+.form-group input:focus{outline:none;border-color:var(--accent-teal);}
+.btn-start{display:block;width:100%;background:var(--accent-teal);color:#0b1426;border:none;padding:1rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:1.2rem;transition:opacity 0.2s;}
+.btn-start:hover{opacity:0.88;}
+.quiz-container{display:none;}
+.quiz-header{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.quiz-info span{font-size:0.85rem;color:var(--text-muted);}
+.quiz-info strong{color:var(--text-primary);}
+.progress-bar{background:var(--bg-secondary);border-radius:20px;height:8px;flex:1;min-width:150px;}
+.progress-fill{background:linear-gradient(90deg,var(--accent-teal),var(--accent-blue));height:100%;border-radius:20px;transition:width 0.3s;}
+.live-score{font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:var(--accent-green);}
+.question-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;margin-bottom:1rem;}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);margin-bottom:0.6rem;}
+.q-text{font-size:0.97rem;color:var(--text-primary);line-height:1.6;margin-bottom:1.2rem;font-weight:500;}
+.options{display:flex;flex-direction:column;gap:0.6rem;}
+.option-btn{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:8px;padding:0.75rem 1rem;text-align:left;color:var(--text-secondary);cursor:pointer;font-size:0.88rem;font-family:'Outfit',sans-serif;transition:all 0.2s;line-height:1.45;}
+.option-btn:hover:not(:disabled){background:var(--bg-card-hover);border-color:var(--accent-blue);color:var(--text-primary);}
+.option-btn.correct{background:var(--correct-bg);border-color:var(--correct-border);color:var(--accent-green);}
+.option-btn.wrong{background:var(--wrong-bg);border-color:var(--wrong-border);color:var(--accent-coral);}
+.option-btn:disabled{cursor:default;}
+.explanation{margin-top:0.8rem;padding:0.8rem 1rem;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--accent-teal);font-size:0.83rem;color:var(--text-secondary);line-height:1.6;display:none;}
+.explanation.show{display:block;}
+/* RESULTS */
+.results-container{display:none;text-align:center;}
+.score-circle{width:160px;height:160px;border-radius:50%;border:6px solid var(--accent-teal);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.5rem;}
+.score-pct{font-family:'JetBrains Mono',monospace;font-size:2.5rem;font-weight:700;color:var(--accent-teal);}
+.score-label{font-size:0.8rem;color:var(--text-muted);}
+.grade-label{font-size:1.8rem;font-weight:700;margin-bottom:0.5rem;}
+.results-stats{display:flex;gap:1rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap;}
+.result-stat{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1rem 1.5rem;text-align:center;}
+.result-stat .num{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;}
+.result-stat .lbl{font-size:0.75rem;color:var(--text-muted);}
+.btn-pdf{background:var(--accent-coral);color:#fff;border:none;padding:0.9rem 2rem;border-radius:8px;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;margin:0.5rem;transition:opacity 0.2s;}
+.btn-pdf:hover{opacity:0.85;}
+.btn-review{background:var(--bg-card);border:1px solid var(--accent-blue);color:var(--accent-blue);padding:0.9rem 2rem;border-radius:8px;font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin:0.5rem;transition:all 0.2s;}
+.btn-review:hover{background:var(--accent-blue);color:#fff;}
+.btn-retake{background:var(--bg-card);border:1px solid var(--accent-teal);color:var(--accent-teal);padding:0.9rem 2rem;border-radius:8px;font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin:0.5rem;transition:all 0.2s;}
+.btn-retake:hover{background:var(--accent-teal);color:#0b1426;}
+.review-list{text-align:left;margin-top:2rem;}
+.review-item{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.1rem;margin-bottom:0.8rem;}
+.review-item.correct-r{border-left:4px solid var(--accent-green);}
+.review-item.wrong-r{border-left:4px solid var(--accent-coral);}
+.review-q{font-size:0.9rem;font-weight:600;color:var(--text-primary);margin-bottom:0.5rem;}
+.review-ans{font-size:0.83rem;margin-bottom:0.3rem;}
+.review-ans.correct-a{color:var(--accent-green);}
+.review-ans.wrong-a{color:var(--accent-coral);}
+.review-exp{font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;font-style:italic;}
+@media(max-width:768px){
+.objectives-grid{grid-template-columns:1fr;}
+.mnemonic-grid{grid-template-columns:1fr 1fr;}
+.cards-grid{grid-template-columns:1fr;}
+.hero-stats{gap:0.75rem;}
+.nav-tab{padding:0.7rem 0.9rem;font-size:0.8rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-icon">👶</div>
+      <div class="logo-text">
+        <h1>CAMP EMS Paramedic Program</h1>
+        <p>Sanders' Paramedic Textbook · 6th Edition</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="chapter-badge">CH 46</span>
+      <button class="theme-btn" onclick="toggleTheme()">☀️ Light Mode</button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <div class="nav-tab active" onclick="switchTab('overview',this)">📋 Overview</div>
+    <div class="nav-tab" onclick="switchTab('conditions',this)">🩺 Conditions & Anomalies</div>
+    <div class="nav-tab" onclick="switchTab('resuscitation',this)">💓 Resuscitation</div>
+    <div class="nav-tab" onclick="switchTab('assessment',this)">📝 Assessment</div>
+  </div>
+</nav>
+
+<main>
+<!-- ============ OVERVIEW ============ -->
+<div id="tab-overview" class="tab-content active">
+  <div class="hero">
+    <h2>Chapter 46: Neonatal Care</h2>
+    <p>About 10% of newborns require some assistance to begin breathing at birth, and about 1% require extensive resuscitation. Master the risk factors, physiologic adaptations, APGAR scoring, and resuscitation algorithms critical for the prehospital paramedic.</p>
+    <div class="hero-stats">
+      <div class="stat-box"><div class="num">10%</div><div class="label">Need breathing help</div></div>
+      <div class="stat-box"><div class="num">1%</div><div class="label">Need full resuscitation</div></div>
+      <div class="stat-box"><div class="num">60s</div><div class="label">The Golden Minute</div></div>
+      <div class="stat-box"><div class="num">3:1</div><div class="label">Compression:Ventilation ratio</div></div>
+      <div class="stat-box"><div class="num">23+</div><div class="label">Congenital anomalies covered</div></div>
+    </div>
+  </div>
+
+  <h3 class="section-title">Learning Objectives</h3>
+  <div class="objectives-grid">
+    <div class="objective-item"><div class="obj-num">1</div><div class="obj-text">Identify risk factors associated with the need for neonatal resuscitation.</div></div>
+    <div class="objective-item"><div class="obj-num">2</div><div class="obj-text">Describe the physiologic adaptations at birth.</div></div>
+    <div class="objective-item"><div class="obj-num">3</div><div class="obj-text">Outline the prehospital assessment and management of the newborn.</div></div>
+    <div class="objective-item"><div class="obj-num">4</div><div class="obj-text">Describe resuscitation of the distressed newborn.</div></div>
+    <div class="objective-item"><div class="obj-num">5</div><div class="obj-text">Identify postresuscitation management and transport considerations.</div></div>
+    <div class="objective-item"><div class="obj-num">6</div><div class="obj-text">Describe management of the emotional needs of the newborn's family.</div></div>
+    <div class="objective-item"><div class="obj-num">7</div><div class="obj-text">Describe signs, symptoms, and management of specific neonatal situations.</div></div>
+    <div class="objective-item"><div class="obj-num">8</div><div class="obj-text">Describe signs and symptoms of sepsis in the newborn.</div></div>
+    <div class="objective-item"><div class="obj-num">9</div><div class="obj-text">Identify injuries associated with birth.</div></div>
+    <div class="objective-item"><div class="obj-num">10</div><div class="obj-text">Describe the pathophysiology and implications of selected genetic anomalies present in some newborns.</div></div>
+  </div>
+
+  <h3 class="section-title">Physiologic Adaptations at Birth</h3>
+  <div class="adaptations-grid">
+    <div class="adaptation-card"><h4>🫁 Lung Fluid Clearance</h4><p>Adrenaline activates sodium channels and catecholamines trigger lung fluid clearance. About one-third is cleared before delivery; vaginal birth compresses the chest and expels more fluid.</p></div>
+    <div class="adaptation-card"><h4>💨 First Breath</h4><p>Triggered by chemical changes (air exposure) and temperature change. Air entering alveoli causes pulmonary capillaries to dilate, reducing pulmonary pressure and allowing blood to flow into the lungs.</p></div>
+    <div class="adaptation-card"><h4>❤️ Circulatory Transition</h4><p>Foramen ovale begins to close. SpO₂ may remain 70–80% for several minutes — normal appearance of cyanosis. SpO₂ may not reach 90% for up to 10 minutes after birth.</p></div>
+    <div class="adaptation-card"><h4>🌡️ Temperature Regulation</h4><p>Newborns have a larger body surface area, less subcutaneous fat, and immature temperature regulation. Immediate drying and warm coverings are essential. Hypothermia worsens hypoxia.</p></div>
+    <div class="adaptation-card"><h4>🧠 Hypoxia Sensitivity</h4><p>Newborns are extremely sensitive to hypoxia. Prolonged hypoxemia causes significant and irreversible brain injury. Causes include decreased brain blood flow, low oxygen content, and cardiovascular anomalies.</p></div>
+    <div class="adaptation-card"><h4>🔄 Ductus Closure</h4><p>The ductus arteriosus and foramen ovale may take several days to fully close. Failure to close results in congenital defects (PDA, etc.) that can require medical or surgical correction.</p></div>
+  </div>
+
+  <h3 class="section-title">APGAR Scoring System</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Sign</th><th>0</th><th>1</th><th>2</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A</strong>ppearance (skin color)</td><td>Blue/pale all over</td><td>Blue extremities, pink body</td><td>Completely pink</td></tr>
+        <tr><td><strong>P</strong>ulse rate</td><td>Absent</td><td>&lt;100 beats/min</td><td>≥100 beats/min</td></tr>
+        <tr><td><strong>G</strong>rimace (irritability)</td><td>No response</td><td>Grimace</td><td>Cry, cough, or sneeze</td></tr>
+        <tr><td><strong>A</strong>ctivity (muscle tone)</td><td>Limp</td><td>Some flexion</td><td>Active motion</td></tr>
+        <tr><td><strong>R</strong>espiration (effort)</td><td>Absent</td><td>Weak/irregular</td><td>Strong cry</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;">
+    <div style="background:var(--correct-bg);border:1px solid var(--correct-border);border-radius:8px;padding:0.8rem 1.2rem;flex:1;min-width:140px;text-align:center;"><strong style="color:var(--accent-green);">7–10</strong><br><span style="font-size:0.8rem;color:var(--text-muted);">Normal</span></div>
+    <div style="background:rgba(255,209,102,0.1);border:1px solid var(--accent-gold);border-radius:8px;padding:0.8rem 1.2rem;flex:1;min-width:140px;text-align:center;"><strong style="color:var(--accent-gold);">4–6</strong><br><span style="font-size:0.8rem;color:var(--text-muted);">Moderately distressed — O₂ + stimulation</span></div>
+    <div style="background:var(--wrong-bg);border:1px solid var(--wrong-border);border-radius:8px;padding:0.8rem 1.2rem;flex:1;min-width:140px;text-align:center;"><strong style="color:var(--accent-coral);">&lt;4</strong><br><span style="font-size:0.8rem;color:var(--text-muted);">Severely distressed — Full resuscitation</span></div>
+  </div>
+
+  <h3 class="section-title">The Golden Minute</h3>
+  <div class="golden-steps">
+    <div class="golden-step"><div class="step-num">STEP 1</div><div class="step-icon">❓</div><div class="step-text">Is baby term? Good tone? Breathing/crying?</div></div>
+    <div class="golden-step"><div class="step-num">STEP 2</div><div class="step-icon">🌡️</div><div class="step-text">Warm, maintain temperature, position airway</div></div>
+    <div class="golden-step"><div class="step-num">STEP 3</div><div class="step-icon">🧹</div><div class="step-text">Clear secretions only if copious and obstructing</div></div>
+    <div class="golden-step"><div class="step-num">STEP 4</div><div class="step-icon">👐</div><div class="step-text">Dry and stimulate (rub back/trunk ≤30 sec)</div></div>
+    <div class="golden-step"><div class="step-num">STEP 5</div><div class="step-icon">📊</div><div class="step-text">Evaluate: respirations, HR, color/SpO₂</div></div>
+    <div class="golden-step"><div class="step-num">STEP 6</div><div class="step-icon">💨</div><div class="step-text">Start PPV if HR &lt;100 or inadequate respirations</div></div>
+  </div>
+</div>
+
+<!-- ============ CONDITIONS ============ -->
+<div id="tab-conditions" class="tab-content">
+
+  <div class="category-title">🚨 Acute Emergency Presentations</div>
+  <div class="cards-grid" id="emergency-cards"></div>
+
+  <div class="category-title">🛣️ Airway & Structural Anomalies</div>
+  <div class="cards-grid" id="airway-cards"></div>
+
+  <div class="category-title">❤️ Congenital Heart Defects</div>
+  <div class="cards-grid" id="cardiac-cards"></div>
+
+  <div class="category-title">🫀 Abdominal & Spinal Anomalies</div>
+  <div class="cards-grid" id="abdominal-cards"></div>
+
+</div>
+
+<!-- ============ RESUSCITATION ============ -->
+<div id="tab-resuscitation" class="tab-content">
+
+  <h3 class="section-title">Neonatal Resuscitation Algorithm</h3>
+  <div class="algo-container">
+    <div class="algo-step"><div class="algo-diamond">Birth</div><div class="algo-text">Assess: Term? Good tone? Breathing/crying?</div></div>
+    <div class="algo-arrow">↓</div>
+    <div class="algo-step"><div class="algo-diamond">Initial Steps</div><div class="algo-text">Warm, dry, stimulate, position, clear airway. Complete within 60 seconds (The Golden Minute).</div></div>
+    <div class="algo-arrow">↓</div>
+    <div class="algo-step"><div class="algo-diamond" style="background:var(--accent-blue);color:#fff;">HR &lt; 100?</div><div class="algo-text">Start PPV at 40–60 breaths/min with approximately 5 cmH₂O PEEP. Apply pulse oximeter.</div></div>
+    <div class="algo-arrow">↓</div>
+    <div class="algo-step"><div class="algo-diamond gold">15 sec: Reassess</div><div class="algo-text">Check HR again at 15 seconds and at 30 seconds of effective ventilation with chest movement.</div></div>
+    <div class="algo-arrow">↓</div>
+    <div class="algo-step"><div class="algo-diamond red">HR ≤ 60?</div><div class="algo-text">Add chest compressions — two-thumb encircling technique preferred. Ratio 3:1 (90 compressions: 30 breaths/min). Continue for 60 seconds before reassessing.</div></div>
+    <div class="algo-arrow">↓</div>
+    <div class="algo-step"><div class="algo-diamond red">Still ≤ 60?</div><div class="algo-text">Administer Epinephrine IV/IO: 0.01–0.03 mg/kg per dose (conc. 0.1 mg/mL). ET route: 0.05–0.1 mg/kg. Consider volume expanders: 10 mL/kg NS if hypovolemia suspected.</div></div>
+  </div>
+
+  <h3 class="section-title">MR. SOPA — Ventilation Troubleshooting</h3>
+  <div class="mnemonic-grid">
+    <div class="mnemonic-card"><div class="mnemonic-letter">M</div><div class="mnemonic-word">Mask adjustment</div><div class="mnemonic-desc">Ensure airtight seal over face</div></div>
+    <div class="mnemonic-card"><div class="mnemonic-letter">R</div><div class="mnemonic-word">Reposition airway</div><div class="mnemonic-desc">Sniffing position, neutral head tilt</div></div>
+    <div class="mnemonic-card"><div class="mnemonic-letter">S</div><div class="mnemonic-word">Suction mouth & nose</div><div class="mnemonic-desc">Clear secretions with bulb syringe</div></div>
+    <div class="mnemonic-card"><div class="mnemonic-letter">O</div><div class="mnemonic-word">Open the mouth</div><div class="mnemonic-desc">Jaw-thrust or reposition</div></div>
+    <div class="mnemonic-card"><div class="mnemonic-letter">P</div><div class="mnemonic-word">Pressure increase</div><div class="mnemonic-desc">Increase PIP incrementally</div></div>
+    <div class="mnemonic-card"><div class="mnemonic-letter">A</div><div class="mnemonic-word">Alternative airway</div><div class="mnemonic-desc">LMA or ET intubation</div></div>
+  </div>
+
+  <h3 class="section-title">ET Intubation Indications</h3>
+  <div class="algo-container">
+    <ul style="padding-left:1.5rem;color:var(--text-secondary);font-size:0.9rem;line-height:2;">
+      <li>Tracheal suctioning of thick meconium required</li>
+      <li>Bag-mask or LMA ventilation is ineffective or prolonged</li>
+      <li>When chest compressions are being performed</li>
+      <li>Special circumstances: congenital diaphragmatic hernia or extremely low birth weight (&lt;1 kg)</li>
+    </ul>
+    <p style="margin-top:1rem;font-size:0.85rem;color:var(--text-muted);">LMA is appropriate for term and preterm newborns ≥34 weeks or weighing &gt;1.5 kg. Confirm ET placement via direct visualization, waveform capnography, and prompt HR improvement.</p>
+  </div>
+
+  <h3 class="section-title">Post-Resuscitation Monitoring</h3>
+  <div class="adaptations-grid">
+    <div class="adaptation-card"><h4>⚠️ ET Tube Complications</h4><p>Watch for tube migration, dislodgement, or occlusion by mucus/meconium. Signs: decreased chest movement, diminished breath sounds, return of bradycardia.</p></div>
+    <div class="adaptation-card"><h4>💨 Pneumothorax</h4><p>Suspect with unilateral decreased breath sounds, unequal chest expansion, or increased resistance to ventilation. Needle decompression per medical direction.</p></div>
+    <div class="adaptation-card"><h4>🧊 Therapeutic Hypothermia</h4><p>Offered in hospital for newborns &gt;36 weeks with moderate-to-severe hypoxic-ischemic encephalopathy. NOT initiated prehospital — continue monitoring and rapid transport.</p></div>
+    <div class="adaptation-card"><h4>🚑 Transport</h4><p>Maintain temperature (warm ambulance), support ventilation, maintain oxygen levels, cover head. Transport to facility with NICU services. Continuously reassess.</p></div>
+  </div>
+</div>
+
+<!-- ============ ASSESSMENT ============ -->
+<div id="tab-assessment" class="tab-content">
+  <div id="student-form-wrapper">
+    <div class="student-form">
+      <h3>📝 Knowledge Assessment</h3>
+      <p style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;">Chapter 46: Neonatal Care · 100 Questions</p>
+      <div class="form-group"><label>Student Full Name</label><input type="text" id="student-name" placeholder="Enter your full name"></div>
+      <div class="form-group"><label>Student ID</label><input type="text" id="student-id" placeholder="Enter your student ID"></div>
+      <div class="form-group"><label>Date</label><input type="text" id="quiz-date" placeholder="Auto-filled"></div>
+      <button class="btn-start" onclick="startQuiz()">Begin Assessment →</button>
+    </div>
+  </div>
+
+  <div class="quiz-container" id="quiz-container">
+    <div class="quiz-header">
+      <div class="quiz-info"><span>Question: </span><strong id="q-counter">1 / 100</strong></div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:1%"></div></div>
+      <div class="live-score">Score: <span id="live-score">0</span>/100</div>
+    </div>
+    <div id="questions-area"></div>
+  </div>
+
+  <div class="results-container" id="results-container">
+    <div class="score-circle"><div class="score-pct" id="score-pct">0%</div><div class="score-label">Final Score</div></div>
+    <div class="grade-label" id="grade-label"></div>
+    <p style="color:var(--text-secondary);margin-bottom:1rem;" id="grade-comment"></p>
+    <div class="results-stats">
+      <div class="result-stat"><div class="num" id="correct-count" style="color:var(--accent-green);">0</div><div class="lbl">Correct</div></div>
+      <div class="result-stat"><div class="num" id="wrong-count" style="color:var(--accent-coral);">0</div><div class="lbl">Incorrect</div></div>
+      <div class="result-stat"><div class="num" id="pct-display" style="color:var(--accent-teal);">0%</div><div class="lbl">Percentage</div></div>
+    </div>
+    <button class="btn-pdf" onclick="generatePDF()">⬇️ Download PDF Report</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+    <button class="btn-retake" onclick="retakeQuiz()">🔄 Retake Quiz</button>
+    <div class="review-list" id="review-list" style="display:none;"></div>
+  </div>
+</div>
+</main>
+
+<script>
+// ===== THEME =====
+function toggleTheme(){
+  const root=document.documentElement;
+  const isDark=root.getAttribute('data-theme')==='dark';
+  root.setAttribute('data-theme',isDark?'light':'dark');
+  document.querySelector('.theme-btn').textContent=isDark?'🌙 Dark Mode':'☀️ Light Mode';
+}
+
+// ===== NAV TABS =====
+function switchTab(id,el){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  el.classList.add('active');
+}
+
+// ===== DATE =====
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('quiz-date').value=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  buildCards();
+});
+
+// ===== DISEASE DATA =====
+const emergencyCards=[
+{icon:'🍼',title:'Prematurity',subtitle:'Birth before 37 weeks',tag:'emergency',
+  patho:'Preterm birth before 37 weeks results in underdeveloped organ systems. The lungs lack surfactant, making alveoli prone to collapse with each breath (atelectasis). The respiratory control center in the brainstem is immature, causing apnea episodes. The skin is thin and poorly keratinized, leading to rapid heat and fluid loss. The immune system is underdeveloped, increasing infection risk.',
+  signs:'Low birth weight (&lt;5 lb), lanugo, thin translucent skin, poor tone, respiratory depression, hypothermia, hypoglycemia.',
+  tx:'Warm, dry, prevent hypothermia (plastic wrap + cap), warm humidified O₂, transport above 74°F. May require surfactant administration in NICU. CPAP for respiratory support.',
+  meds:[{drug:'Epinephrine',dose:'0.01–0.03 mg/kg IV',note:'If HR &lt;60 despite PPV'},{drug:'Normal Saline',dose:'10 mL/kg IV',note:'Volume expander for hypovolemia'},{drug:'Dextrose 10%',dose:'Per medical direction',note:'For hypoglycemia'}],
+  analogy:'A premature baby is like a house framed but without insulation, drywall, or utilities — the structure exists but nothing is ready to handle the outside world yet. Every system needs time to "finish construction."'},
+
+{icon:'😶',title:'Neonatal Apnea',subtitle:'Absence of spontaneous breathing',tag:'emergency',
+  patho:'Primary apnea: brief cessation, self-limited, correctable with stimulation — the brain still has reserve. Secondary apnea: prolonged cessation (&gt;20 sec) due to depleted oxygen reserve — brainstem respiratory centers fail to fire. Caused by hypoxemia, hypothermia, maternal opioids, CNS disorders, metabolic disturbances, or septicemia. Secondary apnea requires immediate PPV; stimulation alone is insufficient.',
+  signs:'No spontaneous breathing, bradycardia, hypoxemia, cyanosis, pallor, muscle limpness.',
+  tx:'Stimulate first (rub back/extremities). If no response: PPV at 40–60 breaths/min. If maternal opioid exposure: Naloxone per protocol. Treat underlying cause.',
+  meds:[{drug:'Naloxone',dose:'0.1 mg/kg IV/IM/IN',note:'Maternal opioid-induced apnea'},{drug:'Epinephrine',dose:'0.01–0.03 mg/kg IV',note:'If HR &lt;60 with PPV'}],
+  analogy:'Primary apnea is like a smoke detector chirping — a gentle tap stops it. Secondary apnea is like the building\'s fire suppression system failing — you need to manually intervene immediately or there will be structural damage (brain injury).'},
+
+{icon:'💓',title:'Neonatal Bradycardia',subtitle:'Heart rate < 100 beats/min',tag:'emergency',
+  patho:'The most common cause of bradycardia in newborns is hypoxia — inadequate ventilation triggers a vagal response that slows the heart. Other causes include vagal stimulation from suctioning, airway manipulation, or invasive procedures. The neonatal heart is extremely rate-dependent for cardiac output (CO = HR × SV), so bradycardia rapidly reduces perfusion pressure. Unlike adults, chest compressions are indicated at HR &lt;60 despite adequate ventilation.',
+  signs:'HR &lt;100 (concern), &lt;60 (compressions indicated). Cyanosis, poor perfusion, decreased LOA, pallor.',
+  tx:'Ensure adequate ventilation FIRST — most bradycardia resolves with effective PPV. If HR remains &lt;60: chest compressions 3:1 ratio. Epinephrine if still &lt;60 after 1 min.',
+  meds:[{drug:'Epinephrine',dose:'0.01–0.03 mg/kg IV/IO',note:'HR &lt;60 despite PPV + compressions'},{drug:'Epinephrine ET',dose:'0.05–0.1 mg/kg',note:'If IV/IO unavailable'}],
+  analogy:'The neonatal heart is like a water pump that depends entirely on its spin speed — unlike adult pumps that can compensate by pumping harder, a baby\'s pump output drops directly with every RPM lost. Slow it down too much and the whole system loses pressure.'},
+
+{icon:'🫁',title:'Respiratory Distress & Cyanosis',subtitle:'Inadequate oxygenation at birth',tag:'emergency',
+  patho:'Prematurity is the most common cause — immature lungs lack surfactant, causing alveolar collapse and V/Q mismatch. Without surfactant, the surface tension of each alveolus is so high that breathing requires enormous effort. Retained lung fluid, meconium aspiration, pneumonia, diaphragmatic hernia, and CHD are other causes. Central cyanosis beyond 5–10 minutes indicates true hypoxemia — not the normal transitional cyanosis of the first minutes.',
+  signs:'Tachypnea, paradoxical breathing, intercostal retractions, nasal flaring, expiratory grunting, central cyanosis.',
+  tx:'Supplemental O₂ guided by pulse oximetry. PPV if HR &lt;100 or inadequate respiratory effort. LMA or ETI as needed. Treat underlying cause.',
+  meds:[{drug:'O₂',dose:'Titrate by SpO₂',note:'Target 90–95% by 10 min of life'},{drug:'Surfactant',dose:'NICU administration',note:'For premature lungs'}],
+  analogy:'Respiratory distress in a newborn is like trying to inflate balloons covered in superglue — without surfactant (the soap on the balloon), every breath takes maximum effort, and when you relax even slightly, they collapse back completely.'},
+
+{icon:'💧',title:'Neonatal Hypovolemia',subtitle:'Inadequate circulating blood volume',tag:'emergency',
+  patho:'Volume loss in newborns can occur from dehydration, hemorrhage (placental abruption, umbilical cord injury), trauma, or sepsis-induced vasodilation. The neonatal cardiovascular system has limited ability to compensate — tachycardia is the primary response, but myocardial reserve is minimal. Capillary refill &gt;2 seconds in a normothermic newborn is an early indicator. Peripheral vasoconstriction causes mottled, pale, cool skin.',
+  signs:'Mottled/pale color, cool skin, tachycardia, diminished peripheral pulses, delayed capillary refill, weak cry.',
+  tx:'Isotonic crystalloid bolus: 10 mL/kg NS IV over 5–10 minutes. Reassess. Repeat if indicated. Slow administration in premature newborns — rapid volume shifts risk intraventricular hemorrhage.',
+  meds:[{drug:'Normal Saline 0.9%',dose:'10 mL/kg IV over 5–10 min',note:'Volume expander of choice'},{drug:'Blood products',dose:'10 mL/kg',note:'If hemorrhage is cause (hospital)'}],
+  analogy:'Neonatal hypovolemia is like a small goldfish bowl with a slow leak — even a small drop in water level is catastrophically proportional. What seems like a tiny loss in adult terms is enormous relative to a baby\'s total blood volume of only ~85 mL/kg.'},
+
+{icon:'⚡',title:'Neonatal Seizures',subtitle:'Abnormal CNS electrical activity',tag:'emergency',
+  patho:'Neonatal seizures differ from adult seizures — often subtle: eye deviation, lip smacking, cycling movements of limbs, or apnea. The immature cortex cannot sustain the classic tonic-clonic pattern. Causes include hypoxic-ischemic encephalopathy (most common), hypoglycemia, intracranial hemorrhage, meningitis, drug withdrawal, and metabolic disorders. Prolonged seizures cause metabolic acidosis, hypoglycemia, and cardiopulmonary compromise — a vicious cycle.',
+  signs:'Subtle: eye deviation, lip smacking, tongue thrusting, pedaling limb movements, apnea. Less often: tonic/clonic activity.',
+  tx:'Airway, O₂, circulatory support. Check blood glucose immediately. Maintain temperature. Benzodiazepines for active seizures. Dextrose 10% for hypoglycemia.',
+  meds:[{drug:'Lorazepam (or diazepam)',dose:'0.05–0.1 mg/kg IV slow',note:'First-line for active seizures'},{drug:'Dextrose 10%',dose:'2 mL/kg IV',note:'If BG &lt;40 mg/dL'},{drug:'Phenobarbital',dose:'Hospital administration',note:'For refractory seizures'}],
+  analogy:'A neonatal seizure is like a power surge through immature electrical wiring — the circuits aren\'t built to handle it, so instead of big visible sparks (tonic-clonic), you get flickering lights and subtle malfunctions (subtle seizures) that are easy to miss.'},
+
+{icon:'🌡️',title:'Neonatal Hypothermia',subtitle:'Core temp < 95°F (35°C)',tag:'emergency',
+  patho:'Newborns have a large surface area-to-volume ratio and minimal subcutaneous fat for insulation. Brown adipose tissue (BAT) thermogenesis is their primary heat source — metabolically expensive and O₂-intensive. When cold, BAT burns oxygen rapidly, causing hypoxemia, metabolic acidosis, pulmonary hypertension, and worsening respiratory distress. Hypothermia is also a sign of sepsis. Premature newborns are at highest risk — thin skin provides almost no insulation.',
+  signs:'Pale color, cool extremities, respiratory distress, apnea, bradycardia, central cyanosis, acrocyanosis, irritability (early), lethargy (late).',
+  tx:'Warm, dry, cap on head, warm blankets. Warm ambulance (ambient temp &gt;74°F). Warm humidified O₂. Cardiac life support. Rapid transport.',
+  meds:[{drug:'Warm O₂',dose:'Humidified, warmed',note:'Reduces evaporative/respiratory heat loss'},{drug:'Epinephrine',dose:'Per resuscitation protocol',note:'If cardiac arrest occurs'}],
+  analogy:'A newborn losing heat is like a smartphone battery in freezing weather — it drains catastrophically fast and loses function in minutes, not hours. The smaller the device, the faster it dies. Keeping them warm is keeping the battery alive.'},
+
+{icon:'🍬',title:'Neonatal Hypoglycemia',subtitle:'BG < 40 mg/dL (0–4 hr) or < 45 mg/dL (>4 hr)',tag:'emergency',
+  patho:'Newborns transition abruptly from continuous placental glucose to intermittent feeding. Infants of diabetic mothers have pancreatic beta-cell hyperplasia from chronic fetal hyperglycemia — after birth, high insulin continues but glucose stops, causing dangerous hypoglycemia. Risk factors include asphyxia (depletes glycogen), sepsis, being the smaller twin, and CNS hemorrhage. The neonatal brain uses glucose almost exclusively and is extremely vulnerable to hypoglycemic injury.',
+  signs:'Twitching/seizures, hypotonia, lethargy, irritability, eye rolling, high-pitched crying, apnea, irregular respirations, cyanosis.',
+  tx:'Check BG with glucometer. Maintain airway, ventilation, circulation, temperature. Administer D10W IV per medical direction. Transport.',
+  meds:[{drug:'Dextrose 10% (D10W)',dose:'2 mL/kg IV slow push',note:'Preferred concentration in neonates — D50 too hypertonic'},{drug:'Glucagon',dose:'0.03 mg/kg IM',note:'If no IV access — limited effectiveness in neonates'}],
+  analogy:'Neonatal hypoglycemia is like a race car that ran out of fuel at the starting line — the engine (brain) is ready and capable, but without glucose (fuel), it cannot run and will sustain damage quickly if supply isn\'t restored.'},
+
+{icon:'🔥',title:'Neonatal Fever',subtitle:'Rectal temp > 100.4°F (38°C)',tag:'emergency',
+  patho:'In the first days of life, fever may be environmental (overheating, dehydration) or pathologic (infection). The immature immune system means even a localized infection can rapidly progress to bacteremia and sepsis. Fever increases metabolic rate, O₂ demand, and glucose consumption — compounding any existing respiratory compromise. Fever is a red flag in any newborn under 28 days — the source is difficult to determine without labs.',
+  signs:'Elevated rectal temperature, rashes, petechiae, warm/hot skin. Symptomatic newborns may show poor feeding, irritability, lethargy, tachycardia.',
+  tx:'Prehospital care is supportive only. Do NOT administer antipyretics or perform cooling in the field. Maintain airway, O₂, circulatory support. Rapid transport to ED for sepsis workup.',
+  meds:[{drug:'Antipyretics',dose:'Delayed — hospital only',note:'Not administered prehospital'},{drug:'Antibiotics',dose:'Hospital administration',note:'After sepsis workup (blood culture, LP)'}],
+  analogy:'A fever in a newborn is like a fire alarm going off in a building where you can\'t see smoke — the alarm is always treated as real until proven otherwise, because you cannot distinguish a nuisance alarm from a structural fire without investigation.'},
+
+{icon:'🟡',title:'Neonatal Jaundice',subtitle:'Elevated unconjugated bilirubin',tag:'emergency',
+  patho:'Fetal hemoglobin (HbF) breaks down rapidly after birth as adult HbA takes over. This creates a large bilirubin load that the immature liver cannot conjugate fast enough. Unconjugated bilirubin is lipid-soluble and crosses the blood-brain barrier — depositing in the basal ganglia (kernicterus), causing irreversible neurological damage. Physiologic jaundice (3 in 5 newborns) peaks at day 3–5 and resolves in 2 weeks. Pathologic jaundice appears in the first 24 hours or persists beyond 2 weeks.',
+  signs:'Yellow skin, sclera, and mucous membranes. Visible in cephalocaudal progression (head → feet correlates with rising levels). Lethargy, poor feeding in severe cases.',
+  tx:'Prehospital: assess and transport. Hospital: phototherapy (UV light converts unconjugated bilirubin to water-soluble isomer), exchange transfusion for severe cases, IV immunoglobulin for Rh disease.',
+  meds:[{drug:'IV Immunoglobulin (IVIG)',dose:'Hospital — for Rh disease',note:'Reduces hemolysis rate'},{drug:'Phototherapy',dose:'Blue-spectrum light',note:'Standard treatment, not prehospital'}],
+  analogy:'Neonatal jaundice is like too many recycling trucks dumping at a facility that isn\'t fully operational yet — the liver (facility) can\'t process bilirubin (waste) fast enough, so it backs up and starts staining everything yellow.'},
+
+{icon:'🦠',title:'Neonatal Sepsis',subtitle:'Systemic infection in the first 28 days',tag:'emergency',
+  patho:'Neonates have immature innate and adaptive immunity — no maternal antibodies cover most bacteria after birth. Early-onset sepsis (&lt;7 days): GBS, E. coli, Listeria from maternal colonization during delivery. Late-onset sepsis (8–28 days): Staph aureus, CoNS, gram-negatives from NICU/environment. The systemic inflammatory response in neonates is often muted — temperature may be normal (50% have no fever), making recognition difficult. Sepsis progresses rapidly to multi-organ failure.',
+  signs:'Temperature instability (only 50% febrile), respiratory distress, feeding changes, apnea, cyanosis, vomiting, distension, irritability, lethargy, weak suck, increased sleeping.',
+  tx:'Supportive prehospital care: airway, O₂, vascular access, temperature maintenance, rapid transport. Hospital: blood cultures, broad-spectrum antibiotics (ampicillin + gentamicin is standard first-line).',
+  meds:[{drug:'Ampicillin + Gentamicin',dose:'Hospital — weight-based',note:'Standard empiric coverage for neonatal sepsis'},{drug:'NS bolus',dose:'10 mL/kg IV',note:'For septic shock/poor perfusion'}],
+  analogy:'Neonatal sepsis is like a wildfire in a forest with no firebreaks — the immune system has no established lines of defense yet, so once an infection ignites, it spreads through every organ simultaneously before you even see the smoke.'},
+
+{icon:'🤕',title:'Birth Injuries',subtitle:'Trauma during the delivery process',tag:'emergency',
+  patho:'Obstetric trauma occurs in ~31 per 1,000 hospital births. Risk factors include abnormal fetal presentation, large babies (&gt;4 kg), instrument-assisted delivery (forceps/vacuum), and prolonged labor. Mechanisms of injury: compression forces cause cranial soft-tissue injuries (caput succedaneum, cephalohematoma); traction forces stretch the brachial plexus (Erb\'s palsy, Klumpke\'s palsy, phrenic nerve injury); excessive lateral pull causes cervical and spinal cord injuries; clavicle/humerus fractures occur with shoulder dystocia.',
+  signs:'Cranial: swelling, asymmetric face, bruising, skull deformity. Brachial: asymmetric arm movement, limp arm. Spinal: flaccid tone, respiratory distress. Fracture: crepitus, pain with movement, swelling.',
+  tx:'Immobilize as needed. Support airway and ventilation (especially if phrenic nerve injury → diaphragm paralysis). Gentle handling. Neurological assessment. Rapid transport. Intracranial hemorrhage: control ICP.',
+  meds:[{drug:'Supportive care',dose:'Airway/O₂/circulatory',note:'Prehospital management'},{drug:'Morphine',dose:'Hospital — pain management',note:'Not typically given prehospital in neonates'}],
+  analogy:'Birth injuries are like forcing a tightly fitted object through a passage that\'s slightly too small — the force required to get it through causes structural damage: dents, bends, or breaks — depending on where the stress concentrates.'},
+
+{icon:'🟩',title:'Meconium Aspiration',subtitle:'Inhalation of fetal stool in utero or at birth',tag:'emergency',
+  patho:'Meconium is fetal stool released in utero — occurs in ~12% of deliveries, most often in postterm, SGA, or stressed fetuses. When inhaled, thick meconium obstructs airways causing a ball-valve effect: air traps distally, causing hyperinflation and air leak (pneumothorax). Meconium also causes chemical pneumonitis and inflammatory cascade, worsening hypoxemia. Severe cases lead to persistent pulmonary hypertension (PPHN) as pulmonary vessels constrict in response to hypoxia.',
+  signs:'Meconium-stained amniotic fluid (green/black), poor muscle tone, inadequate breathing, aspiration pneumonia, hypoxemia, pneumothorax, pulmonary hypertension.',
+  tx:'Bulb syringe suction of mouth and nose. PPV if not breathing or HR &lt;100. Routine tracheal suctioning NO longer recommended — only if thick meconium with poor tone. Treat pneumothorax if suspected. Surfactant and iNO at NICU.',
+  meds:[{drug:'Surfactant',dose:'NICU administration',note:'Displaces meconium, improves compliance'},{drug:'O₂',dose:'100% initially',note:'Pulmonary vasodilation, treat PPHN'}],
+  analogy:'Meconium aspiration is like pouring wet cement into a vacuum hose — it partially blocks flow, sets up a check-valve, traps air behind it, and causes chemical corrosion of the lining. Clearing it is urgent but requires finesse.'},
+];
+
+const airwayCards=[
+{icon:'👃',title:'Choanal Atresia',subtitle:'Bony/tissue blockage of posterior nasal passage',tag:'structural',
+  patho:'The choanae are the posterior openings connecting the nasal cavity to the nasopharynx. In choanal atresia, the bony plate or soft tissue that should dissolve during fetal development persists. Bilateral atresia is a life-threatening emergency — neonates are obligate nose breathers. When both nostrils are blocked, the baby can only breathe while crying (mouth open), then desaturates when calm and closes the mouth. Affects 1 in 5,000–7,000 live births.',
+  signs:'Chest wall retraction, dyspnea and cyanosis that improve with crying, inability to nurse and breathe simultaneously, persistent unilateral nasal blockage or discharge.',
+  tx:'Insert oropharyngeal (OPA) airway to bypass nasal obstruction. Alternative: partial ET tube placement in posterior pharynx (tip just beyond tongue, not past vocal cords). Definitive: surgical correction.',
+  meds:[{drug:'O₂',dose:'Supplemental via mask/OPA',note:'Maintain SpO₂'},{drug:'No specific medications',dose:'—',note:'Surgical correction required'}],
+  analogy:'Choanal atresia is like a revolving door jammed shut in a building where all the windows are sealed — the only way air can get in or out is through a separate emergency exit (the mouth), and the baby can only open that door when crying.'},
+
+{icon:'🔗',title:'Tracheoesophageal Fistula (TEF)',subtitle:'Abnormal connection: esophagus ↔ trachea',tag:'structural',
+  patho:'During fetal development, the trachea and esophagus fail to properly separate, creating an abnormal connection. The most common type (85%) is esophageal atresia + TEF — the esophagus ends blindly, with the lower segment connected to the trachea. When the baby feeds, food enters the airway via the fistula, causing aspiration. Air from the trachea also enters the stomach, causing gastric distension. Affects 1 in 3,000–5,000 live births.',
+  signs:'Copious salivation (cannot swallow — blind esophagus fills), choking, coughing during feeding, regurgitation, cyanosis, abdominal distension from air entering stomach.',
+  tx:'NPO immediately. Upright positioning to prevent aspiration. Avoid positive-pressure ventilation if possible (forces air into stomach). Nasogastric tube if possible. Early surgical correction.',
+  meds:[{drug:'No specific prehospital medications',dose:'—',note:'Supportive care only'},{drug:'O₂',dose:'Supplemental',note:'Maintain SpO₂'},{drug:'IV access',dose:'Fluid support',note:'NPO — no oral nutrition'}],
+  analogy:'TEF is like plumbing with crossed pipes — the food drain and the air vent got connected during construction. Every time you pour something down the food pipe, it goes into the air vent (airway), and every breath blows air into the stomach. The pipes need surgical rerouting.'},
+
+{icon:'👄',title:'Cleft Lip & Cleft Palate',subtitle:'Incomplete closure of lip or palate',tag:'structural',
+  patho:'Cleft lip results from failure of the maxillary and median nasal processes to fuse during weeks 6–9 of gestation. Cleft palate results from failure of the palatine shelves to fuse during weeks 8–12. May occur in isolation or together. The defect creates an open channel between the oral cavity and nasal cavity, disrupting the negative pressure seal required for effective sucking and swallowing. Risk factors: maternal smoking, alcohol, folate deficiency, and genetic syndromes.',
+  signs:'Visible lip/palate defect at birth. Poor feeding (cannot generate suction), nasal regurgitation of milk, frequent ear infections, speech difficulties, dental misalignment.',
+  tx:'Prehospital: maintain airway, support feeding attempts (specialty nipples). Airway management may be difficult if associated with Pierre Robin sequence. Definitive: staged surgical repair (lip at 3 months, palate at 12 months).',
+  meds:[{drug:'No specific medications',dose:'—',note:'Surgical correction required'},{drug:'Antibiotics',dose:'Hospital — for ear infections',note:'Prophylaxis for chronic otitis media'}],
+  analogy:'Cleft lip/palate is like a vacuum cleaner with a hole in the hose — it doesn\'t matter how powerful the motor (suction), if there\'s a gap in the seal, no suction can be generated. The baby cannot nurse effectively because the oral vacuum is broken.'},
+
+{icon:'🫦',title:'Pierre Robin Sequence',subtitle:'Small mandible + tongue displacement + cleft palate',tag:'structural',
+  patho:'In Pierre Robin sequence, the mandible (jaw) fails to develop properly in early fetal life. The small jaw causes the tongue to be positioned posteriorly (glossoptosis), where it obstructs the posterior pharynx — especially during sleep or when supine (tongue falls further back). The posteriorly positioned tongue also prevents palatal shelves from fusing, explaining the associated cleft palate. Affects 1 in 8,500–14,000. Death can result from respiratory failure.',
+  signs:'Receding chin (micrognathia), tongue appearing large/posterior, cleft palate, breathing difficulty (especially supine), poor feeding, cyanosis, stridor.',
+  tx:'Prone positioning (gravity moves tongue forward, opens airway). If still dyspneic: small ET tube via nose to posterior pharynx (not past cords). LMA as rescue device. BVM and standard intubation are often difficult.',
+  meds:[{drug:'O₂',dose:'Supplemental',note:'Maintain SpO₂'},{drug:'No specific medications',dose:'—',note:'Positional airway management is primary'}],
+  analogy:'Pierre Robin is like trying to breathe through a straw that gets blocked by a ball every time you lie down — gravity pulls the ball (tongue) to the back of the throat (straw). Rolling onto your stomach lets gravity pull the ball away from the opening instead.'},
+];
+
+const cardiacCards=[
+{icon:'🩸',title:'Coarctation of the Aorta (CoA)',subtitle:'Narrowing of the aorta, usually at the ductus junction',tag:'cardiac',
+  patho:'A discrete narrowing (coarctation) in the aorta, most often just distal to the left subclavian artery at the level of the ductus arteriosus. The left ventricle must generate extreme pressure to push blood through the narrowed segment, causing left ventricular hypertrophy and eventual failure. Blood flow to lower extremities is reduced, causing differential cyanosis (lower body blue, upper body pink). When the ductus arteriosus closes (days 1–2), blood flow to the lower body is severely compromised — presenting as shock.',
+  signs:'Absent or weak femoral pulses, lower body cyanosis, differential blood pressure (arms vs. legs), decompensated shock, cardiac arrest. Common in Turner syndrome.',
+  tx:'Prehospital: stabilization, support ventilation and perfusion. Hospital: prostaglandin E1 (PGE1) to keep ductus open, surgical repair or balloon angioplasty with stent.',
+  meds:[{drug:'Prostaglandin E1 (Alprostadil)',dose:'0.05–0.1 mcg/kg/min IV',note:'Keeps ductus arteriosus open — buys time for surgery'},{drug:'Dopamine/Dobutamine',dose:'Hospital — inotropic support',note:'For ventricular failure'}],
+  analogy:'CoA is like a kinked garden hose — the water pressure upstream (upper body) is enormous and the hose may burst (aortic aneurysm/rupture), while downstream (lower extremities) almost no water flows. The kink must be corrected surgically or stretched open.'},
+
+{icon:'🕳️',title:'Septal Defects (ASD & VSD)',subtitle:'Holes in the atrial or ventricular wall',tag:'cardiac',
+  patho:'ASD: persistent communication between the left and right atria. Oxygenated blood from the higher-pressure left atrium flows back through the defect to the right atrium, recirculates to the lungs, and volume-overloads the pulmonary circuit. VSD: hole between ventricles — larger pressure gradient causes greater left-to-right shunting, more pronounced volume overload, and pulmonary hypertension development. Over time, if untreated, pulmonary hypertension reverses the shunt (Eisenmenger syndrome).',
+  signs:'ASD: often asymptomatic initially, fixed split S2, systolic murmur. VSD: loud harsh holosystolic murmur (hallmark), tachycardia, failure to thrive, recurrent respiratory infections.',
+  tx:'Prehospital: supportive, treat CHF symptoms. Hospital: small defects may close spontaneously; large ones require catheter-based closure (Amplatzer device) or surgical repair.',
+  meds:[{drug:'Furosemide',dose:'Hospital — diuretic for CHF',note:'Volume overload management'},{drug:'Digoxin',dose:'Hospital — inotrope',note:'Improve cardiac output in CHF'}],
+  analogy:'A septal defect is like a recycling system where clean water keeps flowing back to the treatment plant for no reason — the oxygenated blood (clean water) shortcuts back to the lungs (treatment plant) instead of going to the body, overworking the system.'},
+
+{icon:'🔓',title:'Patent Ductus Arteriosus (PDA)',subtitle:'Failure of the fetal ductus arteriosus to close',tag:'cardiac',
+  patho:'In fetal life, the ductus arteriosus connects the pulmonary artery to the aorta, shunting blood away from the non-functional fetal lungs. At birth, increased O₂ tension and decreased prostaglandins trigger closure (usually within 24–72 hours). In PDA, this vessel remains open — oxygenated aortic blood flows back (left-to-right) into the pulmonary artery, creating pulmonary overcirculation. Extremely common in premature infants whose prostaglandin closure mechanism is immature.',
+  signs:'Continuous "machinery" murmur, wide pulse pressure, bounding peripheral pulses, fatigue, slow growth, recurrent pulmonary infections, CHF symptoms.',
+  tx:'Medical closure: NSAIDs (indomethacin or ibuprofen) inhibit prostaglandin synthesis — stimulates closure. Acetaminophen also promotes closure. Surgical ligation if medical management fails.',
+  meds:[{drug:'Indomethacin',dose:'0.1–0.25 mg/kg IV',note:'NSAID — inhibits prostaglandins → closes PDA'},{drug:'Ibuprofen',dose:'Weight-based IV protocol',note:'Alternative to indomethacin'},{drug:'Acetaminophen',dose:'15 mg/kg PO q6h',note:'Emerging alternative for PDA closure'}],
+  analogy:'PDA is like leaving the freeway on-ramp open after the road is complete — cars (blood) that should continue forward to the body take the ramp back and loop through the same road segment (lungs) again and again, causing gridlock.'},
+
+{icon:'💙',title:'Tetralogy of Fallot (ToF)',subtitle:'4 defects: VSD, pulmonary stenosis, RVH, overriding aorta',tag:'cardiac',
+  patho:'The four defects of ToF form a complex that results in oxygen-poor blood bypassing the lungs and entering systemic circulation. Pulmonary stenosis creates right ventricular outflow obstruction, increasing RV pressure. The large VSD provides a pressure-release valve — when RV pressure exceeds LV, deoxygenated blood crosses the VSD into the aorta (right-to-left shunt). The overriding aorta sits directly over the VSD, receiving blood from both ventricles. "Tet spells" occur when RV outflow spasm suddenly worsens — knee-chest position increases SVR, forcing more blood to the lungs.',
+  signs:'Central cyanosis, "tet spells" with acute severe cyanosis (triggered by crying, feeding, defecation), squatting in toddlers, systolic ejection murmur, clubbing (chronic).',
+  tx:'Tet spell: calm baby, knee-chest (or squat) position, O₂, IV morphine or propranolol to reduce RVOT spasm. Phenylephrine to increase SVR. Definitive: surgical repair.',
+  meds:[{drug:'Morphine',dose:'0.05–0.1 mg/kg IV',note:'Reduces infundibular spasm in tet spell'},{drug:'Propranolol',dose:'0.01–0.25 mg/kg IV',note:'Beta-blocker — prevents infundibular spasm'},{drug:'Phenylephrine',dose:'Hospital dosing',note:'Increases SVR → more blood to lungs'}],
+  analogy:'ToF is like a city\'s water tower with a crack (VSD) and a partially blocked supply pipe (pulmonary stenosis) — clean water (oxygenated blood) mixes with dirty water (deoxygenated) before reaching the rest of the city. Tet spells are when the supply pipe clamps completely shut.'},
+
+{icon:'🔁',title:'Transposition of Great Arteries (TGA)',subtitle:'Aorta and pulmonary artery are switched',tag:'cardiac',
+  patho:'In TGA, the aorta arises from the right ventricle and the pulmonary artery from the left ventricle — a complete reversal. This creates two completely separate, parallel circulations: deoxygenated blood from the body goes right heart → aorta → body (never to the lungs), and oxygenated blood from the lungs goes left heart → pulmonary artery → lungs again (never to the body). Without mixing between the circuits (via ASD, VSD, or PDA), TGA is incompatible with life. Mixing is initially maintained by the foramen ovale and PDA.',
+  signs:'Cyanosis at birth (often severe), tachypnea, no significant murmur initially, rapid deterioration as ductus and foramen close.',
+  tx:'Emergent: maintain ductal patency with Prostaglandin E1. Hospital: Rashkind balloon atrial septostomy (creates atrial mixing). Surgical: arterial switch operation (Jatene procedure) within first week. Survival &gt;94% with surgery.',
+  meds:[{drug:'Prostaglandin E1',dose:'0.05–0.1 mcg/kg/min IV',note:'Keeps PDA open for mixing — CRITICAL'},{drug:'O₂',dose:'Supplemental',note:'Caution: may accelerate PDA closure'},{drug:'Sodium bicarbonate',dose:'Hospital dosing',note:'Correct severe metabolic acidosis'}],
+  analogy:'TGA is like having two completely separate water systems in a building — hot (oxygenated) and cold (deoxygenated) — but they\'re each connected back to their own source and never mix. The hot water (oxygenated blood) just keeps looping back to the heater (lungs) and the cold water keeps circulating to the building (body) with no heat at all.'},
+
+{icon:'💔',title:'Hypoplastic Left Heart Syndrome (HLHS)',subtitle:'Severely underdeveloped left heart',tag:'cardiac',
+  patho:'HLHS encompasses a spectrum of defects where the left-sided structures (left ventricle, mitral valve, aortic valve, ascending aorta) are severely underdeveloped or absent. The right ventricle is the only functional pumping chamber — it supplies both pulmonary and systemic circulation via the ductus arteriosus. When the ductus closes, systemic circulation collapses. Requires staged surgical palliation (Norwood, Glenn, Fontan) or cardiac transplantation.',
+  signs:'Severe cyanosis, respiratory distress, weak or absent pulses, rapid cardiovascular collapse when ductus closes (24–72 hours of life), shock, acidosis.',
+  tx:'EMERGENT: Prostaglandin E1 to maintain ductal patency — most critical intervention. O₂ (with caution — lowers PVR, increases pulmonary flow at expense of systemic). Ventilatory support. Urgent transport to pediatric cardiac center.',
+  meds:[{drug:'Prostaglandin E1',dose:'0.05–0.1 mcg/kg/min IV',note:'LIFE-SAVING — must maintain PDA open'},{drug:'Dopamine',dose:'5–10 mcg/kg/min',note:'Maintain systemic perfusion'},{drug:'Sodium bicarb',dose:'Hospital dosing',note:'Correct metabolic acidosis'}],
+  analogy:'HLHS is like a building where the main pump (left ventricle) was never installed — the backup pump (right ventricle) is doing all the work for both floors. Without the connecting bypass pipe (ductus), the backup can\'t reach the building at all. Close the bypass and the building loses water pressure completely.'},
+
+{icon:'🌀',title:'Truncus Arteriosus',subtitle:'Single great vessel over a large VSD',tag:'cardiac',
+  patho:'Instead of the aorta and pulmonary artery developing as two separate vessels, a single arterial trunk (truncus) overrides a large VSD. Blood from both ventricles (mixed) exits through this single vessel, which then branches to supply both the body and lungs. Pulmonary overcirculation occurs because pulmonary vascular resistance (PVR) is lower than SVR — blood preferentially goes to the lungs, causing heart failure. Without surgery, most die within months from CHF or pulmonary hypertension.',
+  signs:'Cyanosis, wide pulse pressure, bounding pulses, signs of CHF (tachycardia, hepatomegaly, poor feeding), prominent single S2.',
+  tx:'Supportive prehospital care. Hospital: diuretics and digoxin for CHF, surgical repair to close VSD and create separate pulmonary pathway using a conduit.',
+  meds:[{drug:'Furosemide',dose:'Hospital — CHF management',note:'Reduce pulmonary overcirculation'},{drug:'Propranolol',dose:'Hospital dosing',note:'Reduce pulmonary blood flow'},{drug:'O₂ (cautious)',dose:'Titrate',note:'May worsen pulmonary overcirculation'}],
+  analogy:'Truncus arteriosus is like a city having only one road out — but it branches immediately into a major highway (lungs) and a local road (body). All the traffic (blood) floods the highway because it\'s wider and faster, while the local road (systemic circulation) gets almost nothing.'},
+
+{icon:'🔀',title:'Total Anomalous Pulmonary Venous Return (TAPVR)',subtitle:'Pulmonary veins misconnected to systemic venous system',tag:'cardiac',
+  patho:'Normally, pulmonary veins return oxygenated blood from the lungs directly to the left atrium. In TAPVR, the pulmonary veins connect to the systemic venous system instead (superior vena cava, coronary sinus, or below the diaphragm). Oxygenated blood mixes with deoxygenated blood in the right side of the heart — the only way any oxygenated blood reaches the body is through an atrial communication (ASD/PFO). Obstructed TAPVR (blood has to cross the liver or other structures) presents as critical cyanosis at birth.',
+  signs:'Cyanosis (variable severity), lethargy, poor feeding, rapid breathing, poor growth, frequent respiratory infections. Obstructed type: severe cyanosis, profound respiratory distress at birth.',
+  tx:'Obstructed TAPVR is a surgical emergency. Supportive prehospital care. Prostaglandin E1 has limited utility. Early surgical reconnection of pulmonary veins to left atrium.',
+  meds:[{drug:'O₂',dose:'Supplemental',note:'Limited effect with right-to-left shunt'},{drug:'Epinephrine',dose:'Per resuscitation protocol',note:'For cardiac arrest'},{drug:'Furosemide',dose:'Hospital dosing',note:'Pulmonary edema management'}],
+  analogy:'TAPVR is like a water purification plant (lungs) that\'s plumbed backwards — clean filtered water (oxygenated blood) gets sent back to the dirty water reservoir (venous system) instead of to the drinking water distribution system (left heart → body). Clean and dirty keep mixing, and nobody in the city gets clean water.'},
+];
+
+const abdominalCards=[
+{icon:'🔄',title:'Intestinal Malrotation',subtitle:'Abnormal gut rotation during embryonic development',tag:'abdominal',
+  patho:'During fetal development, the intestine rotates 270° counterclockwise around the superior mesenteric artery (SMA) to reach its normal position. In malrotation, this rotation is incomplete — the bowel is positioned abnormally and the mesenteric attachment is narrow. This narrow mesenteric base predisposes to midgut volvulus: the bowel twists around the SMA, cutting off blood supply to virtually the entire small intestine. Volvulus can cause complete bowel necrosis within hours — a true surgical emergency.',
+  signs:'Bilious vomiting (hallmark/pathognomonic sign), recurrent abdominal pain, diarrhea/constipation alternating, food intolerance, jaundice. With volvulus: abdominal distension, shock, peritoneal signs.',
+  tx:'NPO immediately. IV access, fluid resuscitation. Nasogastric decompression. Emergent transport — this is a surgical emergency. Hospital: immediate surgical detorsion (Ladd procedure).',
+  meds:[{drug:'Normal Saline',dose:'10–20 mL/kg IV bolus',note:'Volume resuscitation for shock'},{drug:'Broad-spectrum antibiotics',dose:'Hospital dosing',note:'Bowel necrosis/perforation prophylaxis'}],
+  analogy:'Intestinal malrotation with volvulus is like a fire hose that\'s kinked and twisting — the more pressure builds (bowel motility), the tighter the twist, until blood flow is cut off completely. The kink must be surgically untwisted before the hose (bowel) is permanently damaged.'},
+
+{icon:'🔧',title:'Pyloric Stenosis',subtitle:'Hypertrophied pyloric muscle causing gastric outlet obstruction',tag:'abdominal',
+  patho:'The pylorus (gastric outlet valve between stomach and duodenum) becomes progressively hypertrophied over the first 2–8 weeks of life. The overgrown muscle obstructs gastric emptying — the stomach cannot empty into the duodenum. Projectile, non-bilious vomiting results (non-bilious because the obstruction is above the entry of bile). Progressive vomiting causes hypochloremic, hypokalemic metabolic alkalosis — vomiting pure gastric acid (HCl) depletes chloride and hydrogen, and the kidneys compensate by excreting potassium. Peak incidence: 3–6 weeks of age; 4:1 male predominance.',
+  signs:'Progressive, projectile, non-bilious vomiting after every feeding (not bile-stained), hungry baby, visible peristaltic wave, "olive sign" palpable mass in epigastrium, signs of dehydration.',
+  tx:'IV access, fluid resuscitation with isotonic saline + KCl replacement. NGT placement for gastric decompression. NPO. Hospital: pyloromyotomy (Ramstedt procedure — surgical division of hypertrophied muscle).',
+  meds:[{drug:'Normal Saline + KCl',dose:'20 mL/kg bolus, then maintenance',note:'Correct dehydration and hypokalemia before surgery'},{drug:'No antiemetics prehospital',dose:'—',note:'NGT decompression preferred'}],
+  analogy:'Pyloric stenosis is like a faucet handle that freezes progressively tighter week by week — at first you can still turn it, but eventually nothing gets through. The stomach keeps filling and the baby keeps vomiting everything back up, getting more dehydrated with every feed.'},
+
+{icon:'🩻',title:'Diaphragmatic Hernia (CDH)',subtitle:'Abdominal organs herniate into chest through diaphragm defect',tag:'abdominal',
+  patho:'A defect in the diaphragm (most often left-sided, Bochdalek type) allows abdominal organs (stomach, intestines, spleen, liver) to herniate into the thoracic cavity during fetal development. The compressed lung on the affected side fails to develop normally (pulmonary hypoplasia), and the mediastinum shifts to the opposite side, compressing the contralateral lung too. After birth, if bag-mask ventilation is applied, air swallows into the herniated stomach expand the intrathoracic contents further — rapidly worsening respiratory compromise.',
+  signs:'Respiratory distress immediately after birth, cyanosis unresponsive to ventilation, scaphoid (flat/concave) abdomen, displaced heart sounds, absent breath sounds on affected side, bowel sounds in chest cavity.',
+  tx:'Immediate ET intubation (avoid BVM — inflates stomach in chest). NGT with low suction to decompress stomach. Elevate head/thorax. Surgical repair to reduce herniated organs and close diaphragm. This is a near-surgical emergency.',
+  meds:[{drug:'O₂/ET intubation',dose:'Immediate',note:'Avoid mask ventilation — worsens herniation'},{drug:'Morphine/Fentanyl',dose:'Hospital — sedation for ventilation',note:'Minimize agitation and pulmonary hypertension'},{drug:'iNO',dose:'Hospital — 20 ppm',note:'Pulmonary hypertension treatment'}],
+  analogy:'CDH is like someone stuffing your stomach and intestines into your chest cavity — your lungs get crushed against the wall and can\'t expand. Every breath forces more air into the intruding organs (if you mask ventilate), making the compression worse. The only solution is to push everything back where it belongs and seal the hole.'},
+
+{icon:'🫃',title:'Gastroschisis & Omphalocele',subtitle:'Abdominal wall defects with organ herniation',tag:'abdominal',
+  patho:'Gastroschisis: a defect (usually right of the navel) through which intestines herniate without any protective sac — organs exposed directly to amniotic fluid, causing chemical inflammation and bowel wall thickening. Omphalocele: herniation of abdominal contents through the base of the umbilical cord, covered by a protective sac of peritoneum and amnion. Omphalocele is associated with chromosomal abnormalities (Trisomy 13, 18), Beckwith-Wiedemann syndrome, and other congenital anomalies. Gastroschisis is associated with young maternal age.',
+  signs:'Visible bowel (gastroschisis) or sac-covered organs (omphalocele) outside the abdominal wall at birth. Gastroschisis: exposed loops appear thickened, matted, discolored from amniotic fluid exposure.',
+  tx:'Cover exposed organs with sterile, moist saline gauze (non-adherent). Place baby on right side to promote blood flow to organs. Keep warm — massive heat/fluid losses. IV access, fluid resuscitation. Emergent transport. Surgical repair.',
+  meds:[{drug:'Normal Saline — irrigation/coverage',dose:'Warm sterile',note:'Keep organs moist, prevent desiccation'},{drug:'IV fluid bolus',dose:'10–20 mL/kg',note:'Compensate massive third-spacing'},{drug:'Antibiotics',dose:'Hospital — broad spectrum',note:'Prevent peritoneal infection'}],
+  analogy:'Gastroschisis is like a suitcase that burst open at the airport — the contents (intestines) are scattered outside with no bag to protect them. Every minute exposed to the elements causes damage. You need to gently gather the contents, cover them immediately, and rush to repairs.'},
+
+{icon:'🧠',title:'Spina Bifida',subtitle:'Neural tube defect with exposed spinal cord',tag:'abdominal',
+  patho:'The neural tube — which becomes the brain and spinal cord — should close completely by 28 days after conception. In spina bifida, incomplete closure leaves part of the spinal cord exposed or malformed. The severity spectrum ranges from spina bifida occulta (hidden bony defect, often asymptomatic) to myelomeningocele (most severe — cord and meninges protrude through open defect, causing permanent motor and sensory deficits below the level). Associated with Arnold-Chiari II malformation (brainstem/cerebellum herniation), hydrocephalus, and neurogenic bladder/bowel.',
+  signs:'Visible defect over spine at birth (myelomeningocele appears as raw swelling). Lower extremity deformity or paralysis, absent reflexes below defect, bladder/bowel dysfunction, hydrocephalus (enlarged head).',
+  tx:'Cover defect with sterile, moist, non-adherent gauze. Prone positioning to prevent pressure on defect. Avoid rupturing the sac if intact. IV access, maintain temperature. Hospital: neurosurgical closure within 24–72 hours, VP shunt for hydrocephalus.',
+  meds:[{drug:'No specific prehospital medications',dose:'—',note:'Protective covering and positioning are key'},{drug:'Folic acid',dose:'400–800 mcg/day preconception',note:'PREVENTION — reduces neural tube defect risk by 50–70%'},{drug:'Antibiotics',dose:'Hospital — prophylaxis',note:'Before surgical closure'}],
+  analogy:'Spina bifida is like a computer tower assembled without its back panel — the internal motherboard (spinal cord) is exposed and vulnerable. Every bump, pressure, or contamination can damage the circuitry (neurons). The panel needs to be installed (surgical closure) as quickly as possible to prevent further damage.'},
+];
+
+function buildCard(data,tagClass){
+  return `<div class="disease-card" id="card-${data.title.replace(/\s+/g,'_')}">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-left">
+        <div class="card-icon">${data.icon}</div>
+        <div>
+          <div class="card-title">${data.title}</div>
+          <div class="card-subtitle">${data.subtitle}</div>
+        </div>
+      </div>
+      <div class="card-chevron">▼</div>
+    </div>
+    <div class="card-body">
+      <div class="card-tabs">
+        <div class="card-tab active" onclick="switchCardTab(this,'patho')">Pathophysiology</div>
+        <div class="card-tab" onclick="switchCardTab(this,'meds')">Medications</div>
+        <div class="card-tab" onclick="switchCardTab(this,'analogy')">Analogy</div>
+      </div>
+      <div class="card-tab-content active" data-tab="patho">
+        <span class="tag tag-${tagClass}">${tagClass.charAt(0).toUpperCase()+tagClass.slice(1)}</span>
+        <p><strong>Pathophysiology:</strong> ${data.patho}</p>
+        <p style="margin-top:0.6rem;"><strong>Signs & Symptoms:</strong> ${data.signs}</p>
+        <p style="margin-top:0.6rem;"><strong>Treatment:</strong> ${data.tx}</p>
+      </div>
+      <div class="card-tab-content" data-tab="meds">
+        <table class="med-table">
+          <thead><tr><th>Drug</th><th>Dose/Route</th><th>Notes</th></tr></thead>
+          <tbody>${data.meds.map(m=>`<tr><td>${m.drug}</td><td>${m.dose}</td><td>${m.note}</td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+      <div class="card-tab-content" data-tab="analogy">
+        <div class="analogy-box"><p>"${data.analogy}"</p></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildCards(){
+  document.getElementById('emergency-cards').innerHTML=emergencyCards.map(c=>buildCard(c,'emergency')).join('');
+  document.getElementById('airway-cards').innerHTML=airwayCards.map(c=>buildCard(c,'structural')).join('');
+  document.getElementById('cardiac-cards').innerHTML=cardiacCards.map(c=>buildCard(c,'cardiac')).join('');
+  document.getElementById('abdominal-cards').innerHTML=abdominalCards.map(c=>buildCard(c,'abdominal')).join('');
+}
+
+function toggleCard(header){
+  const card=header.closest('.disease-card');
+  card.classList.toggle('open');
+}
+function switchCardTab(tab,tabName){
+  const body=tab.closest('.card-body');
+  body.querySelectorAll('.card-tab').forEach(t=>t.classList.remove('active'));
+  body.querySelectorAll('.card-tab-content').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  body.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+}
+
+// ===== QUIZ DATA =====
+const questions=[
+  {q:"What percentage of newborns require some assistance to begin breathing at birth?",opts:["About 1%","About 5%","About 10%","About 25%"],a:2,exp:"Approximately 10% of newborns require some breathing assistance. About 1% require extensive resuscitation."},
+  {q:"The 'Golden Minute' refers to which of the following in neonatal care?",opts:["The first minute of chest compressions","The time allotted to complete initial assessment steps and begin ventilation if needed","The maximum time allowed before epinephrine is administered","The window for intubation before brain injury occurs"],a:1,exp:"The Golden Minute is the 60 seconds allotted for completing initial steps of newborn stabilization, evaluating, and beginning ventilation if required."},
+  {q:"Preterm birth is defined as childbirth before how many weeks of gestation?",opts:["34 weeks","36 weeks","37 weeks","38 weeks"],a:2,exp:"Preterm birth is defined as childbirth before 37 completed weeks of pregnancy."},
+  {q:"Which of the following is NOT a typical finding in a premature newborn?",opts:["Lanugo","Lack of surfactant","Well-developed subcutaneous fat","Thin, non-keratinized skin"],a:2,exp:"Premature newborns typically have less subcutaneous fat (not more). They have lanugo, lack surfactant, and have thin translucent skin."},
+  {q:"The APGAR score is assessed at which time intervals?",opts:["1 and 5 minutes","2 and 10 minutes","5 and 15 minutes","Immediately and 5 minutes"],a:0,exp:"The APGAR score is evaluated at 1 and 5 minutes of age. A score of 7-10 is normal; 4-6 is moderately distressed; below 4 is severely distressed."},
+  {q:"What does the 'A' in APGAR stand for?",opts:["Airway","Activity (muscle tone)","Appearance (skin color)","Alertness"],a:2,exp:"APGAR: Appearance (skin color), Pulse rate, Grimace (irritability), Activity (muscle tone), Respiratory effort."},
+  {q:"An APGAR score of 4 to 6 indicates:",opts:["Normal newborn","Moderately distressed — requires O₂ and stimulation","Severely distressed — requires full resuscitation","Requires only monitoring"],a:1,exp:"An APGAR score of 4-6 indicates a moderately distressed newborn who requires oxygen and stimulation. Below 4 indicates severe distress requiring resuscitation."},
+  {q:"During vaginal delivery, approximately how much fetal lung fluid is expelled by chest compression?",opts:["One-third is cleared before delivery; more expelled during delivery","All fluid is expelled by maternal pushing","No fluid is expelled — all must evaporate after birth","Two-thirds is expelled in utero"],a:0,exp:"About one-third of fetal lung fluid is cleared before delivery through catecholamine-driven sodium reabsorption. Further clearance occurs during vaginal delivery when the chest is compressed."},
+  {q:"How long may it normally take for SpO₂ to reach 90% in a healthy newborn after birth?",opts:["Immediately","2 minutes","5 minutes","10 minutes"],a:3,exp:"A normal newly born baby may not reach SpO₂ of 90% for up to 10 minutes after birth. The initial 70-80% SpO₂ during this transitional period is normal."},
+  {q:"The ideal body temperature range for a newborn is:",opts:["95–97°F (35–36.1°C)","97.7–99.5°F (36.5–37.5°C)","99.5–101°F (37.5–38.3°C)","96–98°F (35.5–36.7°C)"],a:1,exp:"The ideal body temperature for newborn babies is 97.7°F to 99.5°F (36.5°C to 37.5°C)."},
+  {q:"What is the preferred method for tactile stimulation to initiate breathing in a newborn?",opts:["Slapping the buttocks","Placing in cold water","Gently rubbing the back, trunk, or extremities","Flicking the soles of the feet repeatedly"],a:2,exp:"The appropriate method of tactile stimulation is to gently rub the newborn's back, trunk, or extremities for no more than 30 seconds."},
+  {q:"What rate should PPV be delivered in a newborn requiring ventilation?",opts:["20-30 breaths/min","40-60 breaths/min","60-80 breaths/min","10-20 breaths/min"],a:1,exp:"Assisted ventilations should be at a rate of 40 to 60 breaths/min to achieve or maintain a heart rate greater than 100 beats/min."},
+  {q:"Chest compressions are indicated in a newborn when the heart rate is:",opts:["Less than 100 beats/min","Less than 80 beats/min","Less than 60 beats/min despite 30 seconds of adequate ventilation","Less than 60 beats/min immediately"],a:2,exp:"Chest compressions are indicated if heart rate is less than 60 beats/min despite at least 30 seconds of adequate positive-pressure ventilation."},
+  {q:"What is the compression-to-ventilation ratio for neonatal resuscitation?",opts:["30:2","15:2","3:1","5:1"],a:2,exp:"Compressions and ventilations should be delivered at a 3:1 ratio, achieving 90 compressions and 30 breaths per minute at a total rate of 120 events/min."},
+  {q:"The preferred technique for chest compressions in neonates is:",opts:["One-finger technique","Two-finger technique","Two-thumb encircling-hands technique","Heel of hand technique"],a:2,exp:"The two-thumb encircling-hands chest compression technique is the preferred method for neonatal resuscitation."},
+  {q:"The recommended IV dose of epinephrine for neonatal resuscitation is:",opts:["0.1-0.3 mg/kg","0.01-0.03 mg/kg","0.05-0.1 mg/kg","0.001-0.003 mg/kg"],a:1,exp:"Recommended IV/IO dose of epinephrine is 0.01-0.03 mg/kg. For ET administration, the dose is higher: 0.05-0.1 mg/kg."},
+  {q:"In the MR. SOPA mnemonic, what does 'O' stand for?",opts:["Oxygen increase","Open the mouth","Optimize positioning","Oropharyngeal airway insertion"],a:1,exp:"MR. SOPA: Mask adjustment, Reposition, Suction, Open the mouth, Pressure increase, Alternative airway."},
+  {q:"A laryngeal mask airway (LMA) is appropriate for neonatal resuscitation in newborns of at least:",opts:["28 weeks or 1.0 kg","30 weeks or 1.2 kg","34 weeks or 1.5 kg","36 weeks or 2.0 kg"],a:2,exp:"The LMA can achieve effective ventilation in term and preterm newborns at 34 weeks or more of gestation weighing more than 1.5 kg (3.3 lb)."},
+  {q:"Which of the following is recommended PEEP during neonatal PPV?",opts:["2 cm H₂O","5 cm H₂O","10 cm H₂O","15 cm H₂O"],a:1,exp:"Approximately 5 cm of H₂O positive end-expiratory pressure (PEEP) is recommended during positive-pressure ventilation in newborns."},
+  {q:"Secondary apnea in a newborn differs from primary apnea in that:",opts:["It resolves with tactile stimulation alone","It only occurs in premature newborns","It exceeds 20 seconds and requires PPV — stimulation alone is insufficient","It is caused only by maternal opioids"],a:2,exp:"Secondary apnea exceeds 20 seconds without spontaneous breathing. It leads to hypoxemia and bradycardia and necessitates PPV. Stimulation alone will not reverse secondary apnea."},
+  {q:"Bradycardia in newborns is most commonly caused by:",opts:["Hypothermia","Hypoglycemia","Inadequate ventilation","Maternal medications"],a:2,exp:"The most common cause of bradycardia in newborns is inadequate ventilation causing hypoxia, which triggers a vagal response. It should be promptly investigated and managed."},
+  {q:"The 'Grimace' component of the APGAR score tests:",opts:["Facial color","Response to stimulation (irritability)","Mouth opening ability","Cry strength"],a:1,exp:"Grimace refers to reflex irritability — the response to stimulation (such as suctioning). A score of 0 = no response, 1 = grimace, 2 = cry, cough, or sneeze."},
+  {q:"Which of the following is the hallmark sign of intestinal malrotation with volvulus?",opts:["Projectile non-bilious vomiting","Bilious vomiting (dark green)","Bloody stools","Abdominal mass"],a:1,exp:"The primary presenting sign of intestinal malrotation/volvulus is bilious emesis (dark green vomit indicating bile). This is a surgical emergency."},
+  {q:"Meconium staining occurs in approximately what percentage of deliveries?",opts:["1-2%","5-6%","12%","25%"],a:2,exp:"Meconium staining occurs in about 12% of all deliveries. It is more common in postterm newborns and those stressed during labor."},
+  {q:"Current guidelines state that routine ET intubation for tracheal suctioning in meconium-stained newborns:",opts:["Is always required","Is recommended only if meconium is thick","Is no longer recommended unless there is poor tone and inadequate breathing","Should be performed before any stimulation"],a:2,exp:"Routine intubation for tracheal suctioning is no longer recommended. If the newborn has poor tone or inadequate breathing, suctioning and PPV should be initiated."},
+  {q:"Neonatal hypothermia is defined as a core temperature below:",opts:["97°F (36.1°C)","95°F (35°C)","98.6°F (37°C)","93°F (33.9°C)"],a:1,exp:"Neonatal hypothermia is defined as core body temperature below 95°F (35°C). It results from decreased heat production, increased heat loss, or both."},
+  {q:"Which of the following is a late finding of hypothermia in a newborn?",opts:["Irritability","Acrocyanosis","Lethargy","Pale skin"],a:2,exp:"Lethargy is a late finding of hypothermia in neonates. Irritability is an early sign. Other findings include pale color, cool skin, respiratory distress, apnea, and bradycardia."},
+  {q:"Neonatal hypoglycemia is defined as blood glucose below 40 mg/dL in the first:",opts:["30 minutes of life","1 hour of life","4 hours of life","24 hours of life"],a:2,exp:"Hypoglycemia is defined as blood glucose less than 40 mg/dL from 0 to 4 hours of life, or less than 45 mg/dL after 4 hours of life."},
+  {q:"The preferred dextrose concentration for treating neonatal hypoglycemia is:",opts:["D5W","D10W","D25W","D50W"],a:1,exp:"Dextrose 10% (D10W) is preferred for neonates — D50W is too hypertonic and can cause vein injury, osmotic brain injury, and rebound hypoglycemia."},
+  {q:"Neonatal fever is defined as a rectal temperature greater than:",opts:["99°F (37.2°C)","100.4°F (38°C)","101°F (38.3°C)","102°F (38.9°C)"],a:1,exp:"Neonatal fever is defined as a rectal temperature greater than 100.4°F (38°C). In any symptomatic newborn, fever is serious and warrants evaluation for infection."},
+  {q:"The prehospital treatment for neonatal fever includes:",opts:["Acetaminophen suppository","Cooling procedures with wet cloths","Antipyretic administration","Supportive care only — cooling and antipyretics are delayed to the hospital"],a:3,exp:"Prehospital care for neonatal fever is supportive only. Cooling procedures and antipyretics are delayed until hospital assessment to avoid masking serious infection."},
+  {q:"Physiologic jaundice in newborns typically affects what proportion of newborns?",opts:["1 in 10","3 in 5","1 in 3","All newborns"],a:1,exp:"Physiologic jaundice affects 3 in 5 (60%) of newborns. It usually resolves within 2 weeks as the liver matures. Pathologic jaundice requires further evaluation and treatment."},
+  {q:"High levels of unconjugated bilirubin in neonatal jaundice are dangerous primarily because:",opts:["They cause direct liver damage","They are lipid-soluble and can cross the blood-brain barrier causing kernicterus","They precipitate in the kidneys causing renal failure","They inhibit red blood cell production"],a:1,exp:"Unconjugated bilirubin is lipid-soluble and crosses the blood-brain barrier. It deposits in the basal ganglia, causing kernicterus — irreversible neurological damage."},
+  {q:"What percentage of neonates with sepsis have a temperature above 100°F (37.8°C)?",opts:["All of them","About 75%","About 50%","Less than 25%"],a:2,exp:"Only about 50% of neonates with sepsis have a temperature above 100°F (37.8°C). Temperature instability (too high or too low) is a key sign, but its absence doesn't rule out sepsis."},
+  {q:"Late-onset neonatal sepsis occurs how many days after birth?",opts:["0-3 days","3-7 days","8-28 days","After 28 days"],a:2,exp:"Late-onset sepsis occurs 8 to 28 days after birth. Risk factors include prematurity and low birth weight. Early-onset sepsis occurs in the first 7 days."},
+  {q:"Birth injuries occur in approximately how many per 1,000 hospital births in the US?",opts:["3.1 per 1,000","10 per 1,000","31.1 per 1,000","50 per 1,000"],a:2,exp:"Birth injury occurs in about 31.1 per 1,000 hospital births in the United States. Higher rates are associated with maternal obesity, abnormal presentation, and larger newborns."},
+  {q:"Brachial plexopathies in newborns are caused by:",opts:["Compression of the head","Forceps application to the face","Stretching of the cervical nerve roots during delivery","Rotation during delivery"],a:2,exp:"Brachial plexopathies (Erb's palsy, Klumpke's palsy) are caused by stretching of the cervical nerve roots, typically from lateral traction or shoulder dystocia during delivery."},
+  {q:"Which bones are most often fractured during difficult births?",opts:["Femur and tibia","Radius and ulna","Clavicle and humerus","Skull and mandible"],a:2,exp:"The clavicle and humerus are the bones most often fractured during difficult births, particularly with abnormal fetal presentation."},
+  {q:"Choanal atresia is a bony or tissue occlusion that blocks the passageway between:",opts:["The trachea and bronchi","The nose and pharynx","The larynx and trachea","The nasopharynx and oropharynx"],a:1,exp:"Choanal atresia is a bony or tissue occlusion that blocks the passageway between the nose and pharynx (posterior nasal choanae). It is the most common nasal abnormality, affecting 1 in 5,000-7,000 live births."},
+  {q:"A newborn with bilateral choanal atresia will characteristically:",opts:["Have stridor only when sleeping","Become cyanotic when calm but improve with crying (mouth breathing)","Show immediate cyanosis with no improvement","Have no respiratory symptoms"],a:1,exp:"Neonates are obligate nose breathers. With bilateral choanal atresia, the baby can only breathe through the mouth when crying. When calm and the mouth closes, cyanosis develops."},
+  {q:"Tracheoesophageal fistula most commonly occurs with which associated anomaly?",opts:["Cleft palate","Esophageal atresia","Duodenal atresia","Choanal atresia"],a:1,exp:"TEF most commonly occurs with esophageal atresia — the esophagus ends in a blind pouch, with the lower segment connected to the trachea. This is the most common type (85% of cases)."},
+  {q:"A hallmark sign of tracheoesophageal fistula is:",opts:["Bilious vomiting","Projectile non-bilious vomiting","Copious salivation with choking during feeding","Absence of cry"],a:2,exp:"Copious salivation (inability to swallow secretions due to the blind esophageal pouch), choking, coughing, and regurgitation during feeding are hallmark signs of TEF."},
+  {q:"Pierre Robin sequence includes which triad of anomalies?",opts:["Large mandible, cleft lip, high-arched palate","Small mandible, posteriorly displaced tongue, and often a cleft palate","Choanal atresia, cleft palate, and micrognathia","Macroglossia, glossoptosis, and large mandible"],a:1,exp:"Pierre Robin sequence includes: small mandible (micrognathia), tongue placed farther back (glossoptosis) potentially obstructing the airway, and often a cleft palate."},
+  {q:"What is the primary prehospital airway management position for a newborn with Pierre Robin sequence?",opts:["Supine with head-tilt","Left lateral decubitus","Prone positioning (face down)","Seated upright"],a:2,exp:"Prone positioning is the primary intervention — gravity moves the tongue away from the posterior pharynx, opening the airway. BVM and intubation are often very difficult in Pierre Robin sequence."},
+  {q:"Congenital heart defects affect approximately how many newborns per year in the US?",opts:["4,000","40,000","400,000","4,000,000"],a:1,exp:"Congenital heart defects are the most common birth defect, affecting about 40,000 newborns per year in the United States. About 25% produce significant hemodynamic effects."},
+  {q:"Coarctation of the aorta most commonly presents in the newborn period when:",opts:["The ductus arteriosus opens","The foramen ovale closes","The ductus arteriosus closes, reducing blood flow to lower extremities","The first feeding is attempted"],a:2,exp:"CoA presents within the first month of life when the ductus arteriosus closes. The narrowed aorta cannot support adequate lower body perfusion without ductal flow, leading to shock."},
+  {q:"Coarctation of the aorta is associated with which chromosomal abnormality?",opts:["Down syndrome (Trisomy 21)","Turner syndrome (45,X)","Klinefelter syndrome (47,XXY)","Trisomy 18"],a:1,exp:"Coarctation of the aorta is common in children with Turner syndrome (45,X). It can also occur with other chromosomal and genetic abnormalities."},
+  {q:"A 'hole in the heart' involving the upper chambers is called:",opts:["Ventricular septal defect (VSD)","Patent ductus arteriosus (PDA)","Atrial septal defect (ASD)","Tetralogy of Fallot"],a:2,exp:"An atrial septal defect (ASD) is a persistent opening between the two upper chambers (atria). A ventricular septal defect (VSD) involves the lower chambers (ventricles)."},
+  {q:"The hallmark finding of a ventricular septal defect is:",opts:["Fixed split S2","Continuous machinery murmur","Loud harsh holosystolic murmur","Absent S1"],a:2,exp:"A loud harsh holosystolic (pansystolic) heart murmur is the hallmark of VSD. Blood flows through the hole during the entire systolic phase, creating a characteristic murmur."},
+  {q:"Patent ductus arteriosus can sometimes be stimulated to close with:",opts:["Aspirin or ibuprofen","NSAIDs (indomethacin) or acetaminophen","Corticosteroids","Prostaglandins"],a:1,exp:"PDA can sometimes be stimulated to close medically with NSAIDs (indomethacin or ibuprofen) which inhibit prostaglandin synthesis, or with acetaminophen. Prostaglandins would KEEP it open."},
+  {q:"Tetralogy of Fallot involves which FOUR defects?",opts:["ASD, VSD, pulmonary stenosis, right ventricular hypoplasia","VSD, pulmonary stenosis, right ventricular hypertrophy, overriding aorta","ASD, PDA, pulmonary stenosis, left ventricular hypertrophy","VSD, ASD, coarctation, pulmonary stenosis"],a:1,exp:"ToF = VSD (large), pulmonary stenosis, right ventricular hypertrophy (due to outflow obstruction), and an overriding aorta (positioned over the VSD)."},
+  {q:"'Tet spells' in Tetralogy of Fallot are best treated acutely with:",opts:["Positioning supine and administering digoxin","Knee-chest or squatting position, O₂, morphine, and phenylephrine","100% O₂ only","Immediate defibrillation"],a:1,exp:"Tet spells are treated with positioning (knee-chest/squat to increase SVR), O₂, morphine (reduces infundibular spasm), propranolol, and phenylephrine (increases SVR, forcing blood to lungs)."},
+  {q:"In transposition of the great arteries, survival depends on:",opts:["Immediate surgical ligation of the ductus","Keeping the ductus arteriosus open to allow blood mixing — with Prostaglandin E1","Closing all septal communications","Increased oxygen delivery to reduce pulmonary resistance"],a:1,exp:"TGA creates two separate parallel circuits. Survival depends on maintaining mixing between circuits via Prostaglandin E1 (keeps PDA open), foramen ovale, or septal defects until surgery."},
+  {q:"Hypoplastic left heart syndrome (HLHS) is characterized by:",opts:["Overdevelopment of the left ventricle with small right ventricle","Severely underdeveloped left-sided structures (LV, mitral/aortic valves, ascending aorta)","Patent ductus arteriosus with normal ventricular development","Absence of the right ventricle only"],a:1,exp:"HLHS involves severe underdevelopment of the left ventricle, mitral valve, aortic valve, and ascending aorta. The right ventricle must support both circulations via the PDA."},
+  {q:"TAPVR stands for:",opts:["Total Anomalous Pulmonary Valve Regurgitation","Transposition of All Pulmonary Venous Routes","Total Anomalous Pulmonary Venous Return","Tricuspid Atresia with Pulmonary Venous Reversal"],a:2,exp:"TAPVR = Total Anomalous Pulmonary Venous Return. The pulmonary veins that should return oxygenated blood to the left atrium are instead attached to the systemic venous system."},
+  {q:"Intestinal malrotation is considered a surgical emergency primarily because:",opts:["It causes immediate sepsis","The gut twist (volvulus) can cut off blood supply causing bowel necrosis within hours","It causes severe dehydration rapidly","The herniated bowel blocks the airway"],a:1,exp:"The narrow mesenteric attachment in malrotation predisposes to volvulus — bowel twisting around the SMA that can cause complete bowel necrosis within hours if not surgically corrected."},
+  {q:"Pyloric stenosis presents with which type of vomiting?",opts:["Bilious, forceful vomiting","Non-bilious, projectile vomiting","Blood-tinged vomiting","Regurgitation without force"],a:1,exp:"Pyloric stenosis causes progressive projectile, non-bilious vomiting — the obstruction is proximal to the entry of bile (pylorus to duodenum). The baby is hungry immediately after vomiting."},
+  {q:"The metabolic abnormality associated with pyloric stenosis is:",opts:["Metabolic acidosis with hyperkalemia","Hypochloremic, hypokalemic metabolic alkalosis","Metabolic acidosis with hyponatremia","Respiratory alkalosis with hyperchloremia"],a:1,exp:"Repeated vomiting of gastric acid (HCl) causes loss of hydrogen and chloride ions, resulting in hypochloremic, hypokalemic metabolic alkalosis."},
+  {q:"In congenital diaphragmatic hernia (CDH), which side is most commonly affected?",opts:["Right side","Left side","Bilateral equally","Central/posterior"],a:1,exp:"CDH most commonly occurs on the LEFT side (left-sided Bochdalek hernia). The herniated abdominal organs compress the developing left lung, causing pulmonary hypoplasia."},
+  {q:"Why should bag-mask ventilation be AVOIDED in congenital diaphragmatic hernia?",opts:["It increases pulmonary pressure directly","It inflates the herniated stomach/bowel in the chest, further compressing the lung","It stimulates vagal bradycardia","It is ineffective due to poor lung compliance"],a:1,exp:"BVM ventilation forces air into the herniated stomach and bowel located in the thoracic cavity, expanding them and further compressing the hypoplastic lung. Immediate ET intubation is indicated instead."},
+  {q:"The scaphoid (flat/sunken) abdomen in a newborn should raise suspicion for:",opts:["Gastroschisis","Omphalocele","Pyloric stenosis","Congenital diaphragmatic hernia"],a:3,exp:"A scaphoid (concave/flat) abdomen in a newborn with respiratory distress suggests CDH — the abdominal organs are in the chest, leaving the abdomen emptied of its normal contents."},
+  {q:"Gastroschisis differs from omphalocele primarily in that:",opts:["Gastroschisis has a protective peritoneal sac; omphalocele does not","Omphalocele is associated with chromosomal abnormalities; gastroschisis is typically isolated","Gastroschisis is covered by a sac; omphalocele is not","Omphalocele is always fatal without surgery"],a:1,exp:"Omphalocele is associated with chromosomal abnormalities (Trisomy 13, 18, Beckwith-Wiedemann) and other congenital anomalies. Gastroschisis is typically an isolated defect in younger mothers."},
+  {q:"How should exposed abdominal organs in gastroschisis be managed prehospital?",opts:["Dry with sterile gauze and apply pressure","Push organs back into the abdominal cavity manually","Cover with sterile moist saline gauze; place baby on right side","Apply an occlusive petroleum-based dressing"],a:2,exp:"Exposed abdominal organs should be covered with sterile, non-adherent gauze moistened with warm saline. The baby is placed on the right side to promote blood flow. Never attempt to return organs to the abdomen."},
+  {q:"The most severe form of spina bifida, which leaves the child severely handicapped, is:",opts:["Spina bifida occulta","Meningocele","Myelomeningocele","Encephalocele"],a:2,exp:"Myelomeningocele is the most severe form of spina bifida — the malformed spinal cord and meninges protrude through the defect, causing partial or complete paralysis below the level of the defect."},
+  {q:"Spina bifida occulta is best described as:",opts:["Nerve tissue protruding through the skull","A membranous sac containing nerve tissue","A bony spinal defect with little external evidence — the most common, least serious form","Complete spinal cord transection"],a:2,exp:"Spina bifida occulta has little external evidence. It is the most common and least serious form — only a bony defect without herniation of neural tissue."},
+  {q:"Folic acid supplementation reduces the risk of neural tube defects by approximately:",opts:["10-20%","30-40%","50-70%","90%"],a:2,exp:"Folic acid supplementation (400-800 mcg/day preconceptionally) reduces the risk of neural tube defects by 50-70%. This led to FDA-mandated folic acid fortification of grain products."},
+  {q:"When covering a spina bifida defect prehospital, the best approach is:",opts:["Dry sterile gauze with firm pressure","Non-adherent sterile gauze moistened with saline; prone positioning","Occlusive plastic wrap without moisture","Leave uncovered and transport immediately"],a:1,exp:"Cover the defect with sterile, moist, non-adherent gauze. Position the baby prone to prevent pressure on the defect. Never use dry or adherent dressings that could damage the neural tissue."},
+  {q:"Which electrolyte abnormality is a risk when administering rapid volume resuscitation to premature neonates?",opts:["Hypernatremia","Hypokalemia","Intraventricular hemorrhage from blood pressure fluctuations","Hypercalcemia"],a:2,exp:"Rapid volume shifts in premature newborns risk blood pressure fluctuations, which can cause intraventricular hemorrhage (IVH) due to their fragile cerebral blood vessels. Volume expanders should be given slowly."},
+  {q:"Volume expanders during neonatal resuscitation should be given at:",opts:["1 mL/kg bolus","10 mL/kg over 5-10 minutes","50 mL/kg over 1 hour","25 mL/kg wide open"],a:1,exp:"Volume expanders (0.9% saline) should be given at 10 mL/kg over 5-10 minutes, slowly and with caution, especially in premature newborns."},
+  {q:"Prostaglandin E1 is administered in ductal-dependent cardiac lesions to:",opts:["Close the foramen ovale","Increase systemic vascular resistance","Keep the ductus arteriosus open to maintain circulation","Decrease pulmonary blood flow"],a:2,exp:"Prostaglandin E1 (alprostadil) is administered to maintain patency of the ductus arteriosus — critical for ductal-dependent lesions like HLHS, coarctation, and TGA where ductal flow is essential for survival."},
+  {q:"During neonatal postresuscitation, tube occlusion by mucus or meconium presents with:",opts:["Sudden improvement in SpO₂","Increased resistance to hand ventilation","Decreased end-tidal CO₂ with improvement","Hypertension"],a:1,exp:"ET tube occlusion presents with increased resistance to hand ventilation, decreased chest wall movement, diminished breath sounds, and return of bradycardia. Suctioning or reintubation is required."},
+  {q:"Which of the following is the MOST common cause of respiratory distress and cyanosis in a newborn?",opts:["Congenital heart defects","Meconium aspiration","Prematurity","Sepsis"],a:2,exp:"Prematurity is the most common cause of respiratory distress and cyanosis in newborns. Premature lungs lack surfactant and have an immature central respiratory control center."},
+  {q:"During neonatal resuscitation, the heart rate should be initially assessed at:",opts:["30 seconds, then again at 60 seconds","The first 15 seconds and again at 30 seconds of effective PPV","Every 5 minutes","Only after 60 seconds of PPV"],a:1,exp:"The newborn's heart rate should initially be assessed in the first 15 seconds and again at 30 seconds of positive-pressure ventilation that moves the chest."},
+  {q:"Truncus arteriosus is characterized by:",opts:["Two great vessels with a large ASD","A single great vessel arising over a large VSD that supplies both lungs and body","Three separate aortic arches","Absent pulmonary valve"],a:1,exp:"Truncus arteriosus features a single arterial trunk (truncus) that arises over a large VSD and carries blood to both the body and the lungs — a single vessel replacing the normal two."},
+  {q:"What is the primary concern with neonatal fever in the first 28 days of life?",opts:["Febrile seizures from any cause","Serious bacterial infection progressing to sepsis","Dehydration only","CNS depression"],a:1,exp:"In the first 28 days of life, fever is serious and can indicate acute viral or bacterial infection including neonatal sepsis. The immature immune system means any infection can rapidly become systemic."},
+  {q:"Which of the following best describes the physiology of cyanosis in ToF?",opts:["Left-to-right shunting causing pulmonary overcirculation","Right-to-left shunting of deoxygenated blood through the VSD into the aorta","Pulmonary vein occlusion","Tricuspid valve regurgitation"],a:1,exp:"In ToF, increased right ventricular pressure (from pulmonary stenosis) causes right-to-left shunting through the VSD. Deoxygenated blood enters the overriding aorta, causing systemic cyanosis."},
+  {q:"Therapeutic hypothermia for neonates with hypoxic-ischemic encephalopathy is initiated:",opts:["In the field by paramedics immediately after resuscitation","Only in hospitals under physician supervision for newborns >36 weeks","At any gestational age if resuscitation was required","After 24 hours of observation"],a:1,exp:"Therapeutic hypothermia is offered in hospital settings under physician supervision to newborns born at more than 36 weeks' gestation with evolving moderate to severe hypoxic-ischemic encephalopathy."},
+  {q:"Meconium aspiration can cause which dangerous pulmonary complication?",opts:["Pulmonary atelectasis only","Persistent pulmonary hypertension of the newborn (PPHN)","Pulmonary fibrosis","Chronic obstructive changes"],a:1,exp:"Meconium aspiration can cause ball-valve obstruction, chemical pneumonitis, air trapping, and pneumothorax. Severe hypoxia leads to pulmonary vasoconstriction and PPHN."},
+  {q:"The most appropriate prehospital intervention for suspected neonatal sepsis is:",opts:["Administering antibiotics empirically","Obtaining blood cultures before any treatment","Supportive care and rapid transport for sepsis workup","Administering antipyretics and monitoring"],a:2,exp:"Prehospital care for neonatal sepsis is supportive: airway management, O₂, IV access, temperature maintenance, and rapid transport. Antibiotic administration and blood cultures are hospital-based interventions."},
+  {q:"In TAPVR, oxygenated blood from the pulmonary veins is abnormally connected to:",opts:["The left atrium directly","The right ventricle","The systemic venous system (e.g., superior vena cava)","The coronary arteries"],a:2,exp:"In TAPVR, pulmonary veins are improperly attached to the systemic venous system (usually the superior vena cava or coronary sinus) instead of the left atrium. Oxygenated blood mixes with deoxygenated blood."},
+  {q:"The primary physiologic problem in PDA is:",opts:["Insufficient blood to the lungs","Oxygenated aortic blood flowing back (left-to-right) into the pulmonary artery causing pulmonary overcirculation","Systemic hypotension from aortic incompetence","Right ventricular outflow obstruction"],a:1,exp:"In PDA, the patent ductus allows oxygenated blood to flow from the higher-pressure aorta back into the pulmonary artery (left-to-right shunt), creating pulmonary overcirculation and volume overload."},
+  {q:"The temperature that the patient-care compartment of an ambulance should be maintained for premature newborns is:",opts:["Above 65°F (18.3°C)","Above 74°F (23°C)","Above 80°F (26.7°C)","Above 90°F (32.2°C)"],a:1,exp:"The temperature in the patient-care compartment of the ambulance should be maintained above 74°F (23°C) to prevent hypothermia in premature newborns."},
+  {q:"What causes the first breath in a newborn?",opts:["Umbilical cord clamping only","Chemical changes (exposure to air) and changes in temperature","Tactile stimulation by the delivering provider","Maternal oxytocin release"],a:1,exp:"The first breath is in response to chemical changes (exposure to air/O₂) and changes in temperature. As air enters the alveoli, pulmonary capillaries dilate in response to oxygen."},
+  {q:"Which of the following describes the correct initial evaluation questions immediately following delivery?",opts:["Is the newborn alert? Is color good? What is the APGAR score?","Is the newborn term? Does the newborn have good tone? Is the newborn breathing or crying?","Is the fontanelle flat? Is capillary refill normal? Is the cord pulsing?","Are reflexes present? Is there cord prolapse? Is the placenta intact?"],a:1,exp:"Immediately following delivery, evaluate: Is the newborn term? Does the newborn have good tone? Is the newborn breathing or crying? If yes to all three, routine care with mother is appropriate."},
+  {q:"Cleft palate is a fissure in the hard palate that can extend through:",opts:["The larynx","The hard and soft palates into the nasal cavity","The epiglottis only","The soft palate but never the hard palate"],a:1,exp:"Cleft palate is a fissure in the hard palate. It may involve one or both sides of the roof of the mouth and can extend through both hard and soft palates into the nasal cavity."},
+  {q:"A newborn with a VSD characteristically has which of the following murmur descriptions?",opts:["Soft diastolic murmur","Continuous machinery murmur","Fixed split S2","Loud holosystolic murmur"],a:3,exp:"VSD produces a loud harsh holosystolic (pansystolic) heart murmur — the hallmark clinical finding. Blood flows through the ventricular defect throughout the entire systolic phase."},
+  {q:"Neonatal seizures in the prehospital setting should initially be treated with:",opts:["Phenobarbital IV","Airway support, O₂, blood glucose check, and lorazepam for active seizures","High-dose magnesium sulfate","Immediate intubation and sedation"],a:1,exp:"Emergency care begins with ABCs and airway support, O₂, circulatory support, rapid blood glucose check, maintain temperature. Benzodiazepines (lorazepam) are first-line for active seizures. Dextrose for confirmed hypoglycemia."},
+  {q:"The etiology of congenital dysrhythmias includes:",opts:["Maternal influenza during the third trimester","Malfunctions in the development of the heart's conduction system","High altitude delivery","Vacuum-assisted delivery"],a:1,exp:"Congenital dysrhythmias result from malfunctions in the development of the heart's conduction system during embryogenesis. They can include atrial fibrillation, atrial flutter, reentry tachycardia, and heart blocks."},
+  {q:"Pyloric stenosis is the most common cause of what complication in neonates?",opts:["Failure to thrive","Intestinal obstruction","Bilious vomiting","Bloody diarrhea"],a:1,exp:"Pyloric stenosis is the most common cause of intestinal obstruction in neonates. The hypertrophied pyloric muscle prevents gastric emptying into the duodenum."},
+  {q:"The 'olive sign' in pyloric stenosis refers to:",opts:["Olive-colored stool from bile staining","A palpable firm mass in the epigastrium — the hypertrophied pyloric muscle","Olive-colored skin from jaundice","The shape of the distended stomach on X-ray"],a:1,exp:"The 'olive sign' refers to a palpable, firm, olive-shaped mass in the epigastrium/right upper quadrant — the hypertrophied pyloric muscle. It is pathognomonic of pyloric stenosis."},
+  {q:"The standard first-line empiric antibiotic regimen for neonatal sepsis in hospital is:",opts:["Vancomycin and piperacillin-tazobactam","Ampicillin and gentamicin","Ceftriaxone monotherapy","Clindamycin and metronidazole"],a:1,exp:"Ampicillin + gentamicin is the standard empiric first-line regimen for neonatal sepsis, providing coverage for GBS, E. coli, Listeria, and gram-negative organisms."},
+  {q:"During normal fetal circulation, the ductus arteriosus connects:",opts:["The right atrium to the left atrium","The pulmonary artery to the aorta","The right ventricle to the left ventricle","The pulmonary veins to the systemic veins"],a:1,exp:"The ductus arteriosus is a fetal vessel connecting the pulmonary artery to the aorta, allowing blood to bypass the non-functional fetal lungs. At birth, rising O₂ and falling prostaglandins trigger its closure."},
+  {q:"In neonatal resuscitation, which drugs should only be given when heart rate remains below 60 despite ventilation AND 1 minute of effective chest compressions?",opts:["Atropine and calcium chloride","Epinephrine and/or volume expanders","Adenosine and amiodarone","Dopamine and norepinephrine"],a:1,exp:"Drugs (epinephrine and volume expanders) are rarely indicated. They should only be administered if heart rate remains below 60 despite adequate ventilation with 100% O₂ and 1 minute of effective chest compressions."},
+  {q:"Hypovolemia in a newborn may result from all EXCEPT:",opts:["Dehydration","Hemorrhage","Trauma","Surfactant deficiency"],a:3,exp:"Surfactant deficiency causes respiratory distress (RDS), not hypovolemia. Neonatal hypovolemia results from dehydration, hemorrhage (placental abruption, cord injury), trauma, or sepsis."},
+  {q:"Which congenital heart defect is characterized by differential cyanosis — lower body blue, upper body pink?",opts:["Tetralogy of Fallot","ASD","Coarctation of the aorta","TAPVR"],a:2,exp:"In coarctation of the aorta, blood flow to the lower body is compromised, while the upper body receives adequate oxygenated blood — producing differential cyanosis (lower body cyanotic, upper body pink)."},
+  {q:"A newborn with Pierre Robin sequence is most at risk for airway obstruction in which position?",opts:["Prone","Left lateral","Supine","Seated upright"],a:2,exp:"Supine positioning is most dangerous in Pierre Robin sequence — gravity allows the tongue to fall back (glossoptosis) and obstruct the posterior pharynx. Prone positioning moves the tongue forward, opening the airway."},
+  {q:"Gastroschisis occurs most often in babies born to:",opts:["Older mothers (>35 years)","Younger mothers","Mothers with diabetes","Mothers with hypertension"],a:1,exp:"Gastroschisis occurs more often in babies born of younger mothers (adolescents and young adults). Its incidence is also on the rise worldwide."},
+  {q:"During neonatal stabilization, which action is performed FIRST after evaluating the newborn?",opts:["Intubate immediately","Administer epinephrine","Warm and maintain temperature, position, dry, and stimulate","Insert intraosseous needle"],a:2,exp:"Initial steps in stabilization (in order): Warm and maintain normal temperature, position, clear secretions only if copious, dry, and stimulate. Escalating interventions follow if needed."},
+];
+
+// ===== QUIZ LOGIC =====
+let studentName='',studentId='',quizDate='';
+let answered=[],score=0;
+
+function startQuiz(){
+  studentName=document.getElementById('student-name').value.trim();
+  studentId=document.getElementById('student-id').value.trim();
+  quizDate=document.getElementById('quiz-date').value;
+  if(!studentName||!studentId){alert('Please enter your name and student ID.');return;}
+  document.getElementById('student-form-wrapper').style.display='none';
+  document.getElementById('quiz-container').style.display='block';
+  answered=new Array(questions.length).fill(null);
+  score=0;
+  renderQuestions();
+}
+
+function renderQuestions(){
+  const area=document.getElementById('questions-area');
+  area.innerHTML=questions.map((q,qi)=>`
+    <div class="question-card" id="qcard-${qi}">
+      <div class="q-num">Question ${qi+1} of ${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o,oi)=>`<button class="option-btn" onclick="answerQ(${qi},${oi})" id="opt-${qi}-${oi}">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="explanation" id="exp-${qi}">${q.exp}</div>
+    </div>`).join('');
+}
+
+function answerQ(qi,oi){
+  if(answered[qi]!==null)return;
+  answered[qi]=oi;
+  const q=questions[qi];
+  for(let i=0;i<q.opts.length;i++){
+    const btn=document.getElementById(`opt-${qi}-${i}`);
+    btn.disabled=true;
+    if(i===q.a)btn.classList.add('correct');
+    else if(i===oi&&oi!==q.a)btn.classList.add('wrong');
+  }
+  document.getElementById(`exp-${qi}`).classList.add('show');
+  if(oi===q.a)score++;
+  document.getElementById('live-score').textContent=score;
+  const done=answered.filter(a=>a!==null).length;
+  document.getElementById('q-counter').textContent=`${done} / ${questions.length} answered`;
+  document.getElementById('progress-fill').style.width=`${(done/questions.length)*100}%`;
+  if(done===questions.length)setTimeout(showResults,800);
+}
+
+function showResults(){
+  document.getElementById('quiz-container').style.display='none';
+  const res=document.getElementById('results-container');
+  res.style.display='block';
+  const pct=Math.round((score/questions.length)*100);
+  document.getElementById('score-pct').textContent=pct+'%';
+  document.getElementById('pct-display').textContent=pct+'%';
+  document.getElementById('correct-count').textContent=score;
+  document.getElementById('wrong-count').textContent=questions.length-score;
+  let grade,comment;
+  if(pct>=90){grade='A — Excellent';comment='Outstanding performance! You demonstrate mastery of neonatal care.';}
+  else if(pct>=80){grade='B — Above Average';comment='Strong performance! Review the topics you missed to achieve mastery.';}
+  else if(pct>=70){grade='C — Satisfactory';comment='Satisfactory performance. Focus on reviewing conditions and resuscitation protocols.';}
+  else if(pct>=60){grade='D — Needs Improvement';comment='Additional study is recommended. Review all sections of Chapter 46.';}
+  else{grade='F — Unsatisfactory';comment='Significant additional study required. Please review all chapter content before retesting.';}
+  document.getElementById('grade-label').textContent=grade;
+  document.getElementById('grade-comment').textContent=comment;
+}
+
+function showReview(){
+  const list=document.getElementById('review-list');
+  list.style.display=list.style.display==='none'?'block':'none';
+  if(list.innerHTML===''){
+    list.innerHTML=questions.map((q,i)=>{
+      const correct=answered[i]===q.a;
+      return `<div class="review-item ${correct?'correct-r':'wrong-r'}">
+        <div class="review-q">${i+1}. ${q.q}</div>
+        ${!correct?`<div class="review-ans wrong-a">Your answer: ${String.fromCharCode(65+answered[i])}. ${q.opts[answered[i]]??'Not answered'}</div>`:''}
+        <div class="review-ans correct-a">Correct: ${String.fromCharCode(65+q.a)}. ${q.opts[q.a]}</div>
+        <div class="review-exp">${q.exp}</div>
+      </div>`;
+    }).join('');
+  }
+}
+
+function retakeQuiz(){
+  document.getElementById('results-container').style.display='none';
+  document.getElementById('quiz-container').style.display='block';
+  answered=new Array(questions.length).fill(null);
+  score=0;
+  document.getElementById('live-score').textContent='0';
+  document.getElementById('q-counter').textContent='0 / 100 answered';
+  document.getElementById('progress-fill').style.width='1%';
+  renderQuestions();
+}
+
+function generatePDF(){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF();
+  const pct=Math.round((score/questions.length)*100);
+  const isDark=true;
+  // Header
+  doc.setFillColor(11,20,38);
+  doc.rect(0,0,210,40,'F');
+  doc.setTextColor(0,212,170);
+  doc.setFontSize(18);
+  doc.setFont('helvetica','bold');
+  doc.text('CAMP EMS Paramedic Program',105,14,{align:'center'});
+  doc.setFontSize(12);
+  doc.setTextColor(148,184,212);
+  doc.text("Sanders' Paramedic Textbook, 6th Edition",105,22,{align:'center'});
+  doc.text('Chapter 46: Neonatal Care — Knowledge Assessment',105,30,{align:'center'});
+  // Student info box
+  doc.setFillColor(19,32,56);
+  doc.rect(10,44,190,32,'F');
+  doc.setDrawColor(0,212,170);
+  doc.rect(10,44,190,32,'S');
+  doc.setTextColor(0,212,170);
+  doc.setFontSize(10);
+  doc.setFont('helvetica','bold');
+  doc.text('Student Information',14,52);
+  doc.setFont('helvetica','normal');
+  doc.setTextColor(232,244,253);
+  doc.setFontSize(9);
+  doc.text(`Name: ${studentName}`,14,60);
+  doc.text(`Student ID: ${studentId}`,14,67);
+  doc.text(`Date: ${quizDate}`,120,60);
+  doc.text(`Chapter: 46 — Neonatal Care`,120,67);
+  // Score box
+  doc.setFillColor(pct>=70?0:200, pct>=70?80:50, pct>=70?70:50);
+  doc.rect(10,80,60,30,'F');
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(22);
+  doc.setFont('helvetica','bold');
+  doc.text(`${pct}%`,40,98,{align:'center'});
+  doc.setFontSize(8);
+  doc.text('FINAL SCORE',40,104,{align:'center'});
+  // Stats
+  doc.setFillColor(19,32,56);
+  doc.rect(75,80,60,30,'F');
+  doc.setTextColor(105,240,174);
+  doc.setFontSize(16);
+  doc.text(`${score}/100`,105,96,{align:'center'});
+  doc.setFontSize(8);
+  doc.setTextColor(148,184,212);
+  doc.text('Correct Answers',105,104,{align:'center'});
+  doc.setFillColor(19,32,56);
+  doc.rect(140,80,60,30,'F');
+  doc.setTextColor(255,107,107);
+  doc.setFontSize(16);
+  doc.text(`${questions.length-score}/100`,170,96,{align:'center'});
+  doc.setFontSize(8);
+  doc.setTextColor(148,184,212);
+  doc.text('Incorrect Answers',170,104,{align:'center'});
+  // Grade
+  let grade='';
+  if(pct>=90)grade='A — Excellent';
+  else if(pct>=80)grade='B — Above Average';
+  else if(pct>=70)grade='C — Satisfactory';
+  else if(pct>=60)grade='D — Needs Improvement';
+  else grade='F — Unsatisfactory';
+  doc.setFillColor(11,20,38);
+  doc.rect(10,114,190,12,'F');
+  doc.setTextColor(255,209,102);
+  doc.setFontSize(11);
+  doc.setFont('helvetica','bold');
+  doc.text(`Grade: ${grade}`,105,123,{align:'center'});
+  // Table
+  const tableData=questions.map((q,i)=>[
+    i+1,
+    q.q.length>70?q.q.substring(0,70)+'...':q.q,
+    answered[i]!==null?`${String.fromCharCode(65+answered[i])}. ${q.opts[answered[i]].substring(0,30)}`:'N/A',
+    `${String.fromCharCode(65+q.a)}. ${q.opts[q.a].substring(0,30)}`,
+    answered[i]===q.a?'✓':'✗'
+  ]);
+  doc.autoTable({
+    head:[['#','Question','Your Answer','Correct Answer','Result']],
+    body:tableData,
+    startY:130,
+    styles:{fontSize:7,cellPadding:2,textColor:[232,244,253],fillColor:[19,32,56]},
+    headStyles:{fillColor:[0,212,170],textColor:[11,20,38],fontStyle:'bold'},
+    alternateRowStyles:{fillColor:[15,30,53]},
+    columnStyles:{0:{cellWidth:8},4:{cellWidth:12,halign:'center'}},
+    didDrawCell:(data)=>{
+      if(data.section==='body'&&data.column.index===4){
+        const val=tableData[data.row.index][4];
+        if(val==='✓')doc.setTextColor(105,240,174);
+        else doc.setTextColor(255,107,107);
+      }
+    }
+  });
+  // Footer
+  const pageCount=doc.internal.getNumberOfPages();
+  for(let i=1;i<=pageCount;i++){
+    doc.setPage(i);
+    doc.setFillColor(11,20,38);
+    doc.rect(0,287,210,10,'F');
+    doc.setTextColor(90,138,176);
+    doc.setFontSize(7);
+    doc.setFont('helvetica','normal');
+    doc.text(`CAMP Community College EMS Program | Chapter 46: Neonatal Care | Page ${i} of ${pageCount}`,105,293,{align:'center'});
+  }
+  doc.save(`CH46_Neonatal_${studentName.replace(/\s+/g,'_')}_${pct}pct.pdf`);
+}
+</script>
+</body>
+</html>
