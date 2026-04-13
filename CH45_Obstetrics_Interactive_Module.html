@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 45 — Obstetrics | CAMP EMS Paramedic Program</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Nunito+Sans:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg:       #080f1a;
+  --surface:  #0d1a2b;
+  --card:     #112236;
+  --border:   #1e3a5f;
+  --teal:     #00c9c8;
+  --teal2:    #008f8e;
+  --gold:     #e8b84b;
+  --red:      #e8534b;
+  --green:    #3ddc84;
+  --purple:   #9b6dff;
+  --pink:     #ff6bb5;
+  --text:     #d4e8f0;
+  --muted:    #6b8fa8;
+  --white:    #f0f8ff;
+  --header-bg: linear-gradient(135deg,#060e1a 0%,#0a1e36 60%,#061828 100%);
+  --header-title: #f0f8ff;
+  --scanline-opacity: .08;
+  --font-h:   'Rajdhani', sans-serif;
+  --font-m:   'Share Tech Mono', monospace;
+  --font-b:   'Nunito Sans', sans-serif;
+}
+
+/* ── LIGHT MODE ────────────────────────────────────────────── */
+html.light {
+  --bg:       #f0f4f8;
+  --surface:  #ffffff;
+  --card:     #f8fafc;
+  --border:   #c8daea;
+  --teal:     #007a7a;
+  --teal2:    #005f5f;
+  --gold:     #b87a00;
+  --red:      #c0392b;
+  --green:    #1a7f45;
+  --purple:   #6c3abf;
+  --pink:     #c0185a;
+  --text:     #1a2e3b;
+  --muted:    #5a7a90;
+  --white:    #1a2e3b;
+  --header-bg: linear-gradient(135deg,#0a4a4a 0%,#0d6b6b 60%,#083d3d 100%);
+  --header-title: #f0ffff;
+  --scanline-opacity: 0;
+}
+
+/* ── THEME TOGGLE BUTTON ───────────────────────────────────── */
+#theme-toggle {
+  background: rgba(0,201,200,.1);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 12px;
+  font-family: var(--font-m); font-size: 10px;
+  color: var(--teal); letter-spacing: 1px;
+  transition: background .2s, border-color .2s;
+  white-space: nowrap;
+}
+#theme-toggle:hover { background: rgba(0,201,200,.18); }
+
+.toggle-track {
+  width: 32px; height: 17px;
+  background: var(--border);
+  border-radius: 10px;
+  position: relative;
+  transition: background .25s;
+  flex-shrink: 0;
+}
+html.light .toggle-track { background: var(--teal); }
+.toggle-thumb {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 13px; height: 13px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform .25s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+html.light .toggle-thumb { transform: translateX(15px); }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-b);
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+  transition: background .25s, color .25s;
+}
+
+/* ── SCANLINES OVERLAY ─────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,var(--scanline-opacity)) 2px,rgba(0,0,0,var(--scanline-opacity)) 4px);
+  pointer-events: none; z-index: 9999;
+}
+
+/* ── HEADER ────────────────────────────────────────────────── */
+#app-header {
+  background: var(--header-bg);
+  border-bottom: 2px solid var(--teal);
+  padding: 18px 32px;
+  display: flex; align-items: center; gap: 20px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 4px 30px rgba(0,201,200,.12);
+  transition: background .25s;
+}
+
+.header-badge {
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  color: #000;
+  font-family: var(--font-m);
+  font-size: 10px; font-weight: 700;
+  padding: 4px 10px; border-radius: 3px;
+  letter-spacing: 2px; white-space: nowrap;
+}
+
+.header-title h1 {
+  font-family: var(--font-h);
+  font-size: 22px; font-weight: 700;
+  color: var(--header-title);
+  letter-spacing: 1px;
+}
+
+.header-title p {
+  font-family: var(--font-m);
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 1.5px; margin-top: 2px;
+}
+
+.header-meta {
+  margin-left: auto;
+  display: flex; gap: 12px; align-items: center;
+}
+
+.meta-chip {
+  background: rgba(0,201,200,.08);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-family: var(--font-m);
+  font-size: 10px; color: var(--teal);
+  letter-spacing: 1px;
+}
+
+/* ── STUDENT ID GATE ───────────────────────────────────────── */
+#id-gate {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at 50% 40%, rgba(0,201,200,.06) 0%, transparent 70%);
+}
+
+.gate-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--teal);
+  border-radius: 8px;
+  padding: 48px 52px;
+  width: 520px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+
+.gate-logo {
+  font-family: var(--font-m);
+  font-size: 11px; color: var(--teal);
+  letter-spacing: 4px; margin-bottom: 8px;
+}
+
+.gate-card h2 {
+  font-family: var(--font-h);
+  font-size: 32px; font-weight: 700;
+  color: var(--white); margin-bottom: 4px;
+}
+
+.gate-card .ch-num {
+  font-family: var(--font-m);
+  font-size: 12px; color: var(--gold);
+  letter-spacing: 3px; margin-bottom: 28px;
+}
+
+.gate-card .ob-icon {
+  font-size: 52px; margin-bottom: 20px;
+  display: block;
+  filter: drop-shadow(0 0 20px rgba(0,201,200,.4));
+}
+
+.gate-input-group { text-align: left; margin-bottom: 16px; }
+.gate-input-group label {
+  font-family: var(--font-m);
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 2px; display: block; margin-bottom: 8px;
+}
+.gate-input-group input {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--white);
+  font-family: var(--font-m);
+  font-size: 14px;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color .2s;
+}
+.gate-input-group input:focus { border-color: var(--teal); }
+
+.btn-enter {
+  width: 100%;
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  border: none; border-radius: 4px;
+  color: #000;
+  font-family: var(--font-h);
+  font-size: 18px; font-weight: 700;
+  padding: 14px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  margin-top: 8px;
+  transition: opacity .2s, transform .1s;
+}
+.btn-enter:hover { opacity: .9; transform: translateY(-1px); }
+.btn-enter:active { transform: translateY(0); }
+
+/* ── MAIN LAYOUT ───────────────────────────────────────────── */
+#main-app { display: none; }
+
+/* ── TAB NAV ───────────────────────────────────────────────── */
+#tab-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky; top: 65px; z-index: 90;
+}
+#tab-nav::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  background: none; border: none;
+  color: var(--muted);
+  font-family: var(--font-h);
+  font-size: 13px; font-weight: 600;
+  padding: 14px 22px;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  letter-spacing: .8px;
+  transition: color .2s, border-color .2s;
+  display: flex; align-items: center; gap: 7px;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active {
+  color: var(--teal);
+  border-bottom-color: var(--teal);
+}
+
+/* ── CONTENT ───────────────────────────────────────────────── */
+.tab-content { display: none; padding: 36px 40px; max-width: 1100px; margin: 0 auto; }
+.tab-content.active { display: block; }
+
+/* ── SECTION HEADINGS ──────────────────────────────────────── */
+.sec-head {
+  font-family: var(--font-h);
+  font-size: 28px; font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 12px;
+}
+.sec-head .accent { color: var(--teal); }
+.sec-sub {
+  font-family: var(--font-m);
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 2px; margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sub-head {
+  font-family: var(--font-h);
+  font-size: 20px; font-weight: 600;
+  color: var(--gold);
+  margin: 28px 0 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sub-head::before {
+  content: '';
+  width: 3px; height: 18px;
+  background: var(--gold);
+  display: inline-block; border-radius: 2px;
+}
+
+/* ── CARDS ─────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 22px 26px;
+  margin-bottom: 20px;
+}
+.card-teal { border-left: 3px solid var(--teal); }
+.card-gold { border-left: 3px solid var(--gold); }
+.card-red { border-left: 3px solid var(--red); }
+.card-green { border-left: 3px solid var(--green); }
+.card-purple { border-left: 3px solid var(--purple); }
+
+.card-title {
+  font-family: var(--font-h);
+  font-size: 16px; font-weight: 700;
+  color: var(--white); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── GRID ──────────────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media(max-width:768px){ .grid-2,.grid-3 { grid-template-columns:1fr; } }
+
+/* ── PILLS ─────────────────────────────────────────────────── */
+.pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pill {
+  font-family: var(--font-m);
+  font-size: 11px;
+  padding: 4px 12px; border-radius: 20px;
+  letter-spacing: .5px;
+}
+.pill-teal { background: rgba(0,201,200,.12); color: var(--teal); border: 1px solid rgba(0,201,200,.3); }
+.pill-gold { background: rgba(232,184,75,.12); color: var(--gold); border: 1px solid rgba(232,184,75,.3); }
+.pill-red  { background: rgba(232,83,75,.12);  color: var(--red);  border: 1px solid rgba(232,83,75,.3); }
+.pill-green{ background: rgba(61,220,132,.12); color: var(--green);border: 1px solid rgba(61,220,132,.3); }
+
+/* ── TABLE ─────────────────────────────────────────────────── */
+.data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13.5px; }
+.data-table th {
+  background: rgba(0,201,200,.12);
+  color: var(--teal);
+  font-family: var(--font-m);
+  font-size: 11px; letter-spacing: 1.5px;
+  text-align: left; padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(30,58,95,.5);
+  color: var(--text);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: rgba(255,255,255,.02); }
+
+/* ── ALERT BOX ─────────────────────────────────────────────── */
+.alert {
+  border-radius: 5px; padding: 14px 18px;
+  margin: 14px 0; display: flex; gap: 12px;
+  font-size: 14px;
+}
+.alert-critical { background: rgba(232,83,75,.1); border: 1px solid rgba(232,83,75,.4); }
+.alert-warn     { background: rgba(232,184,75,.1); border: 1px solid rgba(232,184,75,.4); }
+.alert-info     { background: rgba(0,201,200,.08); border: 1px solid rgba(0,201,200,.3); }
+.alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.alert-text strong { display: block; margin-bottom: 4px; font-family: var(--font-h); font-size: 15px; letter-spacing: .5px; }
+
+/* ── STEP LIST ─────────────────────────────────────────────── */
+.step-list { list-style: none; }
+.step-list li {
+  display: flex; gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(30,58,95,.4);
+}
+.step-list li:last-child { border-bottom: none; }
+.step-num {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  background: var(--teal); color: #000;
+  border-radius: 50%;
+  font-family: var(--font-m);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── MONO BLOCK ────────────────────────────────────────────── */
+.mono-block {
+  background: rgba(0,0,0,.3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px 20px;
+  font-family: var(--font-m);
+  font-size: 12.5px;
+  color: var(--teal);
+  line-height: 1.8;
+  margin: 12px 0;
+}
+
+/* ── APGAR CALCULATOR ──────────────────────────────────────── */
+.apgar-table { width: 100%; border-collapse: collapse; }
+.apgar-table th {
+  background: rgba(0,201,200,.15);
+  color: var(--teal);
+  font-family: var(--font-m); font-size: 10px; letter-spacing: 2px;
+  padding: 10px 12px; text-align: center;
+}
+.apgar-table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  vertical-align: middle;
+}
+.apgar-table td:first-child {
+  font-family: var(--font-h); font-size: 15px; font-weight: 600;
+  color: var(--white); min-width: 160px;
+}
+.apgar-table td:first-child span {
+  display: block; font-size: 11px; color: var(--muted); font-family: var(--font-b); font-weight: 400;
+}
+.apgar-btn-group { display: flex; gap: 6px; justify-content: center; }
+.apgar-btn {
+  width: 40px; height: 36px;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--font-m); font-size: 15px;
+  border-radius: 4px; cursor: pointer;
+  transition: all .15s;
+}
+.apgar-btn.selected {
+  background: var(--teal); border-color: var(--teal);
+  color: #000; font-weight: 700;
+}
+#apgar-score-display {
+  font-family: var(--font-h); font-size: 48px; font-weight: 700;
+  text-align: center; padding: 20px;
+  transition: color .3s;
+}
+#apgar-interp {
+  text-align: center; font-size: 14px;
+  font-family: var(--font-m); letter-spacing: 1px;
+  padding-bottom: 10px;
+}
+
+/* ── ASSESSMENT ─────────────────────────────────────────────── */
+.q-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 22px 26px;
+  margin-bottom: 18px;
+  transition: border-color .2s;
+}
+.q-card.correct { border-color: var(--green); }
+.q-card.incorrect { border-color: var(--red); }
+
+.q-num {
+  font-family: var(--font-m); font-size: 10px;
+  color: var(--muted); letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.q-text {
+  font-size: 15px; font-weight: 600;
+  color: var(--white); margin-bottom: 16px;
+  line-height: 1.5;
+}
+.options { display: flex; flex-direction: column; gap: 8px; }
+.option-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text);
+  font-family: var(--font-b); font-size: 14px;
+  padding: 11px 16px;
+  cursor: pointer; text-align: left;
+  transition: all .15s; display: flex; align-items: center; gap: 10px;
+}
+.option-btn:hover:not(:disabled) { border-color: var(--teal); color: var(--white); }
+.option-btn:disabled { cursor: default; }
+.option-btn.correct-ans { background: rgba(61,220,132,.15); border-color: var(--green); color: var(--green); }
+.option-btn.wrong-ans   { background: rgba(232,83,75,.15);  border-color: var(--red);   color: var(--red); }
+.option-btn .opt-letter {
+  flex-shrink: 0; width: 26px; height: 26px;
+  border: 1px solid var(--border); border-radius: 4px;
+  font-family: var(--font-m); font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted);
+}
+.q-explain {
+  margin-top: 12px; padding: 12px 16px;
+  background: rgba(0,0,0,.25); border-radius: 4px;
+  font-size: 13.5px; line-height: 1.6;
+  display: none; border-left: 3px solid var(--teal);
+  color: var(--text);
+}
+
+/* ── SCORE PANEL ────────────────────────────────────────────── */
+#score-panel {
+  display: none;
+  background: var(--card);
+  border: 2px solid var(--teal);
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+#score-panel h2 { font-family: var(--font-h); font-size: 28px; color: var(--white); margin-bottom: 8px; }
+#score-big {
+  font-family: var(--font-h); font-size: 80px; font-weight: 700;
+  line-height: 1; margin: 16px 0;
+}
+#score-label { font-family: var(--font-m); font-size: 12px; letter-spacing: 3px; color: var(--muted); }
+
+.score-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 24px 0; }
+.score-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
+.score-stat .val { font-family: var(--font-h); font-size: 32px; font-weight: 700; }
+.score-stat .lbl { font-family: var(--font-m); font-size: 10px; color: var(--muted); letter-spacing: 2px; margin-top: 4px; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  color: #000; border: none; border-radius: 5px;
+  font-family: var(--font-h); font-size: 16px; font-weight: 700;
+  padding: 13px 32px; cursor: pointer; letter-spacing: 1px;
+  transition: opacity .2s;
+}
+.btn-primary:hover { opacity: .9; }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--teal); border: 1px solid var(--teal);
+  border-radius: 5px;
+  font-family: var(--font-h); font-size: 15px; font-weight: 600;
+  padding: 12px 28px; cursor: pointer;
+  margin-left: 12px;
+  transition: background .2s;
+}
+.btn-secondary:hover { background: rgba(0,201,200,.08); }
+
+/* ── PROGRESS BAR ───────────────────────────────────────────── */
+#quiz-progress-bar {
+  height: 3px; background: var(--border);
+  border-radius: 2px; margin-bottom: 28px; overflow: hidden;
+}
+#quiz-progress-fill {
+  height: 100%; background: var(--teal);
+  border-radius: 2px; transition: width .3s;
+}
+
+/* ── BEAU-CHOPS GRID ────────────────────────────────────────── */
+.beau-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+@media(max-width:768px){ .beau-grid { grid-template-columns: 1fr; } }
+.beau-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--teal);
+  border-radius: 5px;
+  padding: 16px;
+}
+.beau-letter {
+  font-family: var(--font-h); font-size: 36px; font-weight: 700;
+  color: var(--teal); line-height: 1;
+}
+.beau-word { font-family: var(--font-h); font-size: 14px; color: var(--white); margin: 4px 0; }
+.beau-desc { font-size: 12.5px; color: var(--muted); }
+
+/* ── STAGES OF LABOR ────────────────────────────────────────── */
+.labor-timeline {
+  display: flex; gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px; overflow: hidden;
+  margin: 16px 0;
+}
+.labor-stage {
+  flex: 1; padding: 16px 14px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.labor-stage:last-child { border-right: none; }
+.labor-stage .stage-name {
+  font-family: var(--font-h); font-size: 13px; font-weight: 700;
+  color: var(--white); margin-bottom: 6px;
+}
+.labor-stage .stage-dil {
+  font-family: var(--font-m); font-size: 11px; color: var(--teal);
+  margin-bottom: 6px;
+}
+.labor-stage ul { list-style: none; }
+.labor-stage ul li {
+  font-size: 11.5px; color: var(--muted);
+  padding: 2px 0;
+  padding-left: 10px; position: relative;
+}
+.labor-stage ul li::before { content: '•'; position: absolute; left: 0; color: var(--teal); }
+
+/* ── QUICK-REFERENCE FLOATING ───────────────────────────────── */
+#fhr-badge {
+  display: inline-block;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 14px 20px;
+  font-family: var(--font-m); font-size: 12px;
+  margin: 14px 0;
+}
+#fhr-badge .fhr-row { display: flex; justify-content: space-between; gap: 24px; padding: 4px 0; }
+#fhr-badge .label { color: var(--muted); }
+#fhr-badge .val-n { color: var(--green); }
+#fhr-badge .val-w { color: var(--gold); }
+
+/* animations */
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+.tab-content.active { animation: fadeIn .25s ease; }
+
+/* ── LIGHT MODE COMPONENT OVERRIDES ───────────────────────── */
+/* Header always stays dark-bg, so pin all child text to light values */
+html.light #app-header .header-title h1 { color: #f0ffff; }
+html.light #app-header .header-title p  { color: rgba(200,240,240,.75); }
+html.light #app-header .meta-chip       { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.2); color: #b0f0f0; }
+html.light #app-header #theme-toggle   { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.2); color: #b0f0f0; }
+html.light #app-header #theme-label,
+html.light #app-header #theme-icon     { color: #b0f0f0; }
+html.light #tab-nav { background: #ffffff; border-bottom-color: var(--border); }
+html.light .tab-btn:hover { color: #1a2e3b; }
+html.light .gate-card { box-shadow: 0 20px 60px rgba(0,100,120,.15); }
+html.light .gate-input-group input { color: #1a2e3b; }
+html.light .mono-block { background: #eaf2f7; color: var(--teal); }
+html.light .labor-stage { border-right-color: var(--border); }
+html.light .apgar-btn { background: #eef4f8; border-color: var(--border); color: var(--muted); }
+html.light .apgar-btn.selected { background: var(--teal); color: #fff; border-color: var(--teal); }
+html.light .option-btn { background: #f4f8fb; border-color: var(--border); color: var(--text); }
+html.light .option-btn:hover:not(:disabled) { border-color: var(--teal); color: #1a2e3b; }
+html.light .option-btn.correct-ans { background: rgba(26,127,69,.12); border-color: var(--green); color: var(--green); }
+html.light .option-btn.wrong-ans   { background: rgba(192,57,43,.1);  border-color: var(--red);   color: var(--red); }
+html.light .q-explain { background: rgba(0,0,0,.04); border-left-color: var(--teal); }
+html.light #score-panel { border-color: var(--teal); }
+html.light .beau-card { border-color: var(--border); border-top-color: var(--teal); }
+html.light #fhr-badge { background: #f4f8fb; border-color: var(--border); }
+html.light .data-table th { background: rgba(0,122,122,.1); }
+html.light .data-table td { border-bottom-color: var(--border); }
+html.light .data-table tr:hover td { background: rgba(0,0,0,.02); }
+html.light .score-stat { background: #f0f4f8; border-color: var(--border); }
+html.light .alert-critical { background: rgba(192,57,43,.08); border-color: rgba(192,57,43,.35); }
+html.light .alert-warn     { background: rgba(184,122,0,.08);  border-color: rgba(184,122,0,.35); }
+html.light .alert-info     { background: rgba(0,122,122,.07);  border-color: rgba(0,122,122,.3); }
+html.light #quiz-progress-bar { background: var(--border); }
+
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────────── -->
+<header id="app-header">
+  <div class="header-badge">CAMP EMS</div>
+  <div class="header-title">
+    <h1>Chapter 45 &mdash; Obstetrics</h1>
+    <p>SANDERS' PARAMEDIC TEXTBOOK, 6TH EDITION &nbsp;|&nbsp; PARAMEDIC PROGRAM</p>
+  </div>
+  <div class="header-meta">
+    <button id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+      <span id="theme-icon">☀️</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span id="theme-label">LIGHT</span>
+    </button>
+    <span class="meta-chip" id="student-chip">STUDENT: &mdash;</span>
+    <span class="meta-chip">OB / CH-45</span>
+  </div>
+</header>
+
+<!-- ── STUDENT ID GATE ─────────────────────────────────────────── -->
+<div id="id-gate">
+  <div class="gate-card">
+    <div class="gate-logo">CAMP COMMUNITY COLLEGE &nbsp;|&nbsp; EMS PARAMEDIC PROGRAM</div>
+    <span class="ob-icon">🫀</span>
+    <h2>Obstetrics</h2>
+    <p class="ch-num">CHAPTER 45 &nbsp;|&nbsp; SANDERS' 6TH ED.</p>
+    <div class="gate-input-group">
+      <label>STUDENT FULL NAME</label>
+      <input type="text" id="inp-name" placeholder="First Last" />
+    </div>
+    <div class="gate-input-group">
+      <label>STUDENT ID / LAST 4 SSN</label>
+      <input type="text" id="inp-id" placeholder="e.g. 1234" maxlength="10" />
+    </div>
+    <button class="btn-enter" onclick="enterModule()">ENTER MODULE &rarr;</button>
+  </div>
+</div>
+
+<!-- ── MAIN APP ────────────────────────────────────────────────── -->
+<div id="main-app">
+
+<!-- TAB NAV -->
+<nav id="tab-nav">
+  <button class="tab-btn active" onclick="showTab('overview')">&#9673; Overview</button>
+  <button class="tab-btn" onclick="showTab('anatomy')">&#9673; Anatomy &amp; Physiology</button>
+  <button class="tab-btn" onclick="showTab('complications')">&#9673; Antepartum Complications</button>
+  <button class="tab-btn" onclick="showTab('labor')">&#9673; Labor &amp; Delivery</button>
+  <button class="tab-btn" onclick="showTab('emergencies')">&#9673; Emergencies</button>
+  <button class="tab-btn" onclick="showTab('medications')">&#9673; Medications</button>
+  <button class="tab-btn" onclick="showTab('assessment')">&#9673; Assessment (100 Qs)</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TAB 1: OVERVIEW -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="tab-content active" id="tab-overview">
+  <div class="sec-head"><span class="accent">01</span> Overview &amp; Objectives</div>
+  <div class="sec-sub">NATIONAL EMS EDUCATION STANDARDS &nbsp;|&nbsp; SPECIAL PATIENT POPULATIONS &nbsp;|&nbsp; OBSTETRICS</div>
+
+  <div class="card card-teal">
+    <div class="card-title">Chapter Summary</div>
+    <p>Childbirth is common in the prehospital setting. Most often, paramedics only assist in this natural process. However, obstetric emergencies can develop suddenly and have life-threatening consequences. The paramedic must be prepared to recognize and manage these events and sometimes assist in abnormal deliveries.</p>
+    <div class="alert alert-critical" style="margin-top:14px;">
+      <span class="alert-icon">&#9888;</span>
+      <div class="alert-text"><strong>Two-Patient Rule</strong>Every obstetric patient represents two patients simultaneously &mdash; the mother and the fetus. Assessment and treatment decisions must account for both.</div>
+    </div>
+  </div>
+
+  <div class="sub-head">GTPAL Terminology</div>
+  <div class="mono-block">
+G &mdash; Gravida  &nbsp;&nbsp;&nbsp; Number of times pregnant (including current pregnancy)<br>
+T &mdash; Term      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Deliveries at &ge;37 weeks<br>
+P &mdash; Preterm   &nbsp;&nbsp;&nbsp;&nbsp; Deliveries between 20&ndash;36 weeks<br>
+A &mdash; Abortions &nbsp;&nbsp; Spontaneous or induced terminations before 20 weeks<br>
+L &mdash; Living    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Number of living children<br><br>
+Para &mdash; Number of infants born after 20 weeks' gestation
+  </div>
+
+  <div class="sub-head">Learning Objectives</div>
+  <div class="grid-2">
+    <div>
+      <ul class="step-list">
+        <li><div class="step-num">1</div><div>Describe anatomy &amp; physiology of the reproductive system during pregnancy.</div></li>
+        <li><div class="step-num">2</div><div>Outline fetal development from ovulation through birth.</div></li>
+        <li><div class="step-num">3</div><div>Explain normal maternal physiologic changes during pregnancy.</div></li>
+        <li><div class="step-num">4</div><div>Describe appropriate obstetric patient history gathering.</div></li>
+        <li><div class="step-num">5</div><div>Describe physical assessment techniques for the pregnant patient.</div></li>
+        <li><div class="step-num">6</div><div>Describe general prehospital care of the pregnant patient.</div></li>
+        <li><div class="step-num">7</div><div>Recognize and begin treatment for complications (HG, Rh sensitization, DM, infection).</div></li>
+        <li><div class="step-num">8</div><div>Describe assessment and management of preeclampsia and eclampsia.</div></li>
+        <li><div class="step-num">9</div><div>Explain pathophysiology, signs, and management of vaginal bleeding in pregnancy.</div></li>
+      </ul>
+    </div>
+    <div>
+      <ul class="step-list">
+        <li><div class="step-num">10</div><div>Outline physiologic changes during stages of labor.</div></li>
+        <li><div class="step-num">11</div><div>Describe the role of the paramedic during normal labor and delivery.</div></li>
+        <li><div class="step-num">12</div><div>Compute an Apgar score.</div></li>
+        <li><div class="step-num">13</div><div>Discuss identification and management of complicated deliveries.</div></li>
+        <li><div class="step-num">14</div><div>Describe assessment and management of postpartum hemorrhage.</div></li>
+        <li><div class="step-num">15</div><div>Describe characteristics of postpartum depression.</div></li>
+        <li><div class="step-num">16</div><div>Discuss special implications of trauma in pregnancy.</div></li>
+        <li><div class="step-num">17</div><div>Outline principles of care for a pregnant patient in cardiac arrest.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub-head">Trimesters at a Glance</div>
+  <div class="grid-3">
+    <div class="card card-teal">
+      <div class="card-title">1st Trimester</div>
+      <p style="font-size:13px">Weeks 1&ndash;12. Fertilization, implantation, organogenesis. Morning sickness. Highest risk of spontaneous abortion. Ectopic pregnancy risk greatest in this window.</p>
+    </div>
+    <div class="card card-gold">
+      <div class="card-title">2nd Trimester</div>
+      <p style="font-size:13px">Weeks 13&ndash;26. Fetal growth, uterus rises to umbilicus by week 20. BP drops due to reduced peripheral resistance. Fetal movement begins.</p>
+    </div>
+    <div class="card card-red">
+      <div class="card-title">3rd Trimester</div>
+      <p style="font-size:13px">Weeks 27&ndash;40. Rapid fetal growth, preeclampsia risk rises, cardiac output peaks at +30%. Supine hypotension risk. Term &ge;37 weeks.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TAB 2: ANATOMY & PHYSIOLOGY -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-anatomy">
+  <div class="sec-head"><span class="accent">02</span> Anatomy &amp; Physiology</div>
+  <div class="sec-sub">REPRODUCTIVE ANATOMY &bull; FETAL CIRCULATION &bull; MATERNAL CHANGES</div>
+
+  <div class="sub-head">Specialized Structures of Pregnancy</div>
+  <div class="grid-3">
+    <div class="card card-teal">
+      <div class="card-title">Placenta</div>
+      <p style="font-size:13px">Disklike organ of exchange. Functions: gas transfer, nutrient transport, waste excretion, hormone production, barrier formation. <em>Not a mixing of blood &mdash; diffusion only.</em></p>
+    </div>
+    <div class="card card-teal">
+      <div class="card-title">Amniotic Sac &amp; Fluid</div>
+      <p style="font-size:13px">Completely surrounds embryo. Fluid produced by placenta then fetal urine. Rupture = gross or leaking. May rupture before or during labor.</p>
+    </div>
+    <div class="card card-teal">
+      <div class="card-title">Umbilical Cord</div>
+      <p style="font-size:13px">Contains 2 arteries (deoxygenated blood TO placenta) and 1 vein (oxygenated blood FROM placenta). Remember: <strong style="color:var(--gold)">1 vein = oxygenated</strong>.</p>
+    </div>
+  </div>
+
+  <div class="sub-head">Fetal Circulation Shunts</div>
+  <table class="data-table">
+    <thead><tr><th>Shunt</th><th>Location / Function</th><th>Closes At Birth When...</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Ductus Venosus</strong></td><td>Allows blood from placenta to bypass the immature liver</td><td>Umbilical blood flow ceases; becomes ligamentum venosum</td></tr>
+      <tr><td><strong>Foramen Ovale</strong></td><td>Opening in atrial septum — blood flows R&rarr;L, bypassing lungs</td><td>Left atrial pressure exceeds right (lung expansion)</td></tr>
+      <tr><td><strong>Ductus Arteriosus</strong></td><td>Connects pulmonary artery to aorta, directs blood away from lungs</td><td>Pulmonary vascular resistance drops with lung inflation</td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-info">
+    <span class="alert-icon">ℹ</span>
+    <div class="alert-text"><strong>Analog: Fetal Circulation</strong>Think of fetal shunts as "bypass roads" around construction zones (immature liver, fluid-filled lungs). At birth, the construction is done, the roads close, and normal traffic (blood) takes the proper route.</div>
+  </div>
+
+  <div class="sub-head">Maternal Physiologic Changes</div>
+  <table class="data-table">
+    <thead><tr><th>System</th><th>Change</th><th>Clinical Significance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Cardiovascular</strong></td><td>CO +30% by week 34; HR +15–20 bpm; blood volume +30%; plasma +50%</td><td>Hemodilutional anemia; may mask shock — 30% blood loss before BP drops</td></tr>
+      <tr><td><strong>Blood Pressure</strong></td><td>Drops 10–15 mmHg in 2nd trimester; returns to normal at term</td><td>Baseline lower; supine hypotension from IVC compression</td></tr>
+      <tr><td><strong>Respiratory</strong></td><td>Tidal volume &amp; minute ventilation +30–40%; FRC &minus;25%; O2 consumption +30–60%</td><td>PCO2 drops from 40 to 30 mmHg; physiologic hyperventilation</td></tr>
+      <tr><td><strong>Hematologic</strong></td><td>Plasma volume +50% vs RBC +30% &rarr; dilutional anemia at 28 wks</td><td>Hb may be 10–11 g/dL and still normal; increased coagulation risk</td></tr>
+      <tr><td><strong>Gastrointestinal</strong></td><td>Decreased GI motility; relaxed pyloric sphincter; GERD risk</td><td>Aspiration risk during airway management; delayed gastric emptying</td></tr>
+      <tr><td><strong>Uterus</strong></td><td>70g &rarr; 1000g by term; umbilicus level at 20 wks; xiphoid at term</td><td>Fundal height estimates gestational age (1 cm &asymp; 1 week)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Fetal Heart Rate Assessment</div>
+  <div id="fhr-badge">
+    <div class="fhr-row"><span class="label">Normal FHR:</span> <span class="val-n">120 &ndash; 160 bpm</span></div>
+    <div class="fhr-row"><span class="label">Fetal Tachycardia:</span> <span class="val-w">&gt; 160 bpm</span></div>
+    <div class="fhr-row"><span class="label">Fetal Bradycardia:</span> <span class="val-w">&lt; 110 bpm</span></div>
+    <div class="fhr-row"><span class="label">Duration concerning:</span> <span class="val-w">&gt; 60 seconds above or below normal</span></div>
+    <div class="fhr-row"><span class="label">Doppler placement:</span> <span class="val-n">Below umbilicus, side of fetal back</span></div>
+  </div>
+
+  <div class="sub-head">Causes of Fetal Distress</div>
+  <div class="pill-row">
+    <span class="pill pill-red">Fetal anemia</span>
+    <span class="pill pill-red">Oligohydramnios</span>
+    <span class="pill pill-red">PIH</span>
+    <span class="pill pill-red">Postterm (&ge;42 wks)</span>
+    <span class="pill pill-red">IUGR</span>
+    <span class="pill pill-red">Meconium-stained fluid</span>
+  </div>
+
+  <div class="sub-head">Fundal Height Landmarks</div>
+  <table class="data-table">
+    <thead><tr><th>Weeks Gestation</th><th>Fundal Height Location</th></tr></thead>
+    <tbody>
+      <tr><td>12 wks</td><td>Just above symphysis pubis</td></tr>
+      <tr><td>16&ndash;20 wks</td><td>Between symphysis and umbilicus</td></tr>
+      <tr><td>20 wks</td><td>At the level of the umbilicus</td></tr>
+      <tr><td>Term (40 wks)</td><td>Near the xiphoid process</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TAB 3: ANTEPARTUM COMPLICATIONS -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-complications">
+  <div class="sec-head"><span class="accent">03</span> Antepartum Complications</div>
+  <div class="sec-sub">BLEEDING &bull; HYPERTENSIVE DISORDERS &bull; METABOLIC &bull; INFECTION</div>
+
+  <div class="sub-head">Bleeding Complications</div>
+  <table class="data-table">
+    <thead><tr><th>Condition</th><th>Key Features</th><th>Prehospital Management</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Spontaneous Abortion</strong><br><small>(&lt;20 wks)</small></td>
+        <td>Most frequent cause of vaginal bleeding in pregnancy; 10–26% of pregnancies; most before 10 wks</td>
+        <td>Monitor for hypovolemia; emotional support; transport; save any passed tissue</td>
+      </tr>
+      <tr>
+        <td><strong>Ectopic Pregnancy</strong></td>
+        <td>Implantation outside uterus (usually fallopian tube); 1–2% of pregnancies; #1 cause of 1st-trimester maternal death; Classic triad: <em>abdominal pain + vaginal bleeding + amenorrhea</em></td>
+        <td><strong style="color:var(--red)">Treat for shock. Rapid transport.</strong> May have referred shoulder pain (diaphragmatic irritation from blood)</td>
+      </tr>
+      <tr>
+        <td><strong>Abruptio Placentae</strong></td>
+        <td>Premature separation of normally implanted placenta (&gt;20 wks). Sudden painful vaginal bleeding. Risk factors: HTN, preeclampsia, smoking, trauma, cocaine</td>
+        <td>Prevent shock; oxygen; IV access; rapid transport</td>
+      </tr>
+      <tr>
+        <td><strong>Placenta Previa</strong></td>
+        <td>Placenta covers cervical os. <strong style="color:var(--teal)">Painless bright red bleeding</strong>. Risk: prior C/S, advanced maternal age, cocaine use</td>
+        <td>Prevent shock; NO vaginal exam; oxygen; rapid transport</td>
+      </tr>
+      <tr>
+        <td><strong>Uterine Rupture</strong></td>
+        <td>Sudden abdominal pain in active labor; early shock signs; may/may not have vaginal bleeding; delivery needed &lt;37 min</td>
+        <td>IV access; oxygen; rapid transport &mdash; life-threatening for both</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-critical">
+    <span class="alert-icon">&#9888;</span>
+    <div class="alert-text"><strong>Abruptio vs. Previa Memory Trick</strong><br>
+    <strong>ABruptio = ABdominal pain + bleeding</strong> (painful)<br>
+    <strong>PREvia = PREtty painless bleeding</strong> (no pain; bright red)
+    </div>
+  </div>
+
+  <div class="sub-head">Hypertensive Disorders of Pregnancy</div>
+  <div class="grid-3">
+    <div class="card card-gold">
+      <div class="card-title">Gestational HTN</div>
+      <p style="font-size:13px">BP &ge;140/90 mmHg after 20 wks without proteinuria. Resolves postpartum. May be early sign of preeclampsia.</p>
+    </div>
+    <div class="card card-red">
+      <div class="card-title">Preeclampsia</div>
+      <p style="font-size:13px">Gestational HTN + at least one of: proteinuria, thrombocytopenia, impaired liver/renal function, pulmonary edema, visual/cerebral disturbances. <strong>After 20 wks.</strong></p>
+      <div class="pill-row" style="margin-top:8px">
+        <span class="pill pill-red">Vasospasm</span>
+        <span class="pill pill-red">Endothelial injury</span>
+        <span class="pill pill-red">Clotting cascade</span>
+      </div>
+    </div>
+    <div class="card card-red" style="border-top:2px solid var(--red)">
+      <div class="card-title">Eclampsia</div>
+      <p style="font-size:13px">Preeclampsia + <strong>seizures</strong>. Most common after 28 wks. Can occur up to 4 weeks postpartum (rare after 48 hrs). Most often in first pregnancy.</p>
+    </div>
+  </div>
+
+  <div class="card card-red" style="margin-top:16px">
+    <div class="card-title">Preeclampsia/Eclampsia Management Protocol</div>
+    <ol style="list-style:decimal;padding-left:20px;font-size:14px;line-height:2">
+      <li>Left lateral recumbent position</li>
+      <li>High-concentration oxygen; monitor SpO2</li>
+      <li>IV access &mdash; NS or LR, KVO (max <strong>80 mL/hr</strong>)</li>
+      <li>Anticipate seizures; airway and circulatory support ready</li>
+      <li>Seizure occurs &rarr; <strong style="color:var(--gold)">Magnesium Sulfate 4g (50%) IV over 10&ndash;20 min</strong>, then 1g/hr infusion</li>
+      <li>Seizure persists &rarr; <strong style="color:var(--gold)">Midazolam, Lorazepam, or Diazepam</strong></li>
+      <li>Monitor for respiratory depression and hypotension; rapid transport</li>
+    </ol>
+    <div class="alert alert-warn" style="margin-top:12px">
+      <span class="alert-icon">&#9888;</span>
+      <div class="alert-text"><strong>Mag Toxicity Signs:</strong> Loss of deep tendon reflexes (first), respiratory depression, cardiac arrest. Antidote: Calcium Gluconate.</div>
+    </div>
+  </div>
+
+  <div class="sub-head">Other Antepartum Conditions</div>
+  <table class="data-table">
+    <thead><tr><th>Condition</th><th>Key Points</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Hyperemesis Gravidarum</strong></td><td>Severe nausea/vomiting, weight loss, ketosis, hypokalemia. Begins 2–5 wks post-conception; often resolves by 20 wks. Tx: antiemetics, rehydration, electrolyte replacement.</td></tr>
+      <tr><td><strong>Rh Sensitization</strong></td><td>Rh-negative mother + Rh-positive fetus &rarr; antibody production damages fetal RBCs in subsequent pregnancies. Prevention: RhoGAM at 26–28 wks AND within 72 hrs of delivery if baby is Rh+.</td></tr>
+      <tr><td><strong>Gestational DM</strong></td><td>Insulin deficiency or placental hormone interference. Risks: large baby, difficult delivery, fetal RDS, maternal type 2 DM risk. Manage: glucose monitoring, dietary modification, insulin if needed.</td></tr>
+      <tr><td><strong>TORCH Infections</strong></td><td>Toxoplasmosis, Other, Rubella, CMV, Herpes &mdash; cross placenta; can cause fetal death or serious complications. Prevention via immunization and hygiene.</td></tr>
+      <tr><td><strong>PROM / PPROM</strong></td><td>Rupture of membranes before labor. PPROM = &lt;37 wks (highest risk &lt;34 wks). Infection (chorioamnionitis) risk rises after 24 hrs. Fever + uterine pain = infection. Tx: antibiotics; delivery is definitive.</td></tr>
+      <tr><td><strong>Pulmonary Embolism</strong></td><td>Significant cause of maternal death. Virchow's Triad: venous stasis + hypercoagulability + vessel injury. Classic: sudden dyspnea, chest pain, tachycardia, hemoptysis.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TAB 4: LABOR & DELIVERY -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-labor">
+  <div class="sec-head"><span class="accent">04</span> Labor &amp; Delivery</div>
+  <div class="sec-sub">STAGES OF LABOR &bull; DELIVERY STEPS &bull; NEWBORN ASSESSMENT &bull; APGAR CALCULATOR</div>
+
+  <div class="sub-head">Stages of Labor</div>
+  <div class="labor-timeline">
+    <div class="labor-stage" style="background:rgba(0,201,200,.05)">
+      <div class="stage-name">1st Stage — Early</div>
+      <div class="stage-dil">0–3 cm dilation</div>
+      <ul><li>Contractions q5–20 min, 30–45 sec</li><li>Primipara: 8–20 hrs</li><li>Multipara: 6–8 hrs</li></ul>
+    </div>
+    <div class="labor-stage" style="background:rgba(0,201,200,.08)">
+      <div class="stage-name">1st Stage — Active</div>
+      <div class="stage-dil">4–8 cm dilation</div>
+      <ul><li>Contractions q4–5 min, ~60 sec</li><li>Intense contractions begin</li><li>1–2 hrs duration</li></ul>
+    </div>
+    <div class="labor-stage" style="background:rgba(0,201,200,.12)">
+      <div class="stage-name">1st Stage — Transition</div>
+      <div class="stage-dil">8–10 cm dilation</div>
+      <ul><li>Contractions q2–3 min, 60–90 sec</li><li>Most intense phase</li><li>15–30 min duration</li></ul>
+    </div>
+    <div class="labor-stage" style="background:rgba(232,184,75,.06)">
+      <div class="stage-name">2nd Stage</div>
+      <div class="stage-dil">Full dilation → Birth</div>
+      <ul><li>Fetal head enters birth canal</li><li>Crowning = imminent delivery</li><li>Primipara: 1–2 hrs; Multipara: ~30 min</li></ul>
+    </div>
+    <div class="labor-stage" style="background:rgba(232,184,75,.09)">
+      <div class="stage-name">3rd Stage</div>
+      <div class="stage-dil">Birth → Placenta</div>
+      <ul><li>Placenta delivery</li><li>5–60 min regardless of parity</li><li>Uterus contracts, cord lengthens</li></ul>
+    </div>
+  </div>
+
+  <div class="sub-head">Signs of Imminent Delivery</div>
+  <div class="pill-row">
+    <span class="pill pill-teal">Contractions q1–2 min / 45–60 sec</span>
+    <span class="pill pill-teal">Urge to bear down</span>
+    <span class="pill pill-teal">Large bloody show</span>
+    <span class="pill pill-teal">Crowning</span>
+    <span class="pill pill-teal">Mother says delivery is imminent</span>
+  </div>
+
+  <div class="sub-head">Delivery Assistance Steps</div>
+  <ul class="step-list">
+    <li><div class="step-num">1</div><div><strong>Standard Precautions</strong> &mdash; gloves, mask, eye protection, gown</div></li>
+    <li><div class="step-num">2</div><div><strong>Gentle counterpressure</strong> to fetal head during crowning &mdash; prevent explosive delivery/perineal tearing. If membranes intact, tear sac.</div></li>
+    <li><div class="step-num">3</div><div><strong>Nuchal cord check</strong> &mdash; feel around the fetal neck. If present, gently slip cord over the head.</div></li>
+    <li><div class="step-num">4</div><div><strong>Grasp head</strong> with hands over ears &mdash; support as it rotates for shoulder presentation. Most fetuses present facedown.</div></li>
+    <li><div class="step-num">5</div><div><strong>Guide head downward</strong> to deliver anterior shoulder, then <strong>upward</strong> to release posterior shoulder. Rest of baby follows quickly.</div></li>
+    <li><div class="step-num">6</div><div><strong>Grasp and support newborn</strong> with dry towel. Place on mother's abdomen skin-to-skin.</div></li>
+    <li><div class="step-num">7</div><div><strong>Clear airway</strong> with sterile gauze. Routine suctioning only if obvious obstruction.</div></li>
+    <li><div class="step-num">8</div><div><strong>Dry and warm</strong> the newborn; cover especially the head to reduce heat loss.</div></li>
+    <li><div class="step-num">9</div><div><strong>Record</strong> sex and time of birth.</div></li>
+    <li><div class="step-num">10</div><div><strong>Delayed cord clamping</strong> &mdash; clamp after 1 minute (after drying and assessing, at least 30–60 sec). Clamp 4–6 inches from newborn in 2 places; cut between clamps.</div></li>
+  </ul>
+
+  <div class="alert alert-warn" style="margin-top:16px">
+    <span class="alert-icon">&#9888;</span>
+    <div class="alert-text"><strong>Placenta Delivery:</strong> Do NOT wait for placenta before transport. Usually delivers within 20 minutes. Transport placenta with patient in plastic bag. Initiate fundal massage. Monitor for hemorrhage.</div>
+  </div>
+
+  <!-- ── APGAR CALCULATOR ──────────────────────────────────────── -->
+  <div class="sub-head">Apgar Score Calculator</div>
+  <div class="card" style="overflow-x:auto">
+    <table class="apgar-table" id="apgar-tbl">
+      <thead>
+        <tr>
+          <th style="min-width:160px">CRITERION</th>
+          <th style="min-width:80px">0</th>
+          <th style="min-width:80px">1</th>
+          <th style="min-width:80px">2</th>
+        </tr>
+      </thead>
+      <tbody id="apgar-body"></tbody>
+    </table>
+    <div style="display:flex;align-items:center;justify-content:center;gap:48px;margin-top:8px">
+      <div>
+        <div id="apgar-score-display" style="color:var(--teal)">—</div>
+        <div id="apgar-interp" style="color:var(--muted)">SELECT SCORES ABOVE</div>
+        <div style="text-align:center;margin-top:8px">
+          <button class="btn-primary" onclick="resetApgar()">Reset</button>
+        </div>
+      </div>
+      <div style="font-family:var(--font-m);font-size:12px;line-height:2">
+        <div style="color:var(--green)">7–10 &rarr; Normal / Stable</div>
+        <div style="color:var(--gold)">4–6 &nbsp;&rarr; Moderate distress &mdash; stimulate</div>
+        <div style="color:var(--red)">0–3 &nbsp;&rarr; Severe &mdash; immediate resuscitation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TAB 5: EMERGENCIES -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-emergencies">
+  <div class="sec-head"><span class="accent">05</span> Obstetric Emergencies</div>
+  <div class="sec-sub">COMPLICATED DELIVERIES &bull; POSTPARTUM &bull; TRAUMA &bull; CARDIAC ARREST</div>
+
+  <div class="sub-head">Complicated Deliveries</div>
+  <table class="data-table">
+    <thead><tr><th>Complication</th><th>Recognition</th><th>Prehospital Management</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Shoulder Dystocia</strong></td>
+        <td>Head delivers but shoulders wedged against symphysis pubis; "turtle sign" (head retracts)</td>
+        <td>
+          1. Hips hyperflexed (McRoberts)<br>
+          2. Suprapubic pressure (not fundal)<br>
+          3. Try "all fours" position<br>
+          4. Guide baby's head downward<br>
+          <strong style="color:var(--red)">NEVER apply fundal pressure</strong>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Breech Presentation</strong><br><small>Frank / Complete / Incomplete</small></td>
+        <td>Buttocks or feet presenting; head delivered last</td>
+        <td>
+          If not imminent: DO NOT push; rapid transport; O2<br>
+          If imminent: Support body; allow delivery to umbilicus; then assist<br>
+          Head entrapment: Create V-airway with gloved hand in vagina; flex chin toward chest
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Umbilical Cord Prolapse</strong></td>
+        <td>Cord visible/palpable in vagina before delivery of fetus; fetal asphyxia risk</td>
+        <td>
+          1. Gloved hand in vagina &mdash; elevate presenting part off cord<br>
+          2. Maintain this position during transport<br>
+          3. Trendelenburg or knee-chest position<br>
+          4. Oxygen; moist sterile dressings on cord<br>
+          5. Instruct patient to pant; do not push<br>
+          <strong style="color:var(--red)">Definitive Tx: Cesarean delivery</strong>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Premature Birth</strong><br><small>(&lt;37 wks or &lt;5.5 lb)</small></td>
+        <td>Delivery before 37 weeks; low birth weight</td>
+        <td>Keep warm and dry; suction secretions; humidified free-flow O2 (oxygen tent); monitor cord end; gentle transport</td>
+      </tr>
+      <tr>
+        <td><strong>Multiple Gestation</strong></td>
+        <td>More than one fetus; often smaller newborns</td>
+        <td>First twin: same as single delivery; clamp/cut cord. Second twin: usually delivers within 30–45 min. Extra attention to warmth, oxygenation, contamination prevention.</td>
+      </tr>
+      <tr>
+        <td><strong>Uterine Inversion</strong></td>
+        <td>Uterus turns "inside out" &mdash; associated with excessive cord traction; postpartum hemorrhage + severe lower abdominal pain</td>
+        <td>Supine position; do NOT remove placenta if attached; push fundus upward through cervix with palm pressure; if ineffective, moist sterile dressings, rapid transport</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="sub-head">Postpartum Emergencies</div>
+  <div class="grid-2">
+    <div class="card card-red">
+      <div class="card-title">Postpartum Hemorrhage</div>
+      <p style="font-size:13px;margin-bottom:10px">&gt;500 mL blood loss after delivery. Most within first 24 hrs. Causes: uterine atony (most common), retained placenta, lacerations.</p>
+      <p style="font-size:13px;color:var(--text)"><strong>Management:</strong></p>
+      <ol style="list-style:decimal;padding-left:18px;font-size:13px;line-height:2">
+        <li>Uterine fundal massage until firm</li>
+        <li>Encourage breastfeeding (releases oxytocin)</li>
+        <li>Oxytocin 10 units in 1,000 mL IV at 20–30 mL/min (per protocol)</li>
+        <li>Fluid resuscitation; blood products per direction</li>
+        <li>Consider Tranexamic Acid</li>
+      </ol>
+    </div>
+    <div class="card card-purple">
+      <div class="card-title">Postpartum Depression</div>
+      <p style="font-size:13px;margin-bottom:10px">Affects ~1 in 7 mothers. Symptoms lasting &ge;2 weeks; begins during pregnancy or within 4 weeks of delivery.</p>
+      <p style="font-size:13px"><strong>Signs &amp; Symptoms:</strong></p>
+      <div class="pill-row">
+        <span class="pill pill-teal">Appetite/weight changes</span>
+        <span class="pill pill-teal">Decreased energy</span>
+        <span class="pill pill-teal">Feeling worthless/guilty</span>
+        <span class="pill pill-teal">Difficulty concentrating</span>
+        <span class="pill pill-teal">Recurrent thoughts of death</span>
+      </div>
+      <div class="alert alert-critical" style="margin-top:12px">
+        <span class="alert-icon">&#9888;</span>
+        <div class="alert-text">Thoughts of suicide or harm to infant require immediate intervention and resource connection.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-head">Trauma in Pregnancy</div>
+  <div class="card card-gold">
+    <div class="card-title">Key Considerations</div>
+    <ul style="font-size:13.5px;list-style:none">
+      <li style="padding:4px 0;border-bottom:1px solid var(--border)">&#9657; Priorities SAME as non-pregnant patient &mdash; exsanguinating hemorrhage first</li>
+      <li style="padding:4px 0;border-bottom:1px solid var(--border)">&#9657; <strong>30–35% blood volume loss</strong> produces minimal BP change but <strong>reduces uterine blood flow 10–20%</strong></li>
+      <li style="padding:4px 0;border-bottom:1px solid var(--border)">&#9657; Blood shunted from uterus to preserve maternal BP &mdash; fetus is at risk before mom shows shock signs</li>
+      <li style="padding:4px 0;border-bottom:1px solid var(--border)">&#9657; Avoid vaginal exam (may increase bleeding / trigger delivery)</li>
+      <li style="padding:4px 0;border-bottom:1px solid var(--border)">&#9657; Transport: <strong>left lateral recumbent</strong> (avoid IVC compression) unless spinal injury suspected</li>
+      <li style="padding:4px 0;border-bottom:1px solid var(--border)">&#9657; Spinal precautions: logroll board 10–15&deg; left with towel/pillow under right side</li>
+      <li style="padding:4px 0">&#9657; Fetal heart rate deceleration = decreased cardiac output and hypoxia in fetus</li>
+    </ul>
+  </div>
+
+  <div class="sub-head">Cardiac Arrest in Pregnancy &mdash; BEAU-CHOPS</div>
+  <div class="beau-grid">
+    <div class="beau-card"><div class="beau-letter">B</div><div class="beau-word">Bleeding / DIC</div><div class="beau-desc">Hemorrhage, disseminated intravascular coagulation</div></div>
+    <div class="beau-card"><div class="beau-letter">E</div><div class="beau-word">Embolism</div><div class="beau-desc">Amniotic fluid embolism, pulmonary embolism</div></div>
+    <div class="beau-card"><div class="beau-letter">A</div><div class="beau-word">Anesthetic</div><div class="beau-desc">Anesthetic/drug complications (MgSO4, epidural)</div></div>
+    <div class="beau-card"><div class="beau-letter">U</div><div class="beau-word">Uterine Atony</div><div class="beau-desc">Failure of uterus to contract postpartum</div></div>
+    <div class="beau-card"><div class="beau-letter">C</div><div class="beau-word">Cardiac Disease</div><div class="beau-desc">Pre-existing or gestational cardiac pathology</div></div>
+    <div class="beau-card"><div class="beau-letter">H</div><div class="beau-word">HTN / Eclampsia</div><div class="beau-desc">Hypertension, preeclampsia, eclamptic arrest</div></div>
+    <div class="beau-card"><div class="beau-letter">O</div><div class="beau-word">Other (ACLS)</div><div class="beau-desc">Standard ACLS differentials; 5 Hs and 5 Ts</div></div>
+    <div class="beau-card"><div class="beau-letter">P</div><div class="beau-word">Placenta</div><div class="beau-desc">Placenta previa, abruptio placentae</div></div>
+    <div class="beau-card"><div class="beau-letter">S</div><div class="beau-word">Sepsis</div><div class="beau-desc">Maternal infection progressing to septic shock</div></div>
+  </div>
+
+  <div class="card card-teal" style="margin-top:20px">
+    <div class="card-title">Cardiac Arrest Management in Pregnancy</div>
+    <ul class="step-list">
+      <li><div class="step-num">1</div><div>Initiate high-quality CPR immediately with minimal interruptions</div></li>
+      <li><div class="step-num">2</div><div>Manual uterine displacement to the left &mdash; if it does not compromise compressions</div></li>
+      <li><div class="step-num">3</div><div>Defibrillate shockable rhythms; standard drug doses apply</div></li>
+      <li><div class="step-num">4</div><div>If &ge;20 weeks gestation (or fundal height &ge;2 fingerbreadths above umbilicus): <strong style="color:var(--gold)">rapid transport for perimortem C-section</strong></div></li>
+      <li><div class="step-num">5</div><div>Goal: Perimortem C/S within <strong style="color:var(--red)">5 minutes of loss of pulses</strong> &mdash; saves mother AND fetus by restoring venous return</div></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TAB 6: MEDICATIONS -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-medications">
+  <div class="sec-head"><span class="accent">06</span> OB Medication Reference</div>
+  <div class="sec-sub">PREHOSPITAL PROTOCOLS &bull; INDICATIONS &bull; DOSES &bull; MONITORING</div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Drug</th>
+        <th>Indication</th>
+        <th>Dose &amp; Route</th>
+        <th>Mechanism</th>
+        <th>Monitor For</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Magnesium Sulfate</strong></td>
+        <td>Eclamptic seizure prevention/treatment; preeclampsia management</td>
+        <td><strong>4 g (50% solution) IV over 10–20 min</strong><br>Maintenance: 1–2 g/hr IV infusion</td>
+        <td>CNS depressant; decreases neuromuscular excitability; vasodilation</td>
+        <td>Loss of DTRs (first sign of toxicity), respiratory depression, hypotension. <strong style="color:var(--red)">Antidote: Calcium Gluconate 1g IV</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Midazolam</strong></td>
+        <td>Seizures refractory to MgSO4</td>
+        <td>Per protocol (benzodiazepine; 1–5 mg IV/IM typical)</td>
+        <td>GABA-A receptor agonist; CNS depression</td>
+        <td>Respiratory depression; apnea; hypotension. Have BVM ready.</td>
+      </tr>
+      <tr>
+        <td><strong>Lorazepam / Diazepam</strong></td>
+        <td>Eclamptic seizures refractory to MgSO4</td>
+        <td>Per protocol (lorazepam 2–4 mg IV; diazepam 5–10 mg IV/IM)</td>
+        <td>GABA-A receptor agonist</td>
+        <td>Respiratory depression; somnolence; hypotension</td>
+      </tr>
+      <tr>
+        <td><strong>Oxytocin (Pitocin)</strong></td>
+        <td>Postpartum hemorrhage (uterine atony)</td>
+        <td><strong>10 units in 1,000 mL IV</strong> infuse at 20–30 mL/min (per medical direction)</td>
+        <td>Synthetic hormone; stimulates uterine contractions</td>
+        <td>Hypotension (rapid bolus); water intoxication with prolonged use; uterine hyperstimulation</td>
+      </tr>
+      <tr>
+        <td><strong>Tranexamic Acid (TXA)</strong></td>
+        <td>Postpartum hemorrhage; trauma in pregnancy</td>
+        <td>1 g IV over 10 min (within 3 hrs of hemorrhage for max benefit)</td>
+        <td>Antifibrinolytic; blocks plasminogen &rarr; reduces clot breakdown</td>
+        <td>Thromboembolic risk; nausea; ensure given within time window</td>
+      </tr>
+      <tr>
+        <td><strong>Oxygen</strong></td>
+        <td>Preeclampsia; fetal distress; eclampsia; maternal hypoxia; trauma</td>
+        <td>10–15 L/min via NRB mask; titrate to SpO2 &ge;95%</td>
+        <td>Increases O2 delivery to fetus through placental diffusion gradient</td>
+        <td>SpO2; patient comfort; mask seal</td>
+      </tr>
+      <tr>
+        <td><strong>Normal Saline / LR</strong></td>
+        <td>Preeclampsia (KVO); hypovolemia; volume replacement in trauma</td>
+        <td>KVO in preeclampsia (max 80 mL/hr)<br>Bolus for hypotension in trauma/shock</td>
+        <td>Isotonic crystalloid; expands intravascular volume</td>
+        <td>Pulmonary edema (preeclampsia); fluid overload; watch for worsening hypertension</td>
+      </tr>
+      <tr>
+        <td><strong>Antiemetics</strong><br><small>(e.g., Ondansetron, Promethazine)</small></td>
+        <td>Hyperemesis gravidarum; nausea/vomiting in pregnancy</td>
+        <td>Per protocol (ondansetron 4 mg IV/IM/ODT preferred in pregnancy)</td>
+        <td>5-HT3 antagonist (ondansetron); dopamine antagonist (promethazine)</td>
+        <td>QT prolongation (ondansetron); extrapyramidal effects (promethazine)</td>
+      </tr>
+      <tr>
+        <td><strong>Dextrose (D50/D10)</strong></td>
+        <td>Hypoglycemia in gestational DM</td>
+        <td>D10W or D50W IV per hypoglycemia protocol; check glucose first</td>
+        <td>Direct glucose supplementation</td>
+        <td>Rebound hyperglycemia; IV site infiltration; check BGL repeatedly</td>
+      </tr>
+      <tr>
+        <td><strong>Calcium Gluconate</strong></td>
+        <td>Magnesium sulfate toxicity</td>
+        <td>1 g IV slow push</td>
+        <td>Directly antagonizes Mg2+ at neuromuscular junction</td>
+        <td>Monitor for bradycardia; ensure IV is patent</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-info" style="margin-top:16px">
+    <span class="alert-icon">ℹ</span>
+    <div class="alert-text"><strong>Protocol Note:</strong> All medication administration requires medical direction or standing orders per local/state EMS protocol. Doses listed reflect Sanders' 6th Edition and NREMT-P curriculum guidance — always defer to your operational medical director's standing orders.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- TAB 7: ASSESSMENT -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-assessment">
+  <div class="sec-head"><span class="accent">07</span> Assessment</div>
+  <div class="sec-sub">100 QUESTIONS &bull; NREMT-P STYLE &bull; CHAPTER 45 OBSTETRICS</div>
+
+  <div id="quiz-progress-bar"><div id="quiz-progress-fill" style="width:0%"></div></div>
+  <div id="score-panel">
+    <h2>Assessment Complete</h2>
+    <div id="score-big"></div>
+    <div id="score-label">FINAL SCORE</div>
+    <div class="score-grid">
+      <div class="score-stat"><div class="val" id="stat-correct"></div><div class="lbl">CORRECT</div></div>
+      <div class="score-stat"><div class="val" id="stat-wrong"></div><div class="lbl">INCORRECT</div></div>
+      <div class="score-stat"><div class="val" id="stat-pct"></div><div class="lbl">PERCENTAGE</div></div>
+    </div>
+    <button class="btn-primary" onclick="generatePDF()">Download PDF Certificate</button>
+    <button class="btn-secondary" onclick="resetQuiz()">Retake</button>
+  </div>
+  <div id="quiz-container"></div>
+</div>
+
+</div><!-- /main-app -->
+
+<script>
+// ── THEME TOGGLE ─────────────────────────────────────────────────
+let isLight = false;
+function toggleTheme() {
+  isLight = !isLight;
+  document.documentElement.classList.toggle('light', isLight);
+  document.getElementById('theme-icon').textContent  = isLight ? '🌙' : '☀️';
+  document.getElementById('theme-label').textContent = isLight ? 'DARK' : 'LIGHT';
+  // persist preference
+  try { localStorage.setItem('ch45-theme', isLight ? 'light' : 'dark'); } catch(e){}
+}
+// restore saved preference
+(function(){
+  try {
+    if (localStorage.getItem('ch45-theme') === 'light') {
+      isLight = true;
+      document.documentElement.classList.add('light');
+      document.getElementById('theme-icon').textContent  = '🌙';
+      document.getElementById('theme-label').textContent = 'DARK';
+    }
+  } catch(e){}
+})();
+
+// ── STUDENT GATE ─────────────────────────────────────────────────
+let studentName = '', studentId = '';
+
+function enterModule() {
+  studentName = document.getElementById('inp-name').value.trim();
+  studentId   = document.getElementById('inp-id').value.trim();
+  if (!studentName || !studentId) { alert('Please enter your name and student ID.'); return; }
+  document.getElementById('id-gate').style.display = 'none';
+  document.getElementById('main-app').style.display = 'block';
+  document.getElementById('student-chip').textContent = 'STUDENT: ' + studentName.toUpperCase();
+  buildApgar();
+  buildQuiz();
+}
+
+document.getElementById('inp-id').addEventListener('keydown', e => { if (e.key === 'Enter') enterModule(); });
+
+// ── TAB NAVIGATION ───────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── APGAR CALCULATOR ─────────────────────────────────────────────
+const apgarCriteria = [
+  { name: 'Appearance', sub: 'Skin Color', opts: ['Blue/Pale all over','Blue extremities, pink body','Pink all over'] },
+  { name: 'Pulse', sub: 'Heart Rate', opts: ['Absent','< 100 bpm','≥ 100 bpm'] },
+  { name: 'Grimace', sub: 'Reflex Irritability', opts: ['No response','Grimace only','Cry, cough, or sneeze'] },
+  { name: 'Activity', sub: 'Muscle Tone', opts: ['Limp','Some flexion','Active motion'] },
+  { name: 'Respiration', sub: 'Respiratory Effort', opts: ['Absent','Weak, irregular','Strong cry'] },
+];
+let apgarScores = [null,null,null,null,null];
+
+function buildApgar() {
+  const tbody = document.getElementById('apgar-body');
+  apgarCriteria.forEach((c, ci) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${c.name}<span>${c.sub}</span></td>` +
+      [0,1,2].map(score => `
+        <td>
+          <div class="apgar-btn-group">
+            <button class="apgar-btn" id="ab-${ci}-${score}" onclick="setApgar(${ci},${score})">
+              ${score}
+            </button>
+          </div>
+          <div style="font-size:10px;text-align:center;color:var(--muted);margin-top:3px;line-height:1.3">${c.opts[score]}</div>
+        </td>
+      `).join('');
+    tbody.appendChild(tr);
+  });
+}
+
+function setApgar(ci, score) {
+  apgarScores[ci] = score;
+  [0,1,2].forEach(s => {
+    const b = document.getElementById(`ab-${ci}-${s}`);
+    b.classList.toggle('selected', s === score);
+  });
+  updateApgar();
+}
+
+function updateApgar() {
+  const filled = apgarScores.filter(s => s !== null);
+  if (filled.length < 5) {
+    document.getElementById('apgar-score-display').textContent = '—';
+    document.getElementById('apgar-interp').textContent = 'SELECT ALL CRITERIA';
+    document.getElementById('apgar-score-display').style.color = 'var(--teal)';
+    return;
+  }
+  const total = apgarScores.reduce((a,b) => a+b, 0);
+  const disp  = document.getElementById('apgar-score-display');
+  const interp = document.getElementById('apgar-interp');
+  disp.textContent = total;
+  if (total >= 7)      { disp.style.color='var(--green)'; interp.style.color='var(--green)'; interp.textContent='NORMAL — STABLE NEWBORN'; }
+  else if (total >= 4) { disp.style.color='var(--gold)';  interp.style.color='var(--gold)';  interp.textContent='MODERATE DISTRESS — STIMULATE'; }
+  else                 { disp.style.color='var(--red)';   interp.style.color='var(--red)';   interp.textContent='SEVERE — IMMEDIATE RESUSCITATION'; }
+}
+
+function resetApgar() {
+  apgarScores = [null,null,null,null,null];
+  document.querySelectorAll('.apgar-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('apgar-score-display').textContent = '—';
+  document.getElementById('apgar-score-display').style.color = 'var(--teal)';
+  document.getElementById('apgar-interp').textContent = 'SELECT SCORES ABOVE';
+  document.getElementById('apgar-interp').style.color = 'var(--muted)';
+}
+
+// ── QUESTIONS ────────────────────────────────────────────────────
+const questions = [
+  // Anatomy & Physiology (1-20)
+  {q:"Which umbilical vessel carries oxygenated blood from the placenta to the fetus?",opts:["Umbilical artery","Umbilical vein","Ductus venosus","Ductus arteriosus"],ans:1,exp:"The umbilical vein carries oxygenated blood FROM the placenta TO the fetus. The two umbilical arteries carry deoxygenated blood back to the placenta. Remember: 1 vein = oxygenated."},
+  {q:"The ductus arteriosus connects which two structures in fetal circulation?",opts:["Right atrium to left atrium","Pulmonary artery to aorta","Umbilical vein to inferior vena cava","Hepatic portal vein to liver"],ans:1,exp:"The ductus arteriosus connects the pulmonary artery to the aorta, directing blood away from the fluid-filled, non-functioning fetal lungs."},
+  {q:"At how many weeks gestation does the fundal height reach the level of the umbilicus?",opts:["12 weeks","16 weeks","20 weeks","28 weeks"],ans:2,exp:"At 20 weeks gestation, the top of the uterus (fundus) reaches the level of the umbilicus. This landmark helps estimate gestational age (1 cm ≈ 1 week after 20 weeks)."},
+  {q:"By how much does cardiac output increase by the 34th week of pregnancy?",opts:["10%","20%","30%","50%"],ans:2,exp:"Cardiac output increases by approximately 30% by the 34th week of pregnancy, largely due to increased stroke volume and heart rate."},
+  {q:"Which fetal shunt allows blood to bypass the immature liver?",opts:["Ductus arteriosus","Foramen ovale","Ductus venosus","Patent ductus"],ans:2,exp:"The ductus venosus allows most blood returning from the placenta via the umbilical vein to bypass the immature fetal liver and enter the inferior vena cava directly."},
+  {q:"What is the normal fetal heart rate range?",opts:["80-100 bpm","100-120 bpm","120-160 bpm","160-200 bpm"],ans:2,exp:"Normal fetal heart rate is 120–160 bpm. Below 110 bpm is bradycardia; above 160 bpm is tachycardia. Either lasting more than 60 seconds may indicate fetal distress."},
+  {q:"Maternal blood volume increases by what percentage during pregnancy?",opts:["10%","20%","30%","50%"],ans:2,exp:"Total blood volume increases by approximately 30%, while plasma volume increases by 50%. This creates a hemodilutional (physiologic) anemia beginning around 28 weeks."},
+  {q:"A pregnant patient's PCO2 normally decreases from 40 mmHg to approximately:",opts:["20 mmHg","30 mmHg","35 mmHg","45 mmHg"],ans:1,exp:"PCO2 normally decreases from 40 to 30 mmHg during pregnancy due to increased respiratory rate. This creates a gradient for fetal carbon dioxide diffusion from fetus to mother."},
+  {q:"What does 'G' stand for in GTPAL terminology?",opts:["Gestation age","Gravida (times pregnant)","Group B Strep status","Gestational week"],ans:1,exp:"G = Gravida, which is the total number of times a person has been pregnant, including the current pregnancy, regardless of outcome."},
+  {q:"Which position can compress the inferior vena cava in a pregnant patient, reducing venous return?",opts:["Left lateral recumbent","Trendelenburg","Supine","Semi-Fowler's"],ans:2,exp:"The supine position in pregnancy causes the enlarged uterus to compress the inferior vena cava, reducing venous return to the heart and decreasing cardiac output (supine hypotensive syndrome)."},
+  {q:"Functional residual capacity (FRC) decreases by approximately how much during pregnancy?",opts:["10%","15%","25%","40%"],ans:2,exp:"Functional residual capacity decreases by approximately 25% during pregnancy due to elevation of the diaphragm by the expanding uterus, reducing the reserve of oxygenated air in the lungs."},
+  {q:"The Foramen Ovale allows fetal blood to bypass which organ?",opts:["Liver","Kidneys","Lungs","Intestines"],ans:2,exp:"The Foramen Ovale is an opening between the right and left atria that allows blood to bypass the lungs (which are filled with fluid and non-functional in the fetus)."},
+  {q:"Maternal oxygen consumption increases during pregnancy by approximately:",opts:["10-20%","30-60%","70-80%","100%"],ans:1,exp:"Oxygen consumption increases by 30–60% during pregnancy to support the fetus, placenta, and increased maternal metabolism and cardiac workload."},
+  {q:"At approximately what week of gestation does hemodilutional anemia typically begin?",opts:["8 weeks","12 weeks","20 weeks","28 weeks"],ans:3,exp:"Hemodilutional anemia typically begins around 28 weeks when plasma volume expansion (50%) exceeds red blood cell mass increase (30%), resulting in a relative decrease in hemoglobin concentration."},
+  {q:"The amniotic fluid is produced primarily by which structure early in pregnancy?",opts:["Fetal kidneys","Placenta","Corpus luteum","Decidua"],ans:1,exp:"Amniotic fluid is produced primarily by the placenta early in pregnancy. Later in pregnancy, fetal urine becomes the primary source of amniotic fluid production."},
+  {q:"What is the average gestational period from fertilization to delivery?",opts:["36 weeks","38 weeks","40 weeks","42 weeks"],ans:2,exp:"The gestational period averages 40 weeks from the time of fertilization to delivery. Term gestation is defined as 37–42 weeks; before 37 weeks is preterm."},
+  {q:"What does the MEOWS tool help predict in obstetric patients?",opts:["Fetal gender","Labor complications","Maternal complications (infection, blood loss, emboli)","Gestational age"],ans:2,exp:"The Modified Early Obstetric Warning System (MEOWS) helps predict complications such as infection, blood loss, emboli, and myocardial infarction in patients from 20 weeks pregnant to 6 weeks postpartum."},
+  {q:"During pregnancy, the respiratory rate may increase due to:",opts:["Increased blood viscosity","Elevated diaphragm from enlarged uterus","Decreased tidal volume","Pulmonary edema"],ans:1,exp:"The enlarged uterus elevates the diaphragm, potentially increasing the respiratory rate. Tidal volume and minute ventilation actually increase by 30–40%, not decrease."},
+  {q:"Fertilization of the ovum normally occurs in which anatomical location?",opts:["Uterine cavity","Ovary","Fallopian tube","Cervix"],ans:2,exp:"Fertilization normally occurs in the fallopian tube when a sperm penetrates the mature ovum. The fertilized egg (zygote) then travels down the tube and implants in the uterus."},
+  {q:"Which term describes the developing ovum from fertilization through the first 8 weeks?",opts:["Fetus","Blastocyst","Embryo","Morula"],ans:2,exp:"The developing ovum is called an embryo during the first 8 weeks of pregnancy. After 8 weeks until birth, it is called a fetus."},
+
+  // Antepartum Complications (21-45)
+  {q:"A 26-year-old G1P0 at 36 weeks presents with BP 168/112, headache, and visual disturbances. This is most consistent with:",opts:["Gestational hypertension","Preeclampsia","Hyperemesis gravidarum","Placenta previa"],ans:1,exp:"Preeclampsia is gestational hypertension after 20 weeks with at least one additional feature. Severe preeclampsia is characterized by BP >160/110 with symptoms such as headache and visual disturbances."},
+  {q:"A pregnant patient presents with sudden severe abdominal pain and vaginal bleeding. The uterus is rigid and tender. This presentation is MOST consistent with:",opts:["Placenta previa","Abruptio placentae","Uterine rupture","Ectopic pregnancy"],ans:1,exp:"Abruptio placentae (premature placental separation) presents with sudden painful vaginal bleeding and a rigid, tender uterus. Placenta previa is painless; uterine rupture is rarer and typically in active labor."},
+  {q:"Placenta previa characteristically presents with:",opts:["Painful vaginal bleeding and uterine rigidity","Painless bright red vaginal bleeding","Sudden severe lower abdominal pain and shock","Vaginal bleeding with shoulder tip pain"],ans:1,exp:"Placenta previa is characterized by painless, bright red vaginal bleeding. The placenta covers the cervical os, and as the cervix dilates, the placenta tears. There is no pain because the placenta has no pain fibers."},
+  {q:"The FIRST dose of magnesium sulfate for eclamptic seizure management is:",opts:["1 g IV over 20 minutes","2 g (50%) IV push","4 g (50%) IV over 10-20 minutes","6 g IM"],ans:2,exp:"The first dose is 4 grams of a 50% magnesium sulfate solution administered IV over 10–20 minutes. The maintenance dose is 1–2 g/hr IV infusion."},
+  {q:"Classic triad of symptoms for ectopic pregnancy includes:",opts:["Nausea, vomiting, and hypertension","Abdominal pain, vaginal bleeding, and amenorrhea","Fever, uterine pain, and discharge","Headache, visual changes, and edema"],ans:1,exp:"The classic ectopic pregnancy triad is abdominal pain + vaginal bleeding + amenorrhea. Additionally, referred shoulder pain may occur from diaphragmatic irritation by intraabdominal blood."},
+  {q:"Hyperemesis gravidarum is characterized by all of the following EXCEPT:",opts:["Severe nausea and vomiting","Hypokalemia","Weight loss","Hypertension"],ans:3,exp:"Hyperemesis gravidarum involves severe nausea, vomiting, weight loss, ketosis, and electrolyte disturbances (especially hypokalemia). Hypertension is NOT a feature — that would suggest preeclampsia."},
+  {q:"Rh sensitization becomes clinically dangerous beginning with which pregnancy?",opts:["First pregnancy","Second or subsequent pregnancies","Third or later pregnancies","It is dangerous in all pregnancies equally"],ans:1,exp:"Rh sensitization typically does not cause problems in the first pregnancy because fetal blood exposure usually occurs at delivery. However, in subsequent pregnancies, maternal antibodies can destroy fetal RBCs."},
+  {q:"Rh immune globulin (RhoGAM) is typically administered at:",opts:["12-16 weeks and 36-40 weeks","20-24 weeks only","26-28 weeks and within 72 hours of delivery","After every delivery regardless of Rh status"],ans:2,exp:"RhoGAM is given at 26–28 weeks gestation AND within 72 hours of delivery if the baby is Rh-positive, to prevent sensitization of the Rh-negative mother."},
+  {q:"Which infection is part of the TORCH acronym and is transmitted through cat feces and undercooked meat?",opts:["Rubella","Cytomegalovirus","Toxoplasmosis","Herpes simplex"],ans:2,exp:"Toxoplasmosis (T in TORCH) is caused by the parasite Toxoplasma gondii, transmitted through cat feces and undercooked meat. It can cross the placenta and cause serious fetal complications."},
+  {q:"Premature Rupture of Membranes (PROM) carries the highest fetal risk when it occurs before:",opts:["20 weeks","28 weeks","34 weeks","37 weeks"],ans:2,exp:"PPROM (preterm PROM) carries the highest fetal risk when it occurs before 34 weeks of gestation. The primary risks are infection (chorioamnionitis), cord prolapse, and prematurity complications."},
+  {q:"The maximum IV fluid infusion rate for a patient with severe preeclampsia is:",opts:["20 mL/hr","40 mL/hr","80 mL/hr","125 mL/hr"],ans:2,exp:"The maximum fluid infusion rate for severe preeclampsia is 80 mL/hr. These patients are at risk for pulmonary edema due to increased capillary permeability, so aggressive fluid administration is dangerous."},
+  {q:"A classic complication of preeclampsia involving hemolytic anemia, elevated liver enzymes, and low platelets is called:",opts:["DIC syndrome","TORCH syndrome","HELLP syndrome","Hyperemesis syndrome"],ans:2,exp:"HELLP syndrome (Hemolysis, Elevated Liver enzymes, Low Platelets) is a severe complication of preeclampsia that represents end-organ damage and is life-threatening to both mother and fetus."},
+  {q:"The most frequent cause of vaginal bleeding in pregnant patients is:",opts:["Ectopic pregnancy","Spontaneous abortion","Placenta previa","Abruptio placentae"],ans:1,exp:"Spontaneous abortion (miscarriage) is the most frequent cause of vaginal bleeding in pregnant patients, occurring in 10–26% of all clinically recognized pregnancies, most in the first trimester."},
+  {q:"Eclampsia is BEST defined as:",opts:["Hypertension with proteinuria after 20 weeks","Seizures in a patient with other signs of preeclampsia","Any seizure occurring during pregnancy","Severe headache and visual disturbances in pregnancy"],ans:1,exp:"Eclampsia is specifically defined as the occurrence of seizures in a patient who has other signs and symptoms of preeclampsia. It is not simply any seizure during pregnancy."},
+  {q:"Which of the following is a risk factor for abruptio placentae?",opts:["Previous cesarean section","Placenta previa","Cocaine use","Advanced maternal age"],ans:2,exp:"Risk factors for abruptio placentae include hypertension, preeclampsia, smoking, cocaine use, trauma, multiple pregnancies, and previous abruption. Cocaine causes intense vasoconstriction that can shear the placenta."},
+  {q:"Gestational diabetes mellitus most commonly results from:",opts:["Viral infection during pregnancy","Insulin deficiency or placental hormones blocking insulin action","Excessive carbohydrate intake","Autoimmune destruction of beta cells"],ans:1,exp:"GDM results from either relative insulin deficiency or placental hormones that block insulin action, creating insulin resistance. Most patients with GDM have healthy pregnancies with proper management."},
+  {q:"In managing a patient with spontaneous abortion, which is the HIGHEST priority?",opts:["Emotional support","Monitoring for significant blood loss and hypovolemia","Administering oxytocin","Performing a vaginal examination"],ans:1,exp:"While emotional support is important, the highest clinical priority is monitoring for significant blood loss and hypovolemia. Spontaneous abortion can result in significant hemorrhage requiring aggressive management."},
+  {q:"Which condition is described as an 'ectopic pregnancy' that is the leading cause of first-trimester maternal death?",opts:["Spontaneous abortion","Ectopic pregnancy (implantation outside uterus)","Abruptio placentae","Uterine rupture"],ans:1,exp:"Ectopic pregnancy (implantation outside the uterus, most commonly in the fallopian tube) occurs in 1–2% of pregnancies and accounts for more than 6% of all maternal deaths, making it the leading cause of first-trimester maternal death."},
+  {q:"The sign of magnesium sulfate toxicity that appears FIRST is:",opts:["Apnea","Cardiac arrest","Loss of deep tendon reflexes","Respiratory depression"],ans:2,exp:"Loss of deep tendon reflexes (DTRs) is the FIRST sign of magnesium toxicity. Monitor DTRs during MgSO4 infusion. Respiratory depression follows, and cardiac arrest occurs with very high levels."},
+  {q:"Pulmonary embolism in pregnancy is associated with Virchow's Triad, which includes all of the following EXCEPT:",opts:["Venous stasis","Hypercoagulability","Vessel injury","Thrombocytopenia"],ans:3,exp:"Virchow's Triad consists of venous stasis, hypercoagulability, and blood vessel injury. Thrombocytopenia (low platelets) is associated with HELLP syndrome and severe preeclampsia, not directly with PE formation."},
+
+  // Labor & Delivery (46-70)
+  {q:"During the SECOND stage of labor, the cervix is dilated to:",opts:["0-3 cm","4-8 cm","Fully dilated (10 cm) through delivery","After placenta delivery"],ans:2,exp:"The second stage of labor extends from full cervical dilation (10 cm) to delivery of the newborn. It lasts approximately 1–2 hours in a primipara and about 30 minutes in a multipara."},
+  {q:"Crowning of the fetal head indicates:",opts:["Early active labor","The beginning of transition","Imminent delivery","Third stage of labor"],ans:2,exp:"Crowning occurs when the presenting part of the fetus is visible at the vaginal opening and does not slip back between contractions. It indicates imminent delivery in the second stage of labor."},
+  {q:"During delivery, after the head is born, the NEXT action is to:",opts:["Clamp the umbilical cord immediately","Check the neck for a nuchal (looped) cord","Apply gentle fundal pressure","Administer oxytocin"],ans:1,exp:"Immediately after the head delivers, examine the fetal neck for a nuchal cord (cord wrapped around the neck). If present, gently slip it over the head. This prevents cord compression as the body delivers."},
+  {q:"Delayed cord clamping should occur at minimum:",opts:["Immediately after delivery","15-20 seconds after delivery","30-60 seconds after delivery, after drying and assessment","5 minutes after delivery"],ans:2,exp:"Current guidelines recommend delayed cord clamping for at least 30–60 seconds (after drying and assessment) in term and preterm newborns not requiring resuscitation, to allow placental blood transfusion."},
+  {q:"An Apgar score of LESS THAN 6 at one minute indicates:",opts:["Normal newborn; no intervention needed","Moderate distress requiring stimulation","Generally requires resuscitation","Immediate transport only"],ans:2,exp:"An Apgar score less than 6 (some sources say less than 7) generally indicates a newborn who will require resuscitation. Scores are assigned at 1 minute and 5 minutes to guide clinical response."},
+  {q:"A newborn with a PINK body but BLUE hands and feet and a heart rate of 102 would receive an Apgar score of:",opts:["4","5","6","7"],ans:3,exp:"Appearance=1 (blue extremities), Pulse=2 (≥100 bpm), Grimace requires testing, Activity requires observation, Respirations require observation. For this scenario with the given two criteria: Appearance=1, Pulse=2 totals 3 for those two — but with Grimace=1 (minimal), Activity=1 (some flexion), Respiration=2 (strong cry) = total 7."},
+  {q:"The THIRD stage of labor encompasses:",opts:["Full dilation to delivery of the newborn","Delivery of the newborn to placental expulsion","Active labor to transition","Onset of contractions to full dilation"],ans:1,exp:"The third stage of labor begins with delivery of the newborn and ends when the placenta is expelled and the uterus contracts. It lasts 5–60 minutes regardless of parity."},
+  {q:"Which of the following is NOT a sign of imminent delivery?",opts:["Regular contractions every 1-2 minutes","Crowning visible","Urge to bear down","Rupture of membranes without contractions"],ans:3,exp:"Signs of imminent delivery include regular contractions q1-2 min lasting 45-60 seconds, urge to bear down, large bloody show, crowning, and the mother stating delivery is imminent. Ruptured membranes alone without contractions do not indicate imminent delivery."},
+  {q:"During delivery, the provider should apply gentle counterpressure to the fetal head to:",opts:["Speed up delivery","Prevent explosive delivery and perineal tearing","Assess position of the fetus","Check for a nuchal cord"],ans:1,exp:"Gentle palm counterpressure to the fetal head during crowning prevents explosive delivery, which could cause perineal tearing in the mother and rapid decompression injury to the fetal head."},
+  {q:"When should you NOT attempt to deliver a breech presentation in the field?",opts:["When the fetus is visible at the vaginal opening","When the patient has an urge to push","When legs/buttocks are visible but fetus is not","When the patient is on her back"],ans:2,exp:"If a breech is reported but only leg/buttocks are visible (not the full buttocks), you should tell the patient NOT to push, begin rapid transport, call for assistance, and administer oxygen. Delay delivery if at all possible."},
+  {q:"Apgar scoring assesses which five criteria?",opts:["Appearance, Pulse, Grimace, Activity, Respiration","Airway, Position, Grimace, Activity, Reflexes","Appearance, Pulse, Grasp, Alertness, Rate","Airway, Pulse, Grimace, Alertness, Respiratory rate"],ans:0,exp:"Apgar stands for: Appearance (skin color), Pulse (heart rate), Grimace (reflex irritability), Activity (muscle tone), and Respiration (respiratory effort). Each is scored 0–2 for a maximum of 10."},
+  {q:"The recommended position for pushing during prehospital delivery is:",opts:["On her side in left lateral recumbent position","On her back with knees flexed and widely separated","In the knee-chest position","Standing upright"],ans:1,exp:"The standard position for delivery is supine with knees flexed and widely separated (or another position preferred by the patient). The provider should coach pushing during contractions and resting between them."},
+  {q:"After delivery, if the mother has not yet delivered the placenta, you should:",opts:["Wait at scene until the placenta delivers","Perform gentle cord traction","Begin transport; do NOT wait for placenta delivery","Administer ergotamine to speed delivery"],ans:2,exp:"Do NOT wait for placenta delivery before beginning transport. Transport should begin after the newborn is delivered. The placenta usually delivers within 20 minutes, but definitive care does not require it prehospitally."},
+  {q:"During transition phase of the first stage of labor, contractions occur approximately every:",opts:["5-20 minutes","4-5 minutes","2-3 minutes","Every 1 minute"],ans:2,exp:"During the transition phase (8–10 cm dilation), contractions occur every 2–3 minutes and last 60–90 seconds. This is the most intense phase of labor and typically lasts only 15–30 minutes."},
+  {q:"The 'show' associated with labor refers to:",opts:["Visible crowning of the fetal head","Rupture of the amniotic membranes","Expulsion of the mucus plug from the dilating cervix","Placental delivery"],ans:2,exp:"'Show' or 'bloody show' refers to the expulsion of the mucus plug from the dilating cervix, which is discharged from the vagina. It is a sign that cervical dilation is occurring."},
+
+  // Complicated Deliveries & Emergencies (71-85)
+  {q:"Shoulder dystocia is best identified by:",opts:["Failure of the baby to rotate after head delivery","The baby's head emerging but shoulders failing to deliver despite pushing","Breech presentation at delivery","Abnormal fetal heart tones during pushing"],ans:1,exp:"Shoulder dystocia occurs when the fetal head delivers but the shoulders become wedged against the maternal symphysis pubis, preventing shoulder delivery. The 'turtle sign' (head retracts after delivery) is classic."},
+  {q:"The MCROBERTS maneuver for shoulder dystocia involves:",opts:["Applying suprapubic pressure only","Hyperflexion of the patient's hips to widen the pelvis","Placing the patient in knee-chest position","Rotating the baby's head clockwise"],ans:1,exp:"The McRoberts maneuver involves hyperflexing the patient's hips (bringing knees to chest), which flattens the lumbar lordosis and increases the functional diameter of the pelvis, helping dislodge the impacted shoulder."},
+  {q:"You should NEVER apply which type of pressure during shoulder dystocia management?",opts:["Suprapubic pressure","Lateral pressure","Fundal pressure","Hip pressure"],ans:2,exp:"Fundal pressure (pushing down on the top of the uterus) is contraindicated in shoulder dystocia because it drives the shoulder further into the pelvic outlet, worsening the impaction."},
+  {q:"A prolapsed umbilical cord requires IMMEDIATE intervention because:",opts:["It causes the mother severe pain","Cord compression between the presenting part and birth canal causes fetal asphyxia","It prevents the placenta from delivering","It causes maternal hemorrhage"],ans:1,exp:"When the cord prolapses ahead of the presenting part, the weight of the fetus compresses the cord against the birth canal, cutting off fetal circulation. Fetal asphyxia can ensue rapidly if unrelieved."},
+  {q:"The definitive treatment for umbilical cord prolapse is:",opts:["Manual cord replacement","Oxytocin administration","Immediate cesarean delivery","Placing patient in Trendelenburg and waiting"],ans:2,exp:"The definitive treatment for cord prolapse is cesarean delivery. Prehospital management (elevating the presenting part) is a temporizing measure to relieve cord compression during transport."},
+  {q:"For cord prolapse during transport, the provider's gloved hand should:",opts:["Reposition the cord back inside the uterus","Remain in the vagina elevating the presenting part off the cord","Apply direct pressure to the cord","Hold the fetal presenting part outside the vagina"],ans:1,exp:"The gloved hand must remain in the vagina to maintain elevation of the presenting part off the cord throughout transport. Do NOT attempt to reposition the cord. Assess cord pulsation without applying additional pressure."},
+  {q:"Postpartum hemorrhage is defined as blood loss greater than how much after delivery?",opts:["200 mL","350 mL","500 mL","750 mL"],ans:2,exp:"Postpartum hemorrhage is classically defined as blood loss greater than 500 mL after vaginal delivery. Primary hemorrhage occurs within the first 24 hours. Uterine atony (failure to contract) is the most common cause."},
+  {q:"The MOST common cause of postpartum hemorrhage is:",opts:["Retained placenta","Cervical lacerations","Uterine atony","Uterine inversion"],ans:2,exp:"Uterine atony (lack of uterine tone/failure of the uterine muscle to contract effectively) is the most common cause of postpartum hemorrhage. Fundal massage and oxytocin are first-line treatments."},
+  {q:"A preterm newborn born at 34 weeks should receive oxygen via:",opts:["Tight-fitting mask at 15 L/min","Humidified free-flow oxygen via oxygen tent","Positive pressure ventilation immediately","Nasal cannula at 4 L/min"],ans:1,exp:"Preterm newborns should receive humidified free-flow oxygen through a makeshift oxygen tent, aimed at the top of the tent. This prevents drying of airways and provides a warm, oxygenated environment without the risks of direct high-flow oxygen."},
+  {q:"A pregnant patient presents with an 'inside-out' uterus visible at the vaginal opening after delivery. This is called:",opts:["Uterine rupture","Uterine prolapse","Uterine inversion","Uterine atony"],ans:2,exp:"Uterine inversion occurs when the uterus turns inside out. It is associated with excessive cord traction and fundal massage. It presents with postpartum hemorrhage and severe lower abdominal pain. Management: push fundus upward through cervix."},
+  {q:"During a breech delivery, you should NOT assist until:",opts:["The head is visible","The entire body has delivered","The fetal umbilicus is visible","The baby starts crying"],ans:2,exp:"During breech delivery, do not assist with delivery until the fetal umbilicus is visible. This ensures adequate descent has occurred before intervention, reducing the risk of head entrapment and cord compression."},
+  {q:"Postpartum depression affects approximately what proportion of new mothers?",opts:["1 in 20 (5%)","1 in 7 (~14%)","1 in 3 (33%)","1 in 100 (1%)"],ans:1,exp:"Postpartum depression affects approximately 1 in 7 (about 14%) of new mothers. Symptoms include changes in appetite, energy, concentration, feelings of worthlessness, and recurrent thoughts of death."},
+  {q:"Amniotic fluid embolism most closely resembles which other condition in its clinical presentation?",opts:["Abruptio placentae","Uterine inversion","Pulmonary embolism","Postpartum hemorrhage"],ans:2,exp:"Amniotic fluid embolism presents with the same signs and symptoms as pulmonary embolism: sudden dyspnea, chest pain, tachycardia, tachypnea, crackles, hemoptysis, and hypotension."},
+  {q:"Following a multiple gestation (twin) delivery, the second twin usually delivers within:",opts:["5-10 minutes","30-45 minutes","1-2 hours","Immediately after the first"],ans:1,exp:"The second twin usually delivers within 30–45 minutes of the first, with contractions resuming about 5–10 minutes after the first birth. Clamp and cut the cord of the first newborn immediately after delivery."},
+  {q:"Postpartum infection signs include all of the following EXCEPT:",opts:["Foul-smelling vaginal discharge","Fever and chills","Uterine pain","Painless vaginal bleeding"],ans:3,exp:"Postpartum infection signs include fever, chills, tachycardia, abdominal pain, foul-smelling discharge, and potentially hypotension from septic shock. Painless vaginal bleeding suggests placenta previa — an antepartum condition, not infection."},
+
+  // Trauma & Cardiac Arrest (86-100)
+  {q:"The BEAU-CHOPS mnemonic helps recall the causes of cardiac arrest in pregnancy. What does 'E' stand for?",opts:["Eclampsia","Embolism","Epidural anesthesia","Endocarditis"],ans:1,exp:"In BEAU-CHOPS, E stands for Embolism — specifically amniotic fluid embolism and pulmonary embolism, which are significant causes of maternal cardiac arrest."},
+  {q:"For perimortem cesarean delivery to be beneficial, it should be performed within how many minutes of loss of maternal pulses?",opts:["2 minutes","5 minutes","10 minutes","15 minutes"],ans:1,exp:"Perimortem cesarean section (PMCS) should be performed within 5 minutes of loss of maternal pulses. This improves both maternal and fetal survival by relieving aortocaval compression and improving venous return."},
+  {q:"In pregnancy, approximately what percentage of blood volume can be lost before significant blood pressure changes occur?",opts:["10-15%","20-25%","30-35%","40-45%"],ans:2,exp:"A 30–35% reduction in blood volume can produce minimal changes in blood pressure due to normal increased maternal blood volume in pregnancy, but this same loss reduces uterine blood flow by 10–20%."},
+  {q:"When managing cardiac arrest in a pregnant patient at or after 20 weeks gestation, manual uterine displacement should be performed to:",opts:["Facilitate fetal delivery","Enhance venous return to the heart","Prevent aortic rupture","Protect the fetus from CPR compressions"],ans:1,exp:"Manual left uterine displacement helps relieve aortocaval compression by the enlarged uterus, enhancing venous return to the maternal heart — critical for effective CPR."},
+  {q:"In a pregnant trauma patient, which assessment finding is the BEST indicator of fetal well-being?",opts:["Maternal blood pressure","Fetal heart rate monitoring","Maternal oxygen saturation","Amniotic fluid appearance"],ans:1,exp:"Fetal monitoring (fetal heart rate) is the best indicator of fetal well-being after trauma. Accelerations are normal; sustained decelerations and decreased fetal movement indicate distress."},
+  {q:"A pregnant trauma patient with suspected spinal injury should be transported:",opts:["In the left lateral recumbent position on a backboard","Secured on a long backboard tilted 10-15° to the left with support under right side of board","Supine on a backboard only","In the right lateral position"],ans:1,exp:"For suspected spinal injury, secure the patient on a long backboard, then carefully tilt the board 10–15° to the left by placing a blanket or towel under the right side, keeping the patient secured while shifting the uterus off the IVC."},
+  {q:"Why is vaginal examination specifically contraindicated in pregnant patients with third-trimester bleeding?",opts:["It is painful for the patient","It may increase bleeding and trigger delivery, especially dangerous with placenta previa","It is not sterile enough in the prehospital environment","It delays transport"],ans:1,exp:"Vaginal examination in third-trimester bleeding is contraindicated because it can worsen bleeding and potentially trigger delivery — extremely dangerous if the cause is placenta previa, where the placenta covers the cervical os."},
+  {q:"BEAU-CHOPS 'U' represents which cause of cardiac arrest in pregnancy?",opts:["Umbilical cord prolapse","Uterine atony","Urinary tract infection","Uterine inversion"],ans:1,exp:"In BEAU-CHOPS, U stands for Uterine Atony — failure of the uterus to contract, which can lead to massive hemorrhage and potentially cardiac arrest if uncorrected."},
+  {q:"The MOST common cause of maternal injury in the prehospital setting is:",opts:["Falls from height","Burns","Vehicular crashes","Penetrating trauma"],ans:2,exp:"The major causes of maternal injury include vehicular crashes (most common), interpersonal violence, and falls. Vehicular trauma is the leading cause of non-obstetric maternal death."},
+  {q:"Standard defibrillation doses in a pregnant patient in cardiac arrest:",opts:["Should be reduced by 50%","Are the same as for non-pregnant patients","Should be increased by 25%","Should be avoided until delivery"],ans:1,exp:"Standard defibrillation doses and drug doses apply in pregnant cardiac arrest. Defibrillation is safe for the fetus; the amount of current reaching the fetus is negligible. Defibrillate shockable rhythms without modification."},
+  {q:"When should immediate transport for perimortem cesarean delivery be considered in a pregnant patient in cardiac arrest?",opts:["At any gestational age","Only if the fetus is known to be viable (>24 wks)","If gestational age is ≥20 weeks or fundal height is ≥2 fingerbreadths above the umbilicus","Only in the third trimester"],ans:2,exp:"Perimortem cesarean delivery should be considered if gestational age is ≥20 weeks OR if the fundal height is 2 or more fingerbreadths above the umbilicus. This benefits maternal hemodynamics by relieving aortocaval compression."},
+  {q:"In pregnancy, vasopressors for hemorrhage management are generally:",opts:["First-line treatment for maternal hypotension","Not recommended due to uterine vasoconstriction reducing fetal blood flow","Used freely as in non-pregnant patients","Replaced with oxytocin"],ans:1,exp:"Vasopressors are generally NOT recommended in the management of hemorrhage in pregnancy because they cause uterine vasoconstriction, which shunts blood away from the fetus. Crystalloid replacement is preferred for hypotension."},
+  {q:"The term 'erythroblastosis fetalis' refers to:",opts:["A severe neonatal blood disorder from Rh incompatibility","A type of placental abruption","A fetal cardiac arrhythmia","A postpartum infection in the newborn"],ans:0,exp:"Erythroblastosis fetalis is a severe, life-threatening blood disorder in newborns caused by Rh incompatibility (less commonly ABO incompatibility), where maternal antibodies destroy fetal red blood cells."},
+  {q:"Tocolytic agents are used in pregnancy to:",opts:["Induce labor","Inhibit (stop) preterm labor","Prevent postpartum hemorrhage","Treat eclamptic seizures"],ans:1,exp:"Tocolytic agents are medications used to inhibit (slow or stop) preterm labor contractions, giving time for fetal lung maturation with corticosteroids or for safe transport to a facility with NICU capabilities."},
+];
+
+// ── QUIZ ENGINE ──────────────────────────────────────────────────
+let quizAnswered = 0, quizCorrect = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  quizAnswered = 0; quizCorrect = 0;
+  updateProgress();
+
+  questions.forEach((qObj, qi) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'qcard-' + qi;
+    card.innerHTML = `
+      <div class="q-num">QUESTION ${qi+1} OF ${questions.length}</div>
+      <div class="q-text">${qObj.q}</div>
+      <div class="options" id="opts-${qi}">
+        ${qObj.opts.map((o,oi) => `
+          <button class="option-btn" onclick="answerQ(${qi},${oi})" id="opt-${qi}-${oi}">
+            <span class="opt-letter">${String.fromCharCode(65+oi)}</span>${o}
+          </button>`).join('')}
+      </div>
+      <div class="q-explain" id="exp-${qi}">${qObj.exp}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function answerQ(qi, selected) {
+  const qObj = questions[qi];
+  const card = document.getElementById('qcard-'+qi);
+  if (card.classList.contains('correct') || card.classList.contains('incorrect')) return;
+
+  quizAnswered++;
+  const correct = (selected === qObj.ans);
+  if (correct) quizCorrect++;
+
+  card.classList.add(correct ? 'correct' : 'incorrect');
+
+  for (let oi = 0; oi < qObj.opts.length; oi++) {
+    const btn = document.getElementById(`opt-${qi}-${oi}`);
+    btn.disabled = true;
+    if (oi === qObj.ans) btn.classList.add('correct-ans');
+    else if (oi === selected && !correct) btn.classList.add('wrong-ans');
+  }
+
+  document.getElementById('exp-'+qi).style.display = 'block';
+  updateProgress();
+  if (quizAnswered === questions.length) showScore();
+}
+
+function updateProgress() {
+  const pct = (quizAnswered / questions.length) * 100;
+  document.getElementById('quiz-progress-fill').style.width = pct + '%';
+}
+
+function showScore() {
+  const pct = Math.round((quizCorrect / questions.length) * 100);
+  const panel = document.getElementById('score-panel');
+  panel.style.display = 'block';
+  const big = document.getElementById('score-big');
+  big.textContent = pct + '%';
+  big.style.color = pct >= 80 ? 'var(--green)' : pct >= 70 ? 'var(--gold)' : 'var(--red)';
+  document.getElementById('stat-correct').textContent = quizCorrect;
+  document.getElementById('stat-wrong').textContent = questions.length - quizCorrect;
+  document.getElementById('stat-pct').textContent = pct + '%';
+  document.getElementById('stat-pct').style.color = big.style.color;
+  panel.scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetQuiz() {
+  document.getElementById('score-panel').style.display = 'none';
+  buildQuiz();
+  document.getElementById('quiz-progress-bar').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── PDF CERTIFICATE ──────────────────────────────────────────────
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
+  const pct = Math.round((quizCorrect / questions.length) * 100);
+  const now = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  const status = pct >= 80 ? 'PASSED' : pct >= 70 ? 'BORDERLINE' : 'REQUIRES REMEDIATION';
+  const statusColor = pct >= 80 ? [61,220,132] : pct >= 70 ? [232,184,75] : [232,83,75];
+
+  // Background
+  doc.setFillColor(8,15,26); doc.rect(0,0,612,792,'F');
+  doc.setFillColor(13,26,43); doc.rect(30,30,552,732,'F');
+
+  // Border
+  doc.setDrawColor(0,201,200); doc.setLineWidth(2); doc.rect(30,30,552,732);
+  doc.setDrawColor(232,184,75); doc.setLineWidth(0.5); doc.rect(38,38,536,716);
+
+  // Header bar
+  doc.setFillColor(0,143,142); doc.rect(30,30,552,60,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(11);
+  doc.setTextColor(0,0,0);
+  doc.text('CAMP COMMUNITY COLLEGE  |  EMS PARAMEDIC PROGRAM', 306, 62, { align:'center' });
+
+  // Title
+  doc.setFont('helvetica','bold'); doc.setFontSize(28); doc.setTextColor(240,248,255);
+  doc.text('Chapter 45: Obstetrics', 306, 145, { align:'center' });
+  doc.setFontSize(12); doc.setTextColor(0,201,200);
+  doc.text("ASSESSMENT COMPLETION RECORD  |  SANDERS' PARAMEDIC TEXTBOOK, 6TH EDITION", 306, 170, { align:'center' });
+
+  // Divider
+  doc.setDrawColor(0,201,200); doc.setLineWidth(0.5); doc.line(80, 185, 532, 185);
+
+  // Student info
+  doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(107,143,168);
+  doc.text('STUDENT NAME', 306, 215, { align:'center' });
+  doc.setFont('helvetica','bold'); doc.setFontSize(18); doc.setTextColor(240,248,255);
+  doc.text(studentName, 306, 240, { align:'center' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(107,143,168);
+  doc.text('STUDENT ID: ' + studentId, 306, 262, { align:'center' });
+
+  // Score box
+  doc.setFillColor(17,34,54); doc.roundedRect(166,290,280,140,6,6,'F');
+  doc.setDrawColor(...statusColor); doc.setLineWidth(1.5); doc.roundedRect(166,290,280,140,6,6,'S');
+  doc.setFont('helvetica','bold'); doc.setFontSize(52); doc.setTextColor(...statusColor);
+  doc.text(pct + '%', 306, 355, { align:'center' });
+  doc.setFontSize(10); doc.setTextColor(107,143,168);
+  doc.text('FINAL SCORE', 306, 375, { align:'center' });
+  doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.setTextColor(...statusColor);
+  doc.text(status, 306, 400, { align:'center' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(107,143,168);
+  doc.text('Passing Score: 80%', 306, 420, { align:'center' });
+
+  // Stats row
+  const stats = [['Correct',quizCorrect],[`Incorrect`,questions.length-quizCorrect],['Total Questions',questions.length]];
+  stats.forEach(([lbl,val],i) => {
+    const x = 110 + i*140;
+    doc.setFillColor(17,34,54); doc.roundedRect(x,452,120,60,4,4,'F');
+    doc.setDrawColor(30,58,95); doc.setLineWidth(0.5); doc.roundedRect(x,452,120,60,4,4,'S');
+    doc.setFont('helvetica','bold'); doc.setFontSize(20); doc.setTextColor(0,201,200);
+    doc.text(String(val), x+60, 482, { align:'center' });
+    doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(107,143,168);
+    doc.text(lbl.toUpperCase(), x+60, 500, { align:'center' });
+  });
+
+  // Date
+  doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(107,143,168);
+  doc.text('Date Completed: ' + now, 306, 545, { align:'center' });
+
+  // Key topics
+  doc.setDrawColor(30,58,95); doc.setLineWidth(0.5); doc.line(80, 565, 532, 565);
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(0,201,200);
+  doc.text('COMPETENCIES ASSESSED', 306, 585, { align:'center' });
+  const topics = [
+    'Obstetric Anatomy & Physiology',  'Antepartum Complications & Bleeding',
+    'Preeclampsia / Eclampsia Mgmt',   'Labor Stages & Delivery Assistance',
+    'Apgar Scoring & Newborn Care',    'Complicated Delivery Management',
+    'Postpartum Emergencies',          'OB Trauma & Cardiac Arrest'
+  ];
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(212,232,240);
+  topics.forEach((t,i) => {
+    const x = i % 2 === 0 ? 120 : 370;
+    const y = 605 + Math.floor(i/2) * 22;
+    doc.setTextColor(0,201,200); doc.text('•', x-10, y);
+    doc.setTextColor(212,232,240); doc.text(t, x, y);
+  });
+
+  // Footer
+  doc.setDrawColor(0,201,200); doc.setLineWidth(0.5); doc.line(80, 700, 532, 700);
+  doc.setFontSize(8); doc.setTextColor(107,143,168);
+  doc.text('CAMP EMS Paramedic Program  |  Dr. Carlos Cajares, DHSc, MPA, NRP, Program Director', 306, 720, { align:'center' });
+  doc.text("Sanders' Paramedic Textbook, 6th Edition  |  Confidential – Program Use Only", 306, 737, { align:'center' });
+
+  const fname = `CH45_Obstetrics_${studentName.replace(/\s+/g,'_')}_${studentId}.pdf`;
+  doc.save(fname);
+}
+</script>
+</body>
+</html>
