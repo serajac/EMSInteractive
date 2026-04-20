@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bleeding & Soft Tissue Trauma | CAMP EMS Paramedic Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+/* ===== DESIGN SYSTEM ===== */
+:root {
+  --crimson:     #B91C1C;
+  --crimson-lt:  #FEE2E2;
+  --crimson-mid: #EF4444;
+  --amber:       #D97706;
+  --amber-lt:    #FEF3C7;
+  --teal:        #0F766E;
+  --teal-lt:     #CCFBF1;
+  --navy:        #1E3A5F;
+  --navy-lt:     #EFF6FF;
+  --surface:     #FFFFFF;
+  --surface-2:   #F8F7F4;
+  --surface-3:   #F0EDE8;
+  --border:      #E2DDD7;
+  --text-primary:#1A1614;
+  --text-body:   #3D3530;
+  --text-muted:  #7A6E68;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,.08);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg:   0 12px 40px rgba(0,0,0,.13);
+  --radius:      10px;
+  --radius-lg:   16px;
+  --font-display:"Playfair Display", serif;
+  --font-body:   "Source Serif 4", serif;
+  --font-mono:   "JetBrains Mono", monospace;
+}
+
+[data-theme="dark"] {
+  --surface:     #141210;
+  --surface-2:   #1E1B18;
+  --surface-3:   #272320;
+  --border:      #3A3430;
+  --text-primary:#F5F0EB;
+  --text-body:   #D6CFC8;
+  --text-muted:  #8C8480;
+  --crimson-lt:  #3D1515;
+  --amber-lt:    #3D2800;
+  --teal-lt:     #0A2520;
+  --navy-lt:     #0D1E33;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,.3);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.4);
+  --shadow-lg:   0 12px 40px rgba(0,0,0,.5);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--surface-2);
+  color: var(--text-body);
+  font-size: 16px;
+  line-height: 1.7;
+  transition: background .3s, color .3s;
+}
+
+/* ===== HERO BANNER ===== */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #2D1B1B 50%, var(--crimson) 100%);
+  color: white;
+  padding: 56px 40px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+}
+.hero-inner { position: relative; max-width: 960px; margin: 0 auto; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 100px; padding: 5px 14px; font-size: .8rem;
+  letter-spacing: .06em; text-transform: uppercase; margin-bottom: 20px;
+  font-family: var(--font-mono);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800; line-height: 1.1;
+  margin-bottom: 14px;
+}
+.hero h1 span { color: #FCA5A5; }
+.hero-sub {
+  font-size: 1.05rem; opacity: .85; max-width: 640px; margin-bottom: 28px;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 20px;
+}
+.hero-meta-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: .82rem; opacity: .85;
+}
+.hero-meta-item svg { opacity: .7; }
+
+/* ===== NAV BAR ===== */
+.topbar {
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+.topbar-inner {
+  max-width: 960px; margin: 0 auto;
+  display: flex; align-items: center; gap: 4px;
+  padding: 0 20px; overflow-x: auto;
+}
+.tab-btn {
+  padding: 14px 18px;
+  border: none; background: none;
+  color: var(--text-muted);
+  font-family: var(--font-body); font-size: .88rem;
+  cursor: pointer; white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all .2s; font-weight: 600;
+  margin-bottom: -2px;
+}
+.tab-btn:hover { color: var(--crimson); }
+.tab-btn.active { color: var(--crimson); border-bottom-color: var(--crimson); }
+.topbar-right {
+  margin-left: auto; display: flex; gap: 10px; align-items: center; flex-shrink: 0;
+}
+.theme-toggle {
+  padding: 7px 14px; border-radius: 100px;
+  border: 1px solid var(--border); background: var(--surface-2);
+  color: var(--text-body); cursor: pointer; font-size: .82rem;
+  font-family: var(--font-mono); transition: all .2s;
+}
+.theme-toggle:hover { border-color: var(--crimson); color: var(--crimson); }
+
+/* ===== MAIN LAYOUT ===== */
+.main { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn .35s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+/* ===== SECTION CARDS ===== */
+.section-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+}
+.section-card + .section-card { }
+.card-header {
+  display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;
+}
+.card-icon {
+  width: 48px; height: 48px; border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.icon-red   { background: var(--crimson-lt); }
+.icon-amber { background: var(--amber-lt); }
+.icon-teal  { background: var(--teal-lt); }
+.icon-navy  { background: var(--navy-lt); }
+.card-title { font-family: var(--font-display); font-size: 1.45rem; color: var(--text-primary); font-weight: 700; }
+.card-subtitle { font-size: .88rem; color: var(--text-muted); margin-top: 4px; font-family: var(--font-mono); }
+
+h3 { font-family: var(--font-display); font-size: 1.15rem; color: var(--text-primary); margin: 24px 0 10px; font-weight: 700; }
+h4 { font-family: var(--font-body); font-size: 1rem; color: var(--crimson); margin: 18px 0 8px; font-weight: 600; letter-spacing: .02em; }
+p { margin-bottom: 14px; }
+
+/* ===== SCENARIO BOX ===== */
+.scenario-box {
+  background: linear-gradient(135deg, #1E3A5F 0%, #2D1B1B 100%);
+  border-radius: var(--radius-lg); padding: 32px 36px;
+  color: white; margin-bottom: 28px; position: relative; overflow: hidden;
+}
+.scenario-box::before {
+  content: '🚑'; position: absolute; right: 30px; top: 50%;
+  transform: translateY(-50%); font-size: 5rem; opacity: .12;
+}
+.scenario-label {
+  font-family: var(--font-mono); font-size: .75rem; letter-spacing: .1em;
+  text-transform: uppercase; color: #FCA5A5; margin-bottom: 12px;
+}
+.scenario-box h2 {
+  font-family: var(--font-display); font-size: 1.5rem;
+  font-weight: 800; margin-bottom: 14px; line-height: 1.2;
+}
+.scenario-box p { opacity: .9; margin-bottom: 10px; }
+.scenario-box .dispatch {
+  background: rgba(255,255,255,.1); border-left: 3px solid #FCA5A5;
+  padding: 12px 16px; border-radius: 6px; margin-top: 16px;
+  font-family: var(--font-mono); font-size: .88rem;
+}
+
+/* ===== CALLOUTS ===== */
+.callout {
+  border-radius: var(--radius); padding: 16px 20px;
+  margin: 18px 0; display: flex; gap: 14px;
+  border: 1px solid transparent;
+}
+.callout-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.callout-content strong { display: block; margin-bottom: 4px; font-weight: 600; }
+.callout-critical { background: var(--crimson-lt); border-color: #FECACA; }
+.callout-critical .callout-content strong { color: var(--crimson); }
+.callout-tip    { background: var(--amber-lt); border-color: #FDE68A; }
+.callout-tip .callout-content strong { color: var(--amber); }
+.callout-clinical { background: var(--teal-lt); border-color: #99F6E4; }
+.callout-clinical .callout-content strong { color: var(--teal); }
+.callout-pearl  { background: var(--navy-lt); border-color: #BFDBFE; }
+.callout-pearl .callout-content strong { color: var(--navy); }
+
+/* ===== TABLES ===== */
+.data-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .92rem; }
+.data-table th {
+  background: var(--surface-3); text-align: left;
+  padding: 10px 14px; font-family: var(--font-mono); font-size: .8rem;
+  letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted);
+  border-bottom: 2px solid var(--border);
+}
+.data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.data-table tr:hover td { background: var(--surface-2); }
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 100px;
+  font-size: .75rem; font-family: var(--font-mono); font-weight: 600;
+}
+.badge-red    { background: var(--crimson-lt); color: var(--crimson); }
+.badge-amber  { background: var(--amber-lt); color: var(--amber); }
+.badge-teal   { background: var(--teal-lt); color: var(--teal); }
+.badge-navy   { background: var(--navy-lt); color: var(--navy); }
+
+/* ===== BLOOM OBJECTIVES ===== */
+.bloom-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 16px; }
+.bloom-card {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+  border-left: 4px solid var(--crimson);
+}
+.bloom-level { font-family: var(--font-mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); margin-bottom: 6px; }
+.bloom-card p { font-size: .88rem; margin: 0; }
+
+/* ===== ACCORDION ===== */
+.accordion { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 16px 0; }
+.accordion-item { border-bottom: 1px solid var(--border); }
+.accordion-item:last-child { border-bottom: none; }
+.accordion-header {
+  width: 100%; text-align: left; padding: 16px 20px;
+  background: var(--surface); border: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-body); font-size: .95rem; font-weight: 600;
+  color: var(--text-primary); transition: background .2s;
+}
+.accordion-header:hover { background: var(--surface-2); }
+.accordion-header.open { color: var(--crimson); background: var(--crimson-lt); }
+.accordion-chevron { transition: transform .25s; font-size: .75rem; color: var(--text-muted); }
+.accordion-header.open .accordion-chevron { transform: rotate(180deg); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.accordion-body.open { max-height: 2000px; }
+.accordion-body-inner { padding: 20px; background: var(--surface-2); }
+
+/* ===== DECISION TREE ===== */
+.decision-tree { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin: 20px 0; }
+.dt-node {
+  background: var(--surface); border: 2px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px;
+  margin: 0 auto 10px; max-width: 460px; text-align: center;
+  font-weight: 600; font-size: .92rem; cursor: pointer;
+  transition: all .2s;
+}
+.dt-node:hover { border-color: var(--crimson); }
+.dt-node.dt-question { border-color: var(--navy); background: var(--navy-lt); color: var(--navy); }
+.dt-node.dt-yes    { border-color: var(--crimson); background: var(--crimson-lt); }
+.dt-node.dt-no     { border-color: var(--teal); background: var(--teal-lt); }
+.dt-node.dt-action { border-color: var(--amber); background: var(--amber-lt); }
+.dt-arrows { text-align: center; color: var(--text-muted); margin: 4px 0; font-size: 1.1rem; }
+.dt-row { display: flex; gap: 20px; justify-content: center; margin-bottom: 10px; }
+.dt-row .dt-node { margin: 0; }
+
+/* ===== PROGRESS BAR ===== */
+.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.progress-label { font-family: var(--font-mono); font-size: .82rem; color: var(--text-muted); }
+.progress-track {
+  height: 8px; background: var(--surface-3); border-radius: 100px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--crimson), var(--amber));
+  border-radius: 100px; transition: width .5s ease;
+}
+
+/* ===== KNOWLEDGE CHECK ===== */
+.kc-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px;
+  margin: 20px 0;
+}
+.kc-question { font-weight: 600; margin-bottom: 16px; color: var(--text-primary); }
+.kc-options { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.kc-option {
+  padding: 13px 18px; border: 2px solid var(--border);
+  border-radius: var(--radius); cursor: pointer; transition: all .2s;
+  font-size: .92rem; user-select: none;
+}
+.kc-option:hover { border-color: var(--crimson); background: var(--crimson-lt); }
+.kc-option.correct { border-color: var(--teal)!important; background: var(--teal-lt)!important; }
+.kc-option.wrong   { border-color: var(--crimson)!important; background: var(--crimson-lt)!important; }
+.kc-option.disabled { pointer-events: none; }
+.kc-rationale {
+  margin-top: 14px; padding: 14px 16px; border-radius: var(--radius);
+  background: var(--surface-2); border-left: 4px solid var(--teal);
+  font-size: .88rem; display: none;
+}
+.kc-rationale.show { display: block; animation: fadeIn .3s; }
+
+/* ===== ANDRAGOGY BANNER ===== */
+.andragogy-ribbon {
+  background: linear-gradient(90deg, var(--navy), var(--teal));
+  color: white; border-radius: var(--radius-lg); padding: 24px 28px;
+  margin: 24px 0;
+}
+.andragogy-ribbon h3 { color: white; margin: 0 0 8px; font-size: 1rem; }
+.andragogy-ribbon p  { opacity: .88; margin: 0; font-size: .9rem; }
+.andragogy-ribbon .principle { font-family: var(--font-mono); font-size: .75rem; opacity: .7; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+
+/* ===== REFLECTION PROMPTS ===== */
+.reflection-box {
+  background: var(--amber-lt); border: 1px solid #FDE68A;
+  border-radius: var(--radius-lg); padding: 24px 28px; margin: 24px 0;
+}
+.reflection-box h3 { color: var(--amber); margin-bottom: 12px; }
+.reflection-input {
+  width: 100%; min-height: 100px; padding: 12px 16px;
+  border: 2px solid #FDE68A; border-radius: var(--radius);
+  background: white; font-family: var(--font-body); font-size: .92rem;
+  color: var(--text-body); resize: vertical; margin-top: 10px;
+  transition: border-color .2s;
+}
+.reflection-input:focus { outline: none; border-color: var(--amber); }
+[data-theme="dark"] .reflection-input { background: var(--surface-2); color: var(--text-body); }
+
+/* ===== ASSESSMENT SECTION ===== */
+.assessment-hero {
+  background: linear-gradient(135deg, #1A0A0A 0%, #2D1B1B 100%);
+  border-radius: var(--radius-lg); padding: 32px 36px; color: white; margin-bottom: 28px;
+}
+.assessment-hero h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 8px; }
+.assessment-hero p  { opacity: .85; }
+
+.student-form {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px; margin-bottom: 28px;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px; }
+.form-group label {
+  display: block; font-family: var(--font-mono); font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); margin-bottom: 6px;
+}
+.form-group input {
+  width: 100%; padding: 11px 14px; border: 2px solid var(--border);
+  border-radius: var(--radius); background: var(--surface-2);
+  font-family: var(--font-body); font-size: .95rem; color: var(--text-body);
+  transition: border-color .2s;
+}
+.form-group input:focus { outline: none; border-color: var(--crimson); }
+[data-theme="dark"] .form-group input { background: var(--surface-3); }
+
+.q-counter {
+  font-family: var(--font-mono); font-size: .82rem; color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.q-block {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px 28px; margin-bottom: 18px;
+}
+.q-number {
+  font-family: var(--font-mono); font-size: .78rem; color: var(--crimson);
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px;
+}
+.q-stem { font-weight: 600; color: var(--text-primary); margin-bottom: 16px; line-height: 1.5; }
+.q-options { display: flex; flex-direction: column; gap: 9px; }
+.q-opt {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 15px; border: 2px solid var(--border);
+  border-radius: var(--radius); cursor: pointer; transition: all .2s;
+  user-select: none;
+}
+.q-opt:hover { border-color: var(--crimson-mid); background: var(--crimson-lt); }
+.q-opt input[type="radio"] { margin-top: 3px; accent-color: var(--crimson); flex-shrink: 0; }
+.q-opt.selected { border-color: var(--crimson); background: var(--crimson-lt); }
+.q-opt.ans-correct { border-color: var(--teal)!important; background: var(--teal-lt)!important; }
+.q-opt.ans-wrong   { border-color: var(--crimson)!important; background: var(--crimson-lt)!important; opacity: .8; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; border-radius: 100px; border: none;
+  cursor: pointer; font-family: var(--font-body); font-size: .95rem;
+  font-weight: 600; transition: all .2s; text-decoration: none;
+}
+.btn-primary { background: var(--crimson); color: white; }
+.btn-primary:hover { background: #991B1B; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-secondary { background: var(--surface-3); color: var(--text-body); border: 1px solid var(--border); }
+.btn-secondary:hover { border-color: var(--crimson); color: var(--crimson); }
+.btn-teal { background: var(--teal); color: white; }
+.btn-teal:hover { background: #0D5F58; }
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+
+.score-display {
+  background: linear-gradient(135deg, var(--navy), var(--crimson));
+  color: white; border-radius: var(--radius-lg); padding: 40px;
+  text-align: center; margin: 28px 0;
+}
+.score-number { font-family: var(--font-display); font-size: 5rem; font-weight: 800; line-height: 1; }
+.score-label  { font-size: 1.1rem; opacity: .85; margin: 8px 0 16px; }
+.score-grade  { font-family: var(--font-mono); font-size: 1.2rem; letter-spacing: .05em; }
+.score-breakdown { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 24px; }
+.score-stat { background: rgba(255,255,255,.12); border-radius: var(--radius); padding: 14px; }
+.score-stat-num { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; }
+.score-stat-lbl { font-size: .8rem; opacity: .75; margin-top: 4px; }
+
+/* Rationale panel */
+.rationale-panel { margin-top: 12px; padding: 12px 16px; background: var(--surface-2); border-radius: var(--radius); border-left: 3px solid var(--teal); font-size: .86rem; display: none; }
+.rationale-panel.show { display: block; }
+
+/* ===== MODULE NAV ===== */
+.mod-nav { display: flex; gap: 12px; margin-bottom: 24px; }
+.mod-pill {
+  padding: 8px 20px; border-radius: 100px; border: 2px solid var(--border);
+  background: var(--surface); color: var(--text-muted); cursor: pointer;
+  font-family: var(--font-mono); font-size: .82rem; transition: all .2s;
+}
+.mod-pill:hover { border-color: var(--crimson); color: var(--crimson); }
+.mod-pill.active { background: var(--crimson); color: white; border-color: var(--crimson); }
+
+/* ===== MISC ===== */
+ul.styled { list-style: none; padding: 0; }
+ul.styled li { padding: 7px 0 7px 24px; position: relative; border-bottom: 1px solid var(--border); font-size: .93rem; }
+ul.styled li:last-child { border-bottom: none; }
+ul.styled li::before { content: '›'; position: absolute; left: 6px; color: var(--crimson); font-weight: 700; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.highlight-num { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; color: var(--crimson); line-height: 1; }
+.highlight-lbl { font-size: .8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; font-family: var(--font-mono); }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 20px 0; }
+.stat-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; text-align: center; }
+
+.timeline { border-left: 3px solid var(--crimson); padding-left: 24px; margin: 20px 0; }
+.timeline-item { position: relative; margin-bottom: 20px; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -31px; top: 5px;
+  width: 12px; height: 12px; background: var(--crimson);
+  border-radius: 50%; border: 2px solid var(--surface);
+}
+.timeline-title { font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.timeline-body  { font-size: .9rem; color: var(--text-body); }
+
+@media (max-width: 640px) {
+  .section-card { padding: 24px 20px; }
+  .form-grid, .two-col { grid-template-columns: 1fr; }
+  .hero { padding: 36px 24px 32px; }
+  .score-breakdown { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      CAMP EMS · Paramedic Program · Sanders Ch. 35
+    </div>
+    <h1>Bleeding &amp; <span>Soft Tissue</span> Trauma</h1>
+    <p class="hero-sub">A clinical mastery module designed for the practicing provider. Control hemorrhage. Save lives. Every second counts.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">📚 3 Learning Modules</div>
+      <div class="hero-meta-item">⏱ 120 min Est. Study Time</div>
+      <div class="hero-meta-item">✅ 100-Question Assessment</div>
+      <div class="hero-meta-item">🏅 NREMT-Aligned</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB BAR ===== -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <button class="tab-btn active" onclick="switchTab('m1')">Module 1: Foundations</button>
+    <button class="tab-btn" onclick="switchTab('m2')">Module 2: Deep Dive</button>
+    <button class="tab-btn" onclick="switchTab('m3')">Module 3: Synthesis</button>
+    <button class="tab-btn" onclick="switchTab('m4')">Assessment</button>
+    <div class="topbar-right">
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ============================================================
+     MODULE 1: FOUNDATION & REAL-WORLD CONTEXT
+     ============================================================ -->
+<div id="tab-m1" class="tab-panel active">
+
+  <!-- Scenario Hook -->
+  <div class="scenario-box">
+    <div class="scenario-label">🚨 Dispatch · Andragogy Principle 1: Need to Know</div>
+    <h2>Dispatch: Motor Vehicle Collision — Multiple Casualties</h2>
+    <p>You are the senior medic on Unit 12. It is 0237. A transport truck has struck a passenger vehicle at highway speed. First responders report three patients — one unresponsive with obvious extremity amputation, one alert and screaming with a penetrating abdominal wound, and one patient with a lacerated neck.</p>
+    <div class="dispatch">
+      "Unit 12 — Trauma Alert. Mechanism: High-speed MVC. Three patients. Exsanguinating hemorrhage reported. ETA to hospital: 22 minutes."
+    </div>
+    <p style="margin-top:16px; font-size:.9rem; opacity:.8;">What you do in the next 90 seconds determines who survives. This is why this module matters.</p>
+  </div>
+
+  <!-- Andragogy Callout -->
+  <div class="andragogy-ribbon">
+    <div class="principle">Andragogy Principle 2: Self-Concept</div>
+    <h3>You Are Already a Clinician</h3>
+    <p>This module treats you as the experienced provider you are. We build on your anatomy knowledge, your field experience, and your clinical judgment — not memorization drills. You will think like an attending, not a student.</p>
+  </div>
+
+  <!-- Learning Objectives -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-navy">🎯</div>
+      <div>
+        <div class="card-title">Learning Objectives</div>
+        <div class="card-subtitle">Bloom's Taxonomy Levels I–VI</div>
+      </div>
+    </div>
+    <div class="bloom-grid">
+      <div class="bloom-card">
+        <div class="bloom-level">Remember · Level 1</div>
+        <p>Recall the three types of hemorrhage and their arterial, venous, or capillary origin.</p>
+      </div>
+      <div class="bloom-card">
+        <div class="bloom-level">Understand · Level 2</div>
+        <p>Explain the physiological cascade of hemorrhagic shock and clotting mechanism failure.</p>
+      </div>
+      <div class="bloom-card">
+        <div class="bloom-level">Apply · Level 3</div>
+        <p>Apply hemorrhage control techniques (pressure, packing, tourniquet) to simulated wound types.</p>
+      </div>
+      <div class="bloom-card">
+        <div class="bloom-level">Analyze · Level 4</div>
+        <p>Differentiate between wound types and determine appropriate field management priorities.</p>
+      </div>
+      <div class="bloom-card">
+        <div class="bloom-level">Evaluate · Level 5</div>
+        <p>Justify tourniquet placement decisions and evaluate hemostatic agent selection criteria.</p>
+      </div>
+      <div class="bloom-card">
+        <div class="bloom-level">Create · Level 6</div>
+        <p>Construct an integrated trauma management plan for the multi-patient MVC scenario above.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Content: Hemorrhage Types -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-red">🩸</div>
+      <div>
+        <div class="card-title">Types of Hemorrhage</div>
+        <div class="card-subtitle">Origin, Recognition & Clinical Significance</div>
+      </div>
+    </div>
+
+    <div class="andragogy-ribbon" style="padding: 16px 20px; margin-bottom: 20px;">
+      <div class="principle">Andragogy Principle 3: Prior Experience</div>
+      <p style="margin:0; font-size:.88rem;">You have already seen these bleeds on scene. We are naming what you already recognize intuitively and deepening your clinical reasoning around each type.</p>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          🔴 Arterial Hemorrhage — The Killer <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p>Arterial bleeding arises from disruption of a high-pressure vessel carrying oxygenated blood directly from the heart. It is characterized by <strong>bright red, pulsatile spurting</strong> that is synchronous with the cardiac cycle.</p>
+            <div class="callout callout-critical">
+              <div class="callout-icon">⚠️</div>
+              <div class="callout-content">
+                <strong>Critical Fact</strong>
+                A severed femoral artery can exsanguinate an adult in as little as 3–5 minutes. Do not delay hemorrhage control for any reason at a scene with arterial involvement.
+              </div>
+            </div>
+            <h4>Pathophysiology Bridge</h4>
+            <p>Arterial pressure averages 120 mmHg systolic. When the vessel wall is breached, blood is ejected with each ventricular contraction. The body's initial compensatory response — vasoconstriction via catecholamine release — may temporarily reduce visible bleeding, creating a dangerous false sense of control.</p>
+            <h4>Clinical Analog</h4>
+            <p>Think of a garden hose with a hole under full pressure. Kinking the hose (tourniquet or proximal compression) stops the spray far more effectively than attempting to patch the hole (direct pressure alone on arterial wounds).</p>
+            <table class="data-table">
+              <thead><tr><th>Characteristic</th><th>Arterial</th></tr></thead>
+              <tbody>
+                <tr><td>Color</td><td>Bright red (oxygenated)</td></tr>
+                <tr><td>Flow pattern</td><td>Pulsatile, spurting</td></tr>
+                <tr><td>Rate</td><td>Rapid — life-threatening immediately</td></tr>
+                <tr><td>Control method</td><td>TQ if extremity; direct pressure + packing otherwise</td></tr>
+                <tr><td>Spontaneous control</td><td>Rare without intervention</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          🔵 Venous Hemorrhage — The Underestimated Threat <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p>Venous hemorrhage originates from the low-pressure venous system. Blood is <strong>dark red</strong> (deoxygenated) and flows in a steady, non-pulsatile stream. While less dramatic than arterial bleeding, large venous injuries — particularly involving the femoral, subclavian, or jugular veins — can be immediately life-threatening.</p>
+            <div class="callout callout-tip">
+              <div class="callout-icon">💡</div>
+              <div class="callout-content">
+                <strong>Clinical Pearl</strong>
+                Jugular vein injuries carry a unique risk: <strong>air embolism</strong>. The negative intrathoracic pressure created during inhalation can draw air into the venous system if a neck vein is open. Occlusive dressings are critical.
+              </div>
+            </div>
+            <h4>Venous vs. Arterial: The Field Distinction</h4>
+            <p>In low-light or high-stress scenes, color differentiation may be difficult. Use flow pattern: <em>Does it pulse?</em> Pulsatile = arterial. Steady = venous. Both require immediate control.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          🟡 Capillary Hemorrhage &amp; Internal Hemorrhage <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p><strong>Capillary bleeding</strong> is slow, oozing, and typically self-limiting. It appears as a diffuse weep from abrasions or superficial lacerations. While rarely life-threatening in isolation, in anticoagulated patients or those with clotting disorders it may be significant.</p>
+            <h4>Internal Hemorrhage — The Hidden Killer</h4>
+            <p>Internal hemorrhage is blood loss into a body cavity with no external sign. A hemothorax can hold 2–3 liters; a fractured pelvis up to 4 liters; intra-abdominal hemorrhage can be limitless. Your only tools are:</p>
+            <ul class="styled">
+              <li>Mechanism of injury analysis</li>
+              <li>Signs of hypoperfusion (shock index, skin color/temp/moisture)</li>
+              <li>Abdominal rigidity, guarding, or distension</li>
+              <li>Pelvic instability on palpation</li>
+              <li>Unilateral decreased breath sounds (hemothorax)</li>
+              <li>Rapid transport to definitive care — your hospital is the treatment</li>
+            </ul>
+            <div class="callout callout-critical">
+              <div class="callout-icon">🚨</div>
+              <div class="callout-content">
+                <strong>Transport Decision</strong>
+                Internal hemorrhage cannot be controlled in the field. Permissive hypotension (target SBP 80–90 mmHg in penetrating trauma) prevents clot disruption during transport. Load and go. Do not delay for IV access at scene.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wound Classification -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-amber">🔬</div>
+      <div>
+        <div class="card-title">Wound Classification</div>
+        <div class="card-subtitle">Open & Closed Soft Tissue Injuries</div>
+      </div>
+    </div>
+
+    <h3>Closed Wounds</h3>
+    <table class="data-table">
+      <thead><tr><th>Type</th><th>Mechanism</th><th>Clinical Findings</th><th>Management</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-navy">Contusion</span></td><td>Blunt force, intact skin</td><td>Ecchymosis, swelling, pain</td><td>Ice, elevation, analgesia</td></tr>
+        <tr><td><span class="badge badge-navy">Hematoma</span></td><td>High-energy blunt or shear</td><td>Fluctuant swelling, discoloration</td><td>Ice, monitor, do not aspirate in field</td></tr>
+        <tr><td><span class="badge badge-amber">Crush Injury</span></td><td>Prolonged compressive force</td><td>May appear deceptively minor</td><td>Rhabdomyolysis protocol; aggressive IVF; monitor K+</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Open Wounds</h3>
+    <table class="data-table">
+      <thead><tr><th>Type</th><th>Description</th><th>Key Management Note</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-red">Abrasion</span></td><td>Superficial dermis loss; "road rash"</td><td>Clean, moist dressing; high infection risk</td></tr>
+        <tr><td><span class="badge badge-red">Laceration</span></td><td>Jagged or linear tear through dermis</td><td>Direct pressure; irrigate at hospital</td></tr>
+        <tr><td><span class="badge badge-red">Incision</span></td><td>Clean-edged cut; knife, glass</td><td>Direct pressure; high vessel/tendon injury risk</td></tr>
+        <tr><td><span class="badge badge-red">Puncture</span></td><td>Small entry, deep penetration</td><td>Do NOT remove impaled objects; stabilize in place</td></tr>
+        <tr><td><span class="badge badge-red">Avulsion</span></td><td>Full-thickness tissue torn away</td><td>Recover flap; moist dressing; preserve tissue</td></tr>
+        <tr><td><span class="badge badge-red">Amputation</span></td><td>Partial or complete extremity loss</td><td>Hemorrhage control first; wrap amputated part in moist gauze, bag, ice (do not submerge)</td></tr>
+        <tr><td><span class="badge badge-amber">Evisceration</span></td><td>Abdominal contents external</td><td>Moist occlusive dressing; NO reduction; keep warm</td></tr>
+        <tr><td><span class="badge badge-amber">Impalement</span></td><td>Object embedded in tissue</td><td>Stabilize object; never remove; exception: chest wall if CPR needed</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Stats -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-teal">📊</div>
+      <div>
+        <div class="card-title">Why This Matters: The Hemorrhage Burden</div>
+        <div class="card-subtitle">Andragogy Principle 4: Readiness to Learn</div>
+      </div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="highlight-num">35%</div>
+        <div class="highlight-lbl">of trauma deaths caused by hemorrhage</div>
+      </div>
+      <div class="stat-card">
+        <div class="highlight-num">#1</div>
+        <div class="highlight-lbl">preventable cause of trauma death</div>
+      </div>
+      <div class="stat-card">
+        <div class="highlight-num">3–5 min</div>
+        <div class="highlight-lbl">to exsanguination from femoral artery</div>
+      </div>
+      <div class="stat-card">
+        <div class="highlight-num">90 sec</div>
+        <div class="highlight-lbl">TQ application stops preventable death</div>
+      </div>
+    </div>
+    <div class="callout callout-pearl">
+      <div class="callout-icon">🏅</div>
+      <div class="callout-content">
+        <strong>Readiness to Learn (Knowles Principle 4)</strong>
+        You will encounter these injuries on your next shift. The Hartford Consensus (THREAT protocol) and TCCC guidelines have fundamentally changed prehospital hemorrhage control. These are current, evidence-based standards you are expected to implement today.
+      </div>
+    </div>
+  </div>
+
+  <!-- Module 1 Knowledge Check -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-red">❓</div>
+      <div>
+        <div class="card-title">Quick Check · Module 1</div>
+        <div class="card-subtitle">Test your foundational understanding</div>
+      </div>
+    </div>
+
+    <div class="kc-card">
+      <div class="kc-question">A patient with a femoral laceration has bright-red, pulsatile hemorrhage. Which mechanism best explains why direct pressure alone is likely insufficient as a definitive control method?</div>
+      <ul class="kc-options">
+        <li class="kc-option" onclick="checkKC(this,'wrong','kc1')">A. Venous pooling prevents adequate clot formation at high-pressure sites.</li>
+        <li class="kc-option" onclick="checkKC(this,'correct','kc1')">B. Arterial pressure exceeds the compressive force achievable by hand pressure alone over a large vessel.</li>
+        <li class="kc-option" onclick="checkKC(this,'wrong','kc1')">C. Bright-red blood indicates deoxygenated flow that resists coagulation.</li>
+        <li class="kc-option" onclick="checkKC(this,'wrong','kc1')">D. Direct pressure is contraindicated when bone fractures are suspected.</li>
+      </ul>
+      <div class="kc-rationale" id="kc1">✅ <strong>Correct.</strong> The femoral artery carries blood at systolic pressures (70–120 mmHg). Manual compression may slow but rarely fully occlude a severed large-caliber artery. A tourniquet applied proximal to the injury provides circumferential compression that eliminates distal arterial flow entirely.</div>
+    </div>
+
+    <div class="kc-card">
+      <div class="kc-question">You arrive to find a patient with an open abdominal wound with protruding intestines. Your first action should be:</div>
+      <ul class="kc-options">
+        <li class="kc-option" onclick="checkKC(this,'wrong','kc2')">A. Gently replace the viscera into the abdominal cavity to prevent further contamination.</li>
+        <li class="kc-option" onclick="checkKC(this,'wrong','kc2')">B. Apply a dry, sterile dressing and tape all four sides.</li>
+        <li class="kc-option" onclick="checkKC(this,'correct','kc2')">C. Cover with a moist (saline-moistened) occlusive dressing and prevent desiccation.</li>
+        <li class="kc-option" onclick="checkKC(this,'wrong','kc2')">D. Insert a nasogastric tube to decompress the bowel before transport.</li>
+      </ul>
+      <div class="kc-rationale" id="kc2">✅ <strong>Correct.</strong> Eviscerated bowel must never be reduced in the field — there is no sterile environment and reduction can cause peritoneal contamination, vascular kinking, or obstruction. A moist occlusive dressing prevents desiccation (drying kills exposed tissue) and protects from further contamination.</div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="switchTab('m2')">Continue to Module 2 →</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODULE 2: DEEP DIVE & APPLICATION
+     ============================================================ -->
+<div id="tab-m2" class="tab-panel">
+
+  <div class="andragogy-ribbon">
+    <div class="principle">Andragogy Principle 5: Orientation to Learning — Problem-Centered</div>
+    <h3>Application Over Memorization</h3>
+    <p>Module 2 is built around clinical problems, not chapters. You will apply hemorrhage control principles, make tourniquet decisions, select hemostatic agents, and manage special wound presentations — all in the context of real field problems.</p>
+  </div>
+
+  <!-- Hemorrhage Control -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-red">🩹</div>
+      <div>
+        <div class="card-title">Hemorrhage Control: The Hierarchy</div>
+        <div class="card-subtitle">TECC/TCCC & Hartford Consensus Integrated</div>
+      </div>
+    </div>
+
+    <div class="callout callout-clinical">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-content">
+        <strong>MARCH Protocol (Tactical/Field)</strong>
+        Massive hemorrhage → Airway → Respirations → Circulation → Hypothermia. Hemorrhage control is FIRST — not third. This is a paradigm shift from traditional ABC prioritization.
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-title">Step 1: Direct Pressure</div>
+        <div class="timeline-body">Apply firm, continuous pressure with gloved hand or hemostatic gauze. Minimum 3–5 minutes without releasing. Works for most venous and minor arterial wounds not involving large proximal vessels.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-title">Step 2: Wound Packing</div>
+        <div class="timeline-body">For deep, irregular wounds or wounds in junctional regions (neck, axilla, groin). Pack gauze deep into the wound cavity, apply firm direct pressure for minimum 3 minutes. Hemostatic gauze (Combat Gauze / ChitoGauze) preferred for HART/junctional hemorrhage.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-title">Step 3: Tourniquet Application</div>
+        <div class="timeline-body">For life-threatening extremity hemorrhage not controlled by pressure. Apply 2–3 inches proximal to wound. Tighten until hemorrhage stops (not just slows). Note time of application. Acceptable ischemia time: 2 hours before definitive care required.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-title">Step 4: Junctional Hemorrhage Devices</div>
+        <div class="timeline-body">Pelvis, groin, axilla — areas where TQ cannot be applied. Devices: Combat Ready Clamp (CRoC), Junctional Emergency Treatment Tool (JETT), SAM Junctional Tourniquet. These apply direct compression to major junctional vessels.</div>
+      </div>
+    </div>
+
+    <h3>Tourniquet: Evidence-Based Decision Making</h3>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          When to Apply a Tourniquet — Decision Framework <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p>Contemporary evidence from military and civilian trauma strongly supports <strong>early tourniquet application</strong> for life-threatening extremity hemorrhage. The fear of ischemic complications — historically overemphasized — is substantially less clinically significant than exsanguination.</p>
+            <table class="data-table">
+              <thead><tr><th>Indicator</th><th>Apply TQ</th></tr></thead>
+              <tbody>
+                <tr><td>Extremity hemorrhage not controlled by direct pressure × 3 minutes</td><td><span class="badge badge-red">✓ Yes</span></td></tr>
+                <tr><td>Amputation (partial or complete)</td><td><span class="badge badge-red">✓ Yes — immediate</span></td></tr>
+                <tr><td>Arterial hemorrhage from extremity</td><td><span class="badge badge-red">✓ Yes — immediate</span></td></tr>
+                <tr><td>Tactical situation prevents direct pressure</td><td><span class="badge badge-red">✓ Yes</span></td></tr>
+                <tr><td>Venous bleeding controlled with pressure</td><td><span class="badge badge-teal">✗ Not required</span></td></tr>
+                <tr><td>Wound proximal to axilla or inguinal ligament</td><td><span class="badge badge-amber">Use junctional device</span></td></tr>
+              </tbody>
+            </table>
+            <div class="callout callout-critical">
+              <div class="callout-icon">⚠️</div>
+              <div class="callout-content">
+                <strong>Never Remove a Tourniquet in the Field</strong>
+                Once applied, a tourniquet should only be removed by a physician in a controlled surgical environment with blood products immediately available. "Converting" a tourniquet to a pressure dressing in the field has caused preventable deaths.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Tourniquet Placement: Technique & Common Errors <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <h4>Correct Technique (CAT Tourniquet)</h4>
+            <ul class="styled">
+              <li>Place 2–3 inches proximal to the wound (or as proximal as anatomically possible)</li>
+              <li>Thread tail through buckle, pull tight — doubly secure</li>
+              <li>Turn windlass rod until bleeding stops COMPLETELY (not just slows)</li>
+              <li>Lock windlass rod in keeper</li>
+              <li>Write application time directly on tourniquet or patient's forehead</li>
+              <li>Cover patient (hypothermia prevention)</li>
+            </ul>
+            <h4>Common Errors</h4>
+            <table class="data-table">
+              <thead><tr><th>Error</th><th>Consequence</th></tr></thead>
+              <tbody>
+                <tr><td>Applied too loosely (venous TQ)</td><td>Increases venous engorgement and hemorrhage rate</td></tr>
+                <tr><td>Applied too distal</td><td>Does not occlude proximal arterial flow</td></tr>
+                <tr><td>Applied over a joint</td><td>Mechanically impossible to generate occlusive pressure</td></tr>
+                <tr><td>Time not documented</td><td>Limb viability at hospital cannot be assessed</td></tr>
+                <tr><td>Removed in field</td><td>Risk of fatal rebound hemorrhage</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Hemostatic Agents</h3>
+    <table class="data-table">
+      <thead><tr><th>Agent</th><th>Mechanism</th><th>Best Use</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-red">Combat Gauze</span></td><td>Kaolin-impregnated; activates intrinsic coagulation pathway</td><td>Extremity, junctional wounds</td><td>TCCC approved; minimal exothermic reaction</td></tr>
+        <tr><td><span class="badge badge-red">ChitoGauze</span></td><td>Chitosan (shrimp-derived); forms physical clot barrier</td><td>Moderate hemorrhage, wound packing</td><td>Allergy alert: shellfish allergy (relative CI)</td></tr>
+        <tr><td><span class="badge badge-amber">QuikClot ACS+</span></td><td>Zeolite beads; absorbs water, concentrates clotting factors</td><td>Field use; broad application</td><td>Older versions caused thermal burns; newer formulations significantly safer</td></tr>
+        <tr><td><span class="badge badge-teal">Celox</span></td><td>Chitosan granules; does not require normal coagulation</td><td>Anticoagulated patients; hypothermic patients</td><td>Works when patient's clotting system is impaired</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Special Wound Management -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-amber">⚡</div>
+      <div>
+        <div class="card-title">Special Wound Presentations</div>
+        <div class="card-subtitle">High-stakes scenarios requiring protocol mastery</div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          🔪 Penetrating Neck Trauma <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p>The neck contains the airway, major vessels (carotid arteries, jugular veins), cervical spine, esophagus, and vagus nerve — all in a compact anatomical space. Penetrating neck trauma is an <strong>immediate life threat</strong>.</p>
+            <h4>Zone-Based Assessment</h4>
+            <table class="data-table">
+              <thead><tr><th>Zone</th><th>Boundaries</th><th>Key Structures</th></tr></thead>
+              <tbody>
+                <tr><td><span class="badge badge-navy">Zone I</span></td><td>Clavicles to cricoid cartilage</td><td>Subclavian vessels, trachea, esophagus, lungs</td></tr>
+                <tr><td><span class="badge badge-red">Zone II</span></td><td>Cricoid to angle of mandible</td><td>Carotid/jugular vessels, larynx, pharynx — most surgically accessible</td></tr>
+                <tr><td><span class="badge badge-amber">Zone III</span></td><td>Angle of mandible to skull base</td><td>Distal carotid, vertebral vessels, cranial nerves</td></tr>
+              </tbody>
+            </table>
+            <div class="callout callout-critical">
+              <div class="callout-icon">🚨</div>
+              <div class="callout-content">
+                <strong>Field Management of Penetrating Neck Wounds</strong>
+                Apply occlusive dressing immediately (air embolism risk from jugular injury). Do NOT apply circumferential compression (bilateral carotid occlusion → stroke). Use gloved fingers or folded gauze with direct pressure on the specific wound. Maintain c-spine precautions only if mechanism suggests hyperextension/hyperflexion — penetrating trauma alone does NOT mandate rigid c-collar.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          💥 Blast Injuries & Crush Syndrome <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <h4>Blast Injury: Four Mechanisms</h4>
+            <table class="data-table">
+              <thead><tr><th>Mechanism</th><th>Physics</th><th>Injuries</th></tr></thead>
+              <tbody>
+                <tr><td><span class="badge badge-red">Primary</span></td><td>Pressure wave interaction with gas-containing organs</td><td>Pulmonary barotrauma, tympanic perforation, bowel</td></tr>
+                <tr><td><span class="badge badge-red">Secondary</span></td><td>Fragmentation (shrapnel) penetration</td><td>Penetrating wounds anywhere</td></tr>
+                <tr><td><span class="badge badge-amber">Tertiary</span></td><td>Body displaced by blast wind</td><td>Blunt trauma, fractures, TBI</td></tr>
+                <tr><td><span class="badge badge-amber">Quaternary</span></td><td>Burns, chemical, structural collapse</td><td>Burns, inhalation injury, crush</td></tr>
+              </tbody>
+            </table>
+            <h4>Crush Syndrome (Rhabdomyolysis)</h4>
+            <p>Prolonged entrapment (>1 hour) causes myocyte death with release of myoglobin, potassium, phosphate, and creatine kinase into systemic circulation. The clinical risk arrives <strong>after extrication</strong>, not during.</p>
+            <div class="callout callout-clinical">
+              <div class="callout-icon">💊</div>
+              <div class="callout-content">
+                <strong>Pre-Extrication Protocol</strong>
+                Begin aggressive IV crystalloid (normal saline, NOT LR — lactate in hyperkalaemia is dangerous) at 1–1.5 L/hour BEFORE release. Alkalinize urine with sodium bicarbonate per protocol. Monitor for reperfusion dysrhythmias post-release. Hyperkalemia → cardiac arrest risk is real.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          ✂️ Amputations & Avulsions <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p>Traumatic amputations present a viscerally disturbing scene that can distract from life-threatening hemorrhage. Your priority is always: <strong>patient stabilization first, limb preservation second.</strong></p>
+            <h4>Amputated Part Preservation</h4>
+            <ul class="styled">
+              <li>Rinse part gently with sterile saline — remove gross contamination only</li>
+              <li>Wrap in sterile saline-moistened gauze</li>
+              <li>Place in sealed sterile bag or container</li>
+              <li>Place bag in a second container with ice and water (NOT direct ice contact)</li>
+              <li>Transport with patient — label container clearly</li>
+              <li>Viable preservation window: 4–6 hours for digit; 4 hours for proximal limb (more muscle = less ischemic tolerance)</li>
+            </ul>
+            <div class="callout callout-tip">
+              <div class="callout-icon">💡</div>
+              <div class="callout-content">
+                <strong>Degloving Injuries</strong>
+                Avulsions removing a sleeve of skin and subcutaneous tissue (degloving) — common in rollovers and industrial machinery. Moist dressings, preserve all tissue, transport priority. These often have intact neurovascular structures despite dramatic appearance.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Burn Management -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-amber">🔥</div>
+      <div>
+        <div class="card-title">Burns: Classification & Field Management</div>
+        <div class="card-subtitle">Soft Tissue Thermal Injury</div>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead><tr><th>Depth</th><th>Layer Affected</th><th>Appearance</th><th>Sensation</th><th>Healing</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-teal">Superficial</span><br><small>(1st degree)</small></td><td>Epidermis only</td><td>Red, dry, no blisters</td><td>Painful</td><td>3–5 days; no scarring</td></tr>
+        <tr><td><span class="badge badge-amber">Partial Thickness</span><br><small>(2nd degree)</small></td><td>Epidermis + dermis (variable)</td><td>Blisters, moist, red/pink</td><td>Extremely painful</td><td>14–21 days superficial; grafts for deep</td></tr>
+        <tr><td><span class="badge badge-red">Full Thickness</span><br><small>(3rd degree)</small></td><td>All skin layers</td><td>Waxy, white, brown or charred; leathery</td><td>Painless (nerve destruction)</td><td>Requires grafting; does not self-heal</td></tr>
+        <tr><td><span class="badge badge-red">4th Degree</span></td><td>Bone, muscle, tendon</td><td>Charred; tissue loss</td><td>No sensation</td><td>Amputation often required</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Rule of Nines — Adult</h3>
+    <div class="two-col">
+      <div>
+        <table class="data-table">
+          <thead><tr><th>Body Region</th><th>% TBSA</th></tr></thead>
+          <tbody>
+            <tr><td>Head & Neck</td><td>9%</td></tr>
+            <tr><td>Each Arm</td><td>9%</td></tr>
+            <tr><td>Anterior Trunk</td><td>18%</td></tr>
+            <tr><td>Posterior Trunk</td><td>18%</td></tr>
+            <tr><td>Each Leg</td><td>18%</td></tr>
+            <tr><td>Perineum</td><td>1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="callout callout-clinical">
+          <div class="callout-icon">💧</div>
+          <div class="callout-content">
+            <strong>Parkland Formula</strong>
+            4 mL × Weight (kg) × %TBSA (2nd + 3rd degree burns)<br>
+            Give 50% in first 8 hours from time of burn (not arrival).<br>
+            Remaining 50% over next 16 hours.
+          </div>
+        </div>
+        <div class="callout callout-critical">
+          <div class="callout-icon">🚨</div>
+          <div class="callout-content">
+            <strong>Critical Burns → Immediate Burn Center</strong>
+            >25% TBSA; full-thickness; hands/feet/face/genitalia; inhalation injury; circumferential; electrical/chemical.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Special Burn Types</h3>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          ⚡ Electrical Burns <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p>Electrical burns are the most deceptive soft tissue injury in EMS. The entry and exit wounds may appear trivial while internal tissues along the electrical pathway have sustained massive injury.</p>
+            <ul class="styled">
+              <li>Current follows path of least resistance (blood vessels, nerves)</li>
+              <li>Entry wound: small, charred; exit wound: explosive (more tissue damage)</li>
+              <li>Cardiac dysrhythmia risk (ventricular fibrillation is primary death mechanism)</li>
+              <li>Rhabdomyolysis: treat as crush injury</li>
+              <li>Delayed presentation of internal injuries is common — all electrical exposures require hospital evaluation regardless of appearance</li>
+              <li>High voltage (>1000V): blast, arc flash, thermal burns are also present</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          🧪 Chemical Burns <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <h4>Acid Burns</h4>
+            <p>Cause <em>coagulation necrosis</em> — a dense eschar forms that limits deeper penetration. Generally more contained than alkali burns.</p>
+            <h4>Alkali Burns</h4>
+            <p>Cause <em>liquefaction necrosis</em> — fat saponification allows continued deep penetration. More dangerous with progressive ongoing tissue destruction. Common alkalis: lye, cement, bleach.</p>
+            <h4>Field Management</h4>
+            <ul class="styled">
+              <li>Ensure scene safety and provider PPE first</li>
+              <li>Brush off dry chemical before irrigation</li>
+              <li>Copious water irrigation for minimum 20 minutes (30 for eye exposure)</li>
+              <li>Remove all contaminated clothing and jewelry</li>
+              <li>Exception: hydrofluoric acid (HF) requires calcium gluconate gel application</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Decision Exercise -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-teal">🌳</div>
+      <div>
+        <div class="card-title">Clinical Decision Exercise</div>
+        <div class="card-subtitle">Andragogy Principle 5: Problem-Centered Learning</div>
+      </div>
+    </div>
+
+    <p><strong>Scenario:</strong> You arrive to find a 28-year-old male with a gunshot wound to the right thigh. He is alert, screaming in pain. The wound is bleeding heavily — dark red, steady flow from the medial thigh.</p>
+
+    <div class="decision-tree">
+      <div class="dt-node dt-question">Characterize the hemorrhage: Is it pulsatile/bright red OR steady/dark red?</div>
+      <div class="dt-arrows">↓</div>
+      <div class="dt-row">
+        <div class="dt-node dt-yes" onclick="showDTPanel('dt-a')">Pulsatile / Bright Red → ARTERIAL</div>
+        <div class="dt-node dt-no" onclick="showDTPanel('dt-b')">Steady / Dark Red → VENOUS</div>
+      </div>
+      <div class="dt-arrows">↓ click a branch above ↓</div>
+      <div id="dt-a" style="display:none; max-width:460px; margin:0 auto;">
+        <div class="dt-node dt-action">IMMEDIATE TOURNIQUET · 2–3" proximal · Record time · Transport</div>
+        <div class="accordion-body-inner" style="margin-top:10px; background: var(--crimson-lt); border-radius: var(--radius); padding: 14px;">
+          <strong>Arterial protocol:</strong> Apply CAT or SOFT-T Wide TQ immediately. Tighten until bleeding stops completely. Begin rapid transport — arterial hemorrhage from proximal extremity is immediately life-threatening. Secondary: establish IV en route; blood products if available; keep warm.
+        </div>
+      </div>
+      <div id="dt-b" style="display:none; max-width:460px; margin:0 auto;">
+        <div class="dt-node dt-action">Direct pressure × 3 min → Re-assess → Wound packing if needed</div>
+        <div class="accordion-body-inner" style="margin-top:10px; background: var(--teal-lt); border-radius: var(--radius); padding: 14px;">
+          <strong>Venous protocol:</strong> Firm direct pressure with hemostatic gauze × 3 minutes. If not controlled, proceed to wound packing. If still uncontrolled or patient deteriorating, apply TQ. Venous hemorrhage from thigh can still be life-threatening — do not underestimate volume loss rate.
+        </div>
+      </div>
+    </div>
+
+    <!-- Knowledge Check -->
+    <div class="kc-card" style="margin-top:20px;">
+      <div class="kc-question">In the above scenario (dark red, steady flow), you apply direct pressure × 3 minutes without success. Your next intervention should be:</div>
+      <ul class="kc-options">
+        <li class="kc-option" onclick="checkKC(this,'wrong','kc3')">A. Apply ice and elevate the limb to reduce venous pressure.</li>
+        <li class="kc-option" onclick="checkKC(this,'correct','kc3')">B. Pack the wound with hemostatic gauze and apply firm direct pressure.</li>
+        <li class="kc-option" onclick="checkKC(this,'wrong','kc3')">C. Apply a pressure bandage and monitor, reassessing every 5 minutes.</li>
+        <li class="kc-option" onclick="checkKC(this,'wrong','kc3')">D. Clamp the bleeding vessel with a hemostat.</li>
+      </ul>
+      <div class="kc-rationale" id="kc3">✅ <strong>Correct.</strong> Wound packing with hemostatic gauze (Combat Gauze, ChitoGauze) into the wound cavity and applying sustained firm pressure for a minimum of 3 minutes is the appropriate escalation after direct pressure fails. Clamping vessels in the field is outside paramedic scope and risks vascular injury. Pressure bandages without wound packing are insufficient for deep wounds.</div>
+    </div>
+  </div>
+
+  <!-- Infection & Wound Care -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-teal">🦠</div>
+      <div>
+        <div class="card-title">Infection Risk & Field Wound Care</div>
+        <div class="card-subtitle">Beyond Hemorrhage Control</div>
+      </div>
+    </div>
+    <p>While hemorrhage control dominates the acute priority, infection — particularly tetanus and polymicrobial contamination — is a secondary but critical consideration in wound management documentation and field care.</p>
+    <table class="data-table">
+      <thead><tr><th>Wound Type</th><th>Infection Risk</th><th>Field Action</th></tr></thead>
+      <tbody>
+        <tr><td>Clean laceration (glass)</td><td><span class="badge badge-teal">Low</span></td><td>Cover; hospital irrigation</td></tr>
+        <tr><td>Abrasion (asphalt contamination)</td><td><span class="badge badge-amber">Moderate</span></td><td>Gentle irrigation with sterile saline; non-adherent dressing</td></tr>
+        <tr><td>Bite wound (human/animal)</td><td><span class="badge badge-red">High</span></td><td>Irrigate; do NOT close in field; hospital evaluation for antibiotics, rabies risk</td></tr>
+        <tr><td>Agricultural/soil contamination</td><td><span class="badge badge-red">Very High (tetanus)</span></td><td>Irrigate; verify tetanus history; hospital</td></tr>
+        <tr><td>Evisceration/bowel exposure</td><td><span class="badge badge-red">Very High</span></td><td>Moist occlusive dressing; antibiotics at hospital</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-secondary" onclick="switchTab('m1')">← Module 1</button>
+    <button class="btn btn-primary" onclick="switchTab('m3')">Continue to Module 3 →</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODULE 3: SYNTHESIS & CAPSTONE
+     ============================================================ -->
+<div id="tab-m3" class="tab-panel">
+
+  <div class="andragogy-ribbon">
+    <div class="principle">Andragogy Principle 6: Motivation — Intrinsic Rewards</div>
+    <h3>Your Competence Saves Lives</h3>
+    <p>What you synthesize in this module directly correlates to outcomes you will see in your career. Providers who master hemorrhage control and soft tissue management consistently demonstrate measurable reductions in preventable trauma mortality. That is your reward.</p>
+  </div>
+
+  <!-- Capstone Scenario -->
+  <div class="scenario-box">
+    <div class="scenario-label">🎓 Capstone Scenario — Integration of All Concepts</div>
+    <h2>Operation: Multi-System Trauma</h2>
+    <p>You are the lead medic at a construction site collapse. Three workers are entrapped. You have one partner and a 12-minute transport time to a Level II trauma center.</p>
+    <div class="dispatch">
+      Patient A: Right forearm amputation at wrist. Alert, pale, diaphoretic. BP 88/60. HR 138.<br>
+      Patient B: Entrapped × 2 hours. Crush injury bilateral legs. Alert, anxious. BP 110/70. Pedal pulses intact currently.<br>
+      Patient C: Impaled rebar through left shoulder. Alert, GCS 15. Mild respiratory distress. BP 122/78.
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-red">🎯</div>
+      <div>
+        <div class="card-title">Capstone Decision Analysis</div>
+        <div class="card-subtitle">Apply your complete knowledge set</div>
+      </div>
+    </div>
+
+    <h3>Patient Prioritization (START Triage)</h3>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Patient A — Amputation · Priority Analysis <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p><strong>START Category: IMMEDIATE (Red)</strong></p>
+            <p>Exsanguinating hemorrhage from traumatic amputation. Hypotension (88/60) and tachycardia (138) indicate Class III hemorrhagic shock (30–40% blood volume lost).</p>
+            <h4>Management Priority Sequence</h4>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-title">0–30 seconds: Tourniquet</div>
+                <div class="timeline-body">Apply CAT TQ 2–3 inches proximal to amputation. Tighten until all hemorrhage stops. Document time.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-title">30–90 seconds: Wrap amputated part</div>
+                <div class="timeline-body">Moist gauze → sterile bag → second container with ice/water mixture. Transport with patient.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-title">En route: IV/IO access × 2</div>
+                <div class="timeline-body">Warm isotonic fluids (or blood products if available). Permissive hypotension target: SBP 80–90. Keep warm.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Patient B — Crush Injury · Priority Analysis <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p><strong>START Category: DELAYED (Yellow) — with upgrade potential</strong></p>
+            <p>Currently hemodynamically stable with intact perfusion. However, 2-hour entrapment with bilateral leg involvement = significant rhabdomyolysis risk.</p>
+            <div class="callout callout-critical">
+              <div class="callout-icon">⚠️</div>
+              <div class="callout-content">
+                <strong>Pre-Extrication Protocol is Critical</strong>
+                Begin 1 L NS (NOT LR) IV before release. Consider bicarb (50 mEq NaHCO3) per protocol. Have defibrillator immediately available. Release can trigger K+ surge → cardiac arrest. Monitor ECG continuously after extrication.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Patient C — Impalement · Priority Analysis <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p><strong>START Category: DELAYED (Yellow)</strong></p>
+            <p>Hemodynamically stable. Mild respiratory distress warrants close monitoring for pneumothorax or hemothorax development.</p>
+            <h4>Impaled Object Management</h4>
+            <ul class="styled">
+              <li>DO NOT REMOVE the rebar — removal may release tamponaded hemorrhage</li>
+              <li>Stabilize object in place using bulky dressings secured around the impaled object</li>
+              <li>Cut object down to manageable length if necessary for transport</li>
+              <li>Exception to non-removal: if object prevents CPR or airway management and patient is in arrest — clinical judgment required</li>
+              <li>Monitor breath sounds bilaterally en route — if absent unilaterally, needle decompression per protocol</li>
+              <li>Maintain supine or position of comfort — do not rotate or flex the shoulder</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pathophysiology: Hemorrhagic Shock -->
+    <h3 style="margin-top:32px;">Hemorrhagic Shock: The Pathophysiological Framework</h3>
+    <table class="data-table">
+      <thead><tr><th>Class</th><th>Blood Loss</th><th>HR</th><th>BP</th><th>RR</th><th>Mental Status</th><th>Urine Output</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-teal">Class I</span></td>
+          <td>&lt;15% (&lt;750 mL)</td><td>&lt;100</td><td>Normal</td><td>14–20</td><td>Normal/Anxious</td><td>&gt;30 mL/hr</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-amber">Class II</span></td>
+          <td>15–30% (750–1500 mL)</td><td>100–120</td><td>Normal</td><td>20–30</td><td>Anxious</td><td>20–30 mL/hr</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-red">Class III</span></td>
+          <td>30–40% (1500–2000 mL)</td><td>120–140</td><td>Decreased</td><td>30–40</td><td>Confused</td><td>5–15 mL/hr</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-red">Class IV</span></td>
+          <td>&gt;40% (&gt;2000 mL)</td><td>&gt;140</td><td>Very low</td><td>&gt;35</td><td>Lethargic/Unresponsive</td><td>Negligible</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-pearl">
+      <div class="callout-icon">🔍</div>
+      <div class="callout-content">
+        <strong>Shock Index: A Clinical Pearl</strong>
+        Shock Index = Heart Rate ÷ Systolic BP. Normal = 0.5–0.7. A Shock Index &gt;1.0 indicates significant hemodynamic compromise and predicts need for blood products. Example: HR 130 / SBP 90 = 1.44 → immediate concern.
+      </div>
+    </div>
+
+    <h3>Fluid Resuscitation: Current Evidence</h3>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Damage Control Resuscitation — The Modern Standard <span class="accordion-chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <h4>Permissive Hypotension</h4>
+            <p>Target SBP 80–90 mmHg for penetrating trauma without TBI. Aggressive crystalloid administration disrupts forming clots, causes hemodilution, and worsens the "lethal triad": <strong>acidosis + hypothermia + coagulopathy</strong>.</p>
+            <h4>Lethal Triad Management</h4>
+            <table class="data-table">
+              <thead><tr><th>Component</th><th>Why It Kills</th><th>Field Intervention</th></tr></thead>
+              <tbody>
+                <tr><td>Hypothermia</td><td>Enzymatic coagulation cascade requires 37°C — cold = coagulopathy</td><td>Blankets, warm fluids, remove wet clothing, heated ambulance</td></tr>
+                <tr><td>Acidosis</td><td>Impairs platelet function and clotting factor activity</td><td>Optimize perfusion; reduce ischemic burden; limit normal saline (hyperchloremic acidosis)</td></tr>
+                <tr><td>Coagulopathy</td><td>Clotting factor dilution + activation = inability to form stable clots</td><td>Hemostatic agents; blood products (1:1:1 pRBC:FFP:PLT); TXA within 3 hrs of injury</td></tr>
+              </tbody>
+            </table>
+            <div class="callout callout-clinical">
+              <div class="callout-icon">💊</div>
+              <div class="callout-content">
+                <strong>Tranexamic Acid (TXA)</strong>
+                1g IV/IO over 10 minutes within 3 hours of injury for significant hemorrhagic trauma. Inhibits fibrinolysis (clot breakdown). Reduces mortality by ~15% in major trauma. Avoid if injury occurred &gt;3 hours prior — may increase mortality.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="reflection-box">
+    <h3>🔍 Reflection: Andragogy Principle 6 — Your Practice</h3>
+    <p>Taking a few minutes to connect this content to your real practice dramatically increases retention and clinical application (Knowles, 1984; Moon, 2004).</p>
+    <p><strong>Prompt 1:</strong> Think about a bleeding or trauma call you have responded to. What hemorrhage class do you estimate the patient was in? What would you do differently with your current knowledge?</p>
+    <textarea class="reflection-input" placeholder="Your reflection here — this is for your learning, not graded..."></textarea>
+    <p style="margin-top:16px;"><strong>Prompt 2:</strong> What is one hemorrhage control skill or protocol you want to practice at your next simulation or station training? How will you implement it?</p>
+    <textarea class="reflection-input" placeholder="Identify a concrete next step for your practice..."></textarea>
+  </div>
+
+  <!-- Module 3 Mini-Assessment (10 Q) -->
+  <div class="section-card">
+    <div class="card-header">
+      <div class="card-icon icon-red">📝</div>
+      <div>
+        <div class="card-title">Module 3: Synthesis Check (10 Questions)</div>
+        <div class="card-subtitle">Integration of Modules 1, 2 & 3</div>
+      </div>
+    </div>
+
+    <div id="synth-qs"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="switchTab('m4')">Proceed to Full 100-Question Assessment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODULE 4: FULL 100-QUESTION ASSESSMENT
+     ============================================================ -->
+<div id="tab-m4" class="tab-panel">
+
+  <div class="assessment-hero">
+    <h2>Final Assessment</h2>
+    <p>100 Questions · NREMT-Style · Bleeding & Soft Tissue Trauma<br>
+    Complete all questions, then submit for your score report and downloadable PDF certificate.</p>
+  </div>
+
+  <!-- Student ID Form -->
+  <div class="student-form" id="student-form-block">
+    <h3 style="margin: 0 0 6px; font-family: var(--font-display);">Student Information</h3>
+    <p style="font-size:.88rem; color: var(--text-muted); margin-bottom: 0;">This information will appear on your score report PDF.</p>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="stu-name" placeholder="e.g., Jane Smith">
+      </div>
+      <div class="form-group">
+        <label>Student ID</label>
+        <input type="text" id="stu-id" placeholder="e.g., CAMP-2026-001">
+      </div>
+      <div class="form-group">
+        <label>Program / Cohort</label>
+        <input type="text" id="stu-cohort" placeholder="e.g., Spring 2026 Paramedic">
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="text" id="stu-date" readonly>
+      </div>
+    </div>
+  </div>
+
+  <div id="assess-progress" style="margin-bottom:24px; display:none;">
+    <div class="progress-header">
+      <span class="progress-label">Questions Answered</span>
+      <span class="progress-label" id="prog-count">0 / 100</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <div id="assessment-questions"></div>
+
+  <div id="assess-actions" style="display:none;">
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="submitAssessment()">Submit Assessment</button>
+      <button class="btn btn-secondary" onclick="clearAssessment()">Clear All Answers</button>
+    </div>
+  </div>
+
+  <div id="score-result" style="display:none;"></div>
+
+  <div id="review-section" style="display:none; margin-top:32px;">
+    <h3 style="font-family:var(--font-display); margin-bottom:16px;">Answer Review</h3>
+    <div id="review-body"></div>
+  </div>
+</div>
+
+</div><!-- /.main -->
+
+<script>
+// ===== THEME =====
+function toggleTheme(){
+  const d = document.documentElement;
+  const btn = document.querySelector('.theme-toggle');
+  if(d.getAttribute('data-theme') === 'dark'){
+    d.removeAttribute('data-theme'); btn.textContent = '🌙 Dark';
+  } else {
+    d.setAttribute('data-theme','dark'); btn.textContent = '☀️ Light';
+  }
+}
+
+// ===== TAB SWITCHING =====
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const tabs = ['m1','m2','m3','m4'];
+  const idx = tabs.indexOf(id);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ===== ACCORDION =====
+function toggleAccordion(header){
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ===== MODULE KC CHECK =====
+function checkKC(el, type, rationaleId){
+  const parent = el.closest('.kc-options');
+  if(parent.querySelector('.disabled')) return;
+  parent.querySelectorAll('.kc-option').forEach(o => o.classList.add('disabled'));
+  el.classList.add(type === 'correct' ? 'correct' : 'wrong');
+  const r = document.getElementById(rationaleId);
+  if(r) r.classList.add('show');
+}
+
+// ===== DECISION TREE =====
+function showDTPanel(id){
+  document.getElementById('dt-a').style.display = 'none';
+  document.getElementById('dt-b').style.display = 'none';
+  document.getElementById(id).style.display = 'block';
+}
+
+// ===== DATE =====
+document.getElementById('stu-date').value = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+
+// ===== SYNTHESIS QUESTIONS (10) =====
+const synthQs = [
+  {q:"A 32-year-old male presents with a stab wound to the right neck (Zone II). He is alert with a small but actively oozing wound. Which management is MOST appropriate?",
+   opts:["Apply a circumferential pressure bandage to control hemorrhage","Apply a folded gauze pad with direct pressure and an occlusive dressing","Insert a nasopharyngeal airway immediately","Apply a tourniquet to the neck at Zone II"],
+   ans:1, rat:"Zone II neck wounds require direct pressure to the specific wound site, not circumferential compression. An occlusive dressing addresses air embolism risk from possible jugular involvement. Circumferential compression risks bilateral carotid occlusion."},
+  {q:"You are treating a construction worker with bilateral leg crush injuries after 2 hours of entrapment. Pre-hospital fluid of choice is:",
+   opts:["Lactated Ringer's solution (LR)","Normal saline (NS) 0.9%","D5W (5% Dextrose in Water)","Hetastarch (Hespan) colloid"],
+   ans:1, rat:"Normal saline is preferred in crush/rhabdomyolysis because LR contains lactate which can worsen acidosis, and LR potassium content (4 mEq/L) is contraindicated when hyperkalemia from rhabdomyolysis is anticipated."},
+  {q:"A patient has a Shock Index of 1.3 following abdominal trauma. This indicates:",
+   opts:["Normal hemodynamic status; no intervention needed","Mild hemodynamic instability manageable with oral hydration","Significant hemodynamic compromise; blood product requirement likely","Adequate perfusion; monitor only"],
+   ans:2, rat:"Shock Index >1.0 indicates significant hemodynamic compromise. SI = HR/SBP. A value of 1.3 suggests Class III-IV hemorrhage and predicts likely need for blood product transfusion at hospital."},
+  {q:"Tranexamic Acid (TXA) should NOT be administered when:",
+   opts:["The patient is in Class III hemorrhagic shock","The injury occurred more than 3 hours prior to administration","The patient has bilateral extremity injuries","Blood pressure is below 80 mmHg systolic"],
+   ans:1, rat:"TXA administered >3 hours after injury has been shown to potentially INCREASE mortality, likely due to the balance shift between fibrinolysis and thrombosis. It is most beneficial within the first hour and effective up to 3 hours."},
+  {q:"A partial-thickness (2nd degree) burn covering both anterior and posterior trunk of an adult = what % TBSA?",
+   opts:["18%","27%","36%","45%"],
+   ans:2, rat:"Using Rule of Nines: Anterior trunk = 18%, Posterior trunk = 18%. Total = 36% TBSA. This exceeds the critical burn threshold (>25%) requiring burn center consultation and Parkland formula fluid resuscitation."},
+  {q:"During management of a patient with a rebar impaled through the shoulder, the MOST appropriate field action is:",
+   opts:["Remove the object and apply direct pressure to control hemorrhage","Cut the object to a manageable length and stabilize it in place without removing","Perform thoracic needle decompression immediately regardless of breath sounds","Place the patient prone to prevent the object from moving"],
+   ans:1, rat:"Impaled objects should never be removed in the field (removal releases tamponaded hemorrhage). Cutting to a manageable length for transport is appropriate. Secure in place with bulky dressings. Monitor for signs of pneumothorax and intervene if breath sounds deteriorate."},
+  {q:"Which characteristic BEST distinguishes arterial from venous hemorrhage in the field?",
+   opts:["Color: bright red versus dark red","Pulsatile flow synchronized with cardiac cycle","Rate of bleeding (fast vs slow)","Warmth of the blood"],
+   ans:1, rat:"While color provides a rough guide, lighting conditions and oxygen saturation can confound this. Pulsatile flow synchronized with the heartbeat is the most reliable clinical distinguisher of arterial hemorrhage in the field."},
+  {q:"The 'Lethal Triad' in trauma refers to the combination of:",
+   opts:["Hypoxia, hypotension, and hypothermia","Acidosis, hypothermia, and coagulopathy","Tachycardia, hypotension, and altered mental status","Hemorrhage, airway obstruction, and tension pneumothorax"],
+   ans:1, rat:"The Lethal Triad (acidosis, hypothermia, coagulopathy) represents a mutually reinforcing cycle where each component worsens the other two. All three impair the coagulation cascade, leading to uncontrollable hemorrhage even when the primary injury is 'controlled.'"},
+  {q:"An alkali burn (lye exposure) to the forearm requires copious irrigation for a MINIMUM of:",
+   opts:["5 minutes","10 minutes","20 minutes","Only until the patient reports pain relief"],
+   ans:2, rat:"Alkali burns cause liquefaction necrosis with ongoing penetration — the alkali continues to react even after the initial exposure. Minimum 20 minutes of copious water irrigation is required; eye exposures require 30 minutes. Duration is not determined by patient pain perception."},
+  {q:"A patient with a traumatic right wrist amputation has HR 138 and BP 82/54. Per hemorrhagic shock classification, this patient is MOST consistent with:",
+   opts:["Class I hemorrhagic shock — minor blood volume loss","Class II hemorrhagic shock — mild hemodynamic compromise","Class III hemorrhagic shock — significant volume depletion","Class IV hemorrhagic shock — immediately life-threatening"],
+   ans:2, rat:"Class III shock: 30–40% blood volume loss. HR 120–140 with decreased BP, confusion possible. Wrist amputation with visible exsanguination is highly consistent with Class III. This patient requires immediate tourniquet application (if not done), IV access × 2, warm fluids, and rapid transport."}
+];
+
+function buildSynthQs(){
+  const c = document.getElementById('synth-qs');
+  synthQs.forEach((q,i) => {
+    const d = document.createElement('div');
+    d.className = 'kc-card';
+    d.innerHTML = `<div class="kc-question">Q${i+1}: ${q.q}</div>
+    <ul class="kc-options">${q.opts.map((o,j)=>`<li class="kc-option" onclick="checkKC(this,'${j===q.ans?'correct':'wrong'}','srn${i}')">${String.fromCharCode(65+j)}. ${o}</li>`).join('')}</ul>
+    <div class="kc-rationale" id="srn${i}">✅ ${q.rat}</div>`;
+    c.appendChild(d);
+  });
+}
+buildSynthQs();
+
+// ===== ALL 100 ASSESSMENT QUESTIONS =====
+const questions = [
+// Section 1: Anatomy & Hemorrhage Types (Q1-15)
+{q:"Which type of hemorrhage is characterized by bright red, pulsatile bleeding?",opts:["Capillary","Venous","Arterial","Lymphatic"],ans:2,rat:"Arterial blood is oxygenated (bright red) and flows under high systolic pressure, creating pulsatile spurting synchronized with ventricular contractions."},
+{q:"Dark red, steady (non-pulsatile) bleeding from a wound most likely indicates:",opts:["Arterial hemorrhage","Capillary hemorrhage","Venous hemorrhage","Lymphatic injury"],ans:2,rat:"Venous blood is deoxygenated (dark red) and travels under lower pressure, resulting in a steady, non-pulsatile flow."},
+{q:"Capillary hemorrhage is BEST described as:",opts:["Pulsatile bright red bleeding from a damaged high-pressure vessel","Steady dark flow from disrupted venous return","Slow oozing from multiple points on a wound surface","Rapid exsanguination from central vessel disruption"],ans:2,rat:"Capillary hemorrhage is diffuse oozing from small vessels — the most minor form of external hemorrhage, typically self-limiting."},
+{q:"A severed femoral artery can exsanguinate an adult in approximately:",opts:["15–20 minutes","1–2 hours","3–5 minutes","30 minutes"],ans:2,rat:"The femoral artery carries high-volume, high-pressure flow. Uncontrolled exsanguination from a complete femoral artery transection can cause death within 3–5 minutes."},
+{q:"Internal hemorrhage is MOST dangerous because:",opts:["It is always associated with external wounds","It can result in large, uncontrollable blood loss with no visible signs","It causes immediate shock within 30 seconds","It is impossible to assess without imaging"],ans:1,rat:"Internal bleeding into cavities (abdomen, thorax, pelvis, retroperitoneum) can accumulate liters of blood with minimal or no external signs, making assessment entirely dependent on mechanism and clinical signs of shock."},
+{q:"Which cavity can accommodate the MOST blood loss in internal hemorrhage?",opts:["Cranial vault","Chest cavity (hemothorax)","Pelvic cavity","Abdominal cavity"],ans:3,rat:"The abdominal (peritoneal) cavity is essentially unlimited in accommodation of hemorrhage. A massive hepatic or splenic injury can rapidly accumulate 5+ liters. Pelvic fractures alone can hold 3–4 liters retroperitoneally."},
+{q:"The PRIMARY prehospital intervention for suspected internal hemorrhage is:",opts:["Aggressive IV fluid resuscitation targeting normal blood pressure","Application of MAST/PASG trousers","Rapid assessment, permissive hypotension, and immediate transport","Morphine for pain management and positioning"],ans:2,rat:"Internal hemorrhage cannot be controlled in the field. The priority is rapid transport to a surgical facility for definitive hemorrhage control. Permissive hypotension (80–90 mmHg SBP for penetrating trauma) prevents clot disruption."},
+{q:"Which sign of internal hemorrhage is associated specifically with pelvic fracture?",opts:["Unequal breath sounds","Subcutaneous emphysema","Pelvic instability on palpation or distension","Distended neck veins"],ans:2,rat:"Pelvic instability on gentle compression/palpation suggests a pelvic fracture capable of accommodating 2–4 liters of hemorrhage into the retroperitoneal space."},
+{q:"A patient following blunt abdominal trauma has a rigid, board-like abdomen. This finding suggests:",opts:["Referred diaphragm pain from pneumothorax","Peritoneal irritation from intra-abdominal hemorrhage or organ injury","Normal response to abdominal muscle guarding from pain","Tension pneumothorax causing diaphragmatic shift"],ans:1,rat:"Peritoneal irritation from blood or bowel contents produces involuntary muscle rigidity and guarding — a reliable sign of significant intra-abdominal injury."},
+{q:"Which body region represents 18% TBSA in the adult Rule of Nines?",opts:["Head and neck","Each arm","Each leg","Posterior trunk"],ans:2,rat:"Each entire lower extremity = 18% TBSA. The head/neck = 9%, each arm = 9%, anterior trunk = 18%, posterior trunk = 18%, perineum = 1%."},
+{q:"The Shock Index is calculated as:",opts:["Systolic BP divided by Heart Rate","Heart Rate divided by Systolic BP","Mean arterial pressure minus diastolic pressure","Heart rate minus respiratory rate"],ans:1,rat:"Shock Index = HR ÷ SBP. Normal range is 0.5–0.7. Values >0.9 suggest significant hemodynamic compromise; >1.0 predicts need for blood product transfusion."},
+{q:"Which type of internal hemorrhage is most likely to present with unilateral absent breath sounds?",opts:["Retroperitoneal hemorrhage","Pericardial tamponade","Hemothorax","Solid organ laceration"],ans:2,rat:"Hemothorax (blood accumulation in the pleural space) compresses the ipsilateral lung, causing unilateral absent or markedly diminished breath sounds — a critical clinical finding."},
+{q:"Class II hemorrhagic shock involves blood loss of approximately:",opts:["Less than 15% of total blood volume","15–30% of total blood volume","30–40% of total blood volume","Greater than 40% of total blood volume"],ans:1,rat:"Class II: 15–30% blood volume loss (750–1500 mL). Signs include HR 100–120, normal BP (compensated), RR 20–30, anxiety."},
+{q:"In Class III hemorrhagic shock, which hemodynamic finding is most consistent?",opts:["HR <100, BP normal, RR normal","HR 100–120, BP normal, mild anxiety","HR 120–140, BP decreased, confusion","HR >140, BP very low, lethargy/unresponsiveness"],ans:2,rat:"Class III shock (30–40% volume loss): HR 120–140 with beginning BP decline and signs of CNS hypoperfusion (confusion). This is the class where resuscitation interventions become most critical."},
+{q:"The most reliable EARLY indicator of hemorrhagic shock is:",opts:["Hypotension","Tachycardia","Decreased urine output","Altered mental status"],ans:1,rat:"Tachycardia is the earliest reliable compensatory response to volume loss. Blood pressure is maintained by vasoconstriction and is a LATE finding in hemorrhagic shock — do not wait for hypotension to recognize shock."},
+
+// Section 2: Wound Types (Q16-30)
+{q:"A wound with a small entry point and deep tissue penetration describes a:",opts:["Laceration","Abrasion","Puncture wound","Incised wound"],ans:2,rat:"Puncture wounds (stab, nail) have a small entry but can penetrate to significant depth, threatening underlying visceral, vascular, or neural structures."},
+{q:"An avulsion injury is defined as:",opts:["A clean, linear cut through the dermis","Full-thickness tissue torn partially or completely away from its attachment","A wound from compressive force leaving the skin intact","Superficial dermis loss from friction"],ans:1,rat:"An avulsion is forceful tearing away of soft tissue. It may be partial (flap remains attached) or complete (tissue fully separated). Degloving is a severe form of avulsion."},
+{q:"Management of an evisceration wound in the field includes:",opts:["Gently replace the exposed viscera into the abdominal cavity","Apply a dry sterile dressing taped on all four sides","Cover with a moist occlusive dressing; do NOT reduce viscera","Insert an NG tube to prevent bowel distension before transport"],ans:2,rat:"Moist occlusive dressing prevents desiccation (which kills exposed tissue) and contamination. Reduction is NEVER performed in the field — no sterile environment exists, and reduction risks contamination, obstruction, and vascular compromise."},
+{q:"You find an impaled object through a patient's forearm. Your FIRST priority is:",opts:["Remove the object to allow direct wound pressure","Stabilize the object in place without removing it","Apply a tourniquet proximal to the object immediately","Cover with occlusive dressing and tape the object down"],ans:1,rat:"Impaled objects tamponade hemorrhage and should be stabilized in place. Removal may release massive bleeding. Stabilize with bulky dressings around the object. Tourniquet is only needed if there is concurrent uncontrolled hemorrhage."},
+{q:"A 'degloving injury' most commonly results from:",opts:["High-velocity penetrating trauma","Rollovers or industrial machinery entrapment","Blunt compressive force to solid organs","High-temperature thermal burns"],ans:1,rat:"Degloving injuries involve a circumferential or large-area avulsion of skin and subcutaneous tissue — classically from rollovers (road surface friction) or industrial machinery (catch points pulling skin off)."},
+{q:"Which wound type carries the HIGHEST infection risk in the field?",opts:["Clean glass laceration","Abrasion from asphalt","Human bite wound","Incised wound from scalpel"],ans:2,rat:"Human bite wounds have the highest polymicrobial bacterial load of any wound type, with significant risk of Eikenella corrodens, Streptococcal, and Staphylococcal infection. They should never be primarily closed in the field."},
+{q:"An abrasion wound is best described as:",opts:["Full-thickness skin loss with dermis exposed","Superficial dermal damage from friction or scraping","A jagged tear through multiple skin layers","Penetrating injury through dermal layers"],ans:1,rat:"Abrasions involve superficial scraping/friction damage to the epidermis and superficial dermis without full-thickness skin loss. 'Road rash' is the most common example."},
+{q:"A laceration differs from an incised wound primarily in:",opts:["Depth of tissue penetration","The presence of jagged versus clean wound edges","The likelihood of arterial involvement","The presence of contamination"],ans:1,rat:"Lacerations have irregular, jagged edges caused by tearing forces. Incised wounds (cuts) have clean, well-defined edges. Both penetrate the dermis, but edge quality affects repair and infection risk."},
+{q:"Which of the following is the CORRECT field management of a traumatically amputated finger?",opts:["Place the finger directly on ice to preserve it","Submerge the finger in ice water to maintain temperature","Wrap in saline-moistened gauze, seal in bag, and place in cool water ice mixture","Discard the part as replantation is rarely successful in field conditions"],ans:2,rat:"The amputated part is wrapped in moist sterile gauze, sealed in a bag, and placed in a container of cool (not direct ice) water. Direct ice contact causes frostbite injury to the tissue, destroying viability."},
+{q:"The 'viable preservation window' for a traumatically amputated proximal limb (above elbow/knee) is approximately:",opts:["8–10 hours","6–8 hours","4 hours","30 minutes"],ans:2,rat:"Proximal limbs have significant muscle mass — more metabolically active than digits. Muscle ischemic tolerance is approximately 4 hours. Digits (minimal muscle) have a 4–6 hour window. Time of amputation should be documented and communicated to receiving hospital."},
+{q:"A crush injury that appears deceptively minor externally but involves prolonged compressive force MOST likely poses which systemic threat?",opts:["Thermal burns from friction heat","Pulmonary barotrauma from elevated intrathoracic pressure","Rhabdomyolysis with hyperkalemia and acute renal failure","Tension pneumothorax from chest wall compression"],ans:2,rat:"Prolonged muscle compression causes myocyte necrosis releasing myoglobin, potassium, and creatine kinase into systemic circulation. Myoglobinuria precipitates acute tubular necrosis; hyperkalemia threatens cardiac dysrhythmias."},
+{q:"Which wound type carries a risk of air embolism if located on the neck?",opts:["Abrasion","Puncture wound","Laceration of the jugular vein","Contusion overlying the carotid sheath"],ans:2,rat:"The jugular veins are a low-pressure system. During inspiration, negative intrathoracic pressure is transmitted to the jugular veins. An open jugular wound allows air entrainment into the venous system — a potentially fatal air embolism."},
+{q:"The management of a closed soft tissue hematoma in the field should include:",opts:["Aspiration with an 18-gauge needle to relieve pressure","Application of ice and elevation; do not aspirate","Warm compresses to promote reabsorption","Application of tight circumferential bandaging"],ans:1,rat:"Field management of hematomas is conservative: ice (first 24–48 hours), elevation, and monitoring. Aspiration in the non-sterile field introduces infection risk and may destabilize the clot. Tight circumferential bandaging could impair distal circulation."},
+{q:"The MOST important prehospital intervention for a patient with an open abdominal wound is:",opts:["Applying pressure to control internal hemorrhage","Covering with a moist occlusive dressing and preventing eviscera desiccation","Establishing two large-bore IVs before transport","Applying a abdominal binder for compression"],ans:1,rat:"Covering the evisceration with a moist, warm, occlusive dressing is the primary field intervention. The wound cannot be reduced, and aggressive fluid resuscitation before surgical hemorrhage control may be harmful. Transport priority is immediate."},
+{q:"Which characteristic differentiates a 'zone II' penetrating neck injury from zones I and III?",opts:["Zone II involves the trachea exclusively","Zone II is most surgically accessible and between the cricoid cartilage and mandible angle","Zone II extends from the skull base to the clavicles","Zone II injuries always involve the vertebral artery"],ans:1,rat:"Zone II (cricoid to angle of mandible) is the most clinically accessible zone. It encompasses the carotid arteries, jugular veins, larynx, and pharynx. Zone I (clavicle to cricoid) and Zone III (mandible to skull base) are surgically more challenging."},
+
+// Section 3: Hemorrhage Control (Q31-48)
+{q:"The MARCH protocol in tactical/field trauma places hemorrhage control at which priority?",opts:["Third, after airway and respirations","Fourth, after airway, respiration, and circulation","Second, immediately after scene safety","First — before airway management"],ans:3,rat:"MARCH = Massive hemorrhage, Airway, Respiration, Circulation, Hypothermia. This reflects the evidence that exsanguination is the leading preventable cause of traumatic death — hemorrhage control precedes airway management in the tactical/field setting."},
+{q:"For a deep thigh wound with uncontrolled venous hemorrhage after 3 minutes of direct pressure, the NEXT intervention should be:",opts:["Apply a tourniquet immediately","Pack the wound with hemostatic gauze and maintain firm pressure","Apply an occlusive dressing and elevate the limb","Establish IV access and begin fluid resuscitation"],ans:1,rat:"Escalation sequence: Direct pressure → Wound packing with hemostatic agent → Tourniquet (if extremity). After failed direct pressure, wound packing with combat gauze and sustained compression for 3 minutes is the appropriate next step."},
+{q:"A tourniquet applied 'too loosely' (venous tourniquet effect) will cause:",opts:["Rapid achievement of arterial occlusion","Increased venous engorgement and paradoxically increased hemorrhage","Immediate nerve ischemia without vessel occlusion","No significant change in hemorrhage rate"],ans:1,rat:"A loosely applied tourniquet occludes venous outflow without achieving arterial occlusion, creating a venous back-pressure that significantly increases hemorrhage rate. All tourniquets must be tightened until bleeding completely stops."},
+{q:"The recommended minimum application time for direct pressure before escalating intervention is:",opts:["30 seconds","1 minute","3 minutes","10 minutes"],ans:2,rat:"Direct pressure should be maintained continuously for a minimum of 3 minutes before assessment. Premature release (common in anxious rescuers) disrupts forming clots and is a primary reason for failed hemorrhage control."},
+{q:"A Combat Application Tourniquet (CAT) should be applied how far proximal to the wound?",opts:["Directly over the wound","1 inch proximal","2–3 inches proximal","As far proximal as possible, at the groin or axilla"],ans:2,rat:"2–3 inches proximal to the wound is the standard placement. This ensures the tourniquet is over muscle tissue with adequate tissue to generate occlusive pressure. Over joints (knee, elbow) prevents effective compression."},
+{q:"The time of tourniquet application MUST be documented because:",opts:["Hospital billing requires it for insurance purposes","Limb viability assessment and conversion decisions depend on total ischemia time","NREMT certification requires documentation of all interventions","It is required by HIPAA for wound care documentation"],ans:1,rat:"Tourniquet ischemia time determines limb salvage potential and guides surgical decision-making. The acceptable window is approximately 2 hours. Without documented time, surgeons cannot make evidence-based limb-saving decisions."},
+{q:"A tourniquet should NEVER be applied over which location?",opts:["Distal thigh","Proximal forearm","A joint (knee, elbow)","The upper arm"],ans:2,rat:"Applying a tourniquet over a joint (knee, elbow) is mechanically ineffective — the rigid bony structures prevent adequate soft tissue compression necessary for arterial occlusion."},
+{q:"'Conversion' of a tourniquet to a pressure bandage in the field is:",opts:["Acceptable if the tourniquet has been in place less than 30 minutes","Recommended to prevent ischemic complications","Dangerous and associated with fatal rebound hemorrhage","Appropriate when the patient is hemodynamically stable"],ans:2,rat:"TQ-to-pressure-dressing conversion in the field has directly caused preventable deaths. Once applied, tourniquets are only removed by physicians in controlled surgical environments with blood products immediately available."},
+{q:"Wound packing is MOST appropriate for which wound type?",opts:["Superficial abrasions with oozing hemorrhage","Deep, irregular wounds or junctional wounds where TQ cannot be applied","All penetrating wounds regardless of location or depth","Partial-thickness burns with fluid loss"],ans:1,rat:"Wound packing addresses deep or junctional wounds where a tourniquet cannot be applied (groin, axilla, neck) and direct pressure cannot reach the source of hemorrhage deep in the wound cavity."},
+{q:"The hemostatic agent MOST appropriate for an anticoagulated patient with uncontrolled hemorrhage is:",opts:["Standard gauze packing with direct pressure","Combat Gauze (kaolin-impregnated)","Celox (chitosan granules)","Dry sterile dressings only"],ans:2,rat:"Celox (chitosan) works independently of the patient's coagulation cascade — it forms a physical clot barrier rather than activating enzymatic coagulation pathways. This makes it especially valuable in anticoagulated or coagulopathic patients."},
+{q:"Kaolin-impregnated gauze (Combat Gauze) achieves hemostasis primarily by:",opts:["Forming a chitosan gel barrier over the wound","Activating the intrinsic coagulation pathway via contact with kaolin mineral","Releasing thromboplastin to initiate extrinsic coagulation","Causing thermal reaction to coagulate proteins"],ans:1,rat:"Kaolin is a negatively charged clay mineral that activates Factor XII (Hageman factor) — the initiator of the intrinsic coagulation pathway. This dramatically accelerates clot formation at the wound site."},
+{q:"Which junctional hemorrhage control device applies pressure to the pelvic/groin region?",opts:["SAM Junctional Tourniquet (SJT)","Windlass-based CAT tourniquet","Needle thoracostomy catheter","Combat Ready Clamp (CRoC)"],ans:0,rat:"The SAM Junctional Tourniquet (SJT) is FDA-cleared for inguinal/groin hemorrhage. It applies targeted pressure over the femoral triangle. The CRoC is designed for single-point junctional pressure application."},
+{q:"Tranexamic Acid (TXA) functions by:",opts:["Activating platelet aggregation at the wound site","Inhibiting fibrinolysis (breakdown of formed clots)","Constricting arterial vessels to reduce flow","Providing clotting factors directly to compensate for dilution"],ans:1,rat:"TXA is an antifibrinolytic agent that competitively inhibits plasminogen activation and thus prevents the breakdown of formed clots. It does not form new clots but protects existing ones."},
+{q:"The CRASH-2 trial demonstrated TXA reduces mortality in trauma patients when administered within:",opts:["30 minutes of injury","1 hour of injury","3 hours of injury","6 hours of injury"],ans:2,rat:"The CRASH-2 trial showed TXA significantly reduces all-cause mortality when given within 3 hours of injury. Mortality benefit is highest within the first hour. Administration AFTER 3 hours may increase mortality."},
+{q:"'Permissive hypotension' in penetrating trauma without TBI targets a systolic blood pressure of:",opts:["110–120 mmHg","90–100 mmHg","80–90 mmHg","60–70 mmHg"],ans:2,rat:"80–90 mmHg SBP maintains end-organ perfusion while allowing clot stabilization. Aggressive normalization to 120 mmHg disrupts forming clots (popping the clot) and worsens coagulopathy from hemodilution."},
+{q:"Which fluid is CONTRAINDICATED in acute rhabdomyolysis secondary to crush injury?",opts:["Normal Saline (0.9% NS)","Lactated Ringer's (LR)","Isotonic sodium bicarbonate solution","Warmed NS at 1–1.5 L/hr"],ans:1,rat:"LR contains 4 mEq/L potassium. In rhabdomyolysis, massive K+ is released from lysed myocytes. Adding exogenous potassium risks precipitating fatal hyperkalemic dysrhythmias. Additionally, LR's lactate load can worsen metabolic acidosis in this setting."},
+{q:"The 'Lethal Triad' in trauma consists of:",opts:["Hypoxia, hypotension, and hypothermia","Hemorrhage, airway obstruction, and tension pneumothorax","Acidosis, hypothermia, and coagulopathy","Tachycardia, hypotension, and metabolic alkalosis"],ans:2,rat:"The Lethal Triad (acidosis + hypothermia + coagulopathy) is a self-reinforcing cycle. Acidosis impairs enzyme function; hypothermia impairs coagulation cascade enzymes (require 37°C); coagulopathy results in ongoing hemorrhage, worsening both."},
+{q:"Which intervention BEST addresses hypothermia in the Lethal Triad of trauma?",opts:["Cold IV fluids to reduce metabolic rate","Warm blankets, warm IV fluids, heated ambulance, and removing wet clothing","External ice packs for fever management","Vasodilators to improve peripheral perfusion"],ans:1,rat:"Hypothermia prevention in trauma: remove all wet clothing, apply warm blankets, administer warmed IV fluids (39°C if available), and maintain a warm transport environment. A 1°C drop in core temperature significantly impairs coagulation enzyme activity."},
+
+// Section 4: Burns (Q49-62)
+{q:"A superficial (first-degree) burn involves which tissue layer?",opts:["Epidermis only","Epidermis and superficial dermis","Full dermis and subcutaneous tissue","Bone and muscle"],ans:0,rat:"First-degree burns affect only the epidermis (outermost layer). They are red, dry, without blisters, and extremely painful. They heal in 3–5 days without scarring."},
+{q:"A partial-thickness burn (second degree) is characterized by:",opts:["Absence of blisters with waxy, leathery appearance","Blisters, moist pink or red surface, and extreme pain","Charred, dry, insensate wound surface","Deep tissue necrosis requiring immediate amputation"],ans:1,rat:"Partial-thickness burns (2nd degree) extend into the dermis but preserve dermal appendages. They are moist, blistered, and intensely painful because nerve endings remain intact."},
+{q:"A full-thickness (third degree) burn is painless because:",opts:["The endorphin system blocks pain from the burn","Nerve endings in the affected tissue have been destroyed","The burn is too superficial to stimulate pain receptors","Eschar formation blocks nerve impulse transmission"],ans:1,rat:"Full-thickness burns destroy all skin layers including nerve endings. Paradoxically, patients report painlessness at the actual burn site while surrounding areas of partial-thickness burn are exquisitely painful."},
+{q:"Using the Parkland Formula, a 70 kg patient with 40% TBSA (2nd and 3rd degree) burns requires:",opts:["5,600 mL in first 24 hours","11,200 mL in first 24 hours","2,800 mL in first 8 hours only","18,000 mL in first 24 hours"],ans:1,rat:"Parkland: 4 mL × 70 kg × 40% = 11,200 mL total in first 24 hours from time of burn. 50% (5,600 mL) in first 8 hours; 50% in following 16 hours."},
+{q:"The MOST dangerous type of chemical burn is caused by:",opts:["Dilute acid (pH 4)","Strong alkali (lye, NaOH)","Hydrogen peroxide","Isopropyl alcohol"],ans:1,rat:"Alkali burns cause liquefaction necrosis — fat saponification allows the alkali to continue penetrating deeper layers long after the initial contact. Strong acids cause coagulation necrosis with a limiting eschar that slows further penetration."},
+{q:"Hydrofluoric acid (HF) burns require a specific field treatment of:",opts:["Copious water irrigation only","Calcium gluconate gel application after irrigation","Dry dressings without irrigation","Sodium bicarbonate solution irrigation"],ans:1,rat:"HF burns require calcium gluconate gel because fluoride ions penetrate tissue and bind calcium, causing hypocalcemia, myocardial instability, and continued tissue destruction. Calcium supplementation neutralizes the fluoride and prevents systemic calcium depletion."},
+{q:"For a chemical burn, if the chemical is a DRY powder, your FIRST action should be:",opts:["Immediately begin copious water irrigation","Brush off as much dry chemical as possible before irrigation","Apply a moist dressing to reactivate the compound","Neutralize with an opposite pH solution"],ans:1,rat:"Dry chemicals react with water to cause exothermic reactions. Brushing off the dry powder first removes the bulk of the chemical before irrigation, preventing the water-activation heat reaction from worsening the burn."},
+{q:"An electrical burn with a high-voltage source (>1000V) is MOST likely to also involve:",opts:["Only the skin at the contact point","Thermal burns, blast injury, and arc flash injuries in addition to the electrical injury","No cardiac involvement because high voltage does not cause dysrhythmias","Exclusively the nervous system"],ans:1,rat:"High-voltage sources involve primary electrical injury PLUS secondary injuries: arc flash (plasma discharge), blast wave (explosion), and thermal burns. All four blast mechanisms may be present in high-voltage industrial accidents."},
+{q:"The PRIMARY cause of cardiac arrest in electrical injury is:",opts:["Thermal destruction of myocardial tissue","Ventricular fibrillation from the electrical current traversing the heart","Air embolism through electrical skin disruption","Coronary artery spasm from sympathetic surge"],ans:1,rat:"Electrical current passing through the thorax can depolarize the entire myocardium simultaneously (similar to a defibrillation pulse), inducing ventricular fibrillation. This is the primary dysrhythmia and cause of immediate death in electrical injury."},
+{q:"Circumferential full-thickness burns to an extremity are particularly dangerous because:",opts:["They prevent topical antibiotic application","Eschar formation creates a tourniquet effect, causing ischemia and compartment syndrome","They are always associated with inhalation injury","They eliminate sensation, delaying patient reporting"],ans:1,rat:"Circumferential full-thickness burns create inelastic eschar around the extremity. As fluid shifts in the inflammatory response cause swelling, the rigid eschar cannot expand, creating increasing compartment pressures — a surgical escharotomy may be required."},
+{q:"Inhalation injury is SUSPECTED when:",opts:["Burns are isolated to hands and feet","Facial burns, singed nasal hairs, carbonaceous sputum, or hoarse voice are present","The patient reports throat irritation without fever","Only chemical burns are present without thermal component"],ans:1,rat:"Classic signs of inhalation injury: singed nasal/facial hair, carbonaceous (black) sputum, hoarse voice (indicates supraglottic edema), stridor, and facial or oropharyngeal burns. Airway edema can rapidly progress to obstruction — early intubation before swelling occurs."},
+{q:"A patient burned over the anterior chest, abdomen, and entire right arm represents what %TBSA?",opts:["27%","36%","45%","18%"],ans:0,rat:"Anterior trunk = 18%; right arm = 9%. Total = 27% TBSA. This exceeds the 25% threshold for critical burn and requires burn center consultation."},
+{q:"Patients with burns to which body regions are automatically classified as 'critical burns' regardless of %TBSA?",opts:["Calves and forearms","Hands, feet, face, genitalia, or circumferential burns","Shoulders and hips","Back and thighs"],ans:1,rat:"Burns involving hands (function), feet (mobility), face (airway, special senses), genitalia (functional/infection risk), or circumferential burns (compartment syndrome risk) warrant burn center referral regardless of total body surface area involved."},
+{q:"The fluid of choice for burn resuscitation using the Parkland Formula is:",opts:["Albumin solution","Packed red blood cells","Lactated Ringer's (LR) solution","Normal saline (0.9% NS)"],ans:2,rat:"Lactated Ringer's is the standard Parkland Formula fluid. It is isotonic, contains electrolytes mirroring plasma, and its lactate is metabolized by the liver to bicarbonate — beneficial in the metabolic acidosis common in major burns."},
+
+// Section 5: Special Presentations (Q63-78)
+{q:"Blast injury PRIMARY mechanism refers to:",opts:["Penetrating injury from projectiles","Body displacement by the blast wind","Burns from the explosion's thermal energy","Pressure wave interaction with gas-filled organs"],ans:3,rat:"Primary blast injury results from the high-pressure shock wave interacting with gas-containing organs (lungs, bowel, middle ear), causing barotrauma. This is the mechanism unique to explosions — not replicable by any other trauma type."},
+{q:"Secondary blast injury is caused by:",opts:["The pressure wave","Fragmentation (shrapnel) propelled by the explosion","Body displacement from the blast wind","Structural collapse or burns"],ans:1,rat:"Secondary blast injury results from fragmentation — metal casing, glass, debris — propelled by the explosion. Essentially penetrating trauma from high-velocity projectiles."},
+{q:"Tertiary blast injury is caused by:",opts:["The initial pressure wave","Fragmentation from the explosion","The body being thrown by the blast wind","Burns from the fireball"],ans:2,rat:"Tertiary blast injuries result from the body being displaced and impacting surfaces — essentially blunt trauma. In large explosions, the blast wind can propel victims significant distances."},
+{q:"A patient at a blast scene has tympanic membrane perforation. This is MOST consistent with which blast mechanism?",opts:["Tertiary blast injury","Secondary blast injury — shrapnel penetration","Primary blast injury — pressure wave barotrauma","Quaternary blast injury — burn"],ans:2,rat:"The tympanic membrane is the most sensitive organ to primary blast overpressure. TM perforation occurring bilaterally without a penetrating wound is pathognomonic of primary blast injury and should prompt evaluation for pulmonary barotrauma."},
+{q:"The major risk in releasing a crush injury patient after 2+ hours of entrapment WITHOUT pre-extrication IV therapy is:",opts:["Dehydration from fluid losses in the compressed tissue","Massive hyperkalemia and myoglobin release causing cardiac arrest and renal failure","Hypothermia from exposed tissue surfaces","Air embolism from disrupted capillary beds"],ans:1,rat:"Reperfusion syndrome: compressed muscle cells release K+, myoglobin, creatine kinase, and lactic acid simultaneously upon pressure release. Without pre-treatment with large-volume crystalloid (NS) and possible alkalinization, the resulting hyperkalemia can cause ventricular fibrillation immediately."},
+{q:"Pre-extrication fluid therapy for crush syndrome uses which target infusion rate?",opts:["200–300 mL/hour","500 mL/hour","1,000–1,500 mL/hour","2,000 mL/hour bolus only"],ans:2,rat:"1–1.5 L/hour of 0.9% NS before extrication dilutes potassium, provides volume for the reperfusion shift, and maintains renal tubular flow to prevent myoglobin precipitation and acute tubular necrosis."},
+{q:"The MOST specific early field finding suggesting rhabdomyolysis is:",opts:["Dark brown (tea-colored) urine","Severe muscle pain","Generalized edema of the affected extremity","Diaphoresis and pale skin"],ans:0,rat:"Tea-colored or cola-colored urine results from myoglobin filtration at the glomerulus. This is the classic early indicator of rhabdomyolysis when present in the field setting. It indicates significant myocyte destruction."},
+{q:"A patient with a penetrating neck wound shows progressive hoarseness, subcutaneous emphysema, and increasing respiratory distress. The MOST likely injury is:",opts:["Carotid artery transection","Tracheal or laryngeal injury with air leak","Vertebral artery injury","Esophageal perforation alone"],ans:1,rat:"Subcutaneous emphysema (air in subcutaneous tissue causing crackling palpation) with hoarseness and respiratory distress indicates tracheal or laryngeal disruption with air tracking into tissue planes. This is an immediate airway threat."},
+{q:"An impaled object through the chest wall should be removed in the field ONLY when:",opts:["The object is longer than 6 inches","The patient develops pneumothorax signs","The patient is in cardiac arrest and the object physically prevents CPR or airway management","The scene is unsafe and rapid extrication is required"],ans:2,rat:"The only absolute field indication for impaled object removal is when the object mechanically prevents life-saving CPR or airway management in a patient in cardiac arrest. In all other cases, stabilization and transport is the standard."},
+{q:"Which position is CONTRAINDICATED for a patient with an abdominal evisceration?",opts:["Supine with knees flexed","Semi-Fowler's (30–45 degree elevation)","Recovery position (lateral)","Spine board supine"],ans:2,rat:"The recovery position (lateral rotation) can cause mechanical displacement and further injury to eviscerated abdominal contents. Supine with knees flexed relaxes abdominal muscles and reduces tension on the wound. Semi-Fowler's is acceptable."},
+{q:"A patient with suspected pelvic fracture and hemodynamic instability benefits MOST from:",opts:["Pelvic stabilization with a sheet/pelvic binder and rapid transport","Bilateral femoral vein IV access for fluid resuscitation","Application of MAST/PASG trousers at maximum pressure","Immediate surgical intervention in the field"],ans:0,rat:"Pelvic binders (or improvised sheet binder) reduce the pelvic volume, partially tamponade retroperitoneal hemorrhage, and decrease pain. Combined with rapid transport, this is the primary field intervention. Definitive hemorrhage control is in the OR."},
+{q:"Subcutaneous emphysema in the neck following penetrating trauma indicates:",opts:["Fat embolism from long bone fracture","Air tracking from a tracheal, esophageal, or chest wall injury","Normal finding after high-velocity impact","Venous air embolism into the jugular system"],ans:1,rat:"Subcutaneous emphysema (crepitus on palpation) in the neck results from air escaping from a damaged hollow structure (trachea, larynx, esophagus, or chest wall) into the fascial planes of the neck."},
+{q:"The MOST dangerous physiological consequence of a venous tourniquet effect (too loose) is:",opts:["Peripheral neuropathy","Paradoxical increase in hemorrhage rate","Skin necrosis at application site","Arterial thrombosis distal to the tourniquet"],ans:1,rat:"A venous TQ effect (too loose to occlude arteries but tight enough to impede venous return) causes venous engorgement distal to the TQ, significantly increasing hemorrhage pressure at the wound. This is worse than no tourniquet in some cases."},
+{q:"Management of open wounds from agricultural/soil exposure should include which specific concern?",opts:["Tetanus prophylaxis verification","Rabies post-exposure prophylaxis","HIV post-exposure chemoprophylaxis","Antifungal treatment of wound edges"],ans:0,rat:"Soil contains Clostridium tetani spores. Agricultural wounds (and any soil-contaminated wounds) require tetanus immunization status inquiry and hospital prophylaxis if non-immunized or overdue. Tetanus causes progressive fatal muscle spasm."},
+{q:"'Damage control surgery' philosophy in trauma corresponds to which prehospital principle?",opts:["Prolonged on-scene resuscitation to stabilize before transport","Rapid hemorrhage control, permissive hypotension, and immediate transport to surgical care","Maximum fluid resuscitation to normalize hemodynamics before movement","Scene time >20 minutes to complete all ALS interventions"],ans:1,rat:"Damage control resuscitation (DCR) parallels damage control surgery: abbreviated interventions to control hemorrhage and prevent the Lethal Triad, then immediate transport to definitive surgical care. The 'platinum 10 minutes' scene time target reflects this philosophy."},
+{q:"Which of the following represents Class IV hemorrhagic shock?",opts:["HR 95, BP 118/72, RR 16, alert","HR 108, BP 110/70, RR 22, mildly anxious","HR 132, BP 84/60, RR 34, confused","HR 148, BP 62/40, RR 38, unresponsive"],ans:3,rat:"Class IV shock (>40% blood volume loss): HR >140, BP very low, RR >35, altered consciousness (lethargic to unresponsive), negligible urine output. Immediate blood products, surgical hemorrhage control, and aggressive resuscitation required."},
+
+// Section 6: Assessment & Clinical Reasoning (Q79-100)
+{q:"The shock index of a patient with HR 126 and BP 96/58 is:",opts:["0.76","1.31","0.54","2.17"],ans:1,rat:"Shock Index = 126 ÷ 96 = 1.31. A Shock Index >1.0 predicts significant hemodynamic compromise and is associated with increased need for blood product transfusion and surgical intervention."},
+{q:"In a multi-casualty trauma scenario (START triage), which patient receives an IMMEDIATE (red) tag?",opts:["A patient with no palpable pulse and no respirations after repositioning the airway","A patient with a respiratory rate of 28 who follows commands and has weak radial pulse","A patient with a femoral amputation who is responsive but has no radial pulse","A patient with lacerations who is walking and talking"],ans:2,rat:"START triage IMMEDIATE criteria: breathing after airway opening, but has absent radial pulse or capillary refill >2 seconds, or does not follow commands. Femoral amputation with no radial pulse = absent perfusion sign = Immediate. Patient A is Black (expectant)."},
+{q:"The 'platinum 10 minutes' concept refers to:",opts:["Maximum time for IV access before departure","Target on-scene time for critical trauma patients to avoid delays in surgical care","Time from cardiac arrest to first defibrillation","Maximum acceptable tourniquet ischemia time"],ans:1,rat:"Platinum 10 minutes: critical trauma patients (uncontrolled hemorrhage, penetrating torso, severe burns) should have on-scene times limited to 10 minutes or less. Surgical hemorrhage control is definitive — every minute on scene delays that care."},
+{q:"A 19-year-old male with a GSW to the right chest is hypotensive with absent right breath sounds and distended neck veins. Your FIRST intervention is:",opts:["Establish two large-bore IVs and begin bolus fluid resuscitation","Apply an occlusive dressing to the entry and exit wounds","Perform needle thoracostomy at the right 2nd ICS, MCL","Intubate immediately for airway protection"],ans:2,rat:"Absent unilateral breath sounds + hypotension + distended neck veins = tension pneumothorax. Needle decompression is the immediate life-saving intervention. Penetrating chest trauma with an open wound also requires occlusive dressings, but tension pneumo is the life threat."},
+{q:"An occlusive chest wound dressing (for sucking chest wound) should be taped:",opts:["On all four sides, completely sealed","On three sides, leaving one side open as a flutter valve","Directly over the wound with non-adherent material only","Circumferentially around the chest"],ans:1,rat:"Three-sided (flutter valve) dressings allow air to escape on exhalation while preventing air entry on inhalation. Complete four-sided sealing may convert an open pneumothorax to a tension pneumothorax if the patient cannot self-vent."},
+{q:"During hemorrhage control, the MOST reliable indicator that a wound packing intervention has been successful is:",opts:["The gauze appears saturated with blood","The patient's heart rate begins to decrease","Bleeding from the wound has completely stopped","The patient reports decreased pain at the wound site"],ans:2,rat:"Complete cessation of external bleeding is the only reliable indicator of successful hemorrhage control. A drop in HR may occur with other causes. Gauze saturation indicates ongoing bleeding. Pain reduction is not a reliable hemostasis indicator."},
+{q:"A patient with a suspected spinal injury who ALSO has a penetrating neck wound should have c-spine immobilization based on:",opts:["Mechanism of injury alone (penetrating = always immobilize)","Clinical assessment: immobilize only if neurological signs or symptoms of spinal injury are present","Automatic immobilization with a rigid c-collar in all penetrating neck injuries","CT imaging results only — field immobilization is never indicated"],ans:1,rat:"Current evidence (NAEMSP/ACS guidelines) shows rigid c-collar application in penetrating neck trauma may impede assessment of vascular injury and increases scene time without benefit. Immobilize only if neurological findings (weakness, paresthesia) suggest cord injury."},
+{q:"Which mechanism of injury is MOST associated with a hollow viscus (bowel) perforation?",opts:["Blunt abdominal trauma from lap belt in MVC","Penetrating trauma to the groin","Crush injury to the pelvis","Soft tissue injury to the abdominal wall"],ans:0,rat:"Lap belt injuries in MVCs cause a characteristic flexion injury ('lap belt complex'). The bowel is compressed between the belt and the lumbar spine, causing hollow viscus perforation — a triad of seat belt bruising, lumbar spine fracture, and bowel injury."},
+{q:"A patient with severe facial trauma and persistent massive oral hemorrhage — your MOST immediate concern is:",opts:["Facial bone fracture repair","Airway compromise from blood and clot accumulation","Pain management with IV opioids","Documentation of dental injuries"],ans:1,rat:"Massive oral hemorrhage presents an immediate airway threat — blood accumulates in the oropharynx, clots can completely obstruct the airway, and altered consciousness prevents protective reflexes. Positioning (lateral), suction, and early airway control are priorities."},
+{q:"Which assessment finding is MOST consistent with a developing hemothorax after blunt chest trauma?",opts:["Unilateral dull percussion, absent breath sounds, hypotension","Bilateral hyperresonance with elevated JVD","Tracheal deviation toward the injured side","Subcutaneous emphysema with clear breath sounds bilaterally"],ans:0,rat:"Hemothorax: blood accumulates in the pleural space, causing dullness to percussion (fluid), absent/diminished breath sounds, and hypotension (from hemorrhage). Tracheal deviation occurs in tension pneumo (contralateral); hyperresonance in pneumothorax."},
+{q:"The 1:1:1 blood product ratio in damage control resuscitation refers to:",opts:["1 unit of saline : 1 unit of plasma : 1 unit of platelets","1 unit packed RBC : 1 unit fresh frozen plasma : 1 unit platelets","1 mg of TXA : 1 mEq bicarb : 1 unit albumin","1 liter LR : 1 liter colloid : 1 unit cryoprecipitate"],ans:1,rat:"1:1:1 (pRBC:FFP:Platelets) resuscitation mimics whole blood, replacing not just oxygen-carrying capacity but also clotting factors and platelets simultaneously. This approach is associated with improved survival in massive hemorrhage."},
+{q:"A 26-year-old construction worker has a large degloving injury to the right forearm from a lathe. The exposed tissue is pink with intact distal pulses. Priority management is:",opts:["Immediately wrap tightly to prevent further avulsion","Cover with moist sterile dressings, preserve all tissue, and transport","Apply a tourniquet regardless of hemorrhage control status","Pack dry sterile gauze into the wound and apply direct pressure"],ans:1,rat:"Degloving injuries should be covered with moist dressings to prevent desiccation — intact distal pulses suggest neurovascular preservation. All tissue should be preserved (never discarded). Moist dressings prevent the desiccation that destroys viable tissue."},
+{q:"Subcutaneous emphysema is BEST detected by:",opts:["Auscultating for crackles in the subcutaneous tissue","Visual inspection for skin tenting","Palpating for 'Rice Krispie' or crackling sensation under the skin","Percussion producing a hyperresonant sound"],ans:2,rat:"Subcutaneous emphysema is detected by palpation — the sensation is classically described as 'Rice Krispies,' crackling, or crepitus, from air in fascial tissue planes. It can spread rapidly over large areas of the body."},
+{q:"The BEST indicator of adequate tourniquet application in the field is:",opts:["Tourniquet appears tight and patient reports decreased pain","Distal pulse is eliminated","All external hemorrhage from the distal wound stops","Patient develops paresthesia distal to tourniquet"],ans:2,rat:"Complete cessation of external hemorrhage is the clinical endpoint for tourniquet adequacy. Eliminating the distal pulse is a consequence, not the primary indicator. Paresthesia and pain are expected effects of arterial occlusion, not measures of success."},
+{q:"A patient who sustained burns to both entire legs and the anterior trunk has a %TBSA of:",opts:["36%","45%","54%","27%"],ans:2,rat:"Both legs = 18% + 18% = 36%. Anterior trunk = 18%. Total = 54% TBSA. This is a life-threatening major burn requiring immediate burn center transport, Parkland Formula fluid resuscitation, and airway management consideration."},
+{q:"Which of the following MOST accurately describes the physiological mechanism of hemorrhagic coagulopathy?",opts:["Excessive activation of coagulation factors causes micro-thrombosis","Clotting factor dilution from massive fluid resuscitation combined with ongoing consumption prevents adequate clot formation","Hypothermia exclusively causes platelet inactivation","Acidosis activates fibrinolytic enzymes exclusively"],ans:1,rat:"Hemorrhagic coagulopathy results from: (1) consumption of clotting factors at the wound, (2) dilution from crystalloid resuscitation, (3) impaired factor function from hypothermia and acidosis, and (4) hypocalcemia from blood transfusions (citrate binds Ca2+)."},
+{q:"When packaging a patient with multiple penetrating wounds for transport, which wound receives your INITIAL attention?",opts:["The largest wound by size","The most proximal wound","The wound with the greatest visible hemorrhage","The wound with the most foreign body contamination"],ans:2,rat:"Active hemorrhage control takes highest priority. The wound with the greatest active bleeding represents the most immediate threat to life and receives first attention, regardless of location, size, or contamination."},
+{q:"A patient with an amputation of the left leg above the knee has a properly applied tourniquet. During a 30-minute transport, you note the tourniquet has a 'window' of bright red seepage. Your action should be:",opts:["Remove and reapply the tourniquet","Apply a second tourniquet proximal to the first","Continue monitoring; seepage through the dressing is normal","Remove the tourniquet — 30 minutes is the maximum application time"],ans:1,rat:"Breakthrough hemorrhage (seepage through an applied TQ) indicates inadequate arterial occlusion — either the TQ was applied too loosely, has loosened, or the anatomy prevents adequate compression with one device. Apply a SECOND TQ proximal to the first (do not remove the first)."},
+{q:"The MOST important information to communicate to the receiving hospital about a tourniquet patient is:",opts:["The type of tourniquet device used","The exact time of tourniquet application","The patient's blood type","The wound size and mechanism of injury"],ans:1,rat:"Time of tourniquet application is the single most critical handoff element. It determines surgical limb-saving priority, acceptable ischemia window, and the decision to attempt limb revascularization versus amputation."},
+{q:"A provider discovers that a patient's wound packing has completely saturated without achieving hemostasis. The BEST next action is:",opts:["Remove all gauze and begin packing with fresh gauze","Leave saturated gauze in place, add additional gauze on top, and increase pressure","Remove packing and apply a tourniquet regardless of wound location","Replace packing every 30 seconds to maintain fresh hemostatic contact"],ans:1,rat:"NEVER remove wound packing that has been applied — removal disrupts the forming clot and restarts hemorrhage from zero. Add additional hemostatic gauze on top and increase manual pressure. Only if completely ineffective should a TQ (if anatomically possible) be applied."}
+];
+
+// Build assessment
+function buildAssessment(){
+  const container = document.getElementById('assessment-questions');
+  container.innerHTML = '';
+  document.getElementById('assess-progress').style.display = 'block';
+  document.getElementById('assess-actions').style.display = 'block';
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'q-block';
+    div.id = 'q-block-'+i;
+    div.innerHTML = `<div class="q-number">Question ${i+1} of ${questions.length}</div>
+    <div class="q-stem">${q.q}</div>
+    <div class="q-options">
+      ${q.opts.map((o,j)=>`<label class="q-opt" id="qopt-${i}-${j}">
+        <input type="radio" name="q${i}" value="${j}" onchange="onAnswer(${i},${j})">
+        <span>${String.fromCharCode(65+j)}. ${o}</span>
+      </label>`).join('')}
+    </div>`;
+    container.appendChild(div);
+  });
+  updateProgress();
+}
+
+function onAnswer(qi, vi){
+  document.querySelectorAll(`#q-block-${qi} .q-opt`).forEach(o => o.classList.remove('selected'));
+  document.getElementById(`qopt-${qi}-${vi}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  let answered = 0;
+  questions.forEach((q,i) => {
+    const checked = document.querySelector(`input[name="q${i}"]:checked`);
+    if(checked) answered++;
+  });
+  document.getElementById('prog-count').textContent = `${answered} / ${questions.length}`;
+  document.getElementById('prog-bar').style.width = `${(answered/questions.length)*100}%`;
+}
+
+function clearAssessment(){
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected'));
+  updateProgress();
+}
+
+function submitAssessment(){
+  const name = document.getElementById('stu-name').value.trim() || 'Unknown';
+  const id   = document.getElementById('stu-id').value.trim() || 'N/A';
+  const cohort = document.getElementById('stu-cohort').value.trim() || 'N/A';
+  const date = document.getElementById('stu-date').value;
+
+  let score = 0, unanswered = 0;
+  const results = [];
+  questions.forEach((q, i) => {
+    const checked = document.querySelector(`input[name="q${i}"]:checked`);
+    if(!checked){ unanswered++; results.push({qi:i, chosen:-1, correct:false}); return; }
+    const chosen = parseInt(checked.value);
+    const correct = chosen === q.ans;
+    if(correct) score++;
+    results.push({qi:i, chosen, correct});
+  });
+
+  if(unanswered > 0){
+    if(!confirm(`${unanswered} question(s) are unanswered. Submit anyway? Unanswered questions count as incorrect.`)) return;
+  }
+
+  const pct = Math.round((score/questions.length)*100);
+  let grade, color;
+  if(pct >= 90){ grade = 'DISTINCTION'; color = '#0F766E'; }
+  else if(pct >= 80){ grade = 'PROFICIENT'; color = '#D97706'; }
+  else if(pct >= 70){ grade = 'SATISFACTORY'; color = '#1E3A5F'; }
+  else { grade = 'REQUIRES REVIEW'; color = '#B91C1C'; }
+
+  document.getElementById('score-result').style.display = 'block';
+  document.getElementById('score-result').innerHTML = `
+    <div class="score-display">
+      <div class="score-number">${pct}%</div>
+      <div class="score-label">${score} of ${questions.length} correct</div>
+      <div class="score-grade" style="letter-spacing:.15em;">${grade}</div>
+      <div class="score-breakdown">
+        <div class="score-stat"><div class="score-stat-num">${score}</div><div class="score-stat-lbl">Correct</div></div>
+        <div class="score-stat"><div class="score-stat-num">${questions.length-score}</div><div class="score-stat-lbl">Incorrect</div></div>
+        <div class="score-stat"><div class="score-stat-num">${pct}%</div><div class="score-stat-lbl">Final Score</div></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="downloadPDF('${name}','${id}','${cohort}','${date}',${score},${pct},'${grade}')">📥 Download Score Report (PDF)</button>
+      <button class="btn btn-secondary" onclick="showReview()">📋 Review All Answers</button>
+    </div>`;
+
+  // Disable all answers
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+  // Mark correct / wrong
+  results.forEach(r => {
+    if(r.chosen >= 0){
+      document.getElementById(`qopt-${r.qi}-${r.chosen}`).classList.add(r.correct ? 'ans-correct' : 'ans-wrong');
+      if(!r.correct){
+        document.getElementById(`qopt-${r.qi}-${questions[r.qi].ans}`).classList.add('ans-correct');
+      }
+    } else {
+      document.getElementById(`qopt-${r.qi}-${questions[r.qi].ans}`).classList.add('ans-correct');
+    }
+  });
+  window.lastResults = results;
+  window.scrollTo({top:document.getElementById('score-result').offsetTop - 80, behavior:'smooth'});
+}
+
+function showReview(){
+  const section = document.getElementById('review-section');
+  section.style.display = 'block';
+  const body = document.getElementById('review-body');
+  body.innerHTML = '';
+  window.lastResults.forEach((r, idx) => {
+    const q = questions[r.qi];
+    const div = document.createElement('div');
+    div.className = 'q-block';
+    div.style.borderLeft = `4px solid ${r.correct ? '#0F766E' : '#B91C1C'}`;
+    div.innerHTML = `<div class="q-number" style="color:${r.correct?'#0F766E':'#B91C1C'}">${r.correct ? '✅ Correct' : '❌ Incorrect'} · Question ${r.qi+1}</div>
+    <div class="q-stem">${q.q}</div>
+    <div style="margin:10px 0; font-size:.9rem;">
+      <strong>Your answer:</strong> ${r.chosen >= 0 ? String.fromCharCode(65+r.chosen)+'. '+q.opts[r.chosen] : 'Not answered'}<br>
+      <strong>Correct answer:</strong> ${String.fromCharCode(65+q.ans)}. ${q.opts[q.ans]}
+    </div>
+    <div class="rationale-panel show">📖 ${q.rat}</div>`;
+    body.appendChild(div);
+  });
+  window.scrollTo({top: section.offsetTop - 80, behavior:'smooth'});
+}
+
+function downloadPDF(name, id, cohort, date, score, pct, grade){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+  const W = doc.internal.pageSize.getWidth();
+  const H = doc.internal.pageSize.getHeight();
+
+  // Header background
+  doc.setFillColor(30, 58, 95);
+  doc.rect(0, 0, W, 120, 'F');
+  doc.setFillColor(185, 28, 28);
+  doc.rect(0, 100, W, 8, 'F');
+
+  // Header text
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(22);
+  doc.text('CAMP Community College — EMS Program', 40, 42);
+  doc.setFontSize(14);
+  doc.setFont('helvetica','normal');
+  doc.text('Bleeding & Soft Tissue Trauma — Assessment Score Report', 40, 66);
+  doc.setFontSize(10);
+  doc.text('Sanders Paramedic Textbook, 6th Edition | Ch. 35', 40, 90);
+
+  // Score circle
+  const cx = W - 90, cy = 60;
+  doc.setFillColor(185,28,28);
+  doc.circle(cx, cy, 44, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(22);
+  doc.text(pct+'%', cx, cy+5, {align:'center'});
+  doc.setFontSize(9);
+  doc.text(grade, cx, cy+20, {align:'center'});
+
+  // Student info box
+  doc.setFillColor(248, 247, 244);
+  doc.rect(40, 135, W-80, 100, 'F');
+  doc.setDrawColor(226, 221, 215);
+  doc.rect(40, 135, W-80, 100, 'S');
+  doc.setTextColor(30,22,20);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(13);
+  doc.text('Student Information', 58, 158);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(11);
+  const fields = [['Full Name', name], ['Student ID', id], ['Program / Cohort', cohort], ['Assessment Date', date]];
+  fields.forEach((f, i) => {
+    const col = i < 2 ? 0 : 1;
+    const row = i % 2;
+    doc.setFont('helvetica','bold'); doc.setTextColor(122,110,104);
+    doc.text(f[0], 58 + col*(W/2-40), 178 + row*22);
+    doc.setFont('helvetica','normal'); doc.setTextColor(30,22,20);
+    doc.text(f[1], 58 + col*(W/2-40) + 110, 178 + row*22);
+  });
+
+  // Score breakdown
+  const sy = 260;
+  const boxes = [
+    ['Total Questions', '100'], ['Correct', String(score)], ['Incorrect', String(100-score)], ['Score', pct+'%'], ['Grade', grade]
+  ];
+  const bw = (W-80)/boxes.length - 8;
+  boxes.forEach((b,i) => {
+    const bx = 40 + i*(bw+8);
+    const fillR = i === 3 ? [185,28,28] : i === 4 ? [30,58,95] : [240,237,232];
+    doc.setFillColor(...fillR);
+    doc.rect(bx, sy, bw, 64, 'F');
+    doc.setTextColor(i >= 3 ? 255 : 30, i >= 3 ? 255 : 22, i >= 3 ? 255 : 20);
+    doc.setFont('helvetica','bold'); doc.setFontSize(18);
+    doc.text(b[1], bx + bw/2, sy+34, {align:'center'});
+    doc.setFont('helvetica','normal'); doc.setFontSize(8);
+    doc.text(b[0].toUpperCase(), bx + bw/2, sy+54, {align:'center'});
+  });
+
+  // Divider
+  doc.setDrawColor(185,28,28); doc.setLineWidth(1.5);
+  doc.line(40, 344, W-40, 344);
+
+  // Performance rubric
+  const py = 366;
+  doc.setTextColor(30,22,20);
+  doc.setFont('helvetica','bold'); doc.setFontSize(13);
+  doc.text('Performance Standards', 40, py);
+  doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  const standards = [
+    ['90–100%', 'DISTINCTION', '0F766E'], ['80–89%', 'PROFICIENT', 'D97706'],
+    ['70–79%', 'SATISFACTORY', '1E3A5F'], ['<70%', 'REQUIRES REVIEW', 'B91C1C']
+  ];
+  standards.forEach((s, i) => {
+    const sx = 40 + i * (W-80)/4;
+    const clr = parseInt(s[2].substr(0,2),16);
+    const clg = parseInt(s[2].substr(2,2),16);
+    const clb = parseInt(s[2].substr(4,2),16);
+    doc.setFillColor(clr, clg, clb);
+    doc.rect(sx, py+10, (W-80)/4-8, 36, 'F');
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica','bold'); doc.setFontSize(12);
+    doc.text(s[1], sx + (W-80)/8 - 4, py+26, {align:'center'});
+    doc.setFont('helvetica','normal'); doc.setFontSize(9);
+    doc.text(s[0], sx + (W-80)/8 - 4, py+40, {align:'center'});
+  });
+
+  // Answer summary table header
+  const ty = 440;
+  doc.setFillColor(30,22,20);
+  doc.rect(40, ty, W-80, 22, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text('Q#', 52, ty+15);
+  doc.text('Result', 88, ty+15);
+  doc.text('Your Answer', 145, ty+15);
+  doc.text('Correct Answer', 340, ty+15);
+
+  let ry = ty + 22;
+  let pg = 1;
+  const addPageIfNeeded = () => {
+    if(ry > H - 80){
+      doc.addPage();
+      pg++;
+      ry = 50;
+      doc.setFillColor(30,22,20);
+      doc.rect(40, 30, W-80, 18, 'F');
+      doc.setTextColor(255,255,255);
+      doc.setFont('helvetica','bold'); doc.setFontSize(9);
+      doc.text('Q#', 52, 43); doc.text('Result', 88, 43);
+      doc.text('Your Answer', 145, 43); doc.text('Correct Answer', 340, 43);
+      ry = 50;
+    }
+  };
+
+  (window.lastResults || []).forEach((r, idx) => {
+    addPageIfNeeded();
+    const q = questions[r.qi];
+    const rowColor = r.correct ? [240,253,250] : [254,242,242];
+    doc.setFillColor(...rowColor);
+    doc.rect(40, ry, W-80, 18, 'F');
+    doc.setDrawColor(226,221,215); doc.setLineWidth(0.5);
+    doc.line(40, ry+18, W-40, ry+18);
+    doc.setTextColor(30,22,20); doc.setFont('helvetica','normal'); doc.setFontSize(9);
+    doc.text(String(r.qi+1), 52, ry+13);
+    doc.setFont('helvetica','bold');
+    doc.setTextColor(r.correct ? 15 : 185, r.correct ? 118 : 28, r.correct ? 110 : 28);
+    doc.text(r.correct ? '✓ Correct' : '✗ Wrong', 88, ry+13);
+    doc.setFont('helvetica','normal'); doc.setTextColor(30,22,20);
+    const yourA = r.chosen >= 0 ? String.fromCharCode(65+r.chosen)+'. '+q.opts[r.chosen] : 'Not answered';
+    const corrA = String.fromCharCode(65+q.ans)+'. '+q.opts[q.ans];
+    doc.text(doc.splitTextToSize(yourA, 170)[0], 145, ry+13);
+    doc.text(doc.splitTextToSize(corrA, 170)[0], 340, ry+13);
+    ry += 18;
+  });
+
+  // Footer
+  const pages = doc.internal.getNumberOfPages();
+  for(let p=1; p<=pages; p++){
+    doc.setPage(p);
+    doc.setFillColor(30,58,95);
+    doc.rect(0, H-36, W, 36, 'F');
+    doc.setTextColor(255,255,255);
+    doc.setFont('helvetica','normal'); doc.setFontSize(9);
+    doc.text('CAMP Community College — EMS Paramedic Program | Bleeding & Soft Tissue Trauma', 40, H-18);
+    doc.text(`Page ${p} of ${pages}`, W-40, H-18, {align:'right'});
+  }
+
+  doc.save(`CAMP_EMS_Score_Report_${name.replace(/\s/g,'_')}_${date.replace(/\s/g,'_').replace(/,/g,'')}.pdf`);
+}
+
+buildAssessment();
+</script>
+</body>
+</html>
