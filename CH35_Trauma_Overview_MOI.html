@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CH 35 | Trauma Overview & Mechanism of Injury | CAMP EMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root {
+  --navy: #0f2d4a;
+  --navy-mid: #1a4068;
+  --blue: #1e6091;
+  --blue-light: #2980b9;
+  --sky: #d6eaf8;
+  --sky-light: #eaf4fb;
+  --red: #c0392b;
+  --red-light: #fadbd8;
+  --amber: #d68910;
+  --amber-light: #fef9e7;
+  --green: #1a7a4a;
+  --green-light: #d5f5e3;
+  --white: #ffffff;
+  --off-white: #f7f9fc;
+  --gray-100: #edf0f4;
+  --gray-200: #dce3ec;
+  --gray-400: #8fa0b4;
+  --gray-600: #4a5f75;
+  --gray-800: #1e2e3d;
+  --text: #1a2e3f;
+  --shadow-sm: 0 1px 3px rgba(15,45,74,0.08), 0 1px 2px rgba(15,45,74,0.05);
+  --shadow-md: 0 4px 16px rgba(15,45,74,0.10), 0 2px 6px rgba(15,45,74,0.07);
+  --shadow-lg: 0 8px 32px rgba(15,45,74,0.12), 0 4px 12px rgba(15,45,74,0.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Source Sans 3', sans-serif; background: var(--off-white); color: var(--text); line-height: 1.65; font-size: 16px; }
+
+/* ── HEADER ── */
+.site-header { background: var(--navy); color: white; padding: 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+.header-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.header-brand { display: flex; align-items: center; gap: 14px; }
+.brand-badge { background: var(--blue-light); color: white; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.08em; text-transform: uppercase; }
+.brand-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: white; letter-spacing: -0.01em; }
+.brand-sub { font-size: 12px; color: var(--gray-400); font-weight: 300; letter-spacing: 0.02em; }
+.progress-area { display: flex; align-items: center; gap: 10px; }
+.progress-label { font-size: 12px; color: var(--gray-400); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.progress-bar-wrap { width: 160px; height: 6px; background: rgba(255,255,255,0.15); border-radius: 3px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, #2ecc71, #27ae60); border-radius: 3px; transition: width 0.5s ease; width: 0%; }
+.progress-pct { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #2ecc71; font-weight: 600; min-width: 36px; text-align: right; }
+
+/* ── MODULE NAV ── */
+.module-nav { background: white; border-bottom: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); }
+.module-nav-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; gap: 0; }
+.mod-tab { padding: 14px 22px; border: none; background: none; cursor: pointer; font-family: 'Source Sans 3', sans-serif; font-size: 14px; font-weight: 600; color: var(--gray-600); border-bottom: 3px solid transparent; margin-bottom: -1px; transition: all 0.2s; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.mod-tab:hover { color: var(--blue); background: var(--sky-light); }
+.mod-tab.active { color: var(--navy); border-bottom-color: var(--blue-light); background: var(--sky-light); }
+.mod-tab .tab-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--gray-200); color: var(--gray-600); padding: 2px 7px; border-radius: 10px; font-weight: 600; }
+.mod-tab.active .tab-num { background: var(--blue-light); color: white; }
+.mod-tab.done .tab-num { background: var(--green); color: white; }
+
+/* ── MAIN LAYOUT ── */
+.main { max-width: 1160px; margin: 0 auto; padding: 32px 24px 64px; }
+.module-section { display: none; }
+.module-section.active { display: block; }
+
+/* ── ANDRAGOGY BADGE ── */
+.andragogy-strip { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); color: white; border-radius: var(--radius); padding: 18px 24px; margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
+.andragogy-strip .strip-icon { font-size: 28px; }
+.andragogy-strip .strip-text h4 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 3px; }
+.andragogy-strip .strip-text p { font-size: 15px; font-weight: 600; color: white; }
+
+/* ── SCENARIO CARD ── */
+.scenario-card { background: white; border: 1px solid var(--gray-200); border-left: 5px solid var(--red); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 28px; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
+.scenario-card::before { content: ''; position: absolute; top: 0; right: 0; width: 120px; height: 120px; background: radial-gradient(circle, var(--red-light) 0%, transparent 70%); }
+.scenario-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); background: var(--red-light); padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 14px; }
+.scenario-card h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--navy); margin-bottom: 12px; }
+.scenario-body { font-size: 15.5px; line-height: 1.7; color: var(--gray-800); }
+.scenario-body strong { color: var(--red); }
+.dispatch-box { background: var(--gray-100); border-radius: var(--radius-sm); padding: 14px 18px; margin: 14px 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--navy-mid); border-left: 3px solid var(--blue); }
+.scenario-reflect { background: var(--amber-light); border: 1px solid #f0c675; border-radius: var(--radius-sm); padding: 14px 18px; margin-top: 16px; font-size: 14px; }
+.scenario-reflect strong { color: var(--amber); }
+
+/* ── SECTION HEADER ── */
+.section-hdr { margin-bottom: 24px; }
+.section-hdr h1 { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--navy); line-height: 1.15; margin-bottom: 8px; }
+.section-hdr p { font-size: 16px; color: var(--gray-600); max-width: 680px; }
+.chapter-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--blue); background: var(--sky); padding: 4px 10px; border-radius: 4px; font-weight: 600; letter-spacing: 0.06em; display: inline-block; margin-bottom: 10px; }
+
+/* ── OBJECTIVE GRID ── */
+.obj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin-bottom: 28px; }
+.obj-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start; box-shadow: var(--shadow-sm); }
+.obj-level { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 12px; white-space: nowrap; margin-top: 2px; flex-shrink: 0; }
+.bloom-remember { background: #e8f4fd; color: #1a6dad; }
+.bloom-understand { background: #e8f5e9; color: #2e7d32; }
+.bloom-apply { background: #fff3e0; color: #ef6c00; }
+.bloom-analyze { background: #fce4ec; color: #c62828; }
+.bloom-evaluate { background: #ede7f6; color: #6a1b9a; }
+.bloom-create { background: #e0f2f1; color: #00695c; }
+.obj-text { font-size: 14px; color: var(--text); line-height: 1.5; }
+
+/* ── CONTENT BLOCKS ── */
+.content-block { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 22px; box-shadow: var(--shadow-sm); }
+.content-block h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--gray-100); display: flex; align-items: center; gap: 10px; }
+.content-block h3 .block-icon { font-size: 20px; }
+.content-block h4 { font-size: 16px; font-weight: 700; color: var(--navy-mid); margin: 16px 0 8px; }
+.content-block p { font-size: 15px; margin-bottom: 12px; line-height: 1.7; }
+.content-block ul, .content-block ol { padding-left: 22px; margin-bottom: 12px; }
+.content-block li { font-size: 15px; margin-bottom: 6px; line-height: 1.6; }
+
+/* ── CALLOUT BOXES ── */
+.callout { border-radius: var(--radius-sm); padding: 16px 20px; margin: 16px 0; border-left: 4px solid; }
+.callout-clinical { background: var(--sky-light); border-color: var(--blue); }
+.callout-clinical .callout-title { color: var(--blue); }
+.callout-critical { background: var(--red-light); border-color: var(--red); }
+.callout-critical .callout-title { color: var(--red); }
+.callout-pearl { background: #fefce8; border-color: #ca8a04; }
+.callout-pearl .callout-title { color: #854d0e; }
+.callout-title { font-size: 11px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; margin-bottom: 6px; }
+.callout p { font-size: 14.5px; margin: 0; }
+
+/* ── FORMULA BOX ── */
+.formula-box { background: var(--navy); color: white; border-radius: var(--radius-sm); padding: 16px 22px; margin: 16px 0; text-align: center; }
+.formula-box .formula-text { font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 600; color: #7dd3fc; letter-spacing: 0.05em; }
+.formula-box .formula-label { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+/* ── INJURY TABLE ── */
+.injury-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0; }
+.injury-table th { background: var(--navy); color: white; padding: 10px 14px; text-align: left; font-weight: 600; letter-spacing: 0.03em; font-size: 13px; }
+.injury-table th:first-child { border-radius: 6px 0 0 0; }
+.injury-table th:last-child { border-radius: 0 6px 0 0; }
+.injury-table td { padding: 10px 14px; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
+.injury-table tr:hover td { background: var(--sky-light); }
+.injury-table tr:last-child td { border-bottom: none; }
+
+/* ── BLAST PHASES ── */
+.blast-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+.blast-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px; text-align: center; box-shadow: var(--shadow-sm); }
+.blast-num { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--blue); margin-bottom: 4px; }
+.blast-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.blast-desc { font-size: 12.5px; color: var(--gray-600); line-height: 1.5; }
+
+/* ── MODULE 2: INTERACTIVE ── */
+.case-wrapper { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; margin-bottom: 22px; box-shadow: var(--shadow-md); }
+.case-header { background: var(--navy); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+.case-header h3 { font-family: 'Playfair Display', serif; font-size: 19px; }
+.case-header .case-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 12px; letter-spacing: 0.08em; }
+.case-body { padding: 24px 28px; }
+.case-vitals { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin: 16px 0; }
+.vital-box { background: var(--gray-100); border-radius: var(--radius-sm); padding: 10px 12px; text-align: center; }
+.vital-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-600); margin-bottom: 3px; }
+.vital-val { font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 700; color: var(--navy); }
+.vital-val.critical { color: var(--red); }
+
+/* ── DECISION TREE ── */
+.decision-node { background: var(--sky-light); border: 2px solid var(--blue-light); border-radius: var(--radius); padding: 20px 24px; margin: 14px 0; }
+.decision-question { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.decision-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.decision-btn { padding: 10px 18px; border-radius: var(--radius-sm); border: 2px solid var(--blue-light); background: white; color: var(--blue); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Source Sans 3', sans-serif; }
+.decision-btn:hover { background: var(--blue-light); color: white; border-color: var(--blue-light); }
+.decision-btn.selected-correct { background: var(--green); color: white; border-color: var(--green); }
+.decision-btn.selected-wrong { background: var(--red); color: white; border-color: var(--red); }
+.decision-feedback { margin-top: 14px; padding: 14px 18px; border-radius: var(--radius-sm); font-size: 14.5px; display: none; }
+.decision-feedback.show { display: block; }
+.feedback-correct { background: var(--green-light); border: 1px solid var(--green); color: var(--green); }
+.feedback-wrong { background: var(--red-light); border: 1px solid var(--red); color: var(--red); }
+
+/* ── REFLECTION ── */
+.reflection-block { background: linear-gradient(135deg, #fff8e7 0%, #fef3cd 100%); border: 1px solid #f4d03f; border-radius: var(--radius); padding: 24px 28px; margin: 22px 0; }
+.reflection-block h3 { font-family: 'Playfair Display', serif; font-size: 19px; color: #856404; margin-bottom: 14px; }
+.reflection-prompt { font-size: 15px; color: #533f03; margin-bottom: 12px; padding-left: 16px; border-left: 3px solid #f4d03f; line-height: 1.6; }
+.reflection-input { width: 100%; min-height: 90px; padding: 12px 16px; border: 1px solid #e2c253; border-radius: var(--radius-sm); background: white; font-family: 'Source Sans 3', sans-serif; font-size: 14px; resize: vertical; color: var(--text); margin-top: 8px; }
+.reflection-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(30,96,145,0.10); }
+
+/* ── ASSESSMENT ── */
+#module-assessment { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.assessment-header-card { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); color: white; border-radius: var(--radius); padding: 32px 36px; margin-bottom: 28px; }
+.assessment-header-card h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 8px; }
+.assessment-header-card p { font-size: 15px; color: rgba(255,255,255,0.75); margin-bottom: 0; }
+.assessment-meta { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
+.meta-box { background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 12px 16px; }
+.meta-label { font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 3px; }
+.meta-val { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: white; }
+
+/* Student ID Form */
+.student-form-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 28px; box-shadow: var(--shadow-md); }
+.student-form-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 18px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 13px; font-weight: 700; color: var(--navy); letter-spacing: 0.03em; text-transform: uppercase; }
+.form-group input { padding: 11px 14px; border: 2px solid var(--gray-200); border-radius: var(--radius-sm); font-family: 'Source Sans 3', sans-serif; font-size: 15px; color: var(--text); transition: border 0.2s; }
+.form-group input:focus { outline: none; border-color: var(--blue-light); box-shadow: 0 0 0 3px rgba(41,128,185,0.12); }
+.form-note { font-size: 13px; color: var(--gray-600); margin-top: 12px; padding: 10px 14px; background: var(--sky-light); border-radius: var(--radius-sm); }
+
+/* Quiz Questions */
+.quiz-section-hdr { background: var(--navy); color: white; border-radius: var(--radius-sm); padding: 12px 20px; margin: 28px 0 16px; display: flex; justify-content: space-between; align-items: center; }
+.quiz-section-hdr h4 { font-family: 'Playfair Display', serif; font-size: 16px; }
+.quiz-section-hdr .q-range { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.65); }
+
+.question-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 22px 26px; margin-bottom: 16px; box-shadow: var(--shadow-sm); transition: border-color 0.2s; }
+.question-card.answered { border-color: var(--gray-400); }
+.question-card.correct-answer { border-color: var(--green); background: #f0faf5; }
+.question-card.wrong-answer { border-color: var(--red); background: #fdf5f5; }
+
+.q-header { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+.q-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; background: var(--navy); color: white; padding: 4px 10px; border-radius: 20px; flex-shrink: 0; margin-top: 1px; }
+.q-text { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.55; }
+
+.options-list { display: flex; flex-direction: column; gap: 8px; padding-left: 36px; }
+.option-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; background: white; }
+.option-item:hover { background: var(--sky-light); border-color: var(--blue-light); }
+.option-item input[type="radio"] { margin-top: 3px; accent-color: var(--blue); flex-shrink: 0; }
+.option-label { font-size: 14.5px; color: var(--text); line-height: 1.45; }
+.option-item.correct-opt { background: var(--green-light); border-color: var(--green); }
+.option-item.wrong-opt { background: var(--red-light); border-color: var(--red); }
+
+.q-rationale { margin-top: 14px; padding: 12px 16px; background: var(--sky-light); border-radius: var(--radius-sm); border-left: 3px solid var(--blue); font-size: 14px; color: var(--gray-800); display: none; }
+.q-rationale.show { display: block; }
+.q-rationale strong { color: var(--blue); }
+
+/* ── SCORE PANEL ── */
+.score-panel { background: white; border: 2px solid var(--gray-200); border-radius: var(--radius); padding: 32px; text-align: center; margin-top: 28px; display: none; box-shadow: var(--shadow-lg); }
+.score-panel.visible { display: block; }
+.score-circle { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 6px solid; }
+.score-circle .pct { font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 700; line-height: 1; }
+.score-circle .pts { font-size: 13px; font-weight: 600; opacity: 0.7; margin-top: 2px; }
+.score-pass { border-color: var(--green); color: var(--green); }
+.score-warn { border-color: var(--amber); color: var(--amber); }
+.score-fail { border-color: var(--red); color: var(--red); }
+.score-label { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--navy); margin-bottom: 8px; }
+.score-sublabel { font-size: 15px; color: var(--gray-600); margin-bottom: 24px; }
+.score-breakdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; text-align: center; }
+.breakdown-item { background: var(--gray-100); border-radius: var(--radius-sm); padding: 12px; }
+.breakdown-num { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--navy); }
+.breakdown-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-600); margin-top: 3px; }
+
+/* ── BUTTONS ── */
+.btn { padding: 12px 24px; border-radius: var(--radius-sm); border: none; font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary { background: var(--blue); color: white; }
+.btn-primary:hover { background: var(--navy); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(30,96,145,0.3); }
+.btn-navy { background: var(--navy); color: white; }
+.btn-navy:hover { background: var(--navy-mid); transform: translateY(-1px); }
+.btn-green { background: var(--green); color: white; }
+.btn-green:hover { background: #145c37; transform: translateY(-1px); }
+.btn-outline { background: white; color: var(--navy); border: 2px solid var(--navy); }
+.btn-outline:hover { background: var(--navy); color: white; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; justify-content: center; }
+
+/* ── CAPSTONE ── */
+.capstone-badge { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: white; padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.capstone-badge .cap-icon { font-size: 22px; }
+.capstone-badge .cap-text { font-size: 14px; font-weight: 700; letter-spacing: 0.03em; }
+
+/* ── BOTTOM NAV ── */
+.bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--gray-200); }
+.nav-info { font-size: 13px; color: var(--gray-600); }
+
+/* ── MISC ── */
+.badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 4px 11px; border-radius: 20px; font-weight: 600; }
+.badge-blue { background: var(--sky); color: var(--blue); }
+.badge-red { background: var(--red-light); color: var(--red); }
+.badge-green { background: var(--green-light); color: var(--green); }
+.badge-amber { background: var(--amber-light); color: var(--amber); }
+
+.divider { height: 1px; background: var(--gray-200); margin: 24px 0; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .form-row { grid-template-columns: 1fr; }
+  .score-breakdown { grid-template-columns: repeat(2, 1fr); }
+  .assessment-meta { grid-template-columns: repeat(2, 1fr); }
+  .module-nav-inner { overflow-x: auto; }
+  .header-inner { flex-wrap: wrap; height: auto; padding: 12px 16px; gap: 8px; }
+  .section-hdr h1 { font-size: 26px; }
+}
+
+.quiz-submitted .option-item { pointer-events: none; }
+.submit-note { font-size: 13px; color: var(--gray-600); text-align: center; margin-top: 12px; }
+.quiz-progress-bar { height: 4px; background: var(--gray-200); border-radius: 2px; margin: 16px 0; overflow: hidden; }
+.quiz-progress-fill { height: 100%; background: var(--blue-light); border-radius: 2px; transition: width 0.4s ease; }
+.quiz-answered-count { text-align: right; font-size: 13px; color: var(--gray-600); font-family: 'JetBrains Mono', monospace; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div>
+        <div class="brand-badge">CAMP EMS · Sanders 6e</div>
+        <div class="brand-title">Trauma Overview &amp; MOI</div>
+        <div class="brand-sub">Chapter 35 &nbsp;·&nbsp; Paramedic Program</div>
+      </div>
+    </div>
+    <div class="progress-area">
+      <span class="progress-label">Progress</span>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="mainProgress"></div></div>
+      <span class="progress-pct" id="mainProgressPct">0%</span>
+    </div>
+  </div>
+</header>
+
+<!-- MODULE NAV -->
+<nav class="module-nav">
+  <div class="module-nav-inner">
+    <button class="mod-tab active" onclick="navTo('module-1')" id="tab-module-1">
+      <span class="tab-num">01</span> Foundation &amp; Context
+    </button>
+    <button class="mod-tab" onclick="navTo('module-2')" id="tab-module-2">
+      <span class="tab-num">02</span> Deep Dive &amp; Application
+    </button>
+    <button class="mod-tab" onclick="navTo('module-3')" id="tab-module-3">
+      <span class="tab-num">03</span> Synthesis &amp; Capstone
+    </button>
+    <button class="mod-tab" onclick="navTo('module-assessment')" id="tab-module-assessment">
+      <span class="tab-num">✎</span> Assessment (100 Q)
+    </button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- MODULE 1: FOUNDATION & CONTEXT                -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="module-section active" id="module-1">
+
+  <div class="andragogy-strip">
+    <div class="strip-icon">🎯</div>
+    <div class="strip-text">
+      <h4>Andragogy Principle 1 &amp; 2 · Need to Know &amp; Self-Concept</h4>
+      <p>You are an advanced life support provider. What you learn here directly determines whether your patient survives the first hour of trauma. This is not theory — this is your clinical decision framework.</p>
+    </div>
+  </div>
+
+  <!-- SCENARIO HOOK -->
+  <div class="scenario-card">
+    <div class="scenario-tag">🚨 Opening Dispatch · Scenario Hook</div>
+    <h2>Unit 7, respond to a two-vehicle MVC…</h2>
+    <div class="dispatch-box">
+      DISPATCH: "Unit 7, respond to a two-vehicle MVC at Route 460 and Bennett's Creek Road. Head-on collision, estimated 60 mph combined speed. First unit reports one patient unresponsive, driver side intrusion. ETA 6 minutes."
+    </div>
+    <div class="scenario-body">
+      You arrive on scene. The SUV's A-pillar is collapsed inward. The driver — male, approximately 35 years old — is slumped against the steering wheel. <strong>There is no external bleeding visible.</strong> Your partner asks: "What do we do first?"
+      <br/><br/>
+      Before you touch the patient, your brain must already be running a critical algorithm: <em>What forces acted on this body? What organs are at risk? What injuries do I expect to find — even if they're not obvious yet?</em>
+      <br/><br/>
+      This is <strong>kinematics</strong>. This is <strong>mechanism of injury (MOI)</strong>. And in the next 45 minutes, you'll build the mental model that makes this analysis automatic — because in the field, you won't have time to look it up.
+    </div>
+    <div class="scenario-reflect">
+      <strong>💭 Clinical Reflection:</strong> Before continuing, write down: <em>What three injuries would you suspect right now, and why?</em> Keep that answer — you'll revisit it at the end of this module.
+    </div>
+  </div>
+
+  <!-- SECTION HEADER -->
+  <div class="section-hdr">
+    <div class="chapter-badge">Sanders' Paramedic Textbook, 6th Ed. · Chapter 35</div>
+    <h1>Trauma Overview &amp;<br/>Mechanism of Injury</h1>
+    <p>The foundation of every trauma assessment begins before you examine the patient. Learn to read the scene like a forensic investigator — predicting injury before it's confirmed.</p>
+  </div>
+
+  <!-- LEARNING OBJECTIVES -->
+  <div class="content-block">
+    <h3><span class="block-icon">🎯</span> Learning Objectives</h3>
+    <p style="font-size:14px;color:var(--gray-600);margin-bottom:16px;">Aligned to Bloom's Taxonomy — from foundational recall to expert integration.</p>
+    <div class="obj-grid">
+      <div class="obj-card"><span class="obj-level bloom-remember">Remember</span><span class="obj-text">Describe the incidence and scope of traumatic injuries and deaths in the U.S.</span></div>
+      <div class="obj-card"><span class="obj-level bloom-understand">Understand</span><span class="obj-text">Explain the role of each component within the trauma system (Level I–V centers, transport modes).</span></div>
+      <div class="obj-card"><span class="obj-level bloom-apply">Apply</span><span class="obj-text">Apply kinematic principles and laws of physics to predict injury patterns for a given MOI.</span></div>
+      <div class="obj-card"><span class="obj-level bloom-apply">Apply</span><span class="obj-text">Describe injury patterns for frontal, lateral, rear-end, rotational, and rollover MVCs.</span></div>
+      <div class="obj-card"><span class="obj-level bloom-analyze">Analyze</span><span class="obj-text">Analyze how organ motion contributes to deceleration and compression injuries in each body region.</span></div>
+      <div class="obj-card"><span class="obj-level bloom-analyze">Analyze</span><span class="obj-text">Differentiate injury patterns in motorcycle, ATV, pedestrian, sports, blast, and fall traumas.</span></div>
+      <div class="obj-card"><span class="obj-level bloom-evaluate">Evaluate</span><span class="obj-text">Evaluate the role of restraints (lap belts, shoulder belts, airbags) in injury prevention and pattern modification.</span></div>
+      <div class="obj-card"><span class="obj-level bloom-evaluate">Evaluate</span><span class="obj-text">Evaluate penetrating trauma based on projectile energy level, cavitation, and ballistic characteristics.</span></div>
+      <div class="obj-card"><span class="obj-level bloom-create">Create</span><span class="obj-text">Formulate a scene-based injury prediction algorithm integrating MOI, physics, anatomy, and patient presentation.</span></div>
+    </div>
+  </div>
+
+  <!-- EPIDEMIOLOGY -->
+  <div class="content-block">
+    <h3><span class="block-icon">📊</span> Epidemiology of Trauma</h3>
+    <div class="callout callout-critical">
+      <div class="callout-title">⚠ Why This Matters to You</div>
+      <p>Unintentional injury is the <strong>leading cause of death for ages 1–44</strong> and the <strong>fourth-leading cause of death overall</strong>. The majority of these deaths are preventable — and your ability to apply kinematic principles is one of the tools that saves them.</p>
+    </div>
+    <h4>The Three Phases of Trauma Care</h4>
+    <table class="injury-table">
+      <tr><th>Phase</th><th>Definition</th><th>Paramedic Role</th></tr>
+      <tr><td><strong>Pre-Event</strong></td><td>Factors present before injury: intoxication, vision impairment, cardiac disease, fatigue</td><td>Injury prevention education, community awareness</td></tr>
+      <tr><td><strong>Event</strong></td><td>Begins at first contact with injuring force; ends when injuring force is no longer applied</td><td>Scene reconstruction, MOI analysis</td></tr>
+      <tr><td><strong>Post-Event</strong></td><td>Emergency care delivery to the patient</td><td>Gather info, lifesaving maneuvers, appropriate transport</td></tr>
+    </table>
+    <h4>The Trauma System</h4>
+    <ul>
+      <li>Comprehensive trauma systems integrate <strong>prevention, prehospital care, emergency department care, definitive care, rehabilitation, and data collection</strong></li>
+      <li><strong>Level I Trauma Center:</strong> Full specialists 24/7; regional resource for severely injured patients</li>
+      <li><strong>Level II–V:</strong> Progressively limited capability — know your regional system</li>
+    </ul>
+    <h4>Transport Decisions</h4>
+    <ul>
+      <li><strong>Ground transport:</strong> Default if destination reachable in reasonable time</li>
+      <li><strong>Aeromedical transport:</strong> Consider when ground time threatens survival, road conditions delay care, or critical care equipment is needed en route</li>
+    </ul>
+    <div class="callout callout-clinical">
+      <div class="callout-title">💡 Clinical Pearl</div>
+      <p>Time is the most critical resource in trauma. The "golden hour" concept means your field time and transport decision directly affects mortality. Always ask: <em>Where does this patient need to be, and how do I get them there fastest?</em></p>
+    </div>
+  </div>
+
+  <!-- KINEMATICS -->
+  <div class="content-block">
+    <h3><span class="block-icon">⚡</span> Kinematics: The Physics of Trauma</h3>
+    <p>Kinematics is the process of <strong>predicting injury patterns</strong> based on the forces and energies involved in a traumatic event. It is your most powerful diagnostic tool — it works before you ever touch the patient.</p>
+    <h4>The Laws of Physics Every Paramedic Must Know</h4>
+    <div class="formula-box">
+      <div class="formula-text">KE = ½ × m × v²</div>
+      <div class="formula-label">Kinetic Energy = ½ × Mass × Velocity² &nbsp;|&nbsp; Velocity is the dominant factor</div>
+    </div>
+    <table class="injury-table">
+      <tr><th>Law</th><th>Principle</th><th>Clinical Application</th></tr>
+      <tr><td><strong>Newton's 1st Law</strong></td><td>Objects at rest/motion stay that way until acted on by outside force</td><td>Restrained patient: body stops with car. Unrestrained: body continues forward.</td></tr>
+      <tr><td><strong>Newton's 2nd Law</strong></td><td>F = m × a (or deceleration)</td><td>Heavier patient or faster deceleration = greater force on organs</td></tr>
+      <tr><td><strong>Conservation of Energy</strong></td><td>Energy cannot be created or destroyed — only transformed</td><td>Crash energy transfers to patient's tissues as crush, stretch, heat</td></tr>
+      <tr><td><strong>Kinetic Energy</strong></td><td>KE = ½mv² — velocity has exponential effect</td><td>Doubling speed = 4× the energy — explains why high-speed crashes are so deadly</td></tr>
+    </table>
+    <div class="callout callout-pearl">
+      <div class="callout-title">🔑 Key Insight</div>
+      <p>Doubling mass doubles kinetic energy. Doubling <em>velocity</em> <strong>quadruples</strong> it. Speed kills exponentially. This is why a 60 mph crash is not twice as bad as a 30 mph crash — it is four times more lethal.</p>
+    </div>
+    <h4>The Four Assessment Considerations</h4>
+    <div class="badge-row">
+      <span class="badge badge-blue">MOI Type</span>
+      <span class="badge badge-red">Force of Energy</span>
+      <span class="badge badge-green">Anatomy Involved</span>
+      <span class="badge badge-amber">Energy Form (mechanical, thermal, electrical, chemical)</span>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="nav-info">Module 1 of 4 · Foundation &amp; Context</div>
+    <button class="btn btn-primary" onclick="navTo('module-2')">Continue to Module 2 →</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- MODULE 2: DEEP DIVE & APPLICATION             -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="module-section" id="module-2">
+
+  <div class="andragogy-strip">
+    <div class="strip-icon">🔬</div>
+    <div class="strip-text">
+      <h4>Andragogy Principle 3 &amp; 4 · Prior Experience &amp; Readiness to Learn</h4>
+      <p>You've been on MVCs before. Now you'll analyze <em>why</em> each injury happened — connecting the physics you just learned to the anatomy you know, making your assessment faster and more accurate on every future call.</p>
+    </div>
+  </div>
+
+  <!-- BLUNT TRAUMA -->
+  <div class="content-block">
+    <h3><span class="block-icon">🚗</span> Blunt Trauma: Motor Vehicle Crashes</h3>
+    <p>Every MVC involves <strong>three separate impacts</strong> as energy transfers through the system:</p>
+    <div class="blast-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="blast-card"><div class="blast-num">1st</div><div class="blast-name">Vehicle Impact</div><div class="blast-desc">Vehicle strikes object or another vehicle. Energy transfers to the chassis.</div></div>
+      <div class="blast-card"><div class="blast-num">2nd</div><div class="blast-name">Occupant Impact</div><div class="blast-desc">Occupant collides with interior of vehicle: dashboard, steering wheel, windshield.</div></div>
+      <div class="blast-card"><div class="blast-num">3rd</div><div class="blast-name">Organ Impact</div><div class="blast-desc">Internal organs collide against each other, body wall, or anchoring structures.</div></div>
+    </div>
+    <h4>MVC Impact Patterns &amp; Expected Injuries</h4>
+    <table class="injury-table">
+      <tr><th>Impact Type</th><th>Mechanism</th><th>Predicted Injuries</th></tr>
+      <tr><td><strong>Frontal (Head-On)</strong></td><td>Down-and-under OR Up-and-over pathway</td><td>Knee/femur fractures, chest wall, aortic shear, C-spine, facial trauma</td></tr>
+      <tr><td><strong>Lateral</strong></td><td>Side compression; organ moves away from impact</td><td>Clavicle, ribs, pelvic fractures; aortic tear; C-spine lateral flexion</td></tr>
+      <tr><td><strong>Rear-End</strong></td><td>Vehicle accelerates forward under occupant; head lags behind</td><td>Cervical hyperextension injury (whiplash), C-spine fracture</td></tr>
+      <tr><td><strong>Rotational</strong></td><td>Off-center impact causes vehicle rotation</td><td>Combination of frontal and lateral patterns</td></tr>
+      <tr><td><strong>Rollover</strong></td><td>Unrestrained occupant tumbles inside vehicle; possible ejection</td><td>Multiple-system trauma; all patterns possible; ejection is 30× higher fatality risk</td></tr>
+    </table>
+  </div>
+
+  <!-- RESTRAINTS -->
+  <div class="content-block">
+    <h3><span class="block-icon">🔒</span> Restraints: Injury Prevention &amp; Pattern Modification</h3>
+    <div class="callout callout-clinical">
+      <div class="callout-title">📊 The Evidence</div>
+      <p>Properly used safety belts reduce <strong>fatal injury risk by 51%</strong> and serious/critical injury by <strong>65%</strong>. Unrestrained occupants are <strong>30× more likely to be ejected</strong>, and <strong>75% of ejected patients die</strong>.</p>
+    </div>
+    <table class="injury-table">
+      <tr><th>Restraint Type</th><th>Benefit</th><th>Injury Pattern When Improperly Used</th></tr>
+      <tr><td><strong>Lap Belt</strong></td><td>Prevents ejection; distributes force to pelvis</td><td>Worn too high: abdominal compression → "seat belt syndrome" (bowel, mesenteric, lumbar spine injuries)</td></tr>
+      <tr><td><strong>Shoulder Belt</strong></td><td>Prevents upper torso impact; holds occupant in seat</td><td>Worn improperly under arm: rib fractures, clavicular injury, lacerated spleen</td></tr>
+      <tr><td><strong>3-Point Belt</strong></td><td>Best protection; distributes force across bony pelvis and chest</td><td>Still allows some forward flexion — assess for abdominal/lumbar injuries</td></tr>
+      <tr><td><strong>Frontal Airbag</strong></td><td>Cushions forward momentum with lap/shoulder belt</td><td>Deflates rapidly — does NOT protect from side, rear, or subsequent impacts. Risk group: infants &lt;13 yrs, adults &lt;4'6", elderly</td></tr>
+    </table>
+  </div>
+
+  <!-- ORGAN INJURIES -->
+  <div class="content-block">
+    <h3><span class="block-icon">🫀</span> Organ Injuries from Deceleration &amp; Compression</h3>
+    <h4>Deceleration Injuries — "The Snap"</h4>
+    <p>When the body decelerates, organs continue to move — stretching or tearing from their attachment points:</p>
+    <table class="injury-table">
+      <tr><th>Region</th><th>Organ Motion</th><th>Result</th></tr>
+      <tr><td>Head</td><td>Brain continues moving as cranium stops; strikes inside of skull</td><td>Concussion, contusion, DAI, coup-contrecoup</td></tr>
+      <tr><td>Thorax</td><td>Heart &amp; aorta continue forward; shear at ligamentum arteriosum</td><td>Traumatic aortic dissection/rupture — often immediately fatal</td></tr>
+      <tr><td>Abdomen</td><td>Kidneys shear from vascular pedicle; liver separates at hilum; mesenteric tears</td><td>Exsanguinating hemorrhage — may be clinically silent initially</td></tr>
+    </table>
+    <h4>Compression Injuries — "The Crush"</h4>
+    <table class="injury-table">
+      <tr><th>Region</th><th>Mechanism</th><th>Result</th></tr>
+      <tr><td>Head</td><td>External force compresses skull</td><td>Depressed fracture, brain contusion/laceration, hemorrhage</td></tr>
+      <tr><td>Thorax</td><td>Chest wall compressed; increased intrathoracic pressure</td><td><strong>Paper bag effect</strong> → lung rupture; pneumothorax; flail chest</td></tr>
+      <tr><td>Abdomen</td><td>Hollow/solid organ compressed between external force and spine</td><td>Bladder rupture (especially if full), splenic/hepatic laceration</td></tr>
+    </table>
+  </div>
+
+  <!-- OTHER MECHANISMS -->
+  <div class="content-block">
+    <h3><span class="block-icon">🏍</span> Other Blunt Mechanisms</h3>
+    <h4>Motorcycle Crashes</h4>
+    <table class="injury-table">
+      <tr><th>Impact Type</th><th>Expected Injuries</th></tr>
+      <tr><td>Frontal (head-on)</td><td>Bilateral femur fractures; perineal injuries; upper extremity fractures if feet leave footrests</td></tr>
+      <tr><td>Angular impact</td><td>Open fractures femur/tibia/fibula; ankle dislocation — rider trapped between bike and object</td></tr>
+      <tr><td>Laying the bike down</td><td>Massive abrasions (road rash); fractures to affected side — least lethal of the three</td></tr>
+    </table>
+    <h4>Pedestrian Injuries</h4>
+    <table class="injury-table">
+      <tr><th>Patient</th><th>1st Impact</th><th>2nd Impact</th><th>3rd Impact</th></tr>
+      <tr><td><strong>Adult</strong></td><td>Bumper → lower legs → tibia/fibula fractures</td><td>Hood of vehicle → upper body trauma</td><td>Ground → head, C-spine, shoulder</td></tr>
+      <tr><td><strong>Child</strong></td><td>Bumper higher on body → femur/pelvic fractures, internal hemorrhage</td><td>Vehicle thorax contact → head/neck flexion</td><td>Ground → head impact (most dangerous)</td></tr>
+    </table>
+    <div class="callout callout-critical">
+      <div class="callout-title">⚠ Vertical Falls</div>
+      <p>Falls from <strong>3× patient's height (15–20 ft)</strong> are associated with severe injury. Classic finding: <strong>bilateral calcaneus (heel) fractures</strong>. Energy then travels up: pelvis → lumbar spine → thoracic spine. Infants fall headfirst (proportionally large head) → skull fractures, intracranial bleeding. Elderly sustain high numbers of hip fractures and head injuries from low-level falls.</p>
+    </div>
+  </div>
+
+  <!-- BLAST INJURIES -->
+  <div class="content-block">
+    <h3><span class="block-icon">💥</span> Blast Injuries: 5 Phases</h3>
+    <div class="blast-grid">
+      <div class="blast-card" style="border-top:3px solid #e74c3c;">
+        <div class="blast-num" style="color:#e74c3c;">1°</div>
+        <div class="blast-name">Primary</div>
+        <div class="blast-desc">Supersonic blast wave → gas-containing organs: lungs, bowel, sinuses, tympanic membranes. Unique to high-order explosives.</div>
+      </div>
+      <div class="blast-card" style="border-top:3px solid #e67e22;">
+        <div class="blast-num" style="color:#e67e22;">2°</div>
+        <div class="blast-name">Secondary</div>
+        <div class="blast-desc">Flying debris (glass, metal, shrapnel) → penetrating trauma. Most common blast injury mechanism.</div>
+      </div>
+      <div class="blast-card" style="border-top:3px solid #f39c12;">
+        <div class="blast-num" style="color:#f39c12;">3°</div>
+        <div class="blast-name">Tertiary</div>
+        <div class="blast-desc">Patient propelled through space by blast wind → strikes stationary object. Similar pattern to vertical falls/MVCs.</div>
+      </div>
+      <div class="blast-card" style="border-top:3px solid #27ae60;">
+        <div class="blast-num" style="color:#27ae60;">4°</div>
+        <div class="blast-name">Quaternary</div>
+        <div class="blast-desc">All other explosion injuries: burns, toxic gas inhalation, crush injuries, exacerbation of existing conditions.</div>
+      </div>
+      <div class="blast-card" style="border-top:3px solid #8e44ad;">
+        <div class="blast-num" style="color:#8e44ad;">5°</div>
+        <div class="blast-name">Quinary</div>
+        <div class="blast-desc">Injuries from contaminants in explosion: chemical, biological, radiologic substances ("dirty bomb" contamination).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PENETRATING TRAUMA -->
+  <div class="content-block">
+    <h3><span class="block-icon">🔫</span> Penetrating Trauma</h3>
+    <p>All penetrating objects — regardless of velocity — cause tissue disruption via two mechanisms: <strong>crushing</strong> and <strong>stretching</strong>.</p>
+    <h4>Cavitation</h4>
+    <p><strong>Cavitation</strong> is the opening produced when a projectile pushes body tissues laterally away from its tract. Temporary cavitation can be massive even without permanent visible damage — especially in abdominal injuries.</p>
+    <h4>Energy Levels of Penetrating Trauma</h4>
+    <table class="injury-table">
+      <tr><th>Energy Level</th><th>Weapons</th><th>Muzzle Velocity</th><th>Injury Pattern</th></tr>
+      <tr><td><strong>Low</strong></td><td>Knives, needles, ice picks</td><td>N/A</td><td>Cutting and crushing along track only; minimal cavitation</td></tr>
+      <tr><td><strong>Medium</strong></td><td>Handguns, some rifles</td><td>~1,000 fps (304 m/s)</td><td>Larger permanent cavity; temporary cavitation; unpredictable tract</td></tr>
+      <tr><td><strong>High</strong></td><td>Military rifles, high-powered rifles</td><td>&gt;2,000 fps (610 m/s)</td><td>Massive cavitation; tissue disruption far from wound tract; fragmentation</td></tr>
+    </table>
+    <h4>Wounding Factors for Medium/High-Energy Projectiles</h4>
+    <div class="badge-row">
+      <span class="badge badge-red">Projectile Velocity</span>
+      <span class="badge badge-red">Projectile Mass</span>
+      <span class="badge badge-red">Deformation (expansion)</span>
+      <span class="badge badge-red">Fragmentation</span>
+      <span class="badge badge-red">Tissue Type</span>
+      <span class="badge badge-red">Weapon Range</span>
+    </div>
+    <h4>Special Penetrating Injury Considerations</h4>
+    <table class="injury-table">
+      <tr><th>Region</th><th>Key Points</th></tr>
+      <tr><td>Head</td><td>GSW to head typically devastating; high-velocity = massive destruction; airway control extremely difficult</td></tr>
+      <tr><td>Thorax</td><td>May injure pulmonary/vascular system with no visible chest wound; massive hemorrhage possible</td></tr>
+      <tr><td>Abdomen</td><td>GSW to abdomen = surgery; always assume serious injury even if patient appears stable</td></tr>
+      <tr><td>Extremities</td><td>Vascular injury → hemorrhage or thrombosis; bone fragments = secondary missiles; nerve/muscle damage</td></tr>
+    </table>
+  </div>
+
+  <!-- INTERACTIVE CASE: Decision Tree -->
+  <div class="case-wrapper">
+    <div class="case-header">
+      <h3>🧠 Interactive Case: Decision-Making Exercise</h3>
+      <span class="case-badge">APPLY YOUR KNOWLEDGE</span>
+    </div>
+    <div class="case-body">
+      <p style="font-size:15px;margin-bottom:16px;"><strong>Scenario:</strong> You respond to a reported shooting. A 28-year-old male is found supine in an alley. Bystanders report he was shot once. You find a single wound to the left lateral chest at the 4th intercostal space, mid-axillary line. No exit wound found.</p>
+      <div class="case-vitals">
+        <div class="vital-box"><div class="vital-label">HR</div><div class="vital-val critical">128</div></div>
+        <div class="vital-box"><div class="vital-label">BP</div><div class="vital-val critical">86/54</div></div>
+        <div class="vital-box"><div class="vital-label">RR</div><div class="vital-val critical">28</div></div>
+        <div class="vital-box"><div class="vital-label">SpO₂</div><div class="vital-val critical">91%</div></div>
+        <div class="vital-box"><div class="vital-label">GCS</div><div class="vital-val">13</div></div>
+        <div class="vital-box"><div class="vital-label">Skin</div><div class="vital-val critical">P/C/D</div></div>
+      </div>
+
+      <div class="decision-node">
+        <div class="decision-question">Question 1: Based on the entry wound location and vitals, which organ system is MOST likely involved?</div>
+        <div class="decision-options">
+          <button class="decision-btn" onclick="decide(this, false, 'dec1', 'Correct anatomy but too narrow — this location more commonly involves the lung given lateral chest placement.')">Cardiac tamponade</button>
+          <button class="decision-btn" onclick="decide(this, true, 'dec1', 'CORRECT. Lateral chest 4th ICS mid-axillary = lung territory. Tachycardia, hypotension, low SpO₂, no exit wound = likely hemopneumothorax or tension pneumothorax. Immediate needle decompression if tension suspected.')">Pulmonary/hemopneumothorax</button>
+          <button class="decision-btn" onclick="decide(this, false, 'dec1', 'While abdominal organs can be reached from the thorax, the primary concern here is intrathoracic given the wound location.')">Abdominal viscera</button>
+          <button class="decision-btn" onclick="decide(this, false, 'dec1', 'Aortic injury is possible but less likely from a lateral wound at this level. Pulmonary injury is the primary concern.')">Aortic injury</button>
+        </div>
+        <div class="decision-feedback" id="dec1"></div>
+      </div>
+
+      <div class="decision-node">
+        <div class="decision-question">Question 2: What is the MOST appropriate transport decision for this patient?</div>
+        <div class="decision-options">
+          <button class="decision-btn" onclick="decide(this, false, 'dec2', 'Scene stabilization is not appropriate for penetrating thoracic trauma with hemodynamic instability. Load and go.')">Stabilize on scene — 10 min treatment</button>
+          <button class="decision-btn" onclick="decide(this, true, 'dec2', 'CORRECT. This is a "load and go" patient. Penetrating chest trauma with hemodynamic instability = rapid transport to trauma center with ALS interventions en route. Scene time should be &lt; 10 minutes.')">Rapid transport — ALS interventions en route</button>
+          <button class="decision-btn" onclick="decide(this, false, 'dec2', 'Basic stabilization only is insufficient — this patient needs ALS interventions (needle decompression, large-bore IV, monitoring).')">BLS unit — basic stabilization only</button>
+          <button class="decision-btn" onclick="decide(this, false, 'dec2', 'Aeromedical is appropriate if ground transport time significantly exceeds aeromedical, or road conditions prevent access. Evaluate based on your local system.')">Helicopter only — do not move patient</button>
+        </div>
+        <div class="decision-feedback" id="dec2"></div>
+      </div>
+
+      <div class="decision-node">
+        <div class="decision-question">Question 3: The weapon was reportedly a handgun at close range. What energy category and wound characteristics do you anticipate?</div>
+        <div class="decision-options">
+          <button class="decision-btn" onclick="decide(this, false, 'dec3', 'Low-energy weapons (knives, needles) cause minimal cavitation — wrong category for a handgun.')">Low-energy — crushing only, no cavitation</button>
+          <button class="decision-btn" onclick="decide(this, true, 'dec3', 'CORRECT. Handguns are medium-energy weapons (~1,000 fps). At close range, expect a larger permanent cavity, possible temporary cavitation, and unpredictable trajectory. No exit wound = bullet retained in tissue, absorbing all energy.')">Medium-energy — larger cavity, possible cavitation</button>
+          <button class="decision-btn" onclick="decide(this, false, 'dec3', 'High-energy is reserved for military/high-powered rifles (>2,000 fps). Handguns are typically medium-energy.')">High-energy — massive cavitation and fragmentation</button>
+          <button class="decision-btn" onclick="decide(this, false, 'dec3', 'Energy level does not depend on caliber alone — velocity and mass together determine kinetic energy. Classify by weapon type.')">Depends only on caliber — cannot classify</button>
+        </div>
+        <div class="decision-feedback" id="dec3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAUMA ASSESSMENT -->
+  <div class="content-block">
+    <h3><span class="block-icon">📋</span> Trauma Assessment: The 9-Component Framework</h3>
+    <ol style="counter-reset:none;">
+      <li style="margin-bottom:10px;"><strong>Standard precautions</strong> — PPE before everything</li>
+      <li style="margin-bottom:10px;"><strong>Scene size-up &amp; resource identification</strong> — unsafe scene cannot be entered</li>
+      <li style="margin-bottom:10px;"><strong>General impression</strong> — Is this patient sick or not sick?</li>
+      <li style="margin-bottom:10px;"><strong>MOI</strong> — Reconstruct the event before you assess the patient</li>
+      <li style="margin-bottom:10px;"><strong>Primary assessment</strong> — ABCDE; identify and treat life threats</li>
+      <li style="margin-bottom:10px;"><strong>Baseline vitals</strong> — BP, HR, RR, SpO₂, EtCO₂, ECG</li>
+      <li style="margin-bottom:10px;"><strong>Patient history &amp; event history</strong> — SAMPLE, OPQRST, pre-event history</li>
+      <li style="margin-bottom:10px;"><strong>Secondary assessment</strong> — Head-to-toe physical exam</li>
+      <li style="margin-bottom:10px;"><strong>Reassessment</strong> — Continuous monitoring; trends matter</li>
+    </ol>
+    <div class="callout callout-clinical">
+      <div class="callout-title">📝 Documentation Is Treatment</div>
+      <p>Your patient care report recreates the scene for every provider who sees this patient after you. Include the MOI, scene findings, anatomic wound locations (on a body diagram), and a timeline. Poor documentation = lost clinical information = compromised care.</p>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflection-block">
+    <h3>💭 Module 2 Reflection Prompts</h3>
+    <div class="reflection-prompt">Think about the last MVC call you've been on or observed. What were the forces involved? What injuries did you predict versus find?</div>
+    <textarea class="reflection-input" placeholder="Write your reflection here — this is for your learning, not graded..."></textarea>
+    <div class="reflection-prompt" style="margin-top:16px;">For penetrating trauma: how will knowing the energy level of a weapon change how you assess and transport your patient?</div>
+    <textarea class="reflection-input" placeholder="Write your reflection here..."></textarea>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="btn btn-outline" onclick="navTo('module-1')">← Module 1</button>
+    <button class="btn btn-primary" onclick="navTo('module-3')">Continue to Module 3 →</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- MODULE 3: SYNTHESIS & CAPSTONE               -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="module-section" id="module-3">
+
+  <div class="andragogy-strip">
+    <div class="strip-icon">🏆</div>
+    <div class="strip-text">
+      <h4>Andragogy Principle 5 &amp; 6 · Problem-Centered Learning &amp; Intrinsic Motivation</h4>
+      <p>You're not solving a textbook problem here — you're building the clinical algorithm you'll use on your next shift. When you recognize an MOI and predict the right injuries, you save lives. That is the reward.</p>
+    </div>
+  </div>
+
+  <!-- CAPSTONE SCENARIO -->
+  <div class="capstone-badge">
+    <div class="cap-icon">🎓</div>
+    <div class="cap-text">CAPSTONE SCENARIO — Integrate all concepts: Kinematics · Trauma Systems · Assessment · Transport Decision</div>
+  </div>
+
+  <div class="scenario-card" style="border-left-color:var(--blue);">
+    <div class="scenario-tag" style="background:var(--sky);color:var(--blue);">📍 Capstone Scenario: Operation Westhaven</div>
+    <h2>Multi-Patient Trauma Scene</h2>
+    <div class="scenario-body">
+      You are the first ALS unit on scene of a high-speed MVC on a rural two-lane highway. A pickup truck (estimated 65 mph) crossed the centerline and struck a passenger sedan head-on. The sedan has severe front-end intrusion. Your unit is alone; the next unit is 8 minutes out.
+      <br/><br/>
+      <strong>Patient A:</strong> Male, ~40s, driver of sedan. Unrestrained. Found partially ejected through windshield. GCS 8. HR 140, BP 70/40, RR 6 and labored. Obvious head laceration with facial deformity.
+      <br/><br/>
+      <strong>Patient B:</strong> Female, ~35, passenger of sedan. Restrained (3-point belt). Alert and oriented. Complaining of severe left chest pain and left shoulder pain. HR 110, BP 100/70, RR 22, SpO₂ 94%.
+      <br/><br/>
+      <strong>Patient C:</strong> Male, ~50s, driver of pickup. Restrained, airbag deployed. Confused (GCS 14). Minor facial lacerations. HR 95, BP 130/80, RR 18, SpO₂ 98%.
+    </div>
+  </div>
+
+  <div class="content-block">
+    <h3><span class="block-icon">🧩</span> Capstone Analysis: Apply Your Framework</h3>
+
+    <h4>Step 1: Scene Size-Up &amp; MOI Analysis</h4>
+    <div class="callout callout-critical">
+      <div class="callout-title">⚠ Critical Decision Point</div>
+      <p>Head-on collision at 65 mph = combined closing speed of ~130 mph. This is an extreme kinetic energy event. Expect multisystem trauma in all patients. Call for additional resources immediately — you cannot manage three patients alone.</p>
+    </div>
+
+    <h4>Step 2: Triage Priority (Using Your MOI Assessment)</h4>
+    <table class="injury-table">
+      <tr><th>Patient</th><th>MOI / Predicted Injuries</th><th>Triage Priority</th><th>Rationale</th></tr>
+      <tr><td><strong>A (Sedan driver)</strong></td><td>Ejection (30× fatal risk) + head-on + unrestrained. Expected: TBI, C-spine, pneumothorax, aortic shear, internal abdominal hemorrhage</td><td style="color:var(--red);font-weight:700;">IMMEDIATE (Red)</td><td>Multisystem trauma, altered LOC, hypotension = hemorrhagic shock, likely airway compromise</td></tr>
+      <tr><td><strong>B (Sedan passenger)</strong></td><td>Restrained 3-point + head-on. Belt syndrome possible. Left lateral chest: rib fractures, pneumothorax, aortic dissection, splenic injury</td><td style="color:var(--amber);font-weight:700;">URGENT (Yellow)</td><td>Compensated; hemodynamically borderline — can deteriorate rapidly; monitor closely</td></tr>
+      <tr><td><strong>C (Pickup driver)</strong></td><td>Restrained + airbag. GCS 14 — possible TBI, airbag abrasions. Lower kinetic force absorption due to truck mass</td><td style="color:var(--green);font-weight:700;">DELAYED (Green)</td><td>Ambulatory, stable — monitor for delayed deterioration</td></tr>
+    </table>
+
+    <h4>Step 3: Transport Decisions</h4>
+    <ul>
+      <li><strong>Patient A:</strong> Requires Level I Trauma Center — request aeromedical now if ground time &gt;15 minutes. Do not delay on scene for anything but airway control and IV access.</li>
+      <li><strong>Patient B:</strong> Level I preferred — left lateral chest pain with hypoxia may represent aortic injury or tension pneumothorax in evolution.</li>
+      <li><strong>Patient C:</strong> Level II or I — monitor GCS trend; confused patient with head-on MOI warrants CT of head.</li>
+    </ul>
+
+    <h4>Step 4: Integration — The MOI Algorithm</h4>
+    <div class="callout callout-clinical">
+      <div class="callout-title">🔄 Your Clinical Algorithm</div>
+      <p><strong>Scene → MOI → Physics → Anatomy → Predicted Injuries → Assessment → Transport</strong>. This is the loop you run on every trauma patient. Kinematics does not replace physical assessment — it <em>directs</em> your assessment so you know where to look and what to treat before the injury declares itself.</p>
+    </div>
+  </div>
+
+  <!-- FINAL REFLECTION -->
+  <div class="reflection-block">
+    <h3>💭 Final Synthesis Reflection: "How Will I Use This?"</h3>
+    <div class="reflection-prompt">On my next trauma call, the one thing I will do differently based on this module is…</div>
+    <textarea class="reflection-input" placeholder="Write your commitment here..."></textarea>
+    <div class="reflection-prompt" style="margin-top:16px;">The MOI that I feel least confident assessing and predicting is… and here's how I'll address that gap…</div>
+    <textarea class="reflection-input" placeholder="Write your gap analysis and plan here..."></textarea>
+    <div class="reflection-prompt" style="margin-top:16px;">Revisit your opening response: You wrote down 3 suspected injuries for the initial scenario. Now that you've completed Modules 1–3, how would your prediction change?</div>
+    <textarea class="reflection-input" placeholder="Compare your initial intuition to your new clinical knowledge..."></textarea>
+  </div>
+
+  <!-- CONTENT CONNECTIONS -->
+  <div class="content-block" style="background:var(--navy);border-color:var(--navy);">
+    <h3 style="color:white;border-bottom-color:rgba(255,255,255,0.1);"><span class="block-icon">🔗</span> <span style="color:white;">Content Connections</span></h3>
+    <p style="color:rgba(255,255,255,0.8);">The principles from Chapter 35 are the foundation for every chapter in Section 9 of Sanders' Paramedic Textbook:</p>
+    <div class="badge-row" style="margin-top:12px;">
+      <span class="badge" style="background:rgba(255,255,255,0.15);color:white;">Ch. 36 · Bleeding &amp; Soft Tissue</span>
+      <span class="badge" style="background:rgba(255,255,255,0.15);color:white;">Ch. 37 · Burns</span>
+      <span class="badge" style="background:rgba(255,255,255,0.15);color:white;">Ch. 38 · Head, Face &amp; Neck</span>
+      <span class="badge" style="background:rgba(255,255,255,0.15);color:white;">Ch. 39 · Spine</span>
+      <span class="badge" style="background:rgba(255,255,255,0.15);color:white;">Ch. 40 · Thorax</span>
+      <span class="badge" style="background:rgba(255,255,255,0.15);color:white;">Ch. 41 · Abdomen</span>
+      <span class="badge" style="background:rgba(255,255,255,0.15);color:white;">Ch. 42 · Musculoskeletal</span>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="btn btn-outline" onclick="navTo('module-2')">← Module 2</button>
+    <button class="btn btn-primary" onclick="navTo('module-assessment')">Proceed to 100-Question Assessment →</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- ASSESSMENT                                     -->
+<!-- ══════════════════════════════════════════════ -->
+<section class="module-section" id="module-assessment">
+
+  <div class="assessment-header-card">
+    <h2>📝 Post-Module Assessment</h2>
+    <p>Chapter 35 · Trauma Overview &amp; Mechanism of Injury</p>
+    <div class="assessment-meta">
+      <div class="meta-box"><div class="meta-label">Questions</div><div class="meta-val">100</div></div>
+      <div class="meta-box"><div class="meta-label">Passing Score</div><div class="meta-val">70%</div></div>
+      <div class="meta-box"><div class="meta-label">Format</div><div class="meta-val">MCQ</div></div>
+      <div class="meta-box"><div class="meta-label">Source</div><div class="meta-val">Ch. 35</div></div>
+    </div>
+  </div>
+
+  <!-- STUDENT INFO FORM -->
+  <div class="student-form-card" id="studentFormCard">
+    <h3>🎓 Student Information</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Student Full Name *</label>
+        <input type="text" id="studentName" placeholder="First Last" />
+      </div>
+      <div class="form-group">
+        <label>Student ID *</label>
+        <input type="text" id="studentId" placeholder="e.g., S-12345" />
+      </div>
+    </div>
+    <div class="form-note">ℹ️ Your name and student ID will appear on your downloadable PDF score report. Both fields are required before submission.</div>
+  </div>
+
+  <!-- QUIZ PROGRESS -->
+  <div class="quiz-answered-count"><span id="answeredCount">0</span> / 100 answered</div>
+  <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill" style="width:0%"></div></div>
+
+  <div id="quizContainer">
+    <!-- Questions injected by JS -->
+  </div>
+
+  <div class="btn-row" id="submitRow">
+    <button class="btn btn-navy" onclick="submitQuiz()">✓ Submit Assessment &amp; View Score</button>
+  </div>
+  <div class="submit-note" id="submitNote"></div>
+
+  <!-- SCORE PANEL -->
+  <div class="score-panel" id="scorePanel">
+    <div class="score-circle" id="scoreCircle">
+      <div class="pct" id="scorePercent">--%</div>
+      <div class="pts" id="scorePoints">--/100</div>
+    </div>
+    <div class="score-label" id="scoreLabel">Assessment Complete</div>
+    <div class="score-sublabel" id="scoreSublabel"></div>
+    <div class="score-breakdown">
+      <div class="breakdown-item"><div class="breakdown-num" id="brkCorrect">0</div><div class="breakdown-lbl">Correct</div></div>
+      <div class="breakdown-item"><div class="breakdown-num" id="brkWrong">0</div><div class="breakdown-lbl">Incorrect</div></div>
+      <div class="breakdown-item"><div class="breakdown-num" id="brkPct">0%</div><div class="breakdown-lbl">Score</div></div>
+      <div class="breakdown-item"><div class="breakdown-num" id="brkGrade">--</div><div class="breakdown-lbl">Grade</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-green" onclick="downloadPDF()">⬇ Download PDF Score Report</button>
+      <button class="btn btn-outline" onclick="reviewAnswers()">🔍 Review All Answers</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// ════════════════════════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════════════════════════
+const modules = ['module-1','module-2','module-3','module-assessment'];
+let completedModules = new Set();
+
+function navTo(id) {
+  modules.forEach(m => {
+    document.getElementById(m).classList.remove('active');
+    document.getElementById('tab-' + m).classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+  if (id !== 'module-assessment') completedModules.add(id);
+  updateProgress();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function updateProgress() {
+  const pct = Math.round((completedModules.size / 4) * 100);
+  document.getElementById('mainProgress').style.width = pct + '%';
+  document.getElementById('mainProgressPct').textContent = pct + '%';
+  completedModules.forEach(m => {
+    const tab = document.getElementById('tab-' + m);
+    if (tab && m !== modules[modules.indexOf(m)]) tab.classList.add('done');
+  });
+}
+
+// ════════════════════════════════════════════════════════
+// DECISION TREE
+// ════════════════════════════════════════════════════════
+function decide(btn, isCorrect, feedbackId, msg) {
+  const parent = btn.closest('.decision-node');
+  parent.querySelectorAll('.decision-btn').forEach(b => b.disabled = true);
+  btn.classList.add(isCorrect ? 'selected-correct' : 'selected-wrong');
+  const fb = document.getElementById(feedbackId);
+  fb.className = 'decision-feedback show ' + (isCorrect ? 'feedback-correct' : 'feedback-wrong');
+  fb.innerHTML = (isCorrect ? '✅ ' : '❌ ') + msg;
+}
+
+// ════════════════════════════════════════════════════════
+// QUESTION BANK — 100 Questions
+// ════════════════════════════════════════════════════════
+const questions = [
+  // SECTION 1: EPIDEMIOLOGY (Q1–12)
+  { section: "Section 1: Epidemiology of Trauma", q: "Unintentional injury is the leading cause of death in which age group?", opts: ["1–44 years","45–64 years","65 and older","Under 1 year"], ans: 0, rat: "Unintentional injury (trauma) is the leading cause of death for ages 1–44 and the fourth-leading cause of death overall (Sanders Ch. 35)." },
+  { q: "Which of the following represents the correct ranking of unintentional injury as a cause of death for ALL ages?", opts: ["1st","2nd","3rd","4th"], ans: 3, rat: "Trauma is the fourth-leading cause of death for all ages combined, though first for ages 1–44." },
+  { q: "Which of the following has consistently been among the leading causes of trauma deaths since 1970?", opts: ["Firearms, falls, and drowning","Poisoning, vehicle crashes, and falls","Explosion injuries, lightning, and burns","Motor vehicle crashes and shootings only"], ans: 1, rat: "Since 1970, poisoning, vehicle crashes, falls, fire, drowning, and choking have been leading causes of trauma deaths (Sanders Ch. 35)." },
+  { q: "The phase of trauma care that includes factors existing BEFORE the injury (e.g., intoxication, poor vision) is the:", opts: ["Event phase","Postevent phase","Pre-event phase","Environmental phase"], ans: 2, rat: "The pre-event phase encompasses conditions present before the injuring force is applied, including intoxication, vision problems, and underlying disease." },
+  { q: "The event phase of trauma care begins:", opts: ["When EMS arrives on scene","At first contact with the injuring force","When the patient becomes hemodynamically unstable","At hospital arrival"], ans: 1, rat: "The event phase begins at first contact with the injuring force and ends when the cause of injury is no longer being applied." },
+  { q: "Which of the following is NOT listed as a component of a comprehensive trauma system?", opts: ["Injury prevention","Trauma critical care","Insurance authorization","Data collection and trauma registry"], ans: 2, rat: "Comprehensive trauma systems include prevention, prehospital care, ED care, definitive care, rehabilitation, and data collection — not insurance authorization." },
+  { q: "A Level I Trauma Center is best described as:", opts: ["A community hospital with trauma surgeons available within 30 minutes","A facility with full specialists and equipment available 24 hours a day","A receiving facility for moderate trauma only","A specialty center limited to pediatric patients"], ans: 1, rat: "Level I centers have a full range of specialists and equipment available 24 hours a day and serve as regional resources for severely injured patients." },
+  { q: "Which situation would MOST support a decision for aeromedical transport?", opts: ["Scene is 5 minutes from a Level II center","Ground transport time poses a threat to patient survival","Patient is stable with isolated extremity injury","The crew prefers faster transport for convenience"], ans: 1, rat: "Aeromedical transport is considered when ground transport time threatens the patient's survival and recovery." },
+  { q: "Most trauma deaths are classified as:", opts: ["Inevitable","Preventable","Iatrogenic","Unknown cause"], ans: 1, rat: "The chapter emphasizes that most deaths from trauma can be prevented through education, system improvements, and proper care." },
+  { q: "Which of the following best describes the paramedic's role in the postevent phase?", opts: ["Gathering patient history only","Performing lifesaving maneuvers and transporting to an appropriate facility","Writing documentation after transport","Notifying medical direction of the crash location"], ans: 1, rat: "In the postevent phase, paramedic responsibilities include gathering information, performing lifesaving maneuvers, preparing the patient, and transporting to the appropriate facility." },
+  { q: "A rural community with a small hospital capable of initial stabilization but lacking neurosurgery would be classified as approximately which trauma center level?", opts: ["Level I","Level II","Level III or IV","Level VI"], ans: 2, rat: "Level III and IV centers have limited capability and are designed for initial stabilization and transfer, not definitive neurosurgical care." },
+  { q: "Which of the following transport factors would MOST likely guide a decision for ground versus air transport?", opts: ["Patient's family preference","Number of patients at the scene","Time to reach the appropriate destination","Color of the vehicle involved"], ans: 2, rat: "The primary guide for ground vs. air transport is the time required to reach the appropriate destination — ground is used when it can reach the facility in a reasonable time." },
+
+  // SECTION 2: KINEMATICS & PHYSICS (Q13–28)
+  { section: "Section 2: Kinematics and Physics of Trauma", q: "Kinematics in trauma is defined as:", opts: ["The study of trauma statistics","The process of predicting injury patterns based on forces involved","The assessment of internal organ damage","The measurement of kinetic energy in projectiles"], ans: 1, rat: "Kinematics is the process of predicting injury patterns based on the MOI and forces applied." },
+  { q: "Which formula correctly represents kinetic energy?", opts: ["KE = m × v","KE = ½ × m × v²","KE = F × d","KE = m × a"], ans: 1, rat: "Kinetic Energy = ½ × mass × velocity squared. Velocity is the dominant variable due to the squared relationship." },
+  { q: "Doubling the velocity of a moving object multiplies its kinetic energy by:", opts: ["2","3","4","8"], ans: 2, rat: "KE = ½mv². Doubling v squares its effect: (2v)² = 4v². So kinetic energy is quadrupled when velocity doubles." },
+  { q: "Newton's first law of motion states that:", opts: ["Force equals mass times acceleration","An object at rest or motion remains that way until acted on by outside force","Energy is neither created nor destroyed","Every action has an equal and opposite reaction"], ans: 1, rat: "Newton's First Law (inertia): an object at rest or in motion remains in that state until acted upon by an external force — the basis of understanding why unbelted occupants continue forward in a crash." },
+  { q: "The law of conservation of energy as applied to trauma states:", opts: ["Energy is always lost in a collision","Energy is transferred from the body to the vehicle","Energy cannot be created or destroyed — only changed in form","Kinetic energy is always converted to thermal energy"], ans: 2, rat: "Conservation of energy law: energy is neither created nor destroyed; it only changes form (mechanical, thermal, electrical, chemical)." },
+  { q: "Newton's second law of motion (F = m × a) is most directly applied in trauma when considering:", opts: ["The type of restraint used","How mass and deceleration combine to create force on the body","The pre-event risk factors","The temperature at the scene"], ans: 1, rat: "F = ma: the greater the mass or the more abrupt the deceleration, the greater the force experienced by the occupant's tissues." },
+  { q: "Which factor in the kinetic energy formula has the GREATEST impact on the extent of injury?", opts: ["Mass","Velocity","Weight","Distance"], ans: 1, rat: "Velocity is squared in the KE formula, making it the dominant variable. A small increase in speed causes a disproportionately large increase in kinetic energy." },
+  { q: "The transfer of energy from an external source to the human body causes:", opts: ["Vascular spasm only","Injuries","Temperature changes only","Organ hypertrophy"], ans: 1, rat: "Injury results from energy transfer from an external source to the human body. The extent of injury depends on the type, amount, and speed of energy applied." },
+  { q: "A vehicle crash involves how many separate impacts as energy is transferred?", opts: ["1","2","3","4"], ans: 2, rat: "Every vehicle crash involves three impacts: vehicle strikes object, occupant strikes vehicle interior, and internal organs collide within the body." },
+  { q: "The THIRD impact in a motor vehicle crash involves:", opts: ["The vehicle striking another object","The occupant hitting the interior of the vehicle","The internal organs colliding inside the body","The restraint system activating"], ans: 2, rat: "The third impact is when internal organs collide against each other, body walls, or their anchoring structures — this causes the most clinically significant internal injuries." },
+  { q: "Which of the following is NOT one of the four key considerations when evaluating a trauma patient using kinematics?", opts: ["Mechanism of injury","Force of energy applied","Patient's insurance status","Anatomy involved"], ans: 2, rat: "The four kinematic considerations are: MOI, force of energy applied, anatomy involved, and energy type. Insurance is not a clinical consideration." },
+  { q: "What type of trauma is produced by the wounding forces of compression and change in speed?", opts: ["Penetrating trauma","Blast trauma","Blunt trauma","Chemical trauma"], ans: 2, rat: "Blunt trauma is produced by compression and change of speed (usually deceleration), which can disrupt tissue without breaking the skin." },
+  { q: "Acceleration in the context of trauma refers to:", opts: ["A decrease in velocity","An increase in velocity","A lateral movement","Rotational force only"], ans: 1, rat: "Acceleration is an increase in velocity; deceleration is a decrease in velocity. Both can produce major injury." },
+  { q: "The extent of injury is determined by all of the following EXCEPT:", opts: ["Type and amount of energy applied","Speed with which energy is applied","Color of the vehicle involved","Part of the body to which energy is applied"], ans: 2, rat: "Injury extent depends on type/amount of energy, speed of application, and body part involved — not vehicle color." },
+  { q: "Which type of energy can cause trauma?", opts: ["Only mechanical energy","Mechanical, thermal, electrical, and chemical energy","Nuclear energy only","Sound energy only"], ans: 1, rat: "Energy can be mechanical, thermal, electrical, chemical, or nuclear in form — all can cause trauma by transferring to human tissue." },
+  { q: "A patient is struck by a car traveling 30 mph. If the car had been traveling 60 mph instead, the kinetic energy would be:", opts: ["Twice as great","Three times as great","Four times as great","Unchanged"], ans: 2, rat: "KE is proportional to velocity squared. Doubling the speed (30→60) quadruples the kinetic energy." },
+
+  // SECTION 3: BLUNT TRAUMA – MVCs (Q29–44)
+  { section: "Section 3: Blunt Trauma and Motor Vehicle Crashes", q: "In a frontal (head-on) impact, which pathway involves the occupant moving forward into the steering column while the thorax absorbs momentum?", opts: ["Down-and-under pathway","Up-and-over pathway","Lateral pathway","Rotational pathway"], ans: 1, rat: "Up-and-over: body moves forward and over, with the ribs and thorax absorbing the momentum of forward movement into the steering column/windshield." },
+  { q: "In a frontal impact using the down-and-under pathway, which initial injuries are MOST expected?", opts: ["Neck hyperextension, upper extremity fractures","Knee and femur fractures from striking the dashboard","Abdominal lacerations from the steering wheel","Shoulder and clavicle fractures from the windshield"], ans: 1, rat: "In the down-and-under pathway, the occupant slides down into the seat, driving knees into the dashboard — resulting in knee dislocation, femur fractures, and potential hip injury." },
+  { q: "The most predictable injury from a rear-end collision is:", opts: ["Splenic laceration","Aortic dissection","Cervical hyperextension injury (whiplash)","Bilateral femur fractures"], ans: 2, rat: "In rear-end impacts, the vehicle accelerates under the occupant while the head lags behind — producing cervical hyperextension (whiplash) and potential C-spine fracture." },
+  { q: "Rotational impacts occur when:", opts: ["The vehicle is struck directly from the rear","An off-center portion of the vehicle strikes an immovable or opposing object","The vehicle rolls completely over","The vehicle is submerged in water"], ans: 1, rat: "Rotational impacts occur when an off-center portion (usually the front quarter) strikes an immovable object, causing the vehicle to rotate around the point of impact." },
+  { q: "In a lateral impact, which injury is MOST predictable if the door is not reinforced?", opts: ["Spinal compression fractures","Bilateral femur fractures","Clavicle, rib, and pelvic fractures on the impacted side","Bilateral calcaneus fractures"], ans: 2, rat: "In lateral impacts, the vehicle side is pushed inward, causing clavicle, rib, and pelvic fractures on the impacted side, along with potential aortic injury from lateral deceleration." },
+  { q: "An unrestrained occupant is ejected from a vehicle. This increases the risk of death by approximately:", opts: ["5 times","10 times","20 times","30 times"], ans: 3, rat: "Unrestrained occupants are 30 times more likely to be ejected, and 75% of ejected persons die from their injuries." },
+  { q: "Properly used safety belts reduce the risk of fatal injury by:", opts: ["25%","38%","51%","75%"], ans: 2, rat: "Properly used safety belts reduce the risk of fatal injury by 51% and serious/critical injuries by 65%." },
+  { q: "In a rollover crash, the occupant's injuries are determined primarily by:", opts: ["The number of roof contacts","Where their body contacts the vehicle during tumbling","The speed of the vehicle only","The type of road surface"], ans: 1, rat: "In a rollover, the unrestrained occupant tumbles inside the vehicle and is injured wherever their body strikes the vehicle's interior." },
+  { q: "The 'paper bag effect' describes:", opts: ["Bowel perforation from lap belt use","Lung rupture from increased intrathoracic pressure during compression","Air trapping in the plural space","Carbon monoxide inhalation from vehicle exhaust"], ans: 1, rat: "The paper bag effect occurs when the patient inhales before impact; compression forces rupture the lungs from increased intrathoracic pressure — similar to stomping on an inflated bag." },
+  { q: "The CDC reports that approximately how many people are killed daily in distracted driving accidents?", opts: ["3","6","9","12"], ans: 2, rat: "The CDC reports that distracted driving kills approximately 9 people and injures more than 1,000 daily in the United States." },
+  { q: "Which of the following best describes the mechanism of injury in a lateral impact where the car moves away from the point of impact?", opts: ["The occupant is compressed toward the door","The occupant accelerates away from the point of impact with the vehicle","The occupant is propelled backward","No significant occupant movement occurs"], ans: 1, rat: "When the damaged vehicle moves away from impact, the occupant accelerates laterally with the car — the occupant and car move together in the new direction." },
+  { q: "A patient in a frontal impact collision on the up-and-over pathway would MOST likely sustain:", opts: ["Lower extremity fractures only","Thoracic injuries, head/facial trauma, and C-spine injury from windshield impact","Abdominal wall laceration only","Isolated cervical fracture"], ans: 1, rat: "Up-and-over pathway: body goes forward and upward, striking windshield/steering column — injuries to thorax, head/face, and C-spine result." },
+  { q: "Which statement about airbags is MOST accurate?", opts: ["Airbags remain inflated to protect from multiple impacts","Frontal airbags offer complete protection when used alone without a belt","Airbags deflate rapidly and do not protect from secondary impacts","Airbags are equally safe for all ages and sizes"], ans: 2, rat: "Frontal airbags deflate rapidly — they are designed for single-impact protection and must be used WITH a lap and shoulder belt to be effective." },
+  { q: "Which group has the HIGHEST risk of injury from airbag deployment?", opts: ["Average-height male adults","Adolescents over 13 years","Infants and children under 13 years","Athletes and fit adults"], ans: 2, rat: "At highest risk from airbag deployment: infants and children under 13, adults shorter than 4'6\", elderly adults, and people with special medical conditions." },
+  { q: "MVC is the leading cause of death in children between:", opts: ["0–6 months","6 months–1 year","1–4 years","5–10 years"], ans: 2, rat: "Motor vehicle crashes are the leading cause of death in children between 1 and 4 years of age, making proper child safety seat use critical." },
+  { q: "Which injury pattern is associated with wearing a lap belt too high (above the iliac crest)?", opts: ["Femur fractures","Abdominal compression injuries — bowel, mesenteric, and lumbar spine injuries","Cervical fractures","Sternal fractures"], ans: 1, rat: "A lap belt worn too high (above the iliac crest, over soft tissue) concentrates force on the abdomen rather than the bony pelvis — causing bowel, mesenteric, and lumbar spine injury ('seat belt syndrome')." },
+
+  // SECTION 4: ORGAN INJURIES (Q45–56)
+  { section: "Section 4: Organ Injuries from Deceleration and Compression", q: "When the cranium comes to an abrupt stop and brain tissue continues to move, the result is:", opts: ["Subarachnoid hemorrhage only","Brain tissue concussed, bruised, crushed, or lacerated against the skull","Epidural hematoma exclusively","Diffuse axonal injury only"], ans: 1, rat: "Deceleration head injury: cranium stops, brain tissue continues forward and is compressed against the interior of the skull — causing contusion, concussion, laceration, or crush injury." },
+  { q: "Traumatic aortic injury in deceleration trauma most commonly occurs at:", opts: ["The aortic root","The level of the ligamentum arteriosum","The aortic bifurcation","The celiac artery origin"], ans: 1, rat: "The aorta is sheared at the level of the ligamentum arteriosum — where the aortic arch is anchored — during rapid deceleration of the heart and aorta relative to their attachment." },
+  { q: "Forward motion of the kidneys during deceleration can cause:", opts: ["Kidney stones","Shearing from their vascular pedicle attachments","Renal vein thrombosis","Kidney rotation and torsion only"], ans: 1, rat: "Deceleration causes the kidneys to continue forward, shearing them away from the renal vascular pedicle — potentially causing hemorrhage." },
+  { q: "The small and large intestines are at risk during abdominal deceleration because:", opts: ["They have no attachments","Forward motion can result in mesenteric tears","They are protected by the retroperitoneum","They cannot be injured by blunt trauma"], ans: 1, rat: "The mesenteric attachments of the small and large intestines are at risk during deceleration — the bowel continues forward while the mesentery is stretched or torn." },
+  { q: "Compression injuries to the abdomen most commonly include all of the following EXCEPT:", opts: ["Bladder rupture if distended","Splenic and hepatic laceration","Thoracic aortic dissection","Solid organ rupture"], ans: 2, rat: "Compression abdominal injuries include bladder rupture, splenic/hepatic lacerations, and solid organ rupture. Thoracic aortic dissection is a deceleration injury, not a compression abdominal injury." },
+  { q: "A compression injury to the thorax is MOST likely to involve which structures?", opts: ["Kidneys and spleen","Lungs, heart, ribs, and sternum","Abdominal viscera only","Pelvic girdle"], ans: 1, rat: "Thoracic compression involves lungs, heart, ribs, and sternum — with associated injuries like rib fractures, open/closed pneumothorax, cardiac contusion, and the paper bag effect." },
+  { q: "Which abdominal organ is most prone to compression rupture when the bladder is distended?", opts: ["Liver","Spleen","Bladder","Pancreas"], ans: 2, rat: "The bladder, when full, is susceptible to rupture from compression forces — either from direct blow or lap belt mechanism." },
+  { q: "A fractured rib resulting from blunt thoracic compression can most directly cause which of the following?", opts: ["Mesenteric tear","Unstable chest wall (flail chest), open pneumothorax","Aortic root injury","Hepatic vein thrombosis"], ans: 1, rat: "Rib fractures from thoracic compression can cause an unstable chest wall (flail chest) and open pneumothorax, both of which compromise respiration." },
+  { q: "Separation of the liver from its vascular and hepatic duct pedicle occurs from which type of force?", opts: ["Lateral compression","Rotational acceleration","Downward and forward motion during deceleration","Pure penetrating force"], ans: 2, rat: "During deceleration, the liver's downward and forward motion causes separation at its midpoint from its vascular and hepatic duct pedicle — a serious cause of internal hemorrhage." },
+  { q: "Injury to the 'vascular pedicle or mesenteric attachment' is dangerous primarily because it can lead to:", opts: ["Infection","Chronic pain syndrome","Brisk or exsanguinating hemorrhage","Lymphatic obstruction"], ans: 2, rat: "When vascular pedicle or mesenteric attachments are disrupted, the result can be brisk or life-threatening exsanguinating hemorrhage." },
+  { q: "Brain injury from compression forces can include all of the following EXCEPT:", opts: ["Open skull fracture with bone fragment penetration","Depressed skull fracture","Hemorrhage from fractured bone or meningeal vessels","Pulmonary contusion"], ans: 3, rat: "Compression injuries to the head produce skull fractures, brain contusions/lacerations, and hemorrhage. Pulmonary contusion is a thoracic, not cranial, injury." },
+  { q: "Which mechanism is responsible for the 'coup-contrecoup' pattern of brain injury?", opts: ["Skull fracture from compression","Brain tissue continuing to move after cranium stops, striking opposite skull interior","Direct penetrating projectile","Meningeal vessel laceration from shear forces"], ans: 1, rat: "Coup-contrecoup: when the cranium stops abruptly, the brain continues forward (coup injury at point of impact) then bounces back (contrecoup injury at the opposite side of the skull)." },
+
+  // SECTION 5: MOTORCYCLE, ATV, PEDESTRIAN (Q57–67)
+  { section: "Section 5: Motorcycle, ATV, and Pedestrian Injuries", q: "In a frontal motorcycle crash, if the rider's feet remain on the footrests, which injury is MOST predictable?", opts: ["Bilateral shoulder fractures","Bilateral femur fractures","Spinal compression","Bilateral wrist fractures"], ans: 1, rat: "In a frontal motorcycle crash with feet on footrests, the midshaft of the femur absorbs the forward motion, causing bilateral femur fractures." },
+  { q: "A rider 'lays the motorcycle down' to avoid a crash. The MOST predictable injuries are:", opts: ["Internal abdominal injuries","Massive abrasions (road rash) and fractures to the affected side","Bilateral calcaneus fractures","Cardiac contusion from steering column impact"], ans: 1, rat: "Laying the bike down separates rider from motorcycle; the rider slides along the ground sustaining road rash and fractures to the contact side — generally the least lethal of motorcycle injury patterns." },
+  { q: "In an angular motorcycle impact, the rider is often:", opts: ["Propelled over the handlebars","Caught between the motorcycle and the second object","Thrown clear of the crash","Sustained only minor injuries"], ans: 1, rat: "Angular impacts catch the rider between the motorcycle and a second object, causing crush-type injuries including open fractures to femur, tibia/fibula, and ankle dislocation." },
+  { q: "A motorcycle helmet is designed to protect by:", opts: ["Preventing the head from moving","Absorbing the energy of impact to reduce skull and brain injury","Deflecting projectiles only","Preventing cervical fractures exclusively"], ans: 1, rat: "Helmets are structured to absorb the energy of an impact, reducing injuries to the face, skull, and brain." },
+  { q: "When an adult pedestrian is struck by a vehicle, the FIRST impact typically involves:", opts: ["Head striking the hood of the car","The bumper striking the lower legs","The torso being compressed by the door","The ground impact"], ans: 1, rat: "The first impact on an adult pedestrian is typically the vehicle bumper striking the lower legs, producing lower-extremity (tibia/fibula) fractures." },
+  { q: "Why is the child pedestrian injury pattern different from the adult pattern?", opts: ["Children run faster","Children's center of gravity is lower","Vehicle bumpers are at a higher level relative to the child's body","Children always fall forward"], ans: 2, rat: "Vehicle bumpers strike children higher on the body (above the knees or at the pelvis) due to the child's shorter stature — causing femur/pelvic fractures and potentially throwing the child under the vehicle." },
+  { q: "The second impact for a child pedestrian hit by a vehicle involves:", opts: ["Child's head striking the windshield","Vehicle's front end striking the child's thorax as it continues forward","Child's lower legs being struck","Child's head striking the ground"], ans: 1, rat: "As the vehicle continues forward after the first (bumper) impact, it makes contact with the child's thorax, causing the head/neck to flex forward." },
+  { q: "An ATV injury most commonly occurs when:", opts: ["The rider accelerates too quickly","The rider puts a foot down to stop and the rear tire catches the leg","The rider goes too slowly on a curve","The vehicle submerges in water"], ans: 1, rat: "Common ATV mechanism: rider puts foot down when stopping → rear tire runs over foot, catches the leg → rider is thrown forward onto shoulder — resulting in extremity, clavicular, head, and neck injuries." },
+  { q: "In an ATV crash described in the chapter, predictable injuries include:", opts: ["Bilateral femur fractures and aortic injury","Extremity injury and fracture, clavicular fracture, and serious head and neck injuries","Mesenteric tears and liver laceration","Bilateral wrist fractures and shoulder dislocation only"], ans: 1, rat: "ATV crash injuries include extremity fractures, clavicular fractures, and serious head and neck injuries — reflecting the forward throw mechanism and unprotected terrain." },
+  { q: "Reflective clothing for motorcycle/small vehicle riders is recommended primarily to:", opts: ["Absorb kinetic energy on impact","Increase visibility to other motorists","Reduce road rash severity","Prevent helmet displacement"], ans: 1, rat: "Reflective clothing increases the rider's visibility to other motorists — a primary injury prevention strategy for small vehicle operators." },
+  { q: "Which statement about protective clothing for motorcyclists is TRUE?", opts: ["Leather or heavy fabric clothing is recommended covering arms and legs","Shorts and a t-shirt provide adequate protection at low speeds","Helmets are sufficient protection even without body covering","Reflective clothing replaces the need for heavy protective fabric"], ans: 0, rat: "Appropriate protective clothing is composed of heavy fabric or leather, covering the arms and legs, with boots, eye protection, and gloves." },
+
+  // SECTION 6: BLAST INJURIES & FALLS (Q68–78)
+  { section: "Section 6: Blast Injuries and Vertical Falls", q: "Primary blast injuries are UNIQUE to:", opts: ["Low-order explosions","High-order detonations that produce a supersonic blast wave","Any explosive device","Secondary fragmentation events only"], ans: 1, rat: "Primary blast injuries are unique to high-order detonations (e.g., nitroglycerin, dynamite) that produce a supersonic blast wave — causing barotrauma to gas-containing organs." },
+  { q: "Which organs are MOST susceptible to primary blast injury?", opts: ["Solid organs (liver, spleen, kidneys)","Gas-containing organs (lungs, sinuses, ears, bowel)","Bone and cartilage","Peripheral nerves only"], ans: 1, rat: "Primary blast injuries result from sudden changes in environmental pressure — most severely affecting gas-containing organs: lungs, sinuses, tympanic membranes, and bowel." },
+  { q: "Secondary blast injuries result from:", opts: ["The blast wave pressure change","Flying debris such as glass, metal, and shrapnel","The patient being propelled through space","Contamination from hazardous materials in the explosion"], ans: 1, rat: "Secondary blast injuries result from flying debris (glass, metal fragments) — the most common type of blast injury mechanism." },
+  { q: "Tertiary blast injuries are similar in pattern to:", opts: ["Shotgun wounds","Primary pressure wave injuries","Vertical falls and MVCs (patient propelled into stationary object)","Burns and inhalation injuries"], ans: 2, rat: "Tertiary blast injuries occur when the patient is propelled through space by the explosion's blast wind and strikes a stationary object — similar in pattern to vertical falls and MVCs." },
+  { q: "A 'dirty bomb' would most commonly cause which type of blast injury?", opts: ["Primary blast injury","Secondary blast injury","Tertiary blast injury","Quinary blast injury"], ans: 3, rat: "Quinary blast injuries are caused by contaminants released in the explosion — including chemical, biological, and radiologic substances such as in a dirty bomb." },
+  { q: "Quaternary blast injuries include:", opts: ["Blast wave barotrauma","Shrapnel wounds","Burns, toxic inhalation, crush injuries, and exacerbation of existing conditions","Radiologic contamination only"], ans: 2, rat: "Quaternary blast injuries include all explosion-related injuries not caused by primary/secondary/tertiary mechanisms: burns, toxic gases, crush, and exacerbation of pre-existing conditions." },
+  { q: "Falls from approximately how many feet are considered most likely to cause severe injuries in adults?", opts: ["5 feet","10 feet","15–20 feet (3× the person's height)","25–30 feet exclusively"], ans: 2, rat: "Falls from three times the person's height (15–20 feet / 5–6 meters) are more likely to be associated with severe injuries." },
+  { q: "A classic injury pattern in a vertical fall is:", opts: ["Bilateral humeral fractures","Bilateral calcaneus (heel) fractures","Skull fractures only","Bilateral femur fractures"], ans: 1, rat: "The classic predictable injury from a vertical fall is bilateral calcaneus (heel) fractures as the feet strike the ground first, with energy then traveling up through the skeleton." },
+  { q: "After energy dissipates from initial calcaneus impact in a vertical fall, energy then travels to:", opts: ["Bilateral humeri then clavicles","The head, torso, and pelvis pressing downward","The lungs and aorta","The cervical spine exclusively"], ans: 1, rat: "After calcaneus impact, energy travels upward: knees → pelvis → lumbar spine → thorax. The head, torso, and pelvis continue to push downward compressing the spine." },
+  { q: "Why do infants tend to sustain head injuries in falls regardless of distance?", opts: ["Infants always land on their heads intentionally","Infant heads are proportionally larger and heavier, causing headfirst falls","Infant skulls are thinner than adults","Infant necks cannot support any weight"], ans: 1, rat: "Infants' heads are proportionally larger and heavier than their bodies, causing them to fall headfirst regardless of distance — resulting in high rates of skull fracture and intracranial bleeding." },
+  { q: "Older adults who sustain low-distance falls (standing height) are MOST at risk for:", opts: ["Bilateral calcaneus fractures","Aortic transection","Hip fracture and head injury","Primary blast injuries"], ans: 2, rat: "Elderly patients sustain a high number of low-distance falls, often resulting in hip fractures and head injuries due to decreased bone density and balance impairment." },
+
+  // SECTION 7: PENETRATING TRAUMA (Q79–93)
+  { section: "Section 7: Penetrating Trauma and Ballistics", q: "All penetrating objects cause tissue disruption through which two mechanisms?", opts: ["Burning and pressure","Crushing and stretching","Shearing and rotation","Compression and deceleration"], ans: 1, rat: "All penetrating objects — regardless of velocity — cause tissue disruption through crushing (direct tissue destruction) and stretching (cavitation from lateral displacement)." },
+  { q: "Cavitation in penetrating trauma is defined as:", opts: ["A permanent wound tract","The opening produced by a projectile pushing body tissues laterally away from its tract","Fracture of bone secondary to blast pressure","Blood collection in a body cavity"], ans: 1, rat: "Cavitation is the lateral displacement of tissue away from the projectile's tract — creating both a temporary cavity (larger, transient) and a permanent cavity." },
+  { q: "Which of the following BEST describes a low-energy penetrating wound?", opts: ["Caused by a high-powered rifle","Produces massive cavitation and tissue disruption","Caused by a knife, needle, or ice pick; minimal cavitation","Always requires surgical exploration"], ans: 2, rat: "Low-energy penetrating injuries (knives, needles) cause tissue damage by their cutting edges — minimal cavitation because the force applied is small." },
+  { q: "Handguns are classified as which energy level for penetrating trauma?", opts: ["Low energy","Medium energy","High energy","Ultralow energy"], ans: 1, rat: "Handguns are medium-energy weapons with a muzzle velocity of approximately 1,000 fps (304 m/s)." },
+  { q: "High-energy projectiles include those from:", opts: ["Knives and needles","Handguns","Military rifles and high-powered rifles with muzzle velocity >2,000 fps","Airguns and BB guns"], ans: 2, rat: "High-energy projectiles include those from military rifles and some hunting rifles with muzzle velocities exceeding 2,000 fps (610 m/s)." },
+  { q: "The amount of cavitation produced by a projectile is directly related to:", opts: ["The color of the firearm","The density of the tissue it strikes and the ability of tissue to return to original shape","The color of the projectile","Only the caliber of the weapon"], ans: 1, rat: "Cavitation is directly related to tissue density and the tissue's ability to return to its original shape. Dense tissue (liver) cavitates more permanently than elastic tissue (lung)." },
+  { q: "Bullet 'deformation' or 'expansion' on impact creates:", opts: ["A smaller, more aerodynamic projectile","A larger area of crushed tissue as bullet diameter expands","Less kinetic energy transfer","Reduced penetration depth"], ans: 1, rat: "Bullet deformation (hollowpoint expansion) increases the diameter of the projectile, creating a larger profile and a greater area of crushed tissue." },
+  { q: "Bone fragmentation from a bullet can act as:", opts: ["An absorber of kinetic energy","Secondary missiles that crush additional tissue pathways","A protective barrier","An electrical conductor"], ans: 1, rat: "Bone fragments from bullet impact can act as secondary missiles — each fragment crushes its own path through surrounding tissue, causing extensive additional damage." },
+  { q: "As weapon range (distance) increases, bullet velocity at the time of impact:", opts: ["Increases due to gravity assist","Decreases — reducing tissue damage potential","Remains constant","Doubles with every 100 yards"], ans: 1, rat: "Increasing weapon range decreases projectile velocity at impact (due to drag/air resistance) — reducing kinetic energy and therefore wounding potential." },
+  { q: "For shotgun wounds, tissue damage depends on all of the following EXCEPT:", opts: ["Gauge of the gun","Size of the pellets","Distance from the victim","Color of the shotgun shell"], ans: 3, rat: "Shotgun wound damage depends on gauge, pellet size, powder charge, and distance. Shell color is clinically irrelevant." },
+  { q: "Gunshot wounds to the abdomen:", opts: ["Rarely require surgery if the patient appears stable","Almost always require surgery","Are safe to monitor without imaging","Are only dangerous if an exit wound is present"], ans: 1, rat: "GSW to the abdomen almost always require surgery. Always assume serious injury even if the patient appears stable — clinical presentation can be misleading in abdominal penetrating trauma." },
+  { q: "Penetrating thoracic trauma can cause all of the following EXCEPT:", opts: ["Massive internal and external hemorrhage","Pulmonary system injury","Vascular trauma","Closed-angle glaucoma"], ans: 3, rat: "Penetrating thoracic trauma can cause pulmonary injury, vascular injury, massive hemorrhage, and even thoracic trauma without visible chest wounds. Glaucoma is an ocular condition unrelated to thoracic penetrating trauma." },
+  { q: "Gunshot wounds to the head with high-velocity projectiles typically result in:", opts: ["Minimal injury due to skull protection","Localized injury to the entry site only","Massive destruction and difficulty maintaining airway control","Recoverable injuries in most patients"], ans: 2, cat: "High-velocity GSW to the head produces massive destruction, major blood loss, and significant difficulty maintaining airway control." },
+  { q: "Soft body armor worn by EMS providers:", opts: ["Eliminates the risk of penetrating trauma","Offers extra protection against blunt and penetrating trauma","Provides complete ballistic protection at all ranges","Is only protective against knives"], ans: 1, rat: "Soft body armor policies adopted by some EMS agencies offer extra protection against both blunt and penetrating trauma — it does not eliminate all risk." },
+  { q: "The 'sonic pressure wave' traveling behind a high-velocity bullet:", opts: ["Is the primary cause of all gunshot injuries","May displace tissue but is not thought to cause permanent injury by itself","Always causes fatal internal injuries","Travels faster than the bullet itself"], ans: 1, rat: "The sonic pressure wave behind a bullet can displace tissue, but it is NOT thought to be responsible for permanent injury by itself — the direct crush and temporary cavitation cause the actual damage." },
+
+  // SECTION 8: TRAUMA ASSESSMENT & DOCUMENTATION (Q94–100)
+  { section: "Section 8: Trauma Assessment and Documentation", q: "The FIRST component of the nine-step trauma assessment framework is:", opts: ["Scene size-up","General impression","Standard precautions","MOI identification"], ans: 2, rat: "Standard precautions are always first — you cannot safely provide care without protecting yourself and your crew from infectious disease exposure." },
+  { q: "MOI in the trauma assessment framework is assessed during which step?", opts: ["Step 1 — Standard precautions","Step 4 — After scene size-up and general impression","Step 7 — Patient history","Step 9 — Reassessment"], ans: 1, rat: "MOI is step 4 in the nine-component trauma assessment framework, occurring after standard precautions (1), scene size-up (2), and general impression (3)." },
+  { q: "In the nine-component trauma assessment, baseline vital signs should include:", opts: ["BP and HR only","BP, HR, RR, SpO₂, EtCO₂, and ECG","Only visual assessment","GCS alone"], ans: 1, rat: "A complete baseline for trauma includes: BP, HR, RR, SpO₂, end-tidal CO₂ (EtCO₂), and ECG — comprehensive hemodynamic monitoring." },
+  { q: "According to the national guideline for field triage, MOI can be categorized as:", opts: ["Life-threatening or non-threatening","Critical or stable","High-risk or moderate-risk","Surgical or non-surgical"], ans: 2, rat: "Per the national guideline for field triage referenced in the chapter, MOI is categorized as high-risk or moderate-risk to guide trauma assessment strategy." },
+  { q: "A thorough patient care report for trauma should include all of the following EXCEPT:", opts: ["MOI and scene findings","Anatomic wound location on a body diagram","Description of the scene and event history","Provider's personal opinion about fault for the incident"], ans: 3, rat: "PCR documentation includes MOI, scene findings, anatomic wound location, and event description. Provider opinion about legal fault is inappropriate and not a clinical documentation element." },
+  { q: "Documentation of the MOI on the patient care report serves to:", opts: ["Satisfy billing requirements only","Help paint a picture for providers who will care for the patient after you","Satisfy legal requirements only","Establish the cause of death prospectively"], ans: 1, rat: "Thorough MOI documentation recreates the event for all subsequent providers — physicians, nurses, and surgeons who will make decisions based on what you document." },
+  { q: "Which of the following statements about trauma assessment and documentation is MOST accurate?", opts: ["Documentation only matters for legal cases","Poor documentation can result in lost clinical information and compromised patient care","Only physicians need to document MOI","Scene findings need not be documented if the patient is transported rapidly"], ans: 1, rat: "Thorough documentation protects the patient — every provider who cares for them after you will reference your report. Missing information means potentially missed diagnoses or treatments." }
+];
+
+// ════════════════════════════════════════════════════════
+// RENDER QUESTIONS
+// ════════════════════════════════════════════════════════
+function renderQuiz() {
+  const container = document.getElementById('quizContainer');
+  let html = '';
+  let currentSection = '';
+  questions.forEach((q, i) => {
+    if (q.section && q.section !== currentSection) {
+      currentSection = q.section;
+      const range = getRange(currentSection);
+      html += `<div class="quiz-section-hdr"><h4>${currentSection}</h4><span class="q-range">${range}</span></div>`;
+    }
+    const opts = q.opts.map((opt, j) =>
+      `<label class="option-item" id="opt-${i}-${j}">
+        <input type="radio" name="q${i}" value="${j}" onchange="onAnswer(${i}, ${j})"/>
+        <span class="option-label"><strong>${String.fromCharCode(65+j)}.</strong> ${opt}</span>
+      </label>`
+    ).join('');
+    html += `
+      <div class="question-card" id="qcard-${i}">
+        <div class="q-header">
+          <span class="q-num">${String(i+1).padStart(2,'0')}</span>
+          <span class="q-text">${q.q}</span>
+        </div>
+        <div class="options-list" id="opts-${i}">${opts}</div>
+        <div class="q-rationale" id="rat-${i}"><strong>📖 Rationale:</strong> ${q.rat}</div>
+      </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function getRange(section) {
+  const sectionStart = {
+    "Section 1: Epidemiology of Trauma": "Q1–12",
+    "Section 2: Kinematics and Physics of Trauma": "Q13–28",
+    "Section 3: Blunt Trauma and Motor Vehicle Crashes": "Q29–44",
+    "Section 4: Organ Injuries from Deceleration and Compression": "Q45–56",
+    "Section 5: Motorcycle, ATV, and Pedestrian Injuries": "Q57–67",
+    "Section 6: Blast Injuries and Vertical Falls": "Q68–78",
+    "Section 7: Penetrating Trauma and Ballistics": "Q79–93",
+    "Section 8: Trauma Assessment and Documentation": "Q94–100"
+  };
+  return sectionStart[section] || '';
+}
+
+let answers = {};
+let answeredCount = 0;
+
+function onAnswer(qIdx, optIdx) {
+  if (!answers.hasOwnProperty(qIdx)) answeredCount++;
+  answers[qIdx] = optIdx;
+  document.getElementById('answeredCount').textContent = answeredCount;
+  document.getElementById('quizProgressFill').style.width = (answeredCount / 100 * 100) + '%';
+  updateHeaderProgress();
+}
+
+function updateHeaderProgress() {
+  const pct = Math.round(answeredCount / 100 * 100);
+}
+
+// ════════════════════════════════════════════════════════
+// SUBMIT QUIZ
+// ════════════════════════════════════════════════════════
+function submitQuiz() {
+  const name = document.getElementById('studentName').value.trim();
+  const id = document.getElementById('studentId').value.trim();
+  if (!name || !id) {
+    document.getElementById('submitNote').textContent = '⚠ Please enter your Student Name and Student ID before submitting.';
+    document.getElementById('submitNote').style.color = 'var(--red)';
+    document.getElementById('studentFormCard').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+  if (answeredCount < 100) {
+    if (!confirm(`You have only answered ${answeredCount} of 100 questions. Unanswered questions will be marked incorrect. Submit anyway?`)) return;
+  }
+
+  let correct = 0;
+  questions.forEach((q, i) => {
+    const userAns = answers.hasOwnProperty(i) ? answers[i] : -1;
+    const isCorrect = userAns === q.ans;
+    if (isCorrect) correct++;
+    const card = document.getElementById('qcard-' + i);
+    card.classList.add(isCorrect ? 'correct-answer' : 'wrong-answer');
+    // Mark options
+    q.opts.forEach((_, j) => {
+      const optEl = document.getElementById('opt-' + i + '-' + j);
+      if (optEl) {
+        if (j === q.ans) optEl.classList.add('correct-opt');
+        else if (j === userAns && !isCorrect) optEl.classList.add('wrong-opt');
+        optEl.querySelector('input').disabled = true;
+      }
+    });
+    document.getElementById('rat-' + i).classList.add('show');
+  });
+
+  const pct = Math.round(correct / 100 * 100);
+  const grade = pct >= 93 ? 'A' : pct >= 83 ? 'B' : pct >= 73 ? 'C' : pct >= 70 ? 'D' : 'F';
+  const pass = pct >= 70;
+
+  document.getElementById('scorePercent').textContent = pct + '%';
+  document.getElementById('scorePoints').textContent = correct + '/100';
+  document.getElementById('brkCorrect').textContent = correct;
+  document.getElementById('brkWrong').textContent = 100 - correct;
+  document.getElementById('brkPct').textContent = pct + '%';
+  document.getElementById('brkGrade').textContent = grade;
+  document.getElementById('scoreLabel').textContent = pass ? '✅ Congratulations — You Passed!' : '❌ Not Yet — Review and Retry';
+  document.getElementById('scoreSublabel').textContent = pass
+    ? `Outstanding clinical commitment, ${name}. Your understanding of trauma kinematics and MOI will save lives.`
+    : `Keep studying, ${name}. Review the rationales for missed questions and focus on your weak sections.`;
+
+  const circle = document.getElementById('scoreCircle');
+  circle.className = 'score-circle ' + (pct >= 80 ? 'score-pass' : pct >= 70 ? 'score-warn' : 'score-fail');
+
+  document.getElementById('scorePanel').classList.add('visible');
+  document.getElementById('submitRow').style.display = 'none';
+  document.getElementById('scorePanel').scrollIntoView({behavior:'smooth'});
+  completedModules.add('module-assessment');
+  updateProgress();
+
+  // Store for PDF
+  window.quizResults = { name, id, correct, pct, grade, pass, date: new Date().toLocaleString() };
+}
+
+function reviewAnswers() {
+  document.getElementById('quizContainer').scrollIntoView({behavior:'smooth'});
+}
+
+// ════════════════════════════════════════════════════════
+// PDF GENERATION
+// ════════════════════════════════════════════════════════
+function downloadPDF() {
+  if (!window.quizResults) { alert('Please submit the assessment first.'); return; }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const r = window.quizResults;
+
+  const navyR=15, navyG=45, navyB=74;
+  const blueR=30, blueG=96, blueB=145;
+
+  // Header
+  doc.setFillColor(navyR, navyG, navyB);
+  doc.rect(0, 0, 210, 42, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(18);
+  doc.text('CAMP Community College — EMS Program', 105, 14, {align:'center'});
+  doc.setFontSize(13);
+  doc.setFont('helvetica','normal');
+  doc.text('CH 35 · Trauma Overview & Mechanism of Injury', 105, 22, {align:'center'});
+  doc.setFontSize(10);
+  doc.text('Sanders\' Paramedic Textbook, 6th Edition', 105, 30, {align:'center'});
+  doc.setFontSize(9);
+  doc.text('Assessment Score Report', 105, 37, {align:'center'});
+
+  // Student Info Box
+  doc.setFillColor(245, 247, 252);
+  doc.roundedRect(14, 48, 182, 38, 3, 3, 'F');
+  doc.setDrawColor(200, 210, 220);
+  doc.roundedRect(14, 48, 182, 38, 3, 3, 'S');
+  doc.setTextColor(navyR, navyG, navyB);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(10);
+  doc.text('STUDENT INFORMATION', 20, 57);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(10);
+  doc.setTextColor(30,46,61);
+  doc.text(`Name: ${r.name}`, 20, 66);
+  doc.text(`Student ID: ${r.id}`, 20, 74);
+  doc.text(`Date Completed: ${r.date}`, 110, 66);
+  doc.text(`Course: Paramedic Program`, 110, 74);
+
+  // Score Box
+  const passColor = r.pass ? [26,122,74] : r.pct >= 70 ? [214,137,16] : [192,57,43];
+  doc.setFillColor(...passColor);
+  doc.roundedRect(14, 92, 182, 46, 3, 3, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(26);
+  doc.text(`${r.pct}%`, 60, 115, {align:'center'});
+  doc.setFontSize(13);
+  doc.text(`${r.correct} / 100`, 60, 127, {align:'center'});
+  doc.setFontSize(10);
+  doc.text('Score', 60, 134, {align:'center'});
+  doc.setFontSize(18);
+  doc.text(r.pass ? 'PASSED ✓' : 'NOT PASSING ✗', 145, 110, {align:'center'});
+  doc.setFontSize(11);
+  doc.text(`Grade: ${r.grade}`, 145, 122, {align:'center'});
+  doc.setFontSize(9);
+  doc.text(r.pass ? 'Minimum passing score: 70%' : 'Required: 70% to pass', 145, 131, {align:'center'});
+
+  // Breakdown
+  doc.setFillColor(237, 241, 247);
+  doc.roundedRect(14, 144, 182, 30, 3, 3, 'F');
+  doc.setTextColor(navyR, navyG, navyB);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(9);
+  doc.text('Correct', 35, 153, {align:'center'});
+  doc.text('Incorrect', 80, 153, {align:'center'});
+  doc.text('Score', 125, 153, {align:'center'});
+  doc.text('Grade', 170, 153, {align:'center'});
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(14);
+  doc.setTextColor(30,46,61);
+  doc.text(String(r.correct), 35, 167, {align:'center'});
+  doc.text(String(100-r.correct), 80, 167, {align:'center'});
+  doc.text(`${r.pct}%`, 125, 167, {align:'center'});
+  doc.text(r.grade, 170, 167, {align:'center'});
+
+  // Topics Table
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(11);
+  doc.setTextColor(navyR, navyG, navyB);
+  doc.text('Assessment Topics Covered', 14, 184);
+  const topics = [
+    ['Section 1','Epidemiology of Trauma','Q1–12'],
+    ['Section 2','Kinematics and Physics of Trauma','Q13–28'],
+    ['Section 3','Blunt Trauma and Motor Vehicle Crashes','Q29–44'],
+    ['Section 4','Organ Injuries from Deceleration and Compression','Q45–56'],
+    ['Section 5','Motorcycle, ATV, and Pedestrian Injuries','Q57–67'],
+    ['Section 6','Blast Injuries and Vertical Falls','Q68–78'],
+    ['Section 7','Penetrating Trauma and Ballistics','Q79–93'],
+    ['Section 8','Trauma Assessment and Documentation','Q94–100'],
+  ];
+  let y = 190;
+  doc.setFillColor(navyR, navyG, navyB);
+  doc.rect(14, y, 182, 7, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(8);
+  doc.text('Section', 18, y+5);
+  doc.text('Topic', 42, y+5);
+  doc.text('Questions', 178, y+5, {align:'right'});
+  y += 7;
+  topics.forEach((row, idx) => {
+    doc.setFillColor(idx % 2 === 0 ? 245 : 255, idx % 2 === 0 ? 247 : 255, idx % 2 === 0 ? 252 : 255);
+    doc.rect(14, y, 182, 6.5, 'F');
+    doc.setTextColor(30, 46, 61);
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(8);
+    doc.text(row[0], 18, y+4.5);
+    doc.setFont('helvetica','normal');
+    doc.text(row[1], 42, y+4.5);
+    doc.text(row[2], 178, y+4.5, {align:'right'});
+    y += 6.5;
+  });
+
+  // Competency standards
+  y += 6;
+  doc.setFillColor(236, 244, 251);
+  doc.roundedRect(14, y, 182, 20, 3, 3, 'F');
+  doc.setTextColor(blueR, blueG, blueB);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(8);
+  doc.text('National EMS Education Standard Competencies Met:', 18, y+6);
+  doc.setFont('helvetica','normal');
+  doc.setTextColor(30,46,61);
+  doc.text('Trauma | Trauma Overview | Multisystem Trauma | Blast Injuries | Transport and Destination', 18, y+12);
+  doc.text('Sanders\' Paramedic Textbook, 6th Edition — Chapter 35', 18, y+18);
+
+  // Footer
+  doc.setFillColor(navyR, navyG, navyB);
+  doc.rect(0, 277, 210, 20, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8);
+  doc.text('CAMP Community College · EMS Program · CH 35 Trauma Overview & MOI', 105, 284, {align:'center'});
+  doc.text(`Report generated: ${r.date}  |  Student: ${r.name}  |  ID: ${r.id}`, 105, 291, {align:'center'});
+
+  doc.save(`CH35_Trauma_MOI_Assessment_${r.id || 'student'}.pdf`);
+}
+
+// ════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════
+renderQuiz();
+</script>
+</body>
+</html>
