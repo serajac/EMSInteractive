@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch. 39 — Spine & Nervous System Trauma | CAMP EMS Paramedic Program</title>
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --surface: #ffffff;
+    --surface2: #f7fafc;
+    --border: #e2e8f0;
+    --accent: #1a56db;
+    --accent2: #1e429f;
+    --accent-light: #ebf0ff;
+    --text: #1a202c;
+    --text2: #4a5568;
+    --text3: #718096;
+    --success: #2f855a;
+    --success-bg: #f0fff4;
+    --error: #c53030;
+    --error-bg: #fff5f5;
+    --warning: #b7791f;
+    --warning-bg: #fffbeb;
+    --red: #e53e3e;
+    --orange: #dd6b20;
+    --teal: #2c7a7b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* HEADER */
+  .site-header {
+    background: linear-gradient(135deg, #1a56db 0%, #1e3a8a 100%);
+    color: white; padding: 0; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .header-inner { max-width: 1200px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .header-brand { display: flex; align-items: center; gap: 12px; }
+  .header-badge { background: rgba(255,255,255,0.2); border-radius: 6px; padding: 4px 10px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; }
+  .header-title { font-size: 1.1rem; font-weight: 700; }
+  .header-sub { font-size: 0.8rem; opacity: 0.85; }
+  .progress-wrap { display: flex; align-items: center; gap: 10px; }
+  .progress-bar-outer { width: 180px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; overflow: hidden; }
+  .progress-bar-inner { height: 100%; background: #90cdf4; border-radius: 4px; transition: width 0.4s; }
+  .progress-label { font-size: 0.78rem; opacity: 0.9; white-space: nowrap; }
+
+  /* HERO */
+  .hero { background: linear-gradient(160deg, #1e3a8a 0%, #2c5282 60%, #2b6cb0 100%); color: white; padding: 56px 24px 48px; text-align: center; }
+  .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 16px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; letter-spacing: 0.05em; }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
+  .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 680px; margin: 0 auto 24px; }
+  .hero-stats { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .hero-stat { background: rgba(255,255,255,0.15); border-radius: 10px; padding: 10px 20px; text-align: center; }
+  .hero-stat .num { font-size: 1.5rem; font-weight: 800; }
+  .hero-stat .lbl { font-size: 0.72rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* NAV TABS */
+  .module-nav { background: var(--surface); border-bottom: 2px solid var(--border); position: sticky; top: 56px; z-index: 90; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; }
+  .nav-tab { flex-shrink: 0; padding: 14px 22px; font-size: 0.875rem; font-weight: 600; color: var(--text2); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.2s; white-space: nowrap; border: none; background: none; }
+  .nav-tab:hover { color: var(--accent); background: var(--accent-light); }
+  .nav-tab.active { color: var(--accent); border-bottom: 3px solid var(--accent); background: var(--accent-light); }
+  .nav-tab .tab-num { display: inline-block; background: var(--accent); color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 0.7rem; line-height: 20px; text-align: center; margin-right: 6px; }
+  .nav-tab.active .tab-num, .nav-tab:hover .tab-num { background: var(--accent2); }
+
+  /* CONTENT */
+  .content-area { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .module-section { display: none; }
+  .module-section.active { display: block; }
+
+  /* CARDS */
+  .card { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 28px; margin-bottom: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .card-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+  .card-icon.blue { background: #ebf0ff; }
+  .card-icon.red { background: #fff5f5; }
+  .card-icon.green { background: #f0fff4; }
+  .card-icon.orange { background: #fffbeb; }
+  .card-icon.purple { background: #faf5ff; }
+  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+  .card-subtitle { font-size: 0.82rem; color: var(--text3); }
+
+  /* SCENARIO HOOK */
+  .scenario-box { background: linear-gradient(135deg, #fff5f5 0%, #fffbeb 100%); border: 1px solid #fbd38d; border-left: 5px solid #e53e3e; border-radius: 10px; padding: 24px 28px; margin-bottom: 24px; }
+  .scenario-badge { display: inline-flex; align-items: center; gap: 6px; background: #e53e3e; color: white; border-radius: 4px; padding: 3px 10px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 12px; }
+  .scenario-box h3 { color: #c53030; font-size: 1.1rem; margin-bottom: 10px; }
+  .scenario-box p { color: #744210; line-height: 1.7; margin-bottom: 8px; }
+  .dispatch-box { background: #1a202c; color: #90cdf4; border-radius: 8px; padding: 14px 18px; font-family: 'Courier New', monospace; font-size: 0.88rem; margin: 14px 0; line-height: 1.8; }
+  .critical-q { background: #fff; border: 1px solid #fbd38d; border-radius: 8px; padding: 16px; margin-top: 14px; }
+  .critical-q strong { color: #c05621; }
+
+  /* ANDRAGOGY BANNER */
+  .andragogy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 24px; }
+  .andragogy-card { border-radius: 10px; padding: 16px; border: 1px solid var(--border); }
+  .andragogy-card .a-num { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .andragogy-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+  .andragogy-card p { font-size: 0.82rem; line-height: 1.5; }
+  .a-1 { background: #ebf0ff; border-color: #c3dafe; } .a-1 .a-num { color: #3730a3; } .a-1 h4 { color: #1e3a8a; }
+  .a-2 { background: #f0fff4; border-color: #9ae6b4; } .a-2 .a-num { color: #22543d; } .a-2 h4 { color: #276749; }
+  .a-3 { background: #fffbeb; border-color: #fbd38d; } .a-3 .a-num { color: #744210; } .a-3 h4 { color: #744210; }
+  .a-4 { background: #faf5ff; border-color: #d6bcfa; } .a-4 .a-num { color: #553c9a; } .a-4 h4 { color: #44337a; }
+  .a-5 { background: #fff5f5; border-color: #feb2b2; } .a-5 .a-num { color: #822727; } .a-5 h4 { color: #822727; }
+  .a-6 { background: #e6fffa; border-color: #81e6d9; } .a-6 .a-num { color: #1d4044; } .a-6 h4 { color: #234e52; }
+
+  /* OBJECTIVES TABLE */
+  .obj-grid { display: grid; gap: 10px; }
+  .obj-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface2); border-radius: 8px; padding: 12px 14px; border: 1px solid var(--border); }
+  .bloom-badge { flex-shrink: 0; padding: 2px 8px; border-radius: 4px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px; }
+  .bloom-R { background: #bee3f8; color: #1a365d; }
+  .bloom-U { background: #c6f6d5; color: #1c4532; }
+  .bloom-Ap { background: #fefcbf; color: #744210; }
+  .bloom-An { background: #fed7d7; color: #742a2a; }
+  .bloom-Ev { background: #e9d8fd; color: #44337a; }
+  .bloom-C { background: #feebc8; color: #652b19; }
+
+  /* ANATOMY SECTION */
+  .anatomy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .anatomy-card { border-radius: 10px; padding: 18px; border: 1px solid var(--border); background: var(--surface2); }
+  .anatomy-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: var(--accent2); border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+  .anatomy-card ul { list-style: none; }
+  .anatomy-card li { padding: 4px 0; font-size: 0.88rem; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; }
+  .anatomy-card li::before { content: '→'; color: var(--accent); font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
+
+  /* MOI TABLE */
+  .moi-table { width: 100%; border-collapse: collapse; }
+  .moi-table th { background: var(--accent); color: white; padding: 10px 14px; text-align: left; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .moi-table td { padding: 10px 14px; font-size: 0.88rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .moi-table tr:nth-child(even) { background: var(--surface2); }
+  .moi-table tr:hover { background: var(--accent-light); }
+
+  /* SYNDROME CARDS */
+  .syndrome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .syn-card { border-radius: 10px; padding: 18px; }
+  .syn-card.central { background: #ebf0ff; border: 1px solid #c3dafe; }
+  .syn-card.anterior { background: #fff5f5; border: 1px solid #feb2b2; }
+  .syn-card.brown { background: #f0fff4; border: 1px solid #9ae6b4; }
+  .syn-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .syn-card.central h4 { color: #1e3a8a; }
+  .syn-card.anterior h4 { color: #822727; }
+  .syn-card.brown h4 { color: #22543d; }
+  .syn-card p { font-size: 0.85rem; line-height: 1.6; }
+  .syn-card .mnemonic { display: inline-block; margin-top: 8px; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 4px; }
+  .syn-card.central .mnemonic { background: #c3dafe; color: #1e3a8a; }
+  .syn-card.anterior .mnemonic { background: #feb2b2; color: #822727; }
+  .syn-card.brown .mnemonic { background: #9ae6b4; color: #22543d; }
+
+  /* SHOCK TABLE */
+  .shock-table-wrap { overflow-x: auto; }
+  .shock-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+  .shock-table th { padding: 10px 14px; text-align: left; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .shock-table td { padding: 10px 14px; font-size: 0.85rem; border-bottom: 1px solid var(--border); }
+  .shock-table tr:hover { background: var(--surface2); }
+  .th-spinal { background: #ebf0ff; color: #1e3a8a; }
+  .th-neuro { background: #fff5f5; color: #822727; }
+  .th-auto { background: #f0fff4; color: #22543d; }
+
+  /* INTERACTIVE CASE */
+  .case-box { background: linear-gradient(135deg, #f7fafc, #edf2f7); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .case-scene { font-size: 0.95rem; line-height: 1.8; color: var(--text2); margin-bottom: 20px; }
+  .decision-q { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 14px; }
+  .option-btn { display: block; width: 100%; text-align: left; background: white; border: 2px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; cursor: pointer; font-size: 0.9rem; color: var(--text); transition: all 0.2s; }
+  .option-btn:hover { border-color: var(--accent); background: var(--accent-light); }
+  .option-btn.correct { border-color: var(--success); background: var(--success-bg); color: var(--success); font-weight: 600; }
+  .option-btn.incorrect { border-color: var(--error); background: var(--error-bg); color: var(--error); }
+  .feedback-box { border-radius: 8px; padding: 14px 18px; margin-top: 14px; font-size: 0.9rem; line-height: 1.6; display: none; }
+  .feedback-box.correct { background: var(--success-bg); border: 1px solid #9ae6b4; color: var(--success); }
+  .feedback-box.incorrect { background: var(--error-bg); border: 1px solid #feb2b2; color: var(--error); }
+  .next-case-btn { margin-top: 14px; background: var(--accent); color: white; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600; display: none; }
+  .next-case-btn:hover { background: var(--accent2); }
+
+  /* SMR CHECKLIST */
+  .checklist-grid { display: grid; gap: 8px; }
+  .check-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: white; cursor: pointer; transition: all 0.2s; }
+  .check-item:hover { border-color: var(--accent); background: var(--accent-light); }
+  .check-item input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); flex-shrink: 0; }
+  .check-item label { font-size: 0.88rem; cursor: pointer; }
+  .check-item.checked { background: var(--success-bg); border-color: var(--success); }
+
+  /* REFLECTION */
+  .reflection-wrap { background: linear-gradient(135deg, #faf5ff, #f0fff4); border: 1px solid #d6bcfa; border-radius: 12px; padding: 24px; }
+  .reflection-wrap h3 { color: #44337a; margin-bottom: 16px; }
+  .reflection-prompt { background: white; border-radius: 8px; padding: 14px; margin-bottom: 12px; border: 1px solid #d6bcfa; }
+  .reflection-prompt p { font-size: 0.9rem; font-weight: 600; color: #553c9a; margin-bottom: 8px; }
+  .reflection-prompt textarea { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 10px; font-size: 0.88rem; resize: vertical; min-height: 70px; font-family: inherit; color: var(--text); }
+
+  /* ASSESSMENT */
+  .student-info-wrap { background: linear-gradient(135deg, #ebf0ff, #e6fffa); border: 1px solid #c3dafe; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+  .student-info-wrap h3 { color: var(--accent2); margin-bottom: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.82rem; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.04em; }
+  .form-group input { border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 0.95rem; font-family: inherit; color: var(--text); }
+  .form-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
+
+  .q-block { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 16px; transition: border-color 0.2s; }
+  .q-block:hover { border-color: #c3dafe; }
+  .q-num { font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .q-text { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 14px; line-height: 1.5; }
+  .opt-label { display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border-radius: 7px; border: 1px solid var(--border); margin-bottom: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.88rem; }
+  .opt-label:hover { border-color: var(--accent); background: var(--accent-light); }
+  .opt-label input[type=radio] { margin-top: 2px; flex-shrink: 0; accent-color: var(--accent); }
+  .q-block.answered-correct { border-color: var(--success); }
+  .q-block.answered-wrong { border-color: var(--error); }
+  .opt-label.q-correct { background: var(--success-bg); border-color: var(--success); color: var(--success); font-weight: 600; }
+  .opt-label.q-wrong { background: var(--error-bg); border-color: var(--error); color: var(--error); }
+  .rationale-box { background: #f7fafc; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem; color: var(--text2); line-height: 1.6; display: none; }
+
+  .submit-assessment { background: linear-gradient(135deg, #1a56db, #1e3a8a); color: white; border: none; border-radius: 10px; padding: 14px 32px; font-size: 1rem; font-weight: 700; cursor: pointer; display: block; margin: 28px auto; transition: all 0.2s; }
+  .submit-assessment:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,86,219,0.3); }
+
+  /* RESULTS */
+  .results-wrap { display: none; }
+  .results-hero { background: linear-gradient(135deg, #1e3a8a, #2c5282); color: white; border-radius: 14px; padding: 36px; text-align: center; margin-bottom: 24px; }
+  .score-circle { width: 120px; height: 120px; border-radius: 50%; border: 5px solid rgba(255,255,255,0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 16px; background: rgba(255,255,255,0.15); }
+  .score-pct { font-size: 2.4rem; font-weight: 800; }
+  .score-label { font-size: 0.75rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.05em; }
+  .results-hero h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+  .results-detail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0 0; }
+  .res-stat { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 12px; }
+  .res-stat .rs-n { font-size: 1.4rem; font-weight: 800; }
+  .res-stat .rs-l { font-size: 0.72rem; opacity: 0.8; text-transform: uppercase; }
+  .pdf-btn { background: white; color: var(--accent2); border: none; border-radius: 8px; padding: 12px 24px; font-size: 0.95rem; font-weight: 700; cursor: pointer; margin-top: 16px; transition: all 0.2s; }
+  .pdf-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+  /* ALERT BOXES */
+  .alert { border-radius: 8px; padding: 14px 18px; margin-bottom: 16px; font-size: 0.88rem; line-height: 1.6; }
+  .alert.info { background: var(--accent-light); border-left: 4px solid var(--accent); color: var(--accent2); }
+  .alert.warn { background: var(--warning-bg); border-left: 4px solid var(--warning); color: #7b341e; }
+  .alert.danger { background: var(--error-bg); border-left: 4px solid var(--red); color: #822727; }
+  .alert.success { background: var(--success-bg); border-left: 4px solid var(--success); color: #1c4532; }
+  .alert strong { font-weight: 700; }
+
+  /* SECTION HEADERS */
+  .section-header { margin-bottom: 24px; }
+  .section-header .module-tag { display: inline-block; background: var(--accent); color: white; border-radius: 4px; padding: 3px 10px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 8px; }
+  .section-header h2 { font-size: 1.7rem; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 8px; }
+  .section-header p { color: var(--text2); font-size: 0.95rem; }
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+  
+  h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  p { margin-bottom: 10px; }
+  ul, ol { padding-left: 20px; margin-bottom: 12px; }
+  li { margin-bottom: 4px; font-size: 0.9rem; color: var(--text2); }
+  strong { font-weight: 700; color: var(--text); }
+
+  /* DERMATOME QUICK REF */
+  .derm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .derm-item { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+  .derm-level { font-size: 1.4rem; font-weight: 800; color: var(--accent); }
+  .derm-desc { font-size: 0.82rem; color: var(--text2); margin-top: 4px; }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .results-detail { grid-template-columns: 1fr; }
+    .hero-stats { gap: 12px; }
+    .andragogy-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-badge">CAMP EMS</div>
+      <div>
+        <div class="header-title">Paramedic Program — Chapter 39</div>
+        <div class="header-sub">Spine & Nervous System Trauma</div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar" style="width:0%"></div></div>
+      <div class="progress-label" id="progressLabel">Module 1 of 3</div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">📚 Sanders' Paramedic Textbook · 6th Edition · Ch. 39</div>
+  <h1>Spine & Nervous System Trauma</h1>
+  <p>A clinically-driven learning experience grounded in adult learning theory. Your expertise matters — let's build on it.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">3</div><div class="lbl">Modules</div></div>
+    <div class="hero-stat"><div class="num">6</div><div class="lbl">Andragogy Principles</div></div>
+    <div class="hero-stat"><div class="num">100</div><div class="lbl">Assessment Questions</div></div>
+    <div class="hero-stat"><div class="num">PDF</div><div class="lbl">Downloadable Certificate</div></div>
+  </div>
+</section>
+
+<!-- MODULE NAV -->
+<nav class="module-nav">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="showModule(0)"><span class="tab-num">1</span>Foundation & Context</button>
+    <button class="nav-tab" onclick="showModule(1)"><span class="tab-num">2</span>Deep Dive & Application</button>
+    <button class="nav-tab" onclick="showModule(2)"><span class="tab-num">3</span>Synthesis & Assessment</button>
+  </div>
+</nav>
+
+<!-- CONTENT AREA -->
+<div class="content-area">
+
+<!-- ═══════════════════════════════════════════
+     MODULE 1: FOUNDATION & REAL-WORLD CONTEXT
+═══════════════════════════════════════════ -->
+<div class="module-section active" id="mod-0">
+  <div class="section-header">
+    <div class="module-tag">Module 1</div>
+    <h2>Foundation &amp; Real-World Context</h2>
+    <p>Grounded in why spinal trauma matters on every shift — before we get to how.</p>
+  </div>
+
+  <!-- ANDRAGOGY ALIGNMENT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">🧠</div>
+      <div><div class="card-title">Andragogy Alignment — Why This Module Is Designed for You</div><div class="card-subtitle">Malcolm Knowles' 6 Principles Applied</div></div>
+    </div>
+    <div class="andragogy-grid">
+      <div class="andragogy-card a-1"><div class="a-num">Principle 1 · Need to Know</div><h4>🎯 The Consequences Are Real</h4><p>Spinal cord injuries are irreversible. One missed C-spine in a distracted trauma patient could mean lifelong paralysis. You must know the clinical criteria — not the checklist, but the reasoning behind it.</p></div>
+      <div class="andragogy-card a-2"><div class="a-num">Principle 2 · Self-Concept</div><h4>💪 You Are the Clinician</h4><p>You're not a passive student here. As a paramedic or paramedic candidate, you are the definitive prehospital clinician making real-time decisions with real consequences.</p></div>
+      <div class="andragogy-card a-3"><div class="a-num">Principle 3 · Prior Experience</div><h4>🔗 Building on Your Foundation</h4><p>You've already managed airway, trauma, and shock. This module bridges what you know about hemodynamic instability to spinal-specific physiology — neurogenic vs. hypovolemic shock.</p></div>
+      <div class="andragogy-card a-4"><div class="a-num">Principle 4 · Readiness to Learn</div><h4>📅 Shift-Ready Learning</h4><p>Every call with trauma mechanism deserves a spine consideration. This content applies to your next MVC, fall, or diving incident — not a future exam scenario.</p></div>
+      <div class="andragogy-card a-5"><div class="a-num">Principle 5 · Problem-Centered</div><h4>🚨 Case-First, Content-Second</h4><p>We start with a real patient scenario, not anatomy definitions. You'll encounter the clinical problem before we give you the theory to solve it.</p></div>
+      <div class="andragogy-card a-6"><div class="a-num">Principle 6 · Motivation</div><h4>⭐ Your Patient's Outcome</h4><p>The primary goal of SMR is to prevent secondary spinal cord injury. When you get this right, you preserve function. That's the most intrinsically rewarding outcome in trauma care.</p></div>
+    </div>
+  </div>
+
+  <!-- SCENARIO HOOK -->
+  <div class="scenario-box">
+    <div class="scenario-badge">🚨 Dispatch</div>
+    <h3>Clinical Scenario: "The Call That Changes Everything"</h3>
+    <div class="dispatch-box">
+      MEDIC 7 — Respond to I-664 southbound near the Bowers Hill interchange.
+      High-speed MVC. Vehicle vs. tractor-trailer. Two patients reported.
+      Airbags deployed. Patient 1 is ambulatory at scene. Patient 2 is still in vehicle.
+      Fire is on scene. ETA: 4 minutes.
+    </div>
+    <p>You arrive and find Patient 1 — a 34-year-old male — standing outside the vehicle, holding his neck, visibly shaken but talking. He says <em>"I'm fine, just a little sore."</em> Your partner notes the airbags deployed and the vehicle sustained significant front-end damage.</p>
+    <p>Patient 2 is conscious but confused, seated and splinted in the vehicle. She has deformity of the steering wheel and tells you her legs feel "weird and tingly."</p>
+    <div class="critical-q">
+      <strong>⚡ Critical Decision Point:</strong> Before reading further — what are your immediate priorities for each patient? Think about your previous training with MOI, GCS, and hemodynamic assessment. How does spinal cord anatomy change your approach?
+    </div>
+  </div>
+
+  <!-- LEARNING OBJECTIVES -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">🎯</div>
+      <div><div class="card-title">Learning Objectives</div><div class="card-subtitle">Bloom's Taxonomy: Remember → Create</div></div>
+    </div>
+    <div class="obj-grid">
+      <div class="obj-item"><span class="bloom-badge bloom-R">Remember</span><span>Describe the incidence, morbidity, and mortality associated with spinal cord injury in the United States.</span></div>
+      <div class="obj-item"><span class="bloom-badge bloom-U">Understand</span><span>Explain the anatomical basis for each mechanism of spinal injury — axial loading, flexion, hyperextension, lateral bending, and distraction.</span></div>
+      <div class="obj-item"><span class="bloom-badge bloom-Ap">Apply</span><span>Apply clinical assessment criteria (MOI + signs/symptoms) to determine the need for spinal motion restriction in a given patient scenario.</span></div>
+      <div class="obj-item"><span class="bloom-badge bloom-An">Analyze</span><span>Distinguish between complete and incomplete spinal cord lesions and identify the three incomplete cord syndromes with their functional deficits.</span></div>
+      <div class="obj-item"><span class="bloom-badge bloom-An">Analyze</span><span>Differentiate spinal shock, neurogenic shock, and autonomic hyperreflexia syndrome by presentation, mechanism, and prehospital management.</span></div>
+      <div class="obj-item"><span class="bloom-badge bloom-Ev">Evaluate</span><span>Evaluate the appropriateness of various SMR devices (long backboard, scoop stretcher, cervical collar, vacuum splint) given specific patient presentations.</span></div>
+      <div class="obj-item"><span class="bloom-badge bloom-C">Create</span><span>Construct a comprehensive prehospital management plan integrating SMR, airway management, hemodynamic support, and rapid transport for a multi-system trauma patient with suspected SCI.</span></div>
+    </div>
+  </div>
+
+  <!-- INCIDENCE & MORTALITY -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon red">📊</div>
+      <div><div class="card-title">Incidence, Morbidity & Mortality</div><div class="card-subtitle">Why This Matters at Scale</div></div>
+    </div>
+    <div class="alert danger"><strong>Clinical Reality:</strong> Spinal cord injuries affect thousands of Americans annually. Motor vehicle crashes are the leading cause (~39%), followed by falls (~31%), acts of violence (~13%), and sports injuries (~8%). Injury prevention strategies have measurable impact — your education of patients matters beyond the call.</div>
+    <div class="anatomy-grid">
+      <div class="anatomy-card"><h4>💀 Mortality Drivers</h4><ul><li>High cervical injuries (C1–C4) carry the highest mortality due to respiratory muscle involvement</li><li>Associated injuries (TBI, chest trauma) compound mortality significantly</li><li>Secondary injury from hypotension, hypoxia, and movement is preventable</li></ul></div>
+      <div class="anatomy-card"><h4>📉 Morbidity Impact</h4><ul><li>Approximately 17,000 new SCIs per year in the US</li><li>Average age at injury: 43 years</li><li>~80% of SCI patients are male</li><li>Lifetime care costs can exceed $5 million for high cervical injuries</li></ul></div>
+      <div class="anatomy-card"><h4>🛡️ Your Role in Prevention</h4><ul><li>Proper SMR technique prevents secondary cord injury</li><li>Avoiding unnecessary immobilization reduces harm (pressure sores, airway compromise)</li><li>Early recognition of neurogenic shock prevents missed diagnosis</li></ul></div>
+    </div>
+  </div>
+
+  <!-- ANATOMY REVIEW -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">🦴</div>
+      <div><div class="card-title">Spinal Anatomy Review</div><div class="card-subtitle">Building Your Clinical Foundation</div></div>
+    </div>
+    <div class="alert info"><strong>Prior Experience Bridge:</strong> Think about the last time you intubated or managed a difficult airway in a trauma patient. Your decision to maintain in-line stabilization was already applying this anatomy — now let's understand why.</div>
+    <div class="anatomy-grid">
+      <div class="anatomy-card"><h4>🔢 Vertebral Column (33 Vertebrae)</h4><ul><li><strong>Cervical (C1–C7):</strong> 7 vertebrae — most mobile, most vulnerable</li><li><strong>Thoracic (T1–T12):</strong> 12 vertebrae — rib attachments provide stability</li><li><strong>Lumbar (L1–L5):</strong> 5 vertebrae — large, weight-bearing</li><li><strong>Sacral (S1–S5):</strong> 5 fused vertebrae (sacrum)</li><li><strong>Coccygeal (Co1–Co4):</strong> 4 fused (coccyx)</li></ul></div>
+      <div class="anatomy-card"><h4>🧠 Spinal Cord Landmarks</h4><ul><li>Originates at the base of the brain (medulla oblongata)</li><li>Runs through cervical and thoracic spine</li><li>Terminates at <strong>L1–L2 in adults</strong>, L3 in infants</li><li>Below L2 → Cauda equina ("horse's tail") — nerve roots, not cord</li><li>Clinical significance: Cauda equina injuries may be incomplete/recoverable</li></ul></div>
+      <div class="anatomy-card"><h4>⚡ Anterior vs. Posterior Elements</h4><ul><li><strong>Anterior:</strong> Vertebral bodies + intervertebral discs + longitudinal ligaments</li><li><strong>Posterior:</strong> Neural arch, spinous processes, facet joints</li><li>Anterior elements provide compressive strength</li><li>Posterior elements protect the cord and guide motion</li></ul></div>
+      <div class="anatomy-card"><h4>🗺️ Key Dermatome Landmarks</h4><div class="derm-grid" style="margin-top:8px">
+        <div class="derm-item"><div class="derm-level">C2–C4</div><div class="derm-desc">Collar of sensation — neck to below clavicles</div></div>
+        <div class="derm-item"><div class="derm-level">T4</div><div class="derm-desc">Nipple line</div></div>
+        <div class="derm-item"><div class="derm-level">T10</div><div class="derm-desc">Umbilicus (belly button)</div></div>
+        <div class="derm-item"><div class="derm-level">S1</div><div class="derm-desc">Soles of the feet</div></div>
+      </div></div>
+    </div>
+
+    <div class="divider"></div>
+    <h3>Most Common Injury Levels — Know These Cold</h3>
+    <div class="alert warn"><strong>Clinical Pearl:</strong> The most frequently injured spinal regions in descending order are: <strong>C5–C7</strong>, then <strong>C1–C2</strong>, then <strong>T12–L2</strong>. This distribution reflects the highest-mobility regions. C5–C7 injuries are disproportionately common in diving accidents.</div>
+  </div>
+
+  <div style="text-align:center;margin-top:28px">
+    <button class="submit-assessment" style="display:inline-block" onclick="showModule(1)">Continue to Module 2: Deep Dive &amp; Application →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODULE 2: DEEP DIVE & APPLICATION
+═══════════════════════════════════════════ -->
+<div class="module-section" id="mod-1">
+  <div class="section-header">
+    <div class="module-tag">Module 2</div>
+    <h2>Deep Dive &amp; Application</h2>
+    <p>Mechanisms, classification, assessment, and clinical decision-making — applied to the field.</p>
+  </div>
+
+  <!-- MOI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon orange">⚡</div>
+      <div><div class="card-title">Mechanisms of Spinal Injury</div><div class="card-subtitle">Forces → Pathology → Clinical Presentation</div></div>
+    </div>
+    <div class="alert info"><strong>Problem-Centered Lens:</strong> You don't memorize mechanisms — you recognize them at scene. When you see the deformed steering wheel, the pool with the shallow end, the football tackle, your mind automatically runs this analysis.</div>
+    <div style="overflow-x:auto">
+    <table class="moi-table">
+      <thead><tr><th>Mechanism</th><th>Force Direction</th><th>Typical Injury</th><th>Classic Scene</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Axial Loading</strong></td><td>Vertical compression along spinal column</td><td>Burst fractures, wedge-shaped compression fractures</td><td>Diving into shallow water (head hits bottom), cave-in, fall landing on feet/head</td></tr>
+        <tr><td><strong>Hyperflexion</strong></td><td>Anterior flexion beyond normal ROM</td><td>Wedge-shaped compression fractures, cord compression</td><td>Head-on MVC — head flies forward; whiplash forward component</td></tr>
+        <tr><td><strong>Hyperextension</strong></td><td>Posterior extension beyond normal ROM</td><td>Ligament injury, cord stretching, posterior element fracture</td><td>Rear-end MVC — head snaps backward; fall with face strike</td></tr>
+        <tr><td><strong>Hyperrotation</strong></td><td>Rotational force exceeding limits</td><td>Subluxation, facet dislocation, cord compression</td><td>Side-impact MVC, tackles, falls with torso rotation</td></tr>
+        <tr><td><strong>Lateral Bending</strong></td><td>Lateral force to neck/torso</td><td>Cervical/thoracic fractures, dislocations</td><td>T-bone MVC, lateral falls, side explosion blast</td></tr>
+        <tr><td><strong>Distraction</strong></td><td>Longitudinal stretching — pulling apart</td><td>Cord laceration, vertebral separation, ligament rupture</td><td>Hanging, high-velocity ejection, sudden halt with momentum</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="divider"></div>
+    <h3>Common Fracture Patterns</h3>
+    <div class="anatomy-grid">
+      <div class="anatomy-card"><h4>🔺 Wedge-Shaped Compression Fractures</h4><ul><li>Result of hyperflexion + compression</li><li>Anterior vertebral body is crushed</li><li>Generally more stable than teardrop</li><li>Most common in cervical and thoracolumbar junction</li></ul></div>
+      <div class="anatomy-card"><h4>💧 Teardrop Fractures</h4><ul><li>Result of severe hyperflexion + compression</li><li><strong>Highly unstable injuries</strong></li><li>Fragment driven posteriorly into canal</li><li>High association with complete SCI</li><li>Named for the triangular fragment shape</li></ul></div>
+      <div class="anatomy-card"><h4>🔀 Subluxation</h4><ul><li>Partial dislocation of vertebral bodies</li><li>Canal is narrowed → cord at risk</li><li>May be "self-reducing" — initially appears normal on plain film</li><li>High index of suspicion required</li></ul></div>
+    </div>
+  </div>
+
+  <!-- CORD INJURIES -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon red">🧬</div>
+      <div><div class="card-title">Spinal Cord Injury Classification</div><div class="card-subtitle">Complete vs. Incomplete Lesions</div></div>
+    </div>
+    <div class="alert danger"><strong>Primary vs. Secondary Injury — Critical Distinction:</strong> Primary injury occurs at the moment of impact — you can't undo this. Secondary injury (swelling, ischemia, bony fragment movement, hypoxia, hypotension) IS PREVENTABLE. Your interventions target secondary injury exclusively.</div>
+    <h3>Complete Cord Lesions — Functional Level Chart</h3>
+    <div style="overflow-x:auto;margin-bottom:20px">
+    <table class="moi-table">
+      <thead><tr><th>Injury Level</th><th>Classification</th><th>Function Retained</th><th>Function Lost</th></tr></thead>
+      <tbody>
+        <tr><td><strong>C1–C4</strong></td><td>High Tetraplegia</td><td>Facial movements, speech</td><td>Ventilator-dependent; all 4 limbs paralyzed; diaphragm affected at C3–C4</td></tr>
+        <tr><td><strong>C5–C6</strong></td><td>Tetraplegia</td><td>Shoulder shrug, elbow flexion</td><td>Wrist, hand, trunk, leg function lost</td></tr>
+        <tr><td><strong>C7–C8</strong></td><td>Tetraplegia</td><td>Elbow extension, wrist extension</td><td>Fine hand motor, trunk, legs affected</td></tr>
+        <tr><td><strong>T1 and below</strong></td><td>Paraplegia</td><td>Full arm function</td><td>Leg function; autonomic dysfunction if T6 and above</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3>Autonomic Dysfunction — T6 and Above</h3>
+    <div class="alert warn"><strong>Why T6?</strong> The major sympathetic splanchnic nerves originate between T5–T9. Injury at or above T6 disrupts the entire sympathetic outflow to cardiovascular and thermoregulatory systems.</div>
+    <div class="anatomy-grid">
+      <div class="anatomy-card"><h4>❤️ Cardiovascular</h4><ul><li>Bradycardia (loss of sympathetic cardiac fibers)</li><li>Hypotension (loss of vasomotor tone / vasodilation)</li><li>In neurogenic shock: bradycardia + hypotension (unlike hemorrhagic shock where HR ↑)</li></ul></div>
+      <div class="anatomy-card"><h4>🌡️ Thermoregulatory</h4><ul><li>Loss of sweating and shivering below injury</li><li>Poikilothermia — patient takes on ambient temperature</li><li>Monitor temperature in cold environments</li></ul></div>
+      <div class="anatomy-card"><h4>🔴 Other Autonomic</h4><ul><li>Priapism — sustained penile erection (T6 and above)</li><li>Loss of bowel and bladder control</li><li>In field: priapism = strong SCI indicator in male trauma patient</li></ul></div>
+    </div>
+    <div class="divider"></div>
+    <h3>Incomplete Cord Syndromes — The Three You Must Know</h3>
+    <div class="syndrome-grid">
+      <div class="syn-card central">
+        <h4>🔵 Central Cord Syndrome</h4>
+        <p><strong>Most common</strong> incomplete cord syndrome. Results from hyperextension injury (especially in patients with pre-existing cervical spondylosis / stenosis). Affects central portion of cord — the motor tracts serving upper extremities are medial.</p>
+        <ul style="margin-top:8px;padding-left:16px;font-size:0.82rem">
+          <li>Upper extremity weakness &gt; lower extremity weakness</li>
+          <li>Hands affected most severely (fine motor first to go)</li>
+          <li>Bladder dysfunction common</li>
+          <li>Variable sensory loss below injury</li>
+        </ul>
+        <span class="mnemonic">💡 "Hands worse than feet"</span>
+      </div>
+      <div class="syn-card anterior">
+        <h4>🔴 Anterior Cord Syndrome</h4>
+        <p>Injury to the anterior spinal artery or direct compression of the anterior cord. Affects the corticospinal (motor) tracts and spinothalamic (pain/temp) tracts in the anterior cord.</p>
+        <ul style="margin-top:8px;padding-left:16px;font-size:0.82rem">
+          <li>Loss of motor function below injury</li>
+          <li>Loss of pain and temperature below injury</li>
+          <li>Preserved proprioception and vibration (posterior columns intact)</li>
+        </ul>
+        <span class="mnemonic">💡 "Motor + pain gone; proprioception spared"</span>
+      </div>
+      <div class="syn-card brown">
+        <h4>🟢 Brown-Séquard Syndrome</h4>
+        <p>Hemisection of the cord — half the cord is injured. Classic cause: penetrating trauma (knife, GSW). Creates a paradoxical presentation across both sides of the body.</p>
+        <ul style="margin-top:8px;padding-left:16px;font-size:0.82rem">
+          <li><strong>Ipsilateral:</strong> Motor paralysis (corticospinal) + proprioception loss</li>
+          <li><strong>Contralateral:</strong> Pain and temperature loss (spinothalamic crosses)</li>
+        </ul>
+        <span class="mnemonic">💡 "Opposite sides — opposite deficits"</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSESSMENT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">🔍</div>
+      <div><div class="card-title">Spinal Assessment in the Field</div><div class="card-subtitle">Clinical Criteria + MOI = Decision Framework</div></div>
+    </div>
+    <h3>Clinical Criteria for SCI — Apply ALL of These</h3>
+    <div class="checklist-grid" id="clinicalCriteria">
+      <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label><strong>Altered LOC</strong> — GCS &lt; 15 (impairs ability to reliably report symptoms)</label></div>
+      <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label><strong>Spinal pain or tenderness</strong> — midline neck or back, with or without palpation</label></div>
+      <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label><strong>Neurologic deficit or complaint</strong> — numbness, tingling, weakness, paralysis</label></div>
+      <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label><strong>Anatomic deformity</strong> — step-off, crepitus, visible deformity of spine on palpation</label></div>
+      <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label><strong>Unreliable patient</strong> — intoxication, distracting injury, communication barrier, age &lt;8 years</label></div>
+    </div>
+    <div class="alert info" style="margin-top:14px"><strong>Key Principle:</strong> ANY single criterion present + positive MOI = Spinal Motion Restriction indicated. The absence of symptoms does NOT rule out injury if the MOI is significant.</div>
+
+    <div class="divider"></div>
+    <h3>Field Neurologic Exam — Quick Reference</h3>
+    <div class="anatomy-grid">
+      <div class="anatomy-card"><h4>💪 Upper Extremity Motor Testing</h4><ul><li><strong>C7:</strong> Have patient extend wrist against resistance</li><li><strong>T1:</strong> Have patient spread fingers against resistance</li><li>Compare bilateral — asymmetry is significant</li><li>Grip strength assessment (squeeze your fingers)</li></ul></div>
+      <div class="anatomy-card"><h4>🦵 Lower Extremity Motor Testing</h4><ul><li><strong>L5:</strong> Dorsiflexion of foot and great toe</li><li><strong>S1–S2:</strong> Plantar flexion of foot (push down like a gas pedal)</li><li>Test both sides simultaneously if possible</li></ul></div>
+      <div class="anatomy-card"><h4>👋 Sensory Testing</h4><ul><li>Light touch to each hand and each foot (eyes closed)</li><li>Mark dermatome level if deficit found</li><li>Babinski sign: stroke outer sole → great toe bends UP = abnormal in adults</li><li>Priapism = involuntary indicator of SCI</li></ul></div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE CASE STUDY -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon purple">🏥</div>
+      <div><div class="card-title">Interactive Clinical Decision Scenarios</div><div class="card-subtitle">Make the call — get immediate feedback</div></div>
+    </div>
+    <div id="case-container"></div>
+  </div>
+
+  <!-- SMR MANAGEMENT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">🛡️</div>
+      <div><div class="card-title">Spinal Motion Restriction (SMR) — Management Framework</div><div class="card-subtitle">Evidence-Based Approach (Post-2013 Consensus)</div></div>
+    </div>
+    <div class="alert success"><strong>Paradigm Shift:</strong> The language has changed from "spinal immobilization" to <strong>Spinal Motion Restriction (SMR)</strong>. Long backboards are no longer the default — they are a tool, not a reflex. The goal is minimizing unnecessary movement, not achieving zero movement.</div>
+    <h3>Manual In-Line Stabilization (MILS) — The Foundation</h3>
+    <p style="font-size:0.9rem;color:var(--text2);margin-bottom:14px">MILS is initiated as soon as potential SCI is recognized. Applied WITHOUT traction on the head. Maintained until mechanical devices are in place.</p>
+    <h4 style="margin-bottom:8px;color:var(--error);font-size:0.9rem">CONTRAINDICATIONS to MILS / Returning to Neutral Position:</h4>
+    <div class="anatomy-grid">
+      <div class="anatomy-card"><h4>🚫 Absolute Contraindications</h4><ul><li>Resistance to movement</li><li>Neck muscle spasm / rigidity</li><li>Increased pain with movement</li><li>New or worsening neurologic deficits during movement</li><li>Airway or ventilation compromise</li><li>Severe head misalignment from body axis (rare)</li></ul></div>
+      <div class="anatomy-card"><h4>📦 Device Selection Guide</h4><ul><li><strong>Cervical collar:</strong> First device applied; does NOT immobilize alone</li><li><strong>Scoop stretcher:</strong> Preferred for moving patients to stretcher</li><li><strong>Vacuum splint:</strong> Good alternative for immobilization</li><li><strong>Long backboard:</strong> Selected situations only; NOT for penetrating trauma</li><li><strong>KED (Kendrick):</strong> Extrication from confined spaces</li></ul></div>
+      <div class="anatomy-card"><h4>⚠️ Penetrating Trauma Rule</h4><ul><li>NO role for SMR in penetrating spinal trauma</li><li>Research shows significantly higher mortality with SMR in penetrating trauma</li><li>Apply cervical collar ONLY if secondary blunt MOI exists</li><li>Prioritize rapid transport over spinal precautions</li></ul></div>
+    </div>
+    <div class="divider"></div>
+    <h3>Special Populations</h3>
+    <div class="anatomy-grid">
+      <div class="anatomy-card"><h4>👶 Pediatric Considerations</h4><ul><li>Padding under shoulders to maintain neutral position (larger occiput)</li><li>Do NOT transport in car seat if SCI suspected</li><li>Use appropriate pediatric stabilization device</li><li>Same SMR criteria as adults apply</li><li>Torticollis in children = SMR indicator</li></ul></div>
+      <div class="anatomy-card"><h4>⛑️ Helmet Issues</h4><ul><li>Full-face helmets: Remove early to access airway</li><li>Sports helmets + shoulder pads: Remove together or not at all (if both fit well)</li><li>Firm-fitting helmet may provide additional cervical support</li><li>Two-rescuer technique required for helmet removal</li></ul></div>
+      <div class="anatomy-card"><h4>🏊 Diving Incidents</h4><ul><li>C5–C7 axial loading is the classic mechanism</li><li>Supine immobilization in water if patient is still submerged</li><li>Float patient to edge → extract with spinal precautions</li><li>Hypothermia risk: minimize time in water</li></ul></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:28px">
+    <button class="submit-assessment" style="display:inline-block" onclick="showModule(2)">Continue to Module 3: Synthesis &amp; Assessment →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODULE 3: SYNTHESIS & ASSESSMENT
+═══════════════════════════════════════════ -->
+<div class="module-section" id="mod-2">
+  <div class="section-header">
+    <div class="module-tag">Module 3</div>
+    <h2>Synthesis, Reflection &amp; Assessment</h2>
+    <p>Integrate everything. Reflect. Prove what you know.</p>
+  </div>
+
+  <!-- SHOCK COMPARISON -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon red">⚡</div>
+      <div><div class="card-title">Capstone Synthesis: Spinal Shock vs. Neurogenic Shock vs. Autonomic Hyperreflexia</div><div class="card-subtitle">Three presentations — one common cause — different management</div></div>
+    </div>
+    <div class="shock-table-wrap">
+    <table class="shock-table">
+      <thead>
+        <tr>
+          <th style="background:#edf2f7;color:#2d3748">Characteristic</th>
+          <th class="th-spinal">Spinal Shock</th>
+          <th class="th-neuro">Neurogenic Shock</th>
+          <th class="th-auto">Autonomic Hyperreflexia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Definition</strong></td><td>Temporary loss of all spinal reflex activity below injury</td><td>Loss of sympathetic vasomotor control → vasodilation + bradycardia</td><td>Exaggerated sympathetic response in chronic SCI patients to stimulus below injury</td></tr>
+        <tr><td><strong>Timing</strong></td><td>Acute — immediately post-injury</td><td>Acute — immediately post-injury</td><td>Weeks to years after injury (after spinal shock resolves)</td></tr>
+        <tr><td><strong>Injury Level</strong></td><td>Any level of SCI</td><td>T6 and above (loss of splanchnic sympathetics)</td><td>T6 and above (chronic)</td></tr>
+        <tr><td><strong>HR</strong></td><td>Variable (flaccid paralysis dominates)</td><td>↓ Bradycardia</td><td>↓ Bradycardia (30–40 bpm)</td></tr>
+        <tr><td><strong>BP</strong></td><td>May be hypotensive</td><td>↓ Hypotension</td><td>↑↑ Paroxysmal hypertension (up to 300 mmHg)</td></tr>
+        <tr><td><strong>Key Feature</strong></td><td>Flaccid paralysis + loss of autonomic function (priapism, hypotension, vasodilation)</td><td>Hypotension + bradycardia WITHOUT compensatory tachycardia (unlike hemorrhagic)</td><td>Severe pounding headache + flushing above injury + pallor/piloerection below injury</td></tr>
+        <tr><td><strong>Trigger</strong></td><td>Primary SCI</td><td>Primary SCI at T6+</td><td>Noxious stimulus below injury (full bladder most common)</td></tr>
+        <tr><td><strong>Prehospital Rx</strong></td><td>SMR, airway/ventilation, fluid cautiously</td><td>Fluid cautiously (vasodilation, not volume loss); atropine for symptomatic bradycardia; consider vasopressors</td><td>Sit patient upright; find and remove trigger; call medical control; antihypertensives if ordered</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="alert warn" style="margin-top:16px"><strong>Critical Differentiator:</strong> In neurogenic shock, you see bradycardia + hypotension together. In hemorrhagic shock, hypotension triggers compensatory tachycardia. If your trauma patient is hypotensive AND bradycardic → think neurogenic shock until proven otherwise. Do not reflexively bolus fluids as you would for hemorrhage.</div>
+  </div>
+
+  <!-- NON-TRAUMATIC -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">📋</div>
+      <div><div class="card-title">Nontraumatic Spinal Conditions</div><div class="card-subtitle">The other spinal emergencies you'll encounter</div></div>
+    </div>
+    <div class="anatomy-grid">
+      <div class="anatomy-card"><h4>🔴 Low Back Pain</h4><ul><li>Most common musculoskeletal complaint in EMS</li><li>Vast majority: mechanical (muscle strain)</li><li>Red flags: bowel/bladder dysfunction, saddle anesthesia, fever, progressive deficit = emergent (Cauda equina syndrome)</li></ul></div>
+      <div class="anatomy-card"><h4>🔵 Herniated Intervertebral Disc</h4><ul><li>Nucleus pulposus herniates through annulus fibrosus</li><li>Compresses nerve root → radicular pain</li><li>Classic L4–L5 or L5–S1; cervical C6–C7</li><li>Sciatica = most common presentation</li></ul></div>
+      <div class="anatomy-card"><h4>🟡 Degenerative Conditions</h4><ul><li><strong>Spondylosis:</strong> Degenerative arthritis of spine (osteophytes)</li><li><strong>Degenerative Disc Disease:</strong> Loss of disc height, flexibility, shock absorption</li><li>Predispose to central cord syndrome with minor trauma</li></ul></div>
+      <div class="anatomy-card"><h4>⚫ Spinal Cord Tumors</h4><ul><li>Primary (rare) or metastatic (common — breast, lung, prostate, kidney)</li><li>Progressive neurologic deficit over days to weeks</li><li>Back pain worse at night = red flag</li><li>Pathologic fracture risk with metastatic disease</li></ul></div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflection-wrap" style="margin-bottom:24px">
+    <h3>🪞 Professional Reflection — The Andragogy Capstone</h3>
+    <p style="font-size:0.88rem;color:#553c9a;margin-bottom:16px">Adult learners integrate knowledge when they connect it to their professional identity and upcoming practice. Take 3–5 minutes to reflect genuinely.</p>
+    <div class="reflection-prompt">
+      <p>💡 Readiness to Learn: How will you apply the MOI + clinical criteria framework differently on your next trauma call?</p>
+      <textarea placeholder="Type your reflection here..."></textarea>
+    </div>
+    <div class="reflection-prompt">
+      <p>💡 Self-Concept: Think of a spinal call where you second-guessed your SMR decision. What would you do differently after this module?</p>
+      <textarea placeholder="Type your reflection here..."></textarea>
+    </div>
+    <div class="reflection-prompt">
+      <p>💡 Motivation: How does preventing secondary spinal cord injury connect to your personal mission as a paramedic?</p>
+      <textarea placeholder="Type your reflection here..."></textarea>
+    </div>
+  </div>
+
+  <!-- STUDENT INFO -->
+  <div class="student-info-wrap">
+    <h3>📋 Assessment Registration</h3>
+    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:14px">Enter your information below. This will appear on your downloadable PDF score report.</p>
+    <div class="form-row">
+      <div class="form-group"><label>Full Name</label><input type="text" id="studentName" placeholder="Enter your full name"></div>
+      <div class="form-group"><label>Student ID</label><input type="text" id="studentId" placeholder="Enter your student ID"></div>
+    </div>
+    <div class="form-row" style="margin-top:12px">
+      <div class="form-group"><label>Program</label><input type="text" id="studentProgram" placeholder="e.g., Paramedic — Spring 2026" value="Paramedic Program"></div>
+      <div class="form-group"><label>Date</label><input type="date" id="assessmentDate"></div>
+    </div>
+  </div>
+
+  <!-- ASSESSMENT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">📝</div>
+      <div><div class="card-title">Chapter 39 — NREMT-Style Assessment</div><div class="card-subtitle">100 Questions · Immediate Feedback · PDF Report</div></div>
+    </div>
+    <div class="alert info"><strong>Instructions:</strong> Select the BEST answer for each question. After submitting, you will receive immediate per-question feedback with rationale. A downloadable PDF score report will be generated.</div>
+    <div id="assessment-container"></div>
+    <button class="submit-assessment" id="submitBtn" onclick="submitAssessment()">Submit Assessment (100 Questions)</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-wrap" id="results">
+    <div class="results-hero">
+      <div class="score-circle"><div class="score-pct" id="scorePct">—</div><div class="score-label">Score</div></div>
+      <h2 id="resultsTitle">Assessment Complete</h2>
+      <p id="resultsMsg" style="opacity:0.85;font-size:0.95rem"></p>
+      <div class="results-detail">
+        <div class="res-stat"><div class="rs-n" id="resCorrect">—</div><div class="rs-l">Correct</div></div>
+        <div class="res-stat"><div class="rs-n" id="resWrong">—</div><div class="rs-l">Incorrect</div></div>
+        <div class="res-stat"><div class="rs-n" id="resPct">—</div><div class="rs-l">Percent</div></div>
+      </div>
+      <button class="pdf-btn" onclick="downloadPDF()">📥 Download PDF Score Report</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- end content-area -->
+
+<script>
+// ─────────────────────────────────────────────
+// MODULE NAVIGATION
+// ─────────────────────────────────────────────
+function showModule(idx) {
+  document.querySelectorAll('.module-section').forEach((s,i) => {
+    s.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.nav-tab').forEach((t,i) => {
+    t.classList.toggle('active', i === idx);
+  });
+  const pcts = [0, 33, 66];
+  document.getElementById('progressBar').style.width = pcts[idx] + '%';
+  document.getElementById('progressLabel').textContent = `Module ${idx+1} of 3`;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  const cb = el.querySelector('input');
+  if (cb) cb.checked = !cb.checked;
+}
+
+// ─────────────────────────────────────────────
+// SET TODAY'S DATE
+// ─────────────────────────────────────────────
+document.getElementById('assessmentDate').valueAsDate = new Date();
+
+// ─────────────────────────────────────────────
+// INTERACTIVE CASE STUDIES
+// ─────────────────────────────────────────────
+const cases = [
+  {
+    scene: "A 22-year-old male dove into the shallow end of a backyard pool. Bystanders pulled him out. He is conscious, alert, lying on the pool deck. He complains of severe neck pain and says his arms feel weak. He is able to move his legs but cannot feel his hands well.",
+    q: "What is the MOST appropriate immediate action?",
+    opts: ["Perform a rapid head-to-toe assessment and log roll patient onto a backboard immediately", "Establish manual in-line stabilization and apply a cervical collar before any movement", "Ask the patient to stand and walk to the ambulance to assess gait", "Begin IV access before initiating spinal motion restriction"],
+    correct: 1,
+    rationale: "Manual in-line stabilization (MILS) is the first intervention — applied before any mechanical devices or patient movement. The presentation (axial loading MOI + cervical pain + upper extremity weakness) is classic for C5–C7 SCI. No movement should occur until MILS is established."
+  },
+  {
+    scene: "A 68-year-old female fell from standing height in her kitchen. She has a GCS of 14, complains of mid-thoracic back pain, and has no obvious deformity. She has a history of osteoporosis. Her blood pressure is 88/60 with a pulse of 54.",
+    q: "The combination of hypotension and bradycardia in this patient MOST likely indicates:",
+    opts: ["Hemorrhagic shock from internal abdominal bleeding", "Neurogenic shock from disruption of sympathetic outflow", "Vasovagal response to pain", "Pulmonary embolism from a fat embolism"],
+    correct: 1,
+    rationale: "Bradycardia + hypotension in a spinal trauma patient = neurogenic shock until proven otherwise. Hemorrhagic shock produces compensatory tachycardia. The fall + osteoporosis + thoracic pain + T-level hemodynamics fits neurogenic shock from thoracic SCI disrupting sympathetic splanchnic fibers. Fluid cautiously; consider vasopressors per protocol."
+  },
+  {
+    scene: "A 45-year-old male with a known C6 spinal cord injury (from an MVC 3 years ago) called 911. He is flushed above his clavicles, pale below, sweating profusely on his face, and says he has the 'worst headache of his life.' His BP is 210/110. His catheter bag is completely full and kinked.",
+    q: "What is the PRIORITY intervention?",
+    opts: ["Administer aspirin 324 mg PO for possible stroke", "Establish IV access and give a 500 mL NS bolus", "Straighten the kinked catheter and drain the bladder", "Lay the patient supine to increase perfusion pressure"],
+    correct: 2,
+    rationale: "This is Autonomic Hyperreflexia Syndrome (dysreflexia). The kinked catheter = bladder distension = noxious stimulus below injury → massive sympathetic surge → paroxysmal hypertension. Priority: REMOVE THE TRIGGER. Straighten/unclog the catheter. Sit patient upright (reduces BP). Aspirin is wrong (not ischemic). Fluids worsen hypertension. Supine positioning worsens the crisis."
+  },
+  {
+    scene: "A 19-year-old football player was tackled and presents with bilateral arm weakness greater than leg weakness. He can walk with assistance. He reports tingling in both hands. No loss of consciousness. Neck is tender at midline.",
+    q: "This presentation is MOST consistent with:",
+    opts: ["Brown-Séquard Syndrome from hemicontusion of the cord", "Complete cord lesion at C5", "Central Cord Syndrome from hyperextension injury", "Anterior Cord Syndrome from vascular compression"],
+    correct: 2,
+    rationale: "Central Cord Syndrome: upper extremity weakness > lower extremity weakness, hand tingling, preserved ambulation. Classic in hyperextension mechanisms (tackle). The hallmark mnemonic: 'Hands worse than feet.' Brown-Séquard would show asymmetric deficits. Complete lesion would abolish leg function. Anterior syndrome preserves proprioception but abolishes pain/temp + motor."
+  },
+  {
+    scene: "You arrive at a GSW scene. Police confirm the patient was shot in the back. The patient is conscious with BP 90/60, HR 115, GCS 15. He has no sensation below his waist but no other injuries identified. Medical control asks about spinal motion restriction.",
+    q: "Regarding SMR in this patient, which statement is CORRECT?",
+    opts: ["Apply full spinal precautions including long backboard immediately", "There is NO role for SMR in penetrating spinal trauma; focus on rapid transport", "Apply a cervical collar only since the spine is injured", "SMR is indicated only if the patient has complete paralysis"],
+    correct: 1,
+    rationale: "Consensus evidence: SMR has NO role in penetrating spinal trauma and is associated with significantly higher mortality in these patients. Priorities are hemorrhage control and rapid transport. A cervical collar may be applied if a blunt secondary MOI exists, but routine SMR is contraindicated for GSW/stab wounds to the spine."
+  }
+];
+
+let caseIdx = 0;
+let caseAnswered = false;
+
+function renderCase() {
+  const c = cases[caseIdx];
+  document.getElementById('case-container').innerHTML = `
+    <div class="case-box">
+      <div style="font-size:0.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px">Case ${caseIdx+1} of ${cases.length}</div>
+      <div class="case-scene">${c.scene}</div>
+      <div class="decision-q">${c.q}</div>
+      ${c.opts.map((o,i) => `<button class="option-btn" onclick="selectOption(${i})" id="opt-${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+      <div class="feedback-box" id="feedbackBox"></div>
+      ${caseIdx < cases.length-1 ? `<button class="next-case-btn" id="nextCaseBtn" onclick="nextCase()">Next Case →</button>` : `<button class="next-case-btn" id="nextCaseBtn" onclick="showModule(2)">Proceed to Assessment →</button>`}
+    </div>
+  `;
+  caseAnswered = false;
+}
+
+function selectOption(idx) {
+  if (caseAnswered) return;
+  caseAnswered = true;
+  const c = cases[caseIdx];
+  const isCorrect = idx === c.correct;
+  const opts = document.querySelectorAll('.option-btn');
+  opts.forEach((btn,i) => {
+    btn.disabled = true;
+    if (i === c.correct) btn.classList.add('correct');
+    else if (i === idx && !isCorrect) btn.classList.add('incorrect');
+  });
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'incorrect');
+  fb.style.display = 'block';
+  fb.innerHTML = `<strong>${isCorrect ? '✅ Correct!' : '❌ Incorrect'}</strong> ${c.rationale}`;
+  document.getElementById('nextCaseBtn').style.display = 'inline-block';
+}
+
+function nextCase() {
+  caseIdx++;
+  if (caseIdx < cases.length) renderCase();
+}
+
+renderCase();
+
+// ─────────────────────────────────────────────
+// 100 QUESTION BANK
+// ─────────────────────────────────────────────
+const questions = [
+  {q:"The spinal cord in an adult typically ends at which vertebral level?",opts:["L4–L5","L1–L2","T12","S1"],ans:1,r:"The adult spinal cord terminates at approximately L1–L2 as the conus medullaris. Below this, nerve roots continue as the cauda equina. In infants, the cord extends to approximately L3."},
+  {q:"Which of the following is the MOST common cause of spinal cord injury in the United States?",opts:["Falls","Acts of violence","Motor vehicle crashes","Sports injuries"],ans:2,r:"Motor vehicle crashes account for approximately 39% of all SCIs, making them the leading cause. Falls are the second leading cause (~31%)."},
+  {q:"Axial loading of the spine occurs when:",opts:["The spine is forcibly bent forward","Direct compressive forces are sent down the length of the spinal column","The spine is twisted beyond its normal range","The spine is pulled apart longitudinally"],ans:1,r:"Axial loading (vertical compression) results when direct forces travel down the long axis of the spinal column. This is the classic mechanism in diving accidents where the head impacts the bottom."},
+  {q:"A patient sustains a teardrop fracture of C5. This fracture is BEST described as:",opts:["A stable hyperflexion injury causing anterior wedging","An unstable injury from severe hyperflexion combined with compression","A lateral bending fracture from rotational forces","A distraction injury from longitudinal stretching"],ans:1,r:"Teardrop fractures result from a combination of severe hyperflexion and compression forces. They are considered highly unstable because a small fragment is driven posteriorly into the spinal canal."},
+  {q:"In an adult patient with a complete spinal cord lesion at C3, which respiratory effect should you MOST anticipate?",opts:["Mild tachypnea only","Full respiratory function preserved","Loss of diaphragm function requiring ventilatory support","Paradoxical breathing with intact diaphragm"],ans:2,r:"The phrenic nerve (C3–C5) innervates the diaphragm. Lesions at C3 or above will compromise diaphragmatic function, requiring ventilatory support. The mnemonic: 'C3, 4, 5 keeps the diaphragm alive.'"},
+  {q:"Which incomplete spinal cord syndrome is characterized by upper extremity weakness GREATER than lower extremity weakness?",opts:["Anterior Cord Syndrome","Brown-Séquard Syndrome","Central Cord Syndrome","Posterior Cord Syndrome"],ans:2,r:"Central Cord Syndrome is the most common incomplete cord syndrome. It preferentially affects upper extremities because the corticospinal tracts serving the arms are medially located in the cord. Hands and fine motor function are most severely affected."},
+  {q:"Brown-Séquard Syndrome results from:",opts:["Complete transection of the spinal cord","Hemisection of the spinal cord affecting one side","Compression of the anterior spinal artery","Injury to the central gray matter of the cord"],ans:1,r:"Brown-Séquard Syndrome results from hemisection (half the cord) — most commonly from penetrating trauma. The hallmark is paradoxical deficits: ipsilateral motor loss + contralateral pain/temperature loss."},
+  {q:"Anterior Cord Syndrome preserves which function below the level of injury?",opts:["Motor function","Pain sensation","Temperature sensation","Proprioception and vibration sense"],ans:3,r:"Anterior Cord Syndrome affects the corticospinal (motor) and spinothalamic (pain/temp) tracts in the anterior cord. The posterior columns, which carry proprioception and vibration, are spared."},
+  {q:"A patient with a T6 complete spinal cord injury presents with hypotension and bradycardia following trauma. The MOST likely explanation is:",opts:["Hemorrhagic shock from internal bleeding","Neurogenic shock from loss of sympathetic vasomotor control","Septic shock from wound contamination","Cardiogenic shock from myocardial contusion"],ans:1,r:"Neurogenic shock results from disruption of sympathetic vasomotor fibers at or above T6. Loss of sympathetic tone causes vasodilation (hypotension) without compensatory tachycardia. The bradycardia distinguishes it from hemorrhagic shock."},
+  {q:"Autonomic Hyperreflexia Syndrome is characterized by all of the following EXCEPT:",opts:["Paroxysmal hypertension","Bradycardia","Hypotension below 90 mmHg systolic","Pounding headache"],ans:2,r:"Autonomic Hyperreflexia causes paroxysmal HYPERTENSION (up to 300 mmHg), not hypotension. Other findings include bradycardia, pounding headache, blurred vision, sweating/flushing above the injury level, and nasal congestion."},
+  {q:"The MOST common trigger for Autonomic Hyperreflexia Syndrome is:",opts:["Hyperthermia","Bladder distension","Urinary tract infection","Pressure ulcer"],ans:1,r:"Full bladder (urinary retention or kinked catheter) is the most common noxious stimulus triggering autonomic hyperreflexia. Treatment priority: remove the trigger (drain the bladder)."},
+  {q:"Manual In-Line Stabilization (MILS) should be applied:",opts:["After the cervical collar is in place","Without traction on the head","With gentle distraction to open the facet joints","Only to unconscious patients"],ans:1,r:"MILS is applied without traction. The goal is to minimize neck movement from neutral position — not to lengthen the spine. Traction is contraindicated in MILS."},
+  {q:"A patient with penetrating trauma to the thoracic spine has no neurologic deficits. Regarding spinal motion restriction, you should:",opts:["Apply full spinal precautions including long backboard","Apply cervical collar and secure to stretcher at minimum","Provide no spinal motion restriction; prioritize rapid transport","Apply MILS only without any mechanical devices"],ans:2,r:"Current consensus: there is NO role for routine SMR in penetrating spinal trauma. Research shows higher mortality with SMR in penetrating injury patients. Priorities are hemorrhage control and rapid transport. Standard securing to stretcher is appropriate."},
+  {q:"Which dermatome landmark corresponds to the T4 spinal nerve?",opts:["Umbilicus","Soles of feet","Nipple line","Below clavicles"],ans:2,r:"T4 corresponds to the nipple line. The mnemonic for quick field assessment: C2–C4 = collar around neck, T4 = nipples, T10 = umbilicus (belly button), S1 = soles of feet."},
+  {q:"A patient has flaccid paralysis below a T8 injury level, hypotension, bradycardia, priapism, and loss of thermoregulation. This presentation is MOST consistent with:",opts:["Neurogenic shock","Spinal shock","Autonomic Hyperreflexia","Anterior Cord Syndrome"],ans:1,r:"Spinal shock is a temporary loss or depression of ALL spinal reflex activity below the injury. It features flaccid paralysis plus autonomic dysfunction (hypotension, bradycardia, priapism, loss of thermoregulation). It occurs immediately post-injury."},
+  {q:"The Babinski sign in an adult patient is considered abnormal when:",opts:["The great toe bends downward when the outer sole is stroked","The great toe bends upward when the outer sole is stroked","There is no response to sole stimulation","The patient experiences pain with sole stimulation"],ans:1,r:"In adults, the Babinski sign is present (abnormal) when the great toe dorsiflexes (bends upward) upon stroking the outer edge of the sole. This may indicate a spinal cord lesion. It is a normal finding in children under 2 years."},
+  {q:"The most frequently injured spinal region is:",opts:["C1–C2","C5–C7","T1–T4","T12–L2"],ans:1,r:"C5–C7 is the most commonly injured spinal region, primarily because this segment is the most mobile in the cervical spine and is in the zone of maximum stress during flexion/extension mechanisms."},
+  {q:"Which of the following patients is considered UNRELIABLE for spinal assessment purposes?",opts:["A 35-year-old with isolated ankle fracture and full alertness","A 28-year-old intoxicated driver with GCS 15","A 50-year-old with neck pain and no distracting injury","A 40-year-old who speaks clearly and follows all commands"],ans:1,r:"Intoxicated patients are unreliable for spinal assessment even if their GCS is 15. Intoxication masks pain and neurologic symptoms. Other unreliable categories: GCS <15, distracting injury, communication barrier, young children."},
+  {q:"A wedge-shaped compression fracture of the spine MOST commonly results from:",opts:["Distraction forces","Hyperflexion and compression","Lateral bending","Penetrating trauma"],ans:1,r:"Wedge-shaped compression fractures result from compressive force applied to the anterior vertebral body during hyperflexion. The anterior portion of the vertebral body is crushed into a wedge shape."},
+  {q:"Why is spinal motion restriction NOT recommended for penetrating spinal trauma?",opts:["Penetrating injuries never cause spinal cord injury","Research shows significantly higher mortality with SMR in penetrating trauma","The spinal cord is not at risk in penetrating injury","SMR devices are ineffective against ballistic forces"],ans:1,r:"Multiple studies have demonstrated that SMR is associated with significantly higher mortality in penetrating trauma patients. The mechanism of injury in penetrating trauma does not create the same secondary injury risk as blunt trauma, and delays in hemorrhage control from SMR application worsen outcomes."},
+  {q:"The cauda equina is located:",opts:["Within the cervical spinal cord from C1–C4","Between T6 and T10 nerve roots","Below the conus medullaris (approximately L1–L2 in adults)","At the junction of the medulla oblongata and spinal cord"],ans:2,r:"The cauda equina ('horse's tail') is the collection of lumbar and sacral nerve roots that continue below the conus medullaris (end of the spinal cord at L1–L2). Cauda equina injuries are technically nerve root injuries, not cord injuries, and may have better recovery potential."},
+  {q:"Neurogenic shock differs from hemorrhagic shock in that neurogenic shock presents with:",opts:["Elevated heart rate and low blood pressure","Low heart rate and low blood pressure","Normal heart rate and low blood pressure","Elevated heart rate and normal blood pressure"],ans:1,r:"The key differentiator: Neurogenic shock = hypotension + bradycardia (loss of sympathetic vasomotor AND cardiac accelerator fibers). Hemorrhagic shock = hypotension + compensatory tachycardia. This is critical for clinical decision-making regarding fluid administration and vasopressors."},
+  {q:"Which statement about cervical collars is CORRECT?",opts:["A properly applied cervical collar alone provides complete spinal immobilization","Cervical collars do not adequately stabilize the spine when used alone","Cervical collars should always be applied before MILS","Soft cervical collars provide equivalent immobilization to rigid collars"],ans:1,r:"Rigid cervical collars do NOT provide adequate spinal stabilization when used alone. They are ONE component of SMR. They must be combined with patient securing to the stretcher and MILS during movement."},
+  {q:"A patient's ability to dorsiflex their foot and great toe tests which nerve root?",opts:["S1","L5","T12","L3"],ans:1,r:"Dorsiflexion of the foot and great toe is controlled by the L5 nerve root. Plantar flexion (pushing foot down like a gas pedal) tests S1 and S2."},
+  {q:"Poikilothermia in a spinal cord injury patient means:",opts:["Abnormally high body temperature","The body temperature varies with the ambient (environmental) temperature","Loss of bowel and bladder control","Involuntary muscle spasms below the injury"],ans:1,r:"Poikilothermia means the patient's body temperature varies with the environment — like a cold-blooded animal. This results from loss of sympathetic thermoregulatory control (sweating and shivering). Prehospital implication: protect SCI patients from environmental temperature extremes."},
+  {q:"In pediatric patients with suspected spinal injury, padding under the shoulders is necessary because:",opts:["Children have weaker spinal muscles than adults","The proportionally larger occiput of children causes neck flexion when supine on a flat surface","Children's spines are more flexible and require extra support","Padding prevents skin breakdown during transport"],ans:1,r:"Children have proportionally larger heads (occiputs) than adults. When placed supine on a flat backboard without shoulder padding, the occiput pushes the head into flexion, which is NOT a neutral position. Shoulder padding restores neutral alignment."},
+  {q:"Distraction as a spinal injury mechanism occurs when:",opts:["The spine is compressed vertically","The spine is pulled apart longitudinally — stretched beyond normal length","The spine is bent to the side excessively","The spine is twisted past its normal rotation"],ans:1,r:"Distraction occurs when the spine is stretched longitudinally — such as in hangings, high-velocity ejections, or sudden deceleration where the body's momentum pulls away from a fixed cervical spine. This can cause cord laceration."},
+  {q:"The primary goal of prehospital spinal motion restriction is to:",opts:["Completely eliminate all spinal movement","Prevent secondary spinal cord injury","Immobilize the entire skeleton","Allow radiographic assessment in the field"],ans:1,r:"The primary goal of SMR is to PREVENT SECONDARY INJURY. The primary injury (from the initial impact) is already done. Secondary injury from movement, hypotension, hypoxia, and bony fragment displacement is what paramedics can prevent."},
+  {q:"A patient with bilateral lower extremity paralysis and loss of pain/temperature sensation below T10, but preserved proprioception, MOST likely has:",opts:["Central Cord Syndrome","Brown-Séquard Syndrome","Anterior Cord Syndrome","Complete cord transection at T10"],ans:2,r:"Anterior Cord Syndrome: loss of motor function AND loss of pain/temperature sensation below injury, with PRESERVED proprioception and vibration (posterior columns intact). The mechanism is usually vascular (anterior spinal artery) or anterior compression."},
+  {q:"Spinal injury can occur even in the absence of:",opts:["Mechanism of injury","Signs and symptoms of spinal injury","Both mechanism of injury and any symptoms","Only in the presence of neurologic deficits"],ans:1,r:"A significant spinal injury may be present even if the patient does NOT show signs or symptoms of SCI. This is especially true in patients with distracting injuries, intoxication, or high-energy mechanisms. Clinical assessment + MOI drives the decision."},
+  {q:"Which nerve root controls the extensors of the hands and fingers?",opts:["C5","C6","C7","T1"],ans:2,r:"C7 nerve roots control the extensors of the hands and fingers. T1 controls finger abduction/adduction (intrinsic hand muscles). C5-C6 control elbow flexion and wrist extension. Knowing these helps localize the SCI level."},
+  {q:"In a suspected SCI patient, when should the neurologic examination be performed?",opts:["Before assessing and treating life-threatening injuries","Only after arrival at the receiving facility","Only after all life-threatening injuries have been assessed and treated","Only if the patient complains of neurologic symptoms"],ans:2,r:"Spinal cord trauma is evaluated only AFTER all life-threatening injuries have been assessed and treated. Airway, breathing, and circulation take priority. The neurologic exam may be done in the field or en route."},
+  {q:"Subluxation of the spine refers to:",opts:["Complete fracture of a vertebral body","Partial dislocation of vertebrae from normal alignment","Ligamentous injury without bony damage","Herniation of the intervertebral disc into the canal"],ans:1,r:"Subluxation is partial dislocation of the vertebral bodies from their normal alignment. This narrows the spinal canal and places the cord at risk. Subluxation can be self-reducing (spontaneously returning to near-normal position) making it difficult to diagnose without MRI."},
+  {q:"The Kendrick Extrication Device (KED) is PRIMARILY used for:",opts:["Long-distance transport of stable SCI patients","SMR of patients found in sitting or confined positions","Pediatric spinal immobilization","Prone patient log roll technique"],ans:1,r:"The KED (short backboard) is used to provide spinal motion restriction for patients who are sitting or in confined spaces (e.g., inside a vehicle). It allows controlled extrication from the vehicle to the long backboard."},
+  {q:"Which of the following is a contraindication to applying a cervical collar?",opts:["GCS score of 14","Complaint of mild neck pain after a low-speed MVC","Reliable patient with a mechanism of injury only (no symptoms)","Distracting injury present"],ans:2,r:"A reliable patient with ONLY a positive MOI but NO clinical signs or symptoms may not require a cervical collar in some protocols (medical control specific). However, a GCS of 14, neck pain, distracting injury, or unreliable status ARE indications for a cervical collar. The option 'reliable patient with MOI only and no symptoms' reflects the clinical criteria approach."},
+  {q:"Hyperrotation of the spine can result in all of the following EXCEPT:",opts:["Subluxation","Facet joint dislocation","Cord compression","Distraction of the vertebral bodies longitudinally"],ans:3,r:"Hyperrotation results in subluxation, facet dislocation, and cord compression. Distraction (longitudinal stretching) is a separate mechanism requiring pulling forces along the long axis of the spine, not rotation."},
+  {q:"A patient with an L3 spinal cord injury would MOST likely present with:",opts:["Respiratory failure requiring ventilatory support","Tetraplegia with loss of all four extremity function","Paraplegia with potential for some lower extremity function preservation","Loss of sympathetic vasomotor control causing neurogenic shock"],ans:2,r:"L3 is below the conus medullaris. At this level, the injury affects the cauda equina (nerve roots), not the cord itself. This results in lower motor neuron injury affecting the lower extremities. Respiratory function and upper extremities are preserved. Neurogenic shock from vasomotor loss is associated with injuries at T6 and above."},
+  {q:"Which of the following best describes primary spinal cord injury?",opts:["Spinal cord damage caused by ischemia after initial trauma","Damage occurring at the moment of initial impact","Cord compression from post-traumatic edema","Damage from bony fragments that shift after the initial injury"],ans:1,r:"Primary SCI occurs AT the time of impact — the direct mechanical trauma to the cord. Secondary injuries (ischemia, edema, bony fragment movement, hypotension, hypoxia) occur AFTER the initial event and are the targets of prehospital intervention."},
+  {q:"A positive Babinski sign involves:",opts:["Dorsiflexion of the great toe when the outer sole is stroked — abnormal in adults","Plantar flexion of the great toe when the outer sole is stroked — normal in adults","Clonus of the ankle with rapid dorsiflexion","Pain radiation down the leg with straight leg raise"],ans:0,r:"The Babinski sign is positive when the great toe dorsiflexes (bends UP) upon stroking the lateral plantar surface. In adults and children over 2 years, this indicates an upper motor neuron lesion (spinal cord or brain). It is a normal finding in infants."},
+  {q:"The thoracic spine is MORE resistant to injury than the cervical spine primarily because:",opts:["Thoracic vertebrae are smaller and more flexible","Rib attachments to thoracic vertebrae provide significant stability","Thoracic vertebral bodies are hollow","The spinal cord is thicker in the thoracic region"],ans:1,r:"The rib cage and costovertebral articulations greatly stabilize the thoracic spine against injury. This is why thoracic spine injuries require higher-energy mechanisms than cervical injuries."},
+  {q:"Neurogenic shock from a high thoracic SCI is treated with ALL of the following EXCEPT:",opts:["Judicious IV fluid administration","Atropine for symptomatic bradycardia","Vasopressors per protocol for refractory hypotension","Aggressive 2L normal saline bolus to compensate for vasodilation"],ans:3,r:"In neurogenic shock, the cause is vasodilation (not fluid loss). Aggressive fluid boluses are inappropriate and can cause pulmonary edema in a patient with normal intravascular volume. Treatment includes judicious fluids, atropine for bradycardia, and vasopressors for refractory hypotension."},
+  {q:"Which statement about log rolling an SCI patient is CORRECT?",opts:["The log roll should be performed using exactly 2 rescuers","The head and neck must be maintained in neutral in-line position throughout the maneuver","The patient should be rapidly rolled to clear the airway if vomiting occurs","Log rolling is contraindicated in all suspected SCI patients"],ans:1,r:"During any log roll, the head and neck must be maintained in a neutral, in-line position throughout the maneuver. One rescuer is dedicated to the head/neck. If vomiting occurs, the patient can be log rolled as a unit to clear the airway — this is NOT a contraindication."},
+  {q:"A T10 sensory level in a patient with SCI means the patient has:",opts:["Sensation at the nipple line","Sensation at the umbilicus","Sensation at the groin","Sensation at the knee"],ans:1,r:"T10 corresponds to the umbilical level. This is one of the four key dermatome landmarks for rapid field assessment: C2–C4 = neck/below clavicles, T4 = nipples, T10 = umbilicus, S1 = soles of feet."},
+  {q:"What is the MOST important factor differentiating a reliable from an unreliable patient for spinal assessment?",opts:["Patient age","Ability to provide accurate and consistent symptom reporting without cognitive, chemical, or physical impairment","Level of pain experienced","Mechanism of injury severity"],ans:1,r:"Patient reliability refers to the ability to accurately report symptoms. Unreliable patients include those with altered mental status (GCS <15), intoxication, distracting injuries, communication barriers, or young children. An unreliable patient requires more conservative SMR decisions."},
+  {q:"Sports helmets should be removed in the field when:",opts:["All sports helmets should be removed immediately","The helmet fits poorly and cannot maintain cervical spine neutral position","The patient insists the helmet be left on","Only when the helmet is visibly damaged"],ans:1,r:"Sports helmets are removed when they cannot maintain the head in neutral position, when access to the airway is compromised, or when the helmet is a full-face type requiring access for airway management. If both a helmet and shoulder pads are worn and fit well, consider removing both together or neither."},
+  {q:"Sacral and coccygeal fractures typically occur as a result of:",opts:["Hyperflexion of the lumbar spine","Direct blows and falls to the buttocks region","Axial loading through the cervical spine","Distraction forces from hanging"],ans:1,r:"Sacral and coccygeal fractures most commonly result from direct blows and falls (landing on the tailbone). The ring structure of the pelvis and the musculature of the buttocks and lower back provide some protection, making these injuries less common and generally less severe than cervical injuries."},
+  {q:"A reliable patient with a negative MOI (minor fall from standing with no significant symptoms) generally:",opts:["Requires full spinal immobilization as a precaution","Does NOT require spinal motion restriction in the absence of clinical criteria","Requires at minimum a cervical collar regardless of symptoms","Should be transported supine with legs elevated"],ans:1,r:"In a reliable patient with a NEGATIVE MOI and NO clinical signs or symptoms of SCI, spinal motion restriction is generally not required. Clinical criteria (not just MOI) must be present to justify SMR in current evidence-based practice."},
+  {q:"Which spinal cord syndrome has the WORST prognosis for recovery?",opts:["Central Cord Syndrome","Brown-Séquard Syndrome","Anterior Cord Syndrome","Posterior Cord Syndrome"],ans:2,r:"Anterior Cord Syndrome has the worst prognosis because it involves the corticospinal motor tracts and spinothalamic pain/temperature tracts. The motor and pain deficits are typically permanent. Brown-Séquard and Central Cord Syndromes have the best recovery potential."},
+  {q:"A male patient with a spinal cord injury presenting with a sustained penile erection (priapism) suggests injury at or above:",opts:["L5","T10","T6","S1"],ans:2,r:"Priapism is a clinical indicator of SCI at or above T6. It results from loss of sympathetic neural control (which normally inhibits the erection reflex). Priapism in a male trauma patient should prompt a high index of suspicion for SCI."},
+  {q:"The scoop stretcher is considered PREFERRED to the long backboard for which purpose?",opts:["Long-distance transport","Moving patients from the scene to the ambulance stretcher","Stabilization of patients with multiple long bone fractures","Prone patient extrication"],ans:1,r:"The scoop stretcher is preferred for moving patients from the accident scene to the ambulance stretcher because it minimizes spinal movement during transfer. It can be split and placed around a patient in the supine position without requiring a log roll."},
+  {q:"In Autonomic Hyperreflexia Syndrome, which position should the patient be placed in?",opts:["Supine with legs elevated","Trendelenburg position","Sitting upright","Left lateral recumbent"],ans:2,r:"Sitting the patient UPRIGHT is a key intervention in Autonomic Hyperreflexia. Upright positioning reduces blood pressure by allowing gravity to pool blood in the lower extremities, reducing the dangerous hypertensive crisis while the trigger (e.g., full bladder) is addressed."},
+  {q:"Spinal shock resolves when:",opts:["The patient regains sensation below the injury level","Reflexes below the injury level return (typically indicated by the bulbocavernous reflex)","Blood pressure returns to normal","The patient is able to move their extremities"],ans:1,r:"Spinal shock resolves when reflex activity returns below the injury level. The bulbocavernous reflex (S3–S4) is typically the first to return, marking resolution of spinal shock. After this, the permanent neurologic deficit becomes clinically apparent."},
+  {q:"Lateral bending injury to the cervical spine most commonly occurs with:",opts:["Head-on motor vehicle collision","Rear-end motor vehicle collision","Side-impact (T-bone) motor vehicle collision","Rollover accident without ejection"],ans:2,r:"Excessive lateral bending from sudden lateral impact (T-bone MVC) moves the torso sideways while the head remains momentarily stationary, or vice versa. This creates lateral shear forces on the cervical and thoracic spine, causing fractures and dislocations."},
+  {q:"Which statement BEST describes the role of the long backboard in current prehospital practice?",opts:["It is the gold standard for all suspected spinal injuries","It is the first device applied after cervical collar placement","Significant evidence suggests it does not improve outcome and may cause complications when used routinely","It should be used in all MVC patients regardless of MOI"],ans:2,r:"Post-2013 research consensus: routine long backboard use for suspected SCI does NOT improve patient outcomes and is associated with complications (pressure sores, respiratory compromise, increased pain). The long backboard is a tool for specific situations — not a reflexive default."},
+  {q:"The S1 dermatome provides sensation to:",opts:["Inner thigh","Anterior knee","Soles of the feet","Lateral calf"],ans:2,r:"S1 provides sensory innervation to the soles of the feet. This is one of the four key prehospital dermatome landmarks: C2–C4 = neck/clavicles, T4 = nipples, T10 = umbilicus, S1 = soles of feet."},
+  {q:"What does the term 'incomplete lesion' mean in spinal cord injury?",opts:["The fracture does not completely cross the vertebral body","Some neurologic function is preserved below the level of injury","The patient will completely recover from their injury","The cord is bruised but not cut"],ans:1,r:"An incomplete SCI means SOME sensory and/or motor function is preserved below the level of injury. This is in contrast to a complete lesion where NO function is preserved. The degree of incompleteness varies widely and influences prognosis significantly."},
+  {q:"A patient with suspected SCI who is found prone should be moved to supine using:",opts:["A rapid flip onto the backboard using 2 rescuers","A log roll technique with dedicated rescuer maintaining head/neck alignment","A scoop stretcher without any rolling","Walking the patient to the stretcher if no neurologic symptoms are present"],ans:1,r:"Log rolling is the preferred technique for moving a prone SCI patient. One dedicated rescuer maintains neutral head/neck alignment throughout. Prone log roll techniques ('push' or 'pull' methods) minimize vertebral movement during position change."},
+  {q:"Which assessment finding would MOST strongly suggest neurogenic shock rather than hemorrhagic shock in a trauma patient?",opts:["Blood pressure 80/50, HR 130, cool pale skin","Blood pressure 80/50, HR 42, warm flushed skin below midchest","Blood pressure 80/50, HR 110, diaphoresis","Blood pressure 80/50, HR 90, absent bowel sounds"],ans:1,r:"Neurogenic shock = hypotension + bradycardia + warm, flushed (vasodilated) skin below the injury (due to loss of sympathetic vasoconstriction). Hemorrhagic shock = hypotension + TACHYCARDIA + cool, pale, diaphoretic skin (compensatory sympathetic response)."},
+  {q:"Hyperextension spinal injuries most commonly occur in which setting?",opts:["Forward head-on collision","Rear-end motor vehicle collision","Axial loading from diving","Lateral impact from side collision"],ans:1,r:"Rear-end collisions are the classic mechanism for hyperextension injury. The torso is accelerated forward while the head lags behind, causing the neck to snap backward (hyperextension). This can stretch and tear anterior longitudinal ligaments and compress posterior elements."},
+  {q:"Assessment of spinal injury in the field begins with:",opts:["Obtaining a complete neurologic examination","Assessing the mechanism of injury and applying clinical criteria","Ordering CT imaging at the scene","Applying spinal precautions to all trauma patients regardless of MOI"],ans:1,r:"The clinical framework for prehospital SCI assessment combines two elements: (1) Mechanism of injury (positive vs. negative) AND (2) Clinical criteria (altered LOC, pain/tenderness, neurologic deficit, deformity, unreliable patient). Both must be considered together."},
+  {q:"A patient who is intoxicated with alcohol and has a positive MOI for spinal injury should be:",opts:["Assessed for spinal injury based solely on clinical symptoms since intoxication masks symptoms","Treated as a reliable patient if GCS is 15","Treated with spinal motion restriction until the intoxication clears and a complete assessment can be done","Released if no complaints of neck pain are made"],ans:2,r:"Intoxicated patients are UNRELIABLE for spinal assessment. Alcohol and drugs mask pain and neurologic symptoms, making clinical criteria assessment impossible. Treat with SMR as if positive criteria exist until sobriety allows reassessment or imaging clears the spine."},
+  {q:"Which statement about the cauda equina is CORRECT?",opts:["It is located within the spinal cord above L2","It consists of motor and sensory nerve roots below the conus medullaris","It is not involved in lower extremity innervation","It is protected by the sacral ring completely"],ans:1,r:"The cauda equina is the collection of lumbar and sacral nerve roots that extend below the conus medullaris (L1–L2 in adults). Because these are peripheral nerve roots (not cord), cauda equina injuries may have better potential for recovery than true cord injuries."},
+  {q:"What is the significance of the T6 level in spinal cord injury?",opts:["All injuries above T6 are fatal","T6 is the approximate level above which sympathetic vasomotor and cardiac control is disrupted, predisposing to neurogenic shock","T6 is the lowest level at which motor function can be assessed","Injuries below T6 cause tetraplegia"],ans:1,r:"T6 is the critical sympathetic level. The major splanchnic sympathetic nerves originate between T5–T9. Injuries AT or ABOVE T6 disrupt sympathetic outflow to the heart and blood vessels, causing bradycardia, vasodilation, hypotension, priapism, and loss of thermoregulation."},
+  {q:"During eight-person direct lift for an SCI patient, the person responsible for the head and neck should:",opts:["Position themselves at the patient's feet for balance","Direct all movement and call commands to coordinate the lift","Step back once the cervical collar is applied","Provide counter-traction to stretch the spine"],ans:1,r:"The rescuer stabilizing the head and neck is responsible for directing the entire operation. This person gives commands for coordinated movement to ensure the spine moves as a unit. Loss of coordination between team members is the highest risk during multi-rescuer lifts."},
+  {q:"Which of the following is a sign of autonomic dysfunction associated with complete SCI at T6?",opts:["Hypertension","Loss of bladder and bowel control","Hyperactive reflexes below injury","Increased pain sensitivity below injury"],ans:1,r:"Loss of bowel and bladder control is a manifestation of autonomic dysfunction in SCI at T6 and above. Other autonomic signs include bradycardia, hypotension, priapism, loss of sweating and shivering, and poikilothermia."},
+  {q:"A patient with a Hangman's fracture (C2 bilateral pedicle fracture) would MOST likely result from which mechanism?",opts:["Lateral bending from side impact","Hyperextension + axial loading (as occurs in judicial hanging or severe MVCs)","Pure flexion from forward collision","Distraction from ejection"],ans:1,r:"Hangman's fracture (C2 bilateral pedicle/isthmus fracture) classically results from hyperextension combined with axial loading — the combination forces that occur in judicial hanging (hence the name) or severe deceleration crashes. Paradoxically, many survive because the fracture widens the spinal canal."},
+  {q:"Which patient does NOT require spinal motion restriction based on current evidence-based practice?",opts:["A 25-year-old in a 60 mph head-on MVC with neck pain","A 70-year-old who fell from standing and cannot move their legs","A reliable 30-year-old who tripped on a flat surface, has no neck or back pain, and has no neurologic complaints","An intoxicated 22-year-old involved in a skateboarding fall"],ans:2,r:"A reliable patient with a NEGATIVE MOI (low-energy fall from standing on flat surface) and NO clinical signs or symptoms of SCI does NOT require SMR. All other options represent positive MOI or unreliable patients."},
+  {q:"The 'scoop and run' philosophy in penetrating spinal trauma means:",opts:["Applying full SMR before any movement","Prioritizing rapid transport over comprehensive spinal precautions","Performing a thorough neurologic exam prior to transport","Using a vacuum splint for all penetrating injuries"],ans:1,r:"In penetrating spinal trauma, rapid transport (scoop and run) is prioritized because SMR is NOT beneficial and is associated with higher mortality. The critical intervention is hemorrhage control and getting the patient to surgical care — not spinal immobilization."},
+  {q:"Spinal cord concussion is BEST described as:",opts:["A permanent severing of the spinal cord","A temporary neurologic deficit without demonstrable structural cord injury","Hemorrhage within the spinal cord parenchyma","A partial laceration of the cord with incomplete deficit"],ans:1,r:"Like cerebral concussion, spinal cord concussion is a temporary functional disruption without structural injury. Symptoms resolve completely. This is analogous to how the cord can suffer a 'stunning' effect from sudden trauma without permanent damage."},
+  {q:"A reliable 30-year-old reports neck pain after a rear-end MVC at 30 mph. There are no neurologic deficits and the patient's GCS is 15. You should:",opts:["Perform no spinal assessment since it was a low-speed MVC","Apply spinal motion restriction including cervical collar and secure to stretcher","Advise the patient to follow up with a chiropractor tomorrow","Clear the spine in the field and release the patient"],ans:1,r:"Neck pain = positive clinical criterion. Rear-end MVC = positive MOI. Even at lower speeds, both criteria are met. SMR is indicated. The cervical collar and proper stretcher securing minimally meets the SMR standard per current evidence."},
+  {q:"Which of the following conditions predisposes patients to central cord syndrome from MINOR trauma?",opts:["Osteoporosis","Cervical spondylosis (degenerative arthritis causing spinal stenosis)","Lumbar disc herniation","Thoracic kyphosis"],ans:1,r:"Cervical spondylosis causes degenerative narrowing (stenosis) of the spinal canal. In a patient with pre-existing stenosis, even MINOR hyperextension can compress the already-narrowed canal and cause Central Cord Syndrome — this is why elderly patients can develop SCI from simple falls."},
+  {q:"What reflex, when present in an adult, may indicate spinal cord pathology?",opts:["Patellar reflex","Achilles reflex","Babinski reflex","Gag reflex"],ans:2,r:"The Babinski reflex (great toe dorsiflexion with lateral plantar stroking) is a pathological upper motor neuron sign in adults. It indicates disruption of the descending corticospinal tracts — from brain or spinal cord injury. It is normal in infants under 2 years."},
+  {q:"Which SMR device is most appropriate for extrication from a vehicle?",opts:["Long backboard only","Scoop stretcher","Kendrick Extrication Device (KED) or short backboard","Vacuum mattress"],ans:2,r:"The KED (Kendrick Extrication Device) or short backboard is specifically designed for extrication from confined spaces such as vehicle interiors. It allows the seated patient to be stabilized and moved to the long backboard or stretcher."},
+  {q:"Hyperflexion of the cervical spine is MOST likely to result in which injury pattern?",opts:["Posterior element fractures and ligament disruption","Anterior vertebral body compression and wedge fracture","Vertebral distraction and cord laceration","Unilateral facet subluxation from rotation"],ans:1,r:"Hyperflexion concentrates compressive force on the ANTERIOR vertebral body, causing wedge-shaped compression fractures. It also stretches posterior ligaments. Teardrop fractures from severe hyperflexion + compression are particularly dangerous."},
+  {q:"An SCI patient has intact motor function but complete loss of pain and temperature sensation bilaterally below T8, with preserved vibration sense. This MOST likely represents:",opts:["Complete spinal cord transection","Anterior Cord Syndrome","Central Cord Syndrome","Brown-Séquard Syndrome"],ans:1,r:"Anterior Cord Syndrome: motor function MAY be preserved in some cases (though typically lost), pain/temperature sensation is lost (spinothalamic tract), and proprioception/vibration is PRESERVED (posterior columns intact). This presentation with preserved motor but lost pain/temp and intact proprioception fits anterior cord syndrome."},
+  {q:"Which mechanism is MOST likely in a patient who sustained a spinal cord injury from a hanging?",opts:["Hyperflexion","Axial loading","Lateral bending","Distraction"],ans:3,r:"Distraction (longitudinal stretching) is the classic mechanism in hanging — the sudden arrest of downward movement while momentum stretches the spine. This can cause actual laceration of the spinal cord and tearing of ligaments."},
+  {q:"Manual in-line stabilization should be discontinued when:",opts:["The cervical collar is applied","The patient is secured to the long backboard or stretcher with adequate SMR devices in place","The patient states they feel fine and wants to move","The ambulance arrives at the hospital"],ans:1,r:"MILS should be maintained until the patient is adequately secured with mechanical SMR devices. Simply applying the cervical collar is insufficient. MILS is discontinued once the full SMR is in place and the patient cannot move the spine."},
+  {q:"Which of the following represents a POSITIVE MOI for spinal injury?",opts:["A patient who slipped on ice and caught themselves on a railing","A patient who tripped over a pet on flat ground","A pedestrian struck by a vehicle at 40 mph","A patient who fell from their couch while asleep"],ans:2,r:"A pedestrian struck at high speed is a classic positive MOI — sudden deceleration, lateral impact, and axial forces are all involved. Positive MOIs include violent impacts, high-speed MVCs, falls involving elderly patients, ejection from vehicles, shallow-water diving, and explosions."},
+  {q:"The dorsal (posterior) columns of the spinal cord are responsible for transmitting:",opts:["Pain and temperature sensation","Motor commands to skeletal muscle","Proprioception, vibration, and fine touch","Autonomic signals to visceral organs"],ans:2,r:"The posterior (dorsal) columns carry proprioception (position sense), vibration sensation, and fine discriminative touch. These are the functions PRESERVED in Anterior Cord Syndrome and LOST on the ipsilateral side in Brown-Séquard Syndrome."},
+  {q:"A patient's lateral bending injury results in bony fractures to the cervical and thoracic spine. The primary cause of this injury was:",opts:["A sudden longitudinal distraction force","A sudden lateral impact that moves the torso sideways relative to the head","Anterior flexion combined with axial loading","Rotational forces around the long axis of the spine"],ans:1,r:"Lateral bending injuries occur when sudden lateral impact moves the torso sideways while the head momentarily remains stationary (or vice versa). This creates a shear force across the cervical and upper thoracic spine causing fractures and dislocations."},
+  {q:"Which statement about spinal injury and the patient's age is CORRECT?",opts:["Younger patients always sustain more severe spinal injuries than older patients","Age, preexisting bone diseases, and congenital anomalies can affect the severity of spinal injury from a given force","Osteoporosis has no effect on spinal fracture risk","Cervical spondylosis actually protects against cord injury"],ans:1,r:"The severity of spinal injury depends not only on the force applied but on patient factors: age (elderly patients sustain severe injuries from minor MOI), preexisting bone diseases (osteoporosis → fractures with low force), and congenital anomalies (spinal stenosis → central cord syndrome with minor trauma)."},
+  {q:"Priapism as a clinical sign is significant because it indicates:",opts:["Pelvic fracture with hematoma formation","Genitourinary trauma with urethral injury","Autonomic dysfunction from spinal cord injury at or above T6","Normal sympathetic nervous system activity"],ans:2,r:"Priapism (sustained penile erection) in a male trauma patient is a strong indicator of SCI at or above T6. It results from loss of sympathetic inhibition of the erection reflex. In the field, this clinical finding should prompt a high index of suspicion for a significant cord injury."},
+  {q:"A patient involved in an explosion sustains spinal injury. The MOST likely mechanism is:",opts:["Pure hyperextension","A combination of mechanisms including sudden deceleration, lateral bending, and distraction","Isolated hyperflexion","Axial loading alone"],ans:1,r:"Explosions generate complex multi-directional blast forces and often cause the body to be violently propelled and impacted at high velocity. This creates combinations of axial loading, flexion, extension, lateral bending, and distraction forces simultaneously — explaining why blast injuries cause complex, multi-level spinal injuries."},
+  {q:"What is the term for the ability of the body to produce body heat and regulate temperature through sweating and shivering?",opts:["Thermoregulation","Poikilothermia","Homeostasis","Thermodysregulation"],ans:0,r:"Thermoregulation is the normal physiologic process of maintaining body temperature through sweating (cooling) and shivering (warming). This is controlled by the sympathetic nervous system. When the cord is injured at T6 and above, thermoregulation is disrupted, and the patient becomes poikilothermic."},
+  {q:"Which statement about SMR in pediatric patients is MOST accurate?",opts:["All children involved in any trauma should receive full spinal immobilization","SMR criteria and indications are identical to adult criteria, with modifications for anatomy","Pediatric patients never require spinal motion restriction","Car seats are preferred for transporting children with suspected SCI"],ans:1,r:"Pediatric SMR uses the same criteria as adults (neck pain, torticollis, neurologic deficit, altered mental status, high-energy MOI) with anatomical modifications: padding under the shoulders to compensate for the proportionally larger occiput, and using pediatric stabilization devices rather than car seats."},
+  {q:"C2 through C4 dermatomes provide sensation to:",opts:["The nipple line","A collar of sensation around the neck and over the anterior chest to below the clavicles","The abdomen from umbilicus to groin","The upper arms and shoulders only"],ans:1,r:"C2–C4 dermatomes create a 'collar' of sensation from the neck down to below the clavicles on the anterior chest. This is clinically useful — if a patient reports numbness below their clavicles but has normal sensation above, the level is approximately C4."},
+  {q:"The MOST important intervention to prevent secondary spinal cord injury in a hypotensive SCI patient is:",opts:["Immediate spinal immobilization only","Maintaining systolic BP above 90 mmHg to ensure spinal cord perfusion","Hyperventilating the patient to reduce cord swelling","Cooling the patient to reduce cord metabolism"],ans:1,r:"Secondary SCI from hypotension is a critical, preventable injury. Spinal cord perfusion pressure depends on adequate systemic blood pressure. Maintaining SBP >90 mmHg (and ideally higher per current research) is essential to prevent ischemic secondary cord damage. Vasopressors may be needed in neurogenic shock."},
+  {q:"The role of the anterior longitudinal ligament in the spine is to:",opts:["Connect posterior spinous processes","Connect vertebral bodies anteriorly and provide resistance to hyperextension forces","Connect transverse processes laterally","Provide attachment for spinal muscles only"],ans:1,r:"The anterior longitudinal ligament (ALL) runs along the anterior surface of the vertebral bodies, connecting them. It resists hyperextension forces. Disruption of the ALL in hyperextension injuries (like rear-end MVCs) can cause instability even without fracture."},
+  {q:"A patient sustains a shotgun wound to the right side of the thorax at T4. She has right leg motor paralysis and right leg loss of proprioception. She has left leg loss of pain and temperature sensation. This presentation is MOST consistent with:",opts:["Complete cord transection at T4","Anterior Cord Syndrome at T4","Brown-Séquard Syndrome with right cord hemisection at T4","Central Cord Syndrome at T4"],ans:2,r:"Brown-Séquard Syndrome from right cord hemisection: IPSILATERAL (right) motor paralysis + proprioception loss; CONTRALATERAL (left) pain/temperature loss (spinothalamic fibers cross at entry level). Classic penetrating trauma (GSW) causing hemisection."},
+  {q:"In the context of spinal assessment, a 'distracting injury' refers to:",opts:["A psychological distraction that prevents the patient from answering questions","A painful injury that may divert the patient's attention from noticing spinal pain","An injury that distracts the rescuer from the spinal assessment","Injuries that are unrelated to the primary trauma"],ans:1,r:"A distracting injury is a painful injury elsewhere (such as a fractured femur, burn, or laceration) that is sufficiently painful to distract the patient's attention from noticing or reporting spinal pain or neurologic symptoms. Patients with distracting injuries are considered unreliable for spinal assessment."},
+  {q:"Which of the following correctly describes the treatment priority for Autonomic Hyperreflexia Syndrome?",opts:["Supine position → IV fluids → antihypertensives → transport","Identify and remove the trigger → sit patient upright → contact medical control → antihypertensives if ordered","Apply spinal precautions first → IV fluids → transport","Initiate manual in-line stabilization → apply cervical collar → elevate legs"],ans:1,r:"Treatment of Autonomic Hyperreflexia: (1) Find and REMOVE the trigger (most commonly the bladder — unclog catheter, drain bladder), (2) Sit patient UPRIGHT to reduce BP via gravity, (3) Contact medical control, (4) Antihypertensives if ordered and BP remains dangerously elevated. IV fluids and spinal precautions are NOT primary treatments."},
+  {q:"A patient with C5 complete tetraplegia would MOST likely have which respiratory presentation?",opts:["Normal respiratory function","Requires ventilatory support (diaphragm partially affected, intercostals lost)","Completely normal breathing with intact diaphragm and intercostals","Requires no respiratory support since the diaphragm is C3–C5"],ans:1,r:"C5 complete injury: The phrenic nerve (C3–C5) is partially affected. The diaphragm may function but is weakened. All intercostal muscles (T1–T12) are paralyzed. Accessory muscles are lost. These patients often have significantly reduced respiratory reserve and may require ventilatory support, especially as they fatigue."},
+  {q:"According to current evidence, the minimum standard for SMR in blunt trauma with positive criteria includes:",opts:["Long backboard + cervical collar + MILS throughout transport","Cervical collar + securing patient to stretcher + minimizing movement + maintaining in-line stabilization during transfers","Cervical collar alone until arrival at the ED","Vacuum mattress + cervical collar + long backboard"],ans:1,r:"Current evidence-based minimum SMR includes: (1) cervical collar, (2) securing patient to stretcher, (3) minimizing movement and transfers, and (4) maintaining in-line stabilization when moving the patient. The long backboard is NOT required as the default — it is reserved for situations such as moving patients or multiple long bone fractures."},
+  {q:"The 'neutral in-line position' for spinal motion restriction means:",opts:["The head is extended backward to open the airway","The head and neck are in the position that best aligns with the long axis of the body — typically straight ahead, slightly flexed","The head is maximally flexed to the chest","The head is turned 15 degrees to the right side for venous drainage"],ans:1,r:"Neutral in-line position means the head and neck are aligned with the long axis of the body (the position the head would naturally be in when standing upright looking straight ahead). This minimizes stress on all spinal elements. It is NOT forced extension or flexion."},
+  {q:"Degenerative disc disease predisposes patients to spinal injury primarily because:",opts:["It increases disc height and canal diameter","It causes loss of disc height, flexibility, and shock absorption, narrowing the canal","It increases ligamentous strength","It causes hypermobility of the spine"],ans:1,r:"Degenerative disc disease (DDD) causes progressive loss of disc height, reduced water content, and loss of flexibility. The intervertebral discs function as shock absorbers — when they degenerate, traumatic forces are transmitted more directly to the vertebral bodies and cord. Narrowed canal diameter also increases cord injury risk."},
+  {q:"A patient who was involved in a high-speed MVC is ambulatory at scene and refuses SMR. Which action is MOST appropriate?",opts:["Honor the patient's refusal and document it since they are ambulatory","Determine if the patient is a reliable adult with decision-making capacity, explain risks of refusal, have them sign refusal, document thoroughly, and offer to reevaluate if symptoms develop","Force SMR since it is always in the patient's best interest","Call law enforcement to compel the patient to accept treatment"],ans:1,r:"Competent adult patients have the right to refuse treatment. The paramedic's obligation is to: determine capacity (reliable, GCS 15, not intoxicated), provide thorough informed refusal counseling (risks of refusing), have the patient sign refusal documentation, ensure they understand warning signs, offer to return if symptoms develop, and thoroughly document."},
+  {q:"Hyperreflexia below the injury level in a chronic SCI patient represents:",opts:["Resolution of the initial cord injury","Permanent muscle weakness from disuse","Upper motor neuron damage causing loss of descending inhibition of spinal reflexes","Normal physiologic aging changes"],ans:2,r:"After spinal shock resolves, chronic SCI patients develop hyperreflexia (spastic paralysis) below the injury — exactly OPPOSITE of the initial flaccid paralysis of spinal shock. This occurs because the upper motor neurons (cord) no longer inhibit spinal reflex arcs. Hyperreflexia is the hallmark of CHRONIC upper motor neuron SCI."},
+];
+
+// ─────────────────────────────────────────────
+// RENDER ASSESSMENT
+// ─────────────────────────────────────────────
+function renderAssessment() {
+  const c = document.getElementById('assessment-container');
+  c.innerHTML = questions.map((q, i) => `
+    <div class="q-block" id="qb-${i}">
+      <div class="q-num">Question ${i+1} of ${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      ${q.opts.map((o, j) => `
+        <label class="opt-label" id="opt-${i}-${j}">
+          <input type="radio" name="q${i}" value="${j}" onchange="recordAnswer(${i},${j})">
+          <span>${String.fromCharCode(65+j)}. ${o}</span>
+        </label>
+      `).join('')}
+      <div class="rationale-box" id="rat-${i}"></div>
+    </div>
+  `).join('');
+}
+
+const userAnswers = {};
+function recordAnswer(qi, ai) { userAnswers[qi] = ai; }
+
+function submitAssessment() {
+  const name = document.getElementById('studentName').value.trim();
+  const id = document.getElementById('studentId').value.trim();
+  if (!name || !id) { alert('Please enter your name and student ID before submitting.'); return; }
+
+  const unanswered = questions.filter((_,i) => userAnswers[i] === undefined);
+  if (unanswered.length > 0) {
+    if (!confirm(`You have ${unanswered.length} unanswered questions. Submit anyway?`)) return;
+  }
+
+  let correct = 0;
+  questions.forEach((q, i) => {
+    const ua = userAnswers[i];
+    const block = document.getElementById('qb-'+i);
+    const rat = document.getElementById('rat-'+i);
+    q.opts.forEach((_,j) => {
+      const lbl = document.getElementById(`opt-${i}-${j}`);
+      const radio = lbl.querySelector('input');
+      radio.disabled = true;
+      if (j === q.ans) lbl.classList.add('q-correct');
+      else if (ua === j) lbl.classList.add('q-wrong');
+    });
+    rat.innerHTML = `<strong>📚 Rationale:</strong> ${q.r}`;
+    rat.style.display = 'block';
+    if (ua === q.ans) { correct++; block.classList.add('answered-correct'); }
+    else { block.classList.add('answered-wrong'); }
+  });
+
+  const pct = Math.round((correct / questions.length) * 100);
+  document.getElementById('scorePct').textContent = pct + '%';
+  document.getElementById('resCorrect').textContent = correct;
+  document.getElementById('resWrong').textContent = questions.length - correct;
+  document.getElementById('resPct').textContent = pct + '%';
+
+  let title = pct >= 90 ? '🏆 Outstanding Performance!' : pct >= 80 ? '✅ Proficient' : pct >= 70 ? '📘 Competent — Review Rationales' : '📖 Needs Additional Study';
+  let msg = pct >= 80 ? 'You demonstrate strong command of spinal trauma content.' : 'Review the rationales for missed items and revisit the module content before your next attempt.';
+  document.getElementById('resultsTitle').textContent = title;
+  document.getElementById('resultsMsg').textContent = msg;
+
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressLabel').textContent = 'Assessment Complete';
+  document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});
+
+  // Store for PDF
+  window._scoreData = { name, id, pct, correct, wrong: questions.length - correct, date: document.getElementById('assessmentDate').value, program: document.getElementById('studentProgram').value };
+}
+
+// ─────────────────────────────────────────────
+// PDF REPORT (jsPDF via CDN)
+// ─────────────────────────────────────────────
+function downloadPDF() {
+  const sd = window._scoreData;
+  if (!sd) { alert('Please complete the assessment first.'); return; }
+
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+  script.onload = () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+    const W = doc.internal.pageSize.getWidth();
+
+    // Header bar
+    doc.setFillColor(26, 86, 219);
+    doc.rect(0, 0, W, 42, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18); doc.setFont('helvetica', 'bold');
+    doc.text('CAMP Community College — EMS Program', W/2, 14, {align:'center'});
+    doc.setFontSize(13); doc.setFont('helvetica', 'normal');
+    doc.text('Chapter 39: Spine & Nervous System Trauma', W/2, 22, {align:'center'});
+    doc.setFontSize(10);
+    doc.text('Sanders\' Paramedic Textbook, 6th Edition', W/2, 30, {align:'center'});
+    doc.text('NREMT-Style Assessment Score Report', W/2, 37, {align:'center'});
+
+    // Score circle area
+    const pct = sd.pct;
+    const grade = pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : pct >= 60 ? 'D' : 'F';
+    const color = pct >= 80 ? [47, 133, 90] : pct >= 70 ? [183, 121, 31] : [197, 48, 48];
+    doc.setFillColor(...color);
+    doc.circle(W/2, 68, 20, 'F');
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(22); doc.setFont('helvetica', 'bold');
+    doc.text(pct + '%', W/2, 72, {align:'center'});
+    doc.setFontSize(10); doc.text('SCORE', W/2, 79, {align:'center'});
+
+    // Student info
+    doc.setTextColor(30,58,138);
+    doc.setFontSize(13); doc.setFont('helvetica', 'bold');
+    doc.text('Student Information', 20, 98);
+    doc.setDrawColor(200,210,240); doc.line(20, 100, W-20, 100);
+    doc.setTextColor(26,32,44);
+    doc.setFontSize(11); doc.setFont('helvetica', 'normal');
+    const col1 = 20, col2 = 110;
+    doc.text('Name:', col1, 110); doc.setFont('helvetica','bold'); doc.text(sd.name, col1+25, 110);
+    doc.setFont('helvetica','normal'); doc.text('Student ID:', col2, 110); doc.setFont('helvetica','bold'); doc.text(sd.id, col2+30, 110);
+    doc.setFont('helvetica','normal'); doc.text('Program:', col1, 120); doc.setFont('helvetica','bold'); doc.text(sd.program, col1+25, 120);
+    doc.setFont('helvetica','normal'); doc.text('Date:', col2, 120); doc.setFont('helvetica','bold'); doc.text(sd.date || 'N/A', col2+18, 120);
+
+    // Score breakdown
+    doc.setTextColor(30,58,138);
+    doc.setFontSize(13); doc.setFont('helvetica','bold');
+    doc.text('Assessment Results', 20, 135);
+    doc.setDrawColor(200,210,240); doc.line(20, 137, W-20, 137);
+
+    const boxes = [
+      { label: 'Total Questions', value: '100', x: 20 },
+      { label: 'Correct Answers', value: String(sd.correct), x: 75 },
+      { label: 'Incorrect Answers', value: String(sd.wrong), x: 130 },
+      { label: 'Grade', value: grade, x: 165 }
+    ];
+    boxes.forEach(b => {
+      doc.setFillColor(240,244,248); doc.roundedRect(b.x, 142, 48, 22, 3, 3, 'F');
+      doc.setTextColor(26,86,219); doc.setFontSize(16); doc.setFont('helvetica','bold');
+      doc.text(b.value, b.x+24, 153, {align:'center'});
+      doc.setTextColor(74,85,104); doc.setFontSize(8); doc.setFont('helvetica','normal');
+      doc.text(b.label, b.x+24, 159, {align:'center'});
+    });
+
+    // Performance message
+    const perfMsg = pct >= 90 ? 'Excellent — Outstanding command of spinal trauma content.' :
+                    pct >= 80 ? 'Proficient — Strong understanding demonstrated.' :
+                    pct >= 70 ? 'Competent — Review rationales for missed items.' :
+                    'Developing — Additional study of chapter content is recommended.';
+    doc.setFillColor(pct >= 80 ? 240 : pct >= 70 ? 255 : 255, pct >= 80 ? 255 : pct >= 70 ? 251 : 245, pct >= 80 ? 244 : pct >= 70 ? 235 : 245);
+    doc.roundedRect(20, 170, W-40, 14, 3, 3, 'F');
+    doc.setTextColor(pct >= 80 ? 47 : pct >= 70 ? 183 : 197, pct >= 80 ? 133 : pct >= 70 ? 121 : 48, pct >= 80 ? 90 : pct >= 70 ? 31 : 48);
+    doc.setFontSize(10); doc.setFont('helvetica','bold');
+    doc.text('Performance: ' + perfMsg, W/2, 179, {align:'center'});
+
+    // Competency domains
+    doc.setTextColor(30,58,138);
+    doc.setFontSize(13); doc.setFont('helvetica','bold');
+    doc.text('Competency Domains Assessed', 20, 195);
+    doc.setDrawColor(200,210,240); doc.line(20, 197, W-20, 197);
+    doc.setTextColor(26,32,44); doc.setFontSize(9); doc.setFont('helvetica','normal');
+    const domains = [
+      'Spinal Anatomy & Physiology (Vertebral column, cord levels, dermatomes)',
+      'Mechanisms of Spinal Injury (Axial, flexion, extension, rotation, distraction)',
+      'Classification of SCI (Complete vs. incomplete, cord syndromes)',
+      'Clinical Assessment Criteria (MOI, clinical criteria, neurologic exam)',
+      'Spinal Motion Restriction (Indications, devices, special populations)',
+      'Shock Differentiation (Spinal, neurogenic, autonomic hyperreflexia)',
+      'Nontraumatic Spinal Conditions',
+    ];
+    domains.forEach((d, i) => {
+      doc.setFillColor(i%2===0?247:255, i%2===0?250:255, i%2===0?252:255);
+      doc.rect(20, 201+i*9, W-40, 9, 'F');
+      doc.setDrawColor(226,232,240); doc.rect(20, 201+i*9, W-40, 9, 'S');
+      doc.setTextColor(26,32,44);
+      doc.text('✓  ' + d, 25, 207+i*9);
+    });
+
+    // Footer
+    const fy = 201 + domains.length * 9 + 15;
+    doc.setFillColor(26,86,219);
+    doc.rect(0, fy, W, 25, 'F');
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(9); doc.setFont('helvetica','normal');
+    doc.text('CAMP Community College — EMS Paramedic Program', W/2, fy+8, {align:'center'});
+    doc.text('Suffolk/Franklin, Virginia | CoAEMSP Accredited Program', W/2, fy+14, {align:'center'});
+    doc.text('This report was generated automatically upon completion of the interactive learning module.', W/2, fy+20, {align:'center'});
+
+    doc.save(`CAMP_EMS_Ch39_Spine_${sd.name.replace(/\s+/g,'_')}_${sd.date}.pdf`);
+  };
+  document.head.appendChild(script);
+}
+
+// Init
+renderAssessment();
+</script>
+</body>
+</html>
