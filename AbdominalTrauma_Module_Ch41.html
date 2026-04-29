@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abdominal Trauma — Interactive Paramedic Module | CAMP EMS Program</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  /* ================================================================
+     ABDOMINAL TRAUMA — LIGHT MODE CLINICAL AESTHETIC
+     Sanders' Paramedic Textbook, 6th Edition — Chapter 41
+     Andragogy-Aligned (Knowles, 6 Principles)
+     ================================================================ */
+
+  :root {
+    --bg: #f6f8fb;
+    --bg-card: #ffffff;
+    --bg-soft: #eef3f9;
+    --bg-accent: #e8f1fb;
+    --ink: #0e1a2b;
+    --ink-soft: #2a3a52;
+    --muted: #5b6a82;
+    --line: #d8e0ec;
+    --line-soft: #e8edf4;
+    --primary: #1f5fb3;
+    --primary-deep: #163d77;
+    --primary-soft: #d6e6f8;
+    --teal: #0e7c86;
+    --teal-soft: #d6f0f2;
+    --green: #1f7a4f;
+    --green-soft: #d8efe1;
+    --amber: #b06d04;
+    --amber-soft: #fbecc7;
+    --red: #b3261e;
+    --red-soft: #fbdcd9;
+    --gold: #946a00;
+    --gold-soft: #fbf0c7;
+    --shadow: 0 1px 2px rgba(15,30,60,.06), 0 8px 24px rgba(15,30,60,.06);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 16px;
+    min-height: 100vh;
+  }
+
+  /* ===== TOP NAV ===== */
+  .topnav {
+    position: sticky; top: 0; z-index: 50;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 22px;
+    display: flex; align-items: center; gap: 18px;
+    flex-wrap: wrap;
+    box-shadow: 0 1px 3px rgba(15,30,60,.04);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    font-weight: 700; color: var(--primary-deep);
+    font-size: 15px; letter-spacing: .2px;
+  }
+  .brand .badge {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--teal));
+    color: white; display: grid; place-items: center;
+    font-weight: 800; font-size: 14px;
+  }
+  .nav-tabs { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+  .nav-tab {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .nav-tab:hover { background: var(--bg-soft); color: var(--primary-deep); }
+  .nav-tab.active {
+    background: var(--primary-soft);
+    color: var(--primary-deep);
+    border-color: #b8d3ee;
+    font-weight: 600;
+  }
+  .student-pill {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 14px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    max-width: 280px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .student-pill .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+  }
+
+  /* ===== LAYOUT ===== */
+  main { max-width: 1180px; margin: 0 auto; padding: 28px 22px 80px; }
+  section.module { display: none; animation: fade .25s ease; }
+  section.module.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* ===== TYPOGRAPHY ===== */
+  h1, h2, h3, h4 { color: var(--ink); margin-top: 0; }
+  h1 { font-size: 30px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
+  h2 { font-size: 22px; font-weight: 700; margin: 28px 0 12px; color: var(--primary-deep);
+       border-bottom: 2px solid var(--primary-soft); padding-bottom: 8px; }
+  h3 { font-size: 18px; font-weight: 600; margin: 18px 0 8px; color: var(--ink-soft); }
+  h4 { font-size: 15px; font-weight: 600; margin: 14px 0 6px; color: var(--primary-deep); text-transform: uppercase; letter-spacing: .5px; }
+  p { margin: 8px 0; color: var(--ink-soft); }
+
+  .module-header {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f6fd 100%);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+  }
+  .module-header .label {
+    text-transform: uppercase; letter-spacing: 1.2px; font-size: 11px;
+    color: var(--primary); font-weight: 700; margin-bottom: 6px;
+  }
+  .module-header h1 { margin: 0 0 6px; }
+  .module-header .sub { color: var(--muted); font-size: 14px; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin: 16px 0;
+    box-shadow: var(--shadow);
+  }
+  .card.tight { padding: 14px 16px; }
+  .card-grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .card-grid.cols-2 { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+  /* ===== ANDRAGOGY BANNERS ===== */
+  .andragogy {
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-left: 4px solid;
+    background: var(--bg-card);
+    border-color: var(--line);
+    box-shadow: 0 1px 2px rgba(15,30,60,.04);
+    border-left-color: var(--primary);
+    background: var(--primary-soft);
+  }
+  .andragogy h4 {
+    margin: 0 0 6px;
+    color: var(--primary-deep);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .andragogy.know { border-left-color: var(--red); background: var(--red-soft); }
+  .andragogy.know h4 { color: var(--red); }
+  .andragogy.self { border-left-color: var(--teal); background: var(--teal-soft); }
+  .andragogy.self h4 { color: var(--teal); }
+  .andragogy.prior { border-left-color: var(--amber); background: var(--amber-soft); }
+  .andragogy.prior h4 { color: var(--amber); }
+  .andragogy.ready { border-left-color: var(--gold); background: var(--gold-soft); }
+  .andragogy.ready h4 { color: var(--gold); }
+  .andragogy.orient { border-left-color: var(--green); background: var(--green-soft); }
+  .andragogy.orient h4 { color: var(--green); }
+  .andragogy.motiv { border-left-color: var(--primary-deep); background: var(--primary-soft); }
+  .andragogy.motiv h4 { color: var(--primary-deep); }
+  .andragogy p { color: var(--ink); margin: 4px 0; font-size: 14px; }
+
+  /* ===== CALLOUTS ===== */
+  .callout {
+    border-left: 4px solid var(--amber);
+    background: var(--amber-soft);
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    margin: 14px 0;
+  }
+  .callout.critical { border-color: var(--red); background: var(--red-soft); }
+  .callout.clinical { border-color: var(--teal); background: var(--teal-soft); }
+  .callout.pearl { border-color: var(--green); background: var(--green-soft); }
+  .callout strong { color: var(--ink); }
+  .callout p { color: var(--ink); margin: 4px 0; font-size: 14px; }
+
+  /* ===== SCENARIO ===== */
+  .scenario {
+    background: linear-gradient(135deg, #fff 0%, #fef6f5 100%);
+    border: 1px solid #f3c3bf;
+    border-left: 5px solid var(--red);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    margin-bottom: 18px;
+  }
+  .scenario .timestamp {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .scenario h3 { color: var(--red); margin-top: 0; }
+  .scenario .vitals {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm);
+    padding: 10px 14px; margin: 12px 0; font-family: 'Courier New', monospace;
+    font-size: 13px; color: var(--ink);
+  }
+
+  /* ===== TABLES ===== */
+  table {
+    width: 100%; border-collapse: collapse;
+    background: white; border-radius: var(--radius); overflow: hidden;
+    margin: 14px 0;
+    border: 1px solid var(--line);
+  }
+  th {
+    background: var(--bg-accent); color: var(--primary-deep);
+    text-align: left; padding: 10px 14px;
+    font-weight: 600; font-size: 13px;
+    border-bottom: 2px solid var(--primary-soft);
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--line-soft); font-size: 14px; color: var(--ink-soft); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafbfd; }
+
+  /* ===== LISTS ===== */
+  ul, ol { padding-left: 22px; color: var(--ink-soft); }
+  ul li, ol li { margin: 4px 0; }
+  ul.checks { list-style: none; padding-left: 0; }
+  ul.checks li {
+    position: relative; padding: 4px 0 4px 28px; margin: 4px 0;
+  }
+  ul.checks li::before {
+    content: "✓"; position: absolute; left: 4px; top: 4px;
+    color: var(--green); font-weight: 700;
+  }
+  ul.warns { list-style: none; padding-left: 0; }
+  ul.warns li { position: relative; padding: 4px 0 4px 28px; margin: 4px 0; }
+  ul.warns li::before {
+    content: "!"; position: absolute; left: 8px; top: 3px;
+    color: white; background: var(--red); font-weight: 800;
+    width: 16px; height: 16px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 11px;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600; font-size: 14px;
+    transition: all .15s ease;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--primary-deep); transform: translateY(-1px); }
+  .btn.secondary { background: white; color: var(--primary); border: 1px solid var(--primary); }
+  .btn.secondary:hover { background: var(--primary-soft); }
+  .btn.success { background: var(--green); }
+  .btn.success:hover { background: #155f3e; }
+  .btn.warn { background: var(--amber); }
+  .btn.danger { background: var(--red); }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+  /* ===== OBJECTIVES ===== */
+  .objectives {
+    display: grid; gap: 10px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) { .objectives { grid-template-columns: 1fr 1fr; } }
+  .objective {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: white; border: 1px solid var(--line);
+    border-radius: var(--radius-sm); padding: 12px 14px;
+  }
+  .objective .blooms {
+    flex-shrink: 0;
+    width: 80px; height: 24px; padding: 0 8px;
+    border-radius: 4px;
+    font-size: 10px; font-weight: 700;
+    display: grid; place-items: center;
+    text-transform: uppercase; letter-spacing: .5px;
+  }
+  .blooms-1 { background: #d6e6f8; color: var(--primary-deep); } /* Remember */
+  .blooms-2 { background: #d6f0f2; color: var(--teal); }       /* Understand */
+  .blooms-3 { background: var(--green-soft); color: var(--green); } /* Apply */
+  .blooms-4 { background: var(--amber-soft); color: var(--amber); } /* Analyze */
+  .blooms-5 { background: var(--gold-soft); color: var(--gold); }   /* Evaluate */
+  .blooms-6 { background: var(--red-soft); color: var(--red); }     /* Create */
+
+  /* ===== ANATOMY VISUAL ===== */
+  .anatomy-fig {
+    background: white; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px; text-align: center; margin: 14px 0;
+  }
+  .anatomy-fig svg { max-width: 100%; height: auto; }
+  .anatomy-fig .caption { font-size: 13px; color: var(--muted); margin-top: 10px; font-style: italic; }
+
+  /* ===== DECISION TREE ===== */
+  .decision-tree { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; margin: 16px 0; }
+  .decision-step { display: none; }
+  .decision-step.active { display: block; }
+  .decision-step h4 { color: var(--primary-deep); margin-top: 0; }
+  .decision-options { display: grid; gap: 10px; margin-top: 14px; }
+  .decision-btn {
+    text-align: left; padding: 14px 18px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 14px; color: var(--ink);
+    transition: all .15s ease;
+  }
+  .decision-btn:hover { background: var(--primary-soft); border-color: var(--primary); }
+  .decision-feedback {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    border-left: 4px solid;
+    font-size: 14px;
+  }
+  .decision-feedback.right { background: var(--green-soft); border-color: var(--green); }
+  .decision-feedback.wrong { background: var(--red-soft); border-color: var(--red); }
+  .decision-feedback.partial { background: var(--amber-soft); border-color: var(--amber); }
+
+  /* ===== REFLECTION ===== */
+  .reflection {
+    background: var(--gold-soft);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .reflection h4 { color: var(--gold); margin-top: 0; }
+  .reflection textarea {
+    width: 100%; min-height: 80px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    font-family: inherit; font-size: 14px;
+    background: white; color: var(--ink);
+    resize: vertical;
+  }
+  .reflection textarea:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+
+  /* ===== ASSESSMENT ===== */
+  .quiz-intro {
+    background: linear-gradient(135deg, #fff 0%, #f0f6fd 100%);
+    border: 1px solid var(--primary-soft);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+  .quiz-intro h2 { border: none; padding: 0; margin: 0 0 10px; }
+  .quiz-meta {
+    display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+    margin: 14px 0 18px;
+  }
+  .quiz-meta .stat {
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: var(--radius-sm); padding: 10px 16px;
+    font-size: 13px; color: var(--ink-soft);
+  }
+  .quiz-meta .stat strong { display: block; color: var(--primary-deep); font-size: 18px; margin-bottom: 2px; }
+
+  .progress-bar {
+    height: 8px; background: var(--line-soft); border-radius: 4px;
+    overflow: hidden; margin: 12px 0;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--primary), var(--teal));
+    transition: width .3s ease;
+  }
+
+  .question-card {
+    background: white; border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 20px 24px; margin: 14px 0;
+    box-shadow: var(--shadow);
+  }
+  .question-card .qnum {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .question-card .qtext {
+    font-size: 15px; font-weight: 500; color: var(--ink);
+    margin: 8px 0 14px;
+    line-height: 1.5;
+  }
+  .choice {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px 14px; margin: 6px 0;
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: var(--radius-sm); cursor: pointer;
+    font-size: 14px; color: var(--ink);
+    transition: all .12s ease;
+  }
+  .choice:hover { border-color: var(--primary); background: var(--primary-soft); }
+  .choice.selected { background: var(--primary-soft); border-color: var(--primary); font-weight: 500; }
+  .choice.correct { background: var(--green-soft); border-color: var(--green); }
+  .choice.incorrect { background: var(--red-soft); border-color: var(--red); }
+  .choice .letter {
+    flex-shrink: 0; width: 22px; height: 22px;
+    background: white; border: 1px solid var(--line); border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 11px;
+    color: var(--ink-soft);
+  }
+  .choice.selected .letter { background: var(--primary); color: white; border-color: var(--primary); }
+  .choice.correct .letter { background: var(--green); color: white; border-color: var(--green); }
+  .choice.incorrect .letter { background: var(--red); color: white; border-color: var(--red); }
+
+  .rationale {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: var(--bg-accent);
+    border-left: 3px solid var(--primary);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: none;
+  }
+  .rationale.show { display: block; }
+  .rationale strong { color: var(--primary-deep); }
+
+  .quiz-controls {
+    display: flex; justify-content: space-between; gap: 10px;
+    margin-top: 20px; flex-wrap: wrap;
+  }
+  .quiz-results {
+    display: none;
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+    margin: 18px 0;
+  }
+  .quiz-results.show { display: block; }
+  .quiz-results .score-circle {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    margin: 0 auto 14px;
+    background: conic-gradient(var(--green) 0deg, var(--green) 0deg, var(--line-soft) 0deg, var(--line-soft) 360deg);
+    position: relative;
+  }
+  .quiz-results .score-circle .inner {
+    width: 110px; height: 110px;
+    background: white;
+    border-radius: 50%;
+    display: grid; place-items: center;
+  }
+  .quiz-results .score-percent {
+    font-size: 32px; font-weight: 800; color: var(--primary-deep);
+  }
+  .quiz-results .score-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
+  }
+
+  /* ===== WELCOME / NAME GATE ===== */
+  .gate-overlay {
+    position: fixed; inset: 0;
+    background: rgba(15, 30, 60, .55);
+    backdrop-filter: blur(4px);
+    display: grid; place-items: center;
+    z-index: 100;
+    padding: 20px;
+  }
+  .gate-overlay.hidden { display: none; }
+  .gate-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 30px 36px;
+    max-width: 460px; width: 100%;
+    box-shadow: 0 20px 60px rgba(15,30,60,.25);
+  }
+  .gate-card h2 { border: none; padding: 0; margin: 0 0 6px; }
+  .gate-card p { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .gate-card label { display: block; font-size: 13px; font-weight: 600; color: var(--ink-soft); margin: 12px 0 4px; }
+  .gate-card input {
+    width: 100%; padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 14px; background: white; color: var(--ink);
+    font-family: inherit;
+  }
+  .gate-card input:focus { outline: 2px solid var(--primary); outline-offset: 1px; border-color: var(--primary); }
+  .gate-card .btn { margin-top: 18px; width: 100%; padding: 12px; }
+
+  .footer-note {
+    text-align: center; padding: 30px 20px;
+    color: var(--muted); font-size: 12px;
+    border-top: 1px solid var(--line);
+    margin-top: 40px;
+  }
+
+  /* hide print-only by default */
+  .print-only { display: none; }
+
+  /* utility */
+  .hidden { display: none !important; }
+  .text-center { text-align: center; }
+  .mt-0 { margin-top: 0; }
+  .mt-2 { margin-top: 16px; }
+  .mt-3 { margin-top: 24px; }
+  .grid-2 { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+  .key-pearl {
+    background: white;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--teal);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  .key-pearl strong { color: var(--teal); }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .pill.crit { background: var(--red-soft); color: var(--red); border-color: #f3c3bf; }
+  .pill.warn { background: var(--amber-soft); color: var(--amber); border-color: #f0d691; }
+  .pill.ok { background: var(--green-soft); color: var(--green); border-color: #b8dec5; }
+</style>
+</head>
+<body>
+
+<!-- ============== STUDENT GATE OVERLAY ============== -->
+<div class="gate-overlay" id="studentGate">
+  <div class="gate-card">
+    <h2>Welcome, Paramedic Student</h2>
+    <p><strong>CAMP EMS Program</strong> — Sanders' Paramedic, Ch. 41: Abdominal Trauma. Enter your name and student ID to begin. This information will appear on your assessment PDF.</p>
+    <label for="inputName">Full Name</label>
+    <input type="text" id="inputName" placeholder="e.g., Jordan A. Lee" autocomplete="name" />
+    <label for="inputId">Student ID</label>
+    <input type="text" id="inputId" placeholder="e.g., CAMP-EMS-2026-001" />
+    <button class="btn" onclick="enterModule()">Begin Module →</button>
+  </div>
+</div>
+
+<!-- ============== TOP NAV ============== -->
+<header class="topnav">
+  <div class="brand">
+    <div class="badge">A41</div>
+    <div>
+      <div>Abdominal Trauma</div>
+      <div style="font-size: 11px; color: var(--muted); font-weight: 400;">Sanders' Ch. 41 · Paramedic</div>
+    </div>
+  </div>
+  <nav class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" data-target="m1" onclick="showModule('m1')">1 · Foundation</button>
+    <button class="nav-tab" data-target="m2" onclick="showModule('m2')">2 · Deep Dive</button>
+    <button class="nav-tab" data-target="m3" onclick="showModule('m3')">3 · Synthesis</button>
+    <button class="nav-tab" data-target="m4" onclick="showModule('m4')">4 · Assessment (100 Q)</button>
+  </nav>
+  <div class="student-pill" id="studentPill">
+    <span class="dot"></span>
+    <span id="studentLabel">Not signed in</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     MODULE 1 — FOUNDATION & REAL-WORLD CONTEXT
+============================================================ -->
+<section class="module active" id="m1">
+
+  <div class="module-header">
+    <div class="label">Module 1 of 3</div>
+    <h1>Foundation & Real-World Context</h1>
+    <div class="sub">Anatomy review · Mechanisms of injury · Why this matters on your next call.</div>
+  </div>
+
+  <!-- ANDRAGOGY: NEED TO KNOW -->
+  <div class="andragogy know">
+    <h4>● Andragogy Principle 1 — Need to Know</h4>
+    <p><strong>Why does this matter to YOU, right now?</strong> Abdominal trauma kills quietly. The peritoneal cavity will accommodate <strong>40% of circulating blood volume</strong> before classical shock signs appear. By the time the abdomen is distended, your patient is already in decompensated hemorrhagic shock. The decisions you make in the first ten minutes — recognize, package, transport — directly determine whether your patient survives the ride to the trauma center.</p>
+  </div>
+
+  <!-- SCENARIO HOOK -->
+  <div class="scenario">
+    <div class="timestamp">Dispatch · 02:14</div>
+    <h3>The Call That Brought You Here</h3>
+    <p>You and your partner are dispatched code 3 to a single-vehicle MVC on Route 460 outside Suffolk. On arrival, you find a 24-year-old unrestrained driver, conscious and ambulatory. He says, "I'm fine, just my shoulder hurts." His left shoulder. He has no obvious trauma to that shoulder. The steering wheel is bent. He brushes off your offer of a backboard.</p>
+    <div class="vitals">
+      BP 118/76  ·  HR 102  ·  RR 18  ·  SpO₂ 98% RA  ·  GCS 15  ·  Skin: pale, slightly cool
+    </div>
+    <p><strong>What do you suspect — and what could go wrong if you let him refuse transport?</strong></p>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 12px;"><em>Hold this scenario in mind. By the end of Module 1, you'll have the anatomic framework to answer it. You'll work the case in Module 2, and integrate all of it in Module 3.</em></p>
+  </div>
+
+  <!-- ANDRAGOGY: PRIOR EXPERIENCE -->
+  <div class="andragogy prior">
+    <h4>● Andragogy Principle 3 — Build on Prior Experience</h4>
+    <p>You already understand <strong>shock physiology</strong>, <strong>permissive hypotension</strong> from chest trauma, and the <strong>kinematics</strong> of MVCs from your EMT and AEMT coursework. This module extends that foundation into a region where signs are <em>delayed</em>, the "rigid abdomen" is a late finding, and clinical suspicion based on mechanism saves more lives than your physical exam ever will.</p>
+  </div>
+
+  <!-- LEARNING OBJECTIVES -->
+  <h2>Learning Objectives — Bloom's Progression</h2>
+  <p>By the end of this module, you will be able to:</p>
+  <div class="objectives">
+    <div class="objective">
+      <div class="blooms blooms-1">Remember</div>
+      <div>Identify the four abdominal quadrants and the major organs contained in each, including which are intraperitoneal versus retroperitoneal.</div>
+    </div>
+    <div class="objective">
+      <div class="blooms blooms-2">Understand</div>
+      <div>Explain why penetrating trauma carries higher mortality than blunt trauma but blunt trauma involves more multi-system injury.</div>
+    </div>
+    <div class="objective">
+      <div class="blooms blooms-3">Apply</div>
+      <div>Apply the mechanism of injury (compression vs. shearing) to predict which organs are most likely injured in a given crash pattern.</div>
+    </div>
+    <div class="objective">
+      <div class="blooms blooms-4">Analyze</div>
+      <div>Differentiate solid-organ from hollow-organ injury patterns based on history, presenting signs, and time-course.</div>
+    </div>
+    <div class="objective">
+      <div class="blooms blooms-5">Evaluate</div>
+      <div>Justify a transport decision when the patient appears stable but mechanism is severe (e.g., the scenario above).</div>
+    </div>
+    <div class="objective">
+      <div class="blooms blooms-6">Create</div>
+      <div>Construct a prehospital plan that integrates airway, hemorrhage control, fluid strategy, and destination triage for the abdominal-trauma patient.</div>
+    </div>
+  </div>
+
+  <!-- CORE CONTENT: ANATOMY -->
+  <h2>Core Content · Anatomic Framework</h2>
+
+  <div class="card">
+    <h3>The Four Quadrants — Mental Map</h3>
+    <p>You navigate the abdomen by quadrant. Your first job at the patient's side is to translate the mechanism into a list of organs at risk. The <strong>umbilicus</strong> and the <strong>midline xiphoid-to-pubis axis</strong> divide the abdomen into the four quadrants below.</p>
+
+    <div class="anatomy-fig">
+      <svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abdominal quadrants diagram">
+        <defs>
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff7f3"/>
+            <stop offset="1" stop-color="#fceae0"/>
+          </linearGradient>
+        </defs>
+        <!-- torso outline -->
+        <rect x="60" y="30" width="360" height="260" rx="40" fill="url(#bodyGrad)" stroke="#d8c0aa" stroke-width="2"/>
+        <!-- midlines -->
+        <line x1="240" y1="30" x2="240" y2="290" stroke="#1f5fb3" stroke-width="2" stroke-dasharray="6,4"/>
+        <line x1="60" y1="160" x2="420" y2="160" stroke="#1f5fb3" stroke-width="2" stroke-dasharray="6,4"/>
+        <!-- umbilicus -->
+        <circle cx="240" cy="160" r="5" fill="#1f5fb3"/>
+        <!-- labels -->
+        <text x="150" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#163d77">RUQ</text>
+        <text x="150" y="72" text-anchor="middle" font-size="10" fill="#5b6a82">Liver, gallbladder,</text>
+        <text x="150" y="86" text-anchor="middle" font-size="10" fill="#5b6a82">duodenum, R kidney,</text>
+        <text x="150" y="100" text-anchor="middle" font-size="10" fill="#5b6a82">hepatic flexure</text>
+
+        <text x="330" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#163d77">LUQ</text>
+        <text x="330" y="72" text-anchor="middle" font-size="10" fill="#5b6a82">Spleen, stomach,</text>
+        <text x="330" y="86" text-anchor="middle" font-size="10" fill="#5b6a82">tail of pancreas,</text>
+        <text x="330" y="100" text-anchor="middle" font-size="10" fill="#5b6a82">L kidney, splenic flex.</text>
+
+        <text x="150" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#163d77">RLQ</text>
+        <text x="150" y="217" text-anchor="middle" font-size="10" fill="#5b6a82">Cecum, appendix,</text>
+        <text x="150" y="231" text-anchor="middle" font-size="10" fill="#5b6a82">R ureter, R ovary/</text>
+        <text x="150" y="245" text-anchor="middle" font-size="10" fill="#5b6a82">spermatic cord</text>
+
+        <text x="330" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#163d77">LLQ</text>
+        <text x="330" y="217" text-anchor="middle" font-size="10" fill="#5b6a82">Sigmoid, descending</text>
+        <text x="330" y="231" text-anchor="middle" font-size="10" fill="#5b6a82">colon, L ureter,</text>
+        <text x="330" y="245" text-anchor="middle" font-size="10" fill="#5b6a82">L ovary</text>
+
+        <!-- center label -->
+        <text x="240" y="270" text-anchor="middle" font-size="11" font-style="italic" fill="#5b6a82">Bladder &amp; uterus sit midline (lower)</text>
+      </svg>
+      <div class="caption">Figure: Abdominal quadrants and their major contents. Adapted from Sanders' 6th ed., Fig. 41-1.</div>
+    </div>
+
+    <h3>Intraperitoneal vs. Retroperitoneal — Why It Matters</h3>
+    <p>This distinction changes your suspicion list and the type of bleeding you expect:</p>
+    <table>
+      <tr><th>Space</th><th>Major organs</th><th>Bleeding behavior</th></tr>
+      <tr>
+        <td><strong>Intraperitoneal</strong></td>
+        <td>Liver, spleen, stomach, most of small/large bowel, transverse colon</td>
+        <td>Free blood produces peritoneal irritation (rigidity, rebound). Detected by FAST. Surgical bleeding.</td>
+      </tr>
+      <tr>
+        <td><strong>Retroperitoneal</strong></td>
+        <td>Kidneys, ureters, pancreas, duodenum, adrenal glands, abdominal aorta &amp; IVC</td>
+        <td>Often <em>occult</em> — can hide several liters before a sign appears. Frequently linked to pelvic/lumbar fractures.</td>
+      </tr>
+      <tr>
+        <td><strong>Pelvic</strong></td>
+        <td>Bladder, urethra, rectum, reproductive organs</td>
+        <td>Pelvic-ring fractures cause severe retroperitoneal bleeding (mortality 6.4%–19%).</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- MECHANISMS -->
+  <div class="card">
+    <h3>Mechanisms of Injury</h3>
+
+    <div class="grid-2">
+      <div>
+        <h4>Blunt Trauma</h4>
+        <p>Caused by <strong>compression</strong> or <strong>shearing</strong> forces. Severity depends on force, duration, and the type of structure injured (fluid-filled, gas-filled, solid, hollow).</p>
+        <ul>
+          <li><strong>Compression:</strong> organs crushed between two solid objects (e.g., liver between steering wheel and spine).</li>
+          <li><strong>Shearing:</strong> rupture or tear at points of attachment when tissues are stretched (classic deceleration injury).</li>
+          <li>Common sources: MVCs, falls, sports impacts, assaults.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Penetrating Trauma</h4>
+        <p>Stab wounds, gunshot wounds, impalement. <strong>Higher mortality rate than blunt trauma.</strong> The major complication is <strong>hemorrhage</strong> from a major vessel or solid organ.</p>
+        <ul>
+          <li>Internal bleeding correlates with type and number of vessels injured + organ vascularity.</li>
+          <li>May perforate bowel → bacterial contamination → peritonitis.</li>
+          <li>Track of injury matters more than the entry wound — assume the worst trajectory.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout critical">
+      <strong>Clinical pearl — speed and severity:</strong>
+      <p>Blunt trauma frequently involves <strong>multi-system injury</strong>. Penetrating trauma carries <strong>higher single-event mortality</strong>. In both, your kinematic awareness during the call (vehicle damage, intrusion, ejection, restraint use, weapon caliber/length) is more predictive of internal injury than your physical exam.</p>
+    </div>
+
+    <h4>Signs of Abdominal Trauma (Box 41-1)</h4>
+    <table>
+      <tr><th>Visible</th><th>Palpable / Reported</th><th>Systemic</th></tr>
+      <tr>
+        <td>Bruising, abrasions, lap-belt sign, evisceration, impaled object, distention</td>
+        <td>Tenderness, guarding, rigidity, rebound, referred shoulder pain</td>
+        <td>Unexplained shock (most significant), hypotension, tachycardia, AMS, pallor</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ANDRAGOGY: SELF-CONCEPT -->
+  <div class="andragogy self">
+    <h4>● Andragogy Principle 2 — Self-Concept (You Are the Clinician)</h4>
+    <p>You are not memorizing a textbook chapter. You are <strong>building a clinical schema</strong>. By the end of this module, when you walk up to an MVC, the quadrant map, the mechanism categories, and the high-mortality organs should already be running in the background — automatically — so the rest of your attention is free for the patient in front of you.</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn" onclick="showModule('m2')">Continue to Module 2: Deep Dive →</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     MODULE 2 — DEEP DIVE & APPLICATION
+============================================================ -->
+<section class="module" id="m2">
+
+  <div class="module-header">
+    <div class="label">Module 2 of 3</div>
+    <h1>Deep Dive & Application</h1>
+    <div class="sub">Specific organ injuries · Case analysis · Branching decision-making.</div>
+  </div>
+
+  <!-- ANDRAGOGY: READINESS TO LEARN -->
+  <div class="andragogy ready">
+    <h4>● Andragogy Principle 4 — Readiness to Learn (Tied to Your Job, This Shift)</h4>
+    <p>If you run on a 911 truck in Hampton Roads — Suffolk, Norfolk, Franklin, Smithfield — you will work an abdominal-trauma patient this month. Restrained MVC, motorcycle crash, GSW, fall from height, ATV rollover, assault. The content below is sequenced the way you'll encounter it: <strong>solid organ → hollow organ → retroperitoneal → pelvic → vascular</strong>, followed by the practical exam findings that distinguish them.</p>
+  </div>
+
+  <!-- SOLID ORGAN -->
+  <h2>Solid Organ Injury — Liver &amp; Spleen</h2>
+  <p>Solid-organ injury produces <strong>rapid, significant blood loss</strong>. The liver and spleen are the two most-often injured solid organs and the most common sources of life-threatening hemorrhage in abdominal trauma.</p>
+
+  <div class="card-grid cols-2">
+    <div class="card tight">
+      <h3 style="color: var(--red);">Liver — RUQ</h3>
+      <ul class="warns">
+        <li>Suspect with <strong>steering-wheel injury</strong>, <strong>lap-belt injury</strong>, or any history of epigastric trauma.</li>
+        <li>Blood + bile escape into peritoneal cavity → shock + peritoneal irritation (pain, tenderness, rigidity).</li>
+        <li><strong>Mortality from uncontrolled bleeding: 54%</strong> — the leading cause of liver-injury death.</li>
+      </ul>
+      <div class="callout pearl">
+        <strong>Field cue:</strong> RUQ tenderness + right lower rib fractures + hypotension after frontal MVC = liver injury until proven otherwise.
+      </div>
+    </div>
+
+    <div class="card tight">
+      <h3 style="color: var(--red);">Spleen — LUQ</h3>
+      <ul class="warns">
+        <li>Common mechanisms: MVC, falls, sports impact to the upper-left abdomen.</li>
+        <li>Many patients <strong>initially have only minor symptoms</strong> — that is the trap.</li>
+        <li>Frequently associated with other intra-abdominal injuries.</li>
+      </ul>
+      <div class="callout clinical">
+        <strong>Kehr Sign — referred pain:</strong>
+        <p style="margin: 4px 0;"><strong>Left shoulder pain</strong> after blunt trauma to the LUQ is splenic injury / hemoperitoneum until proven otherwise. The blood is irritating the diaphragm; the phrenic nerve refers it to the shoulder.</p>
+        <p style="margin: 4px 0;"><strong>Right shoulder pain</strong> can suggest liver or gallbladder irritation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout critical">
+    <strong>Tie back to the scenario:</strong>
+    <p>Remember the 24-year-old driver with left-shoulder pain and a bent steering wheel? You are now looking at it through the right lens. He is not just a "shoulder pain after MVC." He is potentially a Kehr-sign positive splenic injury masquerading as benign musculoskeletal pain — exactly the pattern that gets overlooked at the scene and dies on the recliner two hours later.</p>
+  </div>
+
+  <!-- HOLLOW ORGAN -->
+  <h2>Hollow Organ Injury — Stomach, Small Bowel, Colon</h2>
+  <div class="card">
+    <p>Hollow-organ rupture spills luminal contents (acid, enzymes, bacteria, stool) into the peritoneum. The result: <strong>peritonitis</strong>, sepsis, wound infection, or abscess. Onset can be <strong>delayed hours to days</strong>, which is why undiagnosed bowel injury is so dangerous.</p>
+
+    <table>
+      <tr><th>Organ</th><th>Mechanism</th><th>Field findings</th></tr>
+      <tr>
+        <td><strong>Stomach</strong></td>
+        <td>Rarely injured by blunt (protected location). Penetrating trauma → transection or laceration.</td>
+        <td>Rapid peritonitis from <strong>acidic gastric leak</strong>; severe epigastric pain, rigidity.</td>
+      </tr>
+      <tr>
+        <td><strong>Small intestine</strong></td>
+        <td>More common in <strong>penetrating</strong> trauma. Can shear from restraints in deceleration.</td>
+        <td>Considerable force required → other injuries usually present. Delayed peritonitis.</td>
+      </tr>
+      <tr>
+        <td><strong>Colon</strong></td>
+        <td>Penetrating &gt; blunt. Compression in high-speed MVC.</td>
+        <td>Heavy bacterial contamination → high infection rate. Often associated injuries.</td>
+      </tr>
+    </table>
+
+    <div class="key-pearl">
+      <strong>Peritonitis (Box 41-3):</strong> Inflammation of the peritoneum, usually <strong>acute and very painful</strong>. Onset may be delayed by hours or days. Field signs: rigid, board-like abdomen; the patient lies still with knees drawn up; movement worsens pain.
+    </div>
+  </div>
+
+  <!-- RETROPERITONEAL -->
+  <h2>Retroperitoneal Organ Injury</h2>
+  <div class="card">
+    <p>Retroperitoneal injury is the <strong>occult bleed</strong>. Hemorrhage may be massive, often results from pelvic or lumbar fractures, and may produce no peritoneal signs because the blood is behind the peritoneum.</p>
+
+    <h4>Kidney</h4>
+    <ul>
+      <li>Range from <strong>minor</strong> (contusion, small laceration) to <strong>major</strong> (deep medullary laceration, fracture, laceration into the collecting system).</li>
+      <li>Result in hemorrhage, urine extravasation, or both.</li>
+      <li>Contusions are self-limiting — bed rest, fluids. Major lacerations may need surgery.</li>
+      <li>Look for: flank ecchymosis, hematuria, lower rib fractures, mid-back tenderness.</li>
+    </ul>
+
+    <h4>Pancreas, Duodenum, Ureters, Esophagus</h4>
+    <ul>
+      <li><strong>Pancreas</strong> — more often injured by penetrating trauma than blunt.</li>
+      <li><strong>Duodenum</strong> — crushed or lacerated by great force; usually associated with concurrent pancreatic injury, confirmed at surgery.</li>
+      <li><strong>Ureters</strong> — flexible, rarely injured by blunt trauma.</li>
+      <li><strong>Esophagus / adrenals</strong> — possible with severe blunt or penetrating trauma to anterior, posterior abdomen, or thoracic spine.</li>
+    </ul>
+
+    <div class="callout critical">
+      <strong>Why retroperitoneal bleeding kills quietly:</strong>
+      <p>A patient can lose two or more liters into the retroperitoneum with minimal external sign. By the time you see flank discoloration (Grey-Turner sign) or pain that radiates to the back, the patient has already lost significant volume. <strong>Mechanism + unexplained tachycardia + back/flank pain is a retroperitoneal bleed until ruled out.</strong></p>
+    </div>
+  </div>
+
+  <!-- PELVIC ORGAN -->
+  <h2>Pelvic Organ Injury</h2>
+  <div class="card">
+    <p>The pelvis supports and protects multiple organ systems, so when it fractures, associated injuries are almost guaranteed. <strong>Pelvic fractures are often associated with severe retroperitoneal hemorrhage. Mortality ranges from 6.4% to 19% depending on severity.</strong></p>
+
+    <h4>Urinary Bladder</h4>
+    <ul>
+      <li>Rupture more likely if the bladder was <strong>distended at the time of injury</strong>.</li>
+      <li>Peritoneal integrity may be disrupted → urine spilled into peritoneal cavity.</li>
+      <li><strong>Gross hematuria</strong> may be present; patient may complain of being unable to void.</li>
+    </ul>
+
+    <h4>Urethra</h4>
+    <ul>
+      <li>Patient complains of abdominal pain and inability to urinate.</li>
+      <li><strong>Blood at the meatus is highly suggestive of urethral injury.</strong></li>
+      <li><strong>Indwelling urinary catheter is contraindicated</strong> — you can convert a partial tear into a complete one. Definitive diagnosis is by retrograde urethrogram in the ED.</li>
+    </ul>
+  </div>
+
+  <!-- VASCULAR -->
+  <h2>Vascular Structure Injury</h2>
+  <div class="card">
+    <p>Injury to abdominal arterial and venous vessels can be life-threatening because of <strong>massive hemorrhage</strong>. Vascular injury is usually marked by hypovolemia and, in some cases, a palpable abdominal mass.</p>
+
+    <p>The most-often injured vessels with the highest mortality:</p>
+    <ul class="warns">
+      <li><strong>Aorta</strong> — exsanguinating hemorrhage; near-100% pre-hospital mortality with full transection.</li>
+      <li><strong>Inferior vena cava</strong> — large-volume venous bleeding.</li>
+      <li><strong>Renal arteries &amp; veins</strong> — retroperitoneal hemorrhage.</li>
+      <li><strong>Mesenteric arteries &amp; veins</strong> — bowel ischemia + intraperitoneal bleeding.</li>
+      <li><strong>Iliac arteries &amp; veins</strong> — frequently injured with pelvic fractures.</li>
+    </ul>
+  </div>
+
+  <!-- INTERACTIVE: THINK-PAIR-SHARE -->
+  <h2>Interactive Activity · Think · Pair · Share</h2>
+  <div class="card">
+    <p><strong>Activity:</strong> Working with a partner (or solo if you are studying online), spend 3 minutes on each prompt. Type your answer, then compare to the model answer that appears.</p>
+
+    <h4>Prompt 1 — Mechanism Mapping</h4>
+    <p>An unrestrained driver in a head-on collision strikes the steering wheel. Predict three injuries by mechanism (one solid-organ, one hollow-organ, one retroperitoneal). Justify each.</p>
+    <textarea id="tps1" placeholder="Type your prediction..." style="width:100%;min-height:80px;border:1px solid var(--line);border-radius:6px;padding:10px;font-family:inherit;font-size:14px;background:white;color:var(--ink);"></textarea>
+    <div class="btn-row">
+      <button class="btn secondary" onclick="revealAnswer('a1')">Reveal model answer</button>
+    </div>
+    <div id="a1" class="hidden callout pearl">
+      <strong>Model answer:</strong>
+      <p>(1) <strong>Liver laceration (solid)</strong> — RUQ compression between steering column and spine; expect RUQ tenderness, rigidity, hypotension; mortality from uncontrolled bleeding ~54%. (2) <strong>Small-bowel injury (hollow)</strong> — deceleration shears bowel at points of attachment; expect delayed peritonitis if undiagnosed. (3) <strong>Pancreatic / duodenal injury (retroperitoneal)</strong> — direct epigastric blow; often occult, confirmed only at surgery; suspect with persistent epigastric pain + tachycardia.</p>
+    </div>
+
+    <h4>Prompt 2 — The Apparently Stable Patient</h4>
+    <p>Why is "I'm fine" the most dangerous sentence in abdominal trauma? Use what you know about peritoneal volume reserve and compensated shock to explain.</p>
+    <textarea id="tps2" placeholder="Type your explanation..." style="width:100%;min-height:80px;border:1px solid var(--line);border-radius:6px;padding:10px;font-family:inherit;font-size:14px;background:white;color:var(--ink);"></textarea>
+    <div class="btn-row">
+      <button class="btn secondary" onclick="revealAnswer('a2')">Reveal model answer</button>
+    </div>
+    <div id="a2" class="hidden callout pearl">
+      <strong>Model answer:</strong>
+      <p>The peritoneal cavity will accommodate large volumes of blood before producing the visible distention or rigidity that drives lay-person concern. Healthy young patients compensate with tachycardia and peripheral vasoconstriction; <strong>hypotension and AMS may not appear until &gt;40% of circulating volume is lost</strong>. By that point, the patient has crossed from compensated to decompensated shock and the window for fluid/blood resuscitation is closing. Reliance on the patient's self-report or a "normal" first set of vitals is the most common error in field abdominal trauma.</p>
+    </div>
+  </div>
+
+  <!-- DECISION TREE -->
+  <h2>Branching Decision Exercise · Operation Suffolk Crossing</h2>
+  <div class="decision-tree">
+    <p style="margin-top: 0;"><em>You are the lead paramedic. Each decision below changes what happens next. The "best" path is not always the most obvious — read carefully.</em></p>
+
+    <!-- STEP 1 -->
+    <div class="decision-step active" id="ds1">
+      <h4>Step 1 — Scene Arrival</h4>
+      <p>Single-vehicle MVC, 24-year-old unrestrained driver, ambulatory, complaining of left-shoulder pain only. Steering wheel is bent. Vitals: BP 118/76, HR 102, RR 18, SpO₂ 98%, GCS 15. He says, "I don't need to go." What is your priority action?</p>
+      <div class="decision-options">
+        <button class="decision-btn" onclick="advanceTree(1, 'A')">A · Honor his refusal — vitals are normal and he is alert.</button>
+        <button class="decision-btn" onclick="advanceTree(1, 'B')">B · Begin a focused trauma assessment, explain mechanism-based concern, and strongly recommend transport.</button>
+        <button class="decision-btn" onclick="advanceTree(1, 'C')">C · Apply a c-collar and load-and-go without further assessment.</button>
+        <button class="decision-btn" onclick="advanceTree(1, 'D')">D · Order ALS-only transport because he is "talking and walking."</button>
+      </div>
+      <div id="fb1" class="decision-feedback hidden"></div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="decision-step" id="ds2">
+      <h4>Step 2 — En Route Reassessment (10 minutes later)</h4>
+      <p>You convinced him to come. En route: BP 96/62, HR 128, RR 22, SpO₂ 96%, skin pale and diaphoretic, mild LUQ tenderness, persistent left-shoulder pain. He is now anxious and confused. What is the best next step?</p>
+      <div class="decision-options">
+        <button class="decision-btn" onclick="advanceTree(2, 'A')">A · Bolus 2 L NS wide-open to chase the blood pressure to 120/80.</button>
+        <button class="decision-btn" onclick="advanceTree(2, 'B')">B · Initiate IV access x2 with NS, run fluids titrated to maintain SBP 80–90 (MAP 60–65), notify trauma center, expedite transport.</button>
+        <button class="decision-btn" onclick="advanceTree(2, 'C')">C · Hold all fluid until you arrive — permissive hypotension means no fluid.</button>
+        <button class="decision-btn" onclick="advanceTree(2, 'D')">D · Stop on the side of the road to perform a thorough secondary survey.</button>
+      </div>
+      <div id="fb2" class="decision-feedback hidden"></div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="decision-step" id="ds3">
+      <h4>Step 3 — Destination Decision</h4>
+      <p>You are 8 minutes from a community ED and 19 minutes from a Level I trauma center. The patient is now hypotensive with a positive Kehr sign and rigid abdomen.</p>
+      <div class="decision-options">
+        <button class="decision-btn" onclick="advanceTree(3, 'A')">A · Closest community ED — get him "off the truck" fastest.</button>
+        <button class="decision-btn" onclick="advanceTree(3, 'B')">B · Level I trauma center — surgical capability is the limiting factor.</button>
+        <button class="decision-btn" onclick="advanceTree(3, 'C')">C · Patient's preferred hospital — honor patient autonomy.</button>
+        <button class="decision-btn" onclick="advanceTree(3, 'D')">D · Halfway hospital with CT scanner only.</button>
+      </div>
+      <div id="fb3" class="decision-feedback hidden"></div>
+    </div>
+
+    <div class="decision-step" id="ds4">
+      <h4>Case Resolution</h4>
+      <div class="callout pearl">
+        <p>The patient arrived at the Level I trauma center with SBP 84. FAST exam was positive. He was taken directly to the OR and underwent splenectomy for a Grade IV splenic laceration with hemoperitoneum of 2.1 L. He survived. The first paramedic who almost let him refuse transport sent him a thank-you card.</p>
+        <p style="margin-top:10px;"><strong>Why you got him there alive:</strong> you trusted mechanism over the patient's self-report, recognized Kehr sign, used permissive hypotension instead of aggressive fluid resuscitation, and chose surgical capability over distance.</p>
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="resetTree()">↺ Restart decision exercise</button>
+        <button class="btn success" onclick="showModule('m3')">Continue to Module 3: Synthesis →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANDRAGOGY: ORIENTATION TO LEARNING -->
+  <div class="andragogy orient">
+    <h4>● Andragogy Principle 5 — Orientation to Learning (Problem-Centered, Not Subject-Centered)</h4>
+    <p>You did not just read about splenic injury. You used spleen anatomy, Kehr sign, permissive hypotension, retroperitoneal mortality, and trauma-center triage <em>as a unit</em> — to keep one patient alive. That is how you will use it on shift. The chapter is the toolkit; the patient is the problem.</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn secondary" onclick="showModule('m1')">← Back to Module 1</button>
+    <button class="btn" onclick="showModule('m3')">Continue to Module 3 →</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     MODULE 3 — SYNTHESIS
+============================================================ -->
+<section class="module" id="m3">
+
+  <div class="module-header">
+    <div class="label">Module 3 of 3</div>
+    <h1>Synthesis · Capstone &amp; Reflection</h1>
+    <div class="sub">Integrate everything · Reflect · Move into the formal 100-question assessment.</div>
+  </div>
+
+  <!-- ANDRAGOGY: MOTIVATION -->
+  <div class="andragogy motiv">
+    <h4>● Andragogy Principle 6 — Motivation (Intrinsic Reward)</h4>
+    <p>The credential at the end of this module is not the point. The point is the patient who walks out of the trauma center because <em>you</em> recognized something subtle — a Kehr sign, a quiet retroperitoneal bleed, a patient minimizing his symptoms — when nobody else did. That is paramedic-level care. That is why this work matters.</p>
+  </div>
+
+  <!-- CAPSTONE SCENARIO -->
+  <h2>Capstone Integration Scenario</h2>
+  <div class="scenario">
+    <div class="timestamp">Dispatch · 17:48 · Suffolk</div>
+    <h3>Multi-System Trauma — Lap-Belt-Only Restraint</h3>
+    <p>You respond to a high-speed (estimated 65 mph) two-vehicle MVC. The patient is a 38-year-old female restrained driver of a sedan struck broadside on the driver side. She is conscious and oriented but very anxious. <strong>Lap belt only — no shoulder strap.</strong> She has visible ecchymosis across the lower abdomen ("seat-belt sign"), guarding, and complains of mid-back and lower-abdominal pain. Vitals: BP 102/74, HR 116, RR 24, SpO₂ 95% RA, skin cool and pale.</p>
+    <div class="vitals">
+      Initial: BP 102/74 · HR 116 · RR 24 · SpO₂ 95%<br>
+      5 min later: BP 88/60 · HR 132 · RR 28 · SpO₂ 94%<br>
+      Mechanism: lateral impact, lap-belt-only, intrusion 14 in.
+    </div>
+
+    <h4>Synthesis Tasks</h4>
+    <p>Integrating all three modules, work through the following — type each answer briefly, then expand the model rationale to compare.</p>
+
+    <div class="card tight" style="margin-top: 14px;">
+      <h4>Task 1 · Differential — At least four likely injuries</h4>
+      <textarea id="cap1" placeholder="List your top 4 suspected injuries with rationale..." style="width:100%;min-height:80px;border:1px solid var(--line);border-radius:6px;padding:10px;font-family:inherit;font-size:14px;background:white;color:var(--ink);"></textarea>
+      <button class="btn secondary" style="margin-top:8px;" onclick="revealAnswer('cap1Ans')">Reveal model rationale</button>
+      <div id="cap1Ans" class="hidden callout pearl" style="margin-top:8px;">
+        <p>(1) <strong>Hollow-organ injury</strong> (small bowel, mesentery) — classic "seat-belt syndrome" from lap-only restraint compressing bowel against the spine. Expect delayed peritonitis. (2) <strong>Lumbar Chance fracture</strong> — flexion-distraction injury → mid-back pain. (3) <strong>Splenic injury</strong> — lateral impact to LUQ; watch for Kehr sign. (4) <strong>Pelvic / retroperitoneal hemorrhage</strong> — explains hypotension out of proportion to visible injury. Consider also (5) bladder rupture if she had recently voided.</p>
+      </div>
+    </div>
+
+    <div class="card tight">
+      <h4>Task 2 · Prehospital Plan — Sequence and justify each action</h4>
+      <textarea id="cap2" placeholder="List your prehospital plan in sequence..." style="width:100%;min-height:80px;border:1px solid var(--line);border-radius:6px;padding:10px;font-family:inherit;font-size:14px;background:white;color:var(--ink);"></textarea>
+      <button class="btn secondary" style="margin-top:8px;" onclick="revealAnswer('cap2Ans')">Reveal model rationale</button>
+      <div id="cap2Ans" class="hidden callout pearl" style="margin-top:8px;">
+        <p><strong>Airway/C-spine:</strong> spinal precautions (full-body); monitor airway. <strong>Breathing:</strong> O₂ to keep SpO₂ ≥ 94%. <strong>Circulation:</strong> two large-bore IVs; titrate fluid to SBP 80–90 / MAP 60–65 (blunt trauma + no documented TBI = permissive hypotension target per chapter). <strong>Pelvic binder</strong> if pelvic instability suspected. <strong>Reassess</strong> abdomen, vitals, mental status every 5 minutes. <strong>Destination:</strong> Level I trauma center — surgical capability is the limiting factor. <strong>Notification:</strong> early radio report to activate trauma team before arrival. <strong>Document mechanism in detail</strong> — lap-only restraint is critical history.</p>
+      </div>
+    </div>
+
+    <div class="card tight">
+      <h4>Task 3 · Fluid Resuscitation — Defend your target</h4>
+      <textarea id="cap3" placeholder="What is your SBP/MAP target, and why?" style="width:100%;min-height:80px;border:1px solid var(--line);border-radius:6px;padding:10px;font-family:inherit;font-size:14px;background:white;color:var(--ink);"></textarea>
+      <button class="btn secondary" style="margin-top:8px;" onclick="revealAnswer('cap3Ans')">Reveal model rationale</button>
+      <div id="cap3Ans" class="hidden callout pearl" style="margin-top:8px;">
+        <p>Per the chapter: for <strong>blunt abdominal trauma with hypotension, target SBP 80–90 (MAP 60–65)</strong>. The goal is organ perfusion, not pre-injury pressure. Aggressive fluid resuscitation in active hemorrhage dilutes clotting factors, dislodges soft clots, and worsens bleeding. <strong>Permissive hypotension</strong> is the strategy. Note: in <em>penetrating</em> trauma, titration is to mental status, not a number.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <h2>Reflection · How Will I Use This?</h2>
+  <p>Write briefly — these prompts are for <em>you</em>. They appear on your assessment PDF as evidence of synthesis.</p>
+
+  <div class="reflection">
+    <h4>Reflection 1 · Next Shift</h4>
+    <p>What is one specific thing you will do differently on your next call involving an MVC, even one that looks minor?</p>
+    <textarea id="ref1" placeholder="One concrete change in my practice..."></textarea>
+  </div>
+
+  <div class="reflection">
+    <h4>Reflection 2 · The Patient You Almost Missed</h4>
+    <p>Think about a real call (or a call you've heard about) where the patient seemed stable initially. Knowing what you know now about retroperitoneal bleeding and compensated shock, what would you reassess next time?</p>
+    <textarea id="ref2" placeholder="What I will reassess..."></textarea>
+  </div>
+
+  <div class="reflection">
+    <h4>Reflection 3 · Teaching Forward</h4>
+    <p>You are partnered with a brand-new EMT next week. Pick one concept from this module — Kehr sign, permissive hypotension, retroperitoneal occult bleeding, or another — and explain how you would teach it in 60 seconds at the side of an ambulance.</p>
+    <textarea id="ref3" placeholder="My 60-second teach..."></textarea>
+  </div>
+
+  <!-- KEY POINTS RECAP -->
+  <h2>One-Page Recap · The Things You Cannot Forget</h2>
+  <div class="card">
+    <ul class="checks">
+      <li>Penetrating trauma → higher mortality. Blunt trauma → more multi-system injury.</li>
+      <li>Liver injury–related death from uncontrolled bleeding: <strong>54%</strong>. RUQ pain + frontal MVC = liver until proven otherwise.</li>
+      <li><strong>Kehr sign:</strong> left shoulder pain after blunt LUQ trauma → splenic injury / hemoperitoneum.</li>
+      <li>Hollow-organ injury → peritonitis, delayed by <strong>hours to days</strong>. The patient who "looked OK" can still die at home.</li>
+      <li>Retroperitoneal bleeding is occult — pelvic and lumbar fractures are the most common drivers; <strong>mortality 6.4%–19%</strong> for pelvic fractures.</li>
+      <li><strong>Blood at the urethral meatus</strong> → no Foley. Definitive Dx via retrograde urethrogram.</li>
+      <li>Most significant sign of abdominal trauma: <strong>unexplained shock</strong>. Distention is a late finding.</li>
+      <li>Clinical signs of shock may not appear until <strong>&gt;40%</strong> of circulating volume is lost — do not be reassured by an early "normal" set of vitals.</li>
+      <li>Fluid strategy: blunt + hypotension → SBP <strong>80–90</strong> / MAP <strong>60–65</strong>. Penetrating → titrate to <strong>mental status</strong>. SpO₂ ≥ <strong>94%</strong>.</li>
+      <li>Auscultation of bowel sounds in the field is informational only — <strong>never delay transport</strong> for it.</li>
+    </ul>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn secondary" onclick="showModule('m2')">← Back to Module 2</button>
+    <button class="btn success" onclick="showModule('m4')">Begin 100-Question Assessment →</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     MODULE 4 — 100-QUESTION ASSESSMENT
+============================================================ -->
+<section class="module" id="m4">
+
+  <div class="quiz-intro">
+    <h2>Final Assessment · 100 Questions</h2>
+    <p style="margin: 0 0 8px;">Sanders' Paramedic, Chapter 41 · Abdominal Trauma · CAMP EMS Program</p>
+    <p style="font-size: 14px; color: var(--muted);">Each question includes a <strong>rationale</strong> revealed after you submit. Pass mark: <strong>80%</strong>. Your name and student ID will appear on the downloadable PDF report.</p>
+    <div class="quiz-meta">
+      <div class="stat"><strong>100</strong>Questions</div>
+      <div class="stat"><strong>4</strong>Choices each</div>
+      <div class="stat"><strong>80%</strong>Pass mark</div>
+      <div class="stat"><strong>PDF</strong>Score report</div>
+    </div>
+    <div class="progress-bar"><div id="quizProgress" class="progress-fill" style="width: 0%;"></div></div>
+    <div style="font-size: 13px; color: var(--muted);" id="quizStatus">0 of 100 answered</div>
+  </div>
+
+  <div id="quizContainer"></div>
+
+  <div class="quiz-controls">
+    <button class="btn secondary" onclick="showModule('m3')">← Back to Module 3</button>
+    <button class="btn success" id="submitQuizBtn" onclick="submitQuiz()">Submit Assessment</button>
+  </div>
+
+  <div class="quiz-results" id="quizResults">
+    <div class="score-circle" id="scoreCircle">
+      <div class="inner">
+        <div>
+          <div class="score-percent" id="scorePercent">--</div>
+          <div class="score-label">Score</div>
+        </div>
+      </div>
+    </div>
+    <h3 id="scoreVerdict" style="margin: 8px 0;">--</h3>
+    <p id="scoreDetail" style="font-size: 14px; color: var(--muted); margin: 4px 0 18px;"></p>
+    <div class="btn-row" style="justify-content: center;">
+      <button class="btn" onclick="downloadPDF()">⬇ Download PDF Report</button>
+      <button class="btn secondary" onclick="reviewQuiz()">Review answers &amp; rationales</button>
+      <button class="btn warn" onclick="resetQuiz()">↺ Retake assessment</button>
+    </div>
+  </div>
+</section>
+
+<div class="footer-note">
+  Sanders' Paramedic Textbook, 6th Edition · Chapter 41: Abdominal Trauma · Lecture Outline (Mick Sanders)<br>
+  Built for the CAMP Community College EMS Program · Andragogy-aligned per Knowles (1980)
+</div>
+
+</main>
+
+<script>
+/* ============================================================
+   STATE — student info + quiz answers persisted to localStorage
+   (Avoids reserved/global names: no scrollTo, no navTo)
+============================================================ */
+const STORAGE_KEY_NAME = 'camp_abd_trauma_name';
+const STORAGE_KEY_ID = 'camp_abd_trauma_id';
+
+let studentName = '';
+let studentId = '';
+let userAnswers = new Array(100).fill(null);
+let quizSubmitted = false;
+let quizScore = 0;
+
+/* ============================================================
+   QUESTION BANK — 100 items, all referenced to Sanders Ch. 41
+============================================================ */
+const QUESTIONS = [
+  // ===== ANATOMY (1-10) =====
+  {q:"The abdominal cavity is divided into how many quadrants for clinical assessment?",c:["Two","Three","Four","Six"],a:2,r:"The abdomen is mapped into four quadrants — RUQ, LUQ, RLQ, LLQ — by the umbilicus and the midline. This is the framework used in Figure 41-1."},
+  {q:"The liver is located primarily in which quadrant?",c:["LUQ","RUQ","RLQ","LLQ"],a:1,r:"The bulk of the liver sits in the right upper quadrant, with a small portion crossing midline into the LUQ."},
+  {q:"The spleen is located in which quadrant?",c:["RUQ","LUQ","RLQ","LLQ"],a:1,r:"The spleen is in the left upper quadrant, beneath the lower left rib cage. Figure 41-2 shows its surface projection."},
+  {q:"Which of the following organs is RETROPERITONEAL?",c:["Liver","Spleen","Stomach","Kidney"],a:3,r:"Kidneys, ureters, pancreas, duodenum, adrenals, abdominal aorta, and IVC are retroperitoneal. Liver, spleen, and stomach are intraperitoneal."},
+  {q:"Which of the following is classified as a SOLID abdominal organ?",c:["Stomach","Small intestine","Liver","Colon"],a:2,r:"Solid organs include the liver, spleen, pancreas, and kidneys. Hollow organs include the stomach, small intestine, and colon."},
+  {q:"Which is classified as a HOLLOW abdominal organ?",c:["Liver","Spleen","Pancreas","Stomach"],a:3,r:"The stomach is a hollow (gas/fluid-filled) organ. Liver, spleen, and pancreas are solid organs."},
+  {q:"The peritoneum is best described as:",c:["A bony plate protecting the abdominal organs","The serous membrane lining the abdominal cavity","A vascular sheath around the aorta","The muscular layer of the abdominal wall"],a:1,r:"The peritoneum is the serous membrane that lines the cavity and covers most intraperitoneal organs; spillage of luminal contents into it produces peritonitis."},
+  {q:"Which structure separates the abdominal cavity from the thoracic cavity?",c:["Mediastinum","Diaphragm","Pleura","Pericardium"],a:1,r:"The diaphragm is the muscular boundary between the thoracic and abdominal cavities. Diaphragmatic irritation underlies referred shoulder pain (Kehr sign)."},
+  {q:"The pancreas is anatomically located in the:",c:["Intraperitoneal space","Pleural space","Retroperitoneal space","Pericardial space"],a:2,r:"The pancreas is retroperitoneal, which is why pancreatic injury is often occult and frequently associated with duodenal injury."},
+  {q:"Which of the following organs sit MIDLINE in the lower abdomen / pelvis?",c:["Spleen and liver","Bladder and uterus","Right kidney and adrenal","Stomach and pancreas"],a:1,r:"The urinary bladder and (in women) the uterus are midline pelvic organs."},
+
+  // ===== MECHANISMS (11-22) =====
+  {q:"Compared to blunt abdominal trauma, penetrating abdominal trauma generally has:",c:["Lower mortality","Equivalent mortality","Higher mortality","No effect on mortality"],a:2,r:"Penetrating trauma carries a higher mortality rate than blunt trauma, while blunt trauma more often involves multi-system injury (Sanders Ch. 41, II.A.1)."},
+  {q:"Blunt trauma to abdominal organs is usually caused by:",c:["Bacterial invasion","Compression or shearing forces","Electrical injury","Thermal injury"],a:1,r:"Blunt trauma is produced by compression (organs crushed between objects) or shearing (tissues torn at attachment points)."},
+  {q:"Compression forces in blunt trauma:",c:["Stretch tissues at points of attachment","Crush organs between solid objects","Cause exclusively penetrating wounds","Are unique to GSWs"],a:1,r:"Compression forces crush abdominal organs between two solid objects (e.g., the steering wheel and the spine)."},
+  {q:"Shearing forces in blunt trauma:",c:["Crush organs between solid objects","Cause rupture or tear at points of attachment when tissues are stretched","Only occur with penetrating injury","Cannot injure solid organs"],a:1,r:"Shearing forces tear or rupture solid organs and blood vessels at points of attachment when tissues are rapidly stretched."},
+  {q:"Severity of blunt abdominal trauma depends on which combination?",c:["Patient's age and gender only","Force, duration, and the type of structure injured","Time of day and weather","Number of bystanders present"],a:1,r:"Severity depends on the degree and duration of the applied force AND the type of structure injured (fluid-filled, gas-filled, solid, or hollow)."},
+  {q:"Penetrating injuries may result from:",c:["Stab wounds, gunshot wounds, or impalement","Only firearms","Only knives","Only blast injuries"],a:0,r:"Penetrating injuries include stab wounds, gunshot wounds, and impalement injuries."},
+  {q:"The major complication of penetrating abdominal trauma is:",c:["Bone fracture","Hemorrhage from a major vessel or solid organ","Pulmonary embolism","Hypothermia"],a:1,r:"Hemorrhage from a major vessel or solid organ is the major complication of penetrating trauma; bleeding correlates with the type/number of vessels injured and organ vascularity."},
+  {q:"Penetrating trauma may cause perforation of which structure?",c:["A segment of bowel","Only the spleen","Only the liver","Only the pancreas"],a:0,r:"Penetrating trauma may perforate a segment of bowel, leading to peritoneal contamination."},
+  {q:"Which mechanism most strongly suggests possible liver injury?",c:["Ankle inversion","Steering-wheel or lap-belt injury or epigastric trauma","Calf strain","Wrist fracture"],a:1,r:"Liver injury should be suspected with steering-wheel injury, lap-belt injury, or any history of epigastric trauma."},
+  {q:"In the front-seat passenger of a car crash, marks of impact on the chest and abdomen suggest:",c:["The patient is fine","Possible deep solid- or hollow-organ injury","Only superficial bruises","Only skin contusions"],a:1,r:"Visible impact marks (Figure 41-3) raise suspicion for underlying solid- or hollow-organ injury, even when initial vitals appear normal."},
+  {q:"In a patient ejected from a vehicle, you should:",c:["Assume only minor injuries because they 'flew clear'","Maintain a high index of suspicion for multi-system injury","Skip spinal precautions","Refuse transport since they were not restrained"],a:1,r:"Ejection is a high-mortality mechanism; multi-system injury including abdominal trauma must be assumed."},
+  {q:"Which of the following is NOT typically listed as a sign of abdominal trauma (Box 41-1)?",c:["Bruising and discoloration","Pain and tenderness","Distended jugular veins","Evisceration"],a:2,r:"Distended jugular veins are a thoracic sign (e.g., tension pneumothorax, cardiac tamponade), not an abdominal-trauma sign per Box 41-1."},
+
+  // ===== LIVER (23-30) =====
+  {q:"The mortality rate associated with uncontrolled bleeding from liver injury is approximately:",c:["10%","25%","54%","85%"],a:2,r:"Per Sanders Ch. 41, the main cause of liver-injury death is uncontrolled bleeding, with a mortality rate of 54%."},
+  {q:"Following liver injury, blood and bile escape into:",c:["The pleural cavity","The peritoneal cavity","The pericardial sac","The mediastinum"],a:1,r:"Blood and bile escape into the peritoneal cavity, producing signs of shock and peritoneal irritation."},
+  {q:"Signs of peritoneal irritation include:",c:["Bowel sounds in chest","Abdominal pain, tenderness, and rigidity","Decreased capillary refill in arms only","Bilateral pedal edema"],a:1,r:"Peritoneal irritation produces abdominal pain, tenderness, and rigidity (board-like abdomen)."},
+  {q:"In a frontal MVC, the liver is most often injured by which mechanism?",c:["Distraction injury","Compression between steering column and spine","Hyperextension","Vasoconstriction"],a:1,r:"The liver is compressed between the steering column/dashboard and the spine — a classic compression mechanism."},
+  {q:"Which finding most strongly suggests liver injury?",c:["LLQ pain","RUQ tenderness with epigastric trauma history","Right shoulder dislocation","Heel pain"],a:1,r:"RUQ tenderness with a history of epigastric trauma (steering wheel, lap belt) strongly suggests liver injury."},
+  {q:"The liver is classified as a:",c:["Hollow organ","Solid organ","Vascular conduit only","Pelvic organ"],a:1,r:"The liver is a solid organ; injury results in rapid and significant blood loss."},
+  {q:"Which sign suggests liver/gallbladder irritation rather than splenic injury?",c:["Left shoulder pain","Right shoulder pain","Heel pain","Toe numbness"],a:1,r:"Right shoulder pain typically signals liver or gallbladder irritation. Left shoulder pain suggests splenic involvement (Kehr sign)."},
+  {q:"A 'lap-belt sign' (transverse bruise across the lower abdomen) is most concerning for:",c:["Only superficial injury","Underlying solid- and hollow-organ injury, possibly Chance fracture","An ankle injury","An upper-extremity injury"],a:1,r:"The lap-belt sign correlates with underlying solid-organ, hollow-organ, mesenteric, and lumbar (Chance) fractures."},
+
+  // ===== SPLEEN (31-40) =====
+  {q:"Kehr sign refers to:",c:["Right knee pain after femur fracture","Left shoulder pain associated with hemoperitoneum or splenic injury","Right shoulder pain after rotator cuff tear","Pain on rectal exam"],a:1,r:"Kehr sign is left shoulder pain (referred, via diaphragmatic irritation) associated with splenic injury / hemoperitoneum."},
+  {q:"Left shoulder pain after blunt trauma to the LUQ is most concerning for:",c:["Rotator cuff tear","Splenic injury / hemoperitoneum","Cervical strain","Pneumothorax"],a:1,r:"Left shoulder pain after LUQ blunt trauma is splenic injury / hemoperitoneum until proven otherwise."},
+  {q:"Many patients with splenic injuries initially present with:",c:["Profound shock and unconsciousness","Only minor symptoms","Cardiac arrest","Seizures"],a:1,r:"Many splenic-injury patients have only minor initial symptoms; this is the trap that leads to delayed recognition."},
+  {q:"Splenic injury should be suspected in:",c:["MVCs and falls or sports injuries with impact to the upper-left abdomen","Only penetrating chest wounds","Only finger fractures","Only patients over 80"],a:0,r:"Splenic injury should be suspected in MVCs and in falls or sports injuries involving impact to the upper-left abdomen."},
+  {q:"Pain in the left shoulder after splenic injury is best described as:",c:["Direct pain at the site","Referred pain from diaphragmatic irritation","Neuropathic pain from a brachial plexus injury","Radicular pain from a herniated disc"],a:1,r:"Left shoulder pain in splenic injury is referred pain from irritation of the diaphragm by splenic hematoma or hemoperitoneum."},
+  {q:"In a 16-year-old soccer player struck in the LUQ who walks off the field, returns to play, then collapses 90 minutes later, the most likely cause is:",c:["Heat exhaustion","Delayed splenic rupture","Vasovagal syncope","Asthma exacerbation"],a:1,r:"Delayed splenic rupture is a classic mechanism — initial subcapsular hematoma expands, then ruptures, producing sudden hemoperitoneum and collapse."},
+  {q:"A patient with splenic injury and free intraperitoneal blood may show:",c:["Kehr sign, hypotension, tachycardia, and peritoneal irritation","Only ankle swelling","Only finger numbness","Only a headache"],a:0,r:"Hemoperitoneum from splenic injury commonly presents with referred shoulder pain, hypotension, tachycardia, and signs of peritoneal irritation."},
+  {q:"The spleen and liver are notable because they:",c:["Are the two most-often-injured solid organs and major sources of life-threatening hemorrhage","Are not easily injured","Heal spontaneously without intervention in all cases","Are protected by a thick muscular shell"],a:0,r:"The liver and spleen are the two most-often-injured solid organs and can be the sources of life-threatening hemorrhage."},
+  {q:"A child with isolated LUQ tenderness after handlebar impact should be:",c:["Discharged from the scene","Transported with a high index of suspicion for splenic injury","Given oral fluids and refused transport","Sent to an urgent care for X-ray only"],a:1,r:"Isolated LUQ tenderness after focal blunt impact requires transport with high suspicion for splenic injury, even if vitals are initially normal."},
+  {q:"Splenic injury 'often associated with':",c:["Other intra-abdominal injuries","Long-bone fractures only","Skin abrasions only","Eye injuries only"],a:0,r:"Splenic injury is often associated with other intra-abdominal injuries; isolated splenic injury is the exception, not the rule."},
+
+  // ===== HOLLOW ORGAN (41-50) =====
+  {q:"Why is the stomach less commonly injured by blunt trauma?",c:["It has a bony shield","Of its protected location in the abdomen","It is empty most of the time","It is hollow"],a:1,r:"Because of its protected location in the abdomen, the stomach is not often injured by blunt trauma."},
+  {q:"Penetrating gastric injuries cause peritonitis quickly because of:",c:["Leakage of acidic gastric contents","Air in the peritoneum only","Cold temperature of stomach contents","Lack of bacteria"],a:0,r:"Gastric transection or laceration produces rapid peritonitis from leakage of acidic gastric contents."},
+  {q:"The colon and small intestine are MORE LIKELY injured by:",c:["Blunt trauma than penetrating","Penetrating trauma such as a gunshot wound","Thermal injury","Electrical injury"],a:1,r:"The colon and small intestine are more likely injured by penetrating trauma (e.g., GSW) than by blunt trauma."},
+  {q:"Deceleration injuries to bowel can be caused by:",c:["Restraints in high-speed MVCs","Standing still","Sleeping","Eating"],a:0,r:"The large and small bowel may sustain deceleration injuries due to restraints in high-speed MVCs (the lap-belt mechanism)."},
+  {q:"Peritoneal contamination with bacteria from a ruptured colon leads to:",c:["No clinical effect","Sepsis, wound infection, and abscess formation","Hyperthyroidism","Anaphylaxis"],a:1,r:"Bacterial spillage from ruptured bowel leads to sepsis, wound infection, and abscess — particularly when the injury is undiagnosed for an extended period."},
+  {q:"Onset of peritonitis after hollow-organ rupture:",c:["Is always immediate","May be delayed for hours or days","Never occurs","Is preceded by a fever first"],a:1,r:"Peritonitis is usually acute and very painful, but its development may be delayed for hours or days."},
+  {q:"Considerable force is required to injure the colon or small intestine because:",c:["They are surrounded by bone","They are mobile and protected; other injuries are usually present","They are in the chest","They have thick walls"],a:1,r:"Considerable force is required to injure the colon or small intestine, so other injuries are usually present alongside bowel injury."},
+  {q:"A restrained driver with a transverse abdominal bruise and worsening abdominal pain over the next 12 hours likely has:",c:["Hollow-organ injury with developing peritonitis","Heat stroke","Asthma","Pulmonary edema"],a:0,r:"Lap-belt mechanism + delayed worsening abdominal pain is the classic presentation of hollow-organ injury with developing peritonitis."},
+  {q:"Compared to penetrating injury, blunt injury to the bowel is:",c:["More common","Less common but possible by compression in high-speed crashes","Impossible","Always fatal"],a:1,r:"Bowel injury from blunt trauma is less common than from penetrating injury but can occur via compression in high-speed MVCs."},
+  {q:"A board-like, rigid abdomen after trauma most directly indicates:",c:["Normal exam","Peritonitis from luminal spillage or hemoperitoneum","Healthy bowel","Hyperventilation"],a:1,r:"A rigid (board-like) abdomen reflects peritoneal irritation from spilled luminal contents or free intraperitoneal blood."},
+
+  // ===== RETROPERITONEAL (51-62) =====
+  {q:"Which of the following is NOT a retroperitoneal organ?",c:["Kidney","Pancreas","Liver","Duodenum"],a:2,r:"The liver is intraperitoneal. Kidneys, ureters, pancreas, duodenum, adrenals, abdominal aorta, and IVC are retroperitoneal."},
+  {q:"Hemorrhage in the retroperitoneal space usually results from:",c:["Pelvic or lumbar fractures","Skin abrasions","Hand fractures","Toe injuries"],a:0,r:"Retroperitoneal hemorrhage may be massive and usually results from pelvic or lumbar fractures."},
+  {q:"Renal contusions typically:",c:["Require emergency surgery","Are self-limiting and heal with bed rest and forced fluids","Require dialysis","Always cause renal failure"],a:1,r:"Renal contusions are self-limiting and typically heal with bed rest and forced fluids."},
+  {q:"Major renal lacerations may require:",c:["Only ice","Surgical repair","Splinting","Sling and swathe"],a:1,r:"Organ fractures and major renal lacerations are more severe and may require surgical repair."},
+  {q:"The ureters are RARELY injured by blunt trauma because:",c:["They are bony","Of their flexible structure","They are intraperitoneal","They lie outside the body"],a:1,r:"Ureters are hollow organs that are rarely injured by blunt trauma because of their flexible structure."},
+  {q:"The pancreas is more often injured by:",c:["Blunt trauma","Penetrating trauma","Thermal injury","Electrical injury"],a:1,r:"The pancreas is more often injured by penetrating trauma than by blunt trauma."},
+  {q:"Duodenal injury is usually:",c:["Isolated","Associated with concurrent pancreatic trauma and confirmed at surgery","Diagnosed by abdominal X-ray alone","Self-limiting"],a:1,r:"Duodenal injury is usually associated with concurrent pancreatic trauma and is confirmed through surgery."},
+  {q:"Kidney injuries can result in:",c:["Hemorrhage, urine extravasation, or both","Only nausea","Only headache","Only weakness"],a:0,r:"Kidney injuries can result in hemorrhage, extravasation of urine, or both."},
+  {q:"Which finding raises suspicion for renal injury?",c:["Hematuria, flank ecchymosis, or lower-rib fractures","Toe pain","Earache","Tinnitus"],a:0,r:"Hematuria, flank discoloration, and lower posterior-rib fractures all raise suspicion for renal injury."},
+  {q:"Retroperitoneal bleeding can be dangerous because:",c:["It is always external","It can be massive yet hidden, with delayed signs","It only occurs in pediatrics","It always presents with rigidity"],a:1,r:"Retroperitoneal bleeding may be massive yet hidden because the blood is behind the peritoneum, producing few or delayed signs."},
+  {q:"Which organ, if injured, is most associated with retroperitoneal injuries?",c:["Liver","Heart","Kidney","Spleen"],a:2,r:"Among the listed organs, the kidney is retroperitoneal and most associated with retroperitoneal injury patterns."},
+  {q:"Esophageal injury after abdominal trauma can result from:",c:["Blunt or penetrating trauma to the anterior abdomen, posterior abdomen, or thoracic spine","Only ingestion of cold liquids","Only common cold","Only vocal strain"],a:0,r:"Retroperitoneal organs (including the esophagus distally) may be injured by blunt or penetrating trauma to the anterior abdomen, posterior abdomen, or thoracic spine."},
+
+  // ===== PELVIC ORGAN (63-70) =====
+  {q:"Mortality rate for pelvic fractures ranges from approximately:",c:["0.1%–1%","6.4%–19%","50%–60%","90%–100%"],a:1,r:"Per Sanders Ch. 41, mortality for pelvic fractures ranges from 6.4% to 19% depending on severity."},
+  {q:"Pelvic fractures are often associated with:",c:["Severe retroperitoneal hemorrhage","Toenail injury","Earlobe trauma","Skin tags"],a:0,r:"Pelvic fractures are often associated with severe retroperitoneal hemorrhage."},
+  {q:"Bladder rupture is more likely if:",c:["The bladder was empty at time of injury","The bladder was distended at time of injury","The patient was running","The patient was sleeping"],a:1,r:"Rupture of the urinary bladder is more likely when the bladder is distended at the time of injury."},
+  {q:"Gross hematuria after pelvic trauma is most concerning for:",c:["A bruise","Bladder injury or other GU tract injury","Asthma","Migraine"],a:1,r:"Gross hematuria suggests bladder or other GU tract injury and warrants definitive imaging."},
+  {q:"Blood at the urethral meatus is highly suggestive of:",c:["Urethral injury","Liver laceration","Splenic rupture","Pneumothorax"],a:0,r:"Blood at the meatus is highly suggestive of urethral injury."},
+  {q:"Passage of an indwelling urinary catheter is contraindicated when:",c:["The patient is dehydrated","Urethral injury is suspected (e.g., blood at the meatus)","The patient is awake","The patient asks for it"],a:1,r:"Passage of an indwelling catheter is contraindicated in suspected urethral injury (it can convert a partial tear to a complete one)."},
+  {q:"Inability to void after pelvic trauma is concerning for:",c:["Bladder or urethral injury","Hyperthyroidism","Sinusitis","Eye strain"],a:0,r:"Inability to void after pelvic trauma is concerning for bladder or urethral injury."},
+  {q:"Pelvic ring fractures with hemodynamic instability are best managed in the field by:",c:["Open splinting only","Pelvic binder, IV access, permissive hypotension target, rapid transport to a trauma center","Walking the patient","Hot packs"],a:1,r:"Field management for unstable pelvic fractures includes pelvic binding, two large-bore IVs, permissive-hypotension fluid strategy for blunt trauma, and rapid transport to definitive surgical care."},
+
+  // ===== VASCULAR (71-78) =====
+  {q:"Which abdominal vessels have the highest mortality when injured?",c:["Aorta, IVC, renal, mesenteric, and iliac","Femoral and popliteal","Carotid only","Radial and ulnar"],a:0,r:"Per Ch. 41: aorta, IVC, and the renal, mesenteric, and iliac arteries and veins are most often injured and have the highest mortality."},
+  {q:"Vascular abdominal injury is usually marked by:",c:["Hyperthermia","Hypovolemia","Hypoglycemia","Hypothermia only"],a:1,r:"Vascular injury is usually marked by hypovolemia; in some cases it is associated with a palpable abdominal mass."},
+  {q:"A palpable pulsatile abdominal mass after trauma may indicate:",c:["A normal aorta","Vascular injury, such as an expanding hematoma","Bowel obstruction only","Pneumothorax"],a:1,r:"A palpable mass with vascular injury may represent expanding hematoma — a critical finding requiring immediate surgical intervention."},
+  {q:"Inferior vena cava injury produces:",c:["Slow capillary leak","Large-volume venous bleeding","No bleeding","Anaphylaxis"],a:1,r:"IVC injury produces large-volume venous bleeding into the retroperitoneum or peritoneum."},
+  {q:"Iliac vessel injury is commonly associated with:",c:["Pelvic fractures","Eye injury","Earache","Toothache"],a:0,r:"Iliac vessels are commonly injured in association with pelvic fractures."},
+  {q:"Mesenteric vessel injury can produce:",c:["Bowel ischemia and intraperitoneal bleeding","Increased visual acuity","Ear pain","Hyperthermia"],a:0,r:"Mesenteric vessel injury produces bowel ischemia and intraperitoneal bleeding."},
+  {q:"Vascular injury to abdominal vessels is life-threatening because:",c:["Of the potential for massive hemorrhage","It causes hyperthermia","It is always painless","It only happens in elderly patients"],a:0,r:"Injury to abdominal arterial and venous vessels is life-threatening because of the potential for massive hemorrhage."},
+  {q:"A patient with mechanism for abdominal vascular injury, hypotension, and a palpable abdominal mass should be:",c:["Reassured and discharged","Transported emergently to a trauma center with surgical capability","Told to drink water","Given oral analgesia and sent home"],a:1,r:"This presentation indicates likely active intra-abdominal hemorrhage requiring emergent surgical intervention."},
+
+  // ===== ASSESSMENT (79-88) =====
+  {q:"The most significant sign of abdominal trauma is:",c:["Bruising","Unexplained shock","Mild tenderness","Vomiting once"],a:1,r:"Per Sanders Ch. 41, the most significant sign of abdominal trauma is unexplained shock, supported by mechanism and hypovolemia presentation."},
+  {q:"Abdominal distention after trauma is best understood as:",c:["An early reliable sign","A late finding because the abdomen accommodates significant blood loss","Always artifactual","Specific to obese patients"],a:1,r:"Abdominal distention is a LATE finding; the abdomen has a great deal of room to accommodate significant blood loss before distention is visible."},
+  {q:"Clinical signs of shock such as hypotension, tachycardia, and confusion may not appear until the patient has lost approximately:",c:["10% of circulating blood volume","More than 40% of circulating blood volume","Exactly 1% of blood volume","No blood volume"],a:1,r:"Per Ch. 41, clinical signs of shock may not manifest until the patient has lost more than 40% of their circulating blood volume."},
+  {q:"Important historical facts in abdominal trauma include:",c:["Events before injury, alcohol/drug use, underlying disease, and medications (e.g., anticoagulants)","Only the patient's middle name","Only their employer","Only their hobbies"],a:0,r:"History should include events before injury (seat-belt use, position in vehicle), alcohol/drug use, underlying medical problems, and medications including anticoagulants."},
+  {q:"Why is anticoagulant use important to identify in abdominal trauma?",c:["It can dramatically increase bleeding from injuries","It prevents bleeding","It cures fractures","It has no effect"],a:0,r:"Anticoagulant use can dramatically increase bleeding from intra-abdominal injuries; this changes urgency and field decisions."},
+  {q:"FAST (in the abdominal-trauma context) refers to:",c:["A diet plan","Focused Assessment with Sonography for Trauma","First Aid Safety Training","Field Ambulance Stretcher Test"],a:1,r:"FAST = Focused Assessment with Sonography for Trauma — bedside ultrasound used to identify free intraperitoneal fluid (Figure 41-8)."},
+  {q:"Auscultation of bowel sounds in the field:",c:["Should always delay transport","Can establish a baseline for hospital personnel but should NEVER delay transport","Is the most important assessment","Replaces vital signs"],a:1,r:"Auscultation can establish a baseline for hospital personnel; however, this assessment should never delay patient transport."},
+  {q:"A patient who lies still with knees drawn up after abdominal trauma is most likely:",c:["Trying to sleep","Showing peritoneal irritation / peritonitis","Intoxicated","Faking pain"],a:1,r:"Knees-drawn-up posture and resistance to movement reflect peritoneal irritation; movement worsens pain."},
+  {q:"Guarding of the abdomen suggests:",c:["Healthy musculature","Underlying peritoneal irritation or significant injury","Hypothermia","No injury"],a:1,r:"Guarding (involuntary tensing of abdominal muscles) suggests peritoneal irritation or significant underlying injury."},
+  {q:"A previously alert trauma patient who suddenly becomes confused with otherwise stable vitals most likely has:",c:["A psychiatric issue","Decompensation from occult hemorrhage","Hyperthermia","Asthma"],a:1,r:"AMS in a trauma patient — even with apparently stable vitals — should be assumed to be a sign of decompensation from occult hemorrhage until proven otherwise."},
+
+  // ===== MANAGEMENT (89-100) =====
+  {q:"For all abdominal-trauma patients, oxygen saturation should be maintained at:",c:["≥ 80%","≥ 88%","≥ 94%","≥ 100%"],a:2,r:"Per Sanders Ch. 41, oxygen saturation should be maintained at 94% or higher for all abdominal-trauma patients."},
+  {q:"For patients with BLUNT trauma to the abdomen and hypotension, fluid resuscitation should target:",c:["SBP 60 with MAP 40","SBP 80–90 with MAP 60–65","SBP 140 with MAP 110","SBP 200"],a:1,r:"For blunt abdominal trauma with hypotension, fluid resuscitation should be initiated to maintain organ perfusion with SBP 80–90 mm Hg (MAP 60–65)."},
+  {q:"For PENETRATING abdominal trauma, fluid resuscitation is best titrated to:",c:["The patient's mental status","A fixed SBP of 140","The patient's gender","The patient's age"],a:0,r:"For penetrating trauma, fluid resuscitation is best titrated to mental status — strive to balance vital-organ perfusion without restoring blood pressure to normal limits (permissive hypotension)."},
+  {q:"Permissive hypotension is best described as:",c:["Avoiding fluid altogether","Allowing a controlled lower-than-normal blood pressure to balance perfusion against the risk of dislodging clot","Aggressively raising BP to 140/90","Inducing hypothermia"],a:1,r:"Permissive hypotension allows a lower-than-normal BP to maintain organ perfusion while minimizing rebleeding from dislodged soft clots and dilutional coagulopathy."},
+  {q:"Definitive care for abdominal trauma typically occurs:",c:["In the field","On the way to the hospital","In the hospital, often in the operating room","At the patient's home"],a:2,r:"Definitive care occurs in the hospital — often in the OR for surgical control of bleeding and repair of injured organs."},
+  {q:"Prehospital priorities for abdominal trauma include all of the following EXCEPT:",c:["Securing airway with spinal precautions","Wound management and shock control","Definitive surgical repair in the truck","Rapid transport to definitive care"],a:2,r:"Prehospital management is limited to securing airway with spinal precautions, providing ventilatory support, wound management, judicious fluid resuscitation, and rapid transport — definitive surgical repair occurs at the receiving hospital."},
+  {q:"Evisceration of abdominal contents should be:",c:["Pushed back inside","Covered with sterile, moist dressing and protected","Ignored","Wrapped tightly with dry gauze"],a:1,r:"Eviscerated bowel should be covered with a sterile, moist dressing and protected; do not attempt to replace it into the abdomen."},
+  {q:"Impaled objects in the abdomen should generally be:",c:["Removed by EMS at the scene","Stabilized in place during transport, removed in the OR","Wiggled to assess depth","Ignored"],a:1,r:"Impaled objects should be stabilized in place; removal in the field can cause uncontrolled hemorrhage. Definitive removal occurs in the OR."},
+  {q:"Mean arterial pressure (MAP) target for blunt abdominal trauma with hypotension is:",c:["20–30","60–65","100–110","130–140"],a:1,r:"Per Ch. 41, MAP target for blunt abdominal trauma with hypotension is 60–65 mm Hg, paired with SBP 80–90."},
+  {q:"Spinal precautions in abdominal trauma are indicated when:",c:["Mechanism, exam, or symptoms suggest possible spinal injury","Always, regardless of mechanism","Only in pediatric patients","Never, in any abdominal trauma"],a:0,r:"Per Ch. 41 management, securing the airway WITH spinal precautions is recommended when mechanism or exam suggests potential spinal involvement (which is common in significant abdominal trauma)."},
+  {q:"En route to the hospital, ongoing assessment of an abdominal-trauma patient should include:",c:["Vital signs, percussion, and palpation of the abdomen","Only height and weight","Only family history","Only the patient's favorite food"],a:0,r:"En route, perform a full physical examination and ongoing assessment, including taking vital signs, percussion, and palpation of the abdomen."},
+  {q:"The single best summary statement of prehospital abdominal-trauma management is:",c:["Stabilize the airway, control hemorrhage, use a permissive-hypotension fluid strategy when appropriate, and rapidly transport to definitive surgical care","Stay on scene to fully diagnose all injuries","Treat all patients with high-volume crystalloid","Use only oral fluids"],a:0,r:"Field management is limited to stabilization (airway, ventilation, hemorrhage control, judicious fluid use guided by mechanism) and rapid transport to definitive surgical care."}
+];
+
+/* ============================================================
+   NAV / GATE
+============================================================ */
+function enterModule() {
+  const nameEl = document.getElementById('inputName');
+  const idEl = document.getElementById('inputId');
+  const name = (nameEl.value || '').trim();
+  const id = (idEl.value || '').trim();
+  if (!name || !id) {
+    if (!name) nameEl.focus();
+    else idEl.focus();
+    nameEl.style.borderColor = name ? '' : 'var(--red)';
+    idEl.style.borderColor = id ? '' : 'var(--red)';
+    return;
+  }
+  studentName = name;
+  studentId = id;
+  try {
+    localStorage.setItem(STORAGE_KEY_NAME, name);
+    localStorage.setItem(STORAGE_KEY_ID, id);
+  } catch (e) { /* localStorage may be unavailable */ }
+  document.getElementById('studentLabel').textContent = name + ' · ' + id;
+  document.getElementById('studentGate').classList.add('hidden');
+}
+
+function showModule(id) {
+  document.querySelectorAll('section.module').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+  const tab = document.querySelector('.nav-tab[data-target="' + id + '"]');
+  if (tab) tab.classList.add('active');
+  if (id === 'm4' && !document.getElementById('quizContainer').dataset.built) {
+    buildQuiz();
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function revealAnswer(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('hidden');
+}
+
+/* ============================================================
+   DECISION TREE
+============================================================ */
+const TREE_FEEDBACK = {
+  1: {
+    A: { type:'wrong', text:'Refusal in this scenario is dangerous. Mechanism (frontal MVC, unrestrained, bent steering wheel) + tachycardia + referred left-shoulder pain (possible Kehr sign) outweigh the apparently normal BP. Younger patients compensate well — until they don\'t.' },
+    B: { type:'right', text:'Correct. You used mechanism over self-report, performed a focused trauma exam, and used informed-refusal language. You bought yourself the chance to reassess en route.' },
+    C: { type:'partial', text:'Spinal precautions and rapid transport are good instincts, but skipping the focused trauma exam means you miss the Kehr sign and lose your baseline. Examine, then load.' },
+    D: { type:'wrong', text:'"Talking and walking" is exactly the trap this chapter warns about. He may be in compensated shock with normal mental status — until he isn\'t.' }
+  },
+  2: {
+    A: { type:'wrong', text:'Aggressive 2 L crystalloid bolus to chase a normal BP is a textbook error in active hemorrhage. It dilutes clotting factors, dislodges soft clot, and worsens bleeding.' },
+    B: { type:'right', text:'Correct. Two large-bore IVs, fluids titrated to SBP 80–90 / MAP 60–65 (per Ch. 41 for blunt abdominal trauma + hypotension), early trauma-center notification, expedited transport. Textbook permissive-hypotension management.' },
+    C: { type:'wrong', text:'Permissive hypotension does not mean zero fluid. The chapter specifies a target (SBP 80–90 / MAP 60–65) for blunt trauma — you titrate, you do not abstain.' },
+    D: { type:'wrong', text:'Stopping on the side of the road delays definitive surgical care. The secondary survey continues en route.' }
+  },
+  3: {
+    A: { type:'wrong', text:'Closest-ED is the right call only when surgical capability is not the limiting factor. Here it is.' },
+    B: { type:'right', text:'Correct. Definitive care for abdominal trauma is surgical. The 11-minute additional transport is justified by the difference in capability.' },
+    C: { type:'wrong', text:'Patient autonomy yields to medical necessity in life-threatening trauma; document the conversation and proceed to the trauma center.' },
+    D: { type:'wrong', text:'A CT scanner without a surgeon and OR is not definitive care for active intra-abdominal hemorrhage.' }
+  }
+};
+let treeStep = 1;
+
+function advanceTree(step, choice) {
+  const fb = TREE_FEEDBACK[step][choice];
+  const fbEl = document.getElementById('fb' + step);
+  fbEl.classList.remove('hidden', 'right', 'wrong', 'partial');
+  fbEl.classList.add(fb.type);
+  fbEl.innerHTML = '<strong>' + (fb.type === 'right' ? '✓ Best path' : fb.type === 'partial' ? '◐ Partial credit' : '✗ Reconsider') + ':</strong> ' + fb.text +
+    '<div style="margin-top:10px;"><button class="btn ' + (fb.type === 'right' ? 'success' : 'secondary') + '" onclick="goNextTreeStep(' + step + ')">Continue →</button></div>';
+}
+
+function goNextTreeStep(step) {
+  document.getElementById('ds' + step).classList.remove('active');
+  const next = step + 1;
+  if (document.getElementById('ds' + next)) {
+    document.getElementById('ds' + next).classList.add('active');
+  }
+}
+
+function resetTree() {
+  document.querySelectorAll('.decision-step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.decision-feedback').forEach(f => { f.classList.add('hidden'); f.innerHTML=''; });
+  document.getElementById('ds1').classList.add('active');
+}
+
+/* ============================================================
+   QUIZ
+============================================================ */
+function buildQuiz() {
+  const cont = document.getElementById('quizContainer');
+  cont.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  QUESTIONS.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = 'q' + i;
+    let html = '<div class="qnum">Question ' + (i+1) + ' of 100</div>';
+    html += '<div class="qtext">' + q.q + '</div>';
+    q.c.forEach((choice, j) => {
+      html += '<div class="choice" data-q="' + i + '" data-choice="' + j + '" onclick="pickChoice(' + i + ',' + j + ')">' +
+              '<div class="letter">' + letters[j] + '</div><div>' + choice + '</div></div>';
+    });
+    html += '<div class="rationale" id="rat' + i + '"><strong>Rationale:</strong> ' + q.r + '</div>';
+    card.innerHTML = html;
+    cont.appendChild(card);
+  });
+  cont.dataset.built = 'true';
+  updateProgress();
+}
+
+function pickChoice(qi, ci) {
+  if (quizSubmitted) return;
+  userAnswers[qi] = ci;
+  document.querySelectorAll('.choice[data-q="' + qi + '"]').forEach(el => el.classList.remove('selected'));
+  document.querySelector('.choice[data-q="' + qi + '"][data-choice="' + ci + '"]').classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  document.getElementById('quizProgress').style.width = (answered) + '%';
+  document.getElementById('quizStatus').textContent = answered + ' of 100 answered';
+}
+
+function submitQuiz() {
+  const unanswered = userAnswers.filter(a => a === null).length;
+  if (unanswered > 0) {
+    if (!confirm('You have ' + unanswered + ' unanswered question(s). They will be marked incorrect. Submit anyway?')) {
+      return;
+    }
+  }
+  quizSubmitted = true;
+  let correct = 0;
+  QUESTIONS.forEach((q, i) => {
+    const choices = document.querySelectorAll('.choice[data-q="' + i + '"]');
+    choices.forEach(el => {
+      const j = parseInt(el.dataset.choice);
+      if (j === q.a) el.classList.add('correct');
+      else if (j === userAnswers[i]) el.classList.add('incorrect');
+    });
+    document.getElementById('rat' + i).classList.add('show');
+    if (userAnswers[i] === q.a) correct++;
+  });
+  quizScore = correct;
+  showResults(correct);
+}
+
+function showResults(correct) {
+  const pct = correct;
+  const passed = pct >= 80;
+  const r = document.getElementById('quizResults');
+  r.classList.add('show');
+  document.getElementById('scorePercent').textContent = pct + '%';
+  document.getElementById('scoreVerdict').textContent = passed ? '✓ Passing — Well Done' : '✗ Below Pass Mark — Review &amp; Retake';
+  document.getElementById('scoreVerdict').style.color = passed ? 'var(--green)' : 'var(--red)';
+  document.getElementById('scoreDetail').textContent = correct + ' of 100 correct · Pass mark 80% · Generated ' + new Date().toLocaleString();
+  // gradient circle
+  const deg = (pct / 100) * 360;
+  const color = passed ? 'var(--green)' : (pct >= 60 ? 'var(--amber)' : 'var(--red)');
+  document.getElementById('scoreCircle').style.background = 'conic-gradient(' + color + ' 0deg, ' + color + ' ' + deg + 'deg, var(--line-soft) ' + deg + 'deg, var(--line-soft) 360deg)';
+  document.getElementById('submitQuizBtn').disabled = true;
+  document.getElementById('submitQuizBtn').style.opacity = .5;
+  // smooth scroll to results
+  setTimeout(() => r.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+}
+
+function reviewQuiz() {
+  document.getElementById('q0').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetQuiz() {
+  if (!confirm('Reset all answers and retake the assessment?')) return;
+  userAnswers = new Array(100).fill(null);
+  quizSubmitted = false;
+  quizScore = 0;
+  document.getElementById('quizResults').classList.remove('show');
+  document.getElementById('submitQuizBtn').disabled = false;
+  document.getElementById('submitQuizBtn').style.opacity = 1;
+  document.getElementById('quizContainer').dataset.built = '';
+  buildQuiz();
+}
+
+/* ============================================================
+   PDF GENERATION (jsPDF)
+============================================================ */
+function downloadPDF() {
+  if (!quizSubmitted) {
+    alert('Submit the assessment first to generate your PDF score report.');
+    return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 50;
+  let y = margin;
+  const pct = quizScore;
+  const passed = pct >= 80;
+  const r1 = document.getElementById('ref1').value || '(no response)';
+  const r2 = document.getElementById('ref2').value || '(no response)';
+  const r3 = document.getElementById('ref3').value || '(no response)';
+
+  // Header band
+  doc.setFillColor(31, 95, 179);
+  doc.rect(0, 0, pageW, 70, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(16);
+  doc.setFont('helvetica', 'bold');
+  doc.text('CAMP EMS Program · Paramedic Assessment Report', margin, 30);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.text("Sanders' Paramedic, Ch. 41 — Abdominal Trauma · 100-Item Final", margin, 48);
+  doc.text('Generated ' + new Date().toLocaleString(), margin, 62);
+
+  y = 100;
+  doc.setTextColor(14, 26, 43);
+
+  // Student Info Block
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Student Information', margin, y);
+  y += 14;
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Name: ' + studentName, margin, y); y += 14;
+  doc.text('Student ID: ' + studentId, margin, y); y += 14;
+  doc.text('Module: Abdominal Trauma (Sanders 6e, Chapter 41)', margin, y); y += 14;
+  doc.text('Date Completed: ' + new Date().toLocaleString(), margin, y); y += 24;
+
+  // Score Block
+  doc.setFillColor(passed ? 216 : 251, passed ? 239 : 220, passed ? 225 : 217);
+  doc.rect(margin, y, pageW - 2*margin, 90, 'F');
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(passed ? 31 : 179, passed ? 122 : 38, passed ? 79 : 30);
+  doc.text(passed ? '✓ PASSING' : '✗ BELOW PASS MARK', margin + 14, y + 22);
+  doc.setFontSize(28);
+  doc.text(pct + '%', margin + 14, y + 56);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(60, 60, 60);
+  doc.text('Score: ' + quizScore + ' of 100 correct', margin + 14, y + 74);
+  doc.text('Pass mark: 80%', margin + 14, y + 86);
+  y += 110;
+
+  // Topic-area breakdown
+  doc.setTextColor(14, 26, 43);
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Performance by Topic Area', margin, y);
+  y += 16;
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  const topicRanges = [
+    { name: 'Anatomy (Q1–10)', start: 0, end: 9 },
+    { name: 'Mechanisms of Injury (Q11–22)', start: 10, end: 21 },
+    { name: 'Liver Injury (Q23–30)', start: 22, end: 29 },
+    { name: 'Spleen Injury / Kehr Sign (Q31–40)', start: 30, end: 39 },
+    { name: 'Hollow-Organ Injury (Q41–50)', start: 40, end: 49 },
+    { name: 'Retroperitoneal Injury (Q51–62)', start: 50, end: 61 },
+    { name: 'Pelvic Organ / GU (Q63–70)', start: 62, end: 69 },
+    { name: 'Vascular Injury (Q71–78)', start: 70, end: 77 },
+    { name: 'Assessment (Q79–88)', start: 78, end: 87 },
+    { name: 'Management (Q89–100)', start: 88, end: 99 }
+  ];
+  topicRanges.forEach(t => {
+    let c = 0;
+    let n = t.end - t.start + 1;
+    for (let i = t.start; i <= t.end; i++) if (userAnswers[i] === QUESTIONS[i].a) c++;
+    const tpct = Math.round((c / n) * 100);
+    doc.text(t.name, margin, y);
+    doc.text(c + ' / ' + n + '   (' + tpct + '%)', pageW - margin - 100, y);
+    // mini bar
+    doc.setFillColor(240, 240, 240);
+    doc.rect(margin + 220, y - 9, 100, 8, 'F');
+    doc.setFillColor(tpct >= 80 ? 31 : 179, tpct >= 80 ? 122 : 109, tpct >= 80 ? 79 : 4);
+    doc.rect(margin + 220, y - 9, tpct, 8, 'F');
+    y += 14;
+  });
+  y += 10;
+
+  // Reflection responses
+  if (y > pageH - 200) { doc.addPage(); y = margin; }
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Reflection Responses', margin, y);
+  y += 16;
+  doc.setFontSize(10);
+  const reflections = [
+    { label: 'R1 · Next Shift', text: r1 },
+    { label: 'R2 · Patient You Almost Missed', text: r2 },
+    { label: 'R3 · Teaching Forward', text: r3 }
+  ];
+  reflections.forEach(rfl => {
+    if (y > pageH - 80) { doc.addPage(); y = margin; }
+    doc.setFont('helvetica', 'bold');
+    doc.text(rfl.label, margin, y);
+    y += 14;
+    doc.setFont('helvetica', 'normal');
+    const lines = doc.splitTextToSize(rfl.text, pageW - 2*margin);
+    lines.forEach(line => {
+      if (y > pageH - 50) { doc.addPage(); y = margin; }
+      doc.text(line, margin, y);
+      y += 13;
+    });
+    y += 8;
+  });
+
+  // ===== Page 2+: Item-by-item review =====
+  doc.addPage();
+  y = margin;
+  doc.setFillColor(31, 95, 179);
+  doc.rect(0, 0, pageW, 40, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(13);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Item-by-Item Review (' + studentName + ' · ' + studentId + ')', margin, 26);
+  y = 60;
+  doc.setTextColor(14, 26, 43);
+
+  const letters = ['A','B','C','D'];
+  QUESTIONS.forEach((q, i) => {
+    if (y > pageH - 90) { doc.addPage(); y = margin; }
+    const userAns = userAnswers[i];
+    const isCorrect = userAns === q.a;
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(isCorrect ? 31 : 179, isCorrect ? 122 : 38, isCorrect ? 79 : 30);
+    doc.text((isCorrect ? '✓' : '✗') + ' Q' + (i+1), margin, y);
+    doc.setTextColor(14, 26, 43);
+    doc.setFont('helvetica', 'normal');
+    const qLines = doc.splitTextToSize(q.q, pageW - 2*margin - 40);
+    qLines.forEach((ln, idx) => { doc.text(ln, margin + 30, y + idx*11); });
+    y += qLines.length * 11 + 4;
+    doc.setFontSize(8.5);
+    doc.text('Your answer: ' + (userAns === null ? '(none)' : letters[userAns] + ' · ' + q.c[userAns]), margin + 30, y); y += 10;
+    doc.text('Correct answer: ' + letters[q.a] + ' · ' + q.c[q.a], margin + 30, y); y += 10;
+    const ratLines = doc.splitTextToSize('Rationale: ' + q.r, pageW - 2*margin - 40);
+    doc.setTextColor(80, 80, 100);
+    ratLines.forEach(ln => {
+      if (y > pageH - 50) { doc.addPage(); y = margin; }
+      doc.text(ln, margin + 30, y);
+      y += 10;
+    });
+    doc.setTextColor(14, 26, 43);
+    y += 8;
+  });
+
+  // Footer signature line on last page
+  if (y > pageH - 80) { doc.addPage(); y = margin; }
+  y = pageH - 60;
+  doc.setDrawColor(180, 180, 200);
+  doc.line(margin, y, margin + 200, y);
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'italic');
+  doc.setTextColor(100, 100, 120);
+  doc.text('Student signature', margin, y + 12);
+  doc.line(pageW - margin - 200, y, pageW - margin, y);
+  doc.text('Instructor signature / date', pageW - margin - 200, y + 12);
+
+  const safeName = studentName.replace(/[^a-z0-9]+/gi, '_');
+  doc.save('AbdominalTrauma_Assessment_' + safeName + '.pdf');
+}
+
+/* ============================================================
+   INIT
+============================================================ */
+(function init() {
+  try {
+    const savedName = localStorage.getItem(STORAGE_KEY_NAME);
+    const savedId = localStorage.getItem(STORAGE_KEY_ID);
+    if (savedName && savedId) {
+      document.getElementById('inputName').value = savedName;
+      document.getElementById('inputId').value = savedId;
+    }
+  } catch(e) {}
+})();
+</script>
+
+</body>
+</html>
