@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orthopaedic Trauma — CAMP Paramedic Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elev: #ffffff;
+  --bg-deep: #f0ece3;
+  --ink: #0f1d2e;
+  --ink-soft: #3d4a5e;
+  --ink-mute: #6b7280;
+  --rule: #e2dccd;
+  --accent: #0a3d62;
+  --accent-soft: #e8eef4;
+  --critical: #a81e1e;
+  --critical-soft: #fbe8e6;
+  --warn: #b8651f;
+  --warn-soft: #fdf2e3;
+  --good: #1f6e44;
+  --good-soft: #e6f1ea;
+  --copper: #b85c3c;
+  --paper: #fdfbf5;
+  --shadow-sm: 0 1px 2px rgba(15,29,46,.04), 0 1px 1px rgba(15,29,46,.03);
+  --shadow: 0 4px 14px rgba(15,29,46,.06), 0 1px 3px rgba(15,29,46,.04);
+  --shadow-lg: 0 14px 40px rgba(15,29,46,.10), 0 4px 12px rgba(15,29,46,.06);
+  --serif: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+body.dark-mode {
+  --bg: #0e151f;
+  --bg-elev: #15202c;
+  --bg-deep: #0a1018;
+  --ink: #ecebe5;
+  --ink-soft: #b8c0cc;
+  --ink-mute: #7a8595;
+  --rule: #243140;
+  --accent: #6fb8e8;
+  --accent-soft: #1a2e42;
+  --critical: #e87474;
+  --critical-soft: #3a1818;
+  --warn: #e0a368;
+  --warn-soft: #3a2812;
+  --good: #6dc591;
+  --good-soft: #14301f;
+  --copper: #d28560;
+  --paper: #131c27;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s ease, color .3s ease;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.masthead {
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg-elev) 92%, transparent);
+}
+
+.masthead-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent) 0%, #0d4d7a 100%);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 2px 6px rgba(10,61,98,.25);
+}
+
+.brand-text { line-height: 1.15; }
+.brand-text .label {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--copper);
+  font-weight: 600;
+}
+.brand-text .name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.student-fields {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-self: end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.field label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.field input {
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 7px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--ink);
+  width: 180px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.theme-toggle {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all .2s ease;
+}
+.theme-toggle:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+/* ===== NAV STRIP ===== */
+.nav-strip {
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 71px;
+  z-index: 99;
+}
+.nav-strip-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-strip-inner::-webkit-scrollbar { display: none; }
+
+.nav-pill {
+  background: transparent;
+  border: none;
+  padding: 14px 18px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  transition: color .2s ease;
+  letter-spacing: -0.01em;
+}
+.nav-pill:hover { color: var(--accent); }
+.nav-pill.active { color: var(--accent); font-weight: 600; }
+.nav-pill.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 18px; right: 18px;
+  height: 2px;
+  background: var(--accent);
+}
+
+/* ===== LAYOUT ===== */
+.canvas {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 32px 96px;
+}
+
+.section { display: none; animation: fadeUp .4s ease; }
+.section.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== TYPOGRAPHY ===== */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--copper);
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+h1.display {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 16px;
+  font-variation-settings: "opsz" 144;
+}
+h1.display em {
+  font-style: italic;
+  color: var(--copper);
+  font-weight: 400;
+}
+
+h2.section-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  margin: 48px 0 18px;
+  color: var(--ink);
+  font-variation-settings: "opsz" 96;
+  position: relative;
+  padding-bottom: 12px;
+}
+h2.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 48px; height: 2px;
+  background: var(--copper);
+}
+
+h3.block-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  margin: 28px 0 10px;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+h4.sub-title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 18px 0 8px;
+}
+
+p { color: var(--ink-soft); margin-bottom: 12px; }
+p strong { color: var(--ink); font-weight: 600; }
+
+.lede {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  font-weight: 400;
+  margin: 18px 0 32px;
+  max-width: 760px;
+  font-variation-settings: "opsz" 36;
+}
+
+/* ===== CARDS / PANELS ===== */
+.panel {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 28px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.panel.hover-lift:hover { box-shadow: var(--shadow); }
+
+.case-hook {
+  background: linear-gradient(135deg, var(--paper) 0%, var(--bg-elev) 100%);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--critical);
+  border-radius: 10px;
+  padding: 32px 36px;
+  margin: 32px 0;
+  position: relative;
+  box-shadow: var(--shadow);
+}
+.case-hook::before {
+  content: 'CASE';
+  position: absolute;
+  top: -10px; left: 24px;
+  background: var(--critical);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.case-hook .dispatch {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-bottom: 14px;
+  letter-spacing: .03em;
+}
+.case-hook .narrative {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink);
+  font-weight: 400;
+  font-variation-settings: "opsz" 24;
+}
+
+/* ===== INFO TILES ===== */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.tile {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+}
+.tile.critical { border-top: 3px solid var(--critical); }
+.tile.warn { border-top: 3px solid var(--warn); }
+.tile.good { border-top: 3px solid var(--good); }
+.tile.accent { border-top: 3px solid var(--accent); }
+
+.tile-num {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--copper);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -0.04em;
+}
+.tile-label {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink-mute);
+  margin-bottom: 8px;
+}
+.tile-body { font-size: 14px; color: var(--ink-soft); line-height: 1.5; }
+
+/* ===== ANDRAGOGY BAR ===== */
+.andragogy-bar {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin: 28px 0 36px;
+  padding: 18px;
+  background: var(--bg-deep);
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+}
+@media (max-width: 880px) { .andragogy-bar { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 540px) { .andragogy-bar { grid-template-columns: repeat(2, 1fr); } }
+
+.andra-pill {
+  text-align: center;
+  padding: 10px 6px;
+  background: var(--bg-elev);
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+}
+.andra-pill .num {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--copper);
+}
+.andra-pill .lbl {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ink);
+  margin-top: 2px;
+  display: block;
+}
+
+/* ===== ANDRAGOGY CALLOUT ===== */
+.andra-callout {
+  background: linear-gradient(95deg, var(--accent-soft) 0%, transparent 100%);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--ink);
+}
+.andra-callout .tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 4px;
+}
+.andra-callout .body { font-style: italic; color: var(--ink-soft); font-family: var(--serif); font-size: 15px; }
+
+/* ===== OBJECTIVES ===== */
+.bloom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.bloom-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 14px;
+  border-top: 2px solid var(--copper);
+}
+.bloom-card .lvl {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--copper);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.bloom-card .obj {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+/* ===== EXPANDABLE BLOCKS ===== */
+.expandable {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: box-shadow .2s ease;
+}
+.expandable.open { box-shadow: var(--shadow); }
+
+.expand-header {
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background .15s ease;
+}
+.expand-header:hover { background: var(--bg-deep); }
+
+.expand-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.expand-title .icon {
+  width: 32px; height: 32px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 600;
+}
+.expand-title .text {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.chev {
+  color: var(--ink-mute);
+  transition: transform .25s ease;
+  font-size: 14px;
+}
+.expandable.open .chev { transform: rotate(180deg); color: var(--accent); }
+
+.expand-body {
+  display: none;
+  padding: 0 22px 22px;
+  border-top: 1px solid var(--rule);
+}
+.expandable.open .expand-body { display: block; padding-top: 18px; }
+
+/* ===== MEDICATION CHIPS ===== */
+.med-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.med-chip {
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all .15s ease;
+}
+.med-chip:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+/* ===== CRITICAL POINTS ===== */
+.crit-list {
+  background: var(--critical-soft);
+  border-left: 3px solid var(--critical);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin: 14px 0;
+}
+.crit-list .head {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--critical);
+  margin-bottom: 6px;
+}
+.crit-list ul { margin-left: 18px; }
+.crit-list li { margin-bottom: 4px; font-size: 14px; color: var(--ink); }
+
+.pearl {
+  background: var(--good-soft);
+  border-left: 3px solid var(--good);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+  color: var(--ink);
+}
+.pearl .head {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--good);
+  margin-bottom: 6px;
+}
+
+.warn-block {
+  background: var(--warn-soft);
+  border-left: 3px solid var(--warn);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+  color: var(--ink);
+}
+.warn-block .head {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--warn);
+  margin-bottom: 6px;
+}
+
+/* ===== TABLES ===== */
+.table-wrap {
+  overflow-x: auto;
+  margin: 18px 0;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+table.clinical {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--bg-elev);
+}
+table.clinical thead th {
+  background: var(--bg-deep);
+  color: var(--ink);
+  text-align: left;
+  padding: 12px 14px;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule);
+}
+table.clinical tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
+  vertical-align: top;
+}
+table.clinical tbody tr:last-child td { border-bottom: none; }
+table.clinical tbody tr:hover { background: var(--bg-deep); }
+table.clinical td strong { color: var(--ink); }
+
+/* ===== BRANCHING SCENARIO ===== */
+.branch-scenario {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 28px;
+  margin: 24px 0;
+}
+.branch-step {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--rule);
+}
+.branch-step:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+.choice-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.choice-btn {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 14px 16px;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  transition: all .15s ease;
+  line-height: 1.45;
+}
+.choice-btn:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.choice-btn.correct { background: var(--good-soft); border-color: var(--good); color: var(--ink); }
+.choice-btn.wrong { background: var(--critical-soft); border-color: var(--critical); color: var(--ink); }
+.choice-btn:disabled { cursor: default; }
+
+.feedback-box {
+  margin-top: 14px;
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: none;
+}
+.feedback-box.show { display: block; }
+.feedback-box.good { background: var(--good-soft); border-left: 3px solid var(--good); color: var(--ink); }
+.feedback-box.bad { background: var(--critical-soft); border-left: 3px solid var(--critical); color: var(--ink); }
+
+/* ===== REFLECTION ===== */
+.reflect-box {
+  background: linear-gradient(135deg, var(--paper) 0%, var(--accent-soft) 100%);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 28px;
+  margin: 24px 0;
+}
+.reflect-q {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.reflect-box textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  font-family: var(--sans);
+  font-size: 14px;
+  background: var(--bg-elev);
+  color: var(--ink);
+  resize: vertical;
+  margin-bottom: 14px;
+}
+.reflect-box textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+/* ===== ASSESSMENT ===== */
+.assess-intro {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 36px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.assess-intro h2 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.assess-meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+.assess-meta div {
+  font-size: 13px;
+  color: var(--ink-mute);
+}
+.assess-meta strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: all .2s ease;
+  box-shadow: 0 2px 6px rgba(10,61,98,.2);
+}
+.btn-primary:hover { background: #0d4d7a; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(10,61,98,.3); }
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.btn-ghost:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+.q-progress {
+  position: sticky;
+  top: 130px;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 14px 22px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+.q-progress .pos {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
+  font-weight: 500;
+  min-width: 80px;
+}
+.q-progress .bar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-deep);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.q-progress .fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--copper));
+  width: 0;
+  transition: width .3s ease;
+}
+.q-progress .pct {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-mute);
+  font-weight: 500;
+  min-width: 60px;
+  text-align: right;
+}
+
+.q-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.q-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--copper);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.q-stem {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.q-options { display: flex; flex-direction: column; gap: 8px; }
+
+.q-opt {
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--ink);
+  transition: all .15s ease;
+  text-align: left;
+  font-family: var(--sans);
+}
+.q-opt:hover:not(.locked) { border-color: var(--accent); background: var(--accent-soft); }
+.q-opt.selected { border-color: var(--accent); background: var(--accent-soft); }
+.q-opt.locked { cursor: default; }
+.q-opt.correct { background: var(--good-soft); border-color: var(--good); }
+.q-opt.wrong { background: var(--critical-soft); border-color: var(--critical); }
+
+.q-opt .letter {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 12px;
+  width: 22px;
+  height: 22px;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--ink-soft);
+}
+.q-opt.selected .letter { background: var(--accent); color: #fff; border-color: var(--accent); }
+.q-opt.correct .letter { background: var(--good); color: #fff; border-color: var(--good); }
+.q-opt.wrong .letter { background: var(--critical); color: #fff; border-color: var(--critical); }
+
+.q-rationale {
+  display: none;
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: var(--bg-deep);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.q-rationale.visible { display: block; }
+.q-rationale strong { color: var(--ink); display: block; margin-bottom: 4px; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+
+.assess-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+.assess-controls .left { display: flex; gap: 10px; }
+.assess-controls .right { display: flex; gap: 10px; align-items: center; }
+.assess-counter { font-size: 13px; color: var(--ink-mute); }
+.assess-counter strong { color: var(--accent); font-weight: 600; }
+
+/* ===== RESULTS ===== */
+.results-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 48px 36px;
+  text-align: center;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+.results-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--copper));
+}
+
+.score-display {
+  font-family: var(--serif);
+  font-size: 96px;
+  font-weight: 400;
+  line-height: 1;
+  margin: 14px 0;
+  letter-spacing: -0.04em;
+  font-variation-settings: "opsz" 144;
+}
+.score-display.pass { color: var(--good); }
+.score-display.fail { color: var(--critical); }
+.score-display sup { font-size: 36px; vertical-align: super; color: var(--ink-mute); margin-left: 6px; }
+
+.score-meta {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+.score-meta div { text-align: center; }
+.score-meta .lbl { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); font-weight: 600; }
+.score-meta .val { font-family: var(--serif); font-size: 26px; color: var(--ink); margin-top: 4px; }
+
+.verdict {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--ink);
+  margin: 12px 0 24px;
+  font-variation-settings: "opsz" 36;
+}
+
+.btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* ===== MISC ===== */
+.legend-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+.legend-item {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.legend-item .key {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--copper);
+}
+.legend-item .desc { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+
+.divider {
+  height: 1px;
+  background: var(--rule);
+  margin: 36px 0;
+}
+
+ol.numlist { margin-left: 22px; margin-top: 8px; }
+ol.numlist li { margin-bottom: 6px; color: var(--ink-soft); font-size: 14px; line-height: 1.55; }
+ul.bul { margin-left: 22px; margin-top: 8px; }
+ul.bul li { margin-bottom: 6px; color: var(--ink-soft); font-size: 14px; line-height: 1.55; }
+
+.footnote {
+  font-size: 12px;
+  color: var(--ink-mute);
+  font-style: italic;
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+@media print { .no-print { display: none !important; } }
+
+@media (max-width: 880px) {
+  .masthead-inner { grid-template-columns: 1fr auto; gap: 14px; }
+  .student-fields { grid-column: 1 / -1; justify-self: stretch; flex-wrap: wrap; }
+  .field input { width: 100%; }
+  .canvas { padding: 32px 18px 80px; }
+  h1.display { font-size: 36px; }
+  .assess-meta { gap: 18px; }
+  .score-display { font-size: 72px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== MASTHEAD ===== -->
+<header class="masthead no-print">
+  <div class="masthead-inner">
+    <div class="brand">
+      <div class="brand-mark">C</div>
+      <div class="brand-text">
+        <div class="label">CAMP &middot; Paramedic Program</div>
+        <div class="name">Orthopaedic Trauma</div>
+      </div>
+    </div>
+    <div></div>
+    <div class="student-fields">
+      <div class="field">
+        <label for="studentName">Student name</label>
+        <input type="text" id="studentName" placeholder="Last, First" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="studentId">Student ID</label>
+        <input type="text" id="studentId" placeholder="ID number" autocomplete="off">
+      </div>
+      <button class="theme-toggle" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☼</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV STRIP ===== -->
+<nav class="nav-strip no-print">
+  <div class="nav-strip-inner">
+    <button class="nav-pill active" data-target="m1">Module 1 · Foundation</button>
+    <button class="nav-pill" data-target="m2">Module 2 · Deep Dive</button>
+    <button class="nav-pill" data-target="m3">Module 3 · Synthesis</button>
+    <button class="nav-pill" data-target="assess">Assessment · 100 Q</button>
+  </div>
+</nav>
+
+<main class="canvas">
+
+<!-- ============================================ -->
+<!-- MODULE 1: FOUNDATION & REAL-WORLD CONTEXT    -->
+<!-- ============================================ -->
+<section class="section active" id="m1">
+
+  <span class="eyebrow">Module One — Foundation</span>
+  <h1 class="display">Bone, blood, &amp; <em>time:</em> the orthopaedic trauma reality.</h1>
+  <p class="lede">A "broken leg" can hide a liter of arterial bleeding, a crushing nerve injury, or a soft-tissue compartment that will be dead in ninety minutes. Mastering orthopaedic trauma is mastering the difference between an inconvenience and a life-altering event — and you decide which.</p>
+
+  <!-- ===== ANDRAGOGY MAP ===== -->
+  <div class="andragogy-bar">
+    <div class="andra-pill"><div class="num">1</div><span class="lbl">Need to Know</span></div>
+    <div class="andra-pill"><div class="num">2</div><span class="lbl">Self-Concept</span></div>
+    <div class="andra-pill"><div class="num">3</div><span class="lbl">Prior Experience</span></div>
+    <div class="andra-pill"><div class="num">4</div><span class="lbl">Readiness</span></div>
+    <div class="andra-pill"><div class="num">5</div><span class="lbl">Orientation</span></div>
+    <div class="andra-pill"><div class="num">6</div><span class="lbl">Motivation</span></div>
+  </div>
+
+  <!-- ===== CASE HOOK ===== -->
+  <div class="case-hook">
+    <div class="dispatch">DISPATCH 14:22 / Priority 1 / Trauma Alert</div>
+    <p class="narrative">Single motorcycle vs. fixed object. 24-year-old male, helmeted, ejected ~30 ft. On arrival you find him supine on the shoulder of US‑58, alert but pale and diaphoretic. Right thigh is angulated and shortened, denim soaked with blood. Pelvis feels "off" when you palpate. BP 92/58, HR 128, SpO₂ 96% RA. He looks at you and says, "<em>Just don't let them take my leg.</em>"</p>
+    <p style="margin-top:12px;font-size:14px;color:var(--ink-mute);">In the next ten minutes you will make four decisions that determine whether this patient walks, limps, or doesn't survive transport. This module exists for that ten minutes.</p>
+  </div>
+
+  <!-- ===== ANDRAGOGY 1: NEED TO KNOW ===== -->
+  <div class="andra-callout">
+    <span class="tag">Andragogy 1 · Need to Know</span>
+    <span class="body">Femoral shaft fractures can sequester 1,000–1,500 mL of blood per side. Pelvic fractures can hemorrhage 2–4 L into a closed retroperitoneum. Compartment syndrome causes irreversible muscle death in 4–8 hours. Missed neurovascular compromise produces lifelong disability. None of these patients arrive labeled — you find them.</span>
+  </div>
+
+  <!-- ===== LEARNING OBJECTIVES ===== -->
+  <h2 class="section-title">Learning objectives</h2>
+  <p>By the end of this module the student will be able to:</p>
+
+  <div class="bloom-grid">
+    <div class="bloom-card"><div class="lvl">Remember</div><div class="obj">Recall the anatomy of the musculoskeletal system, fracture nomenclature, and the 6 P's of neurovascular assessment.</div></div>
+    <div class="bloom-card"><div class="lvl">Understand</div><div class="obj">Explain how mechanism of injury predicts the pattern, severity, and complications of orthopaedic trauma.</div></div>
+    <div class="bloom-card"><div class="lvl">Apply</div><div class="obj">Perform proper splinting, traction, and pelvic stabilization techniques with appropriate device selection.</div></div>
+    <div class="bloom-card"><div class="lvl">Analyze</div><div class="obj">Differentiate life-threatening from limb-threatening from limb-altering orthopaedic injuries during assessment.</div></div>
+    <div class="bloom-card"><div class="lvl">Evaluate</div><div class="obj">Justify pain management, transport destination, and intervention priorities using clinical findings.</div></div>
+    <div class="bloom-card"><div class="lvl">Create</div><div class="obj">Construct a complete management plan for the multi-system trauma patient with isolated and combined orthopaedic injuries.</div></div>
+  </div>
+
+  <!-- ===== CORE CONTENT ===== -->
+  <h2 class="section-title">Core anatomy &amp; mechanism</h2>
+
+  <div class="andra-callout">
+    <span class="tag">Andragogy 3 · Prior Experience</span>
+    <span class="body">You already know bone, joint, and gross anatomy from your EMT and A&amp;P coursework. Here we are going to use that foundation to predict injury — anatomy is no longer a fact to memorize, it is a map to read on scene.</span>
+  </div>
+
+  <div class="expandable">
+    <div class="expand-header" onclick="bcToggleBlock(this)">
+      <div class="expand-title"><span class="icon">A</span><span class="text">Bone biology — why bone bleeds, breaks, and heals the way it does</span></div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="expand-body">
+      <h4 class="sub-title">Architecture</h4>
+      <p>Bone is living, vascular, neurally innervated tissue. <strong>Cortical (compact) bone</strong> forms the dense outer shaft and resists bending; <strong>cancellous (trabecular) bone</strong> fills the metaphysis and epiphysis with a lattice that absorbs compression. The <strong>periosteum</strong> is a richly vascular and innervated outer membrane — strip it and you destroy bone's blood supply; tear it and the patient feels deep, sickening pain.</p>
+      <h4 class="sub-title">Why this matters in the field</h4>
+      <ul class="bul">
+        <li><strong>Bone bleeds significantly</strong> because cancellous bone houses sinusoidal capillaries and marrow vessels with poor ability to vasoconstrict.</li>
+        <li><strong>Pediatric bone bends before it breaks</strong> (greenstick, torus, plastic deformation) because immature cortex is more porous and the periosteum is thicker.</li>
+        <li><strong>Geriatric bone snaps with minimal force</strong> because osteoporotic cortex loses tensile strength — a "trip-and-fall" fracture is a real fracture.</li>
+        <li><strong>Bone heals through hematoma</strong> — splinting that controls motion preserves the fracture hematoma and is the patient's first contribution to bony union.</li>
+      </ul>
+      <div class="pearl"><div class="head">Clinical pearl</div>The "feel" of crepitus is broken cortex grinding on broken cortex, with periosteum dragged across both. Producing it deliberately is malpractice. Hearing it once is unforgettable; producing it intentionally tells the patient you don't know what you're doing.</div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expand-header" onclick="bcToggleBlock(this)">
+      <div class="expand-title"><span class="icon">B</span><span class="text">Joint structure &amp; the geometry of dislocation</span></div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="expand-body">
+      <p>Synovial joints (knee, hip, shoulder, elbow) are the ones that dislocate. Each is a balance between <strong>mobility</strong> (provided by lax capsule, ball-and-socket geometry, and accessory motion) and <strong>stability</strong> (provided by ligaments, joint congruity, and surrounding muscle). Hip = most stable, hardest to dislocate, requires the most force. Shoulder = least stable, easiest to dislocate, often atraumatic in recurrent cases.</p>
+      <h4 class="sub-title">Subluxation vs. dislocation</h4>
+      <p>A <strong>subluxation</strong> is partial loss of articular contact that often spontaneously reduces. A <strong>dislocation</strong> is complete loss of contact — the joint is locked out of position and will not move through normal range. Both stretch capsule, ligaments, and surrounding neurovascular structures.</p>
+      <h4 class="sub-title">High-yield neurovascular pairings</h4>
+      <div class="table-wrap"><table class="clinical">
+        <thead><tr><th>Joint</th><th>Most common dislocation direction</th><th>Structure most at risk</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Shoulder</strong></td><td>Anterior (95%)</td><td>Axillary nerve (deltoid, lateral arm sensation)</td></tr>
+          <tr><td><strong>Elbow</strong></td><td>Posterior</td><td>Brachial artery, median &amp; ulnar nerves</td></tr>
+          <tr><td><strong>Hip</strong></td><td>Posterior (85–90%)</td><td>Sciatic nerve; femoral head AVN if &gt;6 hr</td></tr>
+          <tr><td><strong>Knee</strong></td><td>Any direction (true emergency)</td><td>Popliteal artery — assume injury until proven</td></tr>
+          <tr><td><strong>Ankle</strong></td><td>Posterior or lateral</td><td>Skin tenting → open conversion</td></tr>
+        </tbody>
+      </table></div>
+      <div class="crit-list"><div class="head">Cannot miss</div>
+        <ul><li><strong>Knee dislocation</strong> = popliteal artery injury until imaging proves otherwise. Pulses present at scene do not exclude intimal injury — these limbs are lost late, not early.</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expand-header" onclick="bcToggleBlock(this)">
+      <div class="expand-title"><span class="icon">C</span><span class="text">Mechanism of injury — what kinematics tell you before you touch the patient</span></div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="expand-body">
+      <p>Mechanism is your first piece of clinical data. Match the mechanism to predicted pattern and you arrive at the patient's side already triaging.</p>
+      <div class="table-wrap"><table class="clinical">
+        <thead><tr><th>Mechanism</th><th>Predicted patterns</th><th>What to look for</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Direct blow</strong></td><td>Transverse fracture at site, contusion, soft-tissue injury</td><td>Localized deformity, bruising</td></tr>
+          <tr><td><strong>Indirect / transmitted force</strong> (FOOSH)</td><td>Wrist (Colles, scaphoid), elbow, clavicle, shoulder</td><td>Pain proximal &amp; distal to point of impact</td></tr>
+          <tr><td><strong>Twisting</strong></td><td>Spiral fractures (tibia, humerus); ankle ligament injury</td><td>"My foot stayed planted and my body kept going"</td></tr>
+          <tr><td><strong>Axial load</strong></td><td>Calcaneal, vertebral compression, hip/acetabulum</td><td>Fall from height, knees-on-dash MVC</td></tr>
+          <tr><td><strong>High-energy blunt</strong> (MVC, motorcycle, ped struck)</td><td>Pelvic, femur, multiple, open fractures</td><td>Anyone with a femur deformity has another injury until proven otherwise</td></tr>
+          <tr><td><strong>Pathologic / minor force</strong></td><td>Fragility fractures (geriatric hip, vertebral); pathologic through tumor or cyst</td><td>Disproportionate pain to mechanism — believe it</td></tr>
+        </tbody>
+      </table></div>
+      <div class="andra-callout">
+        <span class="tag">Andragogy 5 · Orientation to Learning</span>
+        <span class="body">This is not a chapter on "fractures." It is a chapter on solving the problem that walks (or arrives) in front of you. Every concept maps to a decision you will make on a real call.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expand-header" onclick="bcToggleBlock(this)">
+      <div class="expand-title"><span class="icon">D</span><span class="text">Fracture nomenclature — speaking the language</span></div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="expand-body">
+      <h4 class="sub-title">Open vs. closed</h4>
+      <p>An <strong>open ("compound") fracture</strong> communicates with the outside through any break in the skin — a dime-sized puncture from a bone end is open, even if the bone is no longer protruding. Treat as contaminated. A <strong>closed fracture</strong> is intact skin over the injury.</p>
+
+      <h4 class="sub-title">Complete vs. incomplete</h4>
+      <ul class="bul">
+        <li><strong>Complete</strong> — disruption through both cortices.</li>
+        <li><strong>Incomplete</strong> — one cortex intact (greenstick, torus/buckle, plastic deformation in pediatrics).</li>
+      </ul>
+
+      <h4 class="sub-title">Pattern (the line of fracture)</h4>
+      <div class="legend-bar">
+        <div class="legend-item"><div class="key">Transverse</div><div class="desc">Perpendicular to long axis — direct blow</div></div>
+        <div class="legend-item"><div class="key">Oblique</div><div class="desc">Diagonal — angulated force</div></div>
+        <div class="legend-item"><div class="key">Spiral</div><div class="desc">Curving — twisting force; child abuse red flag in non-ambulatory child</div></div>
+        <div class="legend-item"><div class="key">Comminuted</div><div class="desc">≥3 fragments — high-energy</div></div>
+        <div class="legend-item"><div class="key">Segmental</div><div class="desc">Two complete fractures isolating a middle segment</div></div>
+        <div class="legend-item"><div class="key">Impacted</div><div class="desc">Driven into itself — fall from height onto axial bone</div></div>
+        <div class="legend-item"><div class="key">Avulsion</div><div class="desc">Tendon/ligament tears off bone fragment</div></div>
+        <div class="legend-item"><div class="key">Pathologic</div><div class="desc">Through abnormal bone (tumor, cyst, osteoporosis)</div></div>
+      </div>
+
+      <h4 class="sub-title">Salter–Harris (pediatric only)</h4>
+      <p>Fractures involving the growth plate (physis), graded I–V. Higher grades carry higher risk of growth arrest and limb-length discrepancy. You don't grade them in the field, but you do recognize that <em>any</em> pediatric fracture near a joint is presumed to involve the physis until imaging proves otherwise.</p>
+
+      <h4 class="sub-title">Gustilo classification of open fractures</h4>
+      <p>(Documentation pearl, not a field grade.) <strong>Type I</strong> &lt;1 cm clean wound; <strong>Type II</strong> 1–10 cm without extensive soft-tissue damage; <strong>Type III</strong> &gt;10 cm or extensive soft-tissue/neurovascular involvement. Type III carries the highest infection and amputation risk — describe what you saw, do not estimate the grade.</p>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expand-header" onclick="bcToggleBlock(this)">
+      <div class="expand-title"><span class="icon">E</span><span class="text">The 6 P's — neurovascular assessment as a verb, not a checkbox</span></div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="expand-body">
+      <p>Document the 6 P's <strong>before</strong> any movement, splinting, or transport — and again after every intervention. Documenting "intact" once means you don't know what changed.</p>
+      <div class="legend-bar">
+        <div class="legend-item"><div class="key">Pain</div><div class="desc">Out of proportion is the earliest sign of compartment syndrome</div></div>
+        <div class="legend-item"><div class="key">Pallor</div><div class="desc">Pale, cool extremity = vascular compromise</div></div>
+        <div class="legend-item"><div class="key">Paresthesia</div><div class="desc">Tingling, numbness — early nerve sign</div></div>
+        <div class="legend-item"><div class="key">Paralysis</div><div class="desc">Inability to move — late and ominous</div></div>
+        <div class="legend-item"><div class="key">Pulselessness</div><div class="desc">Absent or asymmetric distal pulse — late vascular sign</div></div>
+        <div class="legend-item"><div class="key">Poikilothermia</div><div class="desc">Limb takes ambient temperature — vascular compromise</div></div>
+      </div>
+      <div class="warn-block"><div class="head">Warning</div>Pulses can be present in a limb that is dying. Pulses last; tissue does not. Pain out of proportion, tense compartment, and paresthesia precede pulse loss in compartment syndrome by hours.</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Why you, why now</h2>
+  <div class="andra-callout">
+    <span class="tag">Andragogy 4 · Readiness to Learn</span>
+    <span class="body">Whether you ride 911 in Suffolk, run interfacility from Riverside, or cover a college football game, the next orthopaedic patient is on your schedule. You are not preparing for a test — you are preparing for a name and a face you don't know yet.</span>
+  </div>
+  <div class="andra-callout">
+    <span class="tag">Andragogy 6 · Motivation</span>
+    <span class="body">No call gives you a clearer line between "what I did" and "how this person walks again" than orthopaedic trauma. A good pelvic binder, a properly aligned femur, a recognized compartment — these are the calls you remember twenty years in.</span>
+  </div>
+
+  <div class="btn-row" style="justify-content:flex-start;margin-top:32px;">
+    <button class="btn-primary" onclick="bcGoTo('m2')">Continue to Module 2 →</button>
+  </div>
+
+</section>
+
+
+<!-- ============================================ -->
+<!-- MODULE 2: DEEP DIVE & APPLICATION             -->
+<!-- ============================================ -->
+<section class="section" id="m2">
+
+  <span class="eyebrow">Module Two — Deep Dive</span>
+  <h1 class="display">High-stakes injuries, <em>field-grade</em> management.</h1>
+  <p class="lede">This is the working-paramedic chapter. Pelvis, femur, hip, compartment, dislocations, splinting, pain control. We move through each as a problem you might solve in a moving ambulance with one partner and an awake patient.</p>
+
+  <div class="andragogy-bar">
+    <div class="andra-pill"><div class="num">1</div><span class="lbl">Need to Know</span></div>
+    <div class="andra-pill"><div class="num">2</div><span class="lbl">Self-Concept</span></div>
+    <div class="andra-pill"><div class="num">3</div><span class="lbl">Prior Experience</span></div>
+    <div class="andra-pill"><div class="num">4</div><span class="lbl">Readiness</span></div>
+    <div class="andra-pill"><div class="num">5</div><span class="lbl">Orientation</span></div>
+    <div class="andra-pill"><div class="num">6</div><span class="lbl">Motivation</span></div>
+  </div>
+
+  <div class="andra-callout">
+    <span class="tag">Andragogy 2 · Self-Concept</span>
+    <span class="body">You are not memorizing for an instructor. You are sharpening the toolkit you will deploy. Treat each block below as a working paramedic, not a passive student — argue with it, compare it to your own protocol, decide where you'll deviate and why.</span>
+  </div>
+
+  <!-- ===== PELVIC FRACTURES ===== -->
+  <h2 class="section-title">Pelvic ring fractures — the silent exsanguination</h2>
+
+  <div class="panel">
+    <h3 class="block-title">The problem</h3>
+    <p>The pelvis is a vascular crime scene waiting to happen. Disruption of the ring opens a retroperitoneal space that can hold <strong>2–4 liters</strong> of blood without producing a single drop visible to you. By the time the abdomen looks distended, the patient is in late shock. Mortality for unstable pelvic fractures with hemodynamic instability is reported at <strong>30–50%</strong>.</p>
+
+    <h4 class="sub-title">Three main patterns</h4>
+    <div class="tile-grid">
+      <div class="tile critical">
+        <div class="tile-label">Anterior–Posterior (Open Book)</div>
+        <div class="tile-body">Frontal compression "opens" the symphysis &amp; SI joints. Massive arterial &amp; venous bleeding. <strong>Single highest mortality.</strong> Mechanism: head-on MVC, motorcycle, ped struck.</div>
+      </div>
+      <div class="tile warn">
+        <div class="tile-label">Lateral Compression</div>
+        <div class="tile-body">Most common. T-bone MVC, fall onto side. Bleeding usually less than APC but can still be life-threatening. Look for crush injury and bladder/urethral involvement.</div>
+      </div>
+      <div class="tile critical">
+        <div class="tile-label">Vertical Shear</div>
+        <div class="tile-body">Axial loading drives one hemipelvis upward (fall from height, ejection). Highest neurologic injury. Limb shortening + asymmetric pelvis.</div>
+      </div>
+    </div>
+
+    <h4 class="sub-title">Field assessment — gentle &amp; once</h4>
+    <ul class="bul">
+      <li><strong>Look</strong> — leg-length discrepancy, asymmetric rotation, perineal/scrotal hematoma, blood at urethral meatus, flank ecchymosis (Grey-Turner).</li>
+      <li><strong>Palpate</strong> — single, gentle bilateral compression of the iliac wings <em>once</em>. Pain, instability, or crepitus = positive. <strong>Do not rock</strong> the pelvis. Repeated examination dislodges clot and worsens bleeding.</li>
+      <li><strong>Suspect</strong> — any patient with the right mechanism + hypotension + femur or back pain has a pelvic injury until imaging says otherwise.</li>
+    </ul>
+
+    <h4 class="sub-title">Pelvic binder — apply early, apply correctly</h4>
+    <ol class="numlist">
+      <li>Indicated for any suspected unstable pelvic ring injury, especially with hemodynamic instability.</li>
+      <li>Place at the level of the <strong>greater trochanters</strong> — not the iliac crests. A binder placed too high does not close the ring.</li>
+      <li>Internally rotate the lower extremities (knees/feet together) before tightening — reduces pelvic volume.</li>
+      <li>Tension to manufacturer specification or until the symphysis closes; over-tension can cause overcompression of lateral compression injuries.</li>
+      <li>Document distal neurovascular status before and after. Do not remove for transfer of care unless the receiving team is ready to take over hemorrhage control.</li>
+    </ol>
+
+    <div class="crit-list"><div class="head">Cannot miss</div>
+      <ul>
+        <li>An "open" pelvic fracture (skin, vagina, rectum, or perineum disrupted) carries mortality up to <strong>50%</strong>. Pack any obvious external wound, transport priority one.</li>
+        <li>Blood at the urethral meatus, perineal hematoma, or high-riding prostate = <strong>do not insert a urinary catheter</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== FEMUR ===== -->
+  <h2 class="section-title">Femoral shaft &amp; hip injuries</h2>
+
+  <div class="panel">
+    <h3 class="block-title">Femoral shaft fracture</h3>
+    <p>The femur is the strongest bone in the body — fracturing it requires significant force, so the patient also has another injury until proven otherwise. Closed femur fracture sequesters <strong>1,000–1,500 mL</strong> of blood; open or bilateral, more.</p>
+    <h4 class="sub-title">Findings</h4>
+    <ul class="bul"><li>Shortened, externally rotated thigh (often)</li><li>Pain, swelling, deformity at midshaft</li><li>Tense, doughy thigh — expanding hematoma</li><li>Possible distal neurovascular compromise</li></ul>
+
+    <h4 class="sub-title">Traction splint — when, when not, how</h4>
+    <p><strong>Indicated:</strong> isolated, closed, midshaft femur fracture without contraindications.</p>
+    <p><strong>Contraindicated:</strong></p>
+    <ul class="bul">
+      <li>Suspected pelvic fracture</li>
+      <li>Hip dislocation or fracture (intracapsular, intertrochanteric, subtrochanteric)</li>
+      <li>Knee injury or fracture distal to the midshaft</li>
+      <li>Lower-leg, ankle, or foot injury that prevents ankle hitch placement</li>
+      <li>Partial amputation with bone-on-soft-tissue connection</li>
+      <li>Pediatric patients smaller than the device permits</li>
+    </ul>
+    <p><strong>Mechanism of benefit:</strong> realigns overlapping bone ends, reduces pain, reduces internal hemorrhage by tamponade against the femoral fascia, and prevents secondary injury to the neurovascular bundle in Hunter's canal.</p>
+    <div class="warn-block"><div class="head">Caution</div>Apply traction only until pain decreases, alignment is restored, and the limb feels stable — not "as much as the ratchet will give." Excess traction injures the nerve.</div>
+  </div>
+
+  <div class="panel">
+    <h3 class="block-title">Hip fracture (proximal femur)</h3>
+    <p>The classic geriatric mechanism: a ground-level fall, the patient cannot weight-bear, the affected leg is shortened and externally rotated, and pain localizes to the groin. Mortality at one year approaches <strong>20–30%</strong> — not from the fracture itself, but from immobility, pneumonia, and DVT.</p>
+    <ul class="bul">
+      <li><strong>Femoral neck (intracapsular)</strong> — risk of avascular necrosis of the head; surgical urgency.</li>
+      <li><strong>Intertrochanteric / subtrochanteric (extracapsular)</strong> — significant blood loss, often surgically stabilized.</li>
+    </ul>
+    <h4 class="sub-title">Field management</h4>
+    <ul class="bul">
+      <li>Position of comfort — usually slightly flexed and externally rotated. Pillows under the knee.</li>
+      <li>Vacuum splint or scoop-and-pad. <strong>Do not</strong> apply a traction splint to a hip fracture.</li>
+      <li>Aggressive pain control — these patients hurt and underdosing is a real harm.</li>
+      <li>Always assess for the cause of the fall (syncope, stroke, dysrhythmia, sepsis) — the fracture may be the second event, not the first.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3 class="block-title">Hip dislocation</h3>
+    <p>True orthopaedic emergency. Posterior dislocation (≈90%) classically results from knee-strikes-dashboard MVC: the limb is shortened, adducted, and internally rotated. The femoral head sits on the sciatic nerve. Reduction within <strong>6 hours</strong> dramatically reduces the rate of avascular necrosis.</p>
+    <div class="crit-list"><div class="head">Time = function</div><ul><li>Immobilize in position found, generous pain control, expedite transport — do not attempt field reduction.</li></ul></div>
+  </div>
+
+  <!-- ===== UPPER EXTREMITY ===== -->
+  <h2 class="section-title">Upper extremity at a glance</h2>
+
+  <div class="table-wrap"><table class="clinical">
+    <thead><tr><th>Injury</th><th>Mechanism</th><th>Presentation</th><th>Field key</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Clavicle fracture</strong></td><td>FOOSH or direct blow to shoulder</td><td>Pain &amp; deformity at midshaft, shoulder dropped &amp; held</td><td>Sling &amp; swathe; assess for tenting / pneumothorax in proximal fxs</td></tr>
+      <tr><td><strong>Anterior shoulder dislocation</strong></td><td>Abduction + external rotation</td><td>Squared-off shoulder, arm held in slight abduction, refuses adduction</td><td>Splint in position; assess axillary nerve (lateral arm sensation, deltoid)</td></tr>
+      <tr><td><strong>Humeral shaft fracture</strong></td><td>Direct blow, fall</td><td>Pain, deformity, shortening</td><td>Sugar-tong splint or sling/swathe; <strong>radial nerve at risk</strong> — check wrist extension</td></tr>
+      <tr><td><strong>Elbow dislocation/fracture</strong></td><td>FOOSH, direct trauma</td><td>Marked deformity, severe pain</td><td>Splint in position; brachial artery and median/ulnar nerves at risk — repeat NV checks</td></tr>
+      <tr><td><strong>Colles' fracture</strong></td><td>FOOSH, geriatric</td><td>"Dinner-fork" deformity at distal radius</td><td>Volar splint, ice, elevate</td></tr>
+      <tr><td><strong>Scaphoid fracture</strong></td><td>FOOSH</td><td>Pain in anatomic snuffbox; minimal deformity</td><td>Splint and refer — high non-union rate, easily missed</td></tr>
+    </tbody>
+  </table></div>
+
+  <!-- ===== LOWER EXTREMITY ===== -->
+  <h2 class="section-title">Lower extremity at a glance</h2>
+
+  <div class="table-wrap"><table class="clinical">
+    <thead><tr><th>Injury</th><th>Mechanism</th><th>Presentation</th><th>Field key</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Knee dislocation</strong></td><td>High-energy / low-energy in obese patient</td><td>Gross deformity (may spontaneously reduce)</td><td><strong>Popliteal artery injury until proven otherwise.</strong> Trauma center, repeat NV every 5 min</td></tr>
+      <tr><td><strong>Patellar fracture</strong></td><td>Direct blow, dashboard</td><td>Anterior knee pain, inability to extend</td><td>Long-leg splint in extension</td></tr>
+      <tr><td><strong>Tibial shaft fracture</strong></td><td>Direct, twisting (often open)</td><td>Pain, deformity, frequently open (subcutaneous)</td><td>High compartment syndrome risk; rigid splint, NV checks</td></tr>
+      <tr><td><strong>Ankle fracture/dislocation</strong></td><td>Inversion/eversion + axial</td><td>Deformity, skin tenting</td><td>Realign for tenting/pulselessness per protocol; vacuum or rigid splint</td></tr>
+      <tr><td><strong>Calcaneus fracture</strong></td><td>Fall from height, axial load</td><td>Heel pain, ecchymosis</td><td>Look for vertebral &amp; contralateral calcaneal fractures — "lover's fracture" complex</td></tr>
+    </tbody>
+  </table></div>
+
+  <!-- ===== COMPARTMENT SYNDROME ===== -->
+  <h2 class="section-title">Compartment syndrome — the limb-killer</h2>
+
+  <div class="panel">
+    <p>Bleeding or edema in a closed fascial compartment raises pressure beyond capillary perfusion. Tissue ischemia causes more edema, which raises pressure further — a closed-loop failure that produces irreversible muscle and nerve death in <strong>4–8 hours</strong>. Treatment is fasciotomy. Recognition is your job.</p>
+
+    <h4 class="sub-title">Risk profile</h4>
+    <ul class="bul">
+      <li>Long-bone fractures, especially tibia &amp; forearm</li>
+      <li>Crush injuries, especially with prolonged extrication</li>
+      <li>High-energy soft-tissue trauma without fracture</li>
+      <li>Burns, especially circumferential</li>
+      <li>Reperfusion after vascular repair</li>
+      <li>Tight casts, splints, or dressings — including the one you applied</li>
+    </ul>
+
+    <h4 class="sub-title">The 5 P's of compartment syndrome (in order of appearance)</h4>
+    <div class="legend-bar">
+      <div class="legend-item"><div class="key">1. Pain</div><div class="desc"><strong>Out of proportion</strong> to injury, worsened by passive stretch — earliest, most reliable</div></div>
+      <div class="legend-item"><div class="key">2. Paresthesia</div><div class="desc">Burning, tingling — early nerve sign</div></div>
+      <div class="legend-item"><div class="key">3. Pallor</div><div class="desc">Pale, cool, tense compartment</div></div>
+      <div class="legend-item"><div class="key">4. Paralysis</div><div class="desc">Late and ominous</div></div>
+      <div class="legend-item"><div class="key">5. Pulselessness</div><div class="desc">Latest sign — pulses last; tissue does not</div></div>
+    </div>
+    <div class="crit-list"><div class="head">Field truth</div><ul><li>If you wait for pulselessness, the limb is gone. Pain out of proportion + tense compartment + paresthesia = compartment syndrome until proven otherwise.</li></ul></div>
+
+    <h4 class="sub-title">Field actions</h4>
+    <ol class="numlist">
+      <li>Loosen any constrictive dressing or splint immediately, even one you placed.</li>
+      <li>Position limb at heart level (not elevated, not dependent).</li>
+      <li>Aggressive pain control as protocol allows.</li>
+      <li>Notify the receiving facility — fasciotomy is time-critical.</li>
+      <li>Document: onset of symptoms, interventions, and serial NV checks.</li>
+    </ol>
+  </div>
+
+  <!-- ===== AMPUTATION ===== -->
+  <h2 class="section-title">Amputations &amp; near-amputations</h2>
+  <div class="panel">
+    <ul class="bul">
+      <li><strong>Hemorrhage control first</strong> — direct pressure, then tourniquet 2–3 inches above the wound, on bare skin, tightened until bleeding stops. Mark "TQ" and the time on the patient's forehead, the device, or both.</li>
+      <li><strong>Wound</strong> — saline-moistened sterile gauze, dry sterile cover, splint to prevent further injury.</li>
+      <li><strong>Amputated part</strong> — wrap in moist sterile gauze, place in a sealed plastic bag, then bag on ice. <strong>Never</strong> place tissue in direct contact with ice or in water — frostbite destroys it.</li>
+      <li><strong>Partial amputation</strong> — splint as a unit, do not complete the amputation. Even a thread of perfusion can preserve the limb.</li>
+      <li>Transport priority one to the appropriate replantation-capable trauma center.</li>
+    </ul>
+  </div>
+
+  <!-- ===== SPLINTING PRINCIPLES ===== -->
+  <h2 class="section-title">Splinting — principles before product</h2>
+  <div class="panel">
+    <ol class="numlist">
+      <li>Expose the injury and assess <strong>distal neurovascular status before splinting</strong>.</li>
+      <li>Cover open wounds with sterile dressing first.</li>
+      <li>Splint the joint above and the joint below the fracture site; for joint injuries, splint the bones above and below.</li>
+      <li>Pad bony prominences and any voids in the splint.</li>
+      <li>Realign severely angulated long-bone fractures with gentle longitudinal traction <strong>only</strong> if there is distal neurovascular compromise — and per local protocol. Stop if you meet resistance or pain dramatically increases.</li>
+      <li>For dislocations and joint injuries, splint <strong>in the position found</strong> unless distal pulse is absent and protocol authorizes a single reduction attempt.</li>
+      <li>Reassess and document distal neurovascular status <strong>after</strong> splinting and at every change of care.</li>
+      <li>Elevate (when permitted by injury), apply cold pack with a barrier (do not place ice directly on skin).</li>
+      <li>Manage pain — splinting without analgesia is incomplete care.</li>
+    </ol>
+
+    <h4 class="sub-title">Device selection</h4>
+    <div class="table-wrap"><table class="clinical">
+      <thead><tr><th>Device</th><th>Best for</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SAM splint</strong></td><td>Forearm, wrist, lower leg, ankle</td><td>Mold to limb; combine with elastic wrap</td></tr>
+        <tr><td><strong>Vacuum splint</strong></td><td>Angulated extremities, joint injuries, geriatric hip</td><td>Conforms to deformity; will not realign</td></tr>
+        <tr><td><strong>Rigid (board/cardboard)</strong></td><td>Long bones in alignment</td><td>Pad voids; secure above and below</td></tr>
+        <tr><td><strong>Traction splint</strong></td><td>Isolated midshaft femur, closed</td><td>Contraindicated with pelvis, hip, knee, distal injury</td></tr>
+        <tr><td><strong>Pelvic binder</strong></td><td>Suspected unstable pelvis</td><td>Greater trochanter level; internal-rotate hips</td></tr>
+        <tr><td><strong>Sling &amp; swathe</strong></td><td>Clavicle, shoulder, humerus</td><td>Quick, comfortable, mobile patients</td></tr>
+        <tr><td><strong>Pillow splint</strong></td><td>Ankle, foot, geriatric hip in transport</td><td>Comfortable, low-tech, often appropriate</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- ===== PAIN MANAGEMENT ===== -->
+  <h2 class="section-title">Pain management — your most reliable intervention</h2>
+  <div class="panel">
+    <p>Untreated pain is harmful: tachycardia, hypertension, increased oxygen demand, and patient-reported anxiety that worsens hemodynamics. Per protocol, options commonly include:</p>
+    <div class="med-row">
+      <span class="med-chip">Fentanyl 1 mcg/kg IV/IO/IN</span>
+      <span class="med-chip">Morphine 0.1 mg/kg IV/IO/IM</span>
+      <span class="med-chip">Ketamine 0.1–0.3 mg/kg IV (analgesic dose)</span>
+      <span class="med-chip">Acetaminophen IV/PO</span>
+      <span class="med-chip">Ondansetron 4 mg IV (antiemetic)</span>
+    </div>
+    <ul class="bul">
+      <li>Fentanyl: rapid onset (1–2 min IV), short duration, less histamine release than morphine — favored for hemodynamically borderline patients.</li>
+      <li>Ketamine: maintains airway reflexes and BP, effective in opioid-naïve and opioid-tolerant patients; watch for emergence at higher doses.</li>
+      <li>Reassess pain numerically <em>and</em> functionally — the patient who can tolerate the splint and answer questions is adequately treated.</li>
+      <li>Document analgesia given, response, and any side effects.</li>
+    </ul>
+    <div class="warn-block"><div class="head">Caution</div>Hypotension is not an absolute contraindication to analgesia. It is a contraindication to over-dosing. Titrate, treat the cause of hypotension, and don't leave a patient screaming because the BP is 90.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== INTERACTIVE: BRANCHING SCENARIO ===== -->
+  <h2 class="section-title">Decision-making exercise — branching scenario</h2>
+  <div class="andra-callout">
+    <span class="tag">Andragogy 5 · Orientation to Learning</span>
+    <span class="body">Problem-centered, not subject-centered. Make a call. Live with what happens next.</span>
+  </div>
+
+  <div class="branch-scenario" id="branchScenario">
+    <div class="branch-step" data-step="1">
+      <h4 class="sub-title">Step 1 · Scene</h4>
+      <p>You are dispatched to a single-vehicle MVC, 0245, rural two-lane road. 28-year-old male, restrained driver, ~50 mph head-on into a tree. Steering wheel deformed. Patient extricated by fire. He is awake, anxious, complaining of severe right thigh pain and "my hip hurts." BP 96/60, HR 122, SpO₂ 97% RA. Right thigh deformed and shortened. Pelvic exam reveals tenderness and subtle motion. You have a 25-minute transport.</p>
+      <p style="margin-top:10px;font-weight:600;color:var(--ink);">Your first immobilization decision is:</p>
+      <div class="choice-row">
+        <button class="choice-btn" onclick="bcChoose(this,1,'A')">A · Apply traction splint to the right femur, then transport.</button>
+        <button class="choice-btn" onclick="bcChoose(this,1,'B')">B · Apply pelvic binder, vacuum-splint or pad the femur in alignment, then transport.</button>
+        <button class="choice-btn" onclick="bcChoose(this,1,'C')">C · No binder until imaging confirms pelvis; just splint femur.</button>
+        <button class="choice-btn" onclick="bcChoose(this,1,'D')">D · Realign pelvis manually before applying any device.</button>
+      </div>
+      <div class="feedback-box" id="fb1"></div>
+    </div>
+
+    <div class="branch-step" data-step="2" style="display:none;">
+      <h4 class="sub-title">Step 2 · En route</h4>
+      <p>Ten minutes in, BP is 84/50, HR 138, mental status decreasing. You have IO access bilaterally. Trauma center is 15 minutes away.</p>
+      <p style="margin-top:10px;font-weight:600;color:var(--ink);">Your next move is:</p>
+      <div class="choice-row">
+        <button class="choice-btn" onclick="bcChoose(this,2,'A')">A · Two liters of crystalloid wide open to bring SBP to 120.</button>
+        <button class="choice-btn" onclick="bcChoose(this,2,'B')">B · Permissive hypotension — small boluses to maintain SBP ~90 and mentation, request blood at the receiving facility, recheck binder placement.</button>
+        <button class="choice-btn" onclick="bcChoose(this,2,'C')">C · Push 100 mcg fentanyl now to get him quiet and reduce sympathetic drive.</button>
+        <button class="choice-btn" onclick="bcChoose(this,2,'D')">D · Stop the truck and reassess from scratch.</button>
+      </div>
+      <div class="feedback-box" id="fb2"></div>
+    </div>
+
+    <div class="branch-step" data-step="3" style="display:none;">
+      <h4 class="sub-title">Step 3 · The handoff</h4>
+      <p>You arrive at the trauma center. Right foot is now cooler than the left. You are asked to give report.</p>
+      <p style="margin-top:10px;font-weight:600;color:var(--ink);">The single most important sentence in your handoff is:</p>
+      <div class="choice-row">
+        <button class="choice-btn" onclick="bcChoose(this,3,'A')">A · "BP came up after fluids, he's stable now."</button>
+        <button class="choice-btn" onclick="bcChoose(this,3,'B')">B · "Suspected unstable pelvis, midshaft femur fracture, persistent shock despite binder and limited fluid, distal pulses initially +2 now diminished on right — he needs blood and the OR."</button>
+        <button class="choice-btn" onclick="bcChoose(this,3,'C')">C · "Probable traumatic hip dislocation."</button>
+        <button class="choice-btn" onclick="bcChoose(this,3,'D')">D · "Stable patient, just bumps and bruises."</button>
+      </div>
+      <div class="feedback-box" id="fb3"></div>
+    </div>
+  </div>
+
+  <div class="btn-row" style="justify-content:flex-start;margin-top:32px;">
+    <button class="btn-primary" onclick="bcGoTo('m3')">Continue to Module 3 →</button>
+  </div>
+
+</section>
+
+
+<!-- ============================================ -->
+<!-- MODULE 3: SYNTHESIS & ASSESSMENT             -->
+<!-- ============================================ -->
+<section class="section" id="m3">
+
+  <span class="eyebrow">Module Three — Synthesis</span>
+  <h1 class="display">Pulling it together: <em>the call</em> as a single performance.</h1>
+  <p class="lede">Knowledge becomes competence when it survives the noise of an actual call. Use this capstone to test your reasoning end-to-end, then write yourself a one-paragraph plan for your next shift.</p>
+
+  <div class="andragogy-bar">
+    <div class="andra-pill"><div class="num">1</div><span class="lbl">Need to Know</span></div>
+    <div class="andra-pill"><div class="num">2</div><span class="lbl">Self-Concept</span></div>
+    <div class="andra-pill"><div class="num">3</div><span class="lbl">Prior Experience</span></div>
+    <div class="andra-pill"><div class="num">4</div><span class="lbl">Readiness</span></div>
+    <div class="andra-pill"><div class="num">5</div><span class="lbl">Orientation</span></div>
+    <div class="andra-pill"><div class="num">6</div><span class="lbl">Motivation</span></div>
+  </div>
+
+  <!-- ===== CAPSTONE ===== -->
+  <h2 class="section-title">Capstone scenario</h2>
+  <div class="case-hook">
+    <div class="dispatch">DISPATCH 16:48 / Mass Casualty Alert / Construction Site</div>
+    <p class="narrative">Two-story residential framing collapses onto three workers. Scene is now safe per IC. You and your partner are assigned to <strong>Patient Yellow</strong>, a 34-year-old male trapped under structural lumber for ~40 minutes. He is freed on your arrival.</p>
+    <p style="margin-top:10px;color:var(--ink-soft);font-size:15px;">
+    <strong>Findings:</strong> awake, in severe pain, GCS 15. Right lower leg deformed below the knee with a 4 cm open wound, bone visible. Left thigh swollen, painful, no obvious deformity. Pelvis tender bilaterally. Right calf is tense and exquisitely painful to passive dorsiflexion of the foot. BP 102/74, HR 124, RR 24, SpO₂ 95% RA. Distal pulses: right DP/PT 1+, left 2+. He says, "<em>My right leg feels like it's on fire and my foot is going numb.</em>"</p>
+  </div>
+
+  <div class="panel">
+    <h3 class="block-title">Your task</h3>
+    <p>List, in order, the next six interventions you will perform and your rationale for each. Then identify the <strong>three time-critical issues</strong> on this scene and the destination decision you will make.</p>
+    <div class="reflect-box" style="background:var(--bg-elev);">
+      <p class="reflect-q">Six interventions, in priority order, with rationale.</p>
+      <textarea id="capInterventions" placeholder="1)&#10;2)&#10;3)&#10;4)&#10;5)&#10;6)"></textarea>
+
+      <p class="reflect-q">Three time-critical issues on this patient.</p>
+      <textarea id="capCritical" placeholder="Critical issue 1, 2, 3 — and what makes each time-critical."></textarea>
+
+      <p class="reflect-q">Destination &amp; transport decision (with rationale).</p>
+      <textarea id="capDestination" placeholder="Where will you take this patient and why? Air vs. ground? What pre-arrival notification do you give?"></textarea>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 class="block-title">Model answer (open after you write yours)</h3>
+    <div class="expandable">
+      <div class="expand-header" onclick="bcToggleBlock(this)">
+        <div class="expand-title"><span class="icon">★</span><span class="text">Show expert priority list and rationale</span></div>
+        <span class="chev">▾</span>
+      </div>
+      <div class="expand-body">
+        <h4 class="sub-title">Six interventions, in order</h4>
+        <ol class="numlist">
+          <li><strong>Hemorrhage control + tourniquet readiness</strong> — open tibia/fibula fracture is contaminated and may bleed; control with direct pressure, sterile dressing, tourniquet ready proximally if pulsatile bleeding develops.</li>
+          <li><strong>Pelvic binder applied at the greater trochanters</strong> — bilateral pelvic tenderness + significant mechanism + tachycardia. Apply early, do not wait for hypotension.</li>
+          <li><strong>Recognize and act on right-leg compartment syndrome</strong> — tense calf, pain on passive stretch, paresthesia, pulses present but diminished. Loosen any constrictive dressing, position at heart level, expedite transport, alert receiving team that fasciotomy may be needed.</li>
+          <li><strong>Splint each long-bone injury appropriately</strong> — vacuum or rigid splint to right tibia (open: sterile dressing first, do not push bone back); align and splint left femur (consider traction splint <em>only</em> if pelvic binder placement and exam exclude pelvic ring injury — in this case the pelvic findings make a traction splint contraindicated; use a vacuum splint or rigid alignment instead).</li>
+          <li><strong>Vascular access ×2 + measured fluid + analgesia</strong> — large-bore IV/IO, permissive hypotension goal (mentation + radial pulse + SBP ~90), fentanyl titrated to effect; consider ondansetron.</li>
+          <li><strong>Reassess and document NV status of all four extremities</strong> before, during, and after interventions; every 5 minutes en route. Notify the receiving trauma center of suspected pelvis, open tibia, contralateral femur, and developing compartment syndrome.</li>
+        </ol>
+        <h4 class="sub-title">Three time-critical issues</h4>
+        <ol class="numlist">
+          <li><strong>Pelvic ring instability with developing shock</strong> — minutes-to-hours.</li>
+          <li><strong>Right-leg compartment syndrome</strong> — 4–8 hour irreversible window.</li>
+          <li><strong>Open contaminated tibial fracture</strong> — every minute increases infection risk; antibiotics and operative washout are time-sensitive.</li>
+        </ol>
+        <h4 class="sub-title">Destination &amp; transport</h4>
+        <p>Level I or highest available trauma center, direct triage. Air medical if ground time exceeds the trauma system's threshold and helicopter ETA shortens definitive care arrival. Pre-arrival notification: trauma activation, "high-energy crush, suspected pelvis, open tibia/fibula with developing compartment syndrome, contralateral femur, age 34, vital signs trending."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== REFLECTION ===== -->
+  <h2 class="section-title">Reflection — for your next shift</h2>
+  <div class="andra-callout">
+    <span class="tag">Andragogy 6 · Motivation</span>
+    <span class="body">Adult learners change behavior when learning attaches to identity. Answer these in your own words. They are not graded — they are the part of this module you will actually carry to a call.</span>
+  </div>
+
+  <div class="reflect-box">
+    <p class="reflect-q">"On my next shift, the one orthopaedic skill I want to do better is __________ because __________."</p>
+    <textarea id="reflect1" placeholder="Be specific. 'Pelvic binder placement' is more useful than 'orthopaedic care.'"></textarea>
+
+    <p class="reflect-q">"The patient I will recognize earlier next time looks like __________."</p>
+    <textarea id="reflect2" placeholder="Mechanism, age group, finding pattern — what will trigger your suspicion sooner?"></textarea>
+
+    <p class="reflect-q">"If a partner challenges my plan to apply a pelvic binder before hypotension develops, I will say __________."</p>
+    <textarea id="reflect3" placeholder="Practice the words now so you have them when you need them."></textarea>
+
+    <p class="reflect-q">"One question I still have, that I will ask my preceptor or look up in Sanders this week, is __________."</p>
+    <textarea id="reflect4" placeholder="Naming the gap is the work."></textarea>
+  </div>
+
+  <div class="btn-row" style="justify-content:flex-start;margin-top:32px;">
+    <button class="btn-primary" onclick="bcGoTo('assess')">Begin 100-Question Assessment →</button>
+  </div>
+
+</section>
+
+<!-- ============================================ -->
+<!-- ASSESSMENT                                    -->
+<!-- ============================================ -->
+<section class="section" id="assess">
+
+  <span class="eyebrow">Final Assessment</span>
+  <h1 class="display">100 questions, <em>full rationale</em>, downloadable PDF.</h1>
+  <p class="lede">Each question carries a written rationale that appears after submission. Your name and student ID will be embedded in the downloadable score report. Passing benchmark for paramedic-level orthopaedic content is <strong>80%</strong>.</p>
+
+  <div id="assessIntro" class="assess-intro">
+    <h2>Ready to start?</h2>
+    <p style="color:var(--ink-soft);margin-top:8px;">Confirm your name and student ID at the top of the page before you begin. You may move freely between questions; submit when complete.</p>
+    <div class="assess-meta">
+      <div><strong>100</strong>Items</div>
+      <div><strong>4</strong>Options each</div>
+      <div><strong>80%</strong>Pass</div>
+      <div><strong>~75</strong>Min suggested</div>
+    </div>
+    <button class="btn-primary" id="startAssessBtn">Start Assessment</button>
+  </div>
+
+  <div id="assessBody" style="display:none;">
+    <div class="q-progress">
+      <div class="pos" id="qPos">0 / 100</div>
+      <div class="bar"><div class="fill" id="qFill"></div></div>
+      <div class="pct" id="qPct">0% answered</div>
+    </div>
+    <div id="qContainer"></div>
+    <div class="assess-controls">
+      <div class="left">
+        <button class="btn-ghost" id="resetBtn">Reset answers</button>
+      </div>
+      <div class="right">
+        <span class="assess-counter" id="counterText"><strong>0</strong> of 100 answered</span>
+        <button class="btn-primary" id="submitBtn" disabled>Submit assessment</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="assessResults" style="display:none;">
+    <div class="results-card">
+      <div class="eyebrow" id="resultEyebrow">Score Report</div>
+      <h2 style="font-family:var(--serif);font-weight:500;font-size:28px;margin-top:8px;" id="resultTitle">Assessment complete</h2>
+      <div class="score-display" id="scoreNum">0<sup>%</sup></div>
+      <div class="verdict" id="verdictLine"></div>
+      <div class="score-meta">
+        <div><div class="lbl">Correct</div><div class="val" id="scoreCorrect">0</div></div>
+        <div><div class="lbl">Incorrect</div><div class="val" id="scoreWrong">0</div></div>
+        <div><div class="lbl">Pass mark</div><div class="val">80%</div></div>
+        <div><div class="lbl">Date</div><div class="val" id="scoreDate"></div></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" id="downloadBtn">Download PDF report</button>
+        <button class="btn-ghost" id="reviewBtn">Review with rationale</button>
+        <button class="btn-ghost" id="retryBtn">Retake assessment</button>
+      </div>
+      <p class="footnote" style="margin-top:24px;">CAMP Community College · Paramedic Program · Orthopaedic Trauma Module · Sanders 6e aligned</p>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+
+<script>
+/* ============================================
+   ORTHOPAEDIC TRAUMA MODULE — JS LOGIC
+   Function names use bc_ / ortho prefix to
+   avoid browser-native collisions (scrollTo, etc.)
+   ============================================ */
+
+(function(){
+  'use strict';
+
+  // ---- THEME ----
+  const themeBtn = document.getElementById('themeBtn');
+  const savedTheme = localStorage.getItem('orthoTheme') || 'light';
+  if (savedTheme === 'dark') { document.body.classList.add('dark-mode'); themeBtn.textContent = '☾'; }
+  themeBtn.addEventListener('click', function(){
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeBtn.textContent = isDark ? '☾' : '☼';
+    localStorage.setItem('orthoTheme', isDark ? 'dark' : 'light');
+  });
+
+  // ---- STUDENT FIELDS PERSIST ----
+  const nameField = document.getElementById('studentName');
+  const idField = document.getElementById('studentId');
+  nameField.value = localStorage.getItem('orthoStudentName') || '';
+  idField.value = localStorage.getItem('orthoStudentId') || '';
+  nameField.addEventListener('input', () => localStorage.setItem('orthoStudentName', nameField.value));
+  idField.addEventListener('input', () => localStorage.setItem('orthoStudentId', idField.value));
+
+  // ---- NAV ----
+  document.querySelectorAll('.nav-pill').forEach(btn => {
+    btn.addEventListener('click', () => bcGoTo(btn.dataset.target));
+  });
+  window.bcGoTo = function(target){
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+    const sec = document.getElementById(target);
+    if (sec) sec.classList.add('active');
+    const pill = document.querySelector('.nav-pill[data-target="'+target+'"]');
+    if (pill) pill.classList.add('active');
+    window.scroll(0,0); // window.scroll, not user-defined navTo
+  };
+
+  // ---- EXPANDABLES ----
+  window.bcToggleBlock = function(headerEl){
+    const card = headerEl.parentElement;
+    card.classList.toggle('open');
+  };
+
+  // ---- BRANCHING SCENARIO ----
+  const branchAnswers = {
+    1: {
+      correct: 'B',
+      A: { ok:false, msg:'Traction splints are contraindicated with suspected pelvic injury — pulling longitudinally on the femur transmits force through the unstable pelvic ring and worsens hemorrhage.' },
+      B: { ok:true,  msg:'Correct. Pelvic binder at the greater trochanters first; femur in alignment with a vacuum splint or rigid splint. Both injuries are addressed without using a contraindicated device.' },
+      C: { ok:false, msg:'Pelvic binders are placed on clinical suspicion, not after imaging. Waiting for confirmation costs blood and time.' },
+      D: { ok:false, msg:'Manual reduction of the pelvis is not a prehospital intervention. The binder closes the ring, controls volume, and tamponades venous bleeding.' }
+    },
+    2: {
+      correct: 'B',
+      A: { ok:false, msg:'2 L wide-open crystalloid in a bleeding trauma patient dilutes clotting factors, drops temperature, and pops clot. Permissive hypotension is the standard.' },
+      B: { ok:true,  msg:'Correct. Small titrated boluses, target SBP ~90 with intact mentation and palpable radial, request blood at receiving facility, recheck binder placement (greater trochanters? hips internally rotated?).' },
+      C: { ok:false, msg:'Analgesia is appropriate, but prioritizing it over hemodynamic management in a decompensating patient is wrong order. Treat shock first; you can analgesize without dropping BP further.' },
+      D: { ok:false, msg:'Stopping a bleeding trauma in shock to "reassess" delays definitive care. Reassess en route.' }
+    },
+    3: {
+      correct: 'B',
+      A: { ok:false, msg:'Vague and reassuring — the receiving team needs your suspicion list, not your conclusion.' },
+      B: { ok:true,  msg:'Correct. Specific, actionable, drives the next move. The trauma team activates blood, OR, and resuscitation around your sentence.' },
+      C: { ok:false, msg:'Hip dislocation alone undersells the picture — pelvic ring instability and persistent shock are the headline.' },
+      D: { ok:false, msg:'Frankly dangerous. Trauma team will deactivate priorities you actually need.' }
+    }
+  };
+
+  window.bcChoose = function(btn, step, letter){
+    const stepDiv = btn.closest('.branch-step');
+    if (stepDiv.dataset.locked === '1') return;
+    stepDiv.dataset.locked = '1';
+    stepDiv.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+    const ans = branchAnswers[step][letter];
+    btn.classList.add(ans.ok ? 'correct' : 'wrong');
+    if (!ans.ok) {
+      // also highlight correct
+      stepDiv.querySelectorAll('.choice-btn').forEach((b,i) => {
+        const lt = ['A','B','C','D'][i];
+        if (lt === branchAnswers[step].correct) b.classList.add('correct');
+      });
+    }
+    const fb = document.getElementById('fb'+step);
+    fb.className = 'feedback-box show ' + (ans.ok ? 'good' : 'bad');
+    fb.textContent = (ans.ok ? '✓ ' : '✗ ') + ans.msg;
+    // reveal next step
+    const nextStep = stepDiv.parentElement.querySelector('.branch-step[data-step="'+(step+1)+'"]');
+    if (nextStep) nextStep.style.display = 'block';
+  };
+
+
+  // =====================================================
+  // QUESTION BANK — 100 items, paramedic-level
+  // Schema: { q: stem, o: [4 options], c: correct index, r: rationale }
+  // =====================================================
+  const QBANK = [
+
+    // --- ANATOMY / BIOLOGY (1-12) ---
+    { q:"Which bone tissue is responsible for absorbing compressive forces in the metaphysis and epiphysis?",
+      o:["Cortical bone","Cancellous (trabecular) bone","Periosteum","Endosteum"], c:1,
+      r:"Cancellous (trabecular) bone forms a lattice that absorbs compression. Cortical bone resists bending; periosteum is the vascular outer membrane; endosteum lines the medullary canal." },
+
+    { q:"The richly innervated outer membrane of bone, responsible for much of the deep pain experienced after a fracture, is the:",
+      o:["Periosteum","Endosteum","Synovium","Cartilage"], c:0,
+      r:"The periosteum is highly vascular and innervated. Stripping or tearing it produces the deep, sickening pain associated with long-bone fractures." },
+
+    { q:"Which statement about pediatric bone is MOST accurate?",
+      o:["It is more brittle than adult bone","Its periosteum is thinner than adult periosteum","It can deform plastically before completely fracturing","It heals more slowly than adult bone"], c:2,
+      r:"Pediatric cortex is more porous and the periosteum is thicker; bone bends before it breaks (greenstick, torus, plastic deformation) and pediatric bone heals faster, not slower." },
+
+    { q:"A geriatric patient sustains a hip fracture from a ground-level fall. The most likely underlying explanation is:",
+      o:["Extreme force from the fall","Osteoporotic loss of bone tensile strength","Pathologic tumor","Vitamin C deficiency"], c:1,
+      r:"Osteoporosis reduces bone density and tensile strength; minimal force can produce fragility fractures. Believe the fracture even when the mechanism sounds trivial." },
+
+    { q:"Which structure forms the most stable ball-and-socket joint in the body?",
+      o:["Glenohumeral (shoulder)","Acetabulofemoral (hip)","Tibiofemoral (knee)","Radiocarpal (wrist)"], c:1,
+      r:"The deep, congruent acetabulum and the strong capsule make the hip the most stable major joint, requiring high force to dislocate." },
+
+    { q:"A subluxation differs from a dislocation in that:",
+      o:["A subluxation is more painful","A subluxation involves complete loss of articular contact","A subluxation involves partial loss of articular contact","A subluxation only occurs in pediatric patients"], c:2,
+      r:"A subluxation = partial loss of joint contact, often spontaneously reduces. A dislocation = complete loss of contact." },
+
+    { q:"Which nerve is most at risk in an anterior shoulder dislocation?",
+      o:["Axillary","Median","Radial","Ulnar"], c:0,
+      r:"The axillary nerve wraps the surgical neck of the humerus and is at risk in anterior dislocations — assess deltoid contraction and lateral arm sensation." },
+
+    { q:"Which artery is at greatest risk in a posterior knee dislocation?",
+      o:["Anterior tibial","Femoral","Popliteal","Posterior tibial"], c:2,
+      r:"The popliteal artery is tethered behind the knee — knee dislocation should be assumed to have vascular injury until imaging proves otherwise." },
+
+    { q:"A 'FOOSH' mechanism (fall on outstretched hand) is most strongly associated with:",
+      o:["Spiral tibial fracture","Colles' fracture and clavicle fracture","Calcaneal fracture","Femoral neck fracture"], c:1,
+      r:"FOOSH transmits force proximally — distal radius (Colles'), scaphoid, elbow, and clavicle injuries are classic." },
+
+    { q:"A spiral fracture in a non-ambulatory infant should raise concern for:",
+      o:["Vitamin D deficiency","Routine accidental injury","Non-accidental trauma","Osteogenesis imperfecta only"], c:2,
+      r:"Spiral fractures in non-ambulatory children require a twisting force the child cannot self-generate. Document carefully and report per protocol." },
+
+    { q:"Which kinematic clue most strongly suggests an axial-load injury?",
+      o:["Side-impact MVC","Twisting on a planted foot","Fall from height landing on the feet","Direct blow to the thigh"], c:2,
+      r:"Falls from height onto the feet drive force through calcaneus → tibia → femur → pelvis → spine. Look for calcaneal, vertebral compression, and acetabular injuries." },
+
+    { q:"Bone heals primarily through:",
+      o:["Direct ossification of intact cortex","Hematoma organization, callus formation, and remodeling","Cartilage replacement only","Fibrous scar without bone formation"], c:1,
+      r:"Fracture hematoma is the matrix for callus → woven bone → mature lamellar bone. Splinting that controls motion preserves the hematoma — that is your contribution to healing." },
+
+    // --- FRACTURE CLASSIFICATION (13-24) ---
+    { q:"Which fracture pattern results from a twisting force?",
+      o:["Transverse","Oblique","Spiral","Comminuted"], c:2,
+      r:"A spiral fracture follows a curving line around the long axis and indicates rotational/twisting force." },
+
+    { q:"A fracture with three or more bony fragments is termed:",
+      o:["Comminuted","Segmental","Greenstick","Avulsion"], c:0,
+      r:"Comminuted = ≥3 fragments and indicates high-energy injury. Segmental = two fractures isolating a middle segment." },
+
+    { q:"A 6-year-old falls onto an outstretched arm. X-ray shows a forearm fracture that is buckled but not displaced through both cortices. This is BEST described as:",
+      o:["Greenstick","Comminuted","Spiral","Pathologic"], c:0,
+      r:"Greenstick (and torus/buckle) fractures are incomplete fractures of immature, plastic bone — a classic pediatric finding." },
+
+    { q:"A bone end protruding through the skin is most accurately classified as:",
+      o:["Closed angulated fracture","Open (compound) fracture","Pathologic fracture","Stress fracture"], c:1,
+      r:"Any communication between the fracture and the outside environment — even a small puncture — defines an open fracture." },
+
+    { q:"Which scenario MOST clearly meets the definition of an open fracture?",
+      o:["A deformed femur with intact skin and a large hematoma","A wrist with skin abrasion, but bone not visualized","A tibia with a 5 mm puncture wound and dark venous bleeding","A clavicle with significant deformity and bruising"], c:2,
+      r:"Even a small puncture overlying a fracture site indicates communication with the environment — treat as open and contaminated." },
+
+    { q:"Salter-Harris classification applies to fractures involving the:",
+      o:["Femoral neck","Vertebral body","Growth plate (physis)","Periosteum only"], c:2,
+      r:"Salter-Harris I–V grades pediatric physeal injuries. Higher grades carry greater risk of growth disturbance and limb-length discrepancy." },
+
+    { q:"A pathologic fracture is BEST defined as:",
+      o:["A fracture caused by extreme force on healthy bone","A fracture occurring through abnormal bone (tumor, cyst, severe osteoporosis) with minimal force","Any fracture in a person over 65","A fracture that fails to heal"], c:1,
+      r:"Pathologic fractures occur through diseased bone with disproportionately small force. They demand investigation of the underlying lesion." },
+
+    { q:"An avulsion fracture occurs when:",
+      o:["A bone is crushed by axial load","A tendon or ligament tears off a fragment of bone at its attachment","A growth plate is sheared","A bone splinters into multiple fragments"], c:1,
+      r:"Avulsions occur at attachment sites — common in finger DIPs, malleoli, and pelvic apophyses in young athletes." },
+
+    { q:"In the field, the Gustilo classification of open fractures should be used to:",
+      o:["Determine prehospital antibiotic dosing","Guide your decision to transport","Document wound size and contamination for the receiving team — describe what you see, do not assign a grade","Decide whether to splint"], c:2,
+      r:"Field providers should describe the wound (size, contamination, neurovascular status) — definitive Gustilo classification is made with full surgical exposure." },
+
+    { q:"A 'segmental' fracture involves:",
+      o:["A single oblique line through both cortices","Two separate complete fractures isolating a middle segment of bone","A fracture extending into a joint","Multiple impacted fragments"], c:1,
+      r:"Segmental fractures involve a free middle segment and indicate high-energy mechanism with high risk of vascular embarrassment to the central piece." },
+
+    { q:"An impacted fracture is one in which:",
+      o:["Bone fragments are driven into one another","Bone fragments overlap and rotate","One fragment is rotated 90 degrees","The fracture extends into a joint capsule"], c:0,
+      r:"Impacted fractures involve telescoping of fragments — common with axial load (e.g., fall from height onto extended wrist or femoral neck)." },
+
+    { q:"Which of the following is a complete fracture?",
+      o:["Greenstick","Buckle (torus)","Plastic deformation","Transverse fracture through both cortices"], c:3,
+      r:"Greenstick, buckle, and plastic deformation are incomplete — only one cortex (or neither) breaks. A transverse fracture through both cortices is complete." },
+
+    // --- ASSESSMENT / 6 P's (25-34) ---
+    { q:"The 6 P's of neurovascular assessment include all of the following EXCEPT:",
+      o:["Pain","Pallor","Pulselessness","Pyrexia"], c:3,
+      r:"The 6 P's are Pain, Pallor, Paresthesia, Paralysis, Pulselessness, Poikilothermia. Pyrexia (fever) is not part of the assessment." },
+
+    { q:"In acute compartment syndrome, the EARLIEST and most reliable sign is:",
+      o:["Pulselessness","Pallor","Pain out of proportion to injury","Paralysis"], c:2,
+      r:"Pain out of proportion (and pain on passive stretch) appears first. Pulselessness is a late, ominous sign — by then the limb may be unsalvageable." },
+
+    { q:"Documenting distal neurovascular status should be performed:",
+      o:["Once on initial contact","Only after splinting is complete","Before and after every intervention and at every change of care","Only when the patient complains"], c:2,
+      r:"Repeated, time-stamped neurovascular checks are the standard. A single 'intact' note hides every change that follows." },
+
+    { q:"Which finding represents poikilothermia?",
+      o:["Limb feels colder or matches ambient temperature compared to the contralateral limb","Pulse is asymmetric","Numbness in the distal extremity","Inability to extend the wrist"], c:0,
+      r:"Poikilothermia is loss of normal limb temperature regulation due to interrupted perfusion — the limb takes ambient temperature." },
+
+    { q:"You note the right foot is cool and pale, with a 1+ DP pulse compared to 2+ on the left, after splinting a tibial fracture. Your IMMEDIATE action is:",
+      o:["Reassure the patient and continue transport","Loosen and reapply the splint, recheck NV status, expedite transport","Apply a tourniquet","Administer fentanyl"], c:1,
+      r:"A constrictive splint can compromise circulation. Loosen, reassess, document, and expedite. If perfusion does not return, escalate." },
+
+    { q:"Which of the following BEST describes the appropriate sequence for assessing an injured extremity?",
+      o:["Splint, then assess","Cover wound, splint, transport, then assess","Inspect, palpate, range of motion, neurovascular check — before and after splinting","Pulse check only"], c:2,
+      r:"Inspect → palpate → ROM (gentle, when appropriate) → distal neurovascular check, before and after intervention." },
+
+    { q:"A 'tense, doughy' compartment with pain on passive stretch and increasing analgesic requirement should prompt you to:",
+      o:["Document and continue","Immediately suspect compartment syndrome and act","Apply more pressure to slow swelling","Elevate the limb above heart level"], c:1,
+      r:"This is the classic compartment-syndrome syndrome triad. Loosen constrictions, position at heart level (not elevated, not dependent), notify receiving team — fasciotomy may be required." },
+
+    { q:"Which sign suggests a possible urethral injury in a pelvic fracture and should defer urinary catheter placement?",
+      o:["Suprapubic tenderness","Blood at the urethral meatus","Microscopic hematuria","Lower abdominal bruising"], c:1,
+      r:"Blood at the meatus, perineal hematoma, or high-riding prostate suggest urethral disruption; foley placement is deferred until imaging clears the urethra." },
+
+    { q:"You should examine an unstable pelvis by:",
+      o:["Rocking the iliac wings repeatedly until you elicit instability","Single, gentle bilateral compression of the iliac wings — once","Springing the symphysis vigorously","Pulling on each leg in opposite directions"], c:1,
+      r:"Repeated examination dislodges clot and worsens bleeding. A single gentle exam is sufficient; further investigation belongs in the trauma bay." },
+
+    { q:"A patient has an angulated mid-shaft tibial fracture with no distal pulse. According to most protocols you should:",
+      o:["Splint in position found and transport","Apply gentle longitudinal traction to realign and restore perfusion, then splint","Apply a tourniquet proximally","Wait for orthopaedic consultation before any intervention"], c:1,
+      r:"Restoration of distal perfusion is the priority. Most protocols permit a single, gentle realignment of severely angulated long-bone fractures with distal NV compromise; reassess and document." },
+
+    // --- PELVIC FRACTURES (35-44) ---
+    { q:"The retroperitoneal space can hold approximately how much blood from an unstable pelvic fracture before producing visible distention?",
+      o:["100–200 mL","500 mL","2–4 L","Less than 100 mL"], c:2,
+      r:"Pelvic ring disruption can hemorrhage 2–4 L into the retroperitoneum without external signs. This is why patients exsanguinate 'silently'." },
+
+    { q:"Which pelvic fracture pattern carries the HIGHEST mortality?",
+      o:["Lateral compression","Anterior–posterior compression (open book)","Isolated iliac wing","Sacral stress fracture"], c:1,
+      r:"APC (open book) injuries open the symphysis and SI joints, producing massive arterial and venous bleeding. Mortality with hemodynamic instability approaches 30–50%." },
+
+    { q:"A pelvic binder should be placed at the level of the:",
+      o:["Iliac crests","Greater trochanters","Mid-abdomen","Symphysis pubis only"], c:1,
+      r:"At the trochanter level the binder closes the pelvic ring. Placement on the iliac crests does not effectively reduce volume." },
+
+    { q:"Before fully tightening a pelvic binder, you should:",
+      o:["Externally rotate the patient's lower extremities","Internally rotate the patient's lower extremities (knees and feet together)","Flex both hips to 90 degrees","Place the patient prone"], c:1,
+      r:"Internal rotation of the hips reduces pelvic volume and aligns the binder with reduction biomechanics." },
+
+    { q:"Which finding most strongly suggests an UNSTABLE pelvic ring injury in the field?",
+      o:["Mild suprapubic tenderness","Leg-length discrepancy with pelvic instability on a single gentle compression and significant mechanism","Microscopic hematuria","Isolated greater trochanter pain"], c:1,
+      r:"Leg-length discrepancy + pelvic instability + significant mechanism strongly suggests vertical shear or APC injury." },
+
+    { q:"An open pelvic fracture (perineal, vaginal, or rectal disruption) carries an approximate mortality of:",
+      o:["1%","5%","Up to 50%","No higher than closed pelvic fracture"], c:2,
+      r:"Open pelvic fractures historically carry mortality up to 50% from hemorrhage and sepsis. Pack obvious external wounds and transport priority one." },
+
+    { q:"After applying a pelvic binder you should:",
+      o:["Remove it for the receiving team's exam","Document distal NV status before and after, leave in place until receiving team is ready to take over hemorrhage control","Loosen it once vital signs improve","Tighten further whenever the patient complains of pressure"], c:1,
+      r:"Premature removal can re-expose the patient to hemorrhage. Maintain the binder; document; hand off intact." },
+
+    { q:"Which sign is suggestive of a posterior pelvic ring (sacral) injury with neurologic involvement?",
+      o:["Bowel or bladder dysfunction, perianal numbness","Mild low back pain","Bilateral iliac crest tenderness only","Suprapubic ecchymosis"], c:0,
+      r:"Sacral fractures can injure the cauda equina and sacral nerve roots — saddle anesthesia, urinary or bowel dysfunction are red flags." },
+
+    { q:"A traction splint applied to a femur in a patient with a suspected pelvic fracture is:",
+      o:["Recommended to control bleeding","Acceptable if pain is severe","Contraindicated — it can worsen pelvic ring disruption and bleeding","Required by all protocols"], c:2,
+      r:"Longitudinal traction on the femur transmits force into the pelvic ring and is contraindicated when pelvic injury is suspected." },
+
+    { q:"Which transport priority best fits a hemodynamically unstable pelvic fracture patient?",
+      o:["Routine, no notification","Priority 1, trauma alert, pre-arrival notification including suspected pelvis","Wait for definitive diagnosis before transporting","Transport to nearest community ED regardless of resources"], c:1,
+      r:"Pelvic ring instability with shock is a time-critical surgical problem. Trauma center, alert, and rapid handoff are essential." },
+
+    // --- FEMUR / HIP (45-54) ---
+    { q:"The classic position of the leg in a posterior hip dislocation is:",
+      o:["Abducted, externally rotated, lengthened","Adducted, internally rotated, shortened","Flexed and externally rotated","Extended and abducted"], c:1,
+      r:"Posterior hip dislocations present with shortening, adduction, and internal rotation. Anterior dislocations present abducted and externally rotated." },
+
+    { q:"Closed midshaft femur fracture can sequester approximately how much blood per side?",
+      o:["100–200 mL","1,000–1,500 mL","3 L","No significant bleeding"], c:1,
+      r:"Closed midshaft femur fractures can lose 1–1.5 L into the thigh. Bilateral or open fractures lose more." },
+
+    { q:"Which is a CONTRAINDICATION to traction splint application?",
+      o:["Closed isolated midshaft femur fracture","Suspected pelvic fracture","Patient pain ≥ 7/10","Female patient"], c:1,
+      r:"Suspected pelvic fracture, hip injury, knee injury, distal tibia/ankle/foot injury, and partial amputation are major contraindications." },
+
+    { q:"In a femoral shaft fracture, the femoral artery is most at risk where it passes through:",
+      o:["The popliteal fossa","Hunter's adductor canal","The obturator foramen","The greater trochanter"], c:1,
+      r:"The femoral artery traverses Hunter's (adductor) canal in the medial thigh — fracture fragments and expanding hematoma can compress or lacerate it." },
+
+    { q:"A 78-year-old female falls in her bathroom; the right leg is shortened and externally rotated, and she cannot stand. The most likely injury is:",
+      o:["Femoral shaft fracture","Hip fracture (proximal femur)","Patellar dislocation","Lumbar compression fracture"], c:1,
+      r:"Geriatric ground-level falls with shortening + external rotation + groin pain = hip fracture until proven otherwise. Pillow splint or vacuum splint, aggressive analgesia, and consider the cause of the fall." },
+
+    { q:"Posterior hip dislocations should be reduced within approximately how many hours to substantially reduce the risk of avascular necrosis?",
+      o:["2","6","24","48"], c:1,
+      r:"Reduction within ~6 hours is the historical benchmark to limit AVN of the femoral head. Field reduction is not standard — expedite transport." },
+
+    { q:"One-year mortality after a geriatric hip fracture is approximately:",
+      o:["1–2%","5%","20–30%","Over 70%"], c:2,
+      r:"One-year mortality of 20–30% reflects the cascade of immobility, pneumonia, DVT, and pre-existing comorbidity — not the fracture alone." },
+
+    { q:"Knee-against-dashboard MVC mechanism most classically produces:",
+      o:["Anterior shoulder dislocation","Posterior hip dislocation","Calcaneal fracture","Clavicle fracture"], c:1,
+      r:"Axial force through a flexed knee drives the femoral head posteriorly out of the acetabulum — the classic dashboard injury." },
+
+    { q:"Femoral neck fractures carry a notable risk of avascular necrosis because:",
+      o:["The femoral neck has poor cancellous bone","Blood supply to the femoral head courses retrograde through the neck and can be disrupted","Femoral nerve lies adjacent","The patient is usually elderly"], c:1,
+      r:"The femoral head receives much of its blood retrograde through vessels in the neck capsule. Displaced intracapsular fractures threaten this supply." },
+
+    { q:"Which of the following is the BEST splinting choice for a suspected geriatric hip fracture during ground transport?",
+      o:["Traction splint","Pillow under the knee or vacuum splint in position of comfort","Long backboard with full strapping","No immobilization needed"], c:1,
+      r:"Position of comfort with padding under the knee, vacuum splint, or scoop-and-pad. Traction is contraindicated; full backboarding is unnecessary and worsens pressure injury risk." },
+
+    // --- UPPER EXTREMITY (55-64) ---
+    { q:"A patient with an anterior shoulder dislocation should be assessed for axillary nerve function by:",
+      o:["Wrist extension","Pinprick over the lateral upper arm and deltoid contraction","Thumb opposition","Grip strength"], c:1,
+      r:"The axillary nerve innervates the deltoid and provides sensation over the lateral 'sergeant's patch' of the upper arm." },
+
+    { q:"Which nerve is most at risk in a midshaft humeral fracture?",
+      o:["Axillary","Musculocutaneous","Radial","Ulnar"], c:2,
+      r:"The radial nerve runs in the spiral groove of the humerus — midshaft fractures classically produce wrist drop." },
+
+    { q:"A 'dinner-fork' deformity at the wrist after a fall is characteristic of:",
+      o:["Smith's fracture","Colles' fracture","Galeazzi fracture","Monteggia fracture"], c:1,
+      r:"Colles' fractures (dorsally displaced distal radius) produce the dinner-fork deformity. Smith's is volarly displaced (garden-spade)." },
+
+    { q:"Pain in the anatomic snuffbox after a FOOSH should raise suspicion for:",
+      o:["Distal radius fracture","Scaphoid fracture","Hamate fracture","Radial styloid only"], c:1,
+      r:"The scaphoid is the most commonly fractured carpal bone and frequently presents with snuffbox tenderness; high non-union rate makes splinting and follow-up critical." },
+
+    { q:"A clavicle fracture displaced superiorly with skin tenting should prompt:",
+      o:["Reassurance and outpatient follow-up","Urgent splinting and transport — risk of skin compromise and underlying neurovascular injury","Manual reduction in the field","Sling without further evaluation"], c:1,
+      r:"Tenting suggests imminent skin compromise; medial clavicle fractures can also compress underlying neurovascular structures. Immobilize and transport." },
+
+    { q:"Brachial artery injury is most likely with which injury?",
+      o:["Posterior shoulder dislocation","Supracondylar humerus fracture or posterior elbow dislocation","Distal radius fracture","Carpal scaphoid fracture"], c:1,
+      r:"The brachial artery courses anterior to the elbow and is at risk in supracondylar fractures (especially in children) and posterior elbow dislocations." },
+
+    { q:"Which feature of an open fracture changes immediate field management most significantly?",
+      o:["Patient age","Wound contamination requiring sterile dressing and antibiotic coordination","Presence of pain","Time of day"], c:1,
+      r:"Open fractures are time-sensitive surgical wounds. Sterile saline-moistened dressing, sterile cover, and rapid transport for irrigation, debridement, and antibiotic therapy." },
+
+    { q:"A child with a 'pulled' arm who refuses to use the elbow most likely has:",
+      o:["Posterior elbow dislocation","Radial head subluxation (nursemaid's elbow)","Supracondylar fracture","Septic elbow"], c:1,
+      r:"Nursemaid's elbow is a common pediatric subluxation of the radial head from longitudinal traction. The child holds the arm pronated and slightly flexed." },
+
+    { q:"A sling and swathe is appropriate immobilization for which injury?",
+      o:["Open midshaft tibia","Suspected unstable pelvis","Clavicle, shoulder, and proximal humerus injuries","Compartment syndrome"], c:2,
+      r:"Sling and swathe is appropriate for clavicle, shoulder, and proximal humerus injuries — fast, comfortable, and effective for ambulatory patients." },
+
+    { q:"In a Galeazzi fracture (distal radius fracture with distal radioulnar joint disruption), the BEST field management is:",
+      o:["Reduce the joint","Realign with longitudinal traction, splint in neutral, transport","Apply a sling and watchful waiting","Apply a finger splint"], c:1,
+      r:"Galeazzi injuries are surgical. Field treatment is alignment, splinting, NV assessment, and transport." },
+
+    // --- LOWER EXTREMITY (65-74) ---
+    { q:"The most concerning vascular complication of a knee dislocation is:",
+      o:["Saphenous vein laceration","Popliteal artery injury","Anterior tibial artery laceration","Femoral vein injury"], c:1,
+      r:"The popliteal artery is tethered behind the knee — knee dislocations carry high rates of intimal injury and limb loss without timely vascular assessment." },
+
+    { q:"A patient with a swollen, painful tibial shaft injury two hours post-injury, with worsening pain on passive dorsiflexion, is likely developing:",
+      o:["Deep vein thrombosis","Compartment syndrome","Shin splints","Cellulitis"], c:1,
+      r:"Tibial fractures are the most common cause of acute compartment syndrome. Pain on passive stretch + progressive analgesic requirement = compartment syndrome until proven otherwise." },
+
+    { q:"Skin tenting over an angulated ankle fracture should prompt:",
+      o:["Splinting in position found, no realignment","Gentle longitudinal traction and realignment to relieve tenting and restore perfusion (per protocol)","A tourniquet proximal to the ankle","Immediate manual reduction of the talus"], c:1,
+      r:"Tenting threatens conversion to an open fracture and skin necrosis. Most protocols permit gentle realignment to relieve tenting and restore perfusion." },
+
+    { q:"A 'lover's fracture' classically refers to a fall from height producing:",
+      o:["Bilateral wrist fractures","Calcaneal fractures, often with associated lumbar compression fractures","Bilateral tibial plateau fractures","Pelvic fracture only"], c:1,
+      r:"Falls from height onto the feet (e.g., a hasty escape from a tryst) produce calcaneal injury and often associated vertebral compression — assess the entire axial spine." },
+
+    { q:"A patient with an open tibial fracture should receive which of the following in the field?",
+      o:["Push the bone back through the skin","Saline-moistened sterile dressing, dry sterile cover, splint, and transport","Pack the wound with cotton gauze and tape closed","Wash the wound with tap water and bandage"], c:1,
+      r:"Cover with sterile, saline-moistened dressing; do not deliberately reduce protruding bone in the field; expedite transport for irrigation, debridement, and antibiotics." },
+
+    { q:"Which finding suggests an Achilles tendon rupture rather than an ankle fracture?",
+      o:["Bony deformity at the malleoli","Sudden popping sensation, palpable defect in the posterior calf, weak plantarflexion","Joint instability on inversion","Ecchymosis over the lateral malleolus"], c:1,
+      r:"Achilles rupture presents with sudden 'kicked-in-the-back-of-the-leg' pain, palpable gap, and Thompson sign (squeezing calf does not produce plantarflexion)." },
+
+    { q:"The compartment of the leg most commonly affected by acute compartment syndrome is:",
+      o:["Anterior compartment","Lateral compartment","Superficial posterior compartment","Deep posterior compartment"], c:0,
+      r:"The anterior compartment of the leg has the smallest compliance — pain on passive plantarflexion of the toes and paresthesia in the deep peroneal nerve distribution are classic signs." },
+
+    { q:"A patellar fracture with inability to extend the knee against gravity indicates:",
+      o:["Minor sprain only","Disruption of the extensor mechanism — splint in extension and transport","Need for immediate reduction","Hip pathology"], c:1,
+      r:"Loss of active extension means the extensor mechanism is disrupted; splint in extension to maintain alignment and transport for surgical evaluation." },
+
+    { q:"A splint that becomes too tight as the limb swells should be:",
+      o:["Removed entirely and the limb left unprotected","Immediately loosened/recut to relieve pressure, NV reassessed, then reapplied","Replaced only after transport","Cut only by the receiving facility"], c:1,
+      r:"Splint-induced compartment compromise is a real entity. Loosen, reassess, and reapply with adequate padding and looser compression — and document." },
+
+    { q:"Which mechanism most strongly suggests a tibial plateau fracture?",
+      o:["Direct lateral blow to the knee with valgus force, common in pedestrian struck by a car bumper","Twisting on a planted foot only","Fall onto outstretched hand","Hyperextension injury"], c:0,
+      r:"Lateral plateau fractures are classic in pedestrian-vs-bumper injuries and high-energy MVCs. Look for joint effusion and check distal NV status." },
+
+    // --- DISLOCATIONS (75-84) ---
+    { q:"In an anterior shoulder dislocation, the arm is typically held in:",
+      o:["Adduction and internal rotation","Slight abduction and external rotation, resisting adduction","Full abduction overhead","Behind the back"], c:1,
+      r:"The patient holds the arm in slight abduction and external rotation; adduction across the body is markedly painful and limited." },
+
+    { q:"Which dislocation must be considered a vascular emergency until proven otherwise?",
+      o:["Anterior shoulder","Patellar","Posterior knee","Finger PIP"], c:2,
+      r:"Posterior knee dislocations are associated with popliteal artery injury at high rates — assume vascular injury, document NV status, transport to a trauma/vascular-capable center." },
+
+    { q:"A patient with a posterior hip dislocation may complain of:",
+      o:["Foot drop and lateral foot numbness from sciatic nerve injury","Wrist weakness","Inability to swallow","Loss of lateral arm sensation"], c:0,
+      r:"The femoral head pressing on the sciatic nerve produces foot drop, peroneal-distribution numbness, or hamstring weakness." },
+
+    { q:"Field reduction of dislocations is generally:",
+      o:["Routinely performed by paramedics for any dislocation","Limited and protocol-dependent — often considered for select shoulder, finger, or patellar dislocations, or reduction for distal pulselessness","Mandatory before transport","Never permitted under any circumstance"], c:1,
+      r:"Field reduction is protocol-dependent. The general principle: splint in position found and transport; selective realignment is reserved for time-sensitive perfusion compromise per local guidelines." },
+
+    { q:"After a successful joint reduction in the field, you must:",
+      o:["Allow the patient to ambulate","Splint the joint, reassess and document distal NV status, transport","Discharge from the scene","Apply a tourniquet"], c:1,
+      r:"Splint, reassess, document, and transport — reductions can re-dislocate or unmask vascular injury." },
+
+    { q:"A 'squared off' shoulder appearance suggests:",
+      o:["Posterior shoulder dislocation","Anterior shoulder dislocation","Acromioclavicular separation","Sternoclavicular dislocation"], c:1,
+      r:"Loss of the rounded deltoid contour with a 'squared' lateral shoulder is the classic anterior dislocation appearance." },
+
+    { q:"A finger dislocation that is open (skin disruption) should be:",
+      o:["Reduced immediately at scene","Cleaned with hydrogen peroxide","Splinted in position of injury, sterile dressing applied, transport","Ignored if reducible"], c:2,
+      r:"Open joint injuries are surgical emergencies due to infection risk. Splint in position, dress, transport for washout." },
+
+    { q:"Sternoclavicular dislocation that is POSTERIOR is concerning because of risk to:",
+      o:["The thoracic duct","The trachea, great vessels, and esophagus","The brachial plexus only","The scapula"], c:1,
+      r:"Posterior SC dislocations can compress the trachea, great vessels, and esophagus — true airway/vascular emergency." },
+
+    { q:"A patellar dislocation typically displaces:",
+      o:["Medially","Laterally","Superiorly","Posteriorly"], c:1,
+      r:"The patella usually dislocates laterally because of the Q angle and quadriceps mechanics. It often spontaneously reduces with knee extension." },
+
+    { q:"An ankle dislocation with a pulseless foot most appropriately receives:",
+      o:["Wait until the receiving facility reduces it","Gentle longitudinal traction and reduction to restore perfusion (per protocol), splint, and transport","No splint","Immediate amputation consideration"], c:1,
+      r:"Time-critical perfusion takes priority. Gentle alignment to restore distal pulse, splint, and rapid transport are the standard." },
+
+    // --- COMPARTMENT SYNDROME / COMPLICATIONS (85-92) ---
+    { q:"Compartment syndrome is most likely to produce IRREVERSIBLE muscle and nerve damage at approximately:",
+      o:["1 hour","4–8 hours","24 hours","48 hours"], c:1,
+      r:"4–8 hours of sustained elevated compartment pressure produces irreversible ischemic injury; recognition and decompression must be prompt." },
+
+    { q:"Definitive treatment of compartment syndrome is:",
+      o:["High-dose analgesics","Limb elevation","Surgical fasciotomy","IV fluid resuscitation"], c:2,
+      r:"Fasciotomy decompresses the involved compartments. Field treatment is recognition, removal of constriction, positioning at heart level, expedited transport, and pre-arrival notification." },
+
+    { q:"The injured limb in suspected compartment syndrome should be positioned:",
+      o:["Above heart level (elevated)","At heart level — neither elevated nor dependent","Below heart level (dependent)","In the position of injury only"], c:1,
+      r:"Elevation reduces arterial inflow and may worsen ischemia; dependency increases venous pressure. Heart level optimizes perfusion gradient." },
+
+    { q:"Which patient has the HIGHEST risk for fat embolism syndrome?",
+      o:["Adolescent with isolated forearm fracture","Adult with bilateral femoral shaft fractures from MVC","Pediatric clavicle fracture","Distal radius fracture in a fall"], c:1,
+      r:"Long-bone (especially femur) and pelvic fractures release marrow fat into the venous system. Bilateral femur fractures dramatically increase risk for fat embolism syndrome." },
+
+    { q:"The classic triad of fat embolism syndrome includes:",
+      o:["Fever, weight loss, night sweats","Hypoxemia, neurologic abnormalities, petechial rash","Headache, photophobia, neck stiffness","Cyanosis, bradycardia, hypotension"], c:1,
+      r:"Hypoxia, neurologic changes (often confusion or agitation), and a petechial rash (axilla, conjunctiva, oral mucosa) appear 24–72 hours after long-bone trauma." },
+
+    { q:"Crush syndrome may produce all of the following EXCEPT:",
+      o:["Hyperkalemia","Myoglobinuric renal failure","Metabolic alkalosis","Hypocalcemia"], c:2,
+      r:"Crush syndrome causes metabolic ACIDOSIS (lactic), hyperkalemia, hypocalcemia, and myoglobinuria. Anticipate and pre-treat hyperkalemia per protocol." },
+
+    { q:"Which is a hallmark prehospital concern in prolonged extrication of a crush victim?",
+      o:["Hypoglycemia from prolonged fasting","Sudden hyperkalemia and hypotension upon release","Hypoxia from low ambient oxygen","Hypothermia only"], c:1,
+      r:"Sudden release of compressed muscle releases potassium, myoglobin, and acid — 'reperfusion injury.' Anticipate dysrhythmia, hypotension, and acute kidney injury; coordinate fluid and electrolyte therapy with medical control." },
+
+    { q:"Deep vein thrombosis is more likely after which orthopaedic injury?",
+      o:["Distal phalanx fracture","Pelvic, hip, or femoral fracture with prolonged immobility","Clavicle fracture","Nasal bone fracture"], c:1,
+      r:"Long-bone, pelvic, and hip injuries with immobility raise DVT and pulmonary embolism risk substantially — early mobilization and chemical prophylaxis are inpatient priorities." },
+
+    // --- SPLINTING / DEVICES (93-97) ---
+    { q:"Which is the MOST important reason to splint a fractured extremity?",
+      o:["Improve cosmetic appearance","Limit further injury to soft tissue, vessels, and nerves; reduce pain; reduce bleeding","Allow the patient to ambulate sooner","Make the splint look professional"], c:1,
+      r:"Splinting prevents conversion of closed to open fractures, limits secondary neurovascular injury, reduces hemorrhage, and reduces pain — these are the priorities." },
+
+    { q:"A vacuum splint is ideal for which of the following?",
+      o:["A patient with a severely angulated tibial fracture and intact pulses","A bleeding scalp laceration","A pelvic ring injury","A femoral shaft fracture with perfect alignment"], c:0,
+      r:"Vacuum splints conform to deformity and are ideal for angulated extremity injuries when realignment is not appropriate or possible." },
+
+    { q:"After applying any splint you should:",
+      o:["Remove all clothing distal to the splint","Reassess and document distal pulse, color, motor, and sensation","Loosen the splint to ensure comfort","Elevate above the head"], c:1,
+      r:"Always reassess and document NV status after splinting. Document loosening, retightening, and any change observed during transport." },
+
+    { q:"Which is the PROPER placement for a tourniquet in major extremity hemorrhage?",
+      o:["Directly over the joint","2–3 inches proximal to the wound, on bare skin","On the distal extremity below the wound","Anywhere as long as it stops bleeding"], c:1,
+      r:"Apply 2–3 inches proximal to the wound on bare skin, tighten until bleeding stops, mark 'TQ' and the time visibly. Never place over a joint." },
+
+    { q:"In a partial amputation with a soft-tissue connection, you should:",
+      o:["Complete the amputation to simplify care","Splint the limb as a unit, control bleeding, transport","Pack the wound with table salt","Apply ice directly to the connecting tissue"], c:1,
+      r:"Even a thread of perfusion can salvage a limb. Splint as a unit, control bleeding, dress, transport. Never deliberately complete an amputation." },
+
+    // --- PAIN MGMT & SPECIAL POPS (98-100) ---
+    { q:"Which analgesic is generally preferred for hemodynamically borderline trauma patients due to less histamine release and rapid onset?",
+      o:["Morphine","Fentanyl","Diphenhydramine","Naproxen"], c:1,
+      r:"Fentanyl has rapid onset (1–2 min IV), short duration, and minimal histamine release; it is favored when blood pressure is fragile. Titrate carefully." },
+
+    { q:"Untreated severe pain in trauma patients contributes to all of the following EXCEPT:",
+      o:["Tachycardia and hypertension","Increased oxygen demand","Improved patient cooperation","Anxiety and worsened hemodynamics"], c:2,
+      r:"Untreated pain worsens hemodynamics, increases oxygen demand, drives anxiety, and reduces cooperation. Adequate analgesia is part of competent trauma care." },
+
+    { q:"A pediatric femur fracture in a non-ambulatory infant should prompt:",
+      o:["Routine outpatient management","Recognition that the mechanism may not match the injury and consideration of non-accidental trauma; document objectively, transport, and report per protocol","Manual reduction in the field","Refusal of care"], c:1,
+      r:"Long-bone fractures in non-ambulatory children are uncommon from accidental mechanisms. Document objectively, treat the injury, transport, and follow mandatory reporting protocols." }
+  ];
+
+  // =====================================================
+  // ASSESSMENT RENDER + STATE
+  // =====================================================
+  const TOTAL = QBANK.length;
+  const LETTERS = ['A','B','C','D'];
+  let selectedAnswers = new Array(TOTAL).fill(null);
+  let submitted = false;
+
+  const startBtn   = document.getElementById('startAssessBtn');
+  const assessIntro= document.getElementById('assessIntro');
+  const assessBody = document.getElementById('assessBody');
+  const assessRes  = document.getElementById('assessResults');
+  const qContainer = document.getElementById('qContainer');
+  const qPosEl     = document.getElementById('qPos');
+  const qFillEl    = document.getElementById('qFill');
+  const qPctEl     = document.getElementById('qPct');
+  const counterTxt = document.getElementById('counterText');
+  const submitBtn  = document.getElementById('submitBtn');
+  const resetBtn   = document.getElementById('resetBtn');
+  const scoreNum   = document.getElementById('scoreNum');
+  const scoreCorr  = document.getElementById('scoreCorrect');
+  const scoreWrng  = document.getElementById('scoreWrong');
+  const scoreDate  = document.getElementById('scoreDate');
+  const verdictLn  = document.getElementById('verdictLine');
+  const downloadBtn= document.getElementById('downloadBtn');
+  const reviewBtn  = document.getElementById('reviewBtn');
+  const retryBtn   = document.getElementById('retryBtn');
+
+  // ---- BUILD QUESTION CARDS ----
+  function bcRenderQuestions(){
+    const frag = document.createDocumentFragment();
+    QBANK.forEach((item, qi) => {
+      const card = document.createElement('div');
+      card.className = 'q-card';
+      card.dataset.qi = qi;
+
+      const num = document.createElement('div');
+      num.className = 'q-num';
+      num.textContent = 'Question ' + (qi + 1) + ' of ' + TOTAL;
+      card.appendChild(num);
+
+      const stem = document.createElement('div');
+      stem.className = 'q-stem';
+      stem.textContent = item.q;
+      card.appendChild(stem);
+
+      const opts = document.createElement('div');
+      opts.className = 'q-options';
+      item.o.forEach((optText, oi) => {
+        const opt = document.createElement('button');
+        opt.type = 'button';
+        opt.className = 'q-opt';
+        opt.dataset.qi = qi;
+        opt.dataset.oi = oi;
+
+        const letter = document.createElement('span');
+        letter.className = 'letter';
+        letter.textContent = LETTERS[oi];
+        opt.appendChild(letter);
+
+        const text = document.createElement('span');
+        text.className = 'opt-text';
+        text.textContent = optText;
+        opt.appendChild(text);
+
+        opt.addEventListener('click', function(){
+          if (submitted) return;
+          bcSelectAnswer(qi, oi);
+        });
+
+        opts.appendChild(opt);
+      });
+      card.appendChild(opts);
+
+      const rat = document.createElement('div');
+      rat.className = 'q-rationale';
+      const ratLbl = document.createElement('strong');
+      ratLbl.textContent = 'Rationale';
+      const ratText = document.createElement('span');
+      ratText.textContent = item.r;
+      rat.appendChild(ratLbl);
+      rat.appendChild(ratText);
+      card.appendChild(rat);
+
+      frag.appendChild(card);
+    });
+    qContainer.innerHTML = '';
+    qContainer.appendChild(frag);
+  }
+
+  // ---- SELECTION ----
+  function bcSelectAnswer(qi, oi){
+    selectedAnswers[qi] = oi;
+    // Update DOM for that question only
+    const card = qContainer.querySelector('.q-card[data-qi="'+qi+'"]');
+    if (!card) return;
+    card.querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
+    const chosen = card.querySelector('.q-opt[data-oi="'+oi+'"]');
+    if (chosen) chosen.classList.add('selected');
+    bcUpdateProgress();
+  }
+
+  // ---- PROGRESS ----
+  function bcUpdateProgress(){
+    const answered = selectedAnswers.filter(v => v !== null).length;
+    const pct = Math.round((answered / TOTAL) * 100);
+    qPosEl.textContent  = answered + ' / ' + TOTAL;
+    qFillEl.style.width = pct + '%';
+    qPctEl.textContent  = pct + '% answered';
+    counterTxt.innerHTML = '<strong>' + answered + '</strong> of ' + TOTAL + ' answered';
+    submitBtn.disabled = (answered < TOTAL);
+  }
+
+  // ---- START ----
+  function bcStartAssess(){
+    selectedAnswers = new Array(TOTAL).fill(null);
+    submitted = false;
+    assessIntro.style.display = 'none';
+    assessBody.style.display = 'block';
+    assessRes.style.display = 'none';
+    bcRenderQuestions();
+    bcUpdateProgress();
+    window.scroll(0, document.getElementById('assess').offsetTop - 80);
+  }
+  startBtn.addEventListener('click', bcStartAssess);
+
+  // ---- RESET (during taking) ----
+  resetBtn.addEventListener('click', function(){
+    if (submitted) return;
+    if (!confirm('Clear all of your current answers?')) return;
+    selectedAnswers = new Array(TOTAL).fill(null);
+    qContainer.querySelectorAll('.q-opt').forEach(b => b.classList.remove('selected'));
+    bcUpdateProgress();
+  });
+
+  // ---- LOCK + REVEAL (used by submit and review) ----
+  function bcLockAndReveal(){
+    qContainer.querySelectorAll('.q-card').forEach(card => {
+      const qi = parseInt(card.dataset.qi, 10);
+      const correct = QBANK[qi].c;
+      const chosen  = selectedAnswers[qi];
+      card.querySelectorAll('.q-opt').forEach(b => {
+        const oi = parseInt(b.dataset.oi, 10);
+        b.classList.add('locked');
+        b.classList.remove('selected');
+        if (oi === correct) b.classList.add('correct');
+        if (oi === chosen && chosen !== correct) b.classList.add('wrong');
+      });
+      const rat = card.querySelector('.q-rationale');
+      if (rat) rat.classList.add('visible');
+    });
+  }
+
+  // ---- SUBMIT ----
+  function bcSubmitAssess(){
+    if (selectedAnswers.includes(null)) {
+      alert('Please answer all questions before submitting.');
+      return;
+    }
+    submitted = true;
+    let correct = 0;
+    QBANK.forEach((item, qi) => { if (selectedAnswers[qi] === item.c) correct++; });
+    const wrong = TOTAL - correct;
+    const pct = Math.round((correct / TOTAL) * 100);
+    const passed = pct >= 80;
+
+    bcLockAndReveal();
+
+    // Hide body, show results card
+    assessBody.style.display = 'none';
+    assessRes.style.display  = 'block';
+
+    scoreNum.innerHTML = pct + '<sup>%</sup>';
+    scoreNum.classList.toggle('pass', passed);
+    scoreNum.classList.toggle('fail', !passed);
+    scoreCorr.textContent = String(correct);
+    scoreWrng.textContent = String(wrong);
+    const today = new Date();
+    const dStr = today.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+    scoreDate.textContent = dStr;
+
+    if (passed){
+      verdictLn.textContent = 'You met the 80% benchmark for paramedic-level orthopaedic content.';
+      verdictLn.style.color = 'var(--good)';
+    } else {
+      verdictLn.textContent = 'You did not meet the 80% benchmark. Review the rationale, restudy, and retake the assessment.';
+      verdictLn.style.color = 'var(--critical)';
+    }
+    window.scroll(0, document.getElementById('assess').offsetTop - 80);
+  }
+  submitBtn.addEventListener('click', bcSubmitAssess);
+
+  // ---- REVIEW (return to question list, locked, with rationale) ----
+  reviewBtn.addEventListener('click', function(){
+    assessRes.style.display = 'none';
+    assessBody.style.display = 'block';
+    // Already locked + revealed by submit; just scroll
+    window.scroll(0, document.getElementById('assess').offsetTop - 80);
+  });
+
+  // ---- RETRY ----
+  retryBtn.addEventListener('click', function(){
+    if (!confirm('Retake the assessment? Your current answers will be cleared.')) return;
+    submitted = false;
+    assessRes.style.display = 'none';
+    assessBody.style.display = 'none';
+    assessIntro.style.display = 'block';
+    qContainer.innerHTML = '';
+    selectedAnswers = new Array(TOTAL).fill(null);
+    bcUpdateProgress();
+    window.scroll(0, document.getElementById('assess').offsetTop - 80);
+  });
+
+  // =====================================================
+  // PDF SCORE REPORT (jsPDF)
+  // =====================================================
+  function bcSafeName(s){
+    return (s || '').replace(/[^A-Za-z0-9_\- ]+/g, '').replace(/\s+/g, '_').slice(0, 40) || 'student';
+  }
+  function bcWrapLines(doc, text, width){
+    return doc.splitTextToSize(text, width);
+  }
+
+  function bcDownloadPDF(){
+    if (!window.jspdf || !window.jspdf.jsPDF){
+      alert('PDF library failed to load. Please check your connection and try again.');
+      return;
+    }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const marginX = 54;
+    const contentW = pageW - (marginX * 2);
+
+    const sName = (document.getElementById('studentName').value || '').trim() || '— not provided —';
+    const sId   = (document.getElementById('studentId').value || '').trim()   || '— not provided —';
+    const today = new Date();
+    const dateStr = today.toLocaleDateString(undefined, { year:'numeric', month:'long', day:'numeric' });
+    const timeStr = today.toLocaleTimeString(undefined, { hour:'2-digit', minute:'2-digit' });
+
+    let correct = 0;
+    QBANK.forEach((item, qi) => { if (selectedAnswers[qi] === item.c) correct++; });
+    const wrong = TOTAL - correct;
+    const pct = Math.round((correct / TOTAL) * 100);
+    const passed = pct >= 80;
+
+    // ---- COVER / HEADER ----
+    let y = 60;
+
+    // Top brand bar
+    doc.setFillColor(10, 61, 98); // navy
+    doc.rect(0, 0, pageW, 6, 'F');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(10, 61, 98);
+    doc.text('CAMP COMMUNITY COLLEGE', marginX, y);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(120, 120, 120);
+    doc.text('PARAMEDIC PROGRAM  ·  ORTHOPAEDIC TRAUMA MODULE', marginX, y + 14);
+
+    y += 50;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.setTextColor(20, 20, 20);
+    doc.text('Assessment Score Report', marginX, y);
+
+    y += 8;
+    doc.setDrawColor(184, 92, 60); // copper
+    doc.setLineWidth(1.5);
+    doc.line(marginX, y + 4, marginX + 60, y + 4);
+
+    y += 36;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(80, 80, 80);
+
+    // Student block
+    doc.text('STUDENT', marginX, y);
+    doc.text('STUDENT ID', marginX + 220, y);
+    doc.text('DATE', marginX + 380, y);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.setTextColor(20, 20, 20);
+    doc.text(sName, marginX, y + 18);
+    doc.text(sId, marginX + 220, y + 18);
+    doc.text(dateStr, marginX + 380, y + 18);
+
+    y += 40;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(140, 140, 140);
+    doc.text('Submitted ' + dateStr + ' at ' + timeStr + '  ·  Sanders 6e aligned  ·  Paramedic level', marginX, y);
+
+    // Score panel
+    y += 24;
+    doc.setDrawColor(220, 220, 220);
+    doc.setFillColor(250, 248, 244);
+    doc.roundedRect(marginX, y, contentW, 110, 6, 6, 'FD');
+
+    // big score
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(48);
+    if (passed) doc.setTextColor(45, 119, 76); else doc.setTextColor(168, 30, 30);
+    doc.text(pct + '%', marginX + 24, y + 64);
+
+    // verdict
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(20, 20, 20);
+    doc.text(passed ? 'PASS  ·  Met 80% benchmark' : 'BELOW BENCHMARK  ·  Below 80%', marginX + 24, y + 86);
+
+    // breakdown right
+    const rightX = marginX + contentW - 200;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(120, 120, 120);
+    doc.text('CORRECT', rightX, y + 30);
+    doc.text('INCORRECT', rightX + 80, y + 30);
+    doc.text('TOTAL', rightX + 160, y + 30);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(20);
+    doc.setTextColor(20, 20, 20);
+    doc.text(String(correct), rightX, y + 56);
+    doc.text(String(wrong), rightX + 80, y + 56);
+    doc.text(String(TOTAL), rightX + 160, y + 56);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(140, 140, 140);
+    doc.text('Pass mark: 80%', rightX, y + 86);
+
+    y += 130;
+
+    // ---- DETAILED ITEM REVIEW ----
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(10, 61, 98);
+    doc.text('ITEM-BY-ITEM REVIEW', marginX, y);
+    doc.setDrawColor(220, 220, 220);
+    doc.setLineWidth(0.5);
+    doc.line(marginX, y + 4, marginX + contentW, y + 4);
+    y += 18;
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(120, 120, 120);
+    doc.text('Q#', marginX, y);
+    doc.text('Question', marginX + 30, y);
+    doc.text('Your Ans', marginX + contentW - 130, y);
+    doc.text('Correct', marginX + contentW - 70, y);
+    doc.text('Result', marginX + contentW - 24, y);
+    y += 12;
+
+    QBANK.forEach((item, qi) => {
+      // Page break check
+      if (y > pageH - 80){
+        doc.addPage();
+        // top bar on continuation pages
+        doc.setFillColor(10, 61, 98);
+        doc.rect(0, 0, pageW, 6, 'F');
+        y = 60;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9);
+        doc.setTextColor(10, 61, 98);
+        doc.text('CAMP · ORTHOPAEDIC TRAUMA · ' + sName, marginX, y);
+        doc.setTextColor(120, 120, 120);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Continued', pageW - marginX, y, { align: 'right' });
+        y += 22;
+      }
+
+      const stem = item.q;
+      const stemLines = bcWrapLines(doc, stem, contentW - 200);
+      const stemHeight = stemLines.length * 11;
+
+      const userIdx = selectedAnswers[qi];
+      const userL   = (userIdx === null) ? '—' : LETTERS[userIdx];
+      const corrL   = LETTERS[item.c];
+      const isRight = (userIdx === item.c);
+
+      // Q number
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(184, 92, 60);
+      doc.text(String(qi + 1).padStart(3, '0'), marginX, y);
+
+      // Stem
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(40, 40, 40);
+      doc.text(stemLines, marginX + 30, y);
+
+      // Your ans / Correct ans
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      if (isRight) doc.setTextColor(45, 119, 76); else doc.setTextColor(168, 30, 30);
+      doc.text(userL, marginX + contentW - 130, y);
+      doc.setTextColor(45, 119, 76);
+      doc.text(corrL, marginX + contentW - 70, y);
+
+      // Mark
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      if (isRight){
+        doc.setTextColor(45, 119, 76);
+        doc.text('\u2713', marginX + contentW - 22, y);
+      } else {
+        doc.setTextColor(168, 30, 30);
+        doc.text('\u2717', marginX + contentW - 22, y);
+      }
+
+      y += Math.max(stemHeight, 12) + 6;
+
+      // Light divider
+      doc.setDrawColor(235, 235, 235);
+      doc.setLineWidth(0.3);
+      doc.line(marginX, y - 2, marginX + contentW, y - 2);
+      y += 4;
+    });
+
+    // ---- SIGNATURE / FOOTER ON LAST PAGE ----
+    if (y > pageH - 120){
+      doc.addPage();
+      doc.setFillColor(10, 61, 98);
+      doc.rect(0, 0, pageW, 6, 'F');
+      y = 60;
+    }
+
+    y += 18;
+    doc.setDrawColor(220, 220, 220);
+    doc.setLineWidth(0.5);
+    doc.line(marginX, y, marginX + contentW, y);
+    y += 24;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(20, 20, 20);
+    doc.text('Student attestation', marginX, y);
+    y += 14;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(80, 80, 80);
+    const att = 'I certify that I completed this assessment independently as part of my CAMP Community College Paramedic Program coursework. The score above reflects my own work.';
+    doc.text(bcWrapLines(doc, att, contentW), marginX, y);
+    y += 36;
+
+    // signature lines
+    doc.setDrawColor(160, 160, 160);
+    doc.setLineWidth(0.6);
+    doc.line(marginX, y, marginX + 220, y);
+    doc.line(marginX + 260, y, marginX + 420, y);
+    doc.setFontSize(8);
+    doc.setTextColor(140, 140, 140);
+    doc.text('Student signature', marginX, y + 12);
+    doc.text('Date', marginX + 260, y + 12);
+
+    // page numbers
+    const pages = doc.internal.getNumberOfPages();
+    for (let p = 1; p <= pages; p++){
+      doc.setPage(p);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(160, 160, 160);
+      doc.text('Page ' + p + ' of ' + pages, pageW - marginX, pageH - 24, { align: 'right' });
+      doc.text('CAMP Community College · Paramedic Program', marginX, pageH - 24);
+    }
+
+    const filename = 'OrthoTrauma_' + bcSafeName(sName) + '_' + today.toISOString().slice(0,10) + '.pdf';
+    doc.save(filename);
+  }
+  downloadBtn.addEventListener('click', bcDownloadPDF);
+
+  // ---- AUTO-SAVE ANSWERS (resilience against accidental refresh) ----
+  // Light-touch persistence: only stores raw indices, not student responses durably across users.
+  try {
+    const cached = localStorage.getItem('orthoSelected');
+    if (cached){
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length === TOTAL){
+        // Don't restore automatically; we don't know if same student. Just ignore.
+      }
+    }
+  } catch(e){}
+
+})();
+</script>
+
+</body>
+</html>
